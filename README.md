@@ -1,2 +1,2 @@
-# PayrollEngine.Client.Core
+# Client.Core
 Payroll Engine client core
