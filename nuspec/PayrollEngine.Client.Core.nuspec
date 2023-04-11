@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>PayrollEngine.Client.Core</id>
+    <version>1.0.0</version>
+    <authors>Jani Giannoudis</authors>
+    <owners>Jani Giannoudis</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Payroll Engine Client Scripting Services</description>
+
+    <dependencies>
+        <dependency id="PayrollEngine.Core" />
+    </dependencies>
+
+  </metadata>
+  <files>
+    <file src="..\PayrollEngine.Client\bin\Debug\ProjectA.dll" target="lib\net45" />
+  </files>
+</package>
