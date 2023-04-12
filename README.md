@@ -6,3 +6,9 @@
 - Query expressions
 - Script parser and tools
 - Api services
+
+## Build
+Runtime environment variables:
+
+- *PayrollEngineSchemaDir* - the Json schema target direcotry (optional)
+- *PayrollEnginePackageDir* - the NuGet package target direcotry (optional)
