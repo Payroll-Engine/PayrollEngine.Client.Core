@@ -99,14 +99,14 @@ public abstract class ConsoleProgram<TApp> : ConsoleToolBase, IDisposable
                 return;
             }
 
+            // log
+            await SetupLogAsync();
+
             // http client
             if (UseHttpClient && !await SetupHttpClientAsync())
             {
                 return;
             }
-
-            // log
-            await SetupLogAsync();
 
             // initialize
             if (!await InitializeAsync())
