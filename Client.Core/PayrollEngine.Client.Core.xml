@@ -518,18 +518,14 @@
         <member name="T:PayrollEngine.Client.Exchange.ExchangeImport">
             <summary>Import exchange from JSON file to Payroll API</summary>
         </member>
-        <member name="P:PayrollEngine.Client.Exchange.ExchangeImport.UpdateMode">
-            <summary>The update mode</summary>
-        </member>
         <member name="P:PayrollEngine.Client.Exchange.ExchangeImport.ImportMode">
             <summary>The data import mode</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeImport.#ctor(PayrollEngine.Client.PayrollHttpClient,PayrollEngine.Client.Model.Exchange,PayrollEngine.Client.Script.IScriptParser,PayrollEngine.Client.UpdateMode,PayrollEngine.Client.Exchange.DataImportMode)">
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeImport.#ctor(PayrollEngine.Client.PayrollHttpClient,PayrollEngine.Client.Model.Exchange,PayrollEngine.Client.Script.IScriptParser,PayrollEngine.Client.Exchange.DataImportMode)">
             <summary>Initializes a new instance of the <see cref="T:PayrollEngine.Client.Exchange.ExchangeImport"/> class</summary>
             <param name="httpClient">The Payroll http client</param>
             <param name="exchange">The exchange model</param>
             <param name="scriptParser">The script parser</param>
-            <param name="updateMode">The update mode (default: update)</param>
             <param name="importMode">The data import mode (default: single)</param>
         </member>
         <member name="M:PayrollEngine.Client.Exchange.ExchangeImport.ImportAsync">
@@ -4074,6 +4070,9 @@
         <member name="P:PayrollEngine.Client.Model.IModel.Updated">
             <summary>The date which the client object was last updated (immutable)</summary>
         </member>
+        <member name="P:PayrollEngine.Client.Model.IModel.UpdateMode">
+            <summary>The object update mode</summary>
+        </member>
         <member name="T:PayrollEngine.Client.Model.IPayroll">
             <summary>The payroll client object</summary>
         </member>
@@ -5329,6 +5328,9 @@
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.Model.Updated">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.Model.UpdateMode">
             <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.Model.#ctor">
@@ -7316,12 +7318,11 @@
             <param name="requestUri">The Uri the request is sent to</param>
             <param name="content">The resource content</param>
         </member>
-        <member name="M:PayrollEngine.Client.PayrollHttpClient.UpsertObjectAsync``1(System.String,``0,``0,PayrollEngine.Client.UpdateMode,System.Nullable{System.DateTime})">
+        <member name="M:PayrollEngine.Client.PayrollHttpClient.UpsertObjectAsync``1(System.String,``0,``0,System.Nullable{System.DateTime})">
             <summary>Insert or update backend resource</summary>
             <param name="requestUri">The Uri the request is sent to</param>
             <param name="newObject">Content of new resource</param>
             <param name="existingObject">Content of existing resource (optional)</param>
-            <param name="updateMode">The update mode</param>
             <param name="createdDate">The created date for new objects</param>
             <typeparam name="T">The object type</typeparam>
         </member>

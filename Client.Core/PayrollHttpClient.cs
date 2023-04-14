@@ -492,10 +492,9 @@ public sealed class PayrollHttpClient : IDisposable
     /// <param name="requestUri">The Uri the request is sent to</param>
     /// <param name="newObject">Content of new resource</param>
     /// <param name="existingObject">Content of existing resource (optional)</param>
-    /// <param name="updateMode">The update mode</param>
     /// <param name="createdDate">The created date for new objects</param>
     /// <typeparam name="T">The object type</typeparam>
-    public async Task UpsertObjectAsync<T>(string requestUri, T newObject, T existingObject, UpdateMode updateMode,
+    public async Task UpsertObjectAsync<T>(string requestUri, T newObject, T existingObject,
         DateTime? createdDate = null)
         where T : IModel
     {
@@ -512,7 +511,7 @@ public sealed class PayrollHttpClient : IDisposable
         {
             // update
             newObject.Id = existingObject.Id;
-            if (updateMode == UpdateMode.Update)
+            if (newObject.UpdateMode == UpdateMode.Update)
             {
                 requestUri = $"{requestUri}/{newObject.Id}";
                 using var response = await httpClient.PutAsync(requestUri, DefaultJsonSerializer.SerializeJson(newObject));

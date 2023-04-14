@@ -16,4 +16,7 @@ public interface IModel : IEquatable<IModel>
 
     /// <summary>The date which the client object was last updated (immutable)</summary>
     DateTime Updated { get; set; }
+
+    /// <summary>The object update mode</summary>
+    UpdateMode UpdateMode { get; set; }
 }

@@ -13,9 +13,6 @@ namespace PayrollEngine.Client.Exchange;
 /// <summary>Import exchange from JSON file to Payroll API</summary>
 public sealed class ExchangeImport : ImportExchangeVisitor
 {
-    /// <summary>The update mode</summary>
-    public UpdateMode UpdateMode { get; }
-
     /// <summary>The data import mode</summary>
     public DataImportMode ImportMode { get; }
 
@@ -23,10 +20,9 @@ public sealed class ExchangeImport : ImportExchangeVisitor
     /// <param name="httpClient">The Payroll http client</param>
     /// <param name="exchange">The exchange model</param>
     /// <param name="scriptParser">The script parser</param>
-    /// <param name="updateMode">The update mode (default: update)</param>
     /// <param name="importMode">The data import mode (default: single)</param>
     public ExchangeImport(PayrollHttpClient httpClient, Model.Exchange exchange, IScriptParser scriptParser,
-        UpdateMode updateMode = UpdateMode.Update, DataImportMode importMode = DataImportMode.Single) :
+        DataImportMode importMode = DataImportMode.Single) :
         base(httpClient, exchange, scriptParser, LoadVisitorOptions.All)
     {
         var hasTenants = exchange.Tenants == null || exchange.Tenants.Any();
@@ -37,7 +33,6 @@ public sealed class ExchangeImport : ImportExchangeVisitor
             throw new PayrollException("Missing import data");
         }
 
-        UpdateMode = updateMode;
         ImportMode = importMode;
     }
 
@@ -46,7 +41,7 @@ public sealed class ExchangeImport : ImportExchangeVisitor
 
     private async Task UpsertObjectAsync<T>(string url, T newObject, T existingObject)
         where T : IModel =>
-        await HttpClient.UpsertObjectAsync(url, newObject, existingObject, UpdateMode, Exchange.CreatedObjectDate);
+        await HttpClient.UpsertObjectAsync(url, newObject, existingObject, Exchange.CreatedObjectDate);
 
     /// <summary><inheritdoc/></summary>
     protected override async Task VisitRegulationPermissionAsync(IRegulationPermission permission)
@@ -87,7 +82,7 @@ public sealed class ExchangeImport : ImportExchangeVisitor
             permission.PermissionDivisionId == x.PermissionDivisionId);
 
         // upsert tenant
-        await HttpClient.UpsertObjectAsync(ApiEndpoints.SharedRegulationPermissionsUrl(), permission, targetPermission, UpdateMode,
+        await HttpClient.UpsertObjectAsync(ApiEndpoints.SharedRegulationPermissionsUrl(), permission, targetPermission,
             Exchange.CreatedObjectDate);
     }
 
@@ -97,7 +92,7 @@ public sealed class ExchangeImport : ImportExchangeVisitor
         await base.SetupTenantAsync(tenant, targetTenant);
 
         // update tenant
-        await HttpClient.UpsertObjectAsync(TenantApiEndpoints.TenantsUrl(), tenant, targetTenant, UpdateMode,
+        await HttpClient.UpsertObjectAsync(TenantApiEndpoints.TenantsUrl(), tenant, targetTenant,
             Exchange.CreatedObjectDate);
     }
 

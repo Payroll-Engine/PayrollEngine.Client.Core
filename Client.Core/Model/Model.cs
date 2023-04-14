@@ -17,6 +17,9 @@ public abstract class Model : IModel
     /// <inheritdoc/>
     public DateTime Updated { get; set; } = Date.MinValue;
 
+    /// <inheritdoc/>
+    public UpdateMode UpdateMode { get; set; }
+
     /// <summary>Initializes a new instance</summary>
     protected Model()
     {
