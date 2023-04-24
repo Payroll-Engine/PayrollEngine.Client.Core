@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The tenant client object</summary>
-public class ExchangeTenant : Tenant, IExchangeTenant, IEquatable<ExchangeTenant>
+public class ExchangeTenant : Tenant, IExchangeTenant
 {
     /// <inheritdoc/>
     public List<User> Users { get; set; }
@@ -64,7 +63,7 @@ public class ExchangeTenant : Tenant, IExchangeTenant, IEquatable<ExchangeTenant
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public ExchangeTenant(ExchangeTenant copySource) :
+    public ExchangeTenant(IExchangeTenant copySource) :
         base(copySource)
     {
         CopyTool.CopyProperties(copySource, this);
@@ -193,9 +192,7 @@ public class ExchangeTenant : Tenant, IExchangeTenant, IEquatable<ExchangeTenant
         }
     }
 
-    /// <summary>Compare two objects</summary>
-    /// <param name="compare">The object to compare with this</param>
-    /// <returns>True for objects with the same data</returns>
-    public virtual bool Equals(ExchangeTenant compare) =>
+    /// <inheritdoc/>
+    public virtual bool Equals(IExchangeTenant compare) =>
         CompareTool.EqualProperties(this, compare);
 }

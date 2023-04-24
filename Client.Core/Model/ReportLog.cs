@@ -3,7 +3,7 @@
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The payroll report log client object</summary>
-public class ReportLog : Model, IReportLog, IEquatable<ReportLog>
+public class ReportLog : Model, IReportLog
 {
     /// <inheritdoc/>
     public string ReportName { get; set; }
@@ -27,14 +27,12 @@ public class ReportLog : Model, IReportLog, IEquatable<ReportLog>
 
     /// <summary>Initializes a new instance of the <see cref="ReportLog"/> class</summary>
     /// <param name="copySource">The copy source.</param>
-    public ReportLog(ReportLog copySource)
+    public ReportLog(IReportLog copySource)
     {
         CopyTool.CopyProperties(copySource, this);
     }
 
-    /// <summary>Compare two objects</summary>
-    /// <param name="compare">The object to compare with this</param>
-    /// <returns>True for objects with the same data</returns>
-    public virtual bool Equals(ReportLog compare) =>
+    /// <inheritdoc/>
+    public virtual bool Equals(IReportLog compare) =>
         CompareTool.EqualProperties(this, compare);
 }

@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The collector result set client object</summary>
-public class CollectorResultSet : CollectorResult, ICollectorResultSet, IEquatable<CollectorResultSet>
+public class CollectorResultSet : CollectorResult, ICollectorResultSet
 {
     /// <inheritdoc/>
     public List<CollectorCustomResult> CustomResults { get; set; }
@@ -16,23 +15,21 @@ public class CollectorResultSet : CollectorResult, ICollectorResultSet, IEquatab
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public CollectorResultSet(CollectorResult copySource) :
+    public CollectorResultSet(ICollectorResult copySource) :
         base(copySource)
     {
     }
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public CollectorResultSet(CollectorResultSet copySource) :
+    public CollectorResultSet(ICollectorResultSet copySource) :
         base(copySource)
     {
         CopyTool.CopyProperties(copySource, this);
     }
 
-    /// <summary>Compare two objects</summary>
-    /// <param name="compare">The object to compare with this</param>
-    /// <returns>True for objects with the same data</returns>
-    public virtual bool Equals(CollectorResultSet compare) =>
+    /// <inheritdoc/>
+    public virtual bool Equals(ICollectorResultSet compare) =>
         CompareTool.EqualProperties(this, compare);
 
     /// <summary>Returns a <see cref="string" /> that represents this instance</summary>

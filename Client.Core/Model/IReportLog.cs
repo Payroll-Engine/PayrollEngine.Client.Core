@@ -3,7 +3,7 @@
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The report log client object</summary>
-public interface IReportLog : IModel
+public interface IReportLog : IModel, IEquatable<IReportLog>
 {
     /// <summary>The report name (immutable)</summary>
     public string ReportName { get; set; }

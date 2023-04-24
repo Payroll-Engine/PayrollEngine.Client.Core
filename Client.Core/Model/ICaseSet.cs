@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The payroll derived case</summary>
-public interface ICaseSet : ICase
+public interface ICaseSet : ICase, IEquatable<ICaseSet>
 {
     /// <summary>The case display name</summary>
     string DisplayName { get; set; }

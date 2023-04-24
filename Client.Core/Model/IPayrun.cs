@@ -3,7 +3,7 @@
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The payrun client object</summary>
-public interface IPayrun : IModel
+public interface IPayrun : IModel, IKeyEquatable<IPayrun>
 {
     /// <summary>The payroll id (immutable)</summary>
     int PayrollId { get; set; }

@@ -1,12 +1,21 @@
 ﻿using System;
+using System.Text.Json.Serialization;
 
 namespace PayrollEngine.Client.Model;
 
 /// <summary>Base for all Payroll models</summary>
-public interface IModel : IEquatable<IModel>
+public interface IModel
 {
     /// <summary>The unique object id (immutable)</summary>
     int Id { get; set; }
+
+    /// <summary>Test for existing object (opposite of <see cref="IsNewObject"/>)</summary>
+    [JsonIgnore]
+    bool IsExistingObject { get; }
+
+    /// <summary>Test for new object (opposite of <see cref="IsExistingObject"/>)</summary>
+    [JsonIgnore]
+    bool IsNewObject { get; }
 
     /// <summary>The status of the object</summary>
     ObjectStatus Status { get; set; }

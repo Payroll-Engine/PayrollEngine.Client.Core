@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The payroll division client object</summary>
-public class Division : Model, IDivision, IEquatable<Division>
+public class Division : Model, IDivision
 {
     /// <inheritdoc/>
     [Required]
@@ -29,17 +28,19 @@ public class Division : Model, IDivision, IEquatable<Division>
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public Division(Division copySource) :
+    public Division(IDivision copySource) :
         base(copySource)
     {
         CopyTool.CopyProperties(copySource, this);
     }
 
-    /// <summary>Compare two objects</summary>
-    /// <param name="compare">The object to compare with this</param>
-    /// <returns>True for objects with the same data</returns>
-    public virtual bool Equals(Division compare) =>
+    /// <inheritdoc/>
+    public virtual bool Equals(IDivision compare) =>
         CompareTool.EqualProperties(this, compare);
+    
+    /// <inheritdoc/>
+    public virtual bool EqualKey(IDivision compare) =>
+        string.Equals(Name, compare?.Name);
 
     /// <summary>Returns a <see cref="string" /> that represents this instance</summary>
     /// <returns>A <see cref="string" /> that represents this instance</returns>

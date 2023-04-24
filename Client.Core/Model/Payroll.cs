@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 using PayrollEngine.Serialization;
@@ -7,7 +6,7 @@ using PayrollEngine.Serialization;
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The payroll client object</summary>
-public class Payroll : Model, IPayroll, IEquatable<Payroll>
+public class Payroll : Model, IPayroll
 {
     /// <inheritdoc/>
     [Required]
@@ -84,17 +83,19 @@ public class Payroll : Model, IPayroll, IEquatable<Payroll>
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public Payroll(Payroll copySource) :
+    public Payroll(IPayroll copySource) :
         base(copySource)
     {
         CopyTool.CopyProperties(copySource, this);
     }
 
-    /// <summary>Compare two objects</summary>
-    /// <param name="compare">The object to compare with this</param>
-    /// <returns>True for objects with the same data</returns>
-    public virtual bool Equals(Payroll compare) =>
+    /// <inheritdoc/>
+    public virtual bool Equals(IPayroll compare) =>
         CompareTool.EqualProperties(this, compare);
+
+    /// <inheritdoc/>
+    public virtual bool EqualKey(IPayroll compare) =>
+        string.Equals(Name, compare?.Name);
 
     /// <summary>Returns a <see cref="string" /> that represents this instance</summary>
     /// <returns>A <see cref="string" /> that represents this instance</returns>

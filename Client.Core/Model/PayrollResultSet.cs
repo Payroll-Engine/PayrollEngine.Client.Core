@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The payroll result client object</summary>
-public class PayrollResultSet : PayrollResult, IPayrollResultSet, IEquatable<PayrollResultSet>
+public class PayrollResultSet : PayrollResult, IPayrollResultSet
 {
     /// <inheritdoc/>
     public DateTime? RetroPeriodStart { get; set; }
@@ -25,23 +25,21 @@ public class PayrollResultSet : PayrollResult, IPayrollResultSet, IEquatable<Pay
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public PayrollResultSet(PayrollResult copySource) :
+    public PayrollResultSet(IPayrollResult copySource) :
         base(copySource)
     {
     }
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public PayrollResultSet(PayrollResultSet copySource) :
+    public PayrollResultSet(IPayrollResultSet copySource) :
         base(copySource)
     {
         CopyTool.CopyProperties(copySource, this);
     }
 
-    /// <summary>Compare two objects</summary>
-    /// <param name="compare">The object to compare with this</param>
-    /// <returns>True for objects with the same data</returns>
-    public virtual bool Equals(PayrollResultSet compare) =>
+    /// <inheritdoc/>
+    public virtual bool Equals(IPayrollResultSet compare) =>
         CompareTool.EqualProperties(this, compare);
 
     /// <inheritdoc/>

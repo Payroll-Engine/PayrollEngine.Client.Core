@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The payroll case relation client object</summary>
-public class CaseRelation : Model, ICaseRelation, IEquatable<CaseRelation>
+public class CaseRelation : Model, ICaseRelation
 {
     /// <inheritdoc/>
     [Required]
@@ -74,17 +73,24 @@ public class CaseRelation : Model, ICaseRelation, IEquatable<CaseRelation>
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public CaseRelation(CaseRelation copySource) :
+    public CaseRelation(ICaseRelation copySource) :
         base(copySource)
     {
         CopyTool.CopyProperties(copySource, this);
     }
 
-    /// <summary>Compare two objects</summary>
-    /// <param name="compare">The object to compare with this</param>
-    /// <returns>True for objects with the same data</returns>
-    public virtual bool Equals(CaseRelation compare) =>
+    /// <inheritdoc/>
+    public virtual bool Equals(ICaseRelation compare) =>
         CompareTool.EqualProperties(this, compare);
+    
+    /// <inheritdoc/>
+    public virtual bool EqualKey(ICaseRelation compare)
+    {
+        return string.Equals(SourceCaseName, compare?.SourceCaseName) &&
+               string.Equals(SourceCaseSlot, compare?.SourceCaseSlot) &&
+               string.Equals(TargetCaseName, compare?.TargetCaseName) &&
+               string.Equals(TargetCaseSlot, compare?.TargetCaseSlot);
+    }
 
     /// <summary>Returns a <see cref="string" /> that represents this instance</summary>
     /// <returns>A <see cref="string" /> that represents this instance</returns>

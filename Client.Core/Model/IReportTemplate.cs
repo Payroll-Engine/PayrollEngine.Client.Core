@@ -1,8 +1,9 @@
-﻿
+﻿using System;
+
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The report template client object</summary>
-public interface IReportTemplate : IModel, IAttributeObject
+public interface IReportTemplate : IModel, IAttributeObject, IEquatable<IReportTemplate>
 {
     /// <summary>The report language</summary>
     Language Language { get; set; }

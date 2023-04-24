@@ -1,9 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The payroll log object</summary>
-public interface ILog : IModel
+public interface ILog : IModel, IEquatable<ILog>
 {
     /// <summary>The log level (immutable)</summary>
     LogLevel Level { get; set; }

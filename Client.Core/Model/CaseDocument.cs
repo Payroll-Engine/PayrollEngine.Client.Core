@@ -1,10 +1,9 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The case document client object</summary>
-public class CaseDocument : Model, ICaseDocument, IEquatable<CaseDocument>
+public class CaseDocument : Model, ICaseDocument
 {
     /// <inheritdoc/>
     [Required]
@@ -28,15 +27,13 @@ public class CaseDocument : Model, ICaseDocument, IEquatable<CaseDocument>
 
     /// <summary>Initializes a new instance of the <see cref="CaseDocument"/> class</summary>
     /// <param name="copySource">The copy source.</param>
-    public CaseDocument(CaseDocument copySource)
+    public CaseDocument(ICaseDocument copySource)
     {
         CopyTool.CopyProperties(copySource, this);
     }
 
-    /// <summary>Compare two objects</summary>
-    /// <param name="compare">The object to compare with this</param>
-    /// <returns>True for objects with the same data</returns>
-    public virtual bool Equals(CaseDocument compare) =>
+    /// <inheritdoc/>
+    public virtual bool Equals(ICaseDocument compare) =>
         CompareTool.EqualProperties(this, compare);
 
     /// <summary>Returns a <see cref="string" /> that represents this instance</summary>

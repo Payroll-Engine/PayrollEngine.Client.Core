@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The payroll regulation client object</summary>
-public class Regulation : Model, IRegulation, IEquatable<Regulation>
+public class Regulation : Model, IRegulation
 {
     /// <inheritdoc/>
     [Required]
@@ -36,7 +36,7 @@ public class Regulation : Model, IRegulation, IEquatable<Regulation>
 
     /// <inheritdoc/>
     public List<string> BaseRegulations { get; set; }
-    
+
     /// <inheritdoc/>
     public Dictionary<string, object> Attributes { get; set; }
 
@@ -47,17 +47,19 @@ public class Regulation : Model, IRegulation, IEquatable<Regulation>
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public Regulation(Regulation copySource) :
+    public Regulation(IRegulation copySource) :
         base(copySource)
     {
         CopyTool.CopyProperties(copySource, this);
     }
 
-    /// <summary>Compare two objects</summary>
-    /// <param name="compare">The object to compare with this</param>
-    /// <returns>True for objects with the same data</returns>
-    public virtual bool Equals(Regulation compare) =>
+    /// <inheritdoc/>
+    public virtual bool Equals(IRegulation compare) =>
         CompareTool.EqualProperties(this, compare);
+
+    /// <inheritdoc/>
+    public virtual bool EqualKey(IRegulation compare) =>
+        string.Equals(Name, compare?.Name);
 
     /// <summary>Returns a <see cref="string" /> that represents this instance</summary>
     /// <returns>A <see cref="string" /> that represents this instance</returns>

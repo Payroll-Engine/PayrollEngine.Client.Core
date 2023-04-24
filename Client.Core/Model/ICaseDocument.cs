@@ -1,8 +1,9 @@
-﻿
+﻿using System;
+
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The case document client object</summary>
-public interface ICaseDocument : IModel
+public interface ICaseDocument : IModel, IEquatable<ICaseDocument>
 {
     /// <summary>The document name</summary>
     string Name { get; set; }

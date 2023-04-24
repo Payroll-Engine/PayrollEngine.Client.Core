@@ -1,4 +1,5 @@
-﻿
+﻿using PayrollEngine.Client.Model;
+
 namespace PayrollEngine.Client.Service;
 
 /// <summary>Payroll service context</summary>
@@ -11,6 +12,14 @@ public class PayrollResultServiceContext : TenantServiceContext
         base(tenantId)
     {
         PayrollResultId = payrollResultId;
+    }
+
+    /// <summary>Initializes a new instance of the <see cref="PayrollResultServiceContext"/> class</summary>
+    /// <param name="tenant">The tenant</param>
+    /// <param name="payrollResult">The payroll result</param>
+    public PayrollResultServiceContext(ITenant tenant, IPayrollResult payrollResult) :
+        this(tenant.Id, payrollResult.Id)
+    {
     }
 
     /// <summary>The payroll result id</summary>

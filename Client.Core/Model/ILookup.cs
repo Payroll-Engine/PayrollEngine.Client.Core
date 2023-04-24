@@ -4,7 +4,7 @@ namespace PayrollEngine.Client.Model;
 
 /// <summary>The payroll lookup client object identified by his unique name.
 /// The lookup contains one or more columns and the ValueColumn indicates.</summary>
-public interface ILookup : IModel
+public interface ILookup : IModel, IKeyEquatable<ILookup>
 {
     /// <summary>The unique lookup name (immutable)</summary>
     string Name { get; set; }

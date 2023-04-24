@@ -3,7 +3,7 @@
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The payroll result info client object</summary>
-public class PayrollResult : Model, IPayrollResult, IEquatable<PayrollResult>
+public class PayrollResult : Model, IPayrollResult
 {
     /// <inheritdoc/>
     public int PayrollId { get; set; }
@@ -51,16 +51,14 @@ public class PayrollResult : Model, IPayrollResult, IEquatable<PayrollResult>
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public PayrollResult(PayrollResult copySource) :
+    public PayrollResult(IPayrollResult copySource) :
         base(copySource)
     {
         CopyTool.CopyProperties(copySource, this);
     }
 
-    /// <summary>Compare two objects</summary>
-    /// <param name="compare">The object to compare with this</param>
-    /// <returns>True for objects with the same data</returns>
-    public virtual bool Equals(PayrollResult compare) =>
+    /// <inheritdoc/>
+    public virtual bool Equals(IPayrollResult compare) =>
         CompareTool.EqualProperties(this, compare);
 
     /// <summary>Returns a <see cref="string" /> that represents this instance</summary>

@@ -3,7 +3,7 @@
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The payrun parameter client object</summary>
-public interface IPayrunParameter : IModel, IAttributeObject
+public interface IPayrunParameter : IModel, IAttributeObject, IKeyEquatable<IPayrunParameter>
 {
     /// <summary>The payrun parameter name</summary>
     string Name { get; set; }

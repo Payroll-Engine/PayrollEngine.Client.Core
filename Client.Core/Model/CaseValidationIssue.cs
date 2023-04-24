@@ -69,9 +69,7 @@ public class CaseValidationIssue : IEquatable<CaseValidationIssue>
         CopyTool.CopyProperties(copySource, this);
     }
 
-    /// <summary>Compare two objects</summary>
-    /// <param name="compare">The object to compare with this</param>
-    /// <returns>True for objects with the same data</returns>
+    /// <inheritdoc/>
     public virtual bool Equals(CaseValidationIssue compare) =>
         CompareTool.EqualProperties(this, compare);
 

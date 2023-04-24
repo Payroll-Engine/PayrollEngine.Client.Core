@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace PayrollEngine.Client.Model;
 
 /// <summary>Payroll case value change client object</summary>
-public class CaseSetup : Model, ICaseSetup, IEquatable<CaseSetup>
+public class CaseSetup : Model, ICaseSetup
 {
     /// <inheritdoc/>
     [Required]
@@ -27,18 +26,16 @@ public class CaseSetup : Model, ICaseSetup, IEquatable<CaseSetup>
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public CaseSetup(CaseSetup copySource) :
+    public CaseSetup(ICaseSetup copySource) :
         base(copySource)
     {
         CopyTool.CopyProperties(copySource, this);
     }
 
-    /// <summary>Compare two objects</summary>
-    /// <param name="compare">The object to compare with this</param>
-    /// <returns>True for objects with the same data</returns>
-    public virtual bool Equals(CaseSetup compare) =>
+    /// <inheritdoc/>
+    public virtual bool Equals(ICaseSetup compare) =>
         CompareTool.EqualProperties(this, compare);
-
+    
     /// <summary>Returns a <see cref="string" /> that represents this instance</summary>
     /// <returns>A <see cref="string" /> that represents this instance</returns>
     public override string ToString() =>

@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 namespace PayrollEngine.Client.Model;
 
 /// <summary>Payroll result value</summary>
-public interface IPayrollResultValue
+public interface IPayrollResultValue : IEquatable<IPayrollResultValue>
 {
     /// <summary>The payroll result id</summary>
     int PayrollResultId { get; set; }

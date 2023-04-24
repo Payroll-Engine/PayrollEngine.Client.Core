@@ -2,7 +2,7 @@
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The Webhook client object</summary>
-public interface IWebhook : IModel, IAttributeObject
+public interface IWebhook : IModel, IAttributeObject, IKeyEquatable<IWebhook>
 {
     /// <summary>The payroll name</summary>
     string Name { get; set; }

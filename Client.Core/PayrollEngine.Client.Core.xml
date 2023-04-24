@@ -37,14 +37,20 @@
         <member name="T:PayrollEngine.Client.ApiError">
             <summary>The payroll API error</summary>
         </member>
-        <member name="P:PayrollEngine.Client.ApiError.StatusCode">
+        <member name="P:PayrollEngine.Client.ApiError.Type">
+            <summary>The error type</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.ApiError.Title">
+            <summary>The error title</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.ApiError.Status">
             <summary>The http status code</summary>
         </member>
-        <member name="P:PayrollEngine.Client.ApiError.Message">
-            <summary>The error message</summary>
+        <member name="P:PayrollEngine.Client.ApiError.TraceId">
+            <summary>The error trace id</summary>
         </member>
-        <member name="P:PayrollEngine.Client.ApiError.StackTrace">
-            <summary>The error stack trace</summary>
+        <member name="P:PayrollEngine.Client.ApiError.Errors">
+            <summary>The errors</summary>
         </member>
         <member name="T:PayrollEngine.Client.CaseChangeSetupExtensions">
             <summary>Extension methods for the <see cref="T:PayrollEngine.Client.Model.CaseChangeSetup"/></summary>
@@ -484,8 +490,13 @@
         <member name="T:PayrollEngine.Client.ExceptionExtensions">
             <summary>Extension methods for <see cref="T:System.Exception"/></summary>
         </member>
-        <member name="M:PayrollEngine.Client.ExceptionExtensions.ToApiError(System.Exception)">
-            <summary>Convert an exception to an payroll API error</summary>
+        <member name="M:PayrollEngine.Client.ExceptionExtensions.GetApiMessage(System.Exception)">
+            <summary>Get the exception message from an API error</summary>
+            <param name="exception">The exception</param>
+            <returns>The payroll API error, null on others errors</returns>
+        </member>
+        <member name="M:PayrollEngine.Client.ExceptionExtensions.GetApiError(System.Exception)">
+            <summary>Get the exception message from an API error</summary>
             <param name="exception">The exception</param>
             <returns>The payroll API error, null on others errors</returns>
         </member>
@@ -1971,14 +1982,15 @@
         <member name="M:PayrollEngine.Client.Model.Case.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.Case.#ctor(PayrollEngine.Client.Model.Case)">
+        <member name="M:PayrollEngine.Client.Model.Case.#ctor(PayrollEngine.Client.Model.ICase)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
-        <member name="M:PayrollEngine.Client.Model.Case.Equals(PayrollEngine.Client.Model.Case)">
-            <summary>Compare two objects</summary>
-            <param name="compare">The object to compare with this</param>
-            <returns>True for objects with the same data</returns>
+        <member name="M:PayrollEngine.Client.Model.Case.Equals(PayrollEngine.Client.Model.ICase)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.Case.EqualKey(PayrollEngine.Client.Model.ICase)">
+            <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.Case.ToString">
             <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
@@ -2035,14 +2047,12 @@
         <member name="M:PayrollEngine.Client.Model.CaseChange.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.CaseChange.#ctor(PayrollEngine.Client.Model.CaseChange)">
+        <member name="M:PayrollEngine.Client.Model.CaseChange.#ctor(PayrollEngine.Client.Model.ICaseChange)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
-        <member name="M:PayrollEngine.Client.Model.CaseChange.Equals(PayrollEngine.Client.Model.CaseChange)">
-            <summary>Compare two objects</summary>
-            <param name="compare">The object to compare with this</param>
-            <returns>True for objects with the same data</returns>
+        <member name="M:PayrollEngine.Client.Model.CaseChange.Equals(PayrollEngine.Client.Model.ICaseChange)">
+            <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.CaseChange.ToString">
             <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
@@ -2140,14 +2150,12 @@
         <member name="M:PayrollEngine.Client.Model.CaseChangeSetup.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.CaseChangeSetup.#ctor(PayrollEngine.Client.Model.CaseChangeSetup)">
+        <member name="M:PayrollEngine.Client.Model.CaseChangeSetup.#ctor(PayrollEngine.Client.Model.ICaseChangeSetup)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
-        <member name="M:PayrollEngine.Client.Model.CaseChangeSetup.Equals(PayrollEngine.Client.Model.CaseChangeSetup)">
-            <summary>Compare two objects</summary>
-            <param name="compare">The object to compare with this</param>
-            <returns>True for objects with the same data</returns>
+        <member name="M:PayrollEngine.Client.Model.CaseChangeSetup.Equals(PayrollEngine.Client.Model.ICaseChangeSetup)">
+            <inheritdoc/>
         </member>
         <member name="T:PayrollEngine.Client.Model.CaseDocument">
             <summary>The case document client object</summary>
@@ -2167,14 +2175,12 @@
         <member name="M:PayrollEngine.Client.Model.CaseDocument.#ctor">
             <summary>Initializes a new instance of the <see cref="T:PayrollEngine.Client.Model.CaseDocument"/> class</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.CaseDocument.#ctor(PayrollEngine.Client.Model.CaseDocument)">
+        <member name="M:PayrollEngine.Client.Model.CaseDocument.#ctor(PayrollEngine.Client.Model.ICaseDocument)">
             <summary>Initializes a new instance of the <see cref="T:PayrollEngine.Client.Model.CaseDocument"/> class</summary>
             <param name="copySource">The copy source.</param>
         </member>
-        <member name="M:PayrollEngine.Client.Model.CaseDocument.Equals(PayrollEngine.Client.Model.CaseDocument)">
-            <summary>Compare two objects</summary>
-            <param name="compare">The object to compare with this</param>
-            <returns>True for objects with the same data</returns>
+        <member name="M:PayrollEngine.Client.Model.CaseDocument.Equals(PayrollEngine.Client.Model.ICaseDocument)">
+            <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.CaseDocument.ToString">
             <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
@@ -2264,14 +2270,15 @@
         <member name="M:PayrollEngine.Client.Model.CaseField.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.CaseField.#ctor(PayrollEngine.Client.Model.CaseField)">
+        <member name="M:PayrollEngine.Client.Model.CaseField.#ctor(PayrollEngine.Client.Model.ICaseField)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
-        <member name="M:PayrollEngine.Client.Model.CaseField.Equals(PayrollEngine.Client.Model.CaseField)">
-            <summary>Compare two objects</summary>
-            <param name="compare">The object to compare with this</param>
-            <returns>True for objects with the same data</returns>
+        <member name="M:PayrollEngine.Client.Model.CaseField.Equals(PayrollEngine.Client.Model.ICaseField)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.CaseField.EqualKey(PayrollEngine.Client.Model.ICaseField)">
+            <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.CaseField.ToString">
             <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
@@ -2291,9 +2298,7 @@
             </summary>
         </member>
         <member name="M:PayrollEngine.Client.Model.CaseFieldReference.Equals(PayrollEngine.Client.Model.CaseFieldReference)">
-            <summary>Compare two objects</summary>
-            <param name="compare">The object to compare with this</param>
-            <returns>True for objects with the same data</returns>
+            <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.CaseFieldReference.ToString">
             <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
@@ -2329,17 +2334,15 @@
         <member name="M:PayrollEngine.Client.Model.CaseFieldSet.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.CaseFieldSet.#ctor(PayrollEngine.Client.Model.CaseFieldSet)">
+        <member name="M:PayrollEngine.Client.Model.CaseFieldSet.#ctor(PayrollEngine.Client.Model.ICaseFieldSet)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
-        <member name="M:PayrollEngine.Client.Model.CaseFieldSet.#ctor(PayrollEngine.Client.Model.CaseField)">
+        <member name="M:PayrollEngine.Client.Model.CaseFieldSet.#ctor(PayrollEngine.Client.Model.ICaseField)">
             <inheritdoc/>
         </member>
-        <member name="M:PayrollEngine.Client.Model.CaseFieldSet.Equals(PayrollEngine.Client.Model.CaseFieldSet)">
-            <summary>Compare two objects</summary>
-            <param name="compare">The object to compare with this</param>
-            <returns>True for objects with the same data</returns>
+        <member name="M:PayrollEngine.Client.Model.CaseFieldSet.Equals(PayrollEngine.Client.Model.ICaseFieldSet)">
+            <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.CaseFieldSet.GetValue">
             <summary>Get native value</summary>
@@ -2393,9 +2396,7 @@
             <param name="copySource">The copy source</param>
         </member>
         <member name="M:PayrollEngine.Client.Model.CaseFieldValue.Equals(PayrollEngine.Client.Model.CaseFieldValue)">
-            <summary>Compare two objects</summary>
-            <param name="compare">The object to compare with this</param>
-            <returns>True for objects with the same data</returns>
+            <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.CaseFieldValue.ToString">
             <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
@@ -2461,14 +2462,15 @@
         <member name="M:PayrollEngine.Client.Model.CaseRelation.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.CaseRelation.#ctor(PayrollEngine.Client.Model.CaseRelation)">
+        <member name="M:PayrollEngine.Client.Model.CaseRelation.#ctor(PayrollEngine.Client.Model.ICaseRelation)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
-        <member name="M:PayrollEngine.Client.Model.CaseRelation.Equals(PayrollEngine.Client.Model.CaseRelation)">
-            <summary>Compare two objects</summary>
-            <param name="compare">The object to compare with this</param>
-            <returns>True for objects with the same data</returns>
+        <member name="M:PayrollEngine.Client.Model.CaseRelation.Equals(PayrollEngine.Client.Model.ICaseRelation)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.CaseRelation.EqualKey(PayrollEngine.Client.Model.ICaseRelation)">
+            <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.CaseRelation.ToString">
             <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
@@ -2509,9 +2511,7 @@
             <param name="targetCaseSlot">The relation target case slot</param>
         </member>
         <member name="M:PayrollEngine.Client.Model.CaseRelationReference.Equals(PayrollEngine.Client.Model.CaseRelationReference)">
-            <summary>Compare two objects</summary>
-            <param name="compare">The object to compare with this</param>
-            <returns>True for objects with the same data</returns>
+            <inheritdoc/>
         </member>
         <member name="T:PayrollEngine.Client.Model.CaseSet">
             <summary>The payroll derived case</summary>
@@ -2537,18 +2537,16 @@
         <member name="M:PayrollEngine.Client.Model.CaseSet.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.CaseSet.#ctor(PayrollEngine.Client.Model.CaseSet)">
+        <member name="M:PayrollEngine.Client.Model.CaseSet.#ctor(PayrollEngine.Client.Model.ICaseSet)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
-        <member name="M:PayrollEngine.Client.Model.CaseSet.#ctor(PayrollEngine.Client.Model.Case)">
+        <member name="M:PayrollEngine.Client.Model.CaseSet.#ctor(PayrollEngine.Client.Model.ICase)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
-        <member name="M:PayrollEngine.Client.Model.CaseSet.Equals(PayrollEngine.Client.Model.CaseSet)">
-            <summary>Compare two objects</summary>
-            <param name="compare">The object to compare with this</param>
-            <returns>True for objects with the same data</returns>
+        <member name="M:PayrollEngine.Client.Model.CaseSet.Equals(PayrollEngine.Client.Model.ICaseSet)">
+            <inheritdoc/>
         </member>
         <member name="T:PayrollEngine.Client.Model.CaseSetup">
             <summary>Payroll case value change client object</summary>
@@ -2568,14 +2566,12 @@
         <member name="M:PayrollEngine.Client.Model.CaseSetup.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.CaseSetup.#ctor(PayrollEngine.Client.Model.CaseSetup)">
+        <member name="M:PayrollEngine.Client.Model.CaseSetup.#ctor(PayrollEngine.Client.Model.ICaseSetup)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
-        <member name="M:PayrollEngine.Client.Model.CaseSetup.Equals(PayrollEngine.Client.Model.CaseSetup)">
-            <summary>Compare two objects</summary>
-            <param name="compare">The object to compare with this</param>
-            <returns>True for objects with the same data</returns>
+        <member name="M:PayrollEngine.Client.Model.CaseSetup.Equals(PayrollEngine.Client.Model.ICaseSetup)">
+            <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.CaseSetup.ToString">
             <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
@@ -2598,9 +2594,7 @@
             <param name="copySource">The copy source</param>
         </member>
         <member name="M:PayrollEngine.Client.Model.CaseSlot.Equals(PayrollEngine.Client.Model.CaseSlot)">
-            <summary>Compare two objects</summary>
-            <param name="compare">The object to compare with this</param>
-            <returns>True for objects with the same data</returns>
+            <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.CaseSlot.ToString">
             <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
@@ -2668,9 +2662,7 @@
             <param name="copySource">The copy source</param>
         </member>
         <member name="M:PayrollEngine.Client.Model.CaseValidationIssue.Equals(PayrollEngine.Client.Model.CaseValidationIssue)">
-            <summary>Compare two objects</summary>
-            <param name="compare">The object to compare with this</param>
-            <returns>True for objects with the same data</returns>
+            <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.CaseValidationIssue.ToString">
             <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
@@ -2739,14 +2731,12 @@
         <member name="M:PayrollEngine.Client.Model.CaseValue.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.CaseValue.#ctor(PayrollEngine.Client.Model.CaseValue)">
+        <member name="M:PayrollEngine.Client.Model.CaseValue.#ctor(PayrollEngine.Client.Model.ICaseValue)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
-        <member name="M:PayrollEngine.Client.Model.CaseValue.Equals(PayrollEngine.Client.Model.CaseValue)">
-            <summary>Compare two objects</summary>
-            <param name="compare">The object to compare with this</param>
-            <returns>True for objects with the same data</returns>
+        <member name="M:PayrollEngine.Client.Model.CaseValue.Equals(PayrollEngine.Client.Model.ICaseValue)">
+            <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.CaseValue.ToString">
             <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
@@ -2786,14 +2776,12 @@
         <member name="M:PayrollEngine.Client.Model.CaseValueSetup.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.CaseValueSetup.#ctor(PayrollEngine.Client.Model.CaseValueSetup)">
+        <member name="M:PayrollEngine.Client.Model.CaseValueSetup.#ctor(PayrollEngine.Client.Model.ICaseValueSetup)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
-        <member name="M:PayrollEngine.Client.Model.CaseValueSetup.Equals(PayrollEngine.Client.Model.CaseValueSetup)">
-            <summary>Compare two objects</summary>
-            <param name="compare">The object to compare with this</param>
-            <returns>True for objects with the same data</returns>
+        <member name="M:PayrollEngine.Client.Model.CaseValueSetup.Equals(PayrollEngine.Client.Model.ICaseValueSetup)">
+            <inheritdoc/>
         </member>
         <member name="T:PayrollEngine.Client.Model.ClusterSet">
             <summary>Cluster set</summary>
@@ -2815,9 +2803,7 @@
             <param name="copySource">The copy source</param>
         </member>
         <member name="M:PayrollEngine.Client.Model.ClusterSet.Equals(PayrollEngine.Client.Model.ClusterSet)">
-            <summary>Compare two objects</summary>
-            <param name="compare">The object to compare with this</param>
-            <returns>True for objects with the same data</returns>
+            <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.ClusterSet.ToString">
             <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
@@ -2880,14 +2866,15 @@
         <member name="M:PayrollEngine.Client.Model.Collector.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.Collector.#ctor(PayrollEngine.Client.Model.Collector)">
+        <member name="M:PayrollEngine.Client.Model.Collector.#ctor(PayrollEngine.Client.Model.ICollector)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
-        <member name="M:PayrollEngine.Client.Model.Collector.Equals(PayrollEngine.Client.Model.Collector)">
-            <summary>Compare two objects</summary>
-            <param name="compare">The object to compare with this</param>
-            <returns>True for objects with the same data</returns>
+        <member name="M:PayrollEngine.Client.Model.Collector.Equals(PayrollEngine.Client.Model.ICollector)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.Collector.EqualKey(PayrollEngine.Client.Model.ICollector)">
+            <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.Collector.ToString">
             <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
@@ -2929,14 +2916,12 @@
         <member name="M:PayrollEngine.Client.Model.CollectorCustomResult.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.CollectorCustomResult.#ctor(PayrollEngine.Client.Model.CollectorCustomResult)">
+        <member name="M:PayrollEngine.Client.Model.CollectorCustomResult.#ctor(PayrollEngine.Client.Model.ICollectorCustomResult)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
-        <member name="M:PayrollEngine.Client.Model.CollectorCustomResult.Equals(PayrollEngine.Client.Model.CollectorCustomResult)">
-            <summary>Compare two objects</summary>
-            <param name="compare">The object to compare with this</param>
-            <returns>True for objects with the same data</returns>
+        <member name="M:PayrollEngine.Client.Model.CollectorCustomResult.Equals(PayrollEngine.Client.Model.ICollectorCustomResult)">
+            <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.CollectorCustomResult.ToString">
             <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
@@ -2981,16 +2966,14 @@
         <member name="M:PayrollEngine.Client.Model.CollectorResult.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.CollectorResult.#ctor(PayrollEngine.Client.Model.CollectorResult)">
+        <member name="M:PayrollEngine.Client.Model.CollectorResult.#ctor(PayrollEngine.Client.Model.ICollectorResult)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
-        <member name="M:PayrollEngine.Client.Model.CollectorResult.Equals(PayrollEngine.Client.Model.CollectorResult)">
-            <summary>Compare two objects</summary>
-            <param name="compare">The object to compare with this</param>
-            <returns>True for objects with the same data</returns>
+        <member name="M:PayrollEngine.Client.Model.CollectorResult.Equals(PayrollEngine.Client.Model.ICollectorResult)">
+            <inheritdoc/>
         </member>
-        <member name="M:PayrollEngine.Client.Model.CollectorResult.AlmostEquals(System.Nullable{System.Decimal},System.Int32)">
+        <member name="M:PayrollEngine.Client.Model.CollectorResult.AlmostEqualValue(System.Nullable{System.Decimal},System.Int32)">
             <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.CollectorResult.ToString">
@@ -3006,18 +2989,16 @@
         <member name="M:PayrollEngine.Client.Model.CollectorResultSet.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.CollectorResultSet.#ctor(PayrollEngine.Client.Model.CollectorResult)">
+        <member name="M:PayrollEngine.Client.Model.CollectorResultSet.#ctor(PayrollEngine.Client.Model.ICollectorResult)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
-        <member name="M:PayrollEngine.Client.Model.CollectorResultSet.#ctor(PayrollEngine.Client.Model.CollectorResultSet)">
+        <member name="M:PayrollEngine.Client.Model.CollectorResultSet.#ctor(PayrollEngine.Client.Model.ICollectorResultSet)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
-        <member name="M:PayrollEngine.Client.Model.CollectorResultSet.Equals(PayrollEngine.Client.Model.CollectorResultSet)">
-            <summary>Compare two objects</summary>
-            <param name="compare">The object to compare with this</param>
-            <returns>True for objects with the same data</returns>
+        <member name="M:PayrollEngine.Client.Model.CollectorResultSet.Equals(PayrollEngine.Client.Model.ICollectorResultSet)">
+            <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.CollectorResultSet.ToString">
             <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
@@ -3038,14 +3019,12 @@
         <member name="M:PayrollEngine.Client.Model.ConsolidatedPayrollResult.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.ConsolidatedPayrollResult.#ctor(PayrollEngine.Client.Model.ConsolidatedPayrollResult)">
+        <member name="M:PayrollEngine.Client.Model.ConsolidatedPayrollResult.#ctor(PayrollEngine.Client.Model.IConsolidatedPayrollResult)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
-        <member name="M:PayrollEngine.Client.Model.ConsolidatedPayrollResult.Equals(PayrollEngine.Client.Model.ConsolidatedPayrollResult)">
-            <summary>Compare two objects</summary>
-            <param name="compare">The object to compare with this</param>
-            <returns>True for objects with the same data</returns>
+        <member name="M:PayrollEngine.Client.Model.ConsolidatedPayrollResult.Equals(PayrollEngine.Client.Model.IConsolidatedPayrollResult)">
+            <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.ConsolidatedPayrollResult.ToString">
             <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
@@ -3069,14 +3048,15 @@
         <member name="M:PayrollEngine.Client.Model.Division.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.Division.#ctor(PayrollEngine.Client.Model.Division)">
+        <member name="M:PayrollEngine.Client.Model.Division.#ctor(PayrollEngine.Client.Model.IDivision)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
-        <member name="M:PayrollEngine.Client.Model.Division.Equals(PayrollEngine.Client.Model.Division)">
-            <summary>Compare two objects</summary>
-            <param name="compare">The object to compare with this</param>
-            <returns>True for objects with the same data</returns>
+        <member name="M:PayrollEngine.Client.Model.Division.Equals(PayrollEngine.Client.Model.IDivision)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.Division.EqualKey(PayrollEngine.Client.Model.IDivision)">
+            <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.Division.ToString">
             <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
@@ -3119,14 +3099,15 @@
         <member name="M:PayrollEngine.Client.Model.Employee.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.Employee.#ctor(PayrollEngine.Client.Model.Employee)">
+        <member name="M:PayrollEngine.Client.Model.Employee.#ctor(PayrollEngine.Client.Model.IEmployee)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
-        <member name="M:PayrollEngine.Client.Model.Employee.Equals(PayrollEngine.Client.Model.Employee)">
-            <summary>Compare two objects</summary>
-            <param name="compare">The object to compare with this</param>
-            <returns>True for objects with the same data</returns>
+        <member name="M:PayrollEngine.Client.Model.Employee.Equals(PayrollEngine.Client.Model.IEmployee)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.Employee.EqualKey(PayrollEngine.Client.Model.IEmployee)">
+            <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.Employee.ToString">
             <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
@@ -3144,18 +3125,16 @@
         <member name="M:PayrollEngine.Client.Model.EmployeeSet.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.EmployeeSet.#ctor(PayrollEngine.Client.Model.Employee)">
+        <member name="M:PayrollEngine.Client.Model.EmployeeSet.#ctor(PayrollEngine.Client.Model.IEmployee)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
-        <member name="M:PayrollEngine.Client.Model.EmployeeSet.#ctor(PayrollEngine.Client.Model.EmployeeSet)">
+        <member name="M:PayrollEngine.Client.Model.EmployeeSet.#ctor(PayrollEngine.Client.Model.IEmployeeSet)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
-        <member name="M:PayrollEngine.Client.Model.EmployeeSet.Equals(PayrollEngine.Client.Model.EmployeeSet)">
-            <summary>Compare two objects</summary>
-            <param name="compare">The object to compare with this</param>
-            <returns>True for objects with the same data</returns>
+        <member name="M:PayrollEngine.Client.Model.EmployeeSet.Equals(PayrollEngine.Client.Model.IEmployeeSet)">
+            <inheritdoc/>
         </member>
         <member name="T:PayrollEngine.Client.Model.Exchange">
             <summary>The exchange object</summary>
@@ -3172,17 +3151,15 @@
         <member name="M:PayrollEngine.Client.Model.Exchange.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.Exchange.#ctor(PayrollEngine.Client.Model.Exchange)">
+        <member name="M:PayrollEngine.Client.Model.Exchange.#ctor(PayrollEngine.Client.Model.IExchange)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
         <member name="M:PayrollEngine.Client.Model.Exchange.Import(PayrollEngine.Client.Model.IExchange)">
             <inheritdoc/>
         </member>
-        <member name="M:PayrollEngine.Client.Model.Exchange.Equals(PayrollEngine.Client.Model.Exchange)">
-            <summary>Compare two objects</summary>
-            <param name="compare">The object to compare with this</param>
-            <returns>True for objects with the same data</returns>
+        <member name="M:PayrollEngine.Client.Model.Exchange.Equals(PayrollEngine.Client.Model.IExchange)">
+            <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.Exchange.ToString">
             <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
@@ -3245,17 +3222,15 @@
         <member name="M:PayrollEngine.Client.Model.ExchangeTenant.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.ExchangeTenant.#ctor(PayrollEngine.Client.Model.ExchangeTenant)">
+        <member name="M:PayrollEngine.Client.Model.ExchangeTenant.#ctor(PayrollEngine.Client.Model.IExchangeTenant)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
         <member name="M:PayrollEngine.Client.Model.ExchangeTenant.Import(PayrollEngine.Client.Model.IExchangeTenant)">
             <inheritdoc/>
         </member>
-        <member name="M:PayrollEngine.Client.Model.ExchangeTenant.Equals(PayrollEngine.Client.Model.ExchangeTenant)">
-            <summary>Compare two objects</summary>
-            <param name="compare">The object to compare with this</param>
-            <returns>True for objects with the same data</returns>
+        <member name="M:PayrollEngine.Client.Model.ExchangeTenant.Equals(PayrollEngine.Client.Model.IExchangeTenant)">
+            <inheritdoc/>
         </member>
         <member name="T:PayrollEngine.Client.Model.ICase">
             <summary>The payroll case client object</summary>
@@ -3835,8 +3810,8 @@
         <member name="P:PayrollEngine.Client.Model.ICollectorResult.Tags">
             <summary>The result tags</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.ICollectorResult.AlmostEquals(System.Nullable{System.Decimal},System.Int32)">
-            <summary>Test if two decimal values are almost equals</summary>
+        <member name="M:PayrollEngine.Client.Model.ICollectorResult.AlmostEqualValue(System.Nullable{System.Decimal},System.Int32)">
+            <summary>Test if two collector values are almost equals</summary>
             <param name="compare">The value to compare</param>
             <param name="precision">The test precision</param>
             <returns>True for almost equal value</returns>
@@ -3973,6 +3948,13 @@
         <member name="M:PayrollEngine.Client.Model.IExchangeTenant.Import(PayrollEngine.Client.Model.IExchangeTenant)">
             <summary>The import exchange tenant</summary>
         </member>
+        <member name="T:PayrollEngine.Client.Model.IKeyEquatable`1">
+            <summary>Model equitable</summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.IKeyEquatable`1.EqualKey(`0)">
+            <summary>Test for the same item key</summary>
+        </member>
         <member name="T:PayrollEngine.Client.Model.ILog">
             <summary>The payroll log object</summary>
         </member>
@@ -4060,6 +4042,12 @@
         </member>
         <member name="P:PayrollEngine.Client.Model.IModel.Id">
             <summary>The unique object id (immutable)</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.IModel.IsExistingObject">
+            <summary>Test for existing object (opposite of <see cref="P:PayrollEngine.Client.Model.IModel.IsNewObject"/>)</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.IModel.IsNewObject">
+            <summary>Test for new object (opposite of <see cref="P:PayrollEngine.Client.Model.IModel.IsExistingObject"/>)</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.IModel.Status">
             <summary>The status of the object</summary>
@@ -4878,9 +4866,6 @@
         <member name="P:PayrollEngine.Client.Model.ITask.Completed">
             <summary>The task completed date</summary>
         </member>
-        <member name="P:PayrollEngine.Client.Model.ITask.Attributes">
-            <summary>Custom attributes</summary>
-        </member>
         <member name="T:PayrollEngine.Client.Model.ITenant">
             <summary>The tenant client object</summary>
         </member>
@@ -5029,7 +5014,7 @@
             <summary>The result tags</summary>
         </member>
         <member name="M:PayrollEngine.Client.Model.IWageTypeResult.AlmostEqualValue(System.Nullable{System.Decimal},System.Int32)">
-            <summary>Test if value is almost equals using a test precision</summary>
+            <summary>Test if value is almost equal value using a test precision</summary>
             <param name="compare">The value to compare</param>
             <param name="precision">The test precision</param>
             <returns>True for almost equal values</returns>
@@ -5121,13 +5106,11 @@
         <member name="M:PayrollEngine.Client.Model.Log.#ctor">
             <inheritdoc/>
         </member>
-        <member name="M:PayrollEngine.Client.Model.Log.#ctor(PayrollEngine.Client.Model.Log)">
+        <member name="M:PayrollEngine.Client.Model.Log.#ctor(PayrollEngine.Client.Model.ILog)">
             <inheritdoc/>
         </member>
-        <member name="M:PayrollEngine.Client.Model.Log.Equals(PayrollEngine.Client.Model.Log)">
-            <summary>Compare two objects</summary>
-            <param name="compare">The object to compare with this</param>
-            <returns>True for objects with the same data</returns>
+        <member name="M:PayrollEngine.Client.Model.Log.Equals(PayrollEngine.Client.Model.ILog)">
+            <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.Log.ToString">
             <inheritdoc/>
@@ -5157,14 +5140,15 @@
         <member name="M:PayrollEngine.Client.Model.Lookup.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.Lookup.#ctor(PayrollEngine.Client.Model.Lookup)">
+        <member name="M:PayrollEngine.Client.Model.Lookup.#ctor(PayrollEngine.Client.Model.ILookup)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
-        <member name="M:PayrollEngine.Client.Model.Lookup.Equals(PayrollEngine.Client.Model.Lookup)">
-            <summary>Compare two objects</summary>
-            <param name="compare">The object to compare with this</param>
-            <returns>True for objects with the same data</returns>
+        <member name="M:PayrollEngine.Client.Model.Lookup.Equals(PayrollEngine.Client.Model.ILookup)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.Lookup.EqualKey(PayrollEngine.Client.Model.ILookup)">
+            <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.Lookup.ToString">
             <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
@@ -5188,14 +5172,12 @@
         <member name="M:PayrollEngine.Client.Model.LookupData.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.LookupData.#ctor(PayrollEngine.Client.Model.LookupData)">
+        <member name="M:PayrollEngine.Client.Model.LookupData.#ctor(PayrollEngine.Client.Model.ILookupData)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
-        <member name="M:PayrollEngine.Client.Model.LookupData.Equals(PayrollEngine.Client.Model.LookupData)">
-            <summary>Compare two objects</summary>
-            <param name="compare">The object to compare with this</param>
-            <returns>True for objects with the same data</returns>
+        <member name="M:PayrollEngine.Client.Model.LookupData.Equals(PayrollEngine.Client.Model.ILookupData)">
+            <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.LookupData.ToString">
             <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
@@ -5210,14 +5192,12 @@
         <member name="M:PayrollEngine.Client.Model.LookupSet.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.LookupSet.#ctor(PayrollEngine.Client.Model.LookupSet)">
+        <member name="M:PayrollEngine.Client.Model.LookupSet.#ctor(PayrollEngine.Client.Model.ILookupSet)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
-        <member name="M:PayrollEngine.Client.Model.LookupSet.Equals(PayrollEngine.Client.Model.LookupSet)">
-            <summary>Compare two objects</summary>
-            <param name="compare">The object to compare with this</param>
-            <returns>True for objects with the same data</returns>
+        <member name="M:PayrollEngine.Client.Model.LookupSet.Equals(PayrollEngine.Client.Model.ILookupSet)">
+            <inheritdoc/>
         </member>
         <member name="T:PayrollEngine.Client.Model.LookupSettings">
             <summary>The lookup settings</summary>
@@ -5239,9 +5219,7 @@
             <param name="source">The copy source</param>
         </member>
         <member name="M:PayrollEngine.Client.Model.LookupSettings.Equals(PayrollEngine.Client.Model.LookupSettings)">
-            <summary>Compare two objects</summary>
-            <param name="compare">The object to compare with this</param>
-            <returns>True for objects with the same data</returns>
+            <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.LookupSettings.ToString">
             <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
@@ -5274,14 +5252,15 @@
         <member name="M:PayrollEngine.Client.Model.LookupValue.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.LookupValue.#ctor(PayrollEngine.Client.Model.LookupValue)">
+        <member name="M:PayrollEngine.Client.Model.LookupValue.#ctor(PayrollEngine.Client.Model.ILookupValue)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
-        <member name="M:PayrollEngine.Client.Model.LookupValue.Equals(PayrollEngine.Client.Model.LookupValue)">
-            <summary>Compare two objects</summary>
-            <param name="compare">The object to compare with this</param>
-            <returns>True for objects with the same data</returns>
+        <member name="M:PayrollEngine.Client.Model.LookupValue.Equals(PayrollEngine.Client.Model.ILookupValue)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.LookupValue.EqualKey(PayrollEngine.Client.Model.ILookupValue)">
+            <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.LookupValue.ToString">
             <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
@@ -5307,9 +5286,7 @@
             <param name="copySource">The copy source</param>
         </member>
         <member name="M:PayrollEngine.Client.Model.LookupValueData.Equals(PayrollEngine.Client.Model.LookupValueData)">
-            <summary>Compare two objects</summary>
-            <param name="compare">The object to compare with this</param>
-            <returns>True for objects with the same data</returns>
+            <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.LookupValueData.ToString">
             <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
@@ -5319,6 +5296,12 @@
             <summary>Base for all Payroll models</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.Model.Id">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.Model.IsExistingObject">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.Model.IsNewObject">
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.Model.Status">
@@ -5336,14 +5319,9 @@
         <member name="M:PayrollEngine.Client.Model.Model.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.Model.#ctor(PayrollEngine.Client.Model.Model)">
+        <member name="M:PayrollEngine.Client.Model.Model.#ctor(PayrollEngine.Client.Model.IModel)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
-        </member>
-        <member name="M:PayrollEngine.Client.Model.Model.Equals(PayrollEngine.Client.Model.IModel)">
-            <summary>Detect if two domain objects containing the same data, including id and status</summary>
-            <param name="compare">Object to compare</param>
-            <returns>True if any change is present</returns>
         </member>
         <member name="M:PayrollEngine.Client.Model.Model.ToString">
             <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
@@ -5412,14 +5390,15 @@
         <member name="M:PayrollEngine.Client.Model.Payroll.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.Payroll.#ctor(PayrollEngine.Client.Model.Payroll)">
+        <member name="M:PayrollEngine.Client.Model.Payroll.#ctor(PayrollEngine.Client.Model.IPayroll)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
-        <member name="M:PayrollEngine.Client.Model.Payroll.Equals(PayrollEngine.Client.Model.Payroll)">
-            <summary>Compare two objects</summary>
-            <param name="compare">The object to compare with this</param>
-            <returns>True for objects with the same data</returns>
+        <member name="M:PayrollEngine.Client.Model.Payroll.Equals(PayrollEngine.Client.Model.IPayroll)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.Payroll.EqualKey(PayrollEngine.Client.Model.IPayroll)">
+            <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.Payroll.ToString">
             <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
@@ -5478,14 +5457,15 @@
         <member name="M:PayrollEngine.Client.Model.PayrollLayer.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.PayrollLayer.#ctor(PayrollEngine.Client.Model.PayrollLayer)">
+        <member name="M:PayrollEngine.Client.Model.PayrollLayer.#ctor(PayrollEngine.Client.Model.IPayrollLayer)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
-        <member name="M:PayrollEngine.Client.Model.PayrollLayer.Equals(PayrollEngine.Client.Model.PayrollLayer)">
-            <summary>Compare two objects</summary>
-            <param name="compare">The object to compare with this</param>
-            <returns>True for objects with the same data</returns>
+        <member name="M:PayrollEngine.Client.Model.PayrollLayer.Equals(PayrollEngine.Client.Model.IPayrollLayer)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.PayrollLayer.EqualKey(PayrollEngine.Client.Model.IPayrollLayer)">
+            <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.PayrollLayer.ToString">
             <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
@@ -5536,14 +5516,12 @@
         <member name="M:PayrollEngine.Client.Model.PayrollResult.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.PayrollResult.#ctor(PayrollEngine.Client.Model.PayrollResult)">
+        <member name="M:PayrollEngine.Client.Model.PayrollResult.#ctor(PayrollEngine.Client.Model.IPayrollResult)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
-        <member name="M:PayrollEngine.Client.Model.PayrollResult.Equals(PayrollEngine.Client.Model.PayrollResult)">
-            <summary>Compare two objects</summary>
-            <param name="compare">The object to compare with this</param>
-            <returns>True for objects with the same data</returns>
+        <member name="M:PayrollEngine.Client.Model.PayrollResult.Equals(PayrollEngine.Client.Model.IPayrollResult)">
+            <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.PayrollResult.ToString">
             <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
@@ -5567,18 +5545,16 @@
         <member name="M:PayrollEngine.Client.Model.PayrollResultSet.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.PayrollResultSet.#ctor(PayrollEngine.Client.Model.PayrollResult)">
+        <member name="M:PayrollEngine.Client.Model.PayrollResultSet.#ctor(PayrollEngine.Client.Model.IPayrollResult)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
-        <member name="M:PayrollEngine.Client.Model.PayrollResultSet.#ctor(PayrollEngine.Client.Model.PayrollResultSet)">
+        <member name="M:PayrollEngine.Client.Model.PayrollResultSet.#ctor(PayrollEngine.Client.Model.IPayrollResultSet)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
-        <member name="M:PayrollEngine.Client.Model.PayrollResultSet.Equals(PayrollEngine.Client.Model.PayrollResultSet)">
-            <summary>Compare two objects</summary>
-            <param name="compare">The object to compare with this</param>
-            <returns>True for objects with the same data</returns>
+        <member name="M:PayrollEngine.Client.Model.PayrollResultSet.Equals(PayrollEngine.Client.Model.IPayrollResultSet)">
+            <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.PayrollResultSet.HasResults">
             <inheritdoc/>
@@ -5699,14 +5675,12 @@
         <member name="M:PayrollEngine.Client.Model.PayrollResultValue.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.PayrollResultValue.#ctor(PayrollEngine.Client.Model.PayrollResultValue)">
+        <member name="M:PayrollEngine.Client.Model.PayrollResultValue.#ctor(PayrollEngine.Client.Model.IPayrollResultValue)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
-        <member name="M:PayrollEngine.Client.Model.PayrollResultValue.Equals(PayrollEngine.Client.Model.PayrollResultValue)">
-            <summary>Compare two objects</summary>
-            <param name="compare">The object to compare with this</param>
-            <returns>True for objects with the same data</returns>
+        <member name="M:PayrollEngine.Client.Model.PayrollResultValue.Equals(PayrollEngine.Client.Model.IPayrollResultValue)">
+            <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.PayrollResultValue.ToString">
             <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
@@ -5724,18 +5698,16 @@
         <member name="M:PayrollEngine.Client.Model.PayrollSet.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.PayrollSet.#ctor(PayrollEngine.Client.Model.Payroll)">
+        <member name="M:PayrollEngine.Client.Model.PayrollSet.#ctor(PayrollEngine.Client.Model.IPayroll)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
-        <member name="M:PayrollEngine.Client.Model.PayrollSet.#ctor(PayrollEngine.Client.Model.PayrollSet)">
+        <member name="M:PayrollEngine.Client.Model.PayrollSet.#ctor(PayrollEngine.Client.Model.IPayrollSet)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
-        <member name="M:PayrollEngine.Client.Model.PayrollSet.Equals(PayrollEngine.Client.Model.PayrollSet)">
-            <summary>Compare two objects</summary>
-            <param name="compare">The object to compare with this</param>
-            <returns>True for objects with the same data</returns>
+        <member name="M:PayrollEngine.Client.Model.PayrollSet.Equals(PayrollEngine.Client.Model.IPayrollSet)">
+            <inheritdoc/>
         </member>
         <member name="T:PayrollEngine.Client.Model.Payrun">
             <summary>The payrun client object</summary>
@@ -5800,14 +5772,15 @@
         <member name="M:PayrollEngine.Client.Model.Payrun.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.Payrun.#ctor(PayrollEngine.Client.Model.Payrun)">
+        <member name="M:PayrollEngine.Client.Model.Payrun.#ctor(PayrollEngine.Client.Model.IPayrun)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
-        <member name="M:PayrollEngine.Client.Model.Payrun.Equals(PayrollEngine.Client.Model.Payrun)">
-            <summary>Compare two objects</summary>
-            <param name="compare">The object to compare with this</param>
-            <returns>True for objects with the same data</returns>
+        <member name="M:PayrollEngine.Client.Model.Payrun.Equals(PayrollEngine.Client.Model.IPayrun)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.Payrun.EqualKey(PayrollEngine.Client.Model.IPayrun)">
+            <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.Payrun.ToString">
             <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
@@ -5915,14 +5888,12 @@
         <member name="M:PayrollEngine.Client.Model.PayrunJob.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.PayrunJob.#ctor(PayrollEngine.Client.Model.PayrunJob)">
+        <member name="M:PayrollEngine.Client.Model.PayrunJob.#ctor(PayrollEngine.Client.Model.IPayrunJob)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
-        <member name="M:PayrollEngine.Client.Model.PayrunJob.Equals(PayrollEngine.Client.Model.PayrunJob)">
-            <summary>Compare two objects</summary>
-            <param name="compare">The object to compare with this</param>
-            <returns>True for objects with the same data</returns>
+        <member name="M:PayrollEngine.Client.Model.PayrunJob.Equals(PayrollEngine.Client.Model.IPayrunJob)">
+            <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.PayrunJob.GetEvaluationPeriod">
             <summary>
@@ -5943,14 +5914,12 @@
         <member name="M:PayrollEngine.Client.Model.PayrunJobEmployee.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.PayrunJobEmployee.#ctor(PayrollEngine.Client.Model.PayrunJobEmployee)">
+        <member name="M:PayrollEngine.Client.Model.PayrunJobEmployee.#ctor(PayrollEngine.Client.Model.IPayrunJobEmployee)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
-        <member name="M:PayrollEngine.Client.Model.PayrunJobEmployee.Equals(PayrollEngine.Client.Model.PayrunJobEmployee)">
-            <summary>Compare two objects</summary>
-            <param name="compare">The object to compare with this</param>
-            <returns>True for objects with the same data</returns>
+        <member name="M:PayrollEngine.Client.Model.PayrunJobEmployee.Equals(PayrollEngine.Client.Model.IPayrunJobEmployee)">
+            <inheritdoc/>
         </member>
         <member name="T:PayrollEngine.Client.Model.PayrunJobInvocation">
             <summary>The payrun job client object</summary>
@@ -6027,14 +5996,12 @@
         <member name="M:PayrollEngine.Client.Model.PayrunJobInvocation.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.PayrunJobInvocation.#ctor(PayrollEngine.Client.Model.PayrunJobInvocation)">
+        <member name="M:PayrollEngine.Client.Model.PayrunJobInvocation.#ctor(PayrollEngine.Client.Model.IPayrunJobInvocation)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
-        <member name="M:PayrollEngine.Client.Model.PayrunJobInvocation.Equals(PayrollEngine.Client.Model.PayrunJobInvocation)">
-            <summary>Compare two objects</summary>
-            <param name="compare">The object to compare with this</param>
-            <returns>True for objects with the same data</returns>
+        <member name="M:PayrollEngine.Client.Model.PayrunJobInvocation.Equals(PayrollEngine.Client.Model.IPayrunJobInvocation)">
+            <inheritdoc/>
         </member>
         <member name="T:PayrollEngine.Client.Model.PayrunParameter">
             <summary>The payroll payrun parameter client object</summary>
@@ -6066,14 +6033,15 @@
         <member name="M:PayrollEngine.Client.Model.PayrunParameter.#ctor">
             <summary>Initializes a new instance of the <see cref="T:PayrollEngine.Client.Model.PayrunParameter"/> class</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.PayrunParameter.#ctor(PayrollEngine.Client.Model.PayrunParameter)">
+        <member name="M:PayrollEngine.Client.Model.PayrunParameter.#ctor(PayrollEngine.Client.Model.IPayrunParameter)">
             <summary>Initializes a new instance of the <see cref="T:PayrollEngine.Client.Model.PayrunParameter"/> class</summary>
             <param name="copySource">The copy source.</param>
         </member>
-        <member name="M:PayrollEngine.Client.Model.PayrunParameter.Equals(PayrollEngine.Client.Model.PayrunParameter)">
-            <summary>Compare two objects</summary>
-            <param name="compare">The object to compare with this</param>
-            <returns>True for objects with the same data</returns>
+        <member name="M:PayrollEngine.Client.Model.PayrunParameter.Equals(PayrollEngine.Client.Model.IPayrunParameter)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.PayrunParameter.EqualKey(PayrollEngine.Client.Model.IPayrunParameter)">
+            <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.PayrunParameter.ToString">
             <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
@@ -6121,14 +6089,12 @@
         <member name="M:PayrollEngine.Client.Model.PayrunResult.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.PayrunResult.#ctor(PayrollEngine.Client.Model.PayrunResult)">
+        <member name="M:PayrollEngine.Client.Model.PayrunResult.#ctor(PayrollEngine.Client.Model.IPayrunResult)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
-        <member name="M:PayrollEngine.Client.Model.PayrunResult.Equals(PayrollEngine.Client.Model.PayrunResult)">
-            <summary>Compare two objects</summary>
-            <param name="compare">The object to compare with this</param>
-            <returns>True for objects with the same data</returns>
+        <member name="M:PayrollEngine.Client.Model.PayrunResult.Equals(PayrollEngine.Client.Model.IPayrunResult)">
+            <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.PayrunResult.ToString">
             <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
@@ -6170,14 +6136,15 @@
         <member name="M:PayrollEngine.Client.Model.Regulation.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.Regulation.#ctor(PayrollEngine.Client.Model.Regulation)">
+        <member name="M:PayrollEngine.Client.Model.Regulation.#ctor(PayrollEngine.Client.Model.IRegulation)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
-        <member name="M:PayrollEngine.Client.Model.Regulation.Equals(PayrollEngine.Client.Model.Regulation)">
-            <summary>Compare two objects</summary>
-            <param name="compare">The object to compare with this</param>
-            <returns>True for objects with the same data</returns>
+        <member name="M:PayrollEngine.Client.Model.Regulation.Equals(PayrollEngine.Client.Model.IRegulation)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.Regulation.EqualKey(PayrollEngine.Client.Model.IRegulation)">
+            <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.Regulation.ToString">
             <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
@@ -6216,14 +6183,15 @@
         <member name="M:PayrollEngine.Client.Model.RegulationPermission.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.RegulationPermission.#ctor(PayrollEngine.Client.Model.RegulationPermission)">
+        <member name="M:PayrollEngine.Client.Model.RegulationPermission.#ctor(PayrollEngine.Client.Model.IRegulationPermission)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
-        <member name="M:PayrollEngine.Client.Model.RegulationPermission.Equals(PayrollEngine.Client.Model.RegulationPermission)">
-            <summary>Compare two objects</summary>
-            <param name="compare">The object to compare with this</param>
-            <returns>True for objects with the same data</returns>
+        <member name="M:PayrollEngine.Client.Model.RegulationPermission.Equals(PayrollEngine.Client.Model.IRegulationPermission)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.RegulationPermission.EqualKey(PayrollEngine.Client.Model.IRegulationPermission)">
+            <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.RegulationPermission.ToString">
             <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
@@ -6256,18 +6224,16 @@
         <member name="M:PayrollEngine.Client.Model.RegulationSet.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.RegulationSet.#ctor(PayrollEngine.Client.Model.Regulation)">
+        <member name="M:PayrollEngine.Client.Model.RegulationSet.#ctor(PayrollEngine.Client.Model.IRegulation)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
-        <member name="M:PayrollEngine.Client.Model.RegulationSet.#ctor(PayrollEngine.Client.Model.RegulationSet)">
+        <member name="M:PayrollEngine.Client.Model.RegulationSet.#ctor(PayrollEngine.Client.Model.IRegulationSet)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
-        <member name="M:PayrollEngine.Client.Model.RegulationSet.Equals(PayrollEngine.Client.Model.RegulationSet)">
-            <summary>Compare two objects</summary>
-            <param name="compare">The object to compare with this</param>
-            <returns>True for objects with the same data</returns>
+        <member name="M:PayrollEngine.Client.Model.RegulationSet.Equals(PayrollEngine.Client.Model.IRegulationSet)">
+            <inheritdoc/>
         </member>
         <member name="T:PayrollEngine.Client.Model.Report">
             <summary>The payroll report client object</summary>
@@ -6323,14 +6289,15 @@
         <member name="M:PayrollEngine.Client.Model.Report.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.Report.#ctor(PayrollEngine.Client.Model.Report)">
+        <member name="M:PayrollEngine.Client.Model.Report.#ctor(PayrollEngine.Client.Model.IReport)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
-        <member name="M:PayrollEngine.Client.Model.Report.Equals(PayrollEngine.Client.Model.Report)">
-            <summary>Compare two objects</summary>
-            <param name="compare">The object to compare with this</param>
-            <returns>True for objects with the same data</returns>
+        <member name="M:PayrollEngine.Client.Model.Report.Equals(PayrollEngine.Client.Model.IReport)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.Report.EqualKey(PayrollEngine.Client.Model.IReport)">
+            <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.Report.ToString">
             <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
@@ -6357,14 +6324,12 @@
         <member name="M:PayrollEngine.Client.Model.ReportLog.#ctor">
             <summary>Initializes a new instance of the <see cref="T:PayrollEngine.Client.Model.ReportLog"/> class</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.ReportLog.#ctor(PayrollEngine.Client.Model.ReportLog)">
+        <member name="M:PayrollEngine.Client.Model.ReportLog.#ctor(PayrollEngine.Client.Model.IReportLog)">
             <summary>Initializes a new instance of the <see cref="T:PayrollEngine.Client.Model.ReportLog"/> class</summary>
             <param name="copySource">The copy source.</param>
         </member>
-        <member name="M:PayrollEngine.Client.Model.ReportLog.Equals(PayrollEngine.Client.Model.ReportLog)">
-            <summary>Compare two objects</summary>
-            <param name="compare">The object to compare with this</param>
-            <returns>True for objects with the same data</returns>
+        <member name="M:PayrollEngine.Client.Model.ReportLog.Equals(PayrollEngine.Client.Model.IReportLog)">
+            <inheritdoc/>
         </member>
         <member name="T:PayrollEngine.Client.Model.ReportParameter">
             <summary>The payroll report parameter client object</summary>
@@ -6399,14 +6364,15 @@
         <member name="M:PayrollEngine.Client.Model.ReportParameter.#ctor">
             <summary>Initializes a new instance of the <see cref="T:PayrollEngine.Client.Model.ReportParameter"/> class</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.ReportParameter.#ctor(PayrollEngine.Client.Model.ReportParameter)">
+        <member name="M:PayrollEngine.Client.Model.ReportParameter.#ctor(PayrollEngine.Client.Model.IReportParameter)">
             <summary>Initializes a new instance of the <see cref="T:PayrollEngine.Client.Model.ReportParameter"/> class</summary>
             <param name="copySource">The copy source.</param>
         </member>
-        <member name="M:PayrollEngine.Client.Model.ReportParameter.Equals(PayrollEngine.Client.Model.ReportParameter)">
-            <summary>Compare two objects</summary>
-            <param name="compare">The object to compare with this</param>
-            <returns>True for objects with the same data</returns>
+        <member name="M:PayrollEngine.Client.Model.ReportParameter.Equals(PayrollEngine.Client.Model.IReportParameter)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.ReportParameter.EqualKey(PayrollEngine.Client.Model.IReportParameter)">
+            <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.ReportParameter.ToString">
             <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
@@ -6435,9 +6401,7 @@
             <param name="copySource">The copy source.</param>
         </member>
         <member name="M:PayrollEngine.Client.Model.ReportRequest.Equals(PayrollEngine.Client.Model.ReportRequest)">
-            <summary>Compare two objects</summary>
-            <param name="compare">The object to compare with this</param>
-            <returns>True for objects with the same data</returns>
+            <inheritdoc/>
         </member>
         <member name="T:PayrollEngine.Client.Model.ReportResponse">
             <summary>The report response client object</summary>
@@ -6471,9 +6435,7 @@
             <param name="copySource">The copy source.</param>
         </member>
         <member name="M:PayrollEngine.Client.Model.ReportResponse.Equals(PayrollEngine.Client.Model.ReportResponse)">
-            <summary>Compare two objects</summary>
-            <param name="compare">The object to compare with this</param>
-            <returns>True for objects with the same data</returns>
+            <inheritdoc/>
         </member>
         <member name="T:PayrollEngine.Client.Model.ReportSet">
             <summary>
@@ -6492,14 +6454,12 @@
         <member name="M:PayrollEngine.Client.Model.ReportSet.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.ReportSet.#ctor(PayrollEngine.Client.Model.ReportSet)">
+        <member name="M:PayrollEngine.Client.Model.ReportSet.#ctor(PayrollEngine.Client.Model.IReportSet)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
-        <member name="M:PayrollEngine.Client.Model.ReportSet.Equals(PayrollEngine.Client.Model.ReportSet)">
-            <summary>Compare two objects</summary>
-            <param name="compare">The object to compare with this</param>
-            <returns>True for objects with the same data</returns>
+        <member name="M:PayrollEngine.Client.Model.ReportSet.Equals(PayrollEngine.Client.Model.IReportSet)">
+            <inheritdoc/>
         </member>
         <member name="T:PayrollEngine.Client.Model.ReportTemplate">
             <summary>The payroll report template client object</summary>
@@ -6531,14 +6491,12 @@
         <member name="M:PayrollEngine.Client.Model.ReportTemplate.#ctor">
             <summary>Initializes a new instance of the <see cref="T:PayrollEngine.Client.Model.ReportTemplate"/> class</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.ReportTemplate.#ctor(PayrollEngine.Client.Model.ReportTemplate)">
+        <member name="M:PayrollEngine.Client.Model.ReportTemplate.#ctor(PayrollEngine.Client.Model.IReportTemplate)">
             <summary>Initializes a new instance of the <see cref="T:PayrollEngine.Client.Model.ReportTemplate"/> class</summary>
             <param name="copySource">The copy source.</param>
         </member>
-        <member name="M:PayrollEngine.Client.Model.ReportTemplate.Equals(PayrollEngine.Client.Model.ReportTemplate)">
-            <summary>Compare two objects</summary>
-            <param name="compare">The object to compare with this</param>
-            <returns>True for objects with the same data</returns>
+        <member name="M:PayrollEngine.Client.Model.ReportTemplate.Equals(PayrollEngine.Client.Model.IReportTemplate)">
+            <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.ReportTemplate.ToString">
             <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
@@ -6571,14 +6529,12 @@
         <member name="M:PayrollEngine.Client.Model.RetroPayrunJob.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.RetroPayrunJob.#ctor(PayrollEngine.Client.Model.RetroPayrunJob)">
+        <member name="M:PayrollEngine.Client.Model.RetroPayrunJob.#ctor(PayrollEngine.Client.Model.IRetroPayrunJob)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
-        <member name="M:PayrollEngine.Client.Model.RetroPayrunJob.Equals(PayrollEngine.Client.Model.RetroPayrunJob)">
-            <summary>Compare two objects</summary>
-            <param name="compare">The object to compare with this</param>
-            <returns>True for objects with the same data</returns>
+        <member name="M:PayrollEngine.Client.Model.RetroPayrunJob.Equals(PayrollEngine.Client.Model.IRetroPayrunJob)">
+            <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.RetroPayrunJob.ToString">
             <inheritdoc/>
@@ -6601,14 +6557,15 @@
         <member name="M:PayrollEngine.Client.Model.Script.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.Script.#ctor(PayrollEngine.Client.Model.Script)">
+        <member name="M:PayrollEngine.Client.Model.Script.#ctor(PayrollEngine.Client.Model.IScript)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
-        <member name="M:PayrollEngine.Client.Model.Script.Equals(PayrollEngine.Client.Model.Script)">
-            <summary>Compare two objects</summary>
-            <param name="compare">The object to compare with this</param>
-            <returns>True for objects with the same data</returns>
+        <member name="M:PayrollEngine.Client.Model.Script.Equals(PayrollEngine.Client.Model.IScript)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.Script.EqualKey(PayrollEngine.Client.Model.IScript)">
+            <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.Script.ToString">
             <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
@@ -6655,13 +6612,11 @@
         <member name="M:PayrollEngine.Client.Model.Task.#ctor">
             <inheritdoc/>
         </member>
-        <member name="M:PayrollEngine.Client.Model.Task.#ctor(PayrollEngine.Client.Model.Task)">
+        <member name="M:PayrollEngine.Client.Model.Task.#ctor(PayrollEngine.Client.Model.ITask)">
             <inheritdoc/>
         </member>
-        <member name="M:PayrollEngine.Client.Model.Task.Equals(PayrollEngine.Client.Model.Task)">
-            <summary>Compare two objects</summary>
-            <param name="compare">The object to compare with this</param>
-            <returns>True for objects with the same data</returns>
+        <member name="M:PayrollEngine.Client.Model.Task.Equals(PayrollEngine.Client.Model.ITask)">
+            <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.Task.ToString">
             <inheritdoc/>
@@ -6684,14 +6639,15 @@
         <member name="M:PayrollEngine.Client.Model.Tenant.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.Tenant.#ctor(PayrollEngine.Client.Model.Tenant)">
+        <member name="M:PayrollEngine.Client.Model.Tenant.#ctor(PayrollEngine.Client.Model.ITenant)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
-        <member name="M:PayrollEngine.Client.Model.Tenant.Equals(PayrollEngine.Client.Model.Tenant)">
-            <summary>Compare two objects</summary>
-            <param name="compare">The object to compare with this</param>
-            <returns>True for objects with the same data</returns>
+        <member name="M:PayrollEngine.Client.Model.Tenant.Equals(PayrollEngine.Client.Model.ITenant)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.Tenant.EqualKey(PayrollEngine.Client.Model.ITenant)">
+            <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.Tenant.ToString">
             <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
@@ -6724,14 +6680,15 @@
         <member name="M:PayrollEngine.Client.Model.User.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.User.#ctor(PayrollEngine.Client.Model.User)">
+        <member name="M:PayrollEngine.Client.Model.User.#ctor(PayrollEngine.Client.Model.IUser)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
-        <member name="M:PayrollEngine.Client.Model.User.Equals(PayrollEngine.Client.Model.User)">
-            <summary>Compare two objects</summary>
-            <param name="compare">The object to compare with this</param>
-            <returns>True for objects with the same data</returns>
+        <member name="M:PayrollEngine.Client.Model.User.Equals(PayrollEngine.Client.Model.IUser)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.User.EqualKey(PayrollEngine.Client.Model.IUser)">
+            <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.User.ToString">
             <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
@@ -6791,14 +6748,15 @@
         <member name="M:PayrollEngine.Client.Model.WageType.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.WageType.#ctor(PayrollEngine.Client.Model.WageType)">
+        <member name="M:PayrollEngine.Client.Model.WageType.#ctor(PayrollEngine.Client.Model.IWageType)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
-        <member name="M:PayrollEngine.Client.Model.WageType.Equals(PayrollEngine.Client.Model.WageType)">
-            <summary>Compare two objects</summary>
-            <param name="compare">The object to compare with this</param>
-            <returns>True for objects with the same data</returns>
+        <member name="M:PayrollEngine.Client.Model.WageType.Equals(PayrollEngine.Client.Model.IWageType)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.WageType.EqualKey(PayrollEngine.Client.Model.IWageType)">
+            <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.WageType.ToString">
             <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
@@ -6843,14 +6801,12 @@
         <member name="M:PayrollEngine.Client.Model.WageTypeCustomResult.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.WageTypeCustomResult.#ctor(PayrollEngine.Client.Model.WageTypeCustomResult)">
+        <member name="M:PayrollEngine.Client.Model.WageTypeCustomResult.#ctor(PayrollEngine.Client.Model.IWageTypeCustomResult)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
-        <member name="M:PayrollEngine.Client.Model.WageTypeCustomResult.Equals(PayrollEngine.Client.Model.WageTypeCustomResult)">
-            <summary>Compare two objects</summary>
-            <param name="compare">The object to compare with this</param>
-            <returns>True for objects with the same data</returns>
+        <member name="M:PayrollEngine.Client.Model.WageTypeCustomResult.Equals(PayrollEngine.Client.Model.IWageTypeCustomResult)">
+            <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.WageTypeCustomResult.ToString">
             <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
@@ -6895,14 +6851,12 @@
         <member name="M:PayrollEngine.Client.Model.WageTypeResult.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.WageTypeResult.#ctor(PayrollEngine.Client.Model.WageTypeResult)">
+        <member name="M:PayrollEngine.Client.Model.WageTypeResult.#ctor(PayrollEngine.Client.Model.IWageTypeResult)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
-        <member name="M:PayrollEngine.Client.Model.WageTypeResult.Equals(PayrollEngine.Client.Model.WageTypeResult)">
-            <summary>Compare two objects</summary>
-            <param name="compare">The object to compare with this</param>
-            <returns>True for objects with the same data</returns>
+        <member name="M:PayrollEngine.Client.Model.WageTypeResult.Equals(PayrollEngine.Client.Model.IWageTypeResult)">
+            <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.WageTypeResult.AlmostEqualValue(System.Nullable{System.Decimal},System.Int32)">
             <inheritdoc/>
@@ -6920,17 +6874,15 @@
         <member name="M:PayrollEngine.Client.Model.WageTypeResultSet.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.WageTypeResultSet.#ctor(PayrollEngine.Client.Model.WageTypeResult)">
+        <member name="M:PayrollEngine.Client.Model.WageTypeResultSet.#ctor(PayrollEngine.Client.Model.IWageTypeResult)">
             <inheritdoc/>
         </member>
-        <member name="M:PayrollEngine.Client.Model.WageTypeResultSet.#ctor(PayrollEngine.Client.Model.WageTypeResultSet)">
+        <member name="M:PayrollEngine.Client.Model.WageTypeResultSet.#ctor(PayrollEngine.Client.Model.IWageTypeResultSet)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
-        <member name="M:PayrollEngine.Client.Model.WageTypeResultSet.Equals(PayrollEngine.Client.Model.WageTypeResultSet)">
-            <summary>Compare two objects</summary>
-            <param name="compare">The object to compare with this</param>
-            <returns>True for objects with the same data</returns>
+        <member name="M:PayrollEngine.Client.Model.WageTypeResultSet.Equals(PayrollEngine.Client.Model.IWageTypeResultSet)">
+            <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.WageTypeResultSet.ToString">
             <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
@@ -6954,14 +6906,15 @@
         <member name="M:PayrollEngine.Client.Model.Webhook.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.Webhook.#ctor(PayrollEngine.Client.Model.Webhook)">
+        <member name="M:PayrollEngine.Client.Model.Webhook.#ctor(PayrollEngine.Client.Model.IWebhook)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
-        <member name="M:PayrollEngine.Client.Model.Webhook.Equals(PayrollEngine.Client.Model.Webhook)">
-            <summary>Compare two objects</summary>
-            <param name="compare">The object to compare with this</param>
-            <returns>True for objects with the same data</returns>
+        <member name="M:PayrollEngine.Client.Model.Webhook.Equals(PayrollEngine.Client.Model.IWebhook)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.Webhook.EqualKey(PayrollEngine.Client.Model.IWebhook)">
+            <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.Webhook.ToString">
             <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
@@ -6997,14 +6950,12 @@
         <member name="M:PayrollEngine.Client.Model.WebhookMessage.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.WebhookMessage.#ctor(PayrollEngine.Client.Model.WebhookMessage)">
+        <member name="M:PayrollEngine.Client.Model.WebhookMessage.#ctor(PayrollEngine.Client.Model.IWebhookMessage)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
-        <member name="M:PayrollEngine.Client.Model.WebhookMessage.Equals(PayrollEngine.Client.Model.WebhookMessage)">
-            <summary>Compare two objects</summary>
-            <param name="compare">The object to compare with this</param>
-            <returns>True for objects with the same data</returns>
+        <member name="M:PayrollEngine.Client.Model.WebhookMessage.Equals(PayrollEngine.Client.Model.IWebhookMessage)">
+            <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.WebhookMessage.ToString">
             <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
@@ -7022,14 +6973,12 @@
         <member name="M:PayrollEngine.Client.Model.WebhookRuntimeMessage.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.WebhookRuntimeMessage.#ctor(PayrollEngine.Client.Model.WebhookRuntimeMessage)">
+        <member name="M:PayrollEngine.Client.Model.WebhookRuntimeMessage.#ctor(PayrollEngine.Client.Model.IWebhookRuntimeMessage)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
-        <member name="M:PayrollEngine.Client.Model.WebhookRuntimeMessage.Equals(PayrollEngine.Client.Model.WebhookRuntimeMessage)">
-            <summary>Compare two objects</summary>
-            <param name="compare">The object to compare with this</param>
-            <returns>True for objects with the same data</returns>
+        <member name="M:PayrollEngine.Client.Model.WebhookRuntimeMessage.Equals(PayrollEngine.Client.Model.IWebhookRuntimeMessage)">
+            <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.WebhookRuntimeMessage.ToString">
             <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
@@ -7044,18 +6993,16 @@
         <member name="M:PayrollEngine.Client.Model.WebhookSet.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.WebhookSet.#ctor(PayrollEngine.Client.Model.Webhook)">
+        <member name="M:PayrollEngine.Client.Model.WebhookSet.#ctor(PayrollEngine.Client.Model.IWebhook)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
-        <member name="M:PayrollEngine.Client.Model.WebhookSet.#ctor(PayrollEngine.Client.Model.WebhookSet)">
+        <member name="M:PayrollEngine.Client.Model.WebhookSet.#ctor(PayrollEngine.Client.Model.IWebhookSet)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
-        <member name="M:PayrollEngine.Client.Model.WebhookSet.Equals(PayrollEngine.Client.Model.WebhookSet)">
-            <summary>Compare two objects</summary>
-            <param name="compare">The object to compare with this</param>
-            <returns>True for objects with the same data</returns>
+        <member name="M:PayrollEngine.Client.Model.WebhookSet.Equals(PayrollEngine.Client.Model.IWebhookSet)">
+            <inheritdoc/>
         </member>
         <member name="T:PayrollEngine.Client.NationalCaseApiEndpoints">
             <summary>National case api endpoints</summary>
@@ -10120,6 +10067,12 @@
             <param name="regulationId">The regulation id</param>
             <param name="caseId">The case id</param>
         </member>
+        <member name="M:PayrollEngine.Client.Service.CaseServiceContext.#ctor(PayrollEngine.Client.Model.ITenant,PayrollEngine.Client.Model.IRegulation,PayrollEngine.Client.Model.ICase)">
+            <summary>Initializes a new instance of the <see cref="T:PayrollEngine.Client.Service.CaseServiceContext"/> class</summary>
+            <param name="tenant">The tenant</param>
+            <param name="regulation">The regulation</param>
+            <param name="case">The case id</param>
+        </member>
         <member name="P:PayrollEngine.Client.Service.CaseServiceContext.CaseId">
             <summary>The case id</summary>
         </member>
@@ -10130,6 +10083,11 @@
             <summary>Initializes a new instance of the <see cref="T:PayrollEngine.Client.Service.CaseValueServiceContext"/> class</summary>
             <param name="tenantId">The tenant id</param>
             <param name="caseValueId">The case value id</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Service.CaseValueServiceContext.#ctor(PayrollEngine.Client.Model.ITenant,PayrollEngine.Client.Model.ICaseValue)">
+            <summary>Initializes a new instance of the <see cref="T:PayrollEngine.Client.Service.CaseValueServiceContext"/> class</summary>
+            <param name="tenant">The tenant</param>
+            <param name="caseValue">The case value</param>
         </member>
         <member name="P:PayrollEngine.Client.Service.CaseValueServiceContext.CaseValueId">
             <summary>The case value id</summary>
@@ -10143,6 +10101,12 @@
             <param name="employeeId">The employee id</param>
             <param name="caseValueId">The case value id</param>
         </member>
+        <member name="M:PayrollEngine.Client.Service.EmployeeCaseValueServiceContext.#ctor(PayrollEngine.Client.Model.ITenant,PayrollEngine.Client.Model.IEmployee,PayrollEngine.Client.Model.ICaseValue)">
+            <summary>Initializes a new instance of the <see cref="T:PayrollEngine.Client.Service.EmployeeCaseValueServiceContext"/> class</summary>
+            <param name="tenant">The tenant</param>
+            <param name="employee">The employee</param>
+            <param name="caseValue">The case value</param>
+        </member>
         <member name="P:PayrollEngine.Client.Service.EmployeeCaseValueServiceContext.CaseValueId">
             <summary>The case value id</summary>
         </member>
@@ -10153,6 +10117,11 @@
             <summary>Initializes a new instance of the <see cref="T:PayrollEngine.Client.Service.EmployeeServiceContext"/> class</summary>
             <param name="tenantId">The tenant id</param>
             <param name="employeeId">The employee id</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Service.EmployeeServiceContext.#ctor(PayrollEngine.Client.Model.ITenant,PayrollEngine.Client.Model.IEmployee)">
+            <summary>Initializes a new instance of the <see cref="T:PayrollEngine.Client.Service.EmployeeServiceContext"/> class</summary>
+            <param name="tenant">The tenant</param>
+            <param name="employee">The employee</param>
         </member>
         <member name="P:PayrollEngine.Client.Service.EmployeeServiceContext.EmployeeId">
             <summary>The employee id</summary>
@@ -11160,8 +11129,14 @@
         <member name="M:PayrollEngine.Client.Service.LookupServiceContext.#ctor(System.Int32,System.Int32,System.Int32)">
             <summary>Initializes a new instance of the <see cref="T:PayrollEngine.Client.Service.LookupServiceContext"/> class</summary>
             <param name="tenantId">The tenant id</param>
-            <param name="regulationId">The lookup id</param>
-            <param name="lookupId">The case id</param>
+            <param name="regulationId">The regulation id</param>
+            <param name="lookupId">The lookup id</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Service.LookupServiceContext.#ctor(PayrollEngine.Client.Model.ITenant,PayrollEngine.Client.Model.IRegulation,PayrollEngine.Client.Model.ILookup)">
+            <summary>Initializes a new instance of the <see cref="T:PayrollEngine.Client.Service.LookupServiceContext"/> class</summary>
+            <param name="tenant">The tenant</param>
+            <param name="regulation">The regulation</param>
+            <param name="lookup">The lookup</param>
         </member>
         <member name="P:PayrollEngine.Client.Service.LookupServiceContext.LookupId">
             <summary>The lookup id</summary>
@@ -11173,6 +11148,11 @@
             <summary>Initializes a new instance of the <see cref="T:PayrollEngine.Client.Service.PayrollResultServiceContext"/> class</summary>
             <param name="tenantId">The tenant id</param>
             <param name="payrollResultId">The payroll result id</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Service.PayrollResultServiceContext.#ctor(PayrollEngine.Client.Model.ITenant,PayrollEngine.Client.Model.IPayrollResult)">
+            <summary>Initializes a new instance of the <see cref="T:PayrollEngine.Client.Service.PayrollResultServiceContext"/> class</summary>
+            <param name="tenant">The tenant</param>
+            <param name="payrollResult">The payroll result</param>
         </member>
         <member name="P:PayrollEngine.Client.Service.PayrollResultServiceContext.PayrollResultId">
             <summary>The payroll result id</summary>
@@ -11187,6 +11167,14 @@
             <param name="payrunJobId">The payrun job id</param>
             <param name="employeeId">The employee id</param>
             <param name="divisionId">The division id</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Service.PayrollResultValueServiceContext.#ctor(PayrollEngine.Client.Model.ITenant,PayrollEngine.Client.Model.IPayroll,PayrollEngine.Client.Model.IPayrunJob,PayrollEngine.Client.Model.IEmployee,PayrollEngine.Client.Model.IDivision)">
+            <summary>Initializes a new instance of the <see cref="T:PayrollEngine.Client.Service.PayrollResultValueServiceContext"/> class</summary>
+            <param name="tenant">The tenant</param>
+            <param name="payroll">The payroll</param>
+            <param name="payrunJob">The payrun job</param>
+            <param name="employee">The employee</param>
+            <param name="division">The division</param>
         </member>
         <member name="P:PayrollEngine.Client.Service.PayrollResultValueServiceContext.PayrollId">
             <summary>The payroll id</summary>
@@ -11208,6 +11196,11 @@
             <param name="tenantId">The tenant id</param>
             <param name="payrollId">The payroll id</param>
         </member>
+        <member name="M:PayrollEngine.Client.Service.PayrollServiceContext.#ctor(PayrollEngine.Client.Model.ITenant,PayrollEngine.Client.Model.IPayroll)">
+            <summary>Initializes a new instance of the <see cref="T:PayrollEngine.Client.Service.PayrollServiceContext"/> class</summary>
+            <param name="tenant">The tenant</param>
+            <param name="payroll">The payroll</param>
+        </member>
         <member name="P:PayrollEngine.Client.Service.PayrollServiceContext.PayrollId">
             <summary>The payroll id</summary>
         </member>
@@ -11218,6 +11211,11 @@
             <summary>Initializes a new instance of the <see cref="T:PayrollEngine.Client.Service.PayrunServiceContext"/> class</summary>
             <param name="tenantId">The tenant id</param>
             <param name="payrunId">The payrun id</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Service.PayrunServiceContext.#ctor(PayrollEngine.Client.Model.ITenant,PayrollEngine.Client.Model.IPayrun)">
+            <summary>Initializes a new instance of the <see cref="T:PayrollEngine.Client.Service.PayrunServiceContext"/> class</summary>
+            <param name="tenant">The tenant</param>
+            <param name="payrun">The payrun</param>
         </member>
         <member name="P:PayrollEngine.Client.Service.PayrunServiceContext.PayrunId">
             <summary>The payrun id</summary>
@@ -11230,6 +11228,11 @@
             <param name="tenantId">The tenant id</param>
             <param name="regulationId">The regulation id</param>
         </member>
+        <member name="M:PayrollEngine.Client.Service.RegulationServiceContext.#ctor(PayrollEngine.Client.Model.ITenant,PayrollEngine.Client.Model.IRegulation)">
+            <summary>Initializes a new instance of the <see cref="T:PayrollEngine.Client.Service.RegulationServiceContext"/> class</summary>
+            <param name="tenant">The tenant</param>
+            <param name="regulation">The regulation</param>
+        </member>
         <member name="P:PayrollEngine.Client.Service.RegulationServiceContext.RegulationId">
             <summary>The regulation id</summary>
         </member>
@@ -11241,6 +11244,12 @@
             <param name="tenantId">The tenant id</param>
             <param name="regulationId">The regulation id</param>
             <param name="reportId">The report id</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Service.ReportServiceContext.#ctor(PayrollEngine.Client.Model.ITenant,PayrollEngine.Client.Model.IRegulation,PayrollEngine.Client.Model.IReport)">
+            <summary>Initializes a new instance of the <see cref="T:PayrollEngine.Client.Service.ReportServiceContext"/> class</summary>
+            <param name="tenant">The tenant</param>
+            <param name="regulation">The regulation</param>
+            <param name="report">The report id</param>
         </member>
         <member name="P:PayrollEngine.Client.Service.ReportServiceContext.ReportId">
             <summary>The report id</summary>
@@ -11258,6 +11267,10 @@
             <summary>Initializes a new instance of the <see cref="T:PayrollEngine.Client.Service.TenantServiceContext"/> class</summary>
             <param name="tenantId">The tenant id</param>
         </member>
+        <member name="M:PayrollEngine.Client.Service.TenantServiceContext.#ctor(PayrollEngine.Client.Model.ITenant)">
+            <summary>Initializes a new instance of the <see cref="T:PayrollEngine.Client.Service.TenantServiceContext"/> class</summary>
+            <param name="tenant">The tenant</param>
+        </member>
         <member name="P:PayrollEngine.Client.Service.TenantServiceContext.TenantId">
             <summary>The tenant id</summary>
         </member>
@@ -11268,6 +11281,11 @@
             <summary>Initializes a new instance of the <see cref="T:PayrollEngine.Client.Service.WebhookServiceContext"/> class</summary>
             <param name="tenantId">The tenant id</param>
             <param name="webhookId">The webhook id</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Service.WebhookServiceContext.#ctor(PayrollEngine.Client.Model.ITenant,PayrollEngine.Client.Model.IWebhook)">
+            <summary>Initializes a new instance of the <see cref="T:PayrollEngine.Client.Service.WebhookServiceContext"/> class</summary>
+            <param name="tenant">The tenant</param>
+            <param name="webhook">The webhook id</param>
         </member>
         <member name="P:PayrollEngine.Client.Service.WebhookServiceContext.WebhookId">
             <summary>The webhook id</summary>

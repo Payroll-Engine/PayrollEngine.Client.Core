@@ -1,7 +1,8 @@
-﻿namespace PayrollEngine.Client.Model;
+﻿
+namespace PayrollEngine.Client.Model;
 
 /// <summary>The payroll layer client object</summary>
-public interface IPayrollLayer : IModel, IAttributeObject
+public interface IPayrollLayer : IModel, IAttributeObject, IKeyEquatable<IPayrollLayer>
 {
     /// <summary>The layer level</summary>
     int Level { get; set; }

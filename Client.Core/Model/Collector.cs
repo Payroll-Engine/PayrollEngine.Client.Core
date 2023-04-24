@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The payroll collector client object</summary>
-public class Collector : Model, ICollector, IEquatable<Collector>
+public class Collector : Model, ICollector
 {
     /// <inheritdoc/>
     public CollectType CollectType { get; set; }
@@ -67,17 +66,19 @@ public class Collector : Model, ICollector, IEquatable<Collector>
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public Collector(Collector copySource) :
+    public Collector(ICollector copySource) :
         base(copySource)
     {
         CopyTool.CopyProperties(copySource, this);
     }
 
-    /// <summary>Compare two objects</summary>
-    /// <param name="compare">The object to compare with this</param>
-    /// <returns>True for objects with the same data</returns>
-    public virtual bool Equals(Collector compare) =>
+    /// <inheritdoc/>
+    public virtual bool Equals(ICollector compare) =>
         CompareTool.EqualProperties(this, compare);
+
+    /// <inheritdoc/>
+    public virtual bool EqualKey(ICollector compare) =>
+        string.Equals(Name, compare?.Name);
 
     /// <summary>Returns a <see cref="string" /> that represents this instance</summary>
     /// <returns>A <see cref="string" /> that represents this instance</returns>

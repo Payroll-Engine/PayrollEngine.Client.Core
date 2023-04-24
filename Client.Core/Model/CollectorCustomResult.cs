@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The collector custom result client object</summary>
-public class CollectorCustomResult : Model, ICollectorCustomResult, IEquatable<CollectorCustomResult>
+public class CollectorCustomResult : Model, ICollectorCustomResult
 {
     /// <inheritdoc/>
     public int CollectorResultId { get; set; }
@@ -46,16 +46,14 @@ public class CollectorCustomResult : Model, ICollectorCustomResult, IEquatable<C
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public CollectorCustomResult(CollectorCustomResult copySource) :
+    public CollectorCustomResult(ICollectorCustomResult copySource) :
         base(copySource)
     {
         CopyTool.CopyProperties(copySource, this);
     }
 
-    /// <summary>Compare two objects</summary>
-    /// <param name="compare">The object to compare with this</param>
-    /// <returns>True for objects with the same data</returns>
-    public virtual bool Equals(CollectorCustomResult compare) =>
+    /// <inheritdoc/>
+    public virtual bool Equals(ICollectorCustomResult compare) =>
         CompareTool.EqualProperties(this, compare);
 
     /// <summary>Returns a <see cref="string" /> that represents this instance</summary>

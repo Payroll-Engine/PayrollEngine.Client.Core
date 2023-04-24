@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The payroll case client object</summary>
-public class Case : Model, ICase, IEquatable<Case>
+public class Case : Model, ICase
 {
     /// <inheritdoc/>
     public CaseType CaseType { get; set; }
@@ -91,17 +90,19 @@ public class Case : Model, ICase, IEquatable<Case>
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public Case(Case copySource) :
+    public Case(ICase copySource) :
         base(copySource)
     {
         CopyTool.CopyProperties(copySource, this);
     }
 
-    /// <summary>Compare two objects</summary>
-    /// <param name="compare">The object to compare with this</param>
-    /// <returns>True for objects with the same data</returns>
-    public virtual bool Equals(Case compare) =>
+    /// <inheritdoc/>
+    public virtual bool Equals(ICase compare) =>
         CompareTool.EqualProperties(this, compare);
+
+    /// <inheritdoc/>
+    public virtual bool EqualKey(ICase compare) =>
+        string.Equals(Name, compare?.Name);
 
     /// <summary>Returns a <see cref="string" /> that represents this instance</summary>
     /// <returns>A <see cref="string" /> that represents this instance</returns>

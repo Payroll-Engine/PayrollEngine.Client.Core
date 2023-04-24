@@ -30,9 +30,7 @@ public class LookupSettings : IEquatable<LookupSettings>
         TextFieldName = source.TextFieldName;
     }
 
-    /// <summary>Compare two objects</summary>
-    /// <param name="compare">The object to compare with this</param>
-    /// <returns>True for objects with the same data</returns>
+    /// <inheritdoc/>
     public virtual bool Equals(LookupSettings compare) =>
         CompareTool.EqualProperties(this, compare);
 

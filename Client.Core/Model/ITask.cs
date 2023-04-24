@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The payroll task object</summary>
-public interface ITask : IModel
+public interface ITask : IModel, IAttributeObject, IEquatable<ITask>
 {
     /// <summary>The task name (immutable)</summary>
     string Name { get; set; }
@@ -35,7 +35,4 @@ public interface ITask : IModel
 
     /// <summary>The task completed date</summary>
     DateTime? Completed { get; set; }
-
-    /// <summary>Custom attributes</summary>
-    Dictionary<string, object> Attributes { get; set; }
 }

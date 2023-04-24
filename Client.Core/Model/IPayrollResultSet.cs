@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The payroll result client object</summary>
-public interface IPayrollResultSet : IPayrollResult
+public interface IPayrollResultSet : IPayrollResult, IEquatable<IPayrollResultSet>
 {
     /// <summary>The retro period start date (client only: test payrun results)</summary>
     DateTime? RetroPeriodStart { get; set; }

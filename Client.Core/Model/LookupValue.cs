@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using PayrollEngine.Serialization;
 using JsonSerializer = System.Text.Json.JsonSerializer;
@@ -7,7 +6,7 @@ using JsonSerializer = System.Text.Json.JsonSerializer;
 namespace PayrollEngine.Client.Model;
 
 /// <summary>Represents a value within a lookup</summary>
-public class LookupValue : Model, ILookupValue, IEquatable<LookupValue>
+public class LookupValue : Model, ILookupValue
 {
     /// <inheritdoc/>
     public string Key { get; set; }
@@ -82,17 +81,19 @@ public class LookupValue : Model, ILookupValue, IEquatable<LookupValue>
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public LookupValue(LookupValue copySource) :
+    public LookupValue(ILookupValue copySource) :
         base(copySource)
     {
         CopyTool.CopyProperties(copySource, this);
     }
 
-    /// <summary>Compare two objects</summary>
-    /// <param name="compare">The object to compare with this</param>
-    /// <returns>True for objects with the same data</returns>
-    public virtual bool Equals(LookupValue compare) =>
+    /// <inheritdoc/>
+    public virtual bool Equals(ILookupValue compare) =>
         CompareTool.EqualProperties(this, compare);
+
+    /// <inheritdoc/>
+    public virtual bool EqualKey(ILookupValue compare) =>
+        string.Equals(Key, compare?.Key);
 
     /// <summary>Returns a <see cref="string" /> that represents this instance</summary>
     /// <returns>A <see cref="string" /> that represents this instance</returns>

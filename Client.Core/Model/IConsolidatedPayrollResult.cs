@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace PayrollEngine.Client.Model;
 
 /// <summary>Consolidated payroll result</summary>
-public interface IConsolidatedPayrollResult
+public interface IConsolidatedPayrollResult : IEquatable<IConsolidatedPayrollResult>
 {
     /// <summary>The wage type results</summary>
     List<WageTypeResultSet> WageTypeResults { get; set; }

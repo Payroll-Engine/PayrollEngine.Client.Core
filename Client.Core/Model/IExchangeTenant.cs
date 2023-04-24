@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The tenant client object</summary>
-public interface IExchangeTenant : ITenant
+public interface IExchangeTenant : ITenant, IEquatable<IExchangeTenant>
 {
     /// <summary>The tenant users</summary>
     List<User> Users { get; set; }

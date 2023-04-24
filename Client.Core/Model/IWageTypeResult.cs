@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The wage type result client object</summary>
-public interface IWageTypeResult : IModel, IAttributeObject
+public interface IWageTypeResult : IModel, IAttributeObject, IEquatable<IWageTypeResult>
 {
     /// <summary>The payroll result id (immutable)</summary>
     int PayrollResultId { get; set; }
@@ -36,7 +36,7 @@ public interface IWageTypeResult : IModel, IAttributeObject
     /// <summary>The result tags</summary>
     List<string> Tags { get; set; }
 
-    /// <summary>Test if value is almost equals using a test precision</summary>
+    /// <summary>Test if value is almost equal value using a test precision</summary>
     /// <param name="compare">The value to compare</param>
     /// <param name="precision">The test precision</param>
     /// <returns>True for almost equal values</returns>

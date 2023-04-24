@@ -3,7 +3,7 @@
 namespace PayrollEngine.Client.Model;
 
 /// <summary>Represents a value within a lookup</summary>
-public interface ILookupValue : IModel
+public interface ILookupValue : IModel, IKeyEquatable<ILookupValue>
 {
     /// <summary>The lookup key</summary>
     string Key { get; set; }

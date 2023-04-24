@@ -3,7 +3,7 @@
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The payroll wage type client object</summary>
-public interface IWageType : IModel, IAttributeObject
+public interface IWageType : IModel, IAttributeObject, IKeyEquatable<IWageType>
 {
     /// <summary>The wage type number (immutable)</summary>
     decimal WageTypeNumber { get; set; }

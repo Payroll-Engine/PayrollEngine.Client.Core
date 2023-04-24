@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace PayrollEngine.Client.Model;
 
 /// <summary>Payroll case value change client object</summary>
-public class CaseChange : Model, ICaseChange, IEquatable<CaseChange>
+public class CaseChange : Model, ICaseChange
 {
     /// <inheritdoc/>
     public int UserId { get; set; }
@@ -58,16 +58,14 @@ public class CaseChange : Model, ICaseChange, IEquatable<CaseChange>
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public CaseChange(CaseChange copySource) :
+    public CaseChange(ICaseChange copySource) :
         base(copySource)
     {
         CopyTool.CopyProperties(copySource, this);
     }
 
-    /// <summary>Compare two objects</summary>
-    /// <param name="compare">The object to compare with this</param>
-    /// <returns>True for objects with the same data</returns>
-    public virtual bool Equals(CaseChange compare) =>
+    /// <inheritdoc/>
+    public virtual bool Equals(ICaseChange compare) =>
         CompareTool.EqualProperties(this, compare);
 
     /// <summary>Returns a <see cref="string" /> that represents this instance</summary>

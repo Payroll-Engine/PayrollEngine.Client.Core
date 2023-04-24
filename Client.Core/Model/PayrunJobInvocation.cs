@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The payrun job client object</summary>
-public class PayrunJobInvocation : IPayrunJobInvocation, IEquatable<PayrunJobInvocation>
+public class PayrunJobInvocation : IPayrunJobInvocation
 {
     /// <inheritdoc/>
     public string Name { get; set; }
@@ -88,14 +88,12 @@ public class PayrunJobInvocation : IPayrunJobInvocation, IEquatable<PayrunJobInv
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public PayrunJobInvocation(PayrunJobInvocation copySource)
+    public PayrunJobInvocation(IPayrunJobInvocation copySource)
     {
         CopyTool.CopyProperties(copySource, this);
     }
 
-    /// <summary>Compare two objects</summary>
-    /// <param name="compare">The object to compare with this</param>
-    /// <returns>True for objects with the same data</returns>
-    public virtual bool Equals(PayrunJobInvocation compare) =>
+    /// <inheritdoc/>
+    public virtual bool Equals(IPayrunJobInvocation compare) =>
         CompareTool.EqualProperties(this, compare);
 }

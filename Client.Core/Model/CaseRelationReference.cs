@@ -59,9 +59,7 @@ public class CaseRelationReference : IEquatable<CaseRelationReference>
         TargetCaseSlot = targetCaseSlot;
     }
 
-    /// <summary>Compare two objects</summary>
-    /// <param name="compare">The object to compare with this</param>
-    /// <returns>True for objects with the same data</returns>
+    /// <inheritdoc/>
     public virtual bool Equals(CaseRelationReference compare) =>
         CompareTool.EqualProperties(this, compare);
 }

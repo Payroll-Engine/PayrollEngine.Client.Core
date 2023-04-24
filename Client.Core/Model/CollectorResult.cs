@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The collector result client object</summary>
-public class CollectorResult : Model, ICollectorResult, IEquatable<CollectorResult>
+public class CollectorResult : Model, ICollectorResult
 {
     /// <inheritdoc/>
     public int PayrollResultId { get; set; }
@@ -46,20 +46,18 @@ public class CollectorResult : Model, ICollectorResult, IEquatable<CollectorResu
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public CollectorResult(CollectorResult copySource) :
+    public CollectorResult(ICollectorResult copySource) :
         base(copySource)
     {
         CopyTool.CopyProperties(copySource, this);
     }
 
-    /// <summary>Compare two objects</summary>
-    /// <param name="compare">The object to compare with this</param>
-    /// <returns>True for objects with the same data</returns>
-    public virtual bool Equals(CollectorResult compare) =>
+    /// <inheritdoc/>
+    public virtual bool Equals(ICollectorResult compare) =>
         CompareTool.EqualProperties(this, compare);
 
     /// <inheritdoc/>
-    public virtual bool AlmostEquals(decimal? compare, int precision) =>
+    public virtual bool AlmostEqualValue(decimal? compare, int precision) =>
         compare.HasValue && Value.AlmostEquals(compare.Value, precision);
 
     /// <summary>Returns a <see cref="string" /> that represents this instance</summary>

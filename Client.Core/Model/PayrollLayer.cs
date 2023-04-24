@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The payroll layer client object</summary>
-public class PayrollLayer : Model, IPayrollLayer, IEquatable<PayrollLayer>
+public class PayrollLayer : Model, IPayrollLayer
 {
     /// <inheritdoc/>
     [Required]
@@ -29,17 +28,21 @@ public class PayrollLayer : Model, IPayrollLayer, IEquatable<PayrollLayer>
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public PayrollLayer(PayrollLayer copySource) :
+    public PayrollLayer(IPayrollLayer copySource) :
         base(copySource)
     {
         CopyTool.CopyProperties(copySource, this);
     }
 
-    /// <summary>Compare two objects</summary>
-    /// <param name="compare">The object to compare with this</param>
-    /// <returns>True for objects with the same data</returns>
-    public virtual bool Equals(PayrollLayer compare) =>
+    /// <inheritdoc/>
+    public virtual bool Equals(IPayrollLayer compare) =>
         CompareTool.EqualProperties(this, compare);
+
+    /// <inheritdoc/>
+    public virtual bool EqualKey(IPayrollLayer compare) =>
+        Level == compare?.Level &&
+        Priority == compare.Priority &&
+        string.Equals(RegulationName, compare.RegulationName);
 
     /// <summary>Returns a <see cref="string" /> that represents this instance</summary>
     /// <returns>A <see cref="string" /> that represents this instance</returns>

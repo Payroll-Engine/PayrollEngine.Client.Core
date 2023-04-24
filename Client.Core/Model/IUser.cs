@@ -1,7 +1,8 @@
-﻿namespace PayrollEngine.Client.Model;
+﻿
+namespace PayrollEngine.Client.Model;
 
 /// <summary>The payroll user client object</summary>
-public interface IUser : IModel, IAttributeObject
+public interface IUser : IModel, IAttributeObject, IKeyEquatable<IUser>
 {
     /// <summary>The user unique identifier</summary>
     string Identifier { get; set; }

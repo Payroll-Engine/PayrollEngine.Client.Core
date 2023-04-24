@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The wage type result client object</summary>
-public class WageTypeResult : Model, IWageTypeResult, IEquatable<WageTypeResult>
+public class WageTypeResult : Model, IWageTypeResult
 {
     /// <inheritdoc/>
     public int PayrollResultId { get; set; }
@@ -48,16 +48,14 @@ public class WageTypeResult : Model, IWageTypeResult, IEquatable<WageTypeResult>
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public WageTypeResult(WageTypeResult copySource) :
+    public WageTypeResult(IWageTypeResult copySource) :
         base(copySource)
     {
         CopyTool.CopyProperties(copySource, this);
     }
 
-    /// <summary>Compare two objects</summary>
-    /// <param name="compare">The object to compare with this</param>
-    /// <returns>True for objects with the same data</returns>
-    public virtual bool Equals(WageTypeResult compare) =>
+    /// <inheritdoc/>
+    public virtual bool Equals(IWageTypeResult compare) =>
         CompareTool.EqualProperties(this, compare);
 
     /// <inheritdoc/>

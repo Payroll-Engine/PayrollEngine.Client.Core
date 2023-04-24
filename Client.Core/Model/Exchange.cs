@@ -6,7 +6,7 @@ using System.Linq;
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The exchange object</summary>
-public class Exchange : IExchange, IEquatable<Exchange>
+public class Exchange : IExchange
 {
     /// <inheritdoc/>
     [Required]
@@ -25,7 +25,7 @@ public class Exchange : IExchange, IEquatable<Exchange>
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public Exchange(Exchange copySource)
+    public Exchange(IExchange copySource)
     {
         CopyTool.CopyProperties(copySource, this);
     }
@@ -72,10 +72,8 @@ public class Exchange : IExchange, IEquatable<Exchange>
         }
     }
 
-    /// <summary>Compare two objects</summary>
-    /// <param name="compare">The object to compare with this</param>
-    /// <returns>True for objects with the same data</returns>
-    public virtual bool Equals(Exchange compare) =>
+    /// <inheritdoc/>
+    public virtual bool Equals(IExchange compare) =>
         CompareTool.EqualProperties(this, compare);
 
     /// <summary>Returns a <see cref="string" /> that represents this instance</summary>

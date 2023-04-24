@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace PayrollEngine.Client.Model;
 
 /// <summary>
 /// The report set API object
 /// </summary>
-public class ReportSet : Report, IEquatable<ReportSet>, IReportSet
+public class ReportSet : Report, IReportSet
 {
     /// <inheritdoc/>
     public int RegulationId { get; set; }
@@ -24,15 +23,13 @@ public class ReportSet : Report, IEquatable<ReportSet>, IReportSet
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public ReportSet(ReportSet copySource) :
+    public ReportSet(IReportSet copySource) :
         base(copySource)
     {
         CopyTool.CopyProperties(copySource, this);
     }
 
-    /// <summary>Compare two objects</summary>
-    /// <param name="compare">The object to compare with this</param>
-    /// <returns>True for objects with the same data</returns>
-    public virtual bool Equals(ReportSet compare) =>
+    /// <inheritdoc/>
+    public virtual bool Equals(IReportSet compare) =>
         CompareTool.EqualProperties(this, compare);
 }

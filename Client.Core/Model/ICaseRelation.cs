@@ -3,7 +3,7 @@
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The payroll case relation client object</summary>
-public interface ICaseRelation : IModel, IAttributeObject
+public interface ICaseRelation : IModel, IAttributeObject, IKeyEquatable<ICaseRelation>
 {
     /// <summary>The relation source case name (immutable)</summary>
     string SourceCaseName { get; set; }

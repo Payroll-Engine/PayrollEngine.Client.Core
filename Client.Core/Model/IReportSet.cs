@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The report set client object</summary>
-public interface IReportSet : IReport
+public interface IReportSet : IReport, IEquatable<IReportSet>
 {
     /// <summary>The regulation id</summary>
     int RegulationId { get; set; }

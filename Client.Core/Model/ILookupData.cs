@@ -1,7 +1,9 @@
-﻿namespace PayrollEngine.Client.Model;
+﻿using System;
+
+namespace PayrollEngine.Client.Model;
 
 /// <summary>Localized lookup for UI cases like list/grid selections</summary>
-public interface ILookupData
+public interface ILookupData : IEquatable<ILookupData>
 {
     /// <summary>The lookup name</summary>
     string Name { get; set; }

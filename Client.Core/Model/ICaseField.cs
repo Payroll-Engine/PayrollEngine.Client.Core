@@ -3,7 +3,7 @@
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The payroll case field client object</summary>
-public interface ICaseField : IModel, IAttributeObject
+public interface ICaseField : IModel, IAttributeObject, IKeyEquatable<ICaseField>
 {
     /// <summary>The case field name (immutable)</summary>
     string Name { get; set; }

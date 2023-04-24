@@ -9,6 +9,12 @@ public abstract class Model : IModel
     public int Id { get; set; }
 
     /// <inheritdoc/>
+    public bool IsExistingObject => Id != 0;
+
+    /// <inheritdoc/>
+    public bool IsNewObject => !IsExistingObject;
+
+    /// <inheritdoc/>
     public ObjectStatus Status { get; set; }
 
     /// <inheritdoc/>
@@ -27,16 +33,10 @@ public abstract class Model : IModel
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    protected Model(Model copySource)
+    protected Model(IModel copySource)
     {
         CopyTool.CopyProperties(copySource, this);
     }
-
-    /// <summary>Detect if two domain objects containing the same data, including id and status</summary>
-    /// <param name="compare">Object to compare</param>
-    /// <returns>True if any change is present</returns>
-    public virtual bool Equals(IModel compare) =>
-        CompareTool.EqualProperties(this, compare);
 
     /// <summary>Returns a <see cref="string" /> that represents this instance</summary>
     /// <returns>A <see cref="string" /> that represents this instance</returns>

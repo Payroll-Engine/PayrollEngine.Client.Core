@@ -3,7 +3,7 @@
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The payroll collector client object</summary>
-public interface ICollector : IModel, IAttributeObject
+public interface ICollector : IModel, IAttributeObject, IKeyEquatable<ICollector>
 {
     /// <summary>The collection type (immutable)</summary>
     CollectType CollectType { get; set; }

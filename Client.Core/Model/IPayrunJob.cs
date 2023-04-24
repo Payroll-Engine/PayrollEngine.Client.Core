@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The payrun job client object</summary>
-public interface IPayrunJob : IModel, IAttributeObject
+public interface IPayrunJob : IModel, IAttributeObject, IEquatable<IPayrunJob>
 {
     /// <summary>The job name (immutable)</summary>
     string Name { get; set; }

@@ -2,7 +2,7 @@
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The regulation permission client object</summary>
-public interface IRegulationPermission : IModel, IAttributeObject
+public interface IRegulationPermission : IModel, IAttributeObject, IKeyEquatable<IRegulationPermission>
 {
     /// <summary>The tenant id</summary>
     int TenantId { get; set; }

@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The employee set client object</summary>
-public interface IEmployeeSet: IEmployee
+public interface IEmployeeSet: IEmployee, IEquatable<IEmployeeSet>
 {
     /// <summary>The employee case changes</summary>
     List<CaseChange> Cases { get; set; }

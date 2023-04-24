@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The payroll case value client object (immutable)</summary>
-public class CaseValueSetup : CaseValue, ICaseValueSetup, IEquatable<CaseValueSetup>
+public class CaseValueSetup : CaseValue, ICaseValueSetup
 {
 
     /// <inheritdoc/>
@@ -17,15 +16,13 @@ public class CaseValueSetup : CaseValue, ICaseValueSetup, IEquatable<CaseValueSe
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public CaseValueSetup(CaseValueSetup copySource) :
+    public CaseValueSetup(ICaseValueSetup copySource) :
         base(copySource)
     {
         CopyTool.CopyProperties(copySource, this);
     }
 
-    /// <summary>Compare two objects</summary>
-    /// <param name="compare">The object to compare with this</param>
-    /// <returns>True for objects with the same data</returns>
-    public virtual bool Equals(CaseValueSetup compare) =>
+    /// <inheritdoc/>
+    public virtual bool Equals(ICaseValueSetup compare) =>
         CompareTool.EqualProperties(this, compare);
 }

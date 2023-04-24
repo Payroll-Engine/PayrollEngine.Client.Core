@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The tenant client object</summary>
-public class RegulationPermission : Model, IRegulationPermission, IEquatable<RegulationPermission>
+public class RegulationPermission : Model, IRegulationPermission
 {
     /// <inheritdoc/>
     public int TenantId { get; set; }
@@ -40,17 +39,22 @@ public class RegulationPermission : Model, IRegulationPermission, IEquatable<Reg
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public RegulationPermission(RegulationPermission copySource) :
+    public RegulationPermission(IRegulationPermission copySource) :
         base(copySource)
     {
         CopyTool.CopyProperties(copySource, this);
     }
 
-    /// <summary>Compare two objects</summary>
-    /// <param name="compare">The object to compare with this</param>
-    /// <returns>True for objects with the same data</returns>
-    public virtual bool Equals(RegulationPermission compare) =>
+    /// <inheritdoc/>
+    public virtual bool Equals(IRegulationPermission compare) =>
         CompareTool.EqualProperties(this, compare);
+
+    /// <inheritdoc/>
+    public virtual bool EqualKey(IRegulationPermission compare) =>
+        string.Equals(TenantIdentifier, compare?.TenantIdentifier) &&
+        string.Equals(RegulationName, compare?.RegulationName) &&
+        string.Equals(PermissionTenantIdentifier, compare?.PermissionTenantIdentifier) &&
+        string.Equals(PermissionDivisionName, compare?.PermissionDivisionName);
 
     /// <summary>Returns a <see cref="string" /> that represents this instance</summary>
     /// <returns>A <see cref="string" /> that represents this instance</returns>

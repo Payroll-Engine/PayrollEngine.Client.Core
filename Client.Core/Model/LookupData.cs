@@ -1,12 +1,11 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 using PayrollEngine.Serialization;
 
 namespace PayrollEngine.Client.Model;
 
 /// <summary>Localized lookup for UI cases like list/grid selections</summary>
-public class LookupData : ILookupData, IEquatable<LookupData>
+public class LookupData : ILookupData
 {
     /// <inheritdoc/>
     [Required]
@@ -31,15 +30,13 @@ public class LookupData : ILookupData, IEquatable<LookupData>
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public LookupData(LookupData copySource)
+    public LookupData(ILookupData copySource)
     {
         CopyTool.CopyProperties(copySource, this);
     }
 
-    /// <summary>Compare two objects</summary>
-    /// <param name="compare">The object to compare with this</param>
-    /// <returns>True for objects with the same data</returns>
-    public virtual bool Equals(LookupData compare) =>
+    /// <inheritdoc/>
+    public virtual bool Equals(ILookupData compare) =>
         CompareTool.EqualProperties(this, compare);
 
     /// <summary>Returns a <see cref="string" /> that represents this instance</summary>

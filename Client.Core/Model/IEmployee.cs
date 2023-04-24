@@ -3,7 +3,7 @@
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The employee client object</summary>
-public interface IEmployee : IModel, IAttributeObject
+public interface IEmployee : IModel, IAttributeObject, IKeyEquatable<IEmployee>
 {
     /// <summary>The employee identifier</summary>
     string Identifier { get; set; }

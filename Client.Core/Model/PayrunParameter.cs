@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The payroll payrun parameter client object</summary>
-public class PayrunParameter : Model, IPayrunParameter, IEquatable<PayrunParameter>
+public class PayrunParameter : Model, IPayrunParameter
 {
     /// <inheritdoc/>
     [Required]
@@ -40,16 +39,18 @@ public class PayrunParameter : Model, IPayrunParameter, IEquatable<PayrunParamet
 
     /// <summary>Initializes a new instance of the <see cref="PayrunParameter"/> class</summary>
     /// <param name="copySource">The copy source.</param>
-    public PayrunParameter(PayrunParameter copySource)
+    public PayrunParameter(IPayrunParameter copySource)
     {
         CopyTool.CopyProperties(copySource, this);
     }
 
-    /// <summary>Compare two objects</summary>
-    /// <param name="compare">The object to compare with this</param>
-    /// <returns>True for objects with the same data</returns>
-    public virtual bool Equals(PayrunParameter compare) =>
+    /// <inheritdoc/>
+    public virtual bool Equals(IPayrunParameter compare) =>
         CompareTool.EqualProperties(this, compare);
+    
+    /// <inheritdoc/>
+    public virtual bool EqualKey(IPayrunParameter compare) =>
+        string.Equals(Name, compare?.Name);
 
     /// <summary>Returns a <see cref="string" /> that represents this instance</summary>
     /// <returns>A <see cref="string" /> that represents this instance</returns>

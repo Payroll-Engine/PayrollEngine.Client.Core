@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The exchange object</summary>
-public interface IExchange
+public interface IExchange : IEquatable<IExchange>
 {
     /// <summary>The tenants</summary>
     List<ExchangeTenant> Tenants { get; set; }

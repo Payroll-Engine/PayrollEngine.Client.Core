@@ -1,10 +1,9 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The payroll task object</summary>
-public class Log : Model, ILog, IEquatable<Log>
+public class Log : Model, ILog
 {
     /// <inheritdoc/>
     public LogLevel Level { get; set; }
@@ -35,16 +34,14 @@ public class Log : Model, ILog, IEquatable<Log>
     }
 
     /// <inheritdoc/>
-    public Log(Log copySource) :
+    public Log(ILog copySource) :
         base(copySource)
     {
         CopyTool.CopyProperties(copySource, this);
     }
 
-    /// <summary>Compare two objects</summary>
-    /// <param name="compare">The object to compare with this</param>
-    /// <returns>True for objects with the same data</returns>
-    public virtual bool Equals(Log compare) =>
+    /// <inheritdoc/>
+    public virtual bool Equals(ILog compare) =>
         CompareTool.EqualProperties(this, compare);
 
     /// <inheritdoc/>

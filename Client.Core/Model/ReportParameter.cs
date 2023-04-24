@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The payroll report parameter client object</summary>
-public class ReportParameter : Model, IReportParameter, IEquatable<ReportParameter>
+public class ReportParameter : Model, IReportParameter
 {
     /// <inheritdoc/>
     [Required]
@@ -43,16 +42,18 @@ public class ReportParameter : Model, IReportParameter, IEquatable<ReportParamet
 
     /// <summary>Initializes a new instance of the <see cref="ReportParameter"/> class</summary>
     /// <param name="copySource">The copy source.</param>
-    public ReportParameter(ReportParameter copySource)
+    public ReportParameter(IReportParameter copySource)
     {
         CopyTool.CopyProperties(copySource, this);
     }
 
-    /// <summary>Compare two objects</summary>
-    /// <param name="compare">The object to compare with this</param>
-    /// <returns>True for objects with the same data</returns>
-    public virtual bool Equals(ReportParameter compare) =>
+    /// <inheritdoc/>
+    public virtual bool Equals(IReportParameter compare) =>
         CompareTool.EqualProperties(this, compare);
+
+    /// <inheritdoc/>
+    public virtual bool EqualKey(IReportParameter compare) =>
+        string.Equals(Name, compare?.Name);
 
     /// <summary>Returns a <see cref="string" /> that represents this instance</summary>
     /// <returns>A <see cref="string" /> that represents this instance</returns>

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The wage type custom result client object</summary>
-public interface IWageTypeCustomResult : IModel, IAttributeObject
+public interface IWageTypeCustomResult : IModel, IAttributeObject, IEquatable<IWageTypeCustomResult>
 {
     /// <summary>The wage type result id (immutable)</summary>
     int WageTypeResultId { get; set; }

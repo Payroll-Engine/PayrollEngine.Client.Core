@@ -3,7 +3,7 @@
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The Webhook message client object</summary>
-public interface IWebhookMessage : IModel
+public interface IWebhookMessage : IModel, IEquatable<IWebhookMessage>
 {
     /// <summary>The webhook action name</summary>
     string ActionName { get; set; }

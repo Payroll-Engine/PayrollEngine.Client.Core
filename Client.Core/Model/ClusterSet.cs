@@ -25,9 +25,7 @@ public class ClusterSet : IEquatable<ClusterSet>
     public ClusterSet(ClusterSet copySource) =>
         CopyTool.CopyProperties(copySource, this);
 
-    /// <summary>Compare two objects</summary>
-    /// <param name="compare">The object to compare with this</param>
-    /// <returns>True for objects with the same data</returns>
+    /// <inheritdoc/>
     public virtual bool Equals(ClusterSet compare) =>
         CompareTool.EqualProperties(this, compare);
 

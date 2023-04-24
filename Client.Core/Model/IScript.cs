@@ -3,7 +3,7 @@
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The payroll script client object</summary>
-public interface IScript : IModel
+public interface IScript : IModel, IKeyEquatable<IScript>
 {
     /// <summary>The script name (immutable)</summary>
     string Name { get; set; }

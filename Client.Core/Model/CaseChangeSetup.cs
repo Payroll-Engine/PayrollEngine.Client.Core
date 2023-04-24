@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 namespace PayrollEngine.Client.Model;
 
 /// <summary>Payroll case change setup client object</summary>
-public class CaseChangeSetup : Model, ICaseChangeSetup, IEquatable<CaseChangeSetup>
+public class CaseChangeSetup : Model, ICaseChangeSetup
 {
     /// <inheritdoc/>
     public int UserId { get; set; }
@@ -51,15 +51,13 @@ public class CaseChangeSetup : Model, ICaseChangeSetup, IEquatable<CaseChangeSet
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public CaseChangeSetup(CaseChangeSetup copySource) :
+    public CaseChangeSetup(ICaseChangeSetup copySource) :
         base(copySource)
     {
         CopyTool.CopyProperties(copySource, this);
     }
 
-    /// <summary>Compare two objects</summary>
-    /// <param name="compare">The object to compare with this</param>
-    /// <returns>True for objects with the same data</returns>
-    public virtual bool Equals(CaseChangeSetup compare) =>
+    /// <inheritdoc/>
+    public virtual bool Equals(ICaseChangeSetup compare) =>
         CompareTool.EqualProperties(this, compare);
 }

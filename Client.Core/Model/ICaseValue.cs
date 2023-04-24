@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The case value (immutable)</summary>
-public interface ICaseValue : IModel, IAttributeObject
+public interface ICaseValue : IModel, IAttributeObject, IEquatable<ICaseValue>
 {
     /// <summary>The division id (immutable), Mandatory for case values with local value scope <see cref="CaseField.ValueScope"/></summary>
     int? DivisionId { get; set; }

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The payroll regulation client object</summary>
-public interface IRegulation : IModel, IAttributeObject
+public interface IRegulation : IModel, IAttributeObject, IKeyEquatable<IRegulation>
 {
     /// <summary>The regulation name</summary>
     string Name { get; set; }

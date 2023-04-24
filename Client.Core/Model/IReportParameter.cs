@@ -3,7 +3,7 @@
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The report parameter client object</summary>
-public interface IReportParameter : IModel, IAttributeObject
+public interface IReportParameter : IModel, IAttributeObject, IKeyEquatable<IReportParameter>
 {
     /// <summary>The report parameter name</summary>
     string Name { get; set; }

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace PayrollEngine.Client.Model;
 
 /// <summary>Payroll case change setup client object</summary>
-public interface ICaseChangeSetup : IModel
+public interface ICaseChangeSetup : IModel, IEquatable<ICaseChangeSetup>
 {
     /// <summary>The change user id</summary>
     int UserId { get; set; }

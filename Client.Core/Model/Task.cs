@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The payroll task object</summary>
-public class Task : Model, ITask, IEquatable<Task>, IAttributeObject
+public class Task : Model, ITask
 {
     /// <inheritdoc/>
     [Required]
@@ -53,16 +53,14 @@ public class Task : Model, ITask, IEquatable<Task>, IAttributeObject
     }
 
     /// <inheritdoc/>
-    public Task(Task copySource) :
+    public Task(ITask copySource) :
         base(copySource)
     {
         CopyTool.CopyProperties(copySource, this);
     }
 
-    /// <summary>Compare two objects</summary>
-    /// <param name="compare">The object to compare with this</param>
-    /// <returns>True for objects with the same data</returns>
-    public virtual bool Equals(Task compare) =>
+    /// <inheritdoc/>
+    public virtual bool Equals(ITask compare) =>
         CompareTool.EqualProperties(this, compare);
 
     /// <inheritdoc/>

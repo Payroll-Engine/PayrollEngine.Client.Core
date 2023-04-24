@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The payroll regulation set client object</summary>
-public class RegulationSet : Regulation, IRegulationSet, IEquatable<RegulationSet>
+public class RegulationSet : Regulation, IRegulationSet
 {
     /// <inheritdoc/>
     public List<CaseSet> Cases { get; set; }
@@ -34,22 +33,20 @@ public class RegulationSet : Regulation, IRegulationSet, IEquatable<RegulationSe
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public RegulationSet(Regulation copySource) :
+    public RegulationSet(IRegulation copySource) :
         base(copySource)
     {
     }
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public RegulationSet(RegulationSet copySource) :
+    public RegulationSet(IRegulationSet copySource) :
         base(copySource)
     {
         CopyTool.CopyProperties(copySource, this);
     }
 
-    /// <summary>Compare two objects</summary>
-    /// <param name="compare">The object to compare with this</param>
-    /// <returns>True for objects with the same data</returns>
-    public virtual bool Equals(RegulationSet compare) =>
+    /// <inheritdoc/>
+    public virtual bool Equals(IRegulationSet compare) =>
         CompareTool.EqualProperties(this, compare);
 }

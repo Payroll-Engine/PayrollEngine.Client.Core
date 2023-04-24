@@ -4,7 +4,7 @@ using PayrollEngine.Data;
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The report client object</summary>
-public interface IReport : IModel, IAttributeObject
+public interface IReport : IModel, IAttributeObject, IKeyEquatable<IReport>
 {
     /// <summary>The payroll result report name</summary>
     string Name { get; set; }
