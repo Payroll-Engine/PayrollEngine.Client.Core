@@ -5,9 +5,9 @@ using System.ComponentModel.DataAnnotations;
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The payroll regulation client object</summary>
-public class Regulation : Model, IRegulation
+public class Regulation : Model, IRegulation, INameObject
 {
-    /// <inheritdoc/>
+    /// <summary>The regulation name</summary>
     [Required]
     [StringLength(128)]
     public string Name { get; set; }

@@ -5,9 +5,9 @@ using PayrollEngine.Data;
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The payroll report client object</summary>
-public class Report : Model, IReport
+public class Report : Model, IReport, INameObject
 {
-    /// <inheritdoc/>
+    /// <summary>The report name</summary>
     [Required]
     [StringLength(128)]
     public string Name { get; set; }

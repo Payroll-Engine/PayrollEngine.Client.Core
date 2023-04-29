@@ -65,7 +65,7 @@ public static class ConsoleArguments
         {
             return false;
         }
-        return argument.StartsWith("/") || argument.StartsWith("-");
+        return argument.StartsWith('/') || argument.StartsWith('-');
     }
 
     /// <summary>Gets the specified index, starting at 1</summary>

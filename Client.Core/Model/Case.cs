@@ -4,12 +4,12 @@ using System.ComponentModel.DataAnnotations;
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The payroll case client object</summary>
-public class Case : Model, ICase
+public class Case : Model, ICase, INameObject
 {
     /// <inheritdoc/>
     public CaseType CaseType { get; set; }
 
-    /// <inheritdoc/>
+    /// <summary>The case name</summary>
     [Required]
     [StringLength(128)]
     public string Name { get; set; }

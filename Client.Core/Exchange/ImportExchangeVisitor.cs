@@ -1048,7 +1048,7 @@ public abstract class ImportExchangeVisitor : ExchangeVisitor
             }
 
             // employee
-            if (!caseChangeSetup.EmployeeId.HasValue && !string.IsNullOrEmpty(caseChangeSetup.EmployeeIdentifier))
+            if (!caseChangeSetup.EmployeeId.HasValue && !string.IsNullOrWhiteSpace(caseChangeSetup.EmployeeIdentifier))
             {
                 var employee = await GetEmployeeAsync(tenant.Id, caseChangeSetup.EmployeeIdentifier);
                 if (employee == null)
@@ -1130,7 +1130,7 @@ public abstract class ImportExchangeVisitor : ExchangeVisitor
                 {
                     foreach (var document in value.Documents)
                     {
-                        if (string.IsNullOrEmpty(document.Content) && !string.IsNullOrEmpty(document.ContentFile))
+                        if (string.IsNullOrWhiteSpace(document.Content) && !string.IsNullOrWhiteSpace(document.ContentFile))
                         {
                             document.Content = BinaryFile.Read(document.ContentFile);
                         }

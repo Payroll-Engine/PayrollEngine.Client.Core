@@ -15,6 +15,18 @@ public class CaseFieldReference : IEquatable<CaseFieldReference>
     /// </summary>
     public int? Order { get; set; }
 
+    /// <summary>Initializes a new instance</summary>
+    public CaseFieldReference()
+    {
+    }
+
+    /// <summary>Initializes a new instance from a copy</summary>
+    /// <param name="copySource">The copy source</param>
+    public CaseFieldReference(CaseFieldReference copySource)
+    {
+        CopyTool.CopyProperties(copySource, this);
+    }
+
     /// <inheritdoc/>
     public virtual bool Equals(CaseFieldReference compare) =>
         CompareTool.EqualProperties(this, compare);

@@ -6,9 +6,9 @@ using PayrollEngine.Serialization;
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The payroll client object</summary>
-public class Payroll : Model, IPayroll
+public class Payroll : Model, IPayroll, INameObject
 {
-    /// <inheritdoc/>
+    /// <summary>The payroll name</summary>
     [Required]
     [StringLength(128)]
     public string Name { get; set; }

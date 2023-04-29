@@ -15,7 +15,7 @@ public class Filter : ExpressionBase
     /// <returns>Updated query filter</returns>
     public virtual Filter Group()
     {
-        if (Expression.StartsWith("(") && Expression.EndsWith(")"))
+        if (Expression.StartsWith('(') && Expression.EndsWith(')'))
         {
             return this;
         }

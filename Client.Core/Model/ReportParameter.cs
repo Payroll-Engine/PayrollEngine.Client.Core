@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations;
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The payroll report parameter client object</summary>
-public class ReportParameter : Model, IReportParameter
+public class ReportParameter : Model, IReportParameter, INameObject
 {
-    /// <inheritdoc/>
+    /// <summary>The report parameter name</summary>
     [Required]
     [StringLength(128)]
     public string Name { get; set; }

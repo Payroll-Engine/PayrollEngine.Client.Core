@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations;
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The payroll user client object</summary>
-public class User : Model, IUser
+public class User : Model, IUser, IIdentifierObject
 {
-    /// <inheritdoc/>
+    /// <summary>The user identifier</summary>
     [Required]
     [StringLength(128)]
     public string Identifier { get; set; }

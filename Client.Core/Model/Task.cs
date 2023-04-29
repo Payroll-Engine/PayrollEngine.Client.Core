@@ -5,9 +5,9 @@ using System.ComponentModel.DataAnnotations;
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The payroll task object</summary>
-public class Task : Model, ITask
+public class Task : Model, ITask, INameObject
 {
-    /// <inheritdoc/>
+    /// <summary>The task name</summary>
     [Required]
     [StringLength(128)]
     public string Name { get; set; }

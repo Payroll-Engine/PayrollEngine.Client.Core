@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations;
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The payroll division client object</summary>
-public class Division : Model, IDivision
+public class Division : Model, IDivision, INameObject
 {
-    /// <inheritdoc/>
+    /// <summary>The division name</summary>
     [Required]
     [StringLength(128)]
     public string Name { get; set; }

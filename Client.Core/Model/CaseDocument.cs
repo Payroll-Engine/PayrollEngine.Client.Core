@@ -3,9 +3,9 @@
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The case document client object</summary>
-public class CaseDocument : Model, ICaseDocument
+public class CaseDocument : Model, ICaseDocument, INameObject
 {
-    /// <inheritdoc/>
+    /// <summary>The case document name</summary>
     [Required]
     public string Name { get; set; }
 

@@ -4,12 +4,12 @@ using System.ComponentModel.DataAnnotations;
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The payroll collector client object</summary>
-public class Collector : Model, ICollector
+public class Collector : Model, ICollector, INameObject
 {
     /// <inheritdoc/>
     public CollectType CollectType { get; set; }
 
-    /// <inheritdoc/>
+    /// <summary>The collector name</summary>
     [Required]
     [StringLength(128)]
     public string Name { get; set; }

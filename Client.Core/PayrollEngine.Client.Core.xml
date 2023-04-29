@@ -1908,7 +1908,7 @@
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.Case.Name">
-            <inheritdoc/>
+            <summary>The case name</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.Case.NameLocalizations">
             <inheritdoc/>
@@ -2161,7 +2161,7 @@
             <summary>The case document client object</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.CaseDocument.Name">
-            <inheritdoc/>
+            <summary>The case document name</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.CaseDocument.Content">
             <inheritdoc/>
@@ -2190,7 +2190,7 @@
             <summary>The payroll case field client object</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.CaseField.Name">
-            <inheritdoc/>
+            <summary>The case field name</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.CaseField.NameLocalizations">
             <inheritdoc/>
@@ -2296,6 +2296,13 @@
             <summary>
             The case field order
             </summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.CaseFieldReference.#ctor">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.CaseFieldReference.#ctor(PayrollEngine.Client.Model.CaseFieldReference)">
+            <summary>Initializes a new instance from a copy</summary>
+            <param name="copySource">The copy source</param>
         </member>
         <member name="M:PayrollEngine.Client.Model.CaseFieldReference.Equals(PayrollEngine.Client.Model.CaseFieldReference)">
             <inheritdoc/>
@@ -2816,7 +2823,7 @@
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.Collector.Name">
-            <inheritdoc/>
+            <summary>The collector name</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.Collector.NameLocalizations">
             <inheritdoc/>
@@ -3034,7 +3041,7 @@
             <summary>The payroll division client object</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.Division.Name">
-            <inheritdoc/>
+            <summary>The division name</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.Division.NameLocalizations">
             <inheritdoc/>
@@ -3076,7 +3083,7 @@
             <summary>The employee client object</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.Employee.Identifier">
-            <inheritdoc/>
+            <summary>The employee identifier</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.Employee.FirstName">
             <inheritdoc/>
@@ -5120,7 +5127,7 @@
             The lookup contains one or more columns and the ValueColumn indicates.</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.Lookup.Name">
-            <inheritdoc/>
+            <summary>The lookup name</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.Lookup.NameLocalizations">
             <inheritdoc/>
@@ -5331,7 +5338,7 @@
             <summary>The payroll client object</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.Payroll.Name">
-            <inheritdoc/>
+            <summary>The payroll name</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.Payroll.NameLocalizations">
             <inheritdoc/>
@@ -5719,7 +5726,7 @@
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.Payrun.Name">
-            <inheritdoc/>
+            <summary>The payrun name</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.Payrun.DefaultReason">
             <inheritdoc/>
@@ -6007,7 +6014,7 @@
             <summary>The payroll payrun parameter client object</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.PayrunParameter.Name">
-            <inheritdoc/>
+            <summary>The payrun parameter name</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.PayrunParameter.NameLocalizations">
             <inheritdoc/>
@@ -6057,7 +6064,7 @@
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.PayrunResult.Name">
-            <inheritdoc/>
+            <summary>The payrun result name</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.PayrunResult.NameLocalizations">
             <inheritdoc/>
@@ -6104,7 +6111,7 @@
             <summary>The payroll regulation client object</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.Regulation.Name">
-            <inheritdoc/>
+            <summary>The regulation name</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.Regulation.NameLocalizations">
             <inheritdoc/>
@@ -6239,7 +6246,7 @@
             <summary>The payroll report client object</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.Report.Name">
-            <inheritdoc/>
+            <summary>The report name</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.Report.NameLocalizations">
             <inheritdoc/>
@@ -6335,7 +6342,7 @@
             <summary>The payroll report parameter client object</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.ReportParameter.Name">
-            <inheritdoc/>
+            <summary>The report parameter name</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.ReportParameter.NameLocalizations">
             <inheritdoc/>
@@ -6543,7 +6550,7 @@
             <summary>The payroll script client object</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.Script.Name">
-            <inheritdoc/>
+            <summary>The script name</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.Script.FunctionTypes">
             <inheritdoc/>
@@ -6575,7 +6582,7 @@
             <summary>The payroll task object</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.Task.Name">
-            <inheritdoc/>
+            <summary>The task name</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.Task.NameLocalizations">
             <inheritdoc/>
@@ -6625,7 +6632,7 @@
             <summary>The tenant client object</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.Tenant.Identifier">
-            <inheritdoc/>
+            <summary>The tenant identifier</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.Tenant.Culture">
             <inheritdoc/>
@@ -6657,7 +6664,7 @@
             <summary>The payroll user client object</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.User.Identifier">
-            <inheritdoc/>
+            <summary>The user identifier</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.User.Password">
             <inheritdoc/>
@@ -6701,7 +6708,7 @@
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.WageType.Name">
-            <inheritdoc/>
+            <summary>The wage type name</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.WageType.NameLocalizations">
             <inheritdoc/>
@@ -6892,7 +6899,7 @@
             <summary>The Webhook client object</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.Webhook.Name">
-            <inheritdoc/>
+            <summary>The webhook name</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.Webhook.ReceiverAddress">
             <inheritdoc/>

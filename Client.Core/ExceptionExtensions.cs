@@ -58,7 +58,7 @@ public static class ExceptionExtensions
         var message = exception.GetBaseMessage();
 
         // api validation error
-        if (!message.StartsWith("{") || !message.EndsWith("}"))
+        if (!message.StartsWith('{') || !message.EndsWith('}'))
         {
             return null;
         }

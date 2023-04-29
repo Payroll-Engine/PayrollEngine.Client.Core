@@ -387,7 +387,7 @@ public sealed class ExchangeImport : ImportExchangeVisitor
         caseChangeSetup.UserId = user.Id;
 
         // employee
-        if (!caseChangeSetup.EmployeeId.HasValue && !string.IsNullOrEmpty(caseChangeSetup.EmployeeIdentifier))
+        if (!caseChangeSetup.EmployeeId.HasValue && !string.IsNullOrWhiteSpace(caseChangeSetup.EmployeeIdentifier))
         {
             var employee = await GetEmployeeAsync(tenant.Id, caseChangeSetup.EmployeeIdentifier);
             if (employee == null)

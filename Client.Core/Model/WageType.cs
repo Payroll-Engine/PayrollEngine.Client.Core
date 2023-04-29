@@ -6,13 +6,13 @@ using PayrollEngine.Serialization;
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The payroll wage type client object</summary>
-public class WageType : Model, IWageType
+public class WageType : Model, IWageType, INameObject
 {
     /// <inheritdoc/>
     [Required]
     public decimal WageTypeNumber { get; set; }
 
-    /// <inheritdoc/>
+    /// <summary>The wage type name</summary>
     [Required]
     [StringLength(128)]
     public string Name { get; set; }

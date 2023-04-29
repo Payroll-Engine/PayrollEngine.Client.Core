@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations;
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The payroll script client object</summary>
-public class Script : Model, IScript
+public class Script : Model, IScript, INameObject
 {
-    /// <inheritdoc/>
+    /// <summary>The script name</summary>
     [Required]
     [StringLength(128)]
     public string Name { get; set; }

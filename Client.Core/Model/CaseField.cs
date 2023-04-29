@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations;
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The payroll case field client object</summary>
-public class CaseField : Model, ICaseField
+public class CaseField : Model, ICaseField, INameObject
 {
-    /// <inheritdoc/>
+    /// <summary>The case field name</summary>
     [Required]
     public string Name { get; set; }
 

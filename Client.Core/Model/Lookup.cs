@@ -5,9 +5,9 @@ namespace PayrollEngine.Client.Model;
 
 /// <summary>The payroll lookup client object identified by his unique name.
 /// The lookup contains one or more columns and the ValueColumn indicates.</summary>
-public class Lookup : Model, ILookup
+public class Lookup : Model, ILookup, INameObject
 {
-    /// <inheritdoc/>
+    /// <summary>The lookup name</summary>
     [Required]
     [StringLength(128)]
     public string Name { get; set; }
