@@ -18,14 +18,14 @@ public class PayrollSet : Payroll, IPayrollSet
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public PayrollSet(IPayroll copySource) :
+    public PayrollSet(Payroll copySource) :
         base(copySource)
     {
     }
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public PayrollSet(IPayrollSet copySource) :
+    public PayrollSet(PayrollSet copySource) :
         base(copySource)
     {
         CopyTool.CopyProperties(copySource, this);

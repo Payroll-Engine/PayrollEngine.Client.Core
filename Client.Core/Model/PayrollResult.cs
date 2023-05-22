@@ -51,7 +51,7 @@ public class PayrollResult : Model, IPayrollResult
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public PayrollResult(IPayrollResult copySource) :
+    public PayrollResult(PayrollResult copySource) :
         base(copySource)
     {
         CopyTool.CopyProperties(copySource, this);
@@ -60,6 +60,9 @@ public class PayrollResult : Model, IPayrollResult
     /// <inheritdoc/>
     public virtual bool Equals(IPayrollResult compare) =>
         CompareTool.EqualProperties(this, compare);
+    
+    /// <inheritdoc/>
+    public override string GetUiString() => PeriodName;
 
     /// <summary>Returns a <see cref="string" /> that represents this instance</summary>
     /// <returns>A <see cref="string" /> that represents this instance</returns>

@@ -7,6 +7,7 @@ namespace PayrollEngine.Client.Model;
 public class Case : Model, ICase, INameObject
 {
     /// <inheritdoc/>
+    [Required]
     public CaseType CaseType { get; set; }
 
     /// <summary>The case name</summary>
@@ -90,7 +91,7 @@ public class Case : Model, ICase, INameObject
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public Case(ICase copySource) :
+    public Case(Case copySource) :
         base(copySource)
     {
         CopyTool.CopyProperties(copySource, this);
@@ -103,9 +104,7 @@ public class Case : Model, ICase, INameObject
     /// <inheritdoc/>
     public virtual bool EqualKey(ICase compare) =>
         string.Equals(Name, compare?.Name);
-
-    /// <summary>Returns a <see cref="string" /> that represents this instance</summary>
-    /// <returns>A <see cref="string" /> that represents this instance</returns>
-    public override string ToString() =>
-        $"{Name} {base.ToString()}";
+    
+    /// <inheritdoc/>
+    public override string GetUiString() => Name;
 }

@@ -11,6 +11,7 @@ public class PayrunResult : Model, IPayrunResult, INameObject
     public int PayrollResultId { get; set; }
 
     /// <inheritdoc/>
+    [Required]
     public string Source { get; set; }
 
     /// <summary>The payrun result name</summary>
@@ -24,18 +25,22 @@ public class PayrunResult : Model, IPayrunResult, INameObject
     public string Slot { get; set; }
 
     /// <inheritdoc/>
+    [Required]
     public ValueType ValueType { get; set; }
 
     /// <inheritdoc/>
+    [Required]
     public string Value { get; set; }
 
     /// <inheritdoc/>
     public decimal? NumericValue { get; set; }
 
     /// <inheritdoc/>
+    [Required]
     public DateTime Start { get; set; }
 
     /// <inheritdoc/>
+    [Required]
     public DateTime End { get; set; }
 
     /// <inheritdoc/>
@@ -51,7 +56,7 @@ public class PayrunResult : Model, IPayrunResult, INameObject
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public PayrunResult(IPayrunResult copySource) :
+    public PayrunResult(PayrunResult copySource) :
         base(copySource)
     {
         CopyTool.CopyProperties(copySource, this);
@@ -60,6 +65,9 @@ public class PayrunResult : Model, IPayrunResult, INameObject
     /// <inheritdoc/>
     public virtual bool Equals(IPayrunResult compare) =>
         CompareTool.EqualProperties(this, compare);
+
+    /// <inheritdoc/>
+    public override string GetUiString() => Name;
 
     /// <summary>Returns a <see cref="string" /> that represents this instance</summary>
     /// <returns>A <see cref="string" /> that represents this instance</returns>

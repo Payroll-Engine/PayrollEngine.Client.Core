@@ -14,6 +14,9 @@ public interface IPayrun : IModel, IKeyEquatable<IPayrun>
     /// <summary>The payrun name</summary>
     string Name { get; set; }
 
+    /// <summary>The localized payrun name</summary>
+    Dictionary<string, string> NameLocalizations { get; set; }
+
     /// <summary>The default payrun reason</summary>
     string DefaultReason { get; set; }
 
@@ -61,4 +64,7 @@ public interface IPayrun : IModel, IKeyEquatable<IPayrun>
 
     /// <summary>The payrun calendar</summary>
     CalendarConfiguration Calendar { get; set; }
+
+    /// <summary>The payrun parameters</summary>
+    List<PayrunParameter> PayrunParameters { get; set; }
 }

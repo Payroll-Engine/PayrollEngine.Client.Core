@@ -28,7 +28,7 @@ public class PayrollLayer : Model, IPayrollLayer
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public PayrollLayer(IPayrollLayer copySource) :
+    public PayrollLayer(PayrollLayer copySource) :
         base(copySource)
     {
         CopyTool.CopyProperties(copySource, this);
@@ -44,8 +44,7 @@ public class PayrollLayer : Model, IPayrollLayer
         Priority == compare.Priority &&
         string.Equals(RegulationName, compare.RegulationName);
 
-    /// <summary>Returns a <see cref="string" /> that represents this instance</summary>
-    /// <returns>A <see cref="string" /> that represents this instance</returns>
-    public override string ToString() =>
-        $"{Level}.{Priority} -> {RegulationName} {base.ToString()}";
+    /// <inheritdoc/>
+    public override string GetUiString() => 
+        $"{RegulationName} [{Level}.{Priority}]";
 }

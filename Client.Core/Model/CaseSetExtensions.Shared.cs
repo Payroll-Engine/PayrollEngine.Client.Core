@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using PayrollEngine.Client.Model;
 
-namespace PayrollEngine.Client;
+namespace PayrollEngine.Client.Model;
 
 /// <summary>Extension methods for the <see cref="CaseSet"/></summary>
 public static class CaseSetExtensions
@@ -33,7 +32,7 @@ public static class CaseSetExtensions
             {
                 foreach (var relatedCase in caseSet.RelatedCases)
                 {
-                    var @case = FindCase(relatedCase, caseName);
+                    var @case = relatedCase.FindCase(caseName);
                     if (@case != null)
                     {
                         return @case;
@@ -84,7 +83,7 @@ public static class CaseSetExtensions
         {
             foreach (var relatedCase in caseSet.RelatedCases)
             {
-                caseFieldSet = FindCaseField(relatedCase, caseFieldName);
+                caseFieldSet = relatedCase.FindCaseField(caseFieldName);
                 if (caseFieldSet != null)
                 {
                     return caseFieldSet;

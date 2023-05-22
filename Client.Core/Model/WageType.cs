@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
-using PayrollEngine.Serialization;
 
 namespace PayrollEngine.Client.Model;
 
@@ -33,7 +31,6 @@ public class WageType : Model, IWageType, INameObject
     public ValueType ValueType { get; set; } = ValueType.Money;
 
     /// <inheritdoc/>
-    [JsonConverter(typeof(StringNullableEnumConverter<CalendarCalculationMode?>))]
     public CalendarCalculationMode? CalendarCalculationMode { get; set; }
 
     /// <inheritdoc/>
@@ -67,7 +64,7 @@ public class WageType : Model, IWageType, INameObject
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public WageType(IWageType copySource) :
+    public WageType(WageType copySource) :
         base(copySource)
     {
         CopyTool.CopyProperties(copySource, this);
@@ -80,9 +77,8 @@ public class WageType : Model, IWageType, INameObject
     /// <inheritdoc/>
     public virtual bool EqualKey(IWageType compare) =>
         WageTypeNumber == compare.WageTypeNumber;
-
-    /// <summary>Returns a <see cref="string" /> that represents this instance</summary>
-    /// <returns>A <see cref="string" /> that represents this instance</returns>
-    public override string ToString() =>
-        $"{WageTypeNumber:##.####} {Name} {base.ToString()}";
+    
+    /// <inheritdoc/>
+    public override string GetUiString() => 
+        $"{Name} [{WageTypeNumber:##.####}]";
 }

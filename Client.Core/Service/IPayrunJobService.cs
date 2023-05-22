@@ -53,10 +53,12 @@ public interface IPayrunJobService : ICrudService<IPayrunJob, TenantServiceConte
 
     /// <summary>Get the status of a payrun job</summary>
     /// <param name="context">The service context</param>
-    /// <param name="userId">The user id</param>
     /// <param name="payrunJobId">The payrun job id</param>
     /// <param name="jobStatus">The target payrun job status</param>
+    /// <param name="userId">The user id</param>
+    /// <param name="reason">The change reason id</param>
     /// <param name="patchMode">The patch mode</param>
     /// <returns>The payrun job status</returns>
-    Task ChangeJobStatusAsync(TenantServiceContext context, int userId, int payrunJobId, PayrunJobStatus jobStatus, bool patchMode);
+    Task ChangeJobStatusAsync(TenantServiceContext context, int payrunJobId,
+        PayrunJobStatus jobStatus, int userId, string reason, bool patchMode);
 }

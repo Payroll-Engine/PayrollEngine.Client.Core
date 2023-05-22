@@ -11,7 +11,6 @@ public class WageTypeCustomResult : Model, IWageTypeCustomResult
     public int WageTypeResultId { get; set; }
 
     /// <inheritdoc/>
-    [Required]
     public decimal WageTypeNumber { get; set; }
 
     /// <inheritdoc/>
@@ -49,7 +48,7 @@ public class WageTypeCustomResult : Model, IWageTypeCustomResult
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public WageTypeCustomResult(IWageTypeCustomResult copySource) :
+    public WageTypeCustomResult(WageTypeCustomResult copySource) :
         base(copySource)
     {
         CopyTool.CopyProperties(copySource, this);
@@ -59,8 +58,12 @@ public class WageTypeCustomResult : Model, IWageTypeCustomResult
     public virtual bool Equals(IWageTypeCustomResult compare) =>
         CompareTool.EqualProperties(this, compare);
 
+    /// <inheritdoc/>
+    public override string GetUiString() => 
+        $"{WageTypeName} [{WageTypeNumber:##.####}]";
+
     /// <summary>Returns a <see cref="string" /> that represents this instance</summary>
     /// <returns>A <see cref="string" /> that represents this instance</returns>
     public override string ToString() =>
-        $"{Source}={Value} [{Start}-{End}] {base.ToString()}";
+        $"{GetUiString()} {Source}={Value} [{Start}-{End}] {base.ToString()}";
 }

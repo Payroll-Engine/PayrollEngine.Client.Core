@@ -23,7 +23,7 @@ public class ReportSet : Report, IReportSet
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public ReportSet(IReportSet copySource) :
+    public ReportSet(ReportSet copySource) :
         base(copySource)
     {
         CopyTool.CopyProperties(copySource, this);

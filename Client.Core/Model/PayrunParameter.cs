@@ -39,7 +39,7 @@ public class PayrunParameter : Model, IPayrunParameter, INameObject
 
     /// <summary>Initializes a new instance of the <see cref="PayrunParameter"/> class</summary>
     /// <param name="copySource">The copy source.</param>
-    public PayrunParameter(IPayrunParameter copySource)
+    public PayrunParameter(PayrunParameter copySource)
     {
         CopyTool.CopyProperties(copySource, this);
     }
@@ -47,13 +47,11 @@ public class PayrunParameter : Model, IPayrunParameter, INameObject
     /// <inheritdoc/>
     public virtual bool Equals(IPayrunParameter compare) =>
         CompareTool.EqualProperties(this, compare);
-    
+
     /// <inheritdoc/>
     public virtual bool EqualKey(IPayrunParameter compare) =>
         string.Equals(Name, compare?.Name);
 
-    /// <summary>Returns a <see cref="string" /> that represents this instance</summary>
-    /// <returns>A <see cref="string" /> that represents this instance</returns>
-    public override string ToString() =>
-        $"{Name} {base.ToString()}";
+    /// <inheritdoc/>
+    public override string GetUiString() => Name;
 }

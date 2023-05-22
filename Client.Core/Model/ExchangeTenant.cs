@@ -47,6 +47,7 @@ public class ExchangeTenant : Tenant, IExchangeTenant
     /// <inheritdoc/>
     public List<Payrun> Payruns { get; set; }
 
+
     /// <inheritdoc/>
     public List<PayrunJob> PayrunJobs { get; set; }
 
@@ -63,7 +64,7 @@ public class ExchangeTenant : Tenant, IExchangeTenant
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public ExchangeTenant(IExchangeTenant copySource) :
+    public ExchangeTenant(ExchangeTenant copySource) :
         base(copySource)
     {
         CopyTool.CopyProperties(copySource, this);

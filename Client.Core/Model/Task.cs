@@ -53,7 +53,7 @@ public class Task : Model, ITask, INameObject
     }
 
     /// <inheritdoc/>
-    public Task(ITask copySource) :
+    public Task(Task copySource) :
         base(copySource)
     {
         CopyTool.CopyProperties(copySource, this);
@@ -62,8 +62,7 @@ public class Task : Model, ITask, INameObject
     /// <inheritdoc/>
     public virtual bool Equals(ITask compare) =>
         CompareTool.EqualProperties(this, compare);
-
+   
     /// <inheritdoc/>
-    public override string ToString() =>
-        $"{Name}: {Scheduled} {base.ToString()}";
+    public override string GetUiString() => Name;
 }

@@ -48,6 +48,9 @@ public interface IReport : IModel, IAttributeObject, IKeyEquatable<IReport>
     /// <summary>The report end expression file</summary>
     string EndExpressionFile { get; set; }
 
+    /// <summary>The override type</summary>
+    OverrideType OverrideType { get; set; }
+
     /// <summary>The report clusters</summary>
     List<string> Clusters { get; set; }
 }

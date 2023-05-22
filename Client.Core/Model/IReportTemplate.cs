@@ -5,6 +5,9 @@ namespace PayrollEngine.Client.Model;
 /// <summary>The report template client object</summary>
 public interface IReportTemplate : IModel, IAttributeObject, IEquatable<IReportTemplate>
 {
+    /// <summary>The payroll report template name</summary>
+    public string Name { get; set; }
+
     /// <summary>The report language</summary>
     Language Language { get; set; }
 
@@ -25,4 +28,7 @@ public interface IReportTemplate : IModel, IAttributeObject, IEquatable<IReportT
 
     /// <summary>The report external resource</summary>
     string Resource { get; set; }
+
+    /// <summary>The override type</summary>
+    OverrideType OverrideType { get; set; }
 }

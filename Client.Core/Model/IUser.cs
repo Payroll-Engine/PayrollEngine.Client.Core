@@ -1,5 +1,4 @@
-﻿
-namespace PayrollEngine.Client.Model;
+﻿namespace PayrollEngine.Client.Model;
 
 /// <summary>The payroll user client object</summary>
 public interface IUser : IModel, IAttributeObject, IKeyEquatable<IUser>
@@ -21,4 +20,7 @@ public interface IUser : IModel, IAttributeObject, IKeyEquatable<IUser>
 
     /// <summary>The users language</summary>
     Language Language { get; set; }
+
+    /// <summary>Supervisor user</summary>
+    bool Supervisor { get; set; }
 }

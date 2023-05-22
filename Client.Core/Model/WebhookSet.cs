@@ -15,14 +15,14 @@ public class WebhookSet : Webhook, IWebhookSet
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public WebhookSet(IWebhook copySource) :
+    public WebhookSet(Webhook copySource) :
         base(copySource)
     {
     }
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public WebhookSet(IWebhookSet copySource) :
+    public WebhookSet(WebhookSet copySource) :
         base(copySource)
     {
         CopyTool.CopyProperties(copySource, this);

@@ -28,4 +28,7 @@ public interface IReportParameter : IModel, IAttributeObject, IKeyEquatable<IRep
 
     /// <summary>The parameter type</summary>
     ReportParameterType ParameterType { get; set; }
+
+    /// <summary>The override type</summary>
+    OverrideType OverrideType { get; set; }
 }

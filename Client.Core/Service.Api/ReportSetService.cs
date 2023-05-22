@@ -92,7 +92,11 @@ public class ReportSetService : Service, IReportSetService
         // query report set
         var uri = RegulationApiEndpoints.RegulationReportSetUrl(context.TenantId, context.RegulationId, reportId);
         // empty body in case of missing report request
-        return reportRequest == null ? await HttpClient.GetAsync<T>(uri, new()) : await HttpClient.GetAsync<T>(uri, reportRequest);
+        // use of POST instead of GET according RFC7231
+        // https://datatracker.ietf.org/doc/html/rfc7231#section-4.3.1
+        return reportRequest == null ? 
+            await HttpClient.PostAsync<T>(uri) : 
+            await HttpClient.PostAsync<ReportRequest, T>(uri, reportRequest);
     }
 
     /// <inheritdoc />

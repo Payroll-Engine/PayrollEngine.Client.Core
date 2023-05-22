@@ -282,6 +282,13 @@ public class NamespaceUpdateTool : ExchangeVisitor
     }
 
     /// <inheritdoc />
+    protected override async Task VisitPayrunParameterAsync(IExchangeTenant tenant, IPayrun payrun, IPayrunParameter parameter)
+    {
+        parameter.Name = ApplyNamespace(payrun.Name);
+        await base.VisitPayrunParameterAsync(tenant, payrun, parameter);
+    }
+
+    /// <inheritdoc />
     protected override async Task VisitPayrunJobInvocationAsync(IExchangeTenant tenant, IPayrunJobInvocation invocation)
     {
         invocation.Name = ApplyNamespace(invocation.Name);

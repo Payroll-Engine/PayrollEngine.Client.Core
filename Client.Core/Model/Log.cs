@@ -34,7 +34,7 @@ public class Log : Model, ILog
     }
 
     /// <inheritdoc/>
-    public Log(ILog copySource) :
+    public Log(Log copySource) :
         base(copySource)
     {
         CopyTool.CopyProperties(copySource, this);
@@ -43,6 +43,9 @@ public class Log : Model, ILog
     /// <inheritdoc/>
     public virtual bool Equals(ILog compare) =>
         CompareTool.EqualProperties(this, compare);
+
+    /// <inheritdoc/>
+    public override string GetUiString() => Message;
 
     /// <inheritdoc/>
     public override string ToString() =>

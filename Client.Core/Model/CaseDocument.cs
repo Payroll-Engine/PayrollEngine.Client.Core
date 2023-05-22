@@ -10,6 +10,7 @@ public class CaseDocument : Model, ICaseDocument, INameObject
     public string Name { get; set; }
 
     /// <inheritdoc/>
+    [Required]
     public string Content { get; set; }
 
     /// <inheritdoc/>
@@ -27,7 +28,7 @@ public class CaseDocument : Model, ICaseDocument, INameObject
 
     /// <summary>Initializes a new instance of the <see cref="CaseDocument"/> class</summary>
     /// <param name="copySource">The copy source.</param>
-    public CaseDocument(ICaseDocument copySource)
+    public CaseDocument(CaseDocument copySource)
     {
         CopyTool.CopyProperties(copySource, this);
     }
@@ -36,8 +37,6 @@ public class CaseDocument : Model, ICaseDocument, INameObject
     public virtual bool Equals(ICaseDocument compare) =>
         CompareTool.EqualProperties(this, compare);
 
-    /// <summary>Returns a <see cref="string" /> that represents this instance</summary>
-    /// <returns>A <see cref="string" /> that represents this instance</returns>
-    public override string ToString() =>
-        $"{Name} {base.ToString()}";
+    /// <inheritdoc/>
+    public override string GetUiString() => Name;
 }

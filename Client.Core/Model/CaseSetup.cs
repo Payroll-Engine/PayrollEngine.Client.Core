@@ -26,7 +26,7 @@ public class CaseSetup : Model, ICaseSetup
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public CaseSetup(ICaseSetup copySource) :
+    public CaseSetup(CaseSetup copySource) :
         base(copySource)
     {
         CopyTool.CopyProperties(copySource, this);
@@ -35,9 +35,8 @@ public class CaseSetup : Model, ICaseSetup
     /// <inheritdoc/>
     public virtual bool Equals(ICaseSetup compare) =>
         CompareTool.EqualProperties(this, compare);
-    
-    /// <summary>Returns a <see cref="string" /> that represents this instance</summary>
-    /// <returns>A <see cref="string" /> that represents this instance</returns>
-    public override string ToString() =>
-        $"{CaseName}.{CaseSlot} {base.ToString()}";
+
+    /// <inheritdoc/>
+    public override string GetUiString() =>
+        string.IsNullOrWhiteSpace(CaseSlot) ? CaseName : $"{CaseSlot} [{CaseSlot}]";
 }

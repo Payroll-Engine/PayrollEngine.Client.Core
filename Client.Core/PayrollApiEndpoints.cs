@@ -43,13 +43,13 @@ public static class PayrollApiEndpoints
     public static string PayrollCasesUrl(int tenantId, int payrollId) =>
         $"{PayrollUrl(tenantId, payrollId)}/cases";
 
-    /// <summary>The payroll cases sets URL</summary>
-    public static string PayrollCasesSetsUrl(int tenantId, int payrollId) =>
-        $"{PayrollCasesUrl(tenantId, payrollId)}/sets";
+    /// <summary>The payroll available cases URL</summary>
+    public static string PayrollCasesAvailableUrl(int tenantId, int payrollId) =>
+        $"{PayrollCasesUrl(tenantId, payrollId)}/available";
 
-    /// <summary>The payroll cases set URL</summary>
-    public static string PayrollCasesSetUrl(int tenantId, int payrollId, string caseName) =>
-        $"{PayrollCasesSetsUrl(tenantId, payrollId)}/{caseName}";
+    /// <summary>The payroll case build URL</summary>
+    public static string PayrollCaseBuildUrl(int tenantId, int payrollId, string caseName) =>
+        $"{PayrollCasesUrl(tenantId, payrollId)}/build/{caseName}";
 
     /// <summary>The payroll case change values URL</summary>
     public static string PayrollCaseChangeValuesUrl(int tenantId, int payrollId) =>
@@ -87,9 +87,9 @@ public static class PayrollApiEndpoints
     public static string PayrollLookupsUrl(int tenantId, int payrollId) =>
         $"{PayrollUrl(tenantId, payrollId)}/lookups";
 
-    /// <summary>The payroll lookup URL</summary>
-    public static string PayrollLookupUrl(int tenantId, int payrollId, string lookupName) =>
-        $"{PayrollLookupsUrl(tenantId, payrollId)}/{lookupName}";
+    /// <summary>The payroll lookups data URL</summary>
+    public static string PayrollLookupsDataUrl(int tenantId, int payrollId) =>
+        $"{PayrollLookupsUrl(tenantId, payrollId)}/data";
 
     /// <summary>The payroll lookup values URL</summary>
     public static string PayrollLookupValuesUrl(int tenantId, int payrollId) =>
@@ -103,9 +103,13 @@ public static class PayrollApiEndpoints
     public static string PayrollReportsUrl(int tenantId, int payrollId) =>
         $"{PayrollUrl(tenantId, payrollId)}/reports";
 
-    /// <summary>The payroll report template URL</summary>
-    public static string PayrollReportTemplateUrl(int tenantId, int payrollId) =>
-        $"{PayrollReportsUrl(tenantId, payrollId)}/template";
+    /// <summary>The payroll report parameters URL</summary>
+    public static string PayrollReportParametersUrl(int tenantId, int payrollId) =>
+        $"{PayrollReportsUrl(tenantId, payrollId)}/parameters";
+
+    /// <summary>The payroll report templates URL</summary>
+    public static string PayrollReportTemplatesUrl(int tenantId, int payrollId) =>
+        $"{PayrollReportsUrl(tenantId, payrollId)}/templates";
 
     /// <summary>The payroll scripts URL</summary>
     public static string PayrollScriptsUrl(int tenantId, int payrollId) =>

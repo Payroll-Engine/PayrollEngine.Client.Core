@@ -10,7 +10,7 @@ public static class ExceptionExtensions
     /// <summary>Get the exception message from an API error</summary>
     /// <param name="exception">The exception</param>
     /// <returns>The payroll API error, null on others errors</returns>
-    public static string GetApiMessage(this Exception exception)
+    public static string GetApiErrorMessage(this Exception exception)
     {
         if (exception == null)
         {
@@ -33,8 +33,17 @@ public static class ExceptionExtensions
             return buffer.ToString().Trim('\r', '\n', '"');
         }
 
-        // extract message in case of exception stacks
+        // api exception
+        var apiException = GetApiException(exception);
+        if (apiException != null)
+        {
+            return apiException.Message;
+        }
+
+        // maybe a plain exception message
+        // use first line only, remove the stack trace lines
         var message = exception.GetBaseMessage();
+        message = message.Replace("\\r\\n", "\n");
         var lines = message.Split(new[] { '\n' });
         if (lines.Length > 1)
         {
@@ -55,10 +64,11 @@ public static class ExceptionExtensions
             return null;
         }
 
-        var message = exception.GetBaseMessage();
+        var message = GetExceptionMessage(exception);
 
-        // api validation error
-        if (!message.StartsWith('{') || !message.EndsWith('}'))
+        // test for api error json
+        if (!message.StartsWith('{') || !message.EndsWith('}') ||
+            !message.Contains(nameof(ApiError.Status), StringComparison.InvariantCultureIgnoreCase))
         {
             return null;
         }
@@ -77,4 +87,45 @@ public static class ExceptionExtensions
         }
         return null;
     }
+
+    /// <summary>Get the exception message from an API exception</summary>
+    /// <param name="exception">The exception</param>
+    /// <returns>The payroll API error, null on others errors</returns>
+    public static ApiException GetApiException(Exception exception)
+    {
+        if (exception == null)
+        {
+            return null;
+        }
+
+        var message = GetExceptionMessage(exception);
+
+        // test for api exception json
+        if (!message.StartsWith('{') || !message.EndsWith('}') ||
+            !message.Contains(nameof(ApiException.StatusCode), StringComparison.InvariantCultureIgnoreCase))
+        {
+            return null;
+        }
+
+        try
+        {
+            var apiException = JsonSerializer.Deserialize<ApiException>(message);
+            if (apiException.StatusCode != 0)
+            {
+                return apiException;
+            }
+        }
+        catch
+        {
+            return null;
+        }
+        return null;
+    }
+
+    private static string GetExceptionMessage(Exception exception) =>
+        exception.GetBaseMessage().Trim('"')
+            .Replace("\\u0027", "'")
+            .Replace("\\r", string.Empty)
+            .Replace("\\n", string.Empty)
+            .Replace("\\", string.Empty);
 }

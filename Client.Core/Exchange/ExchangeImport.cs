@@ -26,9 +26,9 @@ public sealed class ExchangeImport : ImportExchangeVisitor
         base(httpClient, exchange, scriptParser, LoadVisitorOptions.All)
     {
         var hasTenants = exchange.Tenants == null || exchange.Tenants.Any();
-        var hasRegulationPermissions =
-            exchange.RegulationPermissions == null || exchange.RegulationPermissions.Any();
-        if (!hasTenants && !hasRegulationPermissions)
+        var hasRegulationShares =
+            exchange.RegulationShares == null || exchange.RegulationShares.Any();
+        if (!hasTenants && !hasRegulationShares)
         {
             throw new PayrollException("Missing import data");
         }
@@ -44,45 +44,45 @@ public sealed class ExchangeImport : ImportExchangeVisitor
         await HttpClient.UpsertObjectAsync(url, newObject, existingObject, Exchange.CreatedObjectDate);
 
     /// <summary><inheritdoc/></summary>
-    protected override async Task VisitRegulationPermissionAsync(IRegulationPermission permission)
+    protected override async Task VisitRegulationShareAsync(IRegulationShare share)
     {
-        await base.VisitRegulationPermissionAsync(permission);
+        await base.VisitRegulationShareAsync(share);
 
-        // tenant
-        if (permission.TenantId == 0 && !string.IsNullOrWhiteSpace(permission.TenantIdentifier))
+        // provider tenant
+        if (share.ProviderTenantId == 0 && !string.IsNullOrWhiteSpace(share.ProviderTenantIdentifier))
         {
-            var tenant = await GetTenantAsync(permission.TenantIdentifier);
-            permission.TenantId = tenant.Id;
+            var providerTenant = await GetTenantAsync(share.ProviderTenantIdentifier);
+            share.ProviderTenantId = providerTenant.Id;
         }
-        // regulation
-        if (permission.RegulationId == 0 && !string.IsNullOrWhiteSpace(permission.RegulationName))
+        // provider regulation
+        if (share.ProviderRegulationId == 0 && !string.IsNullOrWhiteSpace(share.ProviderRegulationName))
         {
-            var regulation = await GetRegulationAsync(permission.TenantId, permission.RegulationName);
-            permission.RegulationId = regulation.Id;
+            var providerRegulation = await GetRegulationAsync(share.ProviderTenantId, share.ProviderRegulationName);
+            share.ProviderRegulationId = providerRegulation.Id;
         }
-        // permission tenant
-        if (permission.PermissionTenantId == 0 && !string.IsNullOrWhiteSpace(permission.PermissionTenantIdentifier))
+        // consumer tenant
+        if (share.ConsumerTenantId == 0 && !string.IsNullOrWhiteSpace(share.ConsumerTenantIdentifier))
         {
-            var permissionTenant = await GetTenantAsync(permission.PermissionTenantIdentifier);
-            permission.PermissionTenantId = permissionTenant.Id;
+            var consumerTenant = await GetTenantAsync(share.ConsumerTenantIdentifier);
+            share.ConsumerTenantId = consumerTenant.Id;
         }
-        // permission division
-        if (permission.PermissionDivisionId == 0 && !string.IsNullOrWhiteSpace(permission.PermissionDivisionName))
+        // consumer division
+        if (share.ConsumerDivisionId == 0 && !string.IsNullOrWhiteSpace(share.ConsumerDivisionName))
         {
-            var permissionTenant = await GetDivisionAsync(permission.PermissionTenantId, permission.PermissionDivisionName);
-            permission.PermissionDivisionId = permissionTenant.Id;
+            var consumerDivision = await GetDivisionAsync(share.ConsumerTenantId, share.ConsumerDivisionName);
+            share.ConsumerDivisionId = consumerDivision.Id;
         }
 
         // get existing tenants
-        var permissions = (await new SharedRegulationService(HttpClient).QueryAsync<RegulationPermission>(new())).ToList();
-        var targetPermission = permissions.FirstOrDefault(x =>
-            permission.TenantId == x.TenantId &&
-            permission.RegulationId == x.RegulationId &&
-            permission.PermissionTenantId == x.PermissionTenantId &&
-            permission.PermissionDivisionId == x.PermissionDivisionId);
+        var shares = (await new RegulationShareService(HttpClient).QueryAsync<RegulationShare>(new())).ToList();
+        var targetShare = shares.FirstOrDefault(x =>
+            share.ProviderTenantId == x.ProviderTenantId &&
+            share.ProviderRegulationId == x.ProviderRegulationId &&
+            share.ConsumerTenantId == x.ConsumerTenantId &&
+            share.ConsumerDivisionId == x.ConsumerDivisionId);
 
         // upsert tenant
-        await HttpClient.UpsertObjectAsync(ApiEndpoints.SharedRegulationPermissionsUrl(), permission, targetPermission,
+        await HttpClient.UpsertObjectAsync(ApiEndpoints.SharesRegulationsUrl(), share, targetShare,
             Exchange.CreatedObjectDate);
     }
 
@@ -459,7 +459,7 @@ public sealed class ExchangeImport : ImportExchangeVisitor
         if (!caseChange.CancellationId.HasValue && caseChange.CancellationCreated.HasValue)
         {
             // find the cancellation case by case name and created date
-            var cancellationCase = await new PayrollService(HttpClient).BuildCaseSetAsync<CaseSet>(payrollContext,
+            var cancellationCase = await new PayrollService(HttpClient).BuildCaseAsync<CaseSet>(payrollContext,
                 caseChange.Case.CaseName, caseChange.UserId, caseChange.EmployeeId);
             if (cancellationCase == null)
             {
@@ -520,8 +520,19 @@ public sealed class ExchangeImport : ImportExchangeVisitor
         await UpsertObjectAsync(PayrunApiEndpoints.PayrunsUrl(tenant.Id), payrun, targetPayrun);
     }
 
-    private async Task ChangeJobStatusAsync(int tenantId, int userId, int payrunJobId, PayrunJobStatus jobStatus, bool patchMode) =>
-        await new PayrunJobService(HttpClient).ChangeJobStatusAsync(new(tenantId), userId, payrunJobId, jobStatus, patchMode);
+    /// <summary><inheritdoc/></summary>
+    protected override async Task SetupPayrunParameterAsync(IExchangeTenant tenant, IPayrun payrun,
+        IPayrunParameter parameter, IPayrunParameter targetParameter)
+    {
+        await base.SetupPayrunParameterAsync(tenant, payrun, parameter, targetParameter);
+
+        // update payrun parameter
+        await UpsertObjectAsync(PayrunApiEndpoints.PayrunParametersUrl(tenant.Id, payrun.Id), parameter, targetParameter);
+    }
+
+    private async Task ChangeJobStatusAsync(int tenantId, int payrunJobId,
+        PayrunJobStatus jobStatus, int userId, string reason, bool patchMode) =>
+        await new PayrunJobService(HttpClient).ChangeJobStatusAsync(new(tenantId), payrunJobId, jobStatus, userId, reason, patchMode);
 
     /// <summary><inheritdoc/></summary>
     protected override async Task VisitPayrunJobInvocationAsync(IExchangeTenant tenant, IPayrunJobInvocation invocation)
@@ -568,7 +579,8 @@ public sealed class ExchangeImport : ImportExchangeVisitor
         if (payrunJob.JobStatus != PayrunJobStatus.Abort &&
             invocation.JobStatus != PayrunJobStatus.Draft)
         {
-            await ChangeJobStatusAsync(tenant.Id, user.Id, payrunJobId, invocation.JobStatus, true);
+            await ChangeJobStatusAsync(tenant.Id, payrunJobId, invocation.JobStatus,
+                user.Id, invocation.Reason, true);
         }
     }
 }

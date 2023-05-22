@@ -6,9 +6,6 @@ namespace PayrollEngine.Client.Model;
 /// <summary>The payroll collector client object</summary>
 public class Collector : Model, ICollector, INameObject
 {
-    /// <inheritdoc/>
-    public CollectType CollectType { get; set; }
-
     /// <summary>The collector name</summary>
     [Required]
     [StringLength(128)]
@@ -18,10 +15,14 @@ public class Collector : Model, ICollector, INameObject
     public Dictionary<string, string> NameLocalizations { get; set; }
 
     /// <inheritdoc/>
+    [Required]
+    public CollectType CollectType { get; set; }
+
+    /// <inheritdoc/>
     public OverrideType OverrideType { get; set; }
 
     /// <inheritdoc/>
-    public ValueType ValueType { get; set; } = ValueType.Money;
+    public ValueType ValueType { get; set; } = ValueType.Decimal;
 
     /// <inheritdoc/>
     public List<string> CollectorGroups { get; set; }
@@ -66,7 +67,7 @@ public class Collector : Model, ICollector, INameObject
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public Collector(ICollector copySource) :
+    public Collector(Collector copySource) :
         base(copySource)
     {
         CopyTool.CopyProperties(copySource, this);
@@ -79,9 +80,7 @@ public class Collector : Model, ICollector, INameObject
     /// <inheritdoc/>
     public virtual bool EqualKey(ICollector compare) =>
         string.Equals(Name, compare?.Name);
-
-    /// <summary>Returns a <see cref="string" /> that represents this instance</summary>
-    /// <returns>A <see cref="string" /> that represents this instance</returns>
-    public override string ToString() =>
-        $"{Name} {base.ToString()}";
+        
+    /// <inheritdoc/>
+    public override string GetUiString() => Name;
 }

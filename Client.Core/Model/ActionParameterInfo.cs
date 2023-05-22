@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace PayrollEngine.Client.Model;
 
@@ -7,6 +8,7 @@ namespace PayrollEngine.Client.Model;
 public class ActionParameterInfo : IEquatable<ActionParameterInfo>
 {
     /// <summary>The action parameter name</summary>
+    [Required]
     public string Name { get; set; }
 
     /// <summary>The action parameter description</summary>

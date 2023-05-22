@@ -1,5 +1,4 @@
-﻿
-namespace PayrollEngine.Client.Model;
+﻿namespace PayrollEngine.Client.Model;
 
 /// <summary>The Webhook client object</summary>
 public interface IWebhook : IModel, IAttributeObject, IKeyEquatable<IWebhook>

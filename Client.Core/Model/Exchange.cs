@@ -13,7 +13,7 @@ public class Exchange : IExchange
     public List<ExchangeTenant> Tenants { get; set; }
 
     /// <inheritdoc/>
-    public List<RegulationPermission> RegulationPermissions { get; set; }
+    public List<RegulationShare> RegulationShares { get; set; }
 
     /// <inheritdoc/>
     public DateTime? CreatedObjectDate { get; set; }
@@ -25,7 +25,7 @@ public class Exchange : IExchange
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public Exchange(IExchange copySource)
+    public Exchange(Exchange copySource)
     {
         CopyTool.CopyProperties(copySource, this);
     }
@@ -58,11 +58,11 @@ public class Exchange : IExchange
             }
         }
 
-        // regulation permissions
-        if (source.RegulationPermissions != null)
+        // regulation shares
+        if (source.RegulationShares != null)
         {
-            RegulationPermissions ??= new();
-            RegulationPermissions.AddRange(source.RegulationPermissions);
+            RegulationShares ??= new();
+            RegulationShares.AddRange(source.RegulationShares);
         }
 
         // created object date

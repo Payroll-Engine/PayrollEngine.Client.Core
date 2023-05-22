@@ -38,8 +38,8 @@ public interface ICaseField : IModel, IAttributeObject, IKeyEquatable<ICaseField
     /// <summary>The case value creation mode</summary>
     CaseValueCreationMode ValueCreationMode { get; set; }
 
-    /// <summary>Optional case field</summary>
-    bool Optional { get; set; }
+    /// <summary>Mandatory case field value</summary>
+    bool ValueMandatory { get; set; }
 
     /// <summary>The case field order</summary>
     int Order { get; set; }

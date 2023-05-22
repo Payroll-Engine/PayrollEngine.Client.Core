@@ -19,8 +19,8 @@ public abstract class ExchangeVisitorBase
         Exchange = exchange ?? throw new ArgumentNullException(nameof(exchange));
 
         var hasTenants = exchange.Tenants == null || exchange.Tenants.Any();
-        var hasRegulationPermissions = exchange.RegulationPermissions == null || exchange.RegulationPermissions.Any();
-        if (!hasTenants && !hasRegulationPermissions)
+        var hasRegulationShares = exchange.RegulationShares == null || exchange.RegulationShares.Any();
+        if (!hasTenants && !hasRegulationShares)
         {
             throw new PayrollException("Missing exchange data");
         }
@@ -30,7 +30,7 @@ public abstract class ExchangeVisitorBase
     protected virtual async Task VisitAsync()
     {
         await VisitExchangeTenantsAsync();
-        await VisitRegulationPermissionsAsync();
+        await VisitRegulationSharesAsync();
 
         // payrun jobs and payroll results
         if (Exchange.Tenants != null && Exchange.Tenants.Any())
@@ -73,23 +73,23 @@ public abstract class ExchangeVisitorBase
 
     #endregion
 
-    #region Regulation Permission
+    #region Regulation Share
 
-    /// <summary>Visit the regulation permissions</summary>
-    protected virtual async Task VisitRegulationPermissionsAsync()
+    /// <summary>Visit the regulation shares</summary>
+    protected virtual async Task VisitRegulationSharesAsync()
     {
-        if (Exchange.RegulationPermissions != null && Exchange.RegulationPermissions.Any())
+        if (Exchange.RegulationShares != null && Exchange.RegulationShares.Any())
         {
-            foreach (var permission in Exchange.RegulationPermissions)
+            foreach (var share in Exchange.RegulationShares)
             {
-                await VisitRegulationPermissionAsync(permission);
+                await VisitRegulationShareAsync(share);
             }
         }
     }
 
-    /// <summary>Visit the regulation permission</summary>
-    /// <param name="permission">The regulation permission</param>
-    protected virtual async Task VisitRegulationPermissionAsync(IRegulationPermission permission)
+    /// <summary>Visit the regulation share</summary>
+    /// <param name="share">The regulation share</param>
+    protected virtual async Task VisitRegulationShareAsync(IRegulationShare share)
     {
         await Task.Run(() => { });
     }
@@ -711,6 +711,31 @@ public abstract class ExchangeVisitorBase
     /// <param name="tenant">The tenant</param>
     /// <param name="payrun">The payrun</param>
     protected virtual async Task VisitPayrunAsync(IExchangeTenant tenant, IPayrun payrun)
+    {
+        await VisitPayrunParametersAsync(tenant, payrun);
+    }
+
+    /// <summary>Visit the payrun parameter</summary>
+    /// <param name="tenant">The tenant</param>
+    /// <param name="payrun">The payrun</param>
+    protected virtual async Task VisitPayrunParametersAsync(IExchangeTenant tenant, IPayrun payrun)
+    {
+        if (payrun.PayrunParameters != null)
+        {
+            foreach (var parameter in payrun.PayrunParameters)
+            {
+                await VisitPayrunParameterAsync(tenant, payrun, parameter);
+            }
+        }
+        await Task.Run(() => { });
+    }
+
+    /// <summary>Visit the payrun parameter</summary>
+    /// <param name="tenant">The tenant</param>
+    /// <param name="payrun">The payrun</param>
+    /// <param name="parameter">The payrun parameter</param>
+    protected virtual async Task VisitPayrunParameterAsync(IExchangeTenant tenant, IPayrun payrun,
+        IPayrunParameter parameter)
     {
         await Task.Run(() => { });
     }

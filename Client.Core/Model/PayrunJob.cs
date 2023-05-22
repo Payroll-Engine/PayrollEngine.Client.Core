@@ -8,6 +8,8 @@ namespace PayrollEngine.Client.Model;
 public class PayrunJob : Model, IPayrunJob
 {
     /// <inheritdoc/>
+    [Required]
+    [StringLength(128)]
     public string Name { get; set; }
 
     /// <inheritdoc/>
@@ -31,7 +33,16 @@ public class PayrunJob : Model, IPayrunJob
     public int DivisionId { get; set; }
 
     /// <inheritdoc/>
-    public int UserId { get; set; }
+    public int CreatedUserId { get; set; }
+
+    /// <inheritdoc/>
+    public int? ReleasedUserId { get; set; }
+
+    /// <inheritdoc/>
+    public int? ProcessedUserId { get; set; }
+
+    /// <inheritdoc/>
+    public int? FinishedUserId { get; set; }
 
     /// <inheritdoc/>
     [Required]
@@ -44,6 +55,7 @@ public class PayrunJob : Model, IPayrunJob
     public int? ParentJobId { get; set; }
 
     /// <inheritdoc/>
+    [StringLength(128)]
     public string Forecast { get; set; }
 
     /// <inheritdoc/>
@@ -59,15 +71,18 @@ public class PayrunJob : Model, IPayrunJob
     public string Culture { get; set; }
 
     /// <inheritdoc/>
+    [Required]
     public string CycleName { get; set; }
 
     /// <inheritdoc/>
+    [Required]
     public DateTime CycleStart { get; set; }
 
     /// <inheritdoc/>
     public DateTime CycleEnd { get; set; }
 
     /// <inheritdoc/>
+    [Required]
     public string PeriodName { get; set; }
 
     /// <inheritdoc/>
@@ -75,14 +90,34 @@ public class PayrunJob : Model, IPayrunJob
     public DateTime PeriodStart { get; set; }
 
     /// <inheritdoc/>
+    [Required]
     public DateTime PeriodEnd { get; set; }
 
     /// <inheritdoc/>
+    [Required]
     public DateTime? EvaluationDate { get; set; }
+
+    /// <summary>The job release date (immutable)</summary>
+    public DateTime? Released { get; set; }
+
+    /// <inheritdoc/>
+    public DateTime? Processed { get; set; }
+
+    /// <inheritdoc/>
+    public DateTime? Finished { get; set; }
 
     /// <inheritdoc/>
     [Required]
-    public string Reason { get; set; }
+    public string CreatedReason { get; set; }
+
+    /// <inheritdoc/>
+    public string ReleasedReason { get; set; }
+
+    /// <inheritdoc/>
+    public string ProcessedReason { get; set; }
+
+    /// <inheritdoc/>
+    public string FinishedReason { get; set; }
 
     /// <inheritdoc/>
     public int TotalEmployeeCount { get; set; }
@@ -115,7 +150,7 @@ public class PayrunJob : Model, IPayrunJob
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public PayrunJob(IPayrunJob copySource) :
+    public PayrunJob(PayrunJob copySource) :
         base(copySource)
     {
         CopyTool.CopyProperties(copySource, this);
@@ -131,6 +166,9 @@ public class PayrunJob : Model, IPayrunJob
     /// <returns>Date period from the job start until the job end</returns>
     public DatePeriod GetEvaluationPeriod() =>
         new(PeriodStart, PeriodEnd);
+
+    /// <inheritdoc/>
+    public override string GetUiString() => Name;
 
     /// <summary>Returns a <see cref="string" /> that represents this instance</summary>
     /// <returns>A <see cref="string" /> that represents this instance</returns>

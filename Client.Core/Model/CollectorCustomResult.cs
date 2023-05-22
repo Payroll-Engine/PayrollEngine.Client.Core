@@ -46,7 +46,7 @@ public class CollectorCustomResult : Model, ICollectorCustomResult
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public CollectorCustomResult(ICollectorCustomResult copySource) :
+    public CollectorCustomResult(CollectorCustomResult copySource) :
         base(copySource)
     {
         CopyTool.CopyProperties(copySource, this);
@@ -56,8 +56,11 @@ public class CollectorCustomResult : Model, ICollectorCustomResult
     public virtual bool Equals(ICollectorCustomResult compare) =>
         CompareTool.EqualProperties(this, compare);
 
+    /// <inheritdoc/>
+    public override string GetUiString() => CollectorName;
+
     /// <summary>Returns a <see cref="string" /> that represents this instance</summary>
     /// <returns>A <see cref="string" /> that represents this instance</returns>
     public override string ToString() =>
-        $"{Source}={Value} [{Start}-{End}] {base.ToString()}";
+        $"{GetUiString()} {Source}={Value} [{Start}-{End}] {base.ToString()}";
 }

@@ -33,14 +33,14 @@ public class RegulationSet : Regulation, IRegulationSet
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public RegulationSet(IRegulation copySource) :
+    public RegulationSet(Regulation copySource) :
         base(copySource)
     {
     }
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public RegulationSet(IRegulationSet copySource) :
+    public RegulationSet(RegulationSet copySource) :
         base(copySource)
     {
         CopyTool.CopyProperties(copySource, this);

@@ -16,4 +16,7 @@ public interface ILookupValue : IModel, IKeyEquatable<ILookupValue>
 
     /// <summary>The lookup range value</summary>
     decimal? RangeValue { get; set; }
+
+    /// <summary>The override type</summary>
+    OverrideType OverrideType { get; set; }
 }

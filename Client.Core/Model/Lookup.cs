@@ -27,6 +27,9 @@ public class Lookup : Model, ILookup, INameObject
     /// <inheritdoc/>
     public decimal? RangeSize { get; set; }
 
+    /// <inheritdoc/>
+    public Dictionary<string, object> Attributes { get; set; }
+
     /// <summary>Initializes a new instance</summary>
     public Lookup()
     {
@@ -34,7 +37,7 @@ public class Lookup : Model, ILookup, INameObject
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public Lookup(ILookup copySource) :
+    public Lookup(Lookup copySource) :
         base(copySource)
     {
         CopyTool.CopyProperties(copySource, this);
@@ -43,13 +46,11 @@ public class Lookup : Model, ILookup, INameObject
     /// <inheritdoc/>
     public virtual bool Equals(ILookup compare) =>
         CompareTool.EqualProperties(this, compare);
-        
+
     /// <inheritdoc/>
     public virtual bool EqualKey(ILookup compare) =>
         string.Equals(Name, compare?.Name);
 
-    /// <summary>Returns a <see cref="string" /> that represents this instance</summary>
-    /// <returns>A <see cref="string" /> that represents this instance</returns>
-    public override string ToString() =>
-        $"{Name} {base.ToString()}";
+    /// <inheritdoc/>
+    public override string GetUiString() => Name;
 }

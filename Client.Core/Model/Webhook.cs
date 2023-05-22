@@ -30,7 +30,7 @@ public class Webhook : Model, IWebhook, INameObject
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public Webhook(IWebhook copySource) :
+    public Webhook(Webhook copySource) :
         base(copySource)
     {
         CopyTool.CopyProperties(copySource, this);
@@ -44,8 +44,6 @@ public class Webhook : Model, IWebhook, INameObject
     public virtual bool EqualKey(IWebhook compare) =>
         string.Equals(Name, compare?.Name);
 
-    /// <summary>Returns a <see cref="string" /> that represents this instance</summary>
-    /// <returns>A <see cref="string" /> that represents this instance</returns>
-    public override string ToString() =>
-        $"{Name} {base.ToString()}";
+    /// <inheritdoc/>
+    public override string GetUiString() => Name;
 }

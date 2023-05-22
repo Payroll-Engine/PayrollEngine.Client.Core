@@ -42,14 +42,14 @@ public class CaseFieldSet : CaseField, ICaseFieldSet
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public CaseFieldSet(ICaseFieldSet copySource) :
+    public CaseFieldSet(CaseFieldSet copySource) :
         base(copySource)
     {
         CopyTool.CopyProperties(copySource, this);
     }
 
     /// <inheritdoc/>
-    public CaseFieldSet(ICaseField caseField) :
+    public CaseFieldSet(CaseField caseField) :
         base(caseField)
     {
     }

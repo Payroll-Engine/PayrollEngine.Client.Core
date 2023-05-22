@@ -34,7 +34,7 @@ public interface IPayrollService : ICrudService<IPayroll, TenantServiceContext, 
 
     #region Cases
 
-    /// <summary>Get all active and available case sets</summary>
+    /// <summary>Get all active and available cases</summary>
     /// <param name="context">The service context</param>
     /// <param name="userId">The user id</param>
     /// <param name="caseType">The case type</param>
@@ -45,10 +45,10 @@ public interface IPayrollService : ICrudService<IPayroll, TenantServiceContext, 
     /// <param name="language">The language</param>
     /// <param name="regulationDate">The regulation date (default: UTC now)</param>
     /// <param name="evaluationDate">Creation date filter (default: UTC now)</param>
-    /// <returns>Derived case values</returns>
-    Task<List<TCaseSet>> GetAvailableCaseSetsAsync<TCaseSet>(PayrollServiceContext context, int userId, CaseType caseType,
+    /// <returns>Available derived cases</returns>
+    Task<List<TCase>> GetAvailableCasesAsync<TCase>(PayrollServiceContext context, int userId, CaseType caseType,
         IEnumerable<string> caseNames = null, int? employeeId = null, string caseSlot = null, string clusterSetName = null,
-        Language? language = null, DateTime? regulationDate = null, DateTime? evaluationDate = null) where TCaseSet : class, ICaseSet;
+        Language? language = null, DateTime? regulationDate = null, DateTime? evaluationDate = null) where TCase : class, ICase;
 
     /// <summary>Build case with fields and related cases</summary>
     /// <param name="context">The service context</param>
@@ -61,7 +61,7 @@ public interface IPayrollService : ICrudService<IPayroll, TenantServiceContext, 
     /// <param name="evaluationDate">Creation date filter (default: UTC now)</param>
     /// <param name="caseChangeSetup">The case change setup (optional)</param>
     /// <returns>The created case set</returns>
-    Task<TCaseSet> BuildCaseSetAsync<TCaseSet>(PayrollServiceContext context, string caseName, int userId,
+    Task<TCaseSet> BuildCaseAsync<TCaseSet>(PayrollServiceContext context, string caseName, int userId,
         int? employeeId = null, string clusterSetName = null, Language? language = null,
         DateTime? regulationDate = null, DateTime? evaluationDate = null, ICaseChangeSetup caseChangeSetup = null)
         where TCaseSet : class, ICaseSet;
@@ -103,7 +103,7 @@ public interface IPayrollService : ICrudService<IPayroll, TenantServiceContext, 
     /// <param name="regulationDate">The regulation date (default: UTC now)</param>
     /// <param name="evaluationDate">Creation date filter (default: UTC now)</param>
     /// <returns>Case period values</returns>
-    Task<List<CaseFieldValue>> GetPayrollAvailableCaseFieldValuesAsync(PayrollServiceContext context, int userId,
+    Task<List<CaseFieldValue>> GetAvailableCaseFieldValuesAsync(PayrollServiceContext context, int userId,
         IEnumerable<string> caseFieldNames, DateTime startDate, DateTime endDate,
         int? employeeId = null, DateTime? regulationDate = null, DateTime? evaluationDate = null);
 
@@ -188,16 +188,27 @@ public interface IPayrollService : ICrudService<IPayroll, TenantServiceContext, 
         OverrideType? overrideType = null, DateTime? regulationDate = null, DateTime? evaluationDate = null)
         where TLookup : class, ILookup;
 
-    /// <summary>Get payroll lookup values</summary>
+    /// <summary>Get payroll lookup data</summary>
     /// <param name="context">The service context</param>
     /// <param name="lookupNames">The lookup names</param>
     /// <param name="regulationDate">The regulation date (default: UTC now)</param>
     /// <param name="evaluationDate">The evaluation date (default: UTC now)</param>
     /// <param name="language">The content language</param>
     /// <returns>The lookup values</returns>
-    Task<List<TLookupData>> GetLookupValuesAsync<TLookupData>(PayrollServiceContext context, IEnumerable<string> lookupNames,
+    Task<List<TLookupData>> GetLookupDataAsync<TLookupData>(PayrollServiceContext context, IEnumerable<string> lookupNames,
         DateTime? regulationDate = null, DateTime? evaluationDate = null, Language? language = null)
         where TLookupData : class, ILookupData;
+
+    /// <summary>Get payroll lookup values</summary>
+    /// <param name="context">The service context</param>
+    /// <param name="lookupNames">The lookup names filter (default is all)</param>
+    /// <param name="lookupKeys">The lookup-value key filter (default: active)</param>
+    /// <param name="regulationDate">The regulation date (default: UTC now)</param>
+    /// <param name="evaluationDate">Creation date filter (default: UTC now)</param>
+    /// <returns>Payroll lookup values</returns>
+    Task<List<TLookupValue>> GetLookupValuesAsync<TLookupValue>(PayrollServiceContext context, IEnumerable<string> lookupNames = null,
+        IEnumerable<string> lookupKeys = null, DateTime? regulationDate = null, DateTime? evaluationDate = null)
+        where TLookupValue : class, ILookupValue;
 
     /// <summary>Get payroll lookup value data</summary>
     /// <param name="context">The service context</param>
@@ -220,18 +231,28 @@ public interface IPayrollService : ICrudService<IPayroll, TenantServiceContext, 
     /// <returns>Payroll lookups</returns>
     Task<List<TReport>> GetReportsAsync<TReport>(PayrollServiceContext context, IEnumerable<string> reportNames = null,
         OverrideType? overrideType = null, DateTime? regulationDate = null, DateTime? evaluationDate = null)
-        where TReport : class, IReportSet;
+        where TReport : class, IReport;
 
-    /// <summary>Get payroll report template</summary>
+    /// <summary>Get payroll report parameters</summary>
+    /// <param name="context">The service context</param>
+    /// <param name="reportNames">The report names</param>
+    /// <param name="regulationDate">The regulation date (default: UTC now)</param>
+    /// <param name="evaluationDate">The evaluation date (default: UTC now)</param>
+    /// <returns>Payroll report parameters</returns>
+    Task<List<TReportParameter>> GetReportParametersAsync<TReportParameter>(PayrollServiceContext context,
+        IEnumerable<string> reportNames = null, DateTime? regulationDate = null, DateTime? evaluationDate = null)
+        where TReportParameter : class, IReportParameter;
+
+    /// <summary>Get payroll report templates</summary>
     /// <param name="context">The service context</param>
     /// <param name="reportNames">The report names</param>
     /// <param name="language">The report language</param>
     /// <param name="regulationDate">The regulation date (default: UTC now)</param>
     /// <param name="evaluationDate">The evaluation date (default: UTC now)</param>
-    /// <returns>Payroll reports</returns>
-    Task<TReportTemplate> GetReportTemplateAsync<TReportTemplate>(PayrollServiceContext context, IEnumerable<string> reportNames,
-        Language language, DateTime? regulationDate = null, DateTime? evaluationDate = null)
-        where TReportTemplate : class, IReportTemplate;
+    /// <returns>Payroll report templates</returns>
+    Task<List<TReportTemplate>> GetReportTemplatesAsync<TReportTemplate>(PayrollServiceContext context,
+        IEnumerable<string> reportNames = null, Language? language = null, DateTime? regulationDate = null,
+        DateTime? evaluationDate = null) where TReportTemplate : class, IReportTemplate;
 
     /// <summary>Get payroll scripts</summary>
     /// <param name="context">The service context</param>
@@ -253,7 +274,7 @@ public interface IPayrollService : ICrudService<IPayroll, TenantServiceContext, 
     /// <param name="evaluationDate">Creation date filter (default: UTC now)</param>
     /// <returns>Payroll actions</returns>
     Task<List<TAction>> GetActionsAsync<TAction>(PayrollServiceContext context, IEnumerable<string> scriptNames = null,
-        OverrideType? overrideType = null, FunctionType functionType = FunctionType.All, DateTime? regulationDate = null,
+        OverrideType? overrideType = null, FunctionType? functionType = null, DateTime? regulationDate = null,
         DateTime? evaluationDate = null)
         where TAction : ActionInfo;
 

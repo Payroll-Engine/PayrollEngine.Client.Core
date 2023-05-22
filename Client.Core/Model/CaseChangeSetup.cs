@@ -51,7 +51,7 @@ public class CaseChangeSetup : Model, ICaseChangeSetup
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public CaseChangeSetup(ICaseChangeSetup copySource) :
+    public CaseChangeSetup(CaseChangeSetup copySource) :
         base(copySource)
     {
         CopyTool.CopyProperties(copySource, this);
@@ -60,4 +60,7 @@ public class CaseChangeSetup : Model, ICaseChangeSetup
     /// <inheritdoc/>
     public virtual bool Equals(ICaseChangeSetup compare) =>
         CompareTool.EqualProperties(this, compare);
+
+    /// <inheritdoc/>
+    public override string GetUiString() => Case?.CaseName;
 }

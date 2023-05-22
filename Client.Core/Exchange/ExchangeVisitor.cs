@@ -37,16 +37,16 @@ public class ExchangeVisitor : ExchangeVisitorBase
 
     #endregion
 
-    #region Regulation Permission
+    #region Regulation Share
 
-    /// <summary>Visit the regulation permission handler</summary>
-    public Action<IRegulationPermission> VisitRegulationPermission { get; set; }
+    /// <summary>Visit the regulation share handler</summary>
+    public Action<IRegulationShare> VisitRegulationShare { get; set; }
 
     /// <inheritdoc />
-    protected override async Task VisitRegulationPermissionAsync(IRegulationPermission permission)
+    protected override async Task VisitRegulationShareAsync(IRegulationShare share)
     {
-        VisitRegulationPermission?.Invoke(permission);
-        await base.VisitRegulationPermissionAsync(permission);
+        VisitRegulationShare?.Invoke(share);
+        await base.VisitRegulationShareAsync(share);
     }
 
     #endregion
@@ -353,6 +353,17 @@ public class ExchangeVisitor : ExchangeVisitorBase
     {
         VisitPayrun?.Invoke(tenant, payrun);
         await base.VisitPayrunAsync(tenant, payrun);
+    }
+
+    /// <summary>Visit the payrun parameter handler</summary>
+    public Action<IExchangeTenant, IPayrun, IPayrunParameter> VisitPayrunParameter { get; set; }
+
+    /// <inheritdoc />
+    protected override async Task VisitPayrunParameterAsync(IExchangeTenant tenant, IPayrun payrun,
+        IPayrunParameter parameter)
+    {
+        VisitPayrunParameter?.Invoke(tenant, payrun, parameter);
+        await base.VisitPayrunParameterAsync(tenant, payrun, parameter);
     }
 
     #endregion

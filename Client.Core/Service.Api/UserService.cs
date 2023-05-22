@@ -150,7 +150,9 @@ public class UserService : Service, IUserService
         // test user password: 200/Ok or 400/BadRequest
         try
         {
-            await HttpClient.GetAsync(TenantApiEndpoints.UserPasswordUrl(context.TenantId, userId),
+            // use of POST instead of GET according RFC7231
+            // https://datatracker.ietf.org/doc/html/rfc7231#section-4.3.1
+            await HttpClient.PostAsync(TenantApiEndpoints.UserPasswordUrl(context.TenantId, userId),
                 DefaultJsonSerializer.SerializeJson(DefaultJsonSerializer.Serialize(password)));
         }
         catch (HttpRequestException exception)

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using PayrollEngine.Serialization;
 using JsonSerializer = System.Text.Json.JsonSerializer;
@@ -9,21 +10,24 @@ namespace PayrollEngine.Client.Model;
 public class LookupValue : Model, ILookupValue
 {
     /// <inheritdoc/>
+    [Required]
     public string Key { get; set; }
 
-    private object[] keyValues;
     /// <summary>The lookup key values (client only)</summary>
     public object[] KeyValues
     {
-        get => keyValues;
+        get => null;
         set
         {
-            keyValues = value;
-            Key = value == null || !value.Any() ? null : JsonSerializer.Serialize(value);
+            if (value != null && value.Any())
+            {
+                Key = JsonSerializer.Serialize(value);
+            }
         }
     }
 
     /// <inheritdoc/>
+    [Required]
     public string Value { get; set; }
 
     /// <summary>The lookup value object</summary>
@@ -74,6 +78,9 @@ public class LookupValue : Model, ILookupValue
     /// <inheritdoc/>
     public decimal? RangeValue { get; set; }
 
+    /// <inheritdoc/>
+    public OverrideType OverrideType { get; set; }
+
     /// <summary>Initializes a new instance</summary>
     public LookupValue()
     {
@@ -81,7 +88,7 @@ public class LookupValue : Model, ILookupValue
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public LookupValue(ILookupValue copySource) :
+    public LookupValue(LookupValue copySource) :
         base(copySource)
     {
         CopyTool.CopyProperties(copySource, this);
@@ -95,8 +102,6 @@ public class LookupValue : Model, ILookupValue
     public virtual bool EqualKey(ILookupValue compare) =>
         string.Equals(Key, compare?.Key);
 
-    /// <summary>Returns a <see cref="string" /> that represents this instance</summary>
-    /// <returns>A <see cref="string" /> that represents this instance</returns>
-    public override string ToString() =>
-        $"{Key} {base.ToString()}";
+    /// <inheritdoc/>
+    public override string GetUiString() => Key;
 }

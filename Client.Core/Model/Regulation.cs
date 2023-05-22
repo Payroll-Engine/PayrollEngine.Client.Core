@@ -47,7 +47,7 @@ public class Regulation : Model, IRegulation, INameObject
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public Regulation(IRegulation copySource) :
+    public Regulation(Regulation copySource) :
         base(copySource)
     {
         CopyTool.CopyProperties(copySource, this);
@@ -60,9 +60,7 @@ public class Regulation : Model, IRegulation, INameObject
     /// <inheritdoc/>
     public virtual bool EqualKey(IRegulation compare) =>
         string.Equals(Name, compare?.Name);
-
-    /// <summary>Returns a <see cref="string" /> that represents this instance</summary>
-    /// <returns>A <see cref="string" /> that represents this instance</returns>
-    public override string ToString() =>
-        $"{Name} {base.ToString()}";
+   
+    /// <inheritdoc/>
+    public override string GetUiString() => Name;
 }

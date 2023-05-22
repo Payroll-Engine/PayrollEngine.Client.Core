@@ -58,7 +58,7 @@ public class CaseChange : Model, ICaseChange
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public CaseChange(ICaseChange copySource) :
+    public CaseChange(CaseChange copySource) :
         base(copySource)
     {
         CopyTool.CopyProperties(copySource, this);
@@ -67,9 +67,7 @@ public class CaseChange : Model, ICaseChange
     /// <inheritdoc/>
     public virtual bool Equals(ICaseChange compare) =>
         CompareTool.EqualProperties(this, compare);
-
-    /// <summary>Returns a <see cref="string" /> that represents this instance</summary>
-    /// <returns>A <see cref="string" /> that represents this instance</returns>
-    public override string ToString() =>
-        $"{ValidationCaseName} {base.ToString()}";
+    
+    /// <inheritdoc/>
+    public override string GetUiString() => ValidationCaseName;
 }

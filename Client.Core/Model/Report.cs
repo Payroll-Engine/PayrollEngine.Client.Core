@@ -52,6 +52,9 @@ public class Report : Model, IReport, INameObject
     public string EndExpressionFile { get; set; }
 
     /// <inheritdoc/>
+    public OverrideType OverrideType { get; set; }
+
+    /// <inheritdoc/>
     public Dictionary<string, object> Attributes { get; set; }
 
     /// <inheritdoc/>
@@ -64,7 +67,7 @@ public class Report : Model, IReport, INameObject
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public Report(IReport copySource) :
+    public Report(Report copySource) :
         base(copySource)
     {
         CopyTool.CopyProperties(copySource, this);
@@ -77,9 +80,7 @@ public class Report : Model, IReport, INameObject
     /// <inheritdoc/>
     public virtual bool EqualKey(IReport compare) =>
         string.Equals(Name, compare?.Name);
-
-    /// <summary>Returns a <see cref="string" /> that represents this instance</summary>
-    /// <returns>A <see cref="string" /> that represents this instance</returns>
-    public override string ToString() =>
-        $"{Name} {base.ToString()}";
+   
+    /// <inheritdoc/>
+    public override string GetUiString() => Name;
 }

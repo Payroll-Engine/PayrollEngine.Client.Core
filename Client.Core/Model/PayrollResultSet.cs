@@ -25,14 +25,14 @@ public class PayrollResultSet : PayrollResult, IPayrollResultSet
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public PayrollResultSet(IPayrollResult copySource) :
+    public PayrollResultSet(PayrollResult copySource) :
         base(copySource)
     {
     }
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public PayrollResultSet(IPayrollResultSet copySource) :
+    public PayrollResultSet(PayrollResultSet copySource) :
         base(copySource)
     {
         CopyTool.CopyProperties(copySource, this);

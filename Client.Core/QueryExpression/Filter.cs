@@ -6,7 +6,7 @@ public class Filter : ExpressionBase
 {
     /// <summary>Constructor</summary>
     /// <param name="expression">The filter expression</param>
-    protected Filter(string expression) :
+    public Filter(string expression) :
         base(expression)
     {
     }

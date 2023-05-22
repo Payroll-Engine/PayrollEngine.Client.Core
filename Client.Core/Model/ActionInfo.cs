@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace PayrollEngine.Client.Model;
 
@@ -13,6 +14,7 @@ public class ActionInfo : IEquatable<ActionInfo>
     public string Namespace { get; set; }
 
     /// <summary>The action name</summary>
+    [Required]
     public string Name { get; set; }
 
     /// <summary>The full name</summary>

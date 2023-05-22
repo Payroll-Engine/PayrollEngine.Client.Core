@@ -34,7 +34,7 @@ public class CaseSet : Case, ICaseSet
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public CaseSet(ICaseSet copySource) :
+    public CaseSet(CaseSet copySource) :
         base(copySource)
     {
         CopyTool.CopyProperties(copySource, this);
@@ -42,7 +42,7 @@ public class CaseSet : Case, ICaseSet
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public CaseSet(ICase copySource) :
+    public CaseSet(Case copySource) :
         base(copySource)
     {
     }

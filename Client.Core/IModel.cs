@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text.Json.Serialization;
 
-namespace PayrollEngine.Client.Model;
+namespace PayrollEngine.Client;
 
 /// <summary>Base for all Payroll models</summary>
 public interface IModel
@@ -28,4 +28,7 @@ public interface IModel
 
     /// <summary>The object update mode</summary>
     UpdateMode UpdateMode { get; set; }
+
+    /// <summary>The object UI string</summary>
+    string GetUiString();
 }

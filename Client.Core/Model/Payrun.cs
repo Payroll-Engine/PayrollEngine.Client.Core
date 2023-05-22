@@ -19,6 +19,9 @@ public class Payrun : Model, IPayrun, INameObject
     public string Name { get; set; }
 
     /// <inheritdoc/>
+    public Dictionary<string, string> NameLocalizations { get; set; }
+
+    /// <inheritdoc/>
     public string DefaultReason { get; set; }
 
     /// <inheritdoc/>
@@ -65,6 +68,9 @@ public class Payrun : Model, IPayrun, INameObject
 
     /// <inheritdoc/>
     public CalendarConfiguration Calendar { get; set; }
+    
+    /// <summary>The payrun parameters</summary>
+    public List<PayrunParameter> PayrunParameters { get; set; }
 
     /// <summary>Initializes a new instance</summary>
     public Payrun()
@@ -73,7 +79,7 @@ public class Payrun : Model, IPayrun, INameObject
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public Payrun(IPayrun copySource) :
+    public Payrun(Payrun copySource) :
         base(copySource)
     {
         CopyTool.CopyProperties(copySource, this);
@@ -87,9 +93,7 @@ public class Payrun : Model, IPayrun, INameObject
     public virtual bool EqualKey(IPayrun compare) =>
         string.Equals(PayrollName, compare?.PayrollName) &&
         string.Equals(Name, compare?.Name);
-
-    /// <summary>Returns a <see cref="string" /> that represents this instance</summary>
-    /// <returns>A <see cref="string" /> that represents this instance</returns>
-    public override string ToString() =>
-        $"{Name} {base.ToString()}";
+   
+    /// <inheritdoc/>
+    public override string GetUiString() => Name;
 }

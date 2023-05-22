@@ -1,5 +1,4 @@
-﻿
-namespace PayrollEngine.Client.Model;
+﻿namespace PayrollEngine.Client.Model;
 
 /// <summary>The tenant client object</summary>
 public interface ITenant : IModel, IAttributeObject, IKeyEquatable<ITenant>

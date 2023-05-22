@@ -21,7 +21,7 @@ public class ConsolidatedPayrollResult : IConsolidatedPayrollResult
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public ConsolidatedPayrollResult(IConsolidatedPayrollResult copySource)
+    public ConsolidatedPayrollResult(ConsolidatedPayrollResult copySource)
     {
         CopyTool.CopyProperties(copySource, this);
     }

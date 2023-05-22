@@ -16,4 +16,7 @@ public interface IScript : IModel, IKeyEquatable<IScript>
 
     /// <summary>The script file name</summary>
     string ValueFile { get; set; }
+
+    /// <summary>The override type</summary>
+    public OverrideType OverrideType { get; set; }
 }

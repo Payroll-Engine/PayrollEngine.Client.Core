@@ -43,7 +43,7 @@ public class WebhookMessage : Model, IWebhookMessage
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public WebhookMessage(IWebhookMessage copySource) :
+    public WebhookMessage(WebhookMessage copySource) :
         base(copySource)
     {
         CopyTool.CopyProperties(copySource, this);
@@ -52,6 +52,9 @@ public class WebhookMessage : Model, IWebhookMessage
     /// <inheritdoc/>
     public virtual bool Equals(IWebhookMessage compare) =>
         CompareTool.EqualProperties(this, compare);
+    
+    /// <inheritdoc/>
+    public override string GetUiString() => ActionName;
 
     /// <summary>Returns a <see cref="string" /> that represents this instance</summary>
     /// <returns>A <see cref="string" /> that represents this instance</returns>

@@ -28,7 +28,7 @@ public class Tenant : Model, ITenant, IIdentifierObject
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public Tenant(ITenant copySource) :
+    public Tenant(Tenant copySource) :
         base(copySource)
     {
         CopyTool.CopyProperties(copySource, this);
@@ -42,8 +42,6 @@ public class Tenant : Model, ITenant, IIdentifierObject
     public virtual bool EqualKey(ITenant compare) =>
         string.Equals(Identifier, compare?.Identifier);
 
-    /// <summary>Returns a <see cref="string" /> that represents this instance</summary>
-    /// <returns>A <see cref="string" /> that represents this instance</returns>
-    public override string ToString() =>
-        $"{Identifier} {base.ToString()}";
+    /// <inheritdoc/>
+    public override string GetUiString() => Identifier;
 }

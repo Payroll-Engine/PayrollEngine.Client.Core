@@ -18,14 +18,14 @@ public class EmployeeSet : Employee, IEmployeeSet
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public EmployeeSet(IEmployee copySource) :
+    public EmployeeSet(Employee copySource) :
         base(copySource)
     {
     }
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public EmployeeSet(IEmployeeSet copySource) :
+    public EmployeeSet(EmployeeSet copySource) :
         base(copySource)
     {
         CopyTool.CopyProperties(copySource, this);

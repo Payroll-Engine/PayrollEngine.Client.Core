@@ -16,6 +16,7 @@ public class Employee : Model, IEmployee, IIdentifierObject
     public string FirstName { get; set; }
 
     /// <inheritdoc/>
+    [Required]
     [StringLength(128)]
     public string LastName { get; set; }
 
@@ -39,7 +40,7 @@ public class Employee : Model, IEmployee, IIdentifierObject
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public Employee(IEmployee copySource) :
+    public Employee(Employee copySource) :
         base(copySource)
     {
         CopyTool.CopyProperties(copySource, this);
@@ -53,8 +54,6 @@ public class Employee : Model, IEmployee, IIdentifierObject
     public virtual bool EqualKey(IEmployee compare) =>
         string.Equals(Identifier, compare?.Identifier);
 
-    /// <summary>Returns a <see cref="string" /> that represents this instance</summary>
-    /// <returns>A <see cref="string" /> that represents this instance</returns>
-    public override string ToString() =>
-        $"{Identifier} {base.ToString()}";
+    /// <inheritdoc/>
+    public override string GetUiString() => Identifier;
 }

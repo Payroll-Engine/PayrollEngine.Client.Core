@@ -73,7 +73,7 @@ public class CaseRelation : Model, ICaseRelation
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public CaseRelation(ICaseRelation copySource) :
+    public CaseRelation(CaseRelation copySource) :
         base(copySource)
     {
         CopyTool.CopyProperties(copySource, this);
@@ -82,7 +82,7 @@ public class CaseRelation : Model, ICaseRelation
     /// <inheritdoc/>
     public virtual bool Equals(ICaseRelation compare) =>
         CompareTool.EqualProperties(this, compare);
-    
+
     /// <inheritdoc/>
     public virtual bool EqualKey(ICaseRelation compare)
     {
@@ -92,8 +92,7 @@ public class CaseRelation : Model, ICaseRelation
                string.Equals(TargetCaseSlot, compare?.TargetCaseSlot);
     }
 
-    /// <summary>Returns a <see cref="string" /> that represents this instance</summary>
-    /// <returns>A <see cref="string" /> that represents this instance</returns>
-    public override string ToString() =>
-        $"{SourceCaseName}.{SourceCaseSlot} > {TargetCaseName}.{TargetCaseSlot} {base.ToString()}";
+    /// <inheritdoc/>
+    public override string GetUiString() =>
+        $"{SourceCaseName}.{SourceCaseSlot} > {TargetCaseName}.{TargetCaseSlot}";
 }

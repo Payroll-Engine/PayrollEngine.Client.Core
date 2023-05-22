@@ -16,7 +16,7 @@ public class CaseValueSetup : CaseValue, ICaseValueSetup
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public CaseValueSetup(ICaseValueSetup copySource) :
+    public CaseValueSetup(CaseValueSetup copySource) :
         base(copySource)
     {
         CopyTool.CopyProperties(copySource, this);

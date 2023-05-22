@@ -8,7 +8,6 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using PayrollEngine.Client.Model;
 using PayrollEngine.Serialization;
 using Task = System.Threading.Tasks.Task;
 
@@ -305,9 +304,44 @@ public sealed class PayrollHttpClient : IDisposable
 
     /// <summary>Post resource to backend</summary>
     /// <param name="requestUri">The Uri the request is sent to</param>
+    /// <returns>The backend resource</returns>
+    public async Task<T> PostAsync<T>(string requestUri)
+    {
+        if (string.IsNullOrWhiteSpace(requestUri))
+        {
+            throw new ArgumentException(nameof(requestUri));
+        }
+
+        LogStopwatch.Start(GetLogName(nameof(PostAsync), requestUri));
+        using var response = await httpClient.PostAsync(requestUri, null);
+        LogStopwatch.Stop(GetLogName(nameof(PostAsync), requestUri));
+
+        await EnsureSuccessResponse(response);
+
+        var json = await response.Content.ReadAsStringAsync();
+        if (string.IsNullOrWhiteSpace(json))
+        {
+            return default;
+        }
+        var responseObj = DefaultJsonSerializer.Deserialize<T>(json);
+        if (responseObj == null)
+        {
+            throw new HttpRequestException($"Empty POST response in request {requestUri}");
+        }
+
+        if (responseObj is IModel model)
+        {
+            model.Id = GetRecordId(response);
+        }
+        LogPost(requestUri, responseObj);
+        return responseObj;
+    }
+
+    /// <summary>Post resource to backend</summary>
+    /// <param name="requestUri">The Uri the request is sent to</param>
     /// <param name="content">The resource content</param>
     /// <returns>The backend resource</returns>
-    public async Task<T> PostAsync<T>(string requestUri, T content) where T : IModel
+    public async Task<T> PostAsync<T>(string requestUri, T content) where T : class
     {
         if (string.IsNullOrWhiteSpace(requestUri))
         {
@@ -335,7 +369,10 @@ public sealed class PayrollHttpClient : IDisposable
             throw new HttpRequestException($"Empty POST response in request {requestUri}");
         }
 
-        responseObj.Id = GetRecordId(response);
+        if (responseObj is IModel model)
+        {
+            model.Id = GetRecordId(response);
+        }
         LogPost(requestUri, responseObj);
         return responseObj;
     }
@@ -344,7 +381,7 @@ public sealed class PayrollHttpClient : IDisposable
     /// <param name="requestUri">The Uri the request is sent to</param>
     /// <param name="content">The resource content</param>
     /// <returns>The backend resource</returns>
-    public async Task<TOut> PostAsync<TIn, TOut>(string requestUri, TIn content) where TOut : IModel
+    public async Task<TOut> PostAsync<TIn, TOut>(string requestUri, TIn content)
     {
         if (string.IsNullOrWhiteSpace(requestUri))
         {
@@ -372,10 +409,14 @@ public sealed class PayrollHttpClient : IDisposable
             throw new HttpRequestException($"Empty POST response in request {requestUri}");
         }
 
-        responseObj.Id = GetRecordId(response);
+        if (responseObj is IModel model)
+        {
+            model.Id = GetRecordId(response);
+        }
         LogPost(requestUri, responseObj);
         return responseObj;
     }
+
 
     /// <summary>Post resource to backend</summary>
     /// <param name="requestUri">The Uri the request is sent to</param>
@@ -657,8 +698,7 @@ public sealed class PayrollHttpClient : IDisposable
     /// <summary>Log a backend post</summary>
     /// <param name="url">The Uri the request is sent to</param>
     /// <param name="newObject">The posted object</param>
-    /// <typeparam name="T">The object type</typeparam>
-    private static void LogPost<T>(string url, T newObject) where T : IModel
+    private static void LogPost(string url, object newObject)
     {
         if (Log.IsEnabled(LogLevel.Verbose))
         {
@@ -669,12 +709,10 @@ public sealed class PayrollHttpClient : IDisposable
             Log.Debug($"Created resource {url}: {newObject}");
         }
     }
-
     /// <summary>Log a backend put</summary>
     /// <param name="requestUri">The Uri the request is sent to</param>
     /// <param name="newObject">The posted object</param>
-    /// <typeparam name="T">The object type</typeparam>
-    private static void LogPut<T>(string requestUri, T newObject) where T : IModel
+    private static void LogPut(string requestUri, object newObject)
     {
         if (Log.IsEnabled(LogLevel.Verbose))
         {
@@ -713,7 +751,7 @@ public sealed class PayrollHttpClient : IDisposable
         {
             content = response.ReasonPhrase;
         }
-        throw new HttpRequestException(content);
+        throw new HttpRequestException(content, null, response.StatusCode);
     }
 
     /// <summary>The string representation</summary>

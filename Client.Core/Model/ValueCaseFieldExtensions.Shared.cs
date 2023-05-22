@@ -1,6 +1,4 @@
-﻿using PayrollEngine.Client.Model;
-
-namespace PayrollEngine.Client;
+﻿namespace PayrollEngine.Client.Model;
 
 /// <summary>Extension methods for the <see cref="CaseFieldSet"/></summary>
 public static class DerivedCaseFieldExtensions
@@ -26,12 +24,12 @@ public static class DerivedCaseFieldExtensions
         // timeless
         if (caseFieldSet.TimeType == CaseFieldTimeType.Timeless)
         {
-            return caseFieldSet.Optional || hasValue;
+            return !caseFieldSet.ValueMandatory || hasValue;
         }
 
         // timed value
         var hasStart = caseFieldSet.Start.HasValue;
-        if (caseFieldSet.Optional)
+        if (!caseFieldSet.ValueMandatory)
         {
             // optional field: both set or unset
             return hasStart == hasValue;

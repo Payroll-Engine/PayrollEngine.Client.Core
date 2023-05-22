@@ -14,14 +14,14 @@ public class WageTypeResultSet : WageTypeResult, IWageTypeResultSet
     }
 
     /// <inheritdoc/>
-    public WageTypeResultSet(IWageTypeResult copySource) :
+    public WageTypeResultSet(WageTypeResult copySource) :
         base(copySource)
     {
     }
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public WageTypeResultSet(IWageTypeResultSet copySource) :
+    public WageTypeResultSet(WageTypeResultSet copySource) :
         base(copySource)
     {
         CopyTool.CopyProperties(copySource, this);

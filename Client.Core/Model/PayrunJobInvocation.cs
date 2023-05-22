@@ -8,6 +8,7 @@ namespace PayrollEngine.Client.Model;
 public class PayrunJobInvocation : IPayrunJobInvocation
 {
     /// <inheritdoc/>
+    [Required]
     public string Name { get; set; }
 
     /// <inheritdoc/>
@@ -88,7 +89,7 @@ public class PayrunJobInvocation : IPayrunJobInvocation
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public PayrunJobInvocation(IPayrunJobInvocation copySource)
+    public PayrunJobInvocation(PayrunJobInvocation copySource)
     {
         CopyTool.CopyProperties(copySource, this);
     }

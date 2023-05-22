@@ -16,10 +16,12 @@ public class User : Model, IUser, IIdentifierObject
     public string Password { get; set; }
 
     /// <inheritdoc/>
+    [Required]
     [StringLength(128)]
     public string FirstName { get; set; }
 
     /// <inheritdoc/>
+    [Required]
     [StringLength(128)]
     public string LastName { get; set; }
 
@@ -31,6 +33,9 @@ public class User : Model, IUser, IIdentifierObject
     public Language Language { get; set; }
 
     /// <inheritdoc/>
+    public bool Supervisor { get; set; }
+
+    /// <inheritdoc/>
     public Dictionary<string, object> Attributes { get; set; }
 
     /// <summary>Initializes a new instance</summary>
@@ -40,7 +45,7 @@ public class User : Model, IUser, IIdentifierObject
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public User(IUser copySource) :
+    public User(User copySource) :
         base(copySource)
     {
         CopyTool.CopyProperties(copySource, this);
@@ -54,8 +59,6 @@ public class User : Model, IUser, IIdentifierObject
     public virtual bool EqualKey(IUser compare) =>
         string.Equals(Identifier, compare?.Identifier);
 
-    /// <summary>Returns a <see cref="string" /> that represents this instance</summary>
-    /// <returns>A <see cref="string" /> that represents this instance</returns>
-    public override string ToString() =>
-        $"{Identifier} {base.ToString()}";
+    /// <inheritdoc/>
+    public override string GetUiString() => Identifier;
 }

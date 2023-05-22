@@ -42,10 +42,10 @@ public sealed class TenantExport
     /// <returns>The exported provide</returns>
     public async Task<Model.Exchange> ExportAsync()
     {
-        // load regulation permissions
-        var regulationPermissions = await LoadRegulationPermissionsAsync();
+        // regulation shares
+        var regulationShares = await LoadRegulationSharesAsync();
 
-        // load tenant
+        // tenant
         var tenant = await LoadTenantAsync(TenantId);
         if (tenant == null)
         {
@@ -53,7 +53,7 @@ public sealed class TenantExport
         }
         var exchange = new Model.Exchange
         {
-            RegulationPermissions = regulationPermissions,
+            RegulationShares = regulationShares,
             Tenants = new() { tenant }
         };
 
@@ -66,12 +66,12 @@ public sealed class TenantExport
         return exchange;
     }
 
-    #region System
+    #region Shares
 
-    private async Task<List<RegulationPermission>> LoadRegulationPermissionsAsync()
+    private async Task<List<RegulationShare>> LoadRegulationSharesAsync()
     {
-        var permissions = await new SharedRegulationService(HttpClient).QueryAsync<RegulationPermission>(new());
-        return permissions?.ToList();
+        var shares = await new RegulationShareService(HttpClient).QueryAsync<RegulationShare>(new());
+        return shares?.ToList();
     }
 
     #endregion
@@ -353,13 +353,17 @@ public sealed class TenantExport
                     payrun.PayrollName = payroll.Name;
                 }
             }
+
+            // payrun parameter
+            payrun.PayrunParameters = (await new PayrunParameterService(HttpClient).QueryAsync<PayrunParameter>(
+                new(tenantId, payrun.Id))).ToList();
         }
         return payruns;
     }
 
     #endregion
 
-    #region PayrunJob
+    #region Payrun Job
 
     private async Task<List<PayrunJob>> LoadPayrunJobsAsync(int tenantId)
     {

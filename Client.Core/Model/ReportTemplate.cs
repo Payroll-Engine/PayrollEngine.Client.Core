@@ -8,6 +8,11 @@ public class ReportTemplate : Model, IReportTemplate
 {
     /// <inheritdoc/>
     [Required]
+    [StringLength(128)]
+    public string Name { get; set; }
+
+    /// <inheritdoc/>
+    [Required]
     public Language Language { get; set; }
 
     /// <inheritdoc/>
@@ -31,6 +36,9 @@ public class ReportTemplate : Model, IReportTemplate
     public string Resource { get; set; }
 
     /// <inheritdoc/>
+    public OverrideType OverrideType { get; set; }
+
+    /// <inheritdoc/>
     public Dictionary<string, object> Attributes { get; set; }
 
     /// <summary>Initializes a new instance of the <see cref="ReportTemplate"/> class</summary>
@@ -40,7 +48,7 @@ public class ReportTemplate : Model, IReportTemplate
 
     /// <summary>Initializes a new instance of the <see cref="ReportTemplate"/> class</summary>
     /// <param name="copySource">The copy source.</param>
-    public ReportTemplate(IReportTemplate copySource)
+    public ReportTemplate(ReportTemplate copySource)
     {
         CopyTool.CopyProperties(copySource, this);
     }
@@ -49,8 +57,6 @@ public class ReportTemplate : Model, IReportTemplate
     public virtual bool Equals(IReportTemplate compare) =>
         CompareTool.EqualProperties(this, compare);
 
-    /// <summary>Returns a <see cref="string" /> that represents this instance</summary>
-    /// <returns>A <see cref="string" /> that represents this instance</returns>
-    public override string ToString() =>
-        $"{Language} {base.ToString()}";
+    /// <inheritdoc/>
+    public override string GetUiString() => Language.ToString();
 }

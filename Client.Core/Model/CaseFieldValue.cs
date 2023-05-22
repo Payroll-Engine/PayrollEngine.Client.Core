@@ -27,6 +27,7 @@ public class CaseFieldValue : IEquatable<CaseFieldValue>
     public ValueType ValueType { get; set; }
 
     /// <summary>The case period value as JSON</summary>
+    [Required]
     public string Value { get; set; }
 
     /// <summary>Cancellation date</summary>

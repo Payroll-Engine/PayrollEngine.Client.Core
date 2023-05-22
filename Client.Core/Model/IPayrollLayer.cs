@@ -1,5 +1,4 @@
-﻿
-namespace PayrollEngine.Client.Model;
+﻿namespace PayrollEngine.Client.Model;
 
 /// <summary>The payroll layer client object</summary>
 public interface IPayrollLayer : IModel, IAttributeObject, IKeyEquatable<IPayrollLayer>

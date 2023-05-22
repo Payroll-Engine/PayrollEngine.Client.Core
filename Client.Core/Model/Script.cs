@@ -20,6 +20,9 @@ public class Script : Model, IScript, INameObject
     /// <inheritdoc/>
     public string ValueFile { get; set; }
 
+    /// <inheritdoc/>
+    public OverrideType OverrideType { get; set; }
+
     /// <summary>Initializes a new instance</summary>
     public Script()
     {
@@ -27,7 +30,7 @@ public class Script : Model, IScript, INameObject
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public Script(IScript copySource) :
+    public Script(Script copySource) :
         base(copySource)
     {
         CopyTool.CopyProperties(copySource, this);
@@ -41,8 +44,6 @@ public class Script : Model, IScript, INameObject
     public virtual bool EqualKey(IScript compare) =>
         string.Equals(Name, compare?.Name);
 
-    /// <summary>Returns a <see cref="string" /> that represents this instance</summary>
-    /// <returns>A <see cref="string" /> that represents this instance</returns>
-    public override string ToString() =>
-        $"{Name} {base.ToString()}";
+    /// <inheritdoc/>
+    public override string GetUiString() => Name;
 }

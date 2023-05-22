@@ -33,6 +33,9 @@ public class ReportParameter : Model, IReportParameter, INameObject
     public ReportParameterType ParameterType { get; set; }
 
     /// <inheritdoc/>
+    public OverrideType OverrideType { get; set; }
+
+    /// <inheritdoc/>
     public Dictionary<string, object> Attributes { get; set; }
 
     /// <summary>Initializes a new instance of the <see cref="ReportParameter"/> class</summary>
@@ -42,7 +45,7 @@ public class ReportParameter : Model, IReportParameter, INameObject
 
     /// <summary>Initializes a new instance of the <see cref="ReportParameter"/> class</summary>
     /// <param name="copySource">The copy source.</param>
-    public ReportParameter(IReportParameter copySource)
+    public ReportParameter(ReportParameter copySource)
     {
         CopyTool.CopyProperties(copySource, this);
     }
@@ -55,8 +58,6 @@ public class ReportParameter : Model, IReportParameter, INameObject
     public virtual bool EqualKey(IReportParameter compare) =>
         string.Equals(Name, compare?.Name);
 
-    /// <summary>Returns a <see cref="string" /> that represents this instance</summary>
-    /// <returns>A <see cref="string" /> that represents this instance</returns>
-    public override string ToString() =>
-        $"{Name} {base.ToString()}";
+    /// <inheritdoc/>
+    public override string GetUiString() => Name;
 }

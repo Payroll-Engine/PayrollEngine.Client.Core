@@ -17,7 +17,7 @@ public class LookupSet : Lookup, ILookupSet
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public LookupSet(ILookupSet copySource) :
+    public LookupSet(LookupSet copySource) :
         base(copySource)
     {
         CopyTool.CopyProperties(copySource, this);

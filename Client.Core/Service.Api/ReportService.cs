@@ -162,7 +162,9 @@ public class ReportService : Service, IReportService
             throw new ArgumentNullException(nameof(request));
         }
 
-        return await HttpClient.GetAsync<ReportResponse>(
+        // use of POST instead of GET according RFC7231
+        // https://datatracker.ietf.org/doc/html/rfc7231#section-4.3.1
+        return await HttpClient.PostAsync<ReportRequest, ReportResponse>(
             RegulationApiEndpoints.RegulationReportExecuteUrl(context.TenantId, context.RegulationId, reportId), request);
     }
 

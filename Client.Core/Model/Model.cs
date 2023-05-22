@@ -33,13 +33,19 @@ public abstract class Model : IModel
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    protected Model(IModel copySource)
+    protected Model(Model copySource)
     {
         CopyTool.CopyProperties(copySource, this);
     }
 
+    /// <inheritdoc/>
+    public abstract string GetUiString();
+
     /// <summary>Returns a <see cref="string" /> that represents this instance</summary>
     /// <returns>A <see cref="string" /> that represents this instance</returns>
-    public override string ToString() =>
-        $"[#{Id}]";
+    public override string ToString()
+    {
+        var uiString = GetUiString();
+        return string.IsNullOrWhiteSpace(uiString) ? $"[#{Id}]" : $"{uiString} [#{Id}]";
+    }
 }

@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using PayrollEngine.Client.Model;
 
-namespace PayrollEngine.Client;
+namespace PayrollEngine.Client.Model;
 
 /// <summary>Extension methods for the <see cref="CaseChangeSetup"/></summary>
 public static class CaseChangeSetupExtensions
@@ -112,7 +111,7 @@ public static class CaseChangeSetupExtensions
     public static CaseValue FindDuplicatedCaseValue(this CaseChangeSetup caseChangeSetup)
     {
         var caseValueLookup = new Dictionary<Tuple<string, string>, CaseValue>();
-        foreach (var caseValue in CollectCaseValues(caseChangeSetup))
+        foreach (var caseValue in caseChangeSetup.CollectCaseValues())
         {
             var key = new Tuple<string, string>(caseValue.CaseFieldName, caseValue.CaseSlot);
             if (caseValueLookup.ContainsKey(key))

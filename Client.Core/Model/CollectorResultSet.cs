@@ -15,14 +15,14 @@ public class CollectorResultSet : CollectorResult, ICollectorResultSet
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public CollectorResultSet(ICollectorResult copySource) :
+    public CollectorResultSet(CollectorResult copySource) :
         base(copySource)
     {
     }
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public CollectorResultSet(ICollectorResultSet copySource) :
+    public CollectorResultSet(CollectorResultSet copySource) :
         base(copySource)
     {
         CopyTool.CopyProperties(copySource, this);

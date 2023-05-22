@@ -181,8 +181,8 @@ public class PayrunJobService : Service, IPayrunJobService
     }
 
     /// <inheritdoc/>
-    public virtual async Task ChangeJobStatusAsync(TenantServiceContext context, int userId, int payrunJobId,
-        PayrunJobStatus jobStatus, bool patchMode)
+    public virtual async Task ChangeJobStatusAsync(TenantServiceContext context, int payrunJobId,
+        PayrunJobStatus jobStatus, int userId, string reason, bool patchMode)
     {
         if (context == null)
         {
@@ -192,9 +192,18 @@ public class PayrunJobService : Service, IPayrunJobService
         {
             throw new ArgumentOutOfRangeException(nameof(payrunJobId));
         }
+        if (userId <= 0)
+        {
+            throw new ArgumentOutOfRangeException(nameof(userId));
+        }
+        if (string.IsNullOrWhiteSpace(reason))
+        {
+            throw new ArgumentException(nameof(reason));
+        }
 
         var url = PayrunApiEndpoints.PayrunJobStatusUrl(context.TenantId, payrunJobId)
             .AddQueryString(nameof(userId), userId)
+            .AddQueryString(nameof(reason), reason)
             .AddQueryString(nameof(patchMode), patchMode);
         await HttpClient.PostAsync(url, jobStatus);
     }

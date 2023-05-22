@@ -27,7 +27,7 @@ public class ReportLog : Model, IReportLog
 
     /// <summary>Initializes a new instance of the <see cref="ReportLog"/> class</summary>
     /// <param name="copySource">The copy source.</param>
-    public ReportLog(IReportLog copySource)
+    public ReportLog(ReportLog copySource)
     {
         CopyTool.CopyProperties(copySource, this);
     }
@@ -35,4 +35,7 @@ public class ReportLog : Model, IReportLog
     /// <inheritdoc/>
     public virtual bool Equals(IReportLog compare) =>
         CompareTool.EqualProperties(this, compare);
+
+    /// <inheritdoc/>
+    public override string GetUiString() => ReportName;
 }

@@ -1168,7 +1168,15 @@ public abstract class ImportExchangeVisitor : ExchangeVisitor
     /// <param name="payrunName">The payrun name</param>
     protected virtual async Task<Payrun> GetPayrunAsync(int tenantId, string payrunName) =>
         await new PayrunService(HttpClient).GetAsync<Payrun>(new(tenantId), payrunName);
-    
+
+    /// <summary>Get payrun parameter</summary>
+    /// <param name="tenantId">The tenant id</param>
+    /// <param name="payrunId">The payrun id</param>
+    /// <param name="parameterName">The payrun parameter name</param>
+    protected virtual async Task<PayrunParameter> GetPayrunParameterAsync(int tenantId, int payrunId,
+        string parameterName) =>
+        await new PayrunParameterService(HttpClient).GetAsync<PayrunParameter>(new(tenantId, payrunId), parameterName);
+
     /// <summary>Get payrun job</summary>
     /// <param name="tenantId">The tenant id</param>
     /// <param name="payrunJobId">The payrun job name</param>
@@ -1309,6 +1317,28 @@ public abstract class ImportExchangeVisitor : ExchangeVisitor
     /// <param name="targetPayrun">The target payrun</param>
     protected virtual async Task SetupPayrunAsync(IExchangeTenant tenant, IPayrun payrun,
         IPayrun targetPayrun)
+    {
+        await Task.Run(() => { });
+    }
+
+    /// <inheritdoc />
+    protected override async Task VisitPayrunParameterAsync(IExchangeTenant tenant, IPayrun payrun,
+        IPayrunParameter parameter)
+    {
+        // payrun parameter
+        var target = TargetLoad ? await GetPayrunParameterAsync(tenant.Id, payrun.Id, payrun.Name) : null;
+        await SetupPayrunParameterAsync(tenant, payrun, parameter, target);
+
+        await base.VisitPayrunParameterAsync(tenant, payrun, parameter);
+    }
+
+    /// <summary>Setup the payrun</summary>
+    /// <param name="tenant">The exchange tenant</param>
+    /// <param name="payrun">The payrun</param>
+    /// <param name="parameter">The payrun parameter</param>
+    /// <param name="targetPayrunParameter">The target payrun parameter</param>
+    protected virtual async Task SetupPayrunParameterAsync(IExchangeTenant tenant, IPayrun payrun,
+        IPayrunParameter parameter, IPayrunParameter targetPayrunParameter)
     {
         await Task.Run(() => { });
     }

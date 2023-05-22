@@ -1,6 +1,4 @@
-﻿using PayrollEngine.Client.Model;
-
-namespace PayrollEngine.Client;
+﻿namespace PayrollEngine.Client.Model;
 
 /// <summary>Extension methods for queries</summary>
 public static class ClientQueryExtensions
@@ -30,7 +28,7 @@ public static class ClientQueryExtensions
         // ensure query
         query ??= new();
         query.Result = resultType;
-        return AppendQueryString(query, uri);
+        return query.AppendQueryString(uri);
     }
 
     /// <summary>Append the given object query key and value to the URI</summary>
@@ -58,7 +56,7 @@ public static class ClientQueryExtensions
         if (query != null)
         {
             // case change query
-            uri = AppendQueryString((CaseChangeQuery)query, uri);
+            uri = ((CaseChangeQuery)query).AppendQueryString(uri);
             // payroll case change query
             uri = QueryExtensions.AppendQueryString(query, uri)
                 .AddQueryString(nameof(query.UserId), query.UserId)

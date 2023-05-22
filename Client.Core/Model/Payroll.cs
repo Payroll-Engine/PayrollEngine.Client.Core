@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
-using PayrollEngine.Serialization;
 
 namespace PayrollEngine.Client.Model;
 
@@ -29,7 +27,6 @@ public class Payroll : Model, IPayroll, INameObject
     public string DivisionName { get; set; }
 
     /// <inheritdoc/>
-    [JsonConverter(typeof(StringNullableEnumConverter<CalendarCalculationMode>))]
     public CalendarCalculationMode CalendarCalculationMode { get; set; }
 
     /// <inheritdoc/>
@@ -83,7 +80,7 @@ public class Payroll : Model, IPayroll, INameObject
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public Payroll(IPayroll copySource) :
+    public Payroll(Payroll copySource) :
         base(copySource)
     {
         CopyTool.CopyProperties(copySource, this);
@@ -97,8 +94,6 @@ public class Payroll : Model, IPayroll, INameObject
     public virtual bool EqualKey(IPayroll compare) =>
         string.Equals(Name, compare?.Name);
 
-    /// <summary>Returns a <see cref="string" /> that represents this instance</summary>
-    /// <returns>A <see cref="string" /> that represents this instance</returns>
-    public override string ToString() =>
-        $"{Name} {base.ToString()}";
+    /// <inheritdoc/>
+    public override string GetUiString() => Name;
 }

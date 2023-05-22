@@ -22,7 +22,7 @@ public class WebhookRuntimeMessage : WebhookMessage, IWebhookRuntimeMessage
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public WebhookRuntimeMessage(IWebhookRuntimeMessage copySource) :
+    public WebhookRuntimeMessage(WebhookRuntimeMessage copySource) :
         base(copySource)
     {
         CopyTool.CopyProperties(copySource, this);

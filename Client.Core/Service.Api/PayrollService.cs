@@ -159,11 +159,11 @@ public class PayrollService : Service, IPayrollService
     #region Cases
 
     /// <inheritdoc/>
-    public virtual async Task<List<TCaseSet>> GetAvailableCaseSetsAsync<TCaseSet>(PayrollServiceContext context, int userId,
+    public virtual async Task<List<TCase>> GetAvailableCasesAsync<TCase>(PayrollServiceContext context, int userId,
         CaseType caseType, IEnumerable<string> caseNames = null, int? employeeId = null, string caseSlot = null,
         string clusterSetName = null, Language? language = null,
         DateTime? regulationDate = null, DateTime? evaluationDate = null)
-        where TCaseSet : class, ICaseSet
+        where TCase : class, ICase
     {
         if (context == null)
         {
@@ -174,7 +174,7 @@ public class PayrollService : Service, IPayrollService
             throw new ArgumentOutOfRangeException(nameof(userId));
         }
 
-        var requestUri = PayrollApiEndpoints.PayrollCasesSetsUrl(context.TenantId, context.PayrollId)
+        var requestUri = PayrollApiEndpoints.PayrollCasesAvailableUrl(context.TenantId, context.PayrollId)
             .AddQueryString(nameof(userId), userId)
             .AddQueryString(nameof(caseType), caseType)
             .AddCollectionQueryString(nameof(caseNames), caseNames)
@@ -184,11 +184,11 @@ public class PayrollService : Service, IPayrollService
             .AddQueryString(nameof(clusterSetName), clusterSetName)
             .AddQueryString(nameof(regulationDate), regulationDate)
             .AddQueryString(nameof(evaluationDate), evaluationDate);
-        return await HttpClient.GetCollectionAsync<TCaseSet>(requestUri);
+        return await HttpClient.GetCollectionAsync<TCase>(requestUri);
     }
 
     /// <inheritdoc/>
-    public virtual async Task<TCaseSet> BuildCaseSetAsync<TCaseSet>(PayrollServiceContext context, string caseName,
+    public virtual async Task<TCaseSet> BuildCaseAsync<TCaseSet>(PayrollServiceContext context, string caseName,
         int userId, int? employeeId = null, string clusterSetName = null, Language? language = null,
         DateTime? regulationDate = null, DateTime? evaluationDate = null, ICaseChangeSetup caseChangeSetup = null)
         where TCaseSet : class, ICaseSet
@@ -206,16 +206,19 @@ public class PayrollService : Service, IPayrollService
             throw new ArgumentOutOfRangeException(nameof(userId));
         }
 
-        var url = PayrollApiEndpoints.PayrollCasesSetUrl(context.TenantId, context.PayrollId, caseName)
+        var url = PayrollApiEndpoints.PayrollCaseBuildUrl(context.TenantId, context.PayrollId, caseName)
             .AddQueryString(nameof(userId), userId)
             .AddQueryString(nameof(employeeId), employeeId)
             .AddQueryString(nameof(language), language)
             .AddQueryString(nameof(clusterSetName), clusterSetName)
             .AddQueryString(nameof(regulationDate), regulationDate)
             .AddQueryString(nameof(evaluationDate), evaluationDate);
+
+        // use of POST instead of GET according RFC7231
+        // https://datatracker.ietf.org/doc/html/rfc7231#section-4.3.1
         return caseChangeSetup != null ?
-            await HttpClient.GetAsync<TCaseSet>(url, caseChangeSetup) :
-            await HttpClient.GetAsync<TCaseSet>(url);
+            await HttpClient.PostAsync<ICaseChangeSetup, TCaseSet>(url, caseChangeSetup) :
+            await HttpClient.PostAsync<TCaseSet>(url);
     }
 
     #endregion
@@ -260,7 +263,7 @@ public class PayrollService : Service, IPayrollService
     }
 
     /// <inheritdoc/>
-    public virtual async Task<List<CaseFieldValue>> GetPayrollAvailableCaseFieldValuesAsync(PayrollServiceContext context,
+    public virtual async Task<List<CaseFieldValue>> GetAvailableCaseFieldValuesAsync(PayrollServiceContext context,
         int userId, IEnumerable<string> caseFieldNames, DateTime startDate, DateTime endDate, int? employeeId = null,
         DateTime? regulationDate = null, DateTime? evaluationDate = null)
     {
@@ -303,7 +306,7 @@ public class PayrollService : Service, IPayrollService
             throw new ArgumentNullException(nameof(caseChangeSetup));
         }
 
-        var requestUri = PayrollApiEndpoints.PayrollCasesSetsUrl(context.TenantId, context.PayrollId);
+        var requestUri = PayrollApiEndpoints.PayrollCasesUrl(context.TenantId, context.PayrollId);
         requestUri = requestUri.AddQueryString(nameof(caseChangeSetup.EmployeeId), caseChangeSetup.EmployeeId);
         return await HttpClient.PostAsync<TCaseChangeSetup, TCaseChange>(requestUri, caseChangeSetup);
     }
@@ -419,7 +422,7 @@ public class PayrollService : Service, IPayrollService
     }
 
     /// <inheritdoc/>
-    public virtual async Task<List<TLookupData>> GetLookupValuesAsync<TLookupData>(PayrollServiceContext context,
+    public virtual async Task<List<TLookupData>> GetLookupDataAsync<TLookupData>(PayrollServiceContext context,
         IEnumerable<string> lookupNames, DateTime? regulationDate = null, DateTime? evaluationDate = null, Language? language = null)
         where TLookupData : class, ILookupData
     {
@@ -432,12 +435,30 @@ public class PayrollService : Service, IPayrollService
             throw new ArgumentException(nameof(lookupNames));
         }
 
-        var uri = PayrollApiEndpoints.PayrollLookupValuesUrl(context.TenantId, context.PayrollId)
+        var uri = PayrollApiEndpoints.PayrollLookupsDataUrl(context.TenantId, context.PayrollId)
             .AddCollectionQueryString(nameof(lookupNames), lookupNames)
             .AddQueryString(nameof(regulationDate), regulationDate)
             .AddQueryString(nameof(evaluationDate), evaluationDate)
             .AddQueryString(nameof(language), language);
         return await HttpClient.GetCollectionAsync<TLookupData>(uri);
+    }
+
+    /// <inheritdoc/>
+    public virtual async Task<List<TLookupValue>> GetLookupValuesAsync<TLookupValue>(PayrollServiceContext context,
+        IEnumerable<string> lookupNames = null, IEnumerable<string> lookupKeys = null, DateTime? regulationDate = null,
+        DateTime? evaluationDate = null) where TLookupValue : class, ILookupValue
+    {
+        if (context == null)
+        {
+            throw new ArgumentNullException(nameof(context));
+        }
+
+        var uri = PayrollApiEndpoints.PayrollLookupValuesUrl(context.TenantId, context.PayrollId)
+            .AddCollectionQueryString(nameof(lookupNames), lookupNames)
+            .AddCollectionQueryString(nameof(lookupKeys), lookupKeys)
+            .AddQueryString(nameof(regulationDate), regulationDate)
+            .AddQueryString(nameof(evaluationDate), evaluationDate);
+        return await HttpClient.GetCollectionAsync<TLookupValue>(uri);
     }
 
     /// <inheritdoc/>
@@ -465,7 +486,7 @@ public class PayrollService : Service, IPayrollService
 
     /// <inheritdoc/>
     public virtual async Task<List<TReport>> GetReportsAsync<TReport>(PayrollServiceContext context, IEnumerable<string> reportNames = null,
-        OverrideType? overrideType = null, DateTime? regulationDate = null, DateTime? evaluationDate = null) where TReport : class, IReportSet
+        OverrideType? overrideType = null, DateTime? regulationDate = null, DateTime? evaluationDate = null) where TReport : class, IReport
     {
         if (context == null)
         {
@@ -481,20 +502,38 @@ public class PayrollService : Service, IPayrollService
     }
 
     /// <inheritdoc/>
-    public virtual async Task<TReportTemplate> GetReportTemplateAsync<TReportTemplate>(PayrollServiceContext context, IEnumerable<string> reportNames,
-        Language language, DateTime? regulationDate = null, DateTime? evaluationDate = null) where TReportTemplate : class, IReportTemplate
+    public virtual async Task<List<TReportParameter>> GetReportParametersAsync<TReportParameter>(PayrollServiceContext context,
+        IEnumerable<string> reportNames, DateTime? regulationDate = null, DateTime? evaluationDate = null)
+        where TReportParameter : class, IReportParameter
     {
         if (context == null)
         {
             throw new ArgumentNullException(nameof(context));
         }
 
-        var uri = PayrollApiEndpoints.PayrollReportTemplateUrl(context.TenantId, context.PayrollId)
+        var uri = PayrollApiEndpoints.PayrollReportParametersUrl(context.TenantId, context.PayrollId)
+            .AddCollectionQueryString(nameof(reportNames), reportNames)
+            .AddQueryString(nameof(regulationDate), regulationDate)
+            .AddQueryString(nameof(evaluationDate), evaluationDate);
+        return await HttpClient.GetCollectionAsync<TReportParameter>(uri);
+    }
+
+    /// <inheritdoc/>
+    public virtual async Task<List<TReportTemplate>> GetReportTemplatesAsync<TReportTemplate>(PayrollServiceContext context,
+        IEnumerable<string> reportNames, Language? language = null, DateTime? regulationDate = null, DateTime? evaluationDate = null)
+        where TReportTemplate : class, IReportTemplate
+    {
+        if (context == null)
+        {
+            throw new ArgumentNullException(nameof(context));
+        }
+
+        var uri = PayrollApiEndpoints.PayrollReportTemplatesUrl(context.TenantId, context.PayrollId)
             .AddCollectionQueryString(nameof(reportNames), reportNames)
             .AddQueryString(nameof(language), language)
             .AddQueryString(nameof(regulationDate), regulationDate)
             .AddQueryString(nameof(evaluationDate), evaluationDate);
-        return await HttpClient.GetAsync<TReportTemplate>(uri);
+        return await HttpClient.GetCollectionAsync<TReportTemplate>(uri);
     }
 
     /// <inheritdoc/>
@@ -516,7 +555,7 @@ public class PayrollService : Service, IPayrollService
 
     /// <inheritdoc/>
     public virtual async Task<List<TAction>> GetActionsAsync<TAction>(PayrollServiceContext context, IEnumerable<string> scriptNames = null,
-        OverrideType? overrideType = null, FunctionType functionType = FunctionType.All, DateTime? regulationDate = null,
+        OverrideType? overrideType = null, FunctionType? functionType = null, DateTime? regulationDate = null,
         DateTime? evaluationDate = null) where TAction : ActionInfo
     {
         if (context == null)

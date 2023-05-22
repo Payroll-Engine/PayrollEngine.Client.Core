@@ -1,4 +1,5 @@
-﻿namespace PayrollEngine.Client.Model;
+﻿
+namespace PayrollEngine.Client.Model;
 
 /// <summary>The payrun job client object</summary>
 public class PayrunJobEmployee : Model, IPayrunJobEmployee
@@ -13,7 +14,7 @@ public class PayrunJobEmployee : Model, IPayrunJobEmployee
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public PayrunJobEmployee(IPayrunJobEmployee copySource) :
+    public PayrunJobEmployee(PayrunJobEmployee copySource) :
         base(copySource)
     {
         CopyTool.CopyProperties(copySource, this);
@@ -22,4 +23,7 @@ public class PayrunJobEmployee : Model, IPayrunJobEmployee
     /// <inheritdoc/>
     public virtual bool Equals(IPayrunJobEmployee compare) =>
         CompareTool.EqualProperties(this, compare);
+
+    /// <inheritdoc/>
+    public override string GetUiString() => EmployeeId.ToString();
 }

@@ -27,23 +27,20 @@ public static class ApiEndpoints
 
     #endregion
 
-    #region Shared
+    #region Shares
 
-    /// <summary>The shared regulations URL</summary>
-    public static string SharedRegulationsUrl() => $"{ApiPath}/shared/regulations";
-    /// <summary>The shared regulation permissions URL</summary>
-    public static string SharedRegulationPermissionsUrl() =>
-        $"{SharedRegulationsUrl()}/permissions";
-    /// <summary>The shared regulation permission URL</summary>
-    public static string SharedRegulationPermissionUrl(int permissionId) =>
-        $"{SharedRegulationPermissionsUrl()}/{permissionId}";
+    /// <summary>The shares regulations URL</summary>
+    public static string SharesRegulationsUrl() => $"{ApiPath}/shares/regulations";
+    /// <summary>The shares regulation URL</summary>
+    public static string SharesRegulationUrl(int shareId) =>
+        $"{SharesRegulationsUrl()}/{shareId}";
 
-    /// <summary>The shared regulation permission attributes URL</summary>
-    public static string SharedRegulationPermissionAttributesUrl(int permissionId) =>
-        $"{TenantApiEndpoints.TenantUrl(permissionId)}/{AttributesPath()}";
-    /// <summary>The shared regulation permission attribute URL</summary>
-    public static string SharedRegulationPermissionAttributeUrl(int permissionId, string attributeName) =>
-        $"{SharedRegulationPermissionAttributesUrl(permissionId)}/{attributeName}";
+    /// <summary>The shared regulation attributes URL</summary>
+    public static string SharesRegulationAttributesUrl(int shareId) =>
+        $"{TenantApiEndpoints.TenantUrl(shareId)}/{AttributesPath()}";
+    /// <summary>The shared regulation attribute URL</summary>
+    public static string SharesRegulationAttributeUrl(int shareId, string attributeName) =>
+        $"{SharesRegulationAttributesUrl(shareId)}/{attributeName}";
 
     #endregion
 

@@ -1,6 +1,4 @@
-﻿using PayrollEngine.Client.Model;
-
-namespace PayrollEngine.Client;
+﻿namespace PayrollEngine.Client.Model;
 
 /// <summary>Extension methods for queries</summary>
 public static class ScriptExtensions

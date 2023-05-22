@@ -19,20 +19,17 @@
         <member name="M:PayrollEngine.Client.ApiEndpoints.AdminQueryMethods">
             <summary>The admin query methods URL</summary>
         </member>
-        <member name="M:PayrollEngine.Client.ApiEndpoints.SharedRegulationsUrl">
-            <summary>The shared regulations URL</summary>
+        <member name="M:PayrollEngine.Client.ApiEndpoints.SharesRegulationsUrl">
+            <summary>The shares regulations URL</summary>
         </member>
-        <member name="M:PayrollEngine.Client.ApiEndpoints.SharedRegulationPermissionsUrl">
-            <summary>The shared regulation permissions URL</summary>
+        <member name="M:PayrollEngine.Client.ApiEndpoints.SharesRegulationUrl(System.Int32)">
+            <summary>The shares regulation URL</summary>
         </member>
-        <member name="M:PayrollEngine.Client.ApiEndpoints.SharedRegulationPermissionUrl(System.Int32)">
-            <summary>The shared regulation permission URL</summary>
+        <member name="M:PayrollEngine.Client.ApiEndpoints.SharesRegulationAttributesUrl(System.Int32)">
+            <summary>The shared regulation attributes URL</summary>
         </member>
-        <member name="M:PayrollEngine.Client.ApiEndpoints.SharedRegulationPermissionAttributesUrl(System.Int32)">
-            <summary>The shared regulation permission attributes URL</summary>
-        </member>
-        <member name="M:PayrollEngine.Client.ApiEndpoints.SharedRegulationPermissionAttributeUrl(System.Int32,System.String)">
-            <summary>The shared regulation permission attribute URL</summary>
+        <member name="M:PayrollEngine.Client.ApiEndpoints.SharesRegulationAttributeUrl(System.Int32,System.String)">
+            <summary>The shared regulation attribute URL</summary>
         </member>
         <member name="T:PayrollEngine.Client.ApiError">
             <summary>The payroll API error</summary>
@@ -52,107 +49,17 @@
         <member name="P:PayrollEngine.Client.ApiError.Errors">
             <summary>The errors</summary>
         </member>
-        <member name="T:PayrollEngine.Client.CaseChangeSetupExtensions">
-            <summary>Extension methods for the <see cref="T:PayrollEngine.Client.Model.CaseChangeSetup"/></summary>
+        <member name="T:PayrollEngine.Client.ApiException">
+            <summary>The payroll API error</summary>
         </member>
-        <member name="M:PayrollEngine.Client.CaseChangeSetupExtensions.FindCaseSetup(PayrollEngine.Client.Model.CaseChangeSetup,System.String,System.String)">
-            <summary>Find case setup</summary>
-            <param name="caseChangeSetup">The case change setup</param>
-            <param name="caseName">The case name</param>
-            <param name="caseSlot">The case slot</param>
-            <returns>The case value or null on missing case value</returns>
+        <member name="P:PayrollEngine.Client.ApiException.StatusCode">
+            <summary>The error status code</summary>
         </member>
-        <member name="M:PayrollEngine.Client.CaseChangeSetupExtensions.FindCaseValue(PayrollEngine.Client.Model.CaseChangeSetup,System.String,System.String)">
-            <summary>Find case value</summary>
-            <param name="caseChangeSetup">The case change setup</param>
-            <param name="caseFieldName">The case field name</param>
-            <param name="caseSlot">The case slot</param>
-            <returns>The case value or null on missing case value</returns>
+        <member name="P:PayrollEngine.Client.ApiException.Message">
+            <summary>The error message</summary>
         </member>
-        <member name="M:PayrollEngine.Client.CaseChangeSetupExtensions.FindCaseValue(PayrollEngine.Client.Model.CaseSetup,System.String,System.String)">
-            <summary>Finds the case value recursively</summary>
-            <param name="caseSetup">The case setup</param>
-            <param name="caseFieldName">Name of the case field</param>
-            <param name="caseSlot">The case slot</param>
-        </member>
-        <member name="M:PayrollEngine.Client.CaseChangeSetupExtensions.FindDuplicatedCaseValue(PayrollEngine.Client.Model.CaseChangeSetup)">
-            <summary>Search for duplicated case value</summary>
-            <param name="caseChangeSetup">The case change setup</param>
-            <returns>The duplicated case value, null without duplicates</returns>
-        </member>
-        <member name="M:PayrollEngine.Client.CaseChangeSetupExtensions.CollectCaseSetups(PayrollEngine.Client.Model.CaseChangeSetup)">
-            <summary>Collect all case setups</summary>
-            <param name="caseChangeSetup">The case change setup</param>
-            <returns>List if case setups</returns>
-        </member>
-        <member name="M:PayrollEngine.Client.CaseChangeSetupExtensions.CollectCaseValues(PayrollEngine.Client.Model.ICaseChangeSetup)">
-            <summary>Collect all case values</summary>
-            <param name="caseChangeSetup">The case change setup</param>
-            <returns>List if case values</returns>
-        </member>
-        <member name="T:PayrollEngine.Client.CaseSetExtensions">
-            <summary>Extension methods for the <see cref="T:PayrollEngine.Client.Model.CaseSet"/></summary>
-        </member>
-        <member name="M:PayrollEngine.Client.CaseSetExtensions.FindCase(PayrollEngine.Client.Model.CaseSet,System.String)">
-            <summary>
-            Find case by name, considering related cases
-            </summary>
-            <param name="caseSet">The case to search</param>
-            <param name="caseName">The name of the case</param>
-            <returns>The value case field matching the name, null on missing case field</returns>
-        </member>
-        <member name="M:PayrollEngine.Client.CaseSetExtensions.FindCaseField(PayrollEngine.Client.Model.CaseSet,System.String)">
-            <summary>
-            Find case field by name, considering related cases
-            </summary>
-            <param name="caseSet">The case to search</param>
-            <param name="caseFieldName">The name of the case field</param>
-            <returns>The value case field matching the name, null on missing case field</returns>
-        </member>
-        <member name="M:PayrollEngine.Client.CaseSetExtensions.EnsureUniqueNames(PayrollEngine.Client.Model.CaseSet)">
-            <summary>Ensure unique case names and case field names, including related cases</summary>
-            <param name="caseSet">The derived case to test</param>
-            <returns>throws a payroll exception if the derived case is invalid</returns>
-        </member>
-        <member name="T:PayrollEngine.Client.ClientQueryExtensions">
-            <summary>Extension methods for queries</summary>
-        </member>
-        <member name="M:PayrollEngine.Client.ClientQueryExtensions.AppendQueryString(PayrollEngine.Client.Model.DivisionQuery,System.String)">
-            <summary>Append the given object query key and value to the URI</summary>
-            <param name="query">The query to append</param>
-            <param name="uri">The base URI</param>
-            <returns>The combined result</returns>
-        </member>
-        <member name="M:PayrollEngine.Client.ClientQueryExtensions.BuildQueryString(PayrollEngine.Client.Model.CaseChangeQuery,System.String,System.Nullable{PayrollEngine.QueryResultType})">
-            <summary>Build a case change query</summary>
-            <param name="query">The query to append</param>
-            <param name="uri">The base URI</param>
-            <param name="resultType">The result type</param>
-            <returns>The combined result</returns>
-        </member>
-        <member name="M:PayrollEngine.Client.ClientQueryExtensions.AppendQueryString(PayrollEngine.Client.Model.CaseChangeQuery,System.String)">
-            <summary>Append the given object query key and value to the URI</summary>
-            <param name="query">The query to append</param>
-            <param name="uri">The base URI</param>
-            <returns>The combined result</returns>
-        </member>
-        <member name="M:PayrollEngine.Client.ClientQueryExtensions.AppendQueryString(PayrollEngine.Client.Model.PayrollCaseChangeQuery,System.String)">
-            <summary>Append the given object query key and value to the URI</summary>
-            <param name="query">The query to append</param>
-            <param name="uri">The base URI</param>
-            <returns>The combined result</returns>
-        </member>
-        <member name="M:PayrollEngine.Client.ClientQueryExtensions.AppendQueryString(PayrollEngine.Client.Model.CaseValueQuery,System.String)">
-            <summary>Append the given object query key and value to the URI</summary>
-            <param name="query">The query to append</param>
-            <param name="uri">The base URI</param>
-            <returns>The combined result</returns>
-        </member>
-        <member name="M:PayrollEngine.Client.ClientQueryExtensions.AppendQueryString(PayrollEngine.Client.Model.ReportTemplateQuery,System.String)">
-            <summary>Append the given object query key and value to the URI</summary>
-            <param name="query">The query to append</param>
-            <param name="uri">The base URI</param>
-            <returns>The combined result</returns>
+        <member name="P:PayrollEngine.Client.ApiException.StackTrace">
+            <summary>The error stack trace</summary>
         </member>
         <member name="T:PayrollEngine.Client.CompanyCaseApiEndpoints">
             <summary>Company case api endpoints</summary>
@@ -490,13 +397,18 @@
         <member name="T:PayrollEngine.Client.ExceptionExtensions">
             <summary>Extension methods for <see cref="T:System.Exception"/></summary>
         </member>
-        <member name="M:PayrollEngine.Client.ExceptionExtensions.GetApiMessage(System.Exception)">
+        <member name="M:PayrollEngine.Client.ExceptionExtensions.GetApiErrorMessage(System.Exception)">
             <summary>Get the exception message from an API error</summary>
             <param name="exception">The exception</param>
             <returns>The payroll API error, null on others errors</returns>
         </member>
         <member name="M:PayrollEngine.Client.ExceptionExtensions.GetApiError(System.Exception)">
             <summary>Get the exception message from an API error</summary>
+            <param name="exception">The exception</param>
+            <returns>The payroll API error, null on others errors</returns>
+        </member>
+        <member name="M:PayrollEngine.Client.ExceptionExtensions.GetApiException(System.Exception)">
+            <summary>Get the exception message from an API exception</summary>
             <param name="exception">The exception</param>
             <returns>The payroll API error, null on others errors</returns>
         </member>
@@ -542,7 +454,7 @@
         <member name="M:PayrollEngine.Client.Exchange.ExchangeImport.ImportAsync">
             <summary>Import payroll</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeImport.VisitRegulationPermissionAsync(PayrollEngine.Client.Model.IRegulationPermission)">
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeImport.VisitRegulationShareAsync(PayrollEngine.Client.Model.IRegulationShare)">
             <summary><inheritdoc/></summary>
         </member>
         <member name="M:PayrollEngine.Client.Exchange.ExchangeImport.SetupTenantAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.ITenant)">
@@ -614,6 +526,9 @@
         <member name="M:PayrollEngine.Client.Exchange.ExchangeImport.SetupPayrunAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrun,PayrollEngine.Client.Model.IPayrun)">
             <summary><inheritdoc/></summary>
         </member>
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeImport.SetupPayrunParameterAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrun,PayrollEngine.Client.Model.IPayrunParameter,PayrollEngine.Client.Model.IPayrunParameter)">
+            <summary><inheritdoc/></summary>
+        </member>
         <member name="M:PayrollEngine.Client.Exchange.ExchangeImport.VisitPayrunJobInvocationAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrunJobInvocation)">
             <summary><inheritdoc/></summary>
         </member>
@@ -646,10 +561,10 @@
         <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitExchangeTenantAsync(PayrollEngine.Client.Model.IExchangeTenant)">
             <inheritdoc />
         </member>
-        <member name="P:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitRegulationPermission">
-            <summary>Visit the regulation permission handler</summary>
+        <member name="P:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitRegulationShare">
+            <summary>Visit the regulation share handler</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitRegulationPermissionAsync(PayrollEngine.Client.Model.IRegulationPermission)">
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitRegulationShareAsync(PayrollEngine.Client.Model.IRegulationShare)">
             <inheritdoc />
         </member>
         <member name="P:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitUser">
@@ -790,6 +705,12 @@
         <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitPayrunAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrun)">
             <inheritdoc />
         </member>
+        <member name="P:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitPayrunParameter">
+            <summary>Visit the payrun parameter handler</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitPayrunParameterAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrun,PayrollEngine.Client.Model.IPayrunParameter)">
+            <inheritdoc />
+        </member>
         <member name="P:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitPayrunJobInvocation">
             <summary>Visit the payrun job invocation handler</summary>
         </member>
@@ -853,12 +774,12 @@
             <summary>Visit the exchange tenant</summary>
             <param name="tenant">The exchange tenant</param>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitRegulationPermissionsAsync">
-            <summary>Visit the regulation permissions</summary>
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitRegulationSharesAsync">
+            <summary>Visit the regulation shares</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitRegulationPermissionAsync(PayrollEngine.Client.Model.IRegulationPermission)">
-            <summary>Visit the regulation permission</summary>
-            <param name="permission">The regulation permission</param>
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitRegulationShareAsync(PayrollEngine.Client.Model.IRegulationShare)">
+            <summary>Visit the regulation share</summary>
+            <param name="share">The regulation share</param>
         </member>
         <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitUsersAsync(PayrollEngine.Client.Model.IExchangeTenant)">
             <summary>Visit the users</summary>
@@ -1111,6 +1032,17 @@
             <summary>Visit the payrun</summary>
             <param name="tenant">The tenant</param>
             <param name="payrun">The payrun</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitPayrunParametersAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrun)">
+            <summary>Visit the payrun parameter</summary>
+            <param name="tenant">The tenant</param>
+            <param name="payrun">The payrun</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitPayrunParameterAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrun,PayrollEngine.Client.Model.IPayrunParameter)">
+            <summary>Visit the payrun parameter</summary>
+            <param name="tenant">The tenant</param>
+            <param name="payrun">The payrun</param>
+            <param name="parameter">The payrun parameter</param>
         </member>
         <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitPayrunJobsAsync(PayrollEngine.Client.Model.IExchangeTenant)">
             <summary>Visit the payrun jobs</summary>
@@ -1532,6 +1464,12 @@
             <param name="tenantId">The tenant id</param>
             <param name="payrunName">The payrun name</param>
         </member>
+        <member name="M:PayrollEngine.Client.Exchange.ImportExchangeVisitor.GetPayrunParameterAsync(System.Int32,System.Int32,System.String)">
+            <summary>Get payrun parameter</summary>
+            <param name="tenantId">The tenant id</param>
+            <param name="payrunId">The payrun id</param>
+            <param name="parameterName">The payrun parameter name</param>
+        </member>
         <member name="M:PayrollEngine.Client.Exchange.ImportExchangeVisitor.GetPayrunJobAsync(System.Int32,System.Int32)">
             <summary>Get payrun job</summary>
             <param name="tenantId">The tenant id</param>
@@ -1547,6 +1485,16 @@
             <param name="tenant">The exchange tenant</param>
             <param name="payrun">The payrun</param>
             <param name="targetPayrun">The target payrun</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.ImportExchangeVisitor.VisitPayrunParameterAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrun,PayrollEngine.Client.Model.IPayrunParameter)">
+            <inheritdoc />
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.ImportExchangeVisitor.SetupPayrunParameterAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrun,PayrollEngine.Client.Model.IPayrunParameter,PayrollEngine.Client.Model.IPayrunParameter)">
+            <summary>Setup the payrun</summary>
+            <param name="tenant">The exchange tenant</param>
+            <param name="payrun">The payrun</param>
+            <param name="parameter">The payrun parameter</param>
+            <param name="targetPayrunParameter">The target payrun parameter</param>
         </member>
         <member name="T:PayrollEngine.Client.Exchange.LoadVisitorOptions">
             <summary>Load visitor options <see cref="T:PayrollEngine.Client.Exchange.ImportExchangeVisitor"/></summary>
@@ -1643,6 +1591,9 @@
             <inheritdoc />
         </member>
         <member name="M:PayrollEngine.Client.Exchange.NamespaceUpdateTool.VisitPayrunAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrun)">
+            <inheritdoc />
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.NamespaceUpdateTool.VisitPayrunParameterAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrun,PayrollEngine.Client.Model.IPayrunParameter)">
             <inheritdoc />
         </member>
         <member name="M:PayrollEngine.Client.Exchange.NamespaceUpdateTool.VisitPayrunJobInvocationAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrunJobInvocation)">
@@ -1788,6 +1739,33 @@
         </member>
         <member name="M:PayrollEngine.Client.GlobalCaseApiEndpoints.GlobalCaseChangeUrl(System.Int32,System.Int32)">
             <summary>The global case change URL</summary>
+        </member>
+        <member name="T:PayrollEngine.Client.IModel">
+            <summary>Base for all Payroll models</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.IModel.Id">
+            <summary>The unique object id (immutable)</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.IModel.IsExistingObject">
+            <summary>Test for existing object (opposite of <see cref="P:PayrollEngine.Client.IModel.IsNewObject"/>)</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.IModel.IsNewObject">
+            <summary>Test for new object (opposite of <see cref="P:PayrollEngine.Client.IModel.IsExistingObject"/>)</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.IModel.Status">
+            <summary>The status of the object</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.IModel.Created">
+            <summary>The date which the client object was created (immutable)</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.IModel.Updated">
+            <summary>The date which the client object was last updated (immutable)</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.IModel.UpdateMode">
+            <summary>The object update mode</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.IModel.GetUiString">
+            <summary>The object UI string</summary>
         </member>
         <member name="T:PayrollEngine.Client.Model.ActionInfo">
             <summary>Cluster set</summary>
@@ -1982,7 +1960,7 @@
         <member name="M:PayrollEngine.Client.Model.Case.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.Case.#ctor(PayrollEngine.Client.Model.ICase)">
+        <member name="M:PayrollEngine.Client.Model.Case.#ctor(PayrollEngine.Client.Model.Case)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
@@ -1992,9 +1970,8 @@
         <member name="M:PayrollEngine.Client.Model.Case.EqualKey(PayrollEngine.Client.Model.ICase)">
             <inheritdoc/>
         </member>
-        <member name="M:PayrollEngine.Client.Model.Case.ToString">
-            <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
-            <returns>A <see cref="T:System.String" /> that represents this instance</returns>
+        <member name="M:PayrollEngine.Client.Model.Case.GetUiString">
+            <inheritdoc/>
         </member>
         <member name="T:PayrollEngine.Client.Model.CaseChange">
             <summary>Payroll case value change client object</summary>
@@ -2047,16 +2024,15 @@
         <member name="M:PayrollEngine.Client.Model.CaseChange.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.CaseChange.#ctor(PayrollEngine.Client.Model.ICaseChange)">
+        <member name="M:PayrollEngine.Client.Model.CaseChange.#ctor(PayrollEngine.Client.Model.CaseChange)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
         <member name="M:PayrollEngine.Client.Model.CaseChange.Equals(PayrollEngine.Client.Model.ICaseChange)">
             <inheritdoc/>
         </member>
-        <member name="M:PayrollEngine.Client.Model.CaseChange.ToString">
-            <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
-            <returns>A <see cref="T:System.String" /> that represents this instance</returns>
+        <member name="M:PayrollEngine.Client.Model.CaseChange.GetUiString">
+            <inheritdoc/>
         </member>
         <member name="T:PayrollEngine.Client.Model.CaseChangeCaseValue">
             <summary>A case value from a case change used in national, company and employee case</summary>
@@ -2150,12 +2126,53 @@
         <member name="M:PayrollEngine.Client.Model.CaseChangeSetup.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.CaseChangeSetup.#ctor(PayrollEngine.Client.Model.ICaseChangeSetup)">
+        <member name="M:PayrollEngine.Client.Model.CaseChangeSetup.#ctor(PayrollEngine.Client.Model.CaseChangeSetup)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
         <member name="M:PayrollEngine.Client.Model.CaseChangeSetup.Equals(PayrollEngine.Client.Model.ICaseChangeSetup)">
             <inheritdoc/>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.CaseChangeSetup.GetUiString">
+            <inheritdoc/>
+        </member>
+        <member name="T:PayrollEngine.Client.Model.CaseChangeSetupExtensions">
+            <summary>Extension methods for the <see cref="T:PayrollEngine.Client.Model.CaseChangeSetup"/></summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.CaseChangeSetupExtensions.FindCaseSetup(PayrollEngine.Client.Model.CaseChangeSetup,System.String,System.String)">
+            <summary>Find case setup</summary>
+            <param name="caseChangeSetup">The case change setup</param>
+            <param name="caseName">The case name</param>
+            <param name="caseSlot">The case slot</param>
+            <returns>The case value or null on missing case value</returns>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.CaseChangeSetupExtensions.FindCaseValue(PayrollEngine.Client.Model.CaseChangeSetup,System.String,System.String)">
+            <summary>Find case value</summary>
+            <param name="caseChangeSetup">The case change setup</param>
+            <param name="caseFieldName">The case field name</param>
+            <param name="caseSlot">The case slot</param>
+            <returns>The case value or null on missing case value</returns>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.CaseChangeSetupExtensions.FindCaseValue(PayrollEngine.Client.Model.CaseSetup,System.String,System.String)">
+            <summary>Finds the case value recursively</summary>
+            <param name="caseSetup">The case setup</param>
+            <param name="caseFieldName">Name of the case field</param>
+            <param name="caseSlot">The case slot</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.CaseChangeSetupExtensions.FindDuplicatedCaseValue(PayrollEngine.Client.Model.CaseChangeSetup)">
+            <summary>Search for duplicated case value</summary>
+            <param name="caseChangeSetup">The case change setup</param>
+            <returns>The duplicated case value, null without duplicates</returns>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.CaseChangeSetupExtensions.CollectCaseSetups(PayrollEngine.Client.Model.CaseChangeSetup)">
+            <summary>Collect all case setups</summary>
+            <param name="caseChangeSetup">The case change setup</param>
+            <returns>List if case setups</returns>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.CaseChangeSetupExtensions.CollectCaseValues(PayrollEngine.Client.Model.ICaseChangeSetup)">
+            <summary>Collect all case values</summary>
+            <param name="caseChangeSetup">The case change setup</param>
+            <returns>List if case values</returns>
         </member>
         <member name="T:PayrollEngine.Client.Model.CaseDocument">
             <summary>The case document client object</summary>
@@ -2175,16 +2192,15 @@
         <member name="M:PayrollEngine.Client.Model.CaseDocument.#ctor">
             <summary>Initializes a new instance of the <see cref="T:PayrollEngine.Client.Model.CaseDocument"/> class</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.CaseDocument.#ctor(PayrollEngine.Client.Model.ICaseDocument)">
+        <member name="M:PayrollEngine.Client.Model.CaseDocument.#ctor(PayrollEngine.Client.Model.CaseDocument)">
             <summary>Initializes a new instance of the <see cref="T:PayrollEngine.Client.Model.CaseDocument"/> class</summary>
             <param name="copySource">The copy source.</param>
         </member>
         <member name="M:PayrollEngine.Client.Model.CaseDocument.Equals(PayrollEngine.Client.Model.ICaseDocument)">
             <inheritdoc/>
         </member>
-        <member name="M:PayrollEngine.Client.Model.CaseDocument.ToString">
-            <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
-            <returns>A <see cref="T:System.String" /> that represents this instance</returns>
+        <member name="M:PayrollEngine.Client.Model.CaseDocument.GetUiString">
+            <inheritdoc/>
         </member>
         <member name="T:PayrollEngine.Client.Model.CaseField">
             <summary>The payroll case field client object</summary>
@@ -2222,7 +2238,7 @@
         <member name="P:PayrollEngine.Client.Model.CaseField.ValueCreationMode">
             <inheritdoc/>
         </member>
-        <member name="P:PayrollEngine.Client.Model.CaseField.Optional">
+        <member name="P:PayrollEngine.Client.Model.CaseField.ValueMandatory">
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.CaseField.Order">
@@ -2270,7 +2286,7 @@
         <member name="M:PayrollEngine.Client.Model.CaseField.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.CaseField.#ctor(PayrollEngine.Client.Model.ICaseField)">
+        <member name="M:PayrollEngine.Client.Model.CaseField.#ctor(PayrollEngine.Client.Model.CaseField)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
@@ -2280,9 +2296,8 @@
         <member name="M:PayrollEngine.Client.Model.CaseField.EqualKey(PayrollEngine.Client.Model.ICaseField)">
             <inheritdoc/>
         </member>
-        <member name="M:PayrollEngine.Client.Model.CaseField.ToString">
-            <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
-            <returns>A <see cref="T:System.String" /> that represents this instance</returns>
+        <member name="M:PayrollEngine.Client.Model.CaseField.GetUiString">
+            <inheritdoc/>
         </member>
         <member name="T:PayrollEngine.Client.Model.CaseFieldReference">
             <summary>Case field reference</summary>
@@ -2341,11 +2356,11 @@
         <member name="M:PayrollEngine.Client.Model.CaseFieldSet.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.CaseFieldSet.#ctor(PayrollEngine.Client.Model.ICaseFieldSet)">
+        <member name="M:PayrollEngine.Client.Model.CaseFieldSet.#ctor(PayrollEngine.Client.Model.CaseFieldSet)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
-        <member name="M:PayrollEngine.Client.Model.CaseFieldSet.#ctor(PayrollEngine.Client.Model.ICaseField)">
+        <member name="M:PayrollEngine.Client.Model.CaseFieldSet.#ctor(PayrollEngine.Client.Model.CaseField)">
             <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.CaseFieldSet.Equals(PayrollEngine.Client.Model.ICaseFieldSet)">
@@ -2469,7 +2484,7 @@
         <member name="M:PayrollEngine.Client.Model.CaseRelation.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.CaseRelation.#ctor(PayrollEngine.Client.Model.ICaseRelation)">
+        <member name="M:PayrollEngine.Client.Model.CaseRelation.#ctor(PayrollEngine.Client.Model.CaseRelation)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
@@ -2479,9 +2494,8 @@
         <member name="M:PayrollEngine.Client.Model.CaseRelation.EqualKey(PayrollEngine.Client.Model.ICaseRelation)">
             <inheritdoc/>
         </member>
-        <member name="M:PayrollEngine.Client.Model.CaseRelation.ToString">
-            <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
-            <returns>A <see cref="T:System.String" /> that represents this instance</returns>
+        <member name="M:PayrollEngine.Client.Model.CaseRelation.GetUiString">
+            <inheritdoc/>
         </member>
         <member name="T:PayrollEngine.Client.Model.CaseRelationReference">
             <summary>Case relation reference</summary>
@@ -2544,16 +2558,40 @@
         <member name="M:PayrollEngine.Client.Model.CaseSet.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.CaseSet.#ctor(PayrollEngine.Client.Model.ICaseSet)">
+        <member name="M:PayrollEngine.Client.Model.CaseSet.#ctor(PayrollEngine.Client.Model.CaseSet)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
-        <member name="M:PayrollEngine.Client.Model.CaseSet.#ctor(PayrollEngine.Client.Model.ICase)">
+        <member name="M:PayrollEngine.Client.Model.CaseSet.#ctor(PayrollEngine.Client.Model.Case)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
         <member name="M:PayrollEngine.Client.Model.CaseSet.Equals(PayrollEngine.Client.Model.ICaseSet)">
             <inheritdoc/>
+        </member>
+        <member name="T:PayrollEngine.Client.Model.CaseSetExtensions">
+            <summary>Extension methods for the <see cref="T:PayrollEngine.Client.Model.CaseSet"/></summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.CaseSetExtensions.FindCase(PayrollEngine.Client.Model.CaseSet,System.String)">
+            <summary>
+            Find case by name, considering related cases
+            </summary>
+            <param name="caseSet">The case to search</param>
+            <param name="caseName">The name of the case</param>
+            <returns>The value case field matching the name, null on missing case field</returns>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.CaseSetExtensions.FindCaseField(PayrollEngine.Client.Model.CaseSet,System.String)">
+            <summary>
+            Find case field by name, considering related cases
+            </summary>
+            <param name="caseSet">The case to search</param>
+            <param name="caseFieldName">The name of the case field</param>
+            <returns>The value case field matching the name, null on missing case field</returns>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.CaseSetExtensions.EnsureUniqueNames(PayrollEngine.Client.Model.CaseSet)">
+            <summary>Ensure unique case names and case field names, including related cases</summary>
+            <param name="caseSet">The derived case to test</param>
+            <returns>throws a payroll exception if the derived case is invalid</returns>
         </member>
         <member name="T:PayrollEngine.Client.Model.CaseSetup">
             <summary>Payroll case value change client object</summary>
@@ -2573,16 +2611,15 @@
         <member name="M:PayrollEngine.Client.Model.CaseSetup.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.CaseSetup.#ctor(PayrollEngine.Client.Model.ICaseSetup)">
+        <member name="M:PayrollEngine.Client.Model.CaseSetup.#ctor(PayrollEngine.Client.Model.CaseSetup)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
         <member name="M:PayrollEngine.Client.Model.CaseSetup.Equals(PayrollEngine.Client.Model.ICaseSetup)">
             <inheritdoc/>
         </member>
-        <member name="M:PayrollEngine.Client.Model.CaseSetup.ToString">
-            <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
-            <returns>A <see cref="T:System.String" /> that represents this instance</returns>
+        <member name="M:PayrollEngine.Client.Model.CaseSetup.GetUiString">
+            <inheritdoc/>
         </member>
         <member name="T:PayrollEngine.Client.Model.CaseSlot">
             <summary>Case slot</summary>
@@ -2738,11 +2775,14 @@
         <member name="M:PayrollEngine.Client.Model.CaseValue.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.CaseValue.#ctor(PayrollEngine.Client.Model.ICaseValue)">
+        <member name="M:PayrollEngine.Client.Model.CaseValue.#ctor(PayrollEngine.Client.Model.CaseValue)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
         <member name="M:PayrollEngine.Client.Model.CaseValue.Equals(PayrollEngine.Client.Model.ICaseValue)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.CaseValue.GetUiString">
             <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.CaseValue.ToString">
@@ -2783,12 +2823,52 @@
         <member name="M:PayrollEngine.Client.Model.CaseValueSetup.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.CaseValueSetup.#ctor(PayrollEngine.Client.Model.ICaseValueSetup)">
+        <member name="M:PayrollEngine.Client.Model.CaseValueSetup.#ctor(PayrollEngine.Client.Model.CaseValueSetup)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
         <member name="M:PayrollEngine.Client.Model.CaseValueSetup.Equals(PayrollEngine.Client.Model.ICaseValueSetup)">
             <inheritdoc/>
+        </member>
+        <member name="T:PayrollEngine.Client.Model.ClientQueryExtensions">
+            <summary>Extension methods for queries</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.ClientQueryExtensions.AppendQueryString(PayrollEngine.Client.Model.DivisionQuery,System.String)">
+            <summary>Append the given object query key and value to the URI</summary>
+            <param name="query">The query to append</param>
+            <param name="uri">The base URI</param>
+            <returns>The combined result</returns>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.ClientQueryExtensions.BuildQueryString(PayrollEngine.Client.Model.CaseChangeQuery,System.String,System.Nullable{PayrollEngine.QueryResultType})">
+            <summary>Build a case change query</summary>
+            <param name="query">The query to append</param>
+            <param name="uri">The base URI</param>
+            <param name="resultType">The result type</param>
+            <returns>The combined result</returns>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.ClientQueryExtensions.AppendQueryString(PayrollEngine.Client.Model.CaseChangeQuery,System.String)">
+            <summary>Append the given object query key and value to the URI</summary>
+            <param name="query">The query to append</param>
+            <param name="uri">The base URI</param>
+            <returns>The combined result</returns>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.ClientQueryExtensions.AppendQueryString(PayrollEngine.Client.Model.PayrollCaseChangeQuery,System.String)">
+            <summary>Append the given object query key and value to the URI</summary>
+            <param name="query">The query to append</param>
+            <param name="uri">The base URI</param>
+            <returns>The combined result</returns>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.ClientQueryExtensions.AppendQueryString(PayrollEngine.Client.Model.CaseValueQuery,System.String)">
+            <summary>Append the given object query key and value to the URI</summary>
+            <param name="query">The query to append</param>
+            <param name="uri">The base URI</param>
+            <returns>The combined result</returns>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.ClientQueryExtensions.AppendQueryString(PayrollEngine.Client.Model.ReportTemplateQuery,System.String)">
+            <summary>Append the given object query key and value to the URI</summary>
+            <param name="query">The query to append</param>
+            <param name="uri">The base URI</param>
+            <returns>The combined result</returns>
         </member>
         <member name="T:PayrollEngine.Client.Model.ClusterSet">
             <summary>Cluster set</summary>
@@ -2819,13 +2899,13 @@
         <member name="T:PayrollEngine.Client.Model.Collector">
             <summary>The payroll collector client object</summary>
         </member>
-        <member name="P:PayrollEngine.Client.Model.Collector.CollectType">
-            <inheritdoc/>
-        </member>
         <member name="P:PayrollEngine.Client.Model.Collector.Name">
             <summary>The collector name</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.Collector.NameLocalizations">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.Collector.CollectType">
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.Collector.OverrideType">
@@ -2873,7 +2953,7 @@
         <member name="M:PayrollEngine.Client.Model.Collector.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.Collector.#ctor(PayrollEngine.Client.Model.ICollector)">
+        <member name="M:PayrollEngine.Client.Model.Collector.#ctor(PayrollEngine.Client.Model.Collector)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
@@ -2883,9 +2963,8 @@
         <member name="M:PayrollEngine.Client.Model.Collector.EqualKey(PayrollEngine.Client.Model.ICollector)">
             <inheritdoc/>
         </member>
-        <member name="M:PayrollEngine.Client.Model.Collector.ToString">
-            <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
-            <returns>A <see cref="T:System.String" /> that represents this instance</returns>
+        <member name="M:PayrollEngine.Client.Model.Collector.GetUiString">
+            <inheritdoc/>
         </member>
         <member name="T:PayrollEngine.Client.Model.CollectorCustomResult">
             <summary>The collector custom result client object</summary>
@@ -2923,11 +3002,14 @@
         <member name="M:PayrollEngine.Client.Model.CollectorCustomResult.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.CollectorCustomResult.#ctor(PayrollEngine.Client.Model.ICollectorCustomResult)">
+        <member name="M:PayrollEngine.Client.Model.CollectorCustomResult.#ctor(PayrollEngine.Client.Model.CollectorCustomResult)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
         <member name="M:PayrollEngine.Client.Model.CollectorCustomResult.Equals(PayrollEngine.Client.Model.ICollectorCustomResult)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.CollectorCustomResult.GetUiString">
             <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.CollectorCustomResult.ToString">
@@ -2973,7 +3055,7 @@
         <member name="M:PayrollEngine.Client.Model.CollectorResult.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.CollectorResult.#ctor(PayrollEngine.Client.Model.ICollectorResult)">
+        <member name="M:PayrollEngine.Client.Model.CollectorResult.#ctor(PayrollEngine.Client.Model.CollectorResult)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
@@ -2981,6 +3063,9 @@
             <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.CollectorResult.AlmostEqualValue(System.Nullable{System.Decimal},System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.CollectorResult.GetUiString">
             <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.CollectorResult.ToString">
@@ -2996,11 +3081,11 @@
         <member name="M:PayrollEngine.Client.Model.CollectorResultSet.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.CollectorResultSet.#ctor(PayrollEngine.Client.Model.ICollectorResult)">
+        <member name="M:PayrollEngine.Client.Model.CollectorResultSet.#ctor(PayrollEngine.Client.Model.CollectorResult)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
-        <member name="M:PayrollEngine.Client.Model.CollectorResultSet.#ctor(PayrollEngine.Client.Model.ICollectorResultSet)">
+        <member name="M:PayrollEngine.Client.Model.CollectorResultSet.#ctor(PayrollEngine.Client.Model.CollectorResultSet)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
@@ -3026,7 +3111,7 @@
         <member name="M:PayrollEngine.Client.Model.ConsolidatedPayrollResult.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.ConsolidatedPayrollResult.#ctor(PayrollEngine.Client.Model.IConsolidatedPayrollResult)">
+        <member name="M:PayrollEngine.Client.Model.ConsolidatedPayrollResult.#ctor(PayrollEngine.Client.Model.ConsolidatedPayrollResult)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
@@ -3055,7 +3140,7 @@
         <member name="M:PayrollEngine.Client.Model.Division.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.Division.#ctor(PayrollEngine.Client.Model.IDivision)">
+        <member name="M:PayrollEngine.Client.Model.Division.#ctor(PayrollEngine.Client.Model.Division)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
@@ -3065,9 +3150,8 @@
         <member name="M:PayrollEngine.Client.Model.Division.EqualKey(PayrollEngine.Client.Model.IDivision)">
             <inheritdoc/>
         </member>
-        <member name="M:PayrollEngine.Client.Model.Division.ToString">
-            <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
-            <returns>A <see cref="T:System.String" /> that represents this instance</returns>
+        <member name="M:PayrollEngine.Client.Model.Division.GetUiString">
+            <inheritdoc/>
         </member>
         <member name="T:PayrollEngine.Client.Model.DivisionQuery">
             <summary>
@@ -3106,7 +3190,7 @@
         <member name="M:PayrollEngine.Client.Model.Employee.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.Employee.#ctor(PayrollEngine.Client.Model.IEmployee)">
+        <member name="M:PayrollEngine.Client.Model.Employee.#ctor(PayrollEngine.Client.Model.Employee)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
@@ -3116,9 +3200,8 @@
         <member name="M:PayrollEngine.Client.Model.Employee.EqualKey(PayrollEngine.Client.Model.IEmployee)">
             <inheritdoc/>
         </member>
-        <member name="M:PayrollEngine.Client.Model.Employee.ToString">
-            <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
-            <returns>A <see cref="T:System.String" /> that represents this instance</returns>
+        <member name="M:PayrollEngine.Client.Model.Employee.GetUiString">
+            <inheritdoc/>
         </member>
         <member name="T:PayrollEngine.Client.Model.EmployeeSet">
             <summary>The employee set client object</summary>
@@ -3132,11 +3215,11 @@
         <member name="M:PayrollEngine.Client.Model.EmployeeSet.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.EmployeeSet.#ctor(PayrollEngine.Client.Model.IEmployee)">
+        <member name="M:PayrollEngine.Client.Model.EmployeeSet.#ctor(PayrollEngine.Client.Model.Employee)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
-        <member name="M:PayrollEngine.Client.Model.EmployeeSet.#ctor(PayrollEngine.Client.Model.IEmployeeSet)">
+        <member name="M:PayrollEngine.Client.Model.EmployeeSet.#ctor(PayrollEngine.Client.Model.EmployeeSet)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
@@ -3149,7 +3232,7 @@
         <member name="P:PayrollEngine.Client.Model.Exchange.Tenants">
             <inheritdoc/>
         </member>
-        <member name="P:PayrollEngine.Client.Model.Exchange.RegulationPermissions">
+        <member name="P:PayrollEngine.Client.Model.Exchange.RegulationShares">
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.Exchange.CreatedObjectDate">
@@ -3158,7 +3241,7 @@
         <member name="M:PayrollEngine.Client.Model.Exchange.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.Exchange.#ctor(PayrollEngine.Client.Model.IExchange)">
+        <member name="M:PayrollEngine.Client.Model.Exchange.#ctor(PayrollEngine.Client.Model.Exchange)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
@@ -3229,7 +3312,7 @@
         <member name="M:PayrollEngine.Client.Model.ExchangeTenant.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.ExchangeTenant.#ctor(PayrollEngine.Client.Model.IExchangeTenant)">
+        <member name="M:PayrollEngine.Client.Model.ExchangeTenant.#ctor(PayrollEngine.Client.Model.ExchangeTenant)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
@@ -3484,8 +3567,8 @@
         <member name="P:PayrollEngine.Client.Model.ICaseField.ValueCreationMode">
             <summary>The case value creation mode</summary>
         </member>
-        <member name="P:PayrollEngine.Client.Model.ICaseField.Optional">
-            <summary>Optional case field</summary>
+        <member name="P:PayrollEngine.Client.Model.ICaseField.ValueMandatory">
+            <summary>Mandatory case field value</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.ICaseField.Order">
             <summary>The case field order</summary>
@@ -3889,8 +3972,8 @@
         <member name="P:PayrollEngine.Client.Model.IExchange.Tenants">
             <summary>The tenants</summary>
         </member>
-        <member name="P:PayrollEngine.Client.Model.IExchange.RegulationPermissions">
-            <summary>The regulation permissions </summary>
+        <member name="P:PayrollEngine.Client.Model.IExchange.RegulationShares">
+            <summary>The regulation shares</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.IExchange.CreatedObjectDate">
             <summary>The default created date for new objects</summary>
@@ -4044,29 +4127,8 @@
         <member name="P:PayrollEngine.Client.Model.ILookupValue.RangeValue">
             <summary>The lookup range value</summary>
         </member>
-        <member name="T:PayrollEngine.Client.Model.IModel">
-            <summary>Base for all Payroll models</summary>
-        </member>
-        <member name="P:PayrollEngine.Client.Model.IModel.Id">
-            <summary>The unique object id (immutable)</summary>
-        </member>
-        <member name="P:PayrollEngine.Client.Model.IModel.IsExistingObject">
-            <summary>Test for existing object (opposite of <see cref="P:PayrollEngine.Client.Model.IModel.IsNewObject"/>)</summary>
-        </member>
-        <member name="P:PayrollEngine.Client.Model.IModel.IsNewObject">
-            <summary>Test for new object (opposite of <see cref="P:PayrollEngine.Client.Model.IModel.IsExistingObject"/>)</summary>
-        </member>
-        <member name="P:PayrollEngine.Client.Model.IModel.Status">
-            <summary>The status of the object</summary>
-        </member>
-        <member name="P:PayrollEngine.Client.Model.IModel.Created">
-            <summary>The date which the client object was created (immutable)</summary>
-        </member>
-        <member name="P:PayrollEngine.Client.Model.IModel.Updated">
-            <summary>The date which the client object was last updated (immutable)</summary>
-        </member>
-        <member name="P:PayrollEngine.Client.Model.IModel.UpdateMode">
-            <summary>The object update mode</summary>
+        <member name="P:PayrollEngine.Client.Model.ILookupValue.OverrideType">
+            <summary>The override type</summary>
         </member>
         <member name="T:PayrollEngine.Client.Model.IPayroll">
             <summary>The payroll client object</summary>
@@ -4324,6 +4386,9 @@
         <member name="P:PayrollEngine.Client.Model.IPayrun.Name">
             <summary>The payrun name</summary>
         </member>
+        <member name="P:PayrollEngine.Client.Model.IPayrun.NameLocalizations">
+            <summary>The localized payrun name</summary>
+        </member>
         <member name="P:PayrollEngine.Client.Model.IPayrun.DefaultReason">
             <summary>The default payrun reason</summary>
         </member>
@@ -4372,6 +4437,9 @@
         <member name="P:PayrollEngine.Client.Model.IPayrun.Calendar">
             <summary>The payrun calendar</summary>
         </member>
+        <member name="P:PayrollEngine.Client.Model.IPayrun.PayrunParameters">
+            <summary>The payrun parameters</summary>
+        </member>
         <member name="T:PayrollEngine.Client.Model.IPayrunJob">
             <summary>The payrun job client object</summary>
         </member>
@@ -4396,11 +4464,20 @@
         <member name="P:PayrollEngine.Client.Model.IPayrunJob.DivisionId">
             <summary>The division id (immutable)</summary>
         </member>
-        <member name="P:PayrollEngine.Client.Model.IPayrunJob.UserId">
-            <summary>The user id (immutable)</summary>
-        </member>
         <member name="P:PayrollEngine.Client.Model.IPayrunJob.ParentJobId">
             <summary>The parent payrun job id, e.g. the parent retro pay run job (immutable)</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.IPayrunJob.CreatedUserId">
+            <summary>The created user id (immutable)</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.IPayrunJob.ReleasedUserId">
+            <summary>The release user id (immutable)</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.IPayrunJob.ProcessedUserId">
+            <summary>The processed user id (immutable)</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.IPayrunJob.FinishedUserId">
+            <summary>The finished user id (immutable)</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.IPayrunJob.UserIdentifier">
             <summary>The user unique identifier (client only)</summary>
@@ -4444,8 +4521,23 @@
         <member name="P:PayrollEngine.Client.Model.IPayrunJob.EvaluationDate">
             <summary>The evaluation date (immutable)</summary>
         </member>
-        <member name="P:PayrollEngine.Client.Model.IPayrunJob.Reason">
-            <summary>The execution reason (immutable)</summary>
+        <member name="P:PayrollEngine.Client.Model.IPayrunJob.Processed">
+            <summary>The job process date (immutable)</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.IPayrunJob.Finished">
+            <summary>The job finish date (immutable)</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.IPayrunJob.CreatedReason">
+            <summary>The create reason (immutable)</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.IPayrunJob.ReleasedReason">
+            <summary>The release reason (immutable)</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.IPayrunJob.ProcessedReason">
+            <summary>The process reason (immutable)</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.IPayrunJob.FinishedReason">
+            <summary>The finished reason (immutable)</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.IPayrunJob.TotalEmployeeCount">
             <summary>Total employee count (immutable)</summary>
@@ -4636,33 +4728,6 @@
         <member name="P:PayrollEngine.Client.Model.IRegulation.BaseRegulations">
             <summary>Required base regulations</summary>
         </member>
-        <member name="T:PayrollEngine.Client.Model.IRegulationPermission">
-            <summary>The regulation permission client object</summary>
-        </member>
-        <member name="P:PayrollEngine.Client.Model.IRegulationPermission.TenantId">
-            <summary>The tenant id</summary>
-        </member>
-        <member name="P:PayrollEngine.Client.Model.IRegulationPermission.TenantIdentifier">
-            <summary>The tenant identifier</summary>
-        </member>
-        <member name="P:PayrollEngine.Client.Model.IRegulationPermission.RegulationId">
-            <summary>The regulation id</summary>
-        </member>
-        <member name="P:PayrollEngine.Client.Model.IRegulationPermission.RegulationName">
-            <summary>The regulation name</summary>
-        </member>
-        <member name="P:PayrollEngine.Client.Model.IRegulationPermission.PermissionTenantId">
-            <summary>The permission tenant id</summary>
-        </member>
-        <member name="P:PayrollEngine.Client.Model.IRegulationPermission.PermissionTenantIdentifier">
-            <summary>The permission tenant identifier</summary>
-        </member>
-        <member name="P:PayrollEngine.Client.Model.IRegulationPermission.PermissionDivisionId">
-            <summary>The permission division id</summary>
-        </member>
-        <member name="P:PayrollEngine.Client.Model.IRegulationPermission.PermissionDivisionName">
-            <summary>The permission division name</summary>
-        </member>
         <member name="T:PayrollEngine.Client.Model.IRegulationSet">
             <summary>The payroll regulation client object</summary>
         </member>
@@ -4686,6 +4751,33 @@
         </member>
         <member name="P:PayrollEngine.Client.Model.IRegulationSet.Reports">
             <summary>The regulation reports</summary>
+        </member>
+        <member name="T:PayrollEngine.Client.Model.IRegulationShare">
+            <summary>The regulation share client object</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.IRegulationShare.ProviderTenantId">
+            <summary>The provider tenant id</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.IRegulationShare.ProviderTenantIdentifier">
+            <summary>The provider tenant identifier (client only)</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.IRegulationShare.ProviderRegulationId">
+            <summary>The provider regulation id</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.IRegulationShare.ProviderRegulationName">
+            <summary>The provider regulation name (client only)</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.IRegulationShare.ConsumerTenantId">
+            <summary>The consumer tenant id</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.IRegulationShare.ConsumerTenantIdentifier">
+            <summary>The consumer tenant identifier (client only)</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.IRegulationShare.ConsumerDivisionId">
+            <summary>The consumer division id</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.IRegulationShare.ConsumerDivisionName">
+            <summary>The consumer division name (client only)</summary>
         </member>
         <member name="T:PayrollEngine.Client.Model.IReport">
             <summary>The report client object</summary>
@@ -4731,6 +4823,9 @@
         </member>
         <member name="P:PayrollEngine.Client.Model.IReport.EndExpressionFile">
             <summary>The report end expression file</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.IReport.OverrideType">
+            <summary>The override type</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.IReport.Clusters">
             <summary>The report clusters</summary>
@@ -4780,6 +4875,9 @@
         <member name="P:PayrollEngine.Client.Model.IReportParameter.ParameterType">
             <summary>The parameter type</summary>
         </member>
+        <member name="P:PayrollEngine.Client.Model.IReportParameter.OverrideType">
+            <summary>The override type</summary>
+        </member>
         <member name="T:PayrollEngine.Client.Model.IReportSet">
             <summary>The report set client object</summary>
         </member>
@@ -4794,6 +4892,9 @@
         </member>
         <member name="T:PayrollEngine.Client.Model.IReportTemplate">
             <summary>The report template client object</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.IReportTemplate.Name">
+            <summary>The payroll report template name</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.IReportTemplate.Language">
             <summary>The report language</summary>
@@ -4815,6 +4916,9 @@
         </member>
         <member name="P:PayrollEngine.Client.Model.IReportTemplate.Resource">
             <summary>The report external resource</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.IReportTemplate.OverrideType">
+            <summary>The override type</summary>
         </member>
         <member name="T:PayrollEngine.Client.Model.IRetroPayrunJob">
             <summary>The retro payrun job client object</summary>
@@ -4839,6 +4943,9 @@
         </member>
         <member name="P:PayrollEngine.Client.Model.IScript.ValueFile">
             <summary>The script file name</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.IScript.OverrideType">
+            <summary>The override type</summary>
         </member>
         <member name="T:PayrollEngine.Client.Model.ITask">
             <summary>The payroll task object</summary>
@@ -4905,6 +5012,9 @@
         </member>
         <member name="P:PayrollEngine.Client.Model.IUser.Language">
             <summary>The users language</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.IUser.Supervisor">
+            <summary>Supervisor user</summary>
         </member>
         <member name="T:PayrollEngine.Client.Model.IWageType">
             <summary>The payroll wage type client object</summary>
@@ -5113,10 +5223,13 @@
         <member name="M:PayrollEngine.Client.Model.Log.#ctor">
             <inheritdoc/>
         </member>
-        <member name="M:PayrollEngine.Client.Model.Log.#ctor(PayrollEngine.Client.Model.ILog)">
+        <member name="M:PayrollEngine.Client.Model.Log.#ctor(PayrollEngine.Client.Model.Log)">
             <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.Log.Equals(PayrollEngine.Client.Model.ILog)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.Log.GetUiString">
             <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.Log.ToString">
@@ -5144,10 +5257,13 @@
         <member name="P:PayrollEngine.Client.Model.Lookup.RangeSize">
             <inheritdoc/>
         </member>
+        <member name="P:PayrollEngine.Client.Model.Lookup.Attributes">
+            <inheritdoc/>
+        </member>
         <member name="M:PayrollEngine.Client.Model.Lookup.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.Lookup.#ctor(PayrollEngine.Client.Model.ILookup)">
+        <member name="M:PayrollEngine.Client.Model.Lookup.#ctor(PayrollEngine.Client.Model.Lookup)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
@@ -5157,9 +5273,8 @@
         <member name="M:PayrollEngine.Client.Model.Lookup.EqualKey(PayrollEngine.Client.Model.ILookup)">
             <inheritdoc/>
         </member>
-        <member name="M:PayrollEngine.Client.Model.Lookup.ToString">
-            <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
-            <returns>A <see cref="T:System.String" /> that represents this instance</returns>
+        <member name="M:PayrollEngine.Client.Model.Lookup.GetUiString">
+            <inheritdoc/>
         </member>
         <member name="T:PayrollEngine.Client.Model.LookupData">
             <summary>Localized lookup for UI cases like list/grid selections</summary>
@@ -5179,7 +5294,7 @@
         <member name="M:PayrollEngine.Client.Model.LookupData.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.LookupData.#ctor(PayrollEngine.Client.Model.ILookupData)">
+        <member name="M:PayrollEngine.Client.Model.LookupData.#ctor(PayrollEngine.Client.Model.LookupData)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
@@ -5199,7 +5314,7 @@
         <member name="M:PayrollEngine.Client.Model.LookupSet.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.LookupSet.#ctor(PayrollEngine.Client.Model.ILookupSet)">
+        <member name="M:PayrollEngine.Client.Model.LookupSet.#ctor(PayrollEngine.Client.Model.LookupSet)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
@@ -5256,10 +5371,13 @@
         <member name="P:PayrollEngine.Client.Model.LookupValue.RangeValue">
             <inheritdoc/>
         </member>
+        <member name="P:PayrollEngine.Client.Model.LookupValue.OverrideType">
+            <inheritdoc/>
+        </member>
         <member name="M:PayrollEngine.Client.Model.LookupValue.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.LookupValue.#ctor(PayrollEngine.Client.Model.ILookupValue)">
+        <member name="M:PayrollEngine.Client.Model.LookupValue.#ctor(PayrollEngine.Client.Model.LookupValue)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
@@ -5269,9 +5387,8 @@
         <member name="M:PayrollEngine.Client.Model.LookupValue.EqualKey(PayrollEngine.Client.Model.ILookupValue)">
             <inheritdoc/>
         </member>
-        <member name="M:PayrollEngine.Client.Model.LookupValue.ToString">
-            <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
-            <returns>A <see cref="T:System.String" /> that represents this instance</returns>
+        <member name="M:PayrollEngine.Client.Model.LookupValue.GetUiString">
+            <inheritdoc/>
         </member>
         <member name="T:PayrollEngine.Client.Model.LookupValueData">
             <summary>Lookup value date in a specific language</summary>
@@ -5326,9 +5443,12 @@
         <member name="M:PayrollEngine.Client.Model.Model.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.Model.#ctor(PayrollEngine.Client.Model.IModel)">
+        <member name="M:PayrollEngine.Client.Model.Model.#ctor(PayrollEngine.Client.Model.Model)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.Model.GetUiString">
+            <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.Model.ToString">
             <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
@@ -5397,7 +5517,7 @@
         <member name="M:PayrollEngine.Client.Model.Payroll.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.Payroll.#ctor(PayrollEngine.Client.Model.IPayroll)">
+        <member name="M:PayrollEngine.Client.Model.Payroll.#ctor(PayrollEngine.Client.Model.Payroll)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
@@ -5407,9 +5527,8 @@
         <member name="M:PayrollEngine.Client.Model.Payroll.EqualKey(PayrollEngine.Client.Model.IPayroll)">
             <inheritdoc/>
         </member>
-        <member name="M:PayrollEngine.Client.Model.Payroll.ToString">
-            <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
-            <returns>A <see cref="T:System.String" /> that represents this instance</returns>
+        <member name="M:PayrollEngine.Client.Model.Payroll.GetUiString">
+            <inheritdoc/>
         </member>
         <member name="T:PayrollEngine.Client.Model.PayrollCaseChangeQuery">
             <summary>
@@ -5464,7 +5583,7 @@
         <member name="M:PayrollEngine.Client.Model.PayrollLayer.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.PayrollLayer.#ctor(PayrollEngine.Client.Model.IPayrollLayer)">
+        <member name="M:PayrollEngine.Client.Model.PayrollLayer.#ctor(PayrollEngine.Client.Model.PayrollLayer)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
@@ -5474,9 +5593,8 @@
         <member name="M:PayrollEngine.Client.Model.PayrollLayer.EqualKey(PayrollEngine.Client.Model.IPayrollLayer)">
             <inheritdoc/>
         </member>
-        <member name="M:PayrollEngine.Client.Model.PayrollLayer.ToString">
-            <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
-            <returns>A <see cref="T:System.String" /> that represents this instance</returns>
+        <member name="M:PayrollEngine.Client.Model.PayrollLayer.GetUiString">
+            <inheritdoc/>
         </member>
         <member name="T:PayrollEngine.Client.Model.PayrollResult">
             <summary>The payroll result info client object</summary>
@@ -5523,11 +5641,14 @@
         <member name="M:PayrollEngine.Client.Model.PayrollResult.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.PayrollResult.#ctor(PayrollEngine.Client.Model.IPayrollResult)">
+        <member name="M:PayrollEngine.Client.Model.PayrollResult.#ctor(PayrollEngine.Client.Model.PayrollResult)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
         <member name="M:PayrollEngine.Client.Model.PayrollResult.Equals(PayrollEngine.Client.Model.IPayrollResult)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.PayrollResult.GetUiString">
             <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.PayrollResult.ToString">
@@ -5552,11 +5673,11 @@
         <member name="M:PayrollEngine.Client.Model.PayrollResultSet.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.PayrollResultSet.#ctor(PayrollEngine.Client.Model.IPayrollResult)">
+        <member name="M:PayrollEngine.Client.Model.PayrollResultSet.#ctor(PayrollEngine.Client.Model.PayrollResult)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
-        <member name="M:PayrollEngine.Client.Model.PayrollResultSet.#ctor(PayrollEngine.Client.Model.IPayrollResultSet)">
+        <member name="M:PayrollEngine.Client.Model.PayrollResultSet.#ctor(PayrollEngine.Client.Model.PayrollResultSet)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
@@ -5705,11 +5826,11 @@
         <member name="M:PayrollEngine.Client.Model.PayrollSet.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.PayrollSet.#ctor(PayrollEngine.Client.Model.IPayroll)">
+        <member name="M:PayrollEngine.Client.Model.PayrollSet.#ctor(PayrollEngine.Client.Model.Payroll)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
-        <member name="M:PayrollEngine.Client.Model.PayrollSet.#ctor(PayrollEngine.Client.Model.IPayrollSet)">
+        <member name="M:PayrollEngine.Client.Model.PayrollSet.#ctor(PayrollEngine.Client.Model.PayrollSet)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
@@ -5727,6 +5848,9 @@
         </member>
         <member name="P:PayrollEngine.Client.Model.Payrun.Name">
             <summary>The payrun name</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.Payrun.NameLocalizations">
+            <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.Payrun.DefaultReason">
             <inheritdoc/>
@@ -5776,10 +5900,13 @@
         <member name="P:PayrollEngine.Client.Model.Payrun.Calendar">
             <inheritdoc/>
         </member>
+        <member name="P:PayrollEngine.Client.Model.Payrun.PayrunParameters">
+            <summary>The payrun parameters</summary>
+        </member>
         <member name="M:PayrollEngine.Client.Model.Payrun.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.Payrun.#ctor(PayrollEngine.Client.Model.IPayrun)">
+        <member name="M:PayrollEngine.Client.Model.Payrun.#ctor(PayrollEngine.Client.Model.Payrun)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
@@ -5789,9 +5916,8 @@
         <member name="M:PayrollEngine.Client.Model.Payrun.EqualKey(PayrollEngine.Client.Model.IPayrun)">
             <inheritdoc/>
         </member>
-        <member name="M:PayrollEngine.Client.Model.Payrun.ToString">
-            <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
-            <returns>A <see cref="T:System.String" /> that represents this instance</returns>
+        <member name="M:PayrollEngine.Client.Model.Payrun.GetUiString">
+            <inheritdoc/>
         </member>
         <member name="T:PayrollEngine.Client.Model.PayrunJob">
             <summary>The payrun job client object</summary>
@@ -5817,7 +5943,16 @@
         <member name="P:PayrollEngine.Client.Model.PayrunJob.DivisionId">
             <inheritdoc/>
         </member>
-        <member name="P:PayrollEngine.Client.Model.PayrunJob.UserId">
+        <member name="P:PayrollEngine.Client.Model.PayrunJob.CreatedUserId">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.PayrunJob.ReleasedUserId">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.PayrunJob.ProcessedUserId">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.PayrunJob.FinishedUserId">
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.PayrunJob.UserIdentifier">
@@ -5865,7 +6000,25 @@
         <member name="P:PayrollEngine.Client.Model.PayrunJob.EvaluationDate">
             <inheritdoc/>
         </member>
-        <member name="P:PayrollEngine.Client.Model.PayrunJob.Reason">
+        <member name="P:PayrollEngine.Client.Model.PayrunJob.Released">
+            <summary>The job release date (immutable)</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.PayrunJob.Processed">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.PayrunJob.Finished">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.PayrunJob.CreatedReason">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.PayrunJob.ReleasedReason">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.PayrunJob.ProcessedReason">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.PayrunJob.FinishedReason">
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.PayrunJob.TotalEmployeeCount">
@@ -5895,7 +6048,7 @@
         <member name="M:PayrollEngine.Client.Model.PayrunJob.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.PayrunJob.#ctor(PayrollEngine.Client.Model.IPayrunJob)">
+        <member name="M:PayrollEngine.Client.Model.PayrunJob.#ctor(PayrollEngine.Client.Model.PayrunJob)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
@@ -5907,6 +6060,9 @@
             Get job time period
             </summary>
             <returns>Date period from the job start until the job end</returns>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.PayrunJob.GetUiString">
+            <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.PayrunJob.ToString">
             <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
@@ -5921,11 +6077,14 @@
         <member name="M:PayrollEngine.Client.Model.PayrunJobEmployee.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.PayrunJobEmployee.#ctor(PayrollEngine.Client.Model.IPayrunJobEmployee)">
+        <member name="M:PayrollEngine.Client.Model.PayrunJobEmployee.#ctor(PayrollEngine.Client.Model.PayrunJobEmployee)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
         <member name="M:PayrollEngine.Client.Model.PayrunJobEmployee.Equals(PayrollEngine.Client.Model.IPayrunJobEmployee)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.PayrunJobEmployee.GetUiString">
             <inheritdoc/>
         </member>
         <member name="T:PayrollEngine.Client.Model.PayrunJobInvocation">
@@ -6003,7 +6162,7 @@
         <member name="M:PayrollEngine.Client.Model.PayrunJobInvocation.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.PayrunJobInvocation.#ctor(PayrollEngine.Client.Model.IPayrunJobInvocation)">
+        <member name="M:PayrollEngine.Client.Model.PayrunJobInvocation.#ctor(PayrollEngine.Client.Model.PayrunJobInvocation)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
@@ -6040,7 +6199,7 @@
         <member name="M:PayrollEngine.Client.Model.PayrunParameter.#ctor">
             <summary>Initializes a new instance of the <see cref="T:PayrollEngine.Client.Model.PayrunParameter"/> class</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.PayrunParameter.#ctor(PayrollEngine.Client.Model.IPayrunParameter)">
+        <member name="M:PayrollEngine.Client.Model.PayrunParameter.#ctor(PayrollEngine.Client.Model.PayrunParameter)">
             <summary>Initializes a new instance of the <see cref="T:PayrollEngine.Client.Model.PayrunParameter"/> class</summary>
             <param name="copySource">The copy source.</param>
         </member>
@@ -6050,9 +6209,8 @@
         <member name="M:PayrollEngine.Client.Model.PayrunParameter.EqualKey(PayrollEngine.Client.Model.IPayrunParameter)">
             <inheritdoc/>
         </member>
-        <member name="M:PayrollEngine.Client.Model.PayrunParameter.ToString">
-            <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
-            <returns>A <see cref="T:System.String" /> that represents this instance</returns>
+        <member name="M:PayrollEngine.Client.Model.PayrunParameter.GetUiString">
+            <inheritdoc/>
         </member>
         <member name="T:PayrollEngine.Client.Model.PayrunResult">
             <summary>The payrun result client object</summary>
@@ -6096,11 +6254,14 @@
         <member name="M:PayrollEngine.Client.Model.PayrunResult.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.PayrunResult.#ctor(PayrollEngine.Client.Model.IPayrunResult)">
+        <member name="M:PayrollEngine.Client.Model.PayrunResult.#ctor(PayrollEngine.Client.Model.PayrunResult)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
         <member name="M:PayrollEngine.Client.Model.PayrunResult.Equals(PayrollEngine.Client.Model.IPayrunResult)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.PayrunResult.GetUiString">
             <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.PayrunResult.ToString">
@@ -6143,7 +6304,7 @@
         <member name="M:PayrollEngine.Client.Model.Regulation.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.Regulation.#ctor(PayrollEngine.Client.Model.IRegulation)">
+        <member name="M:PayrollEngine.Client.Model.Regulation.#ctor(PayrollEngine.Client.Model.Regulation)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
@@ -6153,56 +6314,8 @@
         <member name="M:PayrollEngine.Client.Model.Regulation.EqualKey(PayrollEngine.Client.Model.IRegulation)">
             <inheritdoc/>
         </member>
-        <member name="M:PayrollEngine.Client.Model.Regulation.ToString">
-            <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
-            <returns>A <see cref="T:System.String" /> that represents this instance</returns>
-        </member>
-        <member name="T:PayrollEngine.Client.Model.RegulationPermission">
-            <summary>The tenant client object</summary>
-        </member>
-        <member name="P:PayrollEngine.Client.Model.RegulationPermission.TenantId">
+        <member name="M:PayrollEngine.Client.Model.Regulation.GetUiString">
             <inheritdoc/>
-        </member>
-        <member name="P:PayrollEngine.Client.Model.RegulationPermission.TenantIdentifier">
-            <inheritdoc/>
-        </member>
-        <member name="P:PayrollEngine.Client.Model.RegulationPermission.RegulationId">
-            <inheritdoc/>
-        </member>
-        <member name="P:PayrollEngine.Client.Model.RegulationPermission.RegulationName">
-            <inheritdoc/>
-        </member>
-        <member name="P:PayrollEngine.Client.Model.RegulationPermission.PermissionTenantId">
-            <inheritdoc/>
-        </member>
-        <member name="P:PayrollEngine.Client.Model.RegulationPermission.PermissionTenantIdentifier">
-            <inheritdoc/>
-        </member>
-        <member name="P:PayrollEngine.Client.Model.RegulationPermission.PermissionDivisionId">
-            <inheritdoc/>
-        </member>
-        <member name="P:PayrollEngine.Client.Model.RegulationPermission.PermissionDivisionName">
-            <inheritdoc/>
-        </member>
-        <member name="P:PayrollEngine.Client.Model.RegulationPermission.Attributes">
-            <inheritdoc/>
-        </member>
-        <member name="M:PayrollEngine.Client.Model.RegulationPermission.#ctor">
-            <summary>Initializes a new instance</summary>
-        </member>
-        <member name="M:PayrollEngine.Client.Model.RegulationPermission.#ctor(PayrollEngine.Client.Model.IRegulationPermission)">
-            <summary>Initializes a new instance from a copy</summary>
-            <param name="copySource">The copy source</param>
-        </member>
-        <member name="M:PayrollEngine.Client.Model.RegulationPermission.Equals(PayrollEngine.Client.Model.IRegulationPermission)">
-            <inheritdoc/>
-        </member>
-        <member name="M:PayrollEngine.Client.Model.RegulationPermission.EqualKey(PayrollEngine.Client.Model.IRegulationPermission)">
-            <inheritdoc/>
-        </member>
-        <member name="M:PayrollEngine.Client.Model.RegulationPermission.ToString">
-            <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
-            <returns>A <see cref="T:System.String" /> that represents this instance</returns>
         </member>
         <member name="T:PayrollEngine.Client.Model.RegulationSet">
             <summary>The payroll regulation set client object</summary>
@@ -6231,16 +6344,66 @@
         <member name="M:PayrollEngine.Client.Model.RegulationSet.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.RegulationSet.#ctor(PayrollEngine.Client.Model.IRegulation)">
+        <member name="M:PayrollEngine.Client.Model.RegulationSet.#ctor(PayrollEngine.Client.Model.Regulation)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
-        <member name="M:PayrollEngine.Client.Model.RegulationSet.#ctor(PayrollEngine.Client.Model.IRegulationSet)">
+        <member name="M:PayrollEngine.Client.Model.RegulationSet.#ctor(PayrollEngine.Client.Model.RegulationSet)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
         <member name="M:PayrollEngine.Client.Model.RegulationSet.Equals(PayrollEngine.Client.Model.IRegulationSet)">
             <inheritdoc/>
+        </member>
+        <member name="T:PayrollEngine.Client.Model.RegulationShare">
+            <summary>The tenant client object</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.RegulationShare.ProviderTenantId">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.RegulationShare.ProviderTenantIdentifier">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.RegulationShare.ProviderRegulationId">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.RegulationShare.ProviderRegulationName">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.RegulationShare.ConsumerTenantId">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.RegulationShare.ConsumerTenantIdentifier">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.RegulationShare.ConsumerDivisionId">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.RegulationShare.ConsumerDivisionName">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.RegulationShare.Attributes">
+            <inheritdoc/>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.RegulationShare.#ctor">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.RegulationShare.#ctor(PayrollEngine.Client.Model.RegulationShare)">
+            <summary>Initializes a new instance from a copy</summary>
+            <param name="copySource">The copy source</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.RegulationShare.Equals(PayrollEngine.Client.Model.IRegulationShare)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.RegulationShare.EqualKey(PayrollEngine.Client.Model.IRegulationShare)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.RegulationShare.GetUiString">
+            <inheritdoc/>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.RegulationShare.ToString">
+            <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
+            <returns>A <see cref="T:System.String" /> that represents this instance</returns>
         </member>
         <member name="T:PayrollEngine.Client.Model.Report">
             <summary>The payroll report client object</summary>
@@ -6287,6 +6450,9 @@
         <member name="P:PayrollEngine.Client.Model.Report.EndExpressionFile">
             <inheritdoc/>
         </member>
+        <member name="P:PayrollEngine.Client.Model.Report.OverrideType">
+            <inheritdoc/>
+        </member>
         <member name="P:PayrollEngine.Client.Model.Report.Attributes">
             <inheritdoc/>
         </member>
@@ -6296,7 +6462,7 @@
         <member name="M:PayrollEngine.Client.Model.Report.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.Report.#ctor(PayrollEngine.Client.Model.IReport)">
+        <member name="M:PayrollEngine.Client.Model.Report.#ctor(PayrollEngine.Client.Model.Report)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
@@ -6306,9 +6472,8 @@
         <member name="M:PayrollEngine.Client.Model.Report.EqualKey(PayrollEngine.Client.Model.IReport)">
             <inheritdoc/>
         </member>
-        <member name="M:PayrollEngine.Client.Model.Report.ToString">
-            <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
-            <returns>A <see cref="T:System.String" /> that represents this instance</returns>
+        <member name="M:PayrollEngine.Client.Model.Report.GetUiString">
+            <inheritdoc/>
         </member>
         <member name="T:PayrollEngine.Client.Model.ReportLog">
             <summary>The payroll report log client object</summary>
@@ -6331,11 +6496,14 @@
         <member name="M:PayrollEngine.Client.Model.ReportLog.#ctor">
             <summary>Initializes a new instance of the <see cref="T:PayrollEngine.Client.Model.ReportLog"/> class</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.ReportLog.#ctor(PayrollEngine.Client.Model.IReportLog)">
+        <member name="M:PayrollEngine.Client.Model.ReportLog.#ctor(PayrollEngine.Client.Model.ReportLog)">
             <summary>Initializes a new instance of the <see cref="T:PayrollEngine.Client.Model.ReportLog"/> class</summary>
             <param name="copySource">The copy source.</param>
         </member>
         <member name="M:PayrollEngine.Client.Model.ReportLog.Equals(PayrollEngine.Client.Model.IReportLog)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.ReportLog.GetUiString">
             <inheritdoc/>
         </member>
         <member name="T:PayrollEngine.Client.Model.ReportParameter">
@@ -6365,13 +6533,16 @@
         <member name="P:PayrollEngine.Client.Model.ReportParameter.ParameterType">
             <inheritdoc/>
         </member>
+        <member name="P:PayrollEngine.Client.Model.ReportParameter.OverrideType">
+            <inheritdoc/>
+        </member>
         <member name="P:PayrollEngine.Client.Model.ReportParameter.Attributes">
             <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.ReportParameter.#ctor">
             <summary>Initializes a new instance of the <see cref="T:PayrollEngine.Client.Model.ReportParameter"/> class</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.ReportParameter.#ctor(PayrollEngine.Client.Model.IReportParameter)">
+        <member name="M:PayrollEngine.Client.Model.ReportParameter.#ctor(PayrollEngine.Client.Model.ReportParameter)">
             <summary>Initializes a new instance of the <see cref="T:PayrollEngine.Client.Model.ReportParameter"/> class</summary>
             <param name="copySource">The copy source.</param>
         </member>
@@ -6381,9 +6552,8 @@
         <member name="M:PayrollEngine.Client.Model.ReportParameter.EqualKey(PayrollEngine.Client.Model.IReportParameter)">
             <inheritdoc/>
         </member>
-        <member name="M:PayrollEngine.Client.Model.ReportParameter.ToString">
-            <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
-            <returns>A <see cref="T:System.String" /> that represents this instance</returns>
+        <member name="M:PayrollEngine.Client.Model.ReportParameter.GetUiString">
+            <inheritdoc/>
         </member>
         <member name="T:PayrollEngine.Client.Model.ReportRequest">
             <summary>The report request client object</summary>
@@ -6461,7 +6631,7 @@
         <member name="M:PayrollEngine.Client.Model.ReportSet.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.ReportSet.#ctor(PayrollEngine.Client.Model.IReportSet)">
+        <member name="M:PayrollEngine.Client.Model.ReportSet.#ctor(PayrollEngine.Client.Model.ReportSet)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
@@ -6470,6 +6640,9 @@
         </member>
         <member name="T:PayrollEngine.Client.Model.ReportTemplate">
             <summary>The payroll report template client object</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.ReportTemplate.Name">
+            <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.ReportTemplate.Language">
             <inheritdoc/>
@@ -6492,22 +6665,24 @@
         <member name="P:PayrollEngine.Client.Model.ReportTemplate.Resource">
             <inheritdoc/>
         </member>
+        <member name="P:PayrollEngine.Client.Model.ReportTemplate.OverrideType">
+            <inheritdoc/>
+        </member>
         <member name="P:PayrollEngine.Client.Model.ReportTemplate.Attributes">
             <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.ReportTemplate.#ctor">
             <summary>Initializes a new instance of the <see cref="T:PayrollEngine.Client.Model.ReportTemplate"/> class</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.ReportTemplate.#ctor(PayrollEngine.Client.Model.IReportTemplate)">
+        <member name="M:PayrollEngine.Client.Model.ReportTemplate.#ctor(PayrollEngine.Client.Model.ReportTemplate)">
             <summary>Initializes a new instance of the <see cref="T:PayrollEngine.Client.Model.ReportTemplate"/> class</summary>
             <param name="copySource">The copy source.</param>
         </member>
         <member name="M:PayrollEngine.Client.Model.ReportTemplate.Equals(PayrollEngine.Client.Model.IReportTemplate)">
             <inheritdoc/>
         </member>
-        <member name="M:PayrollEngine.Client.Model.ReportTemplate.ToString">
-            <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
-            <returns>A <see cref="T:System.String" /> that represents this instance</returns>
+        <member name="M:PayrollEngine.Client.Model.ReportTemplate.GetUiString">
+            <inheritdoc/>
         </member>
         <member name="T:PayrollEngine.Client.Model.ReportTemplateQuery">
             <summary>
@@ -6561,10 +6736,13 @@
         <member name="P:PayrollEngine.Client.Model.Script.ValueFile">
             <inheritdoc/>
         </member>
+        <member name="P:PayrollEngine.Client.Model.Script.OverrideType">
+            <inheritdoc/>
+        </member>
         <member name="M:PayrollEngine.Client.Model.Script.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.Script.#ctor(PayrollEngine.Client.Model.IScript)">
+        <member name="M:PayrollEngine.Client.Model.Script.#ctor(PayrollEngine.Client.Model.Script)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
@@ -6574,9 +6752,41 @@
         <member name="M:PayrollEngine.Client.Model.Script.EqualKey(PayrollEngine.Client.Model.IScript)">
             <inheritdoc/>
         </member>
-        <member name="M:PayrollEngine.Client.Model.Script.ToString">
-            <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
-            <returns>A <see cref="T:System.String" /> that represents this instance</returns>
+        <member name="M:PayrollEngine.Client.Model.Script.GetUiString">
+            <inheritdoc/>
+        </member>
+        <member name="T:PayrollEngine.Client.Model.ScriptExtensions">
+            <summary>Extension methods for queries</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.ScriptExtensions.HasAnyScript(PayrollEngine.Client.Model.Case)">
+            <summary>Test if a case has any script</summary>
+            <param name="case">The case to test</param>
+            <returns>True if any script is present</returns>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.ScriptExtensions.HasAnyScript(PayrollEngine.Client.Model.CaseRelation)">
+            <summary>Test if a case relation has any script</summary>
+            <param name="caseRelation">The case relation to test</param>
+            <returns>True if any script is present</returns>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.ScriptExtensions.HasAnyScript(PayrollEngine.Client.Model.Collector)">
+            <summary>Test if a collector has any script</summary>
+            <param name="collector">The collector to test</param>
+            <returns>True if any script is present</returns>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.ScriptExtensions.HasAnyScript(PayrollEngine.Client.Model.WageType)">
+            <summary>Test if a wage type has any script</summary>
+            <param name="wageType">The wage type to test</param>
+            <returns>True if any script is present</returns>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.ScriptExtensions.HasAnyScript(PayrollEngine.Client.Model.Report)">
+            <summary>Test if a report has any script</summary>
+            <param name="report">The report to test</param>
+            <returns>True if any script is present</returns>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.ScriptExtensions.HasAnyScript(PayrollEngine.Client.Model.Payrun)">
+            <summary>Test if a payrun has any script</summary>
+            <param name="payrun">The payrun to test</param>
+            <returns>True if any script is present</returns>
         </member>
         <member name="T:PayrollEngine.Client.Model.Task">
             <summary>The payroll task object</summary>
@@ -6619,13 +6829,13 @@
         <member name="M:PayrollEngine.Client.Model.Task.#ctor">
             <inheritdoc/>
         </member>
-        <member name="M:PayrollEngine.Client.Model.Task.#ctor(PayrollEngine.Client.Model.ITask)">
+        <member name="M:PayrollEngine.Client.Model.Task.#ctor(PayrollEngine.Client.Model.Task)">
             <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.Task.Equals(PayrollEngine.Client.Model.ITask)">
             <inheritdoc/>
         </member>
-        <member name="M:PayrollEngine.Client.Model.Task.ToString">
+        <member name="M:PayrollEngine.Client.Model.Task.GetUiString">
             <inheritdoc/>
         </member>
         <member name="T:PayrollEngine.Client.Model.Tenant">
@@ -6646,7 +6856,7 @@
         <member name="M:PayrollEngine.Client.Model.Tenant.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.Tenant.#ctor(PayrollEngine.Client.Model.ITenant)">
+        <member name="M:PayrollEngine.Client.Model.Tenant.#ctor(PayrollEngine.Client.Model.Tenant)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
@@ -6656,9 +6866,8 @@
         <member name="M:PayrollEngine.Client.Model.Tenant.EqualKey(PayrollEngine.Client.Model.ITenant)">
             <inheritdoc/>
         </member>
-        <member name="M:PayrollEngine.Client.Model.Tenant.ToString">
-            <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
-            <returns>A <see cref="T:System.String" /> that represents this instance</returns>
+        <member name="M:PayrollEngine.Client.Model.Tenant.GetUiString">
+            <inheritdoc/>
         </member>
         <member name="T:PayrollEngine.Client.Model.User">
             <summary>The payroll user client object</summary>
@@ -6681,13 +6890,16 @@
         <member name="P:PayrollEngine.Client.Model.User.Language">
             <inheritdoc/>
         </member>
+        <member name="P:PayrollEngine.Client.Model.User.Supervisor">
+            <inheritdoc/>
+        </member>
         <member name="P:PayrollEngine.Client.Model.User.Attributes">
             <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.User.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.User.#ctor(PayrollEngine.Client.Model.IUser)">
+        <member name="M:PayrollEngine.Client.Model.User.#ctor(PayrollEngine.Client.Model.User)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
@@ -6697,9 +6909,16 @@
         <member name="M:PayrollEngine.Client.Model.User.EqualKey(PayrollEngine.Client.Model.IUser)">
             <inheritdoc/>
         </member>
-        <member name="M:PayrollEngine.Client.Model.User.ToString">
-            <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
-            <returns>A <see cref="T:System.String" /> that represents this instance</returns>
+        <member name="M:PayrollEngine.Client.Model.User.GetUiString">
+            <inheritdoc/>
+        </member>
+        <member name="T:PayrollEngine.Client.Model.DerivedCaseFieldExtensions">
+            <summary>Extension methods for the <see cref="T:PayrollEngine.Client.Model.CaseFieldSet"/></summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.DerivedCaseFieldExtensions.IsComplete(PayrollEngine.Client.Model.CaseFieldSet)">
+            <summary>Test for complete case field</summary>
+            <param name="caseFieldSet">The derived case field to test</param>
+            <returns>True if the case field is complete,  otherwise false</returns>
         </member>
         <member name="T:PayrollEngine.Client.Model.WageType">
             <summary>The payroll wage type client object</summary>
@@ -6755,7 +6974,7 @@
         <member name="M:PayrollEngine.Client.Model.WageType.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.WageType.#ctor(PayrollEngine.Client.Model.IWageType)">
+        <member name="M:PayrollEngine.Client.Model.WageType.#ctor(PayrollEngine.Client.Model.WageType)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
@@ -6765,9 +6984,8 @@
         <member name="M:PayrollEngine.Client.Model.WageType.EqualKey(PayrollEngine.Client.Model.IWageType)">
             <inheritdoc/>
         </member>
-        <member name="M:PayrollEngine.Client.Model.WageType.ToString">
-            <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
-            <returns>A <see cref="T:System.String" /> that represents this instance</returns>
+        <member name="M:PayrollEngine.Client.Model.WageType.GetUiString">
+            <inheritdoc/>
         </member>
         <member name="T:PayrollEngine.Client.Model.WageTypeCustomResult">
             <summary>The wage type custom result client object</summary>
@@ -6808,11 +7026,14 @@
         <member name="M:PayrollEngine.Client.Model.WageTypeCustomResult.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.WageTypeCustomResult.#ctor(PayrollEngine.Client.Model.IWageTypeCustomResult)">
+        <member name="M:PayrollEngine.Client.Model.WageTypeCustomResult.#ctor(PayrollEngine.Client.Model.WageTypeCustomResult)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
         <member name="M:PayrollEngine.Client.Model.WageTypeCustomResult.Equals(PayrollEngine.Client.Model.IWageTypeCustomResult)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.WageTypeCustomResult.GetUiString">
             <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.WageTypeCustomResult.ToString">
@@ -6858,7 +7079,7 @@
         <member name="M:PayrollEngine.Client.Model.WageTypeResult.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.WageTypeResult.#ctor(PayrollEngine.Client.Model.IWageTypeResult)">
+        <member name="M:PayrollEngine.Client.Model.WageTypeResult.#ctor(PayrollEngine.Client.Model.WageTypeResult)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
@@ -6866,6 +7087,9 @@
             <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.WageTypeResult.AlmostEqualValue(System.Nullable{System.Decimal},System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.WageTypeResult.GetUiString">
             <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.WageTypeResult.ToString">
@@ -6881,10 +7105,10 @@
         <member name="M:PayrollEngine.Client.Model.WageTypeResultSet.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.WageTypeResultSet.#ctor(PayrollEngine.Client.Model.IWageTypeResult)">
+        <member name="M:PayrollEngine.Client.Model.WageTypeResultSet.#ctor(PayrollEngine.Client.Model.WageTypeResult)">
             <inheritdoc/>
         </member>
-        <member name="M:PayrollEngine.Client.Model.WageTypeResultSet.#ctor(PayrollEngine.Client.Model.IWageTypeResultSet)">
+        <member name="M:PayrollEngine.Client.Model.WageTypeResultSet.#ctor(PayrollEngine.Client.Model.WageTypeResultSet)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
@@ -6913,7 +7137,7 @@
         <member name="M:PayrollEngine.Client.Model.Webhook.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.Webhook.#ctor(PayrollEngine.Client.Model.IWebhook)">
+        <member name="M:PayrollEngine.Client.Model.Webhook.#ctor(PayrollEngine.Client.Model.Webhook)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
@@ -6923,9 +7147,8 @@
         <member name="M:PayrollEngine.Client.Model.Webhook.EqualKey(PayrollEngine.Client.Model.IWebhook)">
             <inheritdoc/>
         </member>
-        <member name="M:PayrollEngine.Client.Model.Webhook.ToString">
-            <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
-            <returns>A <see cref="T:System.String" /> that represents this instance</returns>
+        <member name="M:PayrollEngine.Client.Model.Webhook.GetUiString">
+            <inheritdoc/>
         </member>
         <member name="T:PayrollEngine.Client.Model.WebhookMessage">
             <summary>The Webhook message client object</summary>
@@ -6957,11 +7180,14 @@
         <member name="M:PayrollEngine.Client.Model.WebhookMessage.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.WebhookMessage.#ctor(PayrollEngine.Client.Model.IWebhookMessage)">
+        <member name="M:PayrollEngine.Client.Model.WebhookMessage.#ctor(PayrollEngine.Client.Model.WebhookMessage)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
         <member name="M:PayrollEngine.Client.Model.WebhookMessage.Equals(PayrollEngine.Client.Model.IWebhookMessage)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.WebhookMessage.GetUiString">
             <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.WebhookMessage.ToString">
@@ -6980,7 +7206,7 @@
         <member name="M:PayrollEngine.Client.Model.WebhookRuntimeMessage.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.WebhookRuntimeMessage.#ctor(PayrollEngine.Client.Model.IWebhookRuntimeMessage)">
+        <member name="M:PayrollEngine.Client.Model.WebhookRuntimeMessage.#ctor(PayrollEngine.Client.Model.WebhookRuntimeMessage)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
@@ -7000,11 +7226,11 @@
         <member name="M:PayrollEngine.Client.Model.WebhookSet.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.WebhookSet.#ctor(PayrollEngine.Client.Model.IWebhook)">
+        <member name="M:PayrollEngine.Client.Model.WebhookSet.#ctor(PayrollEngine.Client.Model.Webhook)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
-        <member name="M:PayrollEngine.Client.Model.WebhookSet.#ctor(PayrollEngine.Client.Model.IWebhookSet)">
+        <member name="M:PayrollEngine.Client.Model.WebhookSet.#ctor(PayrollEngine.Client.Model.WebhookSet)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
@@ -7074,11 +7300,11 @@
         <member name="M:PayrollEngine.Client.PayrollApiEndpoints.PayrollCasesUrl(System.Int32,System.Int32)">
             <summary>The payroll cases URL</summary>
         </member>
-        <member name="M:PayrollEngine.Client.PayrollApiEndpoints.PayrollCasesSetsUrl(System.Int32,System.Int32)">
-            <summary>The payroll cases sets URL</summary>
+        <member name="M:PayrollEngine.Client.PayrollApiEndpoints.PayrollCasesAvailableUrl(System.Int32,System.Int32)">
+            <summary>The payroll available cases URL</summary>
         </member>
-        <member name="M:PayrollEngine.Client.PayrollApiEndpoints.PayrollCasesSetUrl(System.Int32,System.Int32,System.String)">
-            <summary>The payroll cases set URL</summary>
+        <member name="M:PayrollEngine.Client.PayrollApiEndpoints.PayrollCaseBuildUrl(System.Int32,System.Int32,System.String)">
+            <summary>The payroll case build URL</summary>
         </member>
         <member name="M:PayrollEngine.Client.PayrollApiEndpoints.PayrollCaseChangeValuesUrl(System.Int32,System.Int32)">
             <summary>The payroll case change values URL</summary>
@@ -7107,8 +7333,8 @@
         <member name="M:PayrollEngine.Client.PayrollApiEndpoints.PayrollLookupsUrl(System.Int32,System.Int32)">
             <summary>The payroll lookups URL</summary>
         </member>
-        <member name="M:PayrollEngine.Client.PayrollApiEndpoints.PayrollLookupUrl(System.Int32,System.Int32,System.String)">
-            <summary>The payroll lookup URL</summary>
+        <member name="M:PayrollEngine.Client.PayrollApiEndpoints.PayrollLookupsDataUrl(System.Int32,System.Int32)">
+            <summary>The payroll lookups data URL</summary>
         </member>
         <member name="M:PayrollEngine.Client.PayrollApiEndpoints.PayrollLookupValuesUrl(System.Int32,System.Int32)">
             <summary>The payroll lookup values URL</summary>
@@ -7119,8 +7345,11 @@
         <member name="M:PayrollEngine.Client.PayrollApiEndpoints.PayrollReportsUrl(System.Int32,System.Int32)">
             <summary>The payroll reports URL</summary>
         </member>
-        <member name="M:PayrollEngine.Client.PayrollApiEndpoints.PayrollReportTemplateUrl(System.Int32,System.Int32)">
-            <summary>The payroll report template URL</summary>
+        <member name="M:PayrollEngine.Client.PayrollApiEndpoints.PayrollReportParametersUrl(System.Int32,System.Int32)">
+            <summary>The payroll report parameters URL</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.PayrollApiEndpoints.PayrollReportTemplatesUrl(System.Int32,System.Int32)">
+            <summary>The payroll report templates URL</summary>
         </member>
         <member name="M:PayrollEngine.Client.PayrollApiEndpoints.PayrollScriptsUrl(System.Int32,System.Int32)">
             <summary>The payroll scripts URL</summary>
@@ -7234,6 +7463,11 @@
             <typeparam name="T">The object type</typeparam>
             <returns>A collection of backend resources</returns>
         </member>
+        <member name="M:PayrollEngine.Client.PayrollHttpClient.PostAsync``1(System.String)">
+            <summary>Post resource to backend</summary>
+            <param name="requestUri">The Uri the request is sent to</param>
+            <returns>The backend resource</returns>
+        </member>
         <member name="M:PayrollEngine.Client.PayrollHttpClient.PostAsync``1(System.String,``0)">
             <summary>Post resource to backend</summary>
             <param name="requestUri">The Uri the request is sent to</param>
@@ -7303,17 +7537,15 @@
             <summary>Delete resource attribute</summary>
             <param name="requestUri">The Uri the request is sent to</param>
         </member>
-        <member name="M:PayrollEngine.Client.PayrollHttpClient.LogPost``1(System.String,``0)">
+        <member name="M:PayrollEngine.Client.PayrollHttpClient.LogPost(System.String,System.Object)">
             <summary>Log a backend post</summary>
             <param name="url">The Uri the request is sent to</param>
             <param name="newObject">The posted object</param>
-            <typeparam name="T">The object type</typeparam>
         </member>
-        <member name="M:PayrollEngine.Client.PayrollHttpClient.LogPut``1(System.String,``0)">
+        <member name="M:PayrollEngine.Client.PayrollHttpClient.LogPut(System.String,System.Object)">
             <summary>Log a backend put</summary>
             <param name="requestUri">The Uri the request is sent to</param>
             <param name="newObject">The posted object</param>
-            <typeparam name="T">The object type</typeparam>
         </member>
         <member name="M:PayrollEngine.Client.PayrollHttpClient.GetLogName(System.String,System.String)">
             <summary>
@@ -8135,39 +8367,6 @@
         </member>
         <member name="M:PayrollEngine.Client.RegulationApiEndpoints.ReportTemplateAttributeUrl(System.Int32,System.Int32,System.Int32,System.Int32,System.String)">
             <summary>The regulation report template attribute URL</summary>
-        </member>
-        <member name="T:PayrollEngine.Client.ScriptExtensions">
-            <summary>Extension methods for queries</summary>
-        </member>
-        <member name="M:PayrollEngine.Client.ScriptExtensions.HasAnyScript(PayrollEngine.Client.Model.Case)">
-            <summary>Test if a case has any script</summary>
-            <param name="case">The case to test</param>
-            <returns>True if any script is present</returns>
-        </member>
-        <member name="M:PayrollEngine.Client.ScriptExtensions.HasAnyScript(PayrollEngine.Client.Model.CaseRelation)">
-            <summary>Test if a case relation has any script</summary>
-            <param name="caseRelation">The case relation to test</param>
-            <returns>True if any script is present</returns>
-        </member>
-        <member name="M:PayrollEngine.Client.ScriptExtensions.HasAnyScript(PayrollEngine.Client.Model.Collector)">
-            <summary>Test if a collector has any script</summary>
-            <param name="collector">The collector to test</param>
-            <returns>True if any script is present</returns>
-        </member>
-        <member name="M:PayrollEngine.Client.ScriptExtensions.HasAnyScript(PayrollEngine.Client.Model.WageType)">
-            <summary>Test if a wage type has any script</summary>
-            <param name="wageType">The wage type to test</param>
-            <returns>True if any script is present</returns>
-        </member>
-        <member name="M:PayrollEngine.Client.ScriptExtensions.HasAnyScript(PayrollEngine.Client.Model.Report)">
-            <summary>Test if a report has any script</summary>
-            <param name="report">The report to test</param>
-            <returns>True if any script is present</returns>
-        </member>
-        <member name="M:PayrollEngine.Client.ScriptExtensions.HasAnyScript(PayrollEngine.Client.Model.Payrun)">
-            <summary>Test if a payrun has any script</summary>
-            <param name="payrun">The payrun to test</param>
-            <returns>True if any script is present</returns>
         </member>
         <member name="T:PayrollEngine.Client.ScriptPublishException">
             <summary>Script publish exception</summary>
@@ -9361,10 +9560,10 @@
         <member name="M:PayrollEngine.Client.Service.Api.PayrollService.DeleteAsync(PayrollEngine.Client.Service.TenantServiceContext,System.Int32)">
             <inheritdoc/>
         </member>
-        <member name="M:PayrollEngine.Client.Service.Api.PayrollService.GetAvailableCaseSetsAsync``1(PayrollEngine.Client.Service.PayrollServiceContext,System.Int32,PayrollEngine.CaseType,System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.String,System.String,System.Nullable{PayrollEngine.Language},System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+        <member name="M:PayrollEngine.Client.Service.Api.PayrollService.GetAvailableCasesAsync``1(PayrollEngine.Client.Service.PayrollServiceContext,System.Int32,PayrollEngine.CaseType,System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.String,System.String,System.Nullable{PayrollEngine.Language},System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
             <inheritdoc/>
         </member>
-        <member name="M:PayrollEngine.Client.Service.Api.PayrollService.BuildCaseSetAsync``1(PayrollEngine.Client.Service.PayrollServiceContext,System.String,System.Int32,System.Nullable{System.Int32},System.String,System.Nullable{PayrollEngine.Language},System.Nullable{System.DateTime},System.Nullable{System.DateTime},PayrollEngine.Client.Model.ICaseChangeSetup)">
+        <member name="M:PayrollEngine.Client.Service.Api.PayrollService.BuildCaseAsync``1(PayrollEngine.Client.Service.PayrollServiceContext,System.String,System.Int32,System.Nullable{System.Int32},System.String,System.Nullable{PayrollEngine.Language},System.Nullable{System.DateTime},System.Nullable{System.DateTime},PayrollEngine.Client.Model.ICaseChangeSetup)">
             <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Service.Api.PayrollService.GetCaseValuesAsync(PayrollEngine.Client.Service.PayrollServiceContext,System.DateTime,System.DateTime,System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.String)">
@@ -9373,7 +9572,7 @@
         <member name="M:PayrollEngine.Client.Service.Api.PayrollService.GetTimeValuesAsync(PayrollEngine.Client.Service.PayrollServiceContext,System.Nullable{System.Int32},System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
             <inheritdoc/>
         </member>
-        <member name="M:PayrollEngine.Client.Service.Api.PayrollService.GetPayrollAvailableCaseFieldValuesAsync(PayrollEngine.Client.Service.PayrollServiceContext,System.Int32,System.Collections.Generic.IEnumerable{System.String},System.DateTime,System.DateTime,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+        <member name="M:PayrollEngine.Client.Service.Api.PayrollService.GetAvailableCaseFieldValuesAsync(PayrollEngine.Client.Service.PayrollServiceContext,System.Int32,System.Collections.Generic.IEnumerable{System.String},System.DateTime,System.DateTime,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
             <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Service.Api.PayrollService.AddCaseAsync``2(PayrollEngine.Client.Service.PayrollServiceContext,``0)">
@@ -9397,7 +9596,10 @@
         <member name="M:PayrollEngine.Client.Service.Api.PayrollService.GetLookupsAsync``1(PayrollEngine.Client.Service.PayrollServiceContext,System.Collections.Generic.IEnumerable{System.String},System.Nullable{PayrollEngine.OverrideType},System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
             <inheritdoc/>
         </member>
-        <member name="M:PayrollEngine.Client.Service.Api.PayrollService.GetLookupValuesAsync``1(PayrollEngine.Client.Service.PayrollServiceContext,System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{PayrollEngine.Language})">
+        <member name="M:PayrollEngine.Client.Service.Api.PayrollService.GetLookupDataAsync``1(PayrollEngine.Client.Service.PayrollServiceContext,System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{PayrollEngine.Language})">
+            <inheritdoc/>
+        </member>
+        <member name="M:PayrollEngine.Client.Service.Api.PayrollService.GetLookupValuesAsync``1(PayrollEngine.Client.Service.PayrollServiceContext,System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
             <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Service.Api.PayrollService.GetLookupValueDataAsync(PayrollEngine.Client.Service.PayrollServiceContext,System.String,System.String,System.Nullable{System.Decimal},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{PayrollEngine.Language})">
@@ -9406,13 +9608,16 @@
         <member name="M:PayrollEngine.Client.Service.Api.PayrollService.GetReportsAsync``1(PayrollEngine.Client.Service.PayrollServiceContext,System.Collections.Generic.IEnumerable{System.String},System.Nullable{PayrollEngine.OverrideType},System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
             <inheritdoc/>
         </member>
-        <member name="M:PayrollEngine.Client.Service.Api.PayrollService.GetReportTemplateAsync``1(PayrollEngine.Client.Service.PayrollServiceContext,System.Collections.Generic.IEnumerable{System.String},PayrollEngine.Language,System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+        <member name="M:PayrollEngine.Client.Service.Api.PayrollService.GetReportParametersAsync``1(PayrollEngine.Client.Service.PayrollServiceContext,System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+            <inheritdoc/>
+        </member>
+        <member name="M:PayrollEngine.Client.Service.Api.PayrollService.GetReportTemplatesAsync``1(PayrollEngine.Client.Service.PayrollServiceContext,System.Collections.Generic.IEnumerable{System.String},System.Nullable{PayrollEngine.Language},System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
             <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Service.Api.PayrollService.GetScriptsAsync``1(PayrollEngine.Client.Service.PayrollServiceContext,System.Collections.Generic.IEnumerable{System.String},System.Nullable{PayrollEngine.OverrideType},System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
             <inheritdoc/>
         </member>
-        <member name="M:PayrollEngine.Client.Service.Api.PayrollService.GetActionsAsync``1(PayrollEngine.Client.Service.PayrollServiceContext,System.Collections.Generic.IEnumerable{System.String},System.Nullable{PayrollEngine.OverrideType},PayrollEngine.FunctionType,System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+        <member name="M:PayrollEngine.Client.Service.Api.PayrollService.GetActionsAsync``1(PayrollEngine.Client.Service.PayrollServiceContext,System.Collections.Generic.IEnumerable{System.String},System.Nullable{PayrollEngine.OverrideType},System.Nullable{PayrollEngine.FunctionType},System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
             <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Service.Api.PayrollService.GetAttributeAsync(PayrollEngine.Client.Service.TenantServiceContext,System.Int32,System.String)">
@@ -9461,7 +9666,7 @@
         <member name="M:PayrollEngine.Client.Service.Api.PayrunJobService.StartJobAsync``1(PayrollEngine.Client.Service.TenantServiceContext,PayrollEngine.Client.Model.PayrunJobInvocation)">
             <inheritdoc/>
         </member>
-        <member name="M:PayrollEngine.Client.Service.Api.PayrunJobService.ChangeJobStatusAsync(PayrollEngine.Client.Service.TenantServiceContext,System.Int32,System.Int32,PayrollEngine.PayrunJobStatus,System.Boolean)">
+        <member name="M:PayrollEngine.Client.Service.Api.PayrunJobService.ChangeJobStatusAsync(PayrollEngine.Client.Service.TenantServiceContext,System.Int32,PayrollEngine.PayrunJobStatus,System.Int32,System.String,System.Boolean)">
             <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Service.Api.PayrunJobService.CreateAsync``1(PayrollEngine.Client.Service.TenantServiceContext,``0)">
@@ -9580,6 +9785,43 @@
         </member>
         <member name="M:PayrollEngine.Client.Service.Api.RegulationService.DeleteAsync(PayrollEngine.Client.Service.TenantServiceContext,System.Int32)">
             <inheritdoc/>
+        </member>
+        <member name="T:PayrollEngine.Client.Service.Api.RegulationShareService">
+            <summary>Regulation share service</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Service.Api.RegulationShareService.#ctor(PayrollEngine.Client.PayrollHttpClient)">
+            <summary>Initializes a new instance of the <see cref="T:PayrollEngine.Client.Service.Api.RegulationShareService"/> class</summary>
+            <param name="httpClient">The Payroll http client</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Service.Api.RegulationShareService.QueryAsync``1(PayrollEngine.Client.Service.RootServiceContext,PayrollEngine.Query)">
+            <inheritdoc />
+        </member>
+        <member name="M:PayrollEngine.Client.Service.Api.RegulationShareService.QueryCountAsync(PayrollEngine.Client.Service.RootServiceContext,PayrollEngine.Query)">
+            <inheritdoc />
+        </member>
+        <member name="M:PayrollEngine.Client.Service.Api.RegulationShareService.QueryResultAsync``1(PayrollEngine.Client.Service.RootServiceContext,PayrollEngine.Query)">
+            <inheritdoc />
+        </member>
+        <member name="M:PayrollEngine.Client.Service.Api.RegulationShareService.GetAsync``1(PayrollEngine.Client.Service.RootServiceContext,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:PayrollEngine.Client.Service.Api.RegulationShareService.CreateAsync``1(PayrollEngine.Client.Service.RootServiceContext,``0)">
+            <inheritdoc />
+        </member>
+        <member name="M:PayrollEngine.Client.Service.Api.RegulationShareService.UpdateAsync``1(PayrollEngine.Client.Service.RootServiceContext,``0)">
+            <inheritdoc />
+        </member>
+        <member name="M:PayrollEngine.Client.Service.Api.RegulationShareService.DeleteAsync(PayrollEngine.Client.Service.RootServiceContext,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:PayrollEngine.Client.Service.Api.RegulationShareService.GetAttributeAsync(PayrollEngine.Client.Service.RootServiceContext,System.Int32,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:PayrollEngine.Client.Service.Api.RegulationShareService.SetAttributeAsync(PayrollEngine.Client.Service.RootServiceContext,System.Int32,System.String,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:PayrollEngine.Client.Service.Api.RegulationShareService.DeleteAttributeAsync(PayrollEngine.Client.Service.RootServiceContext,System.Int32,System.String)">
+            <inheritdoc />
         </member>
         <member name="T:PayrollEngine.Client.Service.Api.ReportLogService">
             <summary>Payroll report log service</summary>
@@ -9790,43 +10032,6 @@
             <param name="name">The name of the query key</param>
             <param name="value">The query value</param>
             <returns>The combined result</returns>
-        </member>
-        <member name="T:PayrollEngine.Client.Service.Api.SharedRegulationService">
-            <summary>Shared regulation service</summary>
-        </member>
-        <member name="M:PayrollEngine.Client.Service.Api.SharedRegulationService.#ctor(PayrollEngine.Client.PayrollHttpClient)">
-            <summary>Initializes a new instance of the <see cref="T:PayrollEngine.Client.Service.Api.SharedRegulationService"/> class</summary>
-            <param name="httpClient">The Payroll http client</param>
-        </member>
-        <member name="M:PayrollEngine.Client.Service.Api.SharedRegulationService.QueryAsync``1(PayrollEngine.Client.Service.RootServiceContext,PayrollEngine.Query)">
-            <inheritdoc />
-        </member>
-        <member name="M:PayrollEngine.Client.Service.Api.SharedRegulationService.QueryCountAsync(PayrollEngine.Client.Service.RootServiceContext,PayrollEngine.Query)">
-            <inheritdoc />
-        </member>
-        <member name="M:PayrollEngine.Client.Service.Api.SharedRegulationService.QueryResultAsync``1(PayrollEngine.Client.Service.RootServiceContext,PayrollEngine.Query)">
-            <inheritdoc />
-        </member>
-        <member name="M:PayrollEngine.Client.Service.Api.SharedRegulationService.GetAsync``1(PayrollEngine.Client.Service.RootServiceContext,System.Int32)">
-            <inheritdoc />
-        </member>
-        <member name="M:PayrollEngine.Client.Service.Api.SharedRegulationService.CreateAsync``1(PayrollEngine.Client.Service.RootServiceContext,``0)">
-            <inheritdoc />
-        </member>
-        <member name="M:PayrollEngine.Client.Service.Api.SharedRegulationService.UpdateAsync``1(PayrollEngine.Client.Service.RootServiceContext,``0)">
-            <inheritdoc />
-        </member>
-        <member name="M:PayrollEngine.Client.Service.Api.SharedRegulationService.DeleteAsync(PayrollEngine.Client.Service.RootServiceContext,System.Int32)">
-            <inheritdoc />
-        </member>
-        <member name="M:PayrollEngine.Client.Service.Api.SharedRegulationService.GetAttributeAsync(PayrollEngine.Client.Service.RootServiceContext,System.Int32,System.String)">
-            <inheritdoc />
-        </member>
-        <member name="M:PayrollEngine.Client.Service.Api.SharedRegulationService.SetAttributeAsync(PayrollEngine.Client.Service.RootServiceContext,System.Int32,System.String,System.String)">
-            <inheritdoc />
-        </member>
-        <member name="M:PayrollEngine.Client.Service.Api.SharedRegulationService.DeleteAttributeAsync(PayrollEngine.Client.Service.RootServiceContext,System.Int32,System.String)">
-            <inheritdoc />
         </member>
         <member name="T:PayrollEngine.Client.Service.Api.TaskService">
             <summary>Payroll task service</summary>
@@ -10634,8 +10839,8 @@
             <param name="evaluationDate">Creation date filter (default: UTC now)</param>
             <returns>The payroll regulations, including the shared regulations</returns>
         </member>
-        <member name="M:PayrollEngine.Client.Service.IPayrollService.GetAvailableCaseSetsAsync``1(PayrollEngine.Client.Service.PayrollServiceContext,System.Int32,PayrollEngine.CaseType,System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.String,System.String,System.Nullable{PayrollEngine.Language},System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
-            <summary>Get all active and available case sets</summary>
+        <member name="M:PayrollEngine.Client.Service.IPayrollService.GetAvailableCasesAsync``1(PayrollEngine.Client.Service.PayrollServiceContext,System.Int32,PayrollEngine.CaseType,System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.String,System.String,System.Nullable{PayrollEngine.Language},System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+            <summary>Get all active and available cases</summary>
             <param name="context">The service context</param>
             <param name="userId">The user id</param>
             <param name="caseType">The case type</param>
@@ -10646,9 +10851,9 @@
             <param name="language">The language</param>
             <param name="regulationDate">The regulation date (default: UTC now)</param>
             <param name="evaluationDate">Creation date filter (default: UTC now)</param>
-            <returns>Derived case values</returns>
+            <returns>Available derived cases</returns>
         </member>
-        <member name="M:PayrollEngine.Client.Service.IPayrollService.BuildCaseSetAsync``1(PayrollEngine.Client.Service.PayrollServiceContext,System.String,System.Int32,System.Nullable{System.Int32},System.String,System.Nullable{PayrollEngine.Language},System.Nullable{System.DateTime},System.Nullable{System.DateTime},PayrollEngine.Client.Model.ICaseChangeSetup)">
+        <member name="M:PayrollEngine.Client.Service.IPayrollService.BuildCaseAsync``1(PayrollEngine.Client.Service.PayrollServiceContext,System.String,System.Int32,System.Nullable{System.Int32},System.String,System.Nullable{PayrollEngine.Language},System.Nullable{System.DateTime},System.Nullable{System.DateTime},PayrollEngine.Client.Model.ICaseChangeSetup)">
             <summary>Build case with fields and related cases</summary>
             <param name="context">The service context</param>
             <param name="caseName">The case name</param>
@@ -10681,7 +10886,7 @@
             <param name="evaluationDate">The evaluation date (default: value date)</param>
             <returns>The payroll case value of the case field</returns>
         </member>
-        <member name="M:PayrollEngine.Client.Service.IPayrollService.GetPayrollAvailableCaseFieldValuesAsync(PayrollEngine.Client.Service.PayrollServiceContext,System.Int32,System.Collections.Generic.IEnumerable{System.String},System.DateTime,System.DateTime,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+        <member name="M:PayrollEngine.Client.Service.IPayrollService.GetAvailableCaseFieldValuesAsync(PayrollEngine.Client.Service.PayrollServiceContext,System.Int32,System.Collections.Generic.IEnumerable{System.String},System.DateTime,System.DateTime,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
             <summary>Get available case period values</summary>
             <param name="context">The service context</param>
             <param name="userId">The user id</param>
@@ -10756,14 +10961,23 @@
             <param name="evaluationDate">Creation date filter (default: UTC now)</param>
             <returns>Payroll lookups</returns>
         </member>
-        <member name="M:PayrollEngine.Client.Service.IPayrollService.GetLookupValuesAsync``1(PayrollEngine.Client.Service.PayrollServiceContext,System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{PayrollEngine.Language})">
-            <summary>Get payroll lookup values</summary>
+        <member name="M:PayrollEngine.Client.Service.IPayrollService.GetLookupDataAsync``1(PayrollEngine.Client.Service.PayrollServiceContext,System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{PayrollEngine.Language})">
+            <summary>Get payroll lookup data</summary>
             <param name="context">The service context</param>
             <param name="lookupNames">The lookup names</param>
             <param name="regulationDate">The regulation date (default: UTC now)</param>
             <param name="evaluationDate">The evaluation date (default: UTC now)</param>
             <param name="language">The content language</param>
             <returns>The lookup values</returns>
+        </member>
+        <member name="M:PayrollEngine.Client.Service.IPayrollService.GetLookupValuesAsync``1(PayrollEngine.Client.Service.PayrollServiceContext,System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+            <summary>Get payroll lookup values</summary>
+            <param name="context">The service context</param>
+            <param name="lookupNames">The lookup names filter (default is all)</param>
+            <param name="lookupKeys">The lookup-value key filter (default: active)</param>
+            <param name="regulationDate">The regulation date (default: UTC now)</param>
+            <param name="evaluationDate">Creation date filter (default: UTC now)</param>
+            <returns>Payroll lookup values</returns>
         </member>
         <member name="M:PayrollEngine.Client.Service.IPayrollService.GetLookupValueDataAsync(PayrollEngine.Client.Service.PayrollServiceContext,System.String,System.String,System.Nullable{System.Decimal},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{PayrollEngine.Language})">
             <summary>Get payroll lookup value data</summary>
@@ -10785,14 +10999,22 @@
             <param name="evaluationDate">Creation date filter (default: UTC now)</param>
             <returns>Payroll lookups</returns>
         </member>
-        <member name="M:PayrollEngine.Client.Service.IPayrollService.GetReportTemplateAsync``1(PayrollEngine.Client.Service.PayrollServiceContext,System.Collections.Generic.IEnumerable{System.String},PayrollEngine.Language,System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
-            <summary>Get payroll report template</summary>
+        <member name="M:PayrollEngine.Client.Service.IPayrollService.GetReportParametersAsync``1(PayrollEngine.Client.Service.PayrollServiceContext,System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+            <summary>Get payroll report parameters</summary>
+            <param name="context">The service context</param>
+            <param name="reportNames">The report names</param>
+            <param name="regulationDate">The regulation date (default: UTC now)</param>
+            <param name="evaluationDate">The evaluation date (default: UTC now)</param>
+            <returns>Payroll report parameters</returns>
+        </member>
+        <member name="M:PayrollEngine.Client.Service.IPayrollService.GetReportTemplatesAsync``1(PayrollEngine.Client.Service.PayrollServiceContext,System.Collections.Generic.IEnumerable{System.String},System.Nullable{PayrollEngine.Language},System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+            <summary>Get payroll report templates</summary>
             <param name="context">The service context</param>
             <param name="reportNames">The report names</param>
             <param name="language">The report language</param>
             <param name="regulationDate">The regulation date (default: UTC now)</param>
             <param name="evaluationDate">The evaluation date (default: UTC now)</param>
-            <returns>Payroll reports</returns>
+            <returns>Payroll report templates</returns>
         </member>
         <member name="M:PayrollEngine.Client.Service.IPayrollService.GetScriptsAsync``1(PayrollEngine.Client.Service.PayrollServiceContext,System.Collections.Generic.IEnumerable{System.String},System.Nullable{PayrollEngine.OverrideType},System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
             <summary>Get payroll scripts</summary>
@@ -10803,7 +11025,7 @@
             <param name="evaluationDate">Creation date filter (default: UTC now)</param>
             <returns>Payroll scripts</returns>
         </member>
-        <member name="M:PayrollEngine.Client.Service.IPayrollService.GetActionsAsync``1(PayrollEngine.Client.Service.PayrollServiceContext,System.Collections.Generic.IEnumerable{System.String},System.Nullable{PayrollEngine.OverrideType},PayrollEngine.FunctionType,System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+        <member name="M:PayrollEngine.Client.Service.IPayrollService.GetActionsAsync``1(PayrollEngine.Client.Service.PayrollServiceContext,System.Collections.Generic.IEnumerable{System.String},System.Nullable{PayrollEngine.OverrideType},System.Nullable{PayrollEngine.FunctionType},System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
             <summary>Get payroll actions</summary>
             <param name="context">The service context</param>
             <param name="scriptNames">The script names filter (default is all)</param>
@@ -10855,12 +11077,13 @@
             <param name="jobInvocation">The payrun job invocation</param>
             <returns>The newly created payrun job</returns>
         </member>
-        <member name="M:PayrollEngine.Client.Service.IPayrunJobService.ChangeJobStatusAsync(PayrollEngine.Client.Service.TenantServiceContext,System.Int32,System.Int32,PayrollEngine.PayrunJobStatus,System.Boolean)">
+        <member name="M:PayrollEngine.Client.Service.IPayrunJobService.ChangeJobStatusAsync(PayrollEngine.Client.Service.TenantServiceContext,System.Int32,PayrollEngine.PayrunJobStatus,System.Int32,System.String,System.Boolean)">
             <summary>Get the status of a payrun job</summary>
             <param name="context">The service context</param>
-            <param name="userId">The user id</param>
             <param name="payrunJobId">The payrun job id</param>
             <param name="jobStatus">The target payrun job status</param>
+            <param name="userId">The user id</param>
+            <param name="reason">The change reason id</param>
             <param name="patchMode">The patch mode</param>
             <returns>The payrun job status</returns>
         </member>
@@ -10928,6 +11151,9 @@
             <param name="context">The service context</param>
             <param name="caseFieldName">The case field name</param>
             <returns>The case name</returns>
+        </member>
+        <member name="T:PayrollEngine.Client.Service.IRegulationShareService">
+            <summary>Regulation share service</summary>
         </member>
         <member name="T:PayrollEngine.Client.Service.IReportLogService">
             <summary>Regulation report log service</summary>
@@ -10998,9 +11224,6 @@
             <summary>
             The service type (satisfy NDepend)
             </summary>
-        </member>
-        <member name="T:PayrollEngine.Client.Service.ISharedRegulationService">
-            <summary>Shared regulation service</summary>
         </member>
         <member name="T:PayrollEngine.Client.Service.ITaskService">
             <summary>Payroll task service</summary>
@@ -11398,14 +11621,6 @@
         </member>
         <member name="F:PayrollEngine.Client.UpdateMode.NoUpdate">
             <summary>Update only changes</summary>
-        </member>
-        <member name="T:PayrollEngine.Client.DerivedCaseFieldExtensions">
-            <summary>Extension methods for the <see cref="T:PayrollEngine.Client.Model.CaseFieldSet"/></summary>
-        </member>
-        <member name="M:PayrollEngine.Client.DerivedCaseFieldExtensions.IsComplete(PayrollEngine.Client.Model.CaseFieldSet)">
-            <summary>Test for complete case field</summary>
-            <param name="caseFieldSet">The derived case field to test</param>
-            <returns>True if the case field is complete,  otherwise false</returns>
         </member>
     </members>
 </doc>

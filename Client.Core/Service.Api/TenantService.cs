@@ -140,7 +140,7 @@ public class TenantService : Service, ITenantService
 
     /// <inheritdoc />
     public virtual async Task<List<TAction>> GetSystemScriptActionsAsync<TAction>(int tenantId,
-        FunctionType functionType = FunctionType.All) 
+        FunctionType functionType)
         where TAction : ActionInfo
     {
         var url = TenantApiEndpoints.TenantActionsUrl(tenantId)
@@ -164,9 +164,11 @@ public class TenantService : Service, ITenantService
         var uri = TenantApiEndpoints.TenantQueriesUrl(tenantId)
             .AddQueryString(nameof(methodName), methodName)
             .AddQueryString(nameof(language), language);
+        // use of POST instead of GET according RFC7231
+        // https://datatracker.ietf.org/doc/html/rfc7231#section-4.3.1
         return parameters != null && parameters.Any() ?
-            await HttpClient.GetAsync<DataTable>(uri, parameters) :
-            await HttpClient.GetAsync<DataTable>(uri);
+            await HttpClient.PostAsync<Dictionary<string, string>, DataTable>(uri, parameters) :
+            await HttpClient.PostAsync<DataTable>(uri);
     }
 
     #region Shared Regulations
@@ -204,9 +206,11 @@ public class TenantService : Service, ITenantService
             .AddQueryString(nameof(culture), culture)
             .AddQueryString(nameof(offset), offset);
 
+        // use of POST instead of GET according RFC7231
+        // https://datatracker.ietf.org/doc/html/rfc7231#section-4.3.1
         return calendar != null ?
-            await HttpClient.GetAsync<DatePeriod>(url, calendar) :
-            await HttpClient.GetAsync<DatePeriod>(url);
+            await HttpClient.PostAsync<CalendarConfiguration, DatePeriod>(url, calendar) :
+            await HttpClient.PostAsync<DatePeriod>(url);
     }
 
     /// <inheritdoc />
@@ -225,9 +229,11 @@ public class TenantService : Service, ITenantService
             .AddQueryString(nameof(culture), culture)
             .AddQueryString(nameof(offset), offset);
 
+        // use of POST instead of GET according RFC7231
+        // https://datatracker.ietf.org/doc/html/rfc7231#section-4.3.1
         return calendar != null ?
-            await HttpClient.GetAsync<DatePeriod>(url, calendar) :
-            await HttpClient.GetAsync<DatePeriod>(url);
+            await HttpClient.PostAsync<CalendarConfiguration, DatePeriod>(url, calendar) :
+            await HttpClient.PostAsync<DatePeriod>(url);
     }
 
     /// <inheritdoc />
@@ -247,9 +253,11 @@ public class TenantService : Service, ITenantService
             .AddQueryString(nameof(evaluationPeriodDate), evaluationPeriodDate)
             .AddQueryString(nameof(culture), culture);
 
+        // use of POST instead of GET according RFC7231
+        // https://datatracker.ietf.org/doc/html/rfc7231#section-4.3.1
         return calendar != null ?
-            await HttpClient.GetAsync<decimal?>(url, calendar) :
-            await HttpClient.GetAsync<decimal?>(url);
+            await HttpClient.PostAsync<CalendarConfiguration, decimal?>(url, calendar) :
+            await HttpClient.PostAsync<decimal?>(url);
     }
 
     #endregion

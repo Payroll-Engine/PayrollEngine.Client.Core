@@ -8,6 +8,7 @@ public class CaseField : Model, ICaseField, INameObject
 {
     /// <summary>The case field name</summary>
     [Required]
+    [StringLength(128)]
     public string Name { get; set; }
 
     /// <inheritdoc/>
@@ -41,7 +42,7 @@ public class CaseField : Model, ICaseField, INameObject
     public CaseValueCreationMode ValueCreationMode { get; set; }
 
     /// <inheritdoc/>
-    public bool Optional { get; set; }
+    public bool ValueMandatory { get; set; }
 
     /// <inheritdoc/>
     public int Order { get; set; }
@@ -92,7 +93,7 @@ public class CaseField : Model, ICaseField, INameObject
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public CaseField(ICaseField copySource) :
+    public CaseField(CaseField copySource) :
         base(copySource)
     {
         CopyTool.CopyProperties(copySource, this);
@@ -106,8 +107,6 @@ public class CaseField : Model, ICaseField, INameObject
     public virtual bool EqualKey(ICaseField compare) =>
         string.Equals(Name, compare?.Name);
 
-    /// <summary>Returns a <see cref="string" /> that represents this instance</summary>
-    /// <returns>A <see cref="string" /> that represents this instance</returns>
-    public override string ToString() =>
-        $"{Name} {base.ToString()}";
+    /// <inheritdoc/>
+    public override string GetUiString() => Name;
 }

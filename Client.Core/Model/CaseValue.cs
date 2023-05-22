@@ -25,6 +25,7 @@ public class CaseValue : Model, ICaseValue
     public Dictionary<string, string> CaseNameLocalizations { get; set; }
 
     /// <inheritdoc/>
+    [Required]
     [StringLength(128)]
     public string CaseFieldName { get; set; }
 
@@ -60,6 +61,7 @@ public class CaseValue : Model, ICaseValue
     public DateTime? End { get; set; }
 
     /// <inheritdoc/>
+    [StringLength(128)]
     public string Forecast { get; set; }
 
     /// <inheritdoc/>
@@ -75,7 +77,7 @@ public class CaseValue : Model, ICaseValue
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public CaseValue(ICaseValue copySource) :
+    public CaseValue(CaseValue copySource) :
         base(copySource)
     {
         CopyTool.CopyProperties(copySource, this);
@@ -85,9 +87,14 @@ public class CaseValue : Model, ICaseValue
     public virtual bool Equals(ICaseValue compare) =>
         CompareTool.EqualProperties(this, compare);
 
+    /// <inheritdoc/>
+    public override string GetUiString() =>
+        string.IsNullOrWhiteSpace(CaseSlot) ?
+            $"{CaseName}{CaseFieldName}" :
+            $"{CaseName}{CaseFieldName} [{CaseSlot}]";
+
     /// <summary>Returns a <see cref="string" /> that represents this instance</summary>
     /// <returns>A <see cref="string" /> that represents this instance</returns>
-    public override string ToString() => string.IsNullOrWhiteSpace(CaseSlot) ?
-        $"{Value} ({CaseName}.{CaseFieldName}) {base.ToString()}" :
-        $"{Value} ({CaseName}.{CaseFieldName}[{CaseSlot}]) {base.ToString()}";
+    public override string ToString() =>
+        $"{GetUiString()} {base.ToString()}";
 }

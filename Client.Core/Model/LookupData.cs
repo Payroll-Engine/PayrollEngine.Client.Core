@@ -30,7 +30,7 @@ public class LookupData : ILookupData
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    public LookupData(ILookupData copySource)
+    public LookupData(LookupData copySource)
     {
         CopyTool.CopyProperties(copySource, this);
     }
