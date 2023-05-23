@@ -179,7 +179,7 @@ public class UserService : Service, IUserService
         }
 
         // update user password: 200/Ok or 403/Forbidden
-        await HttpClient.PostAsync(TenantApiEndpoints.UserPasswordUrl(context.TenantId, userId),
+        await HttpClient.PutAsync(TenantApiEndpoints.UserPasswordUrl(context.TenantId, userId),
             DefaultJsonSerializer.SerializeJson(DefaultJsonSerializer.Serialize(password)));
     }
 
