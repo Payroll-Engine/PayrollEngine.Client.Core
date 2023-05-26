@@ -13,6 +13,7 @@
 	<!-- help file generation -->
 	<PropertyGroup>
 		<DocumentationFile>$(AssemblyName).xml</DocumentationFile>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -76,7 +77,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.WebUtilities" Version="2.2.0" />
-		<PackageReference Include="PayrollEngine.Core" Version="0.5.0-pre-230523-2" />
+		<PackageReference Include="PayrollEngine.Core" Version="0.5.0-pre-230526" />
 	</ItemGroup>
 
 	<!-- include xml documention files and json schemas to the nuget package -->
@@ -88,16 +89,22 @@
 			<PackageCopyToOutput>true</PackageCopyToOutput>
 		</None>
 	</ItemGroup>
+	<ItemGroup>
+	  <None Include="..\README.md">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
+	</ItemGroup>
 
 	<!--  build json schema -->
 	<Target Name="BuildJsonSchema" AfterTargets="Build">
-		<Message Importance="High" Text="Building json schema: $(ProjectDir)$(OutDir)PayrollEngine.Exchange.schema.json"/>
+		<Message Importance="High" Text="Building json schema: $(ProjectDir)$(OutDir)PayrollEngine.Exchange.schema.json" />
 		<Exec Command="JsonSchemaBuilder $(ProjectDir)$(OutDir)PayrollEngine.Client.Core.dll PayrollEngine.Client.Model.Exchange $(ProjectDir)$(OutDir)PayrollEngine.Exchange.schema.json" />
 	</Target>
 
 	<!--  publish json schema -->
 	<Target Name="PublishJsonSchema" AfterTargets="Build" Condition="exists('$(PayrollEngineSchemaDir)')">
-		<Message Importance="High" Text="Publish json schema..."/>
+		<Message Importance="High" Text="Publish json schema..." />
 		<Copy SourceFiles="$(ProjectDir)$(OutDir)PayrollEngine.Exchange.schema.json" DestinationFolder="$(PayrollEngineSchemaDir)" />
 	</Target>
 
