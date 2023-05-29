@@ -5,6 +5,7 @@
 		<RootNamespace>PayrollEngine.Client</RootNamespace>
 		<Authors>Jani Giannoudis</Authors>
 		<Company>Software Consulting Giannoudis</Company>
+		<Copyright>2023 Software Consulting Giannoudis</Copyright>
 		<Product>Payroll Engine</Product>
 		<Description>Payroll Engine Client Services</Description>
 		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
@@ -77,7 +78,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.WebUtilities" Version="2.2.0" />
-		<PackageReference Include="PayrollEngine.Core" Version="0.5.0-pre-230526" />
+		<PackageReference Include="PayrollEngine.Core" Version="0.5.0-pre-230527" />
 	</ItemGroup>
 
 	<!-- include xml documention files and json schemas to the nuget package -->
