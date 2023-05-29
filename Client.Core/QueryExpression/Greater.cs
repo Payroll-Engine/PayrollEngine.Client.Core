@@ -23,7 +23,7 @@ public class Greater : ConditionFilter
     /// <param name="field">The query field name</param>
     /// <param name="value">The expression function</param>
     public Greater(string field, FunctionBase value) :
-        this(field, value.Expression)
+        this(field, value?.Expression)
     {
     }
 
@@ -31,7 +31,7 @@ public class Greater : ConditionFilter
     /// <param name="field">The field function</param>
     /// <param name="value">The value function</param>
     public Greater(FunctionBase field, FunctionBase value) :
-        this(field.Expression, value.Expression)
+        this(field.Expression, value?.Expression)
     {
     }
 }

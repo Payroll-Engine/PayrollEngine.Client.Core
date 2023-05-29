@@ -23,7 +23,7 @@ public class LessFilter : ConditionFilter
     /// <param name="field">The query field name</param>
     /// <param name="value">The expression function</param>
     public LessFilter(string field, FunctionBase value) :
-        this(field, value.Expression)
+        this(field, value?.Expression)
     {
     }
 
@@ -31,7 +31,7 @@ public class LessFilter : ConditionFilter
     /// <param name="field">The field function</param>
     /// <param name="value">The value function</param>
     public LessFilter(FunctionBase field, FunctionBase value) :
-        this(field.Expression, value.Expression)
+        this(field.Expression, value?.Expression)
     {
     }
 }

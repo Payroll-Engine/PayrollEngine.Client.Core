@@ -13,7 +13,7 @@ public class EqualName : Equals
     /// <summary>Constructor</summary>
     /// <param name="value">The value function</param>
     public EqualName(FunctionBase value) :
-        this(value.Expression)
+        this(value?.Expression)
     {
     }
 }

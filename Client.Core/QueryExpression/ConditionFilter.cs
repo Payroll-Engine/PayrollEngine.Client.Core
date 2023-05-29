@@ -38,7 +38,7 @@ public abstract class ConditionFilter : Filter
     private static string GetFilterValue(object value) =>
         value switch
         {
-            null => null,
+            null => "null",
             string => $"'{value}'",
             DateTime dateTime => $"'{dateTime.ToUtcString(CultureInfo.InvariantCulture)}'",
             _ => value.ToString()
