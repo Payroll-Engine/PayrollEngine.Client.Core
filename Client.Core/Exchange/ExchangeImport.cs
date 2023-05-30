@@ -11,7 +11,7 @@ using Task = System.Threading.Tasks.Task;
 namespace PayrollEngine.Client.Exchange;
 
 /// <summary>Import exchange from JSON file to Payroll API</summary>
-public sealed class ExchangeImport : ImportExchangeVisitor
+public sealed class ExchangeImport : ExchangeImportVisitor
 {
     /// <summary>The data import mode</summary>
     public DataImportMode ImportMode { get; }
@@ -20,10 +20,11 @@ public sealed class ExchangeImport : ImportExchangeVisitor
     /// <param name="httpClient">The Payroll http client</param>
     /// <param name="exchange">The exchange model</param>
     /// <param name="scriptParser">The script parser</param>
+    /// <param name="importOptions">The import options</param>
     /// <param name="importMode">The data import mode (default: single)</param>
-    public ExchangeImport(PayrollHttpClient httpClient, Model.Exchange exchange, IScriptParser scriptParser,
-        DataImportMode importMode = DataImportMode.Single) :
-        base(httpClient, exchange, scriptParser, LoadVisitorOptions.All)
+    public ExchangeImport(PayrollHttpClient httpClient, Client.Model.Exchange exchange, IScriptParser scriptParser,
+        ExchangeImportOptions importOptions = null, DataImportMode importMode = DataImportMode.Single) :
+        base(httpClient, exchange, scriptParser, importOptions)
     {
         var hasTenants = exchange.Tenants == null || exchange.Tenants.Any();
         var hasRegulationShares =

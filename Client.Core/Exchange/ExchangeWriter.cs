@@ -5,8 +5,8 @@ using PayrollEngine.Serialization;
 
 namespace PayrollEngine.Client.Exchange;
 
-/// <summary>Write payroll to a JSON file</summary>
-public static class PayrollJsonWriter
+/// <summary>Write the exchange model to a JSON file</summary>
+public static class ExchangeWriter
 {
     /// <summary>Writes the specified provider</summary>
     /// <param name="exchange">The provider</param>

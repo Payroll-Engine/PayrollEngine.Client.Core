@@ -552,7 +552,7 @@ public sealed class PayrollHttpClient : IDisposable
         {
             // update
             newObject.Id = existingObject.Id;
-            if (newObject.UpdateMode == UpdateMode.Update)
+            if (newObject.UpdateMode is UpdateMode.Update)
             {
                 requestUri = $"{requestUri}/{newObject.Id}";
                 using var response = await httpClient.PutAsync(requestUri, DefaultJsonSerializer.SerializeJson(newObject));

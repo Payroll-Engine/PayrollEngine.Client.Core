@@ -10,13 +10,13 @@ using Task = System.Threading.Tasks.Task;
 
 namespace PayrollEngine.Client.Exchange;
 
-/// <summary>Exchange visitor tool</summary>
-public abstract class ImportExchangeVisitor : ExchangeVisitor
+/// <summary>Import exchange from JSON file to Payroll API</summary>
+public abstract class ExchangeImportVisitor : Visitor
 {
     private readonly TextFileCache textFiles = new();
 
     /// <summary>The visitor load options</summary>
-    public LoadVisitorOptions LoadOptions { get; }
+    public ExchangeImportOptions ImportOptions { get; }
 
     /// <summary>The Payroll http client</summary>
     public PayrollHttpClient HttpClient { get; }
@@ -24,38 +24,38 @@ public abstract class ImportExchangeVisitor : ExchangeVisitor
     /// <summary>The script parser</summary>
     public IScriptParser ScriptParser { get; }
 
-    /// <summary>Initializes a new instance of the <see cref="ExchangeVisitorBase"/> class</summary>
+    /// <summary>Initializes a new instance of the <see cref="VisitorBase"/> class</summary>
     /// <remarks>Content is loaded from the working folder</remarks>
     /// <param name="httpClient">The Payroll http client</param>
     /// <param name="exchange">The exchange model</param>
     /// <param name="scriptParser">The script parser</param>
-    /// <param name="loadOptions">The visitor options (default is all)</param>
-    protected ImportExchangeVisitor(PayrollHttpClient httpClient, Model.Exchange exchange,
-        IScriptParser scriptParser, LoadVisitorOptions loadOptions) :
+    /// <param name="importOptions">The import options</param>
+    protected ExchangeImportVisitor(PayrollHttpClient httpClient, Client.Model.Exchange exchange,
+        IScriptParser scriptParser, ExchangeImportOptions importOptions = null) :
         base(exchange)
     {
         HttpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
         ScriptParser = scriptParser ?? throw new ArgumentNullException(nameof(scriptParser));
-        LoadOptions = loadOptions;
+        ImportOptions = importOptions ?? new();
     }
 
     /// <summary>Load target object</summary>
-    protected bool TargetLoad => LoadOptions.HasFlag(LoadVisitorOptions.TargetLoad);
+    protected bool TargetLoad => ImportOptions.TargetLoad;
 
     /// <summary>Load scripts from the working folder</summary>
-    protected bool ScriptLoad => LoadOptions.HasFlag(LoadVisitorOptions.ScriptLoad);
+    protected bool ScriptLoad => ImportOptions.ScriptLoad;
 
     /// <summary>Load case documents from the working folder</summary>
-    protected bool CaseDocumentLoad => LoadOptions.HasFlag(LoadVisitorOptions.CaseDocumentLoad);
+    protected bool CaseDocumentLoad => ImportOptions.CaseDocumentLoad;
 
     /// <summary>Load report templates from file</summary>
-    protected bool ReportTemplateLoad => LoadOptions.HasFlag(LoadVisitorOptions.ReportTemplateLoad);
+    protected bool ReportTemplateLoad => ImportOptions.ReportTemplateLoad;
 
     /// <summary>Load report templates from the working folder</summary>
-    protected bool ReportSchemaLoad => LoadOptions.HasFlag(LoadVisitorOptions.ReportSchemaLoad);
+    protected bool ReportSchemaLoad => ImportOptions.ReportSchemaLoad;
 
     /// <summary>Load report schemas from the working folder</summary>
-    protected bool LookupValidation => LoadOptions.HasFlag(LoadVisitorOptions.LookupValidation);
+    protected bool LookupValidation => ImportOptions.LookupValidation;
 
     /// <summary>
     /// Reads a text file as string
@@ -692,7 +692,7 @@ public abstract class ImportExchangeVisitor : ExchangeVisitor
         }
 
         // get script
-        var target = TargetLoad ? await new ScriptService(HttpClient).GetAsync<Model.Script>(
+        var target = TargetLoad ? await new ScriptService(HttpClient).GetAsync<Client.Model.Script>(
             new(tenant.Id, regulation.Id), script.Name) : null;
 
         // setup script

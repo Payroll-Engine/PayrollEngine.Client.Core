@@ -6,15 +6,15 @@ using Task = System.Threading.Tasks.Task;
 namespace PayrollEngine.Client.Exchange;
 
 /// <summary>Exchange visitor base class</summary>
-public abstract class ExchangeVisitorBase
+public abstract class VisitorBase
 {
     /// <summary>The exchange model</summary>
     public Model.Exchange Exchange { get; }
 
-    /// <summary>Initializes a new instance of the <see cref="ExchangeVisitorBase"/> class</summary>
+    /// <summary>Initializes a new instance of the <see cref="VisitorBase"/> class</summary>
     /// <remarks>Content is loaded from the working folder</remarks>
     /// <param name="exchange">The exchange model</param>
-    protected ExchangeVisitorBase(Model.Exchange exchange)
+    protected VisitorBase(Model.Exchange exchange)
     {
         Exchange = exchange ?? throw new ArgumentNullException(nameof(exchange));
 

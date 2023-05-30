@@ -429,6 +429,83 @@
         <member name="F:PayrollEngine.Client.Exchange.DataImportMode.Bulk">
             <summary>Multiple objects in bulk mode</summary>
         </member>
+        <member name="T:PayrollEngine.Client.Exchange.ExchangeExport">
+            <summary>Export tenant to exchange</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Exchange.ExchangeExport.HttpClient">
+            <summary>The payroll http client</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Exchange.ExchangeExport.ExportOptions">
+            <summary>The export options</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Exchange.ExchangeExport.Namespace">
+            <summary>The export namespace</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeExport.#ctor(PayrollEngine.Client.PayrollHttpClient,PayrollEngine.Client.Exchange.ExchangeExportOptions,System.String)">
+            <summary>Initializes a new instance of the <see cref="T:PayrollEngine.Client.Exchange.ExchangeExport"/> class</summary>
+            <param name="httpClient">The payroll http client</param>
+            <param name="exportOptions">The export options</param>
+            <param name="namespace">The export namespace</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeExport.ExportAsync(System.Int32)">
+            <summary>Export tenant to exchange</summary>
+            <returns>The exchange model</returns>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeExport.ExportAsync(System.Collections.Generic.IEnumerable{System.Int32})">
+            <summary>Export tenants to exchange</summary>
+            <returns>The exchange model</returns>
+        </member>
+        <member name="T:PayrollEngine.Client.Exchange.ExchangeExportOptions">
+            <summary>Exchange export options</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Exchange.ExchangeExportOptions.HasAnyFilter">
+            <summary>Export user identifiers</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Exchange.ExchangeExportOptions.Users">
+            <summary>Export user identifiers</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Exchange.ExchangeExportOptions.Divisions">
+            <summary>Export division names</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Exchange.ExchangeExportOptions.Employees">
+            <summary>Export employee identifiers</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Exchange.ExchangeExportOptions.Tasks">
+            <summary>Export task names</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Exchange.ExchangeExportOptions.Webhooks">
+            <summary>Export webhook names</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Exchange.ExchangeExportOptions.Regulations">
+            <summary>Export regulation names</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Exchange.ExchangeExportOptions.Payrolls">
+            <summary>Export payroll names</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Exchange.ExchangeExportOptions.Payruns">
+            <summary>Export payrun names</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Exchange.ExchangeExportOptions.PayrunJobs">
+            <summary>Export payrun job names</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Exchange.ExchangeExportOptions.ExportWebhookMessages">
+            <summary>Export webhook messages </summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Exchange.ExchangeExportOptions.ExportGlobalCaseValues">
+            <summary>Export global case values</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Exchange.ExchangeExportOptions.ExportNationalCaseValues">
+            <summary>Export national case values</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Exchange.ExchangeExportOptions.ExportCompanyCaseValues">
+            <summary>Export company case values</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Exchange.ExchangeExportOptions.ExportEmployeeCaseValues">
+            <summary>Export Global case values</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Exchange.ExchangeExportOptions.ExportPayrollResults">
+            <summary>Export results</summary>
+        </member>
         <member name="T:PayrollEngine.Client.Exchange.ExchangeExtensions">
             <summary>Extension methods for <see cref="N:PayrollEngine.Client.Exchange"/></summary>
         </member>
@@ -444,11 +521,12 @@
         <member name="P:PayrollEngine.Client.Exchange.ExchangeImport.ImportMode">
             <summary>The data import mode</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeImport.#ctor(PayrollEngine.Client.PayrollHttpClient,PayrollEngine.Client.Model.Exchange,PayrollEngine.Client.Script.IScriptParser,PayrollEngine.Client.Exchange.DataImportMode)">
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeImport.#ctor(PayrollEngine.Client.PayrollHttpClient,PayrollEngine.Client.Model.Exchange,PayrollEngine.Client.Script.IScriptParser,PayrollEngine.Client.Exchange.ExchangeImportOptions,PayrollEngine.Client.Exchange.DataImportMode)">
             <summary>Initializes a new instance of the <see cref="T:PayrollEngine.Client.Exchange.ExchangeImport"/> class</summary>
             <param name="httpClient">The Payroll http client</param>
             <param name="exchange">The exchange model</param>
             <param name="scriptParser">The script parser</param>
+            <param name="importOptions">The import options</param>
             <param name="importMode">The data import mode (default: single)</param>
         </member>
         <member name="M:PayrollEngine.Client.Exchange.ExchangeImport.ImportAsync">
@@ -532,738 +610,166 @@
         <member name="M:PayrollEngine.Client.Exchange.ExchangeImport.VisitPayrunJobInvocationAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrunJobInvocation)">
             <summary><inheritdoc/></summary>
         </member>
-        <member name="T:PayrollEngine.Client.Exchange.ExchangeReader">
-            <summary>Read exchange payroll from file</summary>
+        <member name="T:PayrollEngine.Client.Exchange.ExchangeImportOptions">
+            <summary>Exchange import options <see cref="T:PayrollEngine.Client.Exchange.ExchangeImportVisitor"/></summary>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeReader.ReadAsync(System.String,System.String)">
-            <summary>Reads the specified file name</summary>
-            <param name="fileName">Name of the file</param>
-            <param name="namespace">The target namespace</param>
-            <returns>The payroll provider</returns>
+        <member name="P:PayrollEngine.Client.Exchange.ExchangeImportOptions.TargetLoad">
+            <summary>Load target object</summary>
         </member>
-        <member name="T:PayrollEngine.Client.Exchange.ExchangeVisitor">
-            <summary>Exchange visitor tool</summary>
+        <member name="P:PayrollEngine.Client.Exchange.ExchangeImportOptions.ScriptLoad">
+            <summary>Load scripts from the working folder</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitor.#ctor(PayrollEngine.Client.Model.Exchange)">
-            <summary>Initializes a new instance of the <see cref="T:PayrollEngine.Client.Exchange.ExchangeVisitor"/> class</summary>
-            <remarks>Content is loaded from the working folder</remarks>
-            <param name="exchange">The exchange model</param>
+        <member name="P:PayrollEngine.Client.Exchange.ExchangeImportOptions.CaseDocumentLoad">
+            <summary>Load case documents from the working folder</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitor.Execute">
-            <summary>Execute the visitor</summary>
+        <member name="P:PayrollEngine.Client.Exchange.ExchangeImportOptions.ReportTemplateLoad">
+            <summary>Load report templates from the working folder</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitor.ExecuteAsync">
-            <summary>Execute the visitor</summary>
+        <member name="P:PayrollEngine.Client.Exchange.ExchangeImportOptions.ReportSchemaLoad">
+            <summary>Load report schemas from the working folder</summary>
         </member>
-        <member name="P:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitExchangeTenant">
-            <summary>Visit the exchange tenant handler</summary>
+        <member name="P:PayrollEngine.Client.Exchange.ExchangeImportOptions.LookupValidation">
+            <summary>Lookup validation</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitExchangeTenantAsync(PayrollEngine.Client.Model.IExchangeTenant)">
-            <inheritdoc />
+        <member name="T:PayrollEngine.Client.Exchange.ExchangeImportVisitor">
+            <summary>Import exchange from JSON file to Payroll API</summary>
         </member>
-        <member name="P:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitRegulationShare">
-            <summary>Visit the regulation share handler</summary>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitRegulationShareAsync(PayrollEngine.Client.Model.IRegulationShare)">
-            <inheritdoc />
-        </member>
-        <member name="P:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitUser">
-            <summary>Visit the user handler</summary>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitUserAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IUser)">
-            <inheritdoc />
-        </member>
-        <member name="P:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitDivision">
-            <summary>Visit the division handler</summary>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitDivisionAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IDivision)">
-            <inheritdoc />
-        </member>
-        <member name="P:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitTask">
-            <summary>Visit the task handler</summary>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitTaskAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.ITask)">
-            <inheritdoc />
-        </member>
-        <member name="P:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitWebhook">
-            <summary>Visit the task handler</summary>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitWebhookAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IWebhook)">
-            <inheritdoc />
-        </member>
-        <member name="P:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitRegulation">
-            <summary>Visit the regulation handler</summary>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitRegulationAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet)">
-            <inheritdoc />
-        </member>
-        <member name="P:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitLookup">
-            <summary>Visit the lookup handler</summary>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitLookupAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.ILookupSet)">
-            <inheritdoc />
-        </member>
-        <member name="P:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitLookupValue">
-            <summary>Visit the lookup value handler</summary>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitLookupValueAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.ILookupSet,PayrollEngine.Client.Model.ILookupValue)">
-            <inheritdoc />
-        </member>
-        <member name="P:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitCase">
-            <summary>Visit the case handler</summary>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitCaseAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.ICaseSet)">
-            <inheritdoc />
-        </member>
-        <member name="P:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitCaseField">
-            <summary>Visit the case field handler</summary>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitCaseFieldAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.ICaseSet,PayrollEngine.Client.Model.ICaseField)">
-            <inheritdoc />
-        </member>
-        <member name="P:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitCaseRelation">
-            <summary>Visit the case relation handler</summary>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitCaseRelationAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.ICaseRelation)">
-            <inheritdoc />
-        </member>
-        <member name="P:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitCollector">
-            <summary>Visit the collector handler</summary>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitCollectorAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.ICollector)">
-            <inheritdoc />
-        </member>
-        <member name="P:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitWageType">
-            <summary>Visit the wage type handler</summary>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitWageTypeAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.IWageType)">
-            <inheritdoc />
-        </member>
-        <member name="P:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitScript">
-            <summary>Visit the script handler</summary>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitScriptAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.IScript)">
-            <inheritdoc />
-        </member>
-        <member name="P:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitReport">
-            <summary>Visit the report handler</summary>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitReportAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.IReportSet)">
-            <inheritdoc />
-        </member>
-        <member name="P:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitReportParameter">
-            <summary>Visit the report parameter handler</summary>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitReportParameterAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.IReportSet,PayrollEngine.Client.Model.IReportParameter)">
-            <inheritdoc />
-        </member>
-        <member name="P:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitReportTemplate">
-            <summary>Visit the report template handler</summary>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitReportTemplateAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.IReportSet,PayrollEngine.Client.Model.IReportTemplate)">
-            <inheritdoc />
-        </member>
-        <member name="P:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitEmployee">
-            <summary>Visit the report template handler</summary>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitEmployeeAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IEmployeeSet)">
-            <inheritdoc />
-        </member>
-        <member name="P:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitPayroll">
-            <summary>Visit the payroll handler</summary>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitPayrollAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollSet)">
-            <inheritdoc />
-        </member>
-        <member name="P:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitPayrollLayer">
-            <summary>Visit the payroll layer handler</summary>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitPayrollLayerAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollSet,PayrollEngine.Client.Model.IPayrollLayer)">
-            <inheritdoc />
-        </member>
-        <member name="P:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitCaseChangeSetup">
-            <summary>Visit the case change setup handler</summary>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitCaseChangeSetupAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollSet,PayrollEngine.Client.Model.ICaseChangeSetup)">
-            <inheritdoc />
-        </member>
-        <member name="P:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitCaseSetup">
-            <summary>Visit the case setup handler</summary>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitCaseSetupAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollSet,PayrollEngine.Client.Model.ICaseChangeSetup,PayrollEngine.Client.Model.ICaseSetup)">
-            <inheritdoc />
-        </member>
-        <member name="P:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitCaseValue">
-            <summary>Visit the case value handler</summary>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitCaseValueAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollSet,PayrollEngine.Client.Model.ICaseChangeSetup,PayrollEngine.Client.Model.ICaseSetup,PayrollEngine.Client.Model.ICaseValueSetup)">
-            <inheritdoc />
-        </member>
-        <member name="P:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitPayrun">
-            <summary>Visit the payrun handler</summary>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitPayrunAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrun)">
-            <inheritdoc />
-        </member>
-        <member name="P:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitPayrunParameter">
-            <summary>Visit the payrun parameter handler</summary>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitPayrunParameterAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrun,PayrollEngine.Client.Model.IPayrunParameter)">
-            <inheritdoc />
-        </member>
-        <member name="P:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitPayrunJobInvocation">
-            <summary>Visit the payrun job invocation handler</summary>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitPayrunJobInvocationAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrunJobInvocation)">
-            <inheritdoc />
-        </member>
-        <member name="P:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitPayrollResult">
-            <summary>Visit the payroll result handler</summary>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitPayrollResultAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollResultSet)">
-            <inheritdoc />
-        </member>
-        <member name="P:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitWageTypeResult">
-            <summary>Visit the wage type result handler</summary>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitWageTypeResultAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollResultSet,PayrollEngine.Client.Model.IWageTypeResultSet)">
-            <inheritdoc />
-        </member>
-        <member name="P:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitWageTypeCustomResult">
-            <summary>Visit the wage type custom result handler</summary>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitWageTypeCustomResultAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollResultSet,PayrollEngine.Client.Model.IWageTypeResultSet,PayrollEngine.Client.Model.IWageTypeCustomResult)">
-            <inheritdoc />
-        </member>
-        <member name="P:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitCollectorResult">
-            <summary>Visit the wage type result handler</summary>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitCollectorResultAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollResultSet,PayrollEngine.Client.Model.ICollectorResultSet)">
-            <inheritdoc />
-        </member>
-        <member name="P:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitCollectorCustomResult">
-            <summary>Visit the wage type custom result handler</summary>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitCollectorCustomResultAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollResultSet,PayrollEngine.Client.Model.ICollectorResultSet,PayrollEngine.Client.Model.ICollectorCustomResult)">
-            <inheritdoc />
-        </member>
-        <member name="P:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitPayrunResult">
-            <summary>Visit the payrun result handler</summary>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitor.VisitPayrunResultAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollResultSet,PayrollEngine.Client.Model.IPayrunResult)">
-            <inheritdoc />
-        </member>
-        <member name="T:PayrollEngine.Client.Exchange.ExchangeVisitorBase">
-            <summary>Exchange visitor base class</summary>
-        </member>
-        <member name="P:PayrollEngine.Client.Exchange.ExchangeVisitorBase.Exchange">
-            <summary>The exchange model</summary>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.#ctor(PayrollEngine.Client.Model.Exchange)">
-            <summary>Initializes a new instance of the <see cref="T:PayrollEngine.Client.Exchange.ExchangeVisitorBase"/> class</summary>
-            <remarks>Content is loaded from the working folder</remarks>
-            <param name="exchange">The exchange model</param>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitAsync">
-            <summary>Visit the exchange model</summary>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitExchangeTenantsAsync">
-            <summary>Visit the exchange tenants</summary>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitExchangeTenantAsync(PayrollEngine.Client.Model.IExchangeTenant)">
-            <summary>Visit the exchange tenant</summary>
-            <param name="tenant">The exchange tenant</param>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitRegulationSharesAsync">
-            <summary>Visit the regulation shares</summary>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitRegulationShareAsync(PayrollEngine.Client.Model.IRegulationShare)">
-            <summary>Visit the regulation share</summary>
-            <param name="share">The regulation share</param>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitUsersAsync(PayrollEngine.Client.Model.IExchangeTenant)">
-            <summary>Visit the users</summary>
-            <param name="tenant">The tenant</param>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitUserAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IUser)">
-            <summary>Visit the user</summary>
-            <param name="tenant">The tenant</param>
-            <param name="user">The user</param>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitDivisionsAsync(PayrollEngine.Client.Model.IExchangeTenant)">
-            <summary>Visit the divisions</summary>
-            <param name="tenant">The tenant</param>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitDivisionAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IDivision)">
-            <summary>Visit the division</summary>
-            <param name="tenant">The tenant</param>
-            <param name="division">The division</param>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitTasksAsync(PayrollEngine.Client.Model.IExchangeTenant)">
-            <summary>Visit the task</summary>
-            <param name="tenant">The tenant</param>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitTaskAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.ITask)">
-            <summary>Visit the task</summary>
-            <param name="tenant">The tenant</param>
-            <param name="task">The task</param>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitWebhooksAsync(PayrollEngine.Client.Model.IExchangeTenant)">
-            <summary>Visit the webhooks</summary>
-            <param name="tenant">The tenant</param>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitWebhookAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IWebhook)">
-            <summary>Visit the webhook</summary>
-            <param name="tenant">The tenant</param>
-            <param name="webhook">The webhook</param>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitRegulationsAsync(PayrollEngine.Client.Model.IExchangeTenant)">
-            <summary>Visit the regulation</summary>
-            <param name="tenant">The tenant</param>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitRegulationAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet)">
-            <summary>Visit the regulation</summary>
-            <param name="tenant">The tenant</param>
-            <param name="regulation">The regulation</param>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitLookupsAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet)">
-            <summary>Visit the lookups</summary>
-            <param name="tenant">The tenant</param>
-            <param name="regulation">The regulation</param>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitLookupAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.ILookupSet)">
-            <summary>Visit the lookup</summary>
-            <param name="tenant">The tenant</param>
-            <param name="regulation">The regulation</param>
-            <param name="lookup">The lookup</param>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitLookupValuesAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.ILookupSet)">
-            <summary>Visit the lookup value</summary>
-            <param name="tenant">The tenant</param>
-            <param name="regulation">The regulation</param>
-            <param name="lookup">The lookup</param>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitLookupValueAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.ILookupSet,PayrollEngine.Client.Model.ILookupValue)">
-            <summary>Visit the lookup value</summary>
-            <param name="tenant">The tenant</param>
-            <param name="regulation">The regulation</param>
-            <param name="lookup">The lookup</param>
-            <param name="lookupValue">The lookup value</param>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitCasesAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet)">
-            <summary>Visit the cases</summary>
-            <param name="tenant">The tenant</param>
-            <param name="regulation">The regulation</param>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitCaseAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.ICaseSet)">
-            <summary>Visit the case</summary>
-            <param name="tenant">The tenant</param>
-            <param name="regulation">The regulation</param>
-            <param name="caseSet">The case</param>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitCaseFieldsAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.ICaseSet)">
-            <summary>Visit the case fields</summary>
-            <param name="tenant">The tenant</param>
-            <param name="regulation">The regulation</param>
-            <param name="caseSet">The case</param>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitCaseFieldAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.ICaseSet,PayrollEngine.Client.Model.ICaseField)">
-            <summary>Visit the case field</summary>
-            <param name="tenant">The tenant</param>
-            <param name="regulation">The regulation</param>
-            <param name="caseSet">The case</param>
-            <param name="caseField">The case field</param>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitCaseRelationsAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet)">
-            <summary>Visit the case relations</summary>
-            <param name="tenant">The tenant</param>
-            <param name="regulation">The regulation</param>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitCaseRelationAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.ICaseRelation)">
-            <summary>Visit the case relation</summary>
-            <param name="tenant">The tenant</param>
-            <param name="regulation">The regulation</param>
-            <param name="caseRelation">The case relation</param>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitCollectorsAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet)">
-            <summary>Visit the collectors</summary>
-            <param name="tenant">The tenant</param>
-            <param name="regulation">The regulation</param>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitCollectorAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.ICollector)">
-            <summary>Visit the collector</summary>
-            <param name="tenant">The tenant</param>
-            <param name="regulation">The regulation</param>
-            <param name="collector">The collector</param>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitWageTypesAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet)">
-            <summary>Visit the wage types</summary>
-            <param name="tenant">The tenant</param>
-            <param name="regulation">The regulation</param>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitWageTypeAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.IWageType)">
-            <summary>Visit the wage type</summary>
-            <param name="tenant">The tenant</param>
-            <param name="regulation">The regulation</param>
-            <param name="wageType">The wage type</param>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitScriptsAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet)">
-            <summary>Visit the scripts</summary>
-            <param name="tenant">The tenant</param>
-            <param name="regulation">The regulation</param>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitScriptAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.IScript)">
-            <summary>Visit the script</summary>
-            <param name="tenant">The tenant</param>
-            <param name="regulation">The regulation</param>
-            <param name="script">The script</param>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitReportsAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet)">
-            <summary>Visit the reports</summary>
-            <param name="tenant">The tenant</param>
-            <param name="regulation">The regulation</param>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitReportAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.IReportSet)">
-            <summary>Visit the report</summary>
-            <param name="tenant">The tenant</param>
-            <param name="regulation">The regulation</param>
-            <param name="report">The report</param>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitReportParametersAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.IReportSet)">
-            <summary>Visit the report parameters</summary>
-            <param name="tenant">The tenant</param>
-            <param name="regulation">The regulation</param>
-            <param name="report">The report</param>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitReportParameterAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.IReportSet,PayrollEngine.Client.Model.IReportParameter)">
-            <summary>Visit the report parameter</summary>
-            <param name="tenant">The tenant</param>
-            <param name="regulation">The regulation</param>
-            <param name="report">The report</param>
-            <param name="parameter">The report parameter</param>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitReportTemplatesAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.IReportSet)">
-            <summary>Visit the report templates</summary>
-            <param name="tenant">The tenant</param>
-            <param name="regulation">The regulation</param>
-            <param name="report">The report</param>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitReportTemplateAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.IReportSet,PayrollEngine.Client.Model.IReportTemplate)">
-            <summary>Visit the report template</summary>
-            <param name="tenant">The tenant</param>
-            <param name="regulation">The regulation</param>
-            <param name="report">The report</param>
-            <param name="template">The report template</param>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitEmployeesAsync(PayrollEngine.Client.Model.IExchangeTenant)">
-            <summary>Visit the employees</summary>
-            <param name="tenant">The tenant</param>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitEmployeeAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IEmployeeSet)">
-            <summary>Visit the employee</summary>
-            <param name="tenant">The tenant</param>
-            <param name="employee">The employee</param>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitPayrollsAsync(PayrollEngine.Client.Model.IExchangeTenant)">
-            <summary>Visit the payrolls</summary>
-            <param name="tenant">The tenant</param>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitPayrollAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollSet)">
-            <summary>Visit the payroll</summary>
-            <param name="tenant">The tenant</param>
-            <param name="payroll">The payroll</param>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitPayrollLayersAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollSet)">
-            <summary>Visit the payroll layers</summary>
-            <param name="tenant">The tenant</param>
-            <param name="payroll">The payroll</param>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitPayrollLayerAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollSet,PayrollEngine.Client.Model.IPayrollLayer)">
-            <summary>Visit the payroll layer</summary>
-            <param name="tenant">The tenant</param>
-            <param name="payroll">The payroll</param>
-            <param name="layer">The payroll layer</param>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitCaseChangeSetupsAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollSet)">
-            <summary>Visit the case changes</summary>
-            <param name="tenant">The tenant</param>
-            <param name="payroll">The payroll</param>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitCaseChangeSetupAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollSet,PayrollEngine.Client.Model.ICaseChangeSetup)">
-            <summary>Visit the case change</summary>
-            <param name="tenant">The tenant</param>
-            <param name="payroll">The payroll</param>
-            <param name="caseChangeSetup">The case change setup</param>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitCaseSetupAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollSet,PayrollEngine.Client.Model.ICaseChangeSetup,PayrollEngine.Client.Model.ICaseSetup)">
-            <summary>Visit the case change documents</summary>
-            <param name="tenant">The tenant</param>
-            <param name="payroll">The payroll</param>
-            <param name="caseChangeSetup">The case change setup</param>
-            <param name="caseSetup">The case setup</param>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitRelatedCasesAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollSet,PayrollEngine.Client.Model.ICaseChangeSetup,PayrollEngine.Client.Model.ICaseSetup)">
-            <summary>Visit the related cases</summary>
-            <param name="tenant">The tenant</param>
-            <param name="payroll">The payroll</param>
-            <param name="caseChangeSetup">The case change setup</param>
-            <param name="caseSetup">The case setup</param>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitCaseValuesAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollSet,PayrollEngine.Client.Model.ICaseChangeSetup,PayrollEngine.Client.Model.ICaseSetup)">
-            <summary>Visit the case values</summary>
-            <param name="tenant">The tenant</param>
-            <param name="payroll">The payroll</param>
-            <param name="caseChangeSetup">The case change setup</param>
-            <param name="caseSetup">The case setup</param>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitCaseValueAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollSet,PayrollEngine.Client.Model.ICaseChangeSetup,PayrollEngine.Client.Model.ICaseSetup,PayrollEngine.Client.Model.ICaseValueSetup)">
-            <summary>Visit the case value</summary>
-            <param name="tenant">The tenant</param>
-            <param name="payroll">The payroll</param>
-            <param name="caseChangeSetup">The case change setup</param>
-            <param name="caseSetup">The case setup</param>
-            <param name="valueSetup">The case value setup</param>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitPayrunsAsync(PayrollEngine.Client.Model.IExchangeTenant)">
-            <summary>Visit the payruns</summary>
-            <param name="tenant">The tenant</param>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitPayrunAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrun)">
-            <summary>Visit the payrun</summary>
-            <param name="tenant">The tenant</param>
-            <param name="payrun">The payrun</param>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitPayrunParametersAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrun)">
-            <summary>Visit the payrun parameter</summary>
-            <param name="tenant">The tenant</param>
-            <param name="payrun">The payrun</param>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitPayrunParameterAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrun,PayrollEngine.Client.Model.IPayrunParameter)">
-            <summary>Visit the payrun parameter</summary>
-            <param name="tenant">The tenant</param>
-            <param name="payrun">The payrun</param>
-            <param name="parameter">The payrun parameter</param>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitPayrunJobsAsync(PayrollEngine.Client.Model.IExchangeTenant)">
-            <summary>Visit the payrun jobs</summary>
-            <param name="tenant">The exchange tenant</param>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitPayrunJobInvocationsAsync(PayrollEngine.Client.Model.IExchangeTenant)">
-            <summary>Visit the payrun job invocations</summary>
-            <param name="tenant">The exchange tenant</param>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitPayrunJobInvocationAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrunJobInvocation)">
-            <summary>Visit the payrun job invocation</summary>
-            <param name="tenant">The exchange tenant</param>
-            <param name="invocation">The payrun job invocation</param>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitPayrollResultsAsync(PayrollEngine.Client.Model.IExchangeTenant)">
-            <summary>Visit the payroll results</summary>
-            <param name="tenant">The exchange tenant</param>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitPayrollResultAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollResultSet)">
-            <summary>Visit the payroll result</summary>
-            <param name="tenant">The exchange tenant</param>
-            <param name="payrollResult">The payroll result</param>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitWageTypeResultsAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollResultSet)">
-            <summary>Visit the wage type results</summary>
-            <param name="tenant">The exchange tenant</param>
-            <param name="payrollResult">The payroll result</param>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitWageTypeResultAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollResultSet,PayrollEngine.Client.Model.IWageTypeResultSet)">
-            <summary>Visit the wage type result</summary>
-            <param name="tenant">The exchange tenant</param>
-            <param name="payrollResult">The payroll result</param>
-            <param name="wageTypeResult">The wage type result</param>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitWageTypeCustomResultsAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollResultSet,PayrollEngine.Client.Model.IWageTypeResultSet)">
-            <summary>Visit the wage type custom results</summary>
-            <param name="tenant">The exchange tenant</param>
-            <param name="payrollResult">The payroll result</param>
-            <param name="wageTypeResult">The wage type result</param>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitWageTypeCustomResultAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollResultSet,PayrollEngine.Client.Model.IWageTypeResultSet,PayrollEngine.Client.Model.IWageTypeCustomResult)">
-            <summary>Visit the wage type custom result</summary>
-            <param name="tenant">The exchange tenant</param>
-            <param name="payrollResult">The payroll result</param>
-            <param name="wageTypeResult">The wage type result</param>
-            <param name="wageTypeCustomResult">The wage type custom result</param>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitCollectorResultsAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollResultSet)">
-            <summary>Visit the collector results</summary>
-            <param name="tenant">The exchange tenant</param>
-            <param name="payrollResult">The payroll result</param>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitCollectorResultAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollResultSet,PayrollEngine.Client.Model.ICollectorResultSet)">
-            <summary>Visit the collector result</summary>
-            <param name="tenant">The exchange tenant</param>
-            <param name="payrollResult">The payroll result</param>
-            <param name="collectorResult">The collector result</param>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitCollectorCustomResultsAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollResultSet,PayrollEngine.Client.Model.ICollectorResultSet)">
-            <summary>Visit the collector custom results</summary>
-            <param name="tenant">The exchange tenant</param>
-            <param name="payrollResult">The payroll result</param>
-            <param name="collectorResult">The collector result</param>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitCollectorCustomResultAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollResultSet,PayrollEngine.Client.Model.ICollectorResultSet,PayrollEngine.Client.Model.ICollectorCustomResult)">
-            <summary>Visit the collector custom result</summary>
-            <param name="tenant">The exchange tenant</param>
-            <param name="payrollResult">The payroll result</param>
-            <param name="collectorResult">The collector result</param>
-            <param name="collectorCustomResult">The collector custom result</param>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitPayrunResultsAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollResultSet)">
-            <summary>Visit the payrun results</summary>
-            <param name="tenant">The exchange tenant</param>
-            <param name="payrollResult">The payroll result</param>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeVisitorBase.VisitPayrunResultAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollResultSet,PayrollEngine.Client.Model.IPayrunResult)">
-            <summary>Visit the payrun result</summary>
-            <param name="tenant">The exchange tenant</param>
-            <param name="payrollResult">The payroll result</param>
-            <param name="payrunResult">The payrun result</param>
-        </member>
-        <member name="T:PayrollEngine.Client.Exchange.ImportExchangeVisitor">
-            <summary>Exchange visitor tool</summary>
-        </member>
-        <member name="P:PayrollEngine.Client.Exchange.ImportExchangeVisitor.LoadOptions">
+        <member name="P:PayrollEngine.Client.Exchange.ExchangeImportVisitor.ImportOptions">
             <summary>The visitor load options</summary>
         </member>
-        <member name="P:PayrollEngine.Client.Exchange.ImportExchangeVisitor.HttpClient">
+        <member name="P:PayrollEngine.Client.Exchange.ExchangeImportVisitor.HttpClient">
             <summary>The Payroll http client</summary>
         </member>
-        <member name="P:PayrollEngine.Client.Exchange.ImportExchangeVisitor.ScriptParser">
+        <member name="P:PayrollEngine.Client.Exchange.ExchangeImportVisitor.ScriptParser">
             <summary>The script parser</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ImportExchangeVisitor.#ctor(PayrollEngine.Client.PayrollHttpClient,PayrollEngine.Client.Model.Exchange,PayrollEngine.Client.Script.IScriptParser,PayrollEngine.Client.Exchange.LoadVisitorOptions)">
-            <summary>Initializes a new instance of the <see cref="T:PayrollEngine.Client.Exchange.ExchangeVisitorBase"/> class</summary>
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.#ctor(PayrollEngine.Client.PayrollHttpClient,PayrollEngine.Client.Model.Exchange,PayrollEngine.Client.Script.IScriptParser,PayrollEngine.Client.Exchange.ExchangeImportOptions)">
+            <summary>Initializes a new instance of the <see cref="T:PayrollEngine.Client.Exchange.VisitorBase"/> class</summary>
             <remarks>Content is loaded from the working folder</remarks>
             <param name="httpClient">The Payroll http client</param>
             <param name="exchange">The exchange model</param>
             <param name="scriptParser">The script parser</param>
-            <param name="loadOptions">The visitor options (default is all)</param>
+            <param name="importOptions">The import options</param>
         </member>
-        <member name="P:PayrollEngine.Client.Exchange.ImportExchangeVisitor.TargetLoad">
+        <member name="P:PayrollEngine.Client.Exchange.ExchangeImportVisitor.TargetLoad">
             <summary>Load target object</summary>
         </member>
-        <member name="P:PayrollEngine.Client.Exchange.ImportExchangeVisitor.ScriptLoad">
+        <member name="P:PayrollEngine.Client.Exchange.ExchangeImportVisitor.ScriptLoad">
             <summary>Load scripts from the working folder</summary>
         </member>
-        <member name="P:PayrollEngine.Client.Exchange.ImportExchangeVisitor.CaseDocumentLoad">
+        <member name="P:PayrollEngine.Client.Exchange.ExchangeImportVisitor.CaseDocumentLoad">
             <summary>Load case documents from the working folder</summary>
         </member>
-        <member name="P:PayrollEngine.Client.Exchange.ImportExchangeVisitor.ReportTemplateLoad">
+        <member name="P:PayrollEngine.Client.Exchange.ExchangeImportVisitor.ReportTemplateLoad">
             <summary>Load report templates from file</summary>
         </member>
-        <member name="P:PayrollEngine.Client.Exchange.ImportExchangeVisitor.ReportSchemaLoad">
+        <member name="P:PayrollEngine.Client.Exchange.ExchangeImportVisitor.ReportSchemaLoad">
             <summary>Load report templates from the working folder</summary>
         </member>
-        <member name="P:PayrollEngine.Client.Exchange.ImportExchangeVisitor.LookupValidation">
+        <member name="P:PayrollEngine.Client.Exchange.ExchangeImportVisitor.LookupValidation">
             <summary>Load report schemas from the working folder</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ImportExchangeVisitor.ReadTextFile(System.String)">
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.ReadTextFile(System.String)">
             <summary>
             Reads a text file as string
             </summary>
             <param name="fileName">Name of the file</param>
             <returns>The file content as string</returns>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ImportExchangeVisitor.GetTenantAsync(System.String)">
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.GetTenantAsync(System.String)">
             <summary>Get tenant</summary>
             <param name="tenantIdentifier">The tenant identifier</param>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ImportExchangeVisitor.VisitExchangeTenantAsync(PayrollEngine.Client.Model.IExchangeTenant)">
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.VisitExchangeTenantAsync(PayrollEngine.Client.Model.IExchangeTenant)">
             <summary>Visit the exchange tenant</summary>
             <param name="tenant">The exchange tenant</param>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ImportExchangeVisitor.SetupTenantAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.ITenant)">
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.SetupTenantAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.ITenant)">
             <summary>Setup the tenant</summary>
             <param name="tenant">The exchange tenant</param>
             <param name="targetTenant">The target tenant</param>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ImportExchangeVisitor.GetUserAsync(System.Int32,System.String)">
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.GetUserAsync(System.Int32,System.String)">
             <summary>Get user</summary>
             <param name="tenantId">The tenant id</param>
             <param name="userIdentifier">The user identifier</param>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ImportExchangeVisitor.VisitUserAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IUser)">
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.VisitUserAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IUser)">
             <summary>Visit the user</summary>
             <param name="tenant">The tenant</param>
             <param name="user">The user</param>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ImportExchangeVisitor.SetupUserAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IUser,PayrollEngine.Client.Model.IUser)">
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.SetupUserAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IUser,PayrollEngine.Client.Model.IUser)">
             <summary>Setup the user</summary>
             <param name="tenant">The exchange tenant</param>
             <param name="user">The user</param>
             <param name="targetUser">The target user</param>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ImportExchangeVisitor.GetDivisionAsync(System.Int32,System.String)">
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.GetDivisionAsync(System.Int32,System.String)">
             <summary>Get division</summary>
             <param name="tenantId">The tenant id</param>
             <param name="name">The division name</param>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ImportExchangeVisitor.VisitDivisionAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IDivision)">
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.VisitDivisionAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IDivision)">
             <summary>Visit the division</summary>
             <param name="tenant">The tenant</param>
             <param name="division">The division</param>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ImportExchangeVisitor.SetupDivisionAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IDivision,PayrollEngine.Client.Model.IDivision)">
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.SetupDivisionAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IDivision,PayrollEngine.Client.Model.IDivision)">
             <summary>Setup the user</summary>
             <param name="tenant">The exchange tenant</param>
             <param name="division">The division</param>
             <param name="targetDivision">The target division</param>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ImportExchangeVisitor.VisitWebhookAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IWebhook)">
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.VisitWebhookAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IWebhook)">
             <summary>Visit the webhook</summary>
             <param name="tenant">The tenant</param>
             <param name="webhook">The webhook</param>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ImportExchangeVisitor.SetupWebhookAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IWebhook,PayrollEngine.Client.Model.IWebhook)">
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.SetupWebhookAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IWebhook,PayrollEngine.Client.Model.IWebhook)">
             <summary>Setup the webhook</summary>
             <param name="tenant">The exchange tenant</param>
             <param name="webhook">The webhook</param>
             <param name="targetWebhook">The target webhook</param>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ImportExchangeVisitor.GetRegulationAsync(System.Int32,System.String,System.Nullable{System.Int32})">
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.GetRegulationAsync(System.Int32,System.String,System.Nullable{System.Int32})">
             <summary>Get division</summary>
             <param name="tenantId">The tenant id</param>
             <param name="name">The regulation name</param>
             <param name="version">The regulation version</param>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ImportExchangeVisitor.VisitRegulationAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet)">
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.VisitRegulationAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet)">
             <summary>Visit the regulation</summary>
             <param name="tenant">The tenant</param>
             <param name="regulation">The regulation</param>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ImportExchangeVisitor.SetupRegulationAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.IRegulation)">
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.SetupRegulationAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.IRegulation)">
             <summary>Setup the regulation</summary>
             <param name="tenant">The exchange tenant</param>
             <param name="regulation">The regulation</param>
             <param name="targetRegulation">The target regulation</param>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ImportExchangeVisitor.VisitLookupAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.ILookupSet)">
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.VisitLookupAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.ILookupSet)">
             <summary>Visit the lookup</summary>
             <param name="tenant">The tenant</param>
             <param name="regulation">The regulation</param>
             <param name="lookup">The lookup</param>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ImportExchangeVisitor.SetupLookupAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.ILookupSet,PayrollEngine.Client.Model.ILookup)">
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.SetupLookupAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.ILookupSet,PayrollEngine.Client.Model.ILookup)">
             <summary>Setup the lookup</summary>
             <param name="tenant">The exchange tenant</param>
             <param name="regulation">The regulation</param>
             <param name="lookup">The lookup</param>
             <param name="targetLookup">The target lookup</param>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ImportExchangeVisitor.VisitLookupValueAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.ILookupSet,PayrollEngine.Client.Model.ILookupValue)">
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.VisitLookupValueAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.ILookupSet,PayrollEngine.Client.Model.ILookupValue)">
             <summary>Visit the lookup value</summary>
             <param name="tenant">The tenant</param>
             <param name="regulation">The regulation</param>
             <param name="lookup">The lookup</param>
             <param name="lookupValue">The lookup value</param>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ImportExchangeVisitor.SetupLookupValueAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.ILookupSet,PayrollEngine.Client.Model.ILookupValue,PayrollEngine.Client.Model.ILookupValue)">
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.SetupLookupValueAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.ILookupSet,PayrollEngine.Client.Model.ILookupValue,PayrollEngine.Client.Model.ILookupValue)">
             <summary>Setup the lookup value</summary>
             <param name="tenant">The exchange tenant</param>
             <param name="regulation">The regulation</param>
@@ -1271,31 +777,31 @@
             <param name="lookupValue">The lookup value</param>
             <param name="targetLookupValue">The target lookup value</param>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ImportExchangeVisitor.ValidateLookup(PayrollEngine.Client.Model.ILookupSet)">
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.ValidateLookup(PayrollEngine.Client.Model.ILookupSet)">
             <summary>Validate the lookup</summary>
             <param name="lookup">The lookup</param>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ImportExchangeVisitor.VisitCaseAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.ICaseSet)">
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.VisitCaseAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.ICaseSet)">
             <summary>Visit the case</summary>
             <param name="tenant">The tenant</param>
             <param name="regulation">The regulation</param>
             <param name="caseSet">The case</param>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ImportExchangeVisitor.SetupCaseAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.ICaseSet,PayrollEngine.Client.Model.ICase)">
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.SetupCaseAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.ICaseSet,PayrollEngine.Client.Model.ICase)">
             <summary>Setup the case</summary>
             <param name="tenant">The exchange tenant</param>
             <param name="regulation">The regulation</param>
             <param name="caseSet">The case</param>
             <param name="targetCase">The target case</param>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ImportExchangeVisitor.VisitCaseFieldAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.ICaseSet,PayrollEngine.Client.Model.ICaseField)">
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.VisitCaseFieldAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.ICaseSet,PayrollEngine.Client.Model.ICaseField)">
             <summary>Visit the case field</summary>
             <param name="tenant">The tenant</param>
             <param name="regulation">The regulation</param>
             <param name="caseSet">The case</param>
             <param name="caseField">The case field</param>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ImportExchangeVisitor.SetupCaseFieldAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.ICaseSet,PayrollEngine.Client.Model.ICaseField,PayrollEngine.Client.Model.ICaseField)">
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.SetupCaseFieldAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.ICaseSet,PayrollEngine.Client.Model.ICaseField,PayrollEngine.Client.Model.ICaseField)">
             <summary>Setup the case field</summary>
             <param name="tenant">The exchange tenant</param>
             <param name="regulation">The regulation</param>
@@ -1303,79 +809,79 @@
             <param name="caseField">The case field</param>
             <param name="targetCaseField">The target case field</param>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ImportExchangeVisitor.VisitCaseRelationAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.ICaseRelation)">
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.VisitCaseRelationAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.ICaseRelation)">
             <summary>Visit the case relation</summary>
             <param name="tenant">The tenant</param>
             <param name="regulation">The regulation</param>
             <param name="caseRelation">The case relation</param>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ImportExchangeVisitor.SetupCaseRelationAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.ICaseRelation,PayrollEngine.Client.Model.ICaseRelation)">
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.SetupCaseRelationAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.ICaseRelation,PayrollEngine.Client.Model.ICaseRelation)">
             <summary>Setup the case relation</summary>
             <param name="tenant">The exchange tenant</param>
             <param name="regulation">The regulation</param>
             <param name="caseRelation">The case relation</param>
             <param name="targetCaseRelation">The target case relation</param>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ImportExchangeVisitor.VisitCollectorAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.ICollector)">
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.VisitCollectorAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.ICollector)">
             <summary>Visit the collector</summary>
             <param name="tenant">The tenant</param>
             <param name="regulation">The regulation</param>
             <param name="collector">The collector</param>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ImportExchangeVisitor.SetupCollectorAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.ICollector,PayrollEngine.Client.Model.ICollector)">
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.SetupCollectorAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.ICollector,PayrollEngine.Client.Model.ICollector)">
             <summary>Setup the case relation</summary>
             <param name="tenant">The exchange tenant</param>
             <param name="regulation">The regulation</param>
             <param name="collector">The collector</param>
             <param name="targetCollector">The target collector</param>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ImportExchangeVisitor.VisitWageTypeAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.IWageType)">
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.VisitWageTypeAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.IWageType)">
             <summary>Visit the wage type</summary>
             <param name="tenant">The tenant</param>
             <param name="regulation">The regulation</param>
             <param name="wageType">The wage type</param>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ImportExchangeVisitor.SetupWageTypeAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.IWageType,PayrollEngine.Client.Model.IWageType)">
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.SetupWageTypeAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.IWageType,PayrollEngine.Client.Model.IWageType)">
             <summary>Setup the wage type</summary>
             <param name="tenant">The exchange tenant</param>
             <param name="regulation">The regulation</param>
             <param name="wageType">The wage type</param>
             <param name="targetWageType">The target wage type</param>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ImportExchangeVisitor.VisitScriptAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.IScript)">
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.VisitScriptAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.IScript)">
             <summary>Visit the script</summary>
             <param name="tenant">The tenant</param>
             <param name="regulation">The regulation</param>
             <param name="script">The script</param>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ImportExchangeVisitor.SetupScriptAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.IScript,PayrollEngine.Client.Model.IScript)">
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.SetupScriptAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.IScript,PayrollEngine.Client.Model.IScript)">
             <summary>Setup the script</summary>
             <param name="tenant">The exchange tenant</param>
             <param name="regulation">The regulation</param>
             <param name="script">The script</param>
             <param name="targetScript">The target script</param>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ImportExchangeVisitor.VisitReportAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.IReportSet)">
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.VisitReportAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.IReportSet)">
             <summary>Visit the script</summary>
             <param name="tenant">The tenant</param>
             <param name="regulation">The regulation</param>
             <param name="report">The report</param>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ImportExchangeVisitor.SetupReportAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.IReportSet,PayrollEngine.Client.Model.IReportSet)">
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.SetupReportAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.IReportSet,PayrollEngine.Client.Model.IReportSet)">
             <summary>Setup the report</summary>
             <param name="tenant">The exchange tenant</param>
             <param name="regulation">The regulation</param>
             <param name="report">The report</param>
             <param name="targetReport">The target report</param>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ImportExchangeVisitor.VisitReportParameterAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.IReportSet,PayrollEngine.Client.Model.IReportParameter)">
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.VisitReportParameterAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.IReportSet,PayrollEngine.Client.Model.IReportParameter)">
             <summary>Visit the report parameter</summary>
             <param name="tenant">The tenant</param>
             <param name="regulation">The regulation</param>
             <param name="report">The report</param>
             <param name="parameter">The report parameter</param>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ImportExchangeVisitor.SetupReportParameterAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.IReportSet,PayrollEngine.Client.Model.IReportParameter,PayrollEngine.Client.Model.IReportParameter)">
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.SetupReportParameterAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.IReportSet,PayrollEngine.Client.Model.IReportParameter,PayrollEngine.Client.Model.IReportParameter)">
             <summary>Setup the report parameter</summary>
             <param name="tenant">The exchange tenant</param>
             <param name="regulation">The regulation</param>
@@ -1383,14 +889,14 @@
             <param name="parameter">The report parameter</param>
             <param name="targetParameter">The target report parameter</param>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ImportExchangeVisitor.VisitReportTemplateAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.IReportSet,PayrollEngine.Client.Model.IReportTemplate)">
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.VisitReportTemplateAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.IReportSet,PayrollEngine.Client.Model.IReportTemplate)">
             <summary>Visit the report template</summary>
             <param name="tenant">The tenant</param>
             <param name="regulation">The regulation</param>
             <param name="report">The report</param>
             <param name="template">The report template</param>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ImportExchangeVisitor.SetupReportTemplateAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.IReportSet,PayrollEngine.Client.Model.IReportTemplate,PayrollEngine.Client.Model.IReportTemplate)">
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.SetupReportTemplateAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.IReportSet,PayrollEngine.Client.Model.IReportTemplate,PayrollEngine.Client.Model.IReportTemplate)">
             <summary>Setup the report template</summary>
             <param name="tenant">The exchange tenant</param>
             <param name="regulation">The regulation</param>
@@ -1398,130 +904,120 @@
             <param name="template">The report template</param>
             <param name="targetTemplate">The target report template</param>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ImportExchangeVisitor.GetEmployeeAsync(System.Int32,System.String)">
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.GetEmployeeAsync(System.Int32,System.String)">
             <summary>Get employee</summary>
             <param name="tenantId">The tenant id</param>
             <param name="identifier">The employee identifier</param>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ImportExchangeVisitor.VisitEmployeeAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IEmployeeSet)">
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.VisitEmployeeAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IEmployeeSet)">
             <summary>Visit the employee</summary>
             <param name="tenant">The tenant</param>
             <param name="employee">The employee</param>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ImportExchangeVisitor.SetupEmployeeAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IEmployeeSet,PayrollEngine.Client.Model.IEmployee)">
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.SetupEmployeeAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IEmployeeSet,PayrollEngine.Client.Model.IEmployee)">
             <summary>Setup the employee</summary>
             <param name="tenant">The exchange tenant</param>
             <param name="employee">The employee</param>
             <param name="targetEmployee">The target employee</param>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ImportExchangeVisitor.GetPayrollAsync(System.Int32,System.String)">
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.GetPayrollAsync(System.Int32,System.String)">
             <summary>Get payroll</summary>
             <param name="tenantId">The tenant id</param>
             <param name="payrollName">The payroll name</param>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ImportExchangeVisitor.VisitPayrollAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollSet)">
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.VisitPayrollAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollSet)">
             <summary>Visit the payroll</summary>
             <param name="tenant">The tenant</param>
             <param name="payroll">The payroll</param>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ImportExchangeVisitor.SetupPayrollAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollSet,PayrollEngine.Client.Model.IPayroll)">
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.SetupPayrollAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollSet,PayrollEngine.Client.Model.IPayroll)">
             <summary>Setup the payroll</summary>
             <param name="tenant">The exchange tenant</param>
             <param name="payroll">The payroll</param>
             <param name="targetPayroll">The target payroll</param>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ImportExchangeVisitor.VisitPayrollLayerAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollSet,PayrollEngine.Client.Model.IPayrollLayer)">
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.VisitPayrollLayerAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollSet,PayrollEngine.Client.Model.IPayrollLayer)">
             <summary>Visit the payroll layer</summary>
             <param name="tenant">The tenant</param>
             <param name="payroll">The payroll</param>
             <param name="layer">The payroll layer</param>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ImportExchangeVisitor.SetupPayrollLayerAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollSet,PayrollEngine.Client.Model.IPayrollLayer,PayrollEngine.Client.Model.IPayrollLayer)">
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.SetupPayrollLayerAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollSet,PayrollEngine.Client.Model.IPayrollLayer,PayrollEngine.Client.Model.IPayrollLayer)">
             <summary>Setup the payroll layer</summary>
             <param name="tenant">The exchange tenant</param>
             <param name="payroll">The payroll</param>
             <param name="layer">The payroll layer</param>
             <param name="targetLayer">The target payroll layer</param>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ImportExchangeVisitor.VisitCaseChangeSetupAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollSet,PayrollEngine.Client.Model.ICaseChangeSetup)">
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.VisitCaseChangeSetupAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollSet,PayrollEngine.Client.Model.ICaseChangeSetup)">
             <summary>Visit the case change</summary>
             <param name="tenant">The tenant</param>
             <param name="payroll">The payroll</param>
             <param name="caseChangeSetup">The case change</param>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ImportExchangeVisitor.SetupCaseChangeDocuments(PayrollEngine.Client.Model.ICaseSetup)">
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.SetupCaseChangeDocuments(PayrollEngine.Client.Model.ICaseSetup)">
             <summary>Setup the case change documents</summary>
             <param name="caseSetup">The case change</param>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ImportExchangeVisitor.SetupCaseChangeAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollSet,PayrollEngine.Client.Model.ICaseChangeSetup)">
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.SetupCaseChangeAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollSet,PayrollEngine.Client.Model.ICaseChangeSetup)">
             <summary>Setup the case change</summary>
             <param name="tenant">The exchange tenant</param>
             <param name="payroll">The payroll</param>
             <param name="caseChangeSetup">The case change</param>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ImportExchangeVisitor.GetPayrunAsync(System.Int32,System.String)">
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.GetPayrunAsync(System.Int32,System.String)">
             <summary>Get payrun</summary>
             <param name="tenantId">The tenant id</param>
             <param name="payrunName">The payrun name</param>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ImportExchangeVisitor.GetPayrunParameterAsync(System.Int32,System.Int32,System.String)">
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.GetPayrunParameterAsync(System.Int32,System.Int32,System.String)">
             <summary>Get payrun parameter</summary>
             <param name="tenantId">The tenant id</param>
             <param name="payrunId">The payrun id</param>
             <param name="parameterName">The payrun parameter name</param>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ImportExchangeVisitor.GetPayrunJobAsync(System.Int32,System.Int32)">
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.GetPayrunJobAsync(System.Int32,System.Int32)">
             <summary>Get payrun job</summary>
             <param name="tenantId">The tenant id</param>
             <param name="payrunJobId">The payrun job name</param>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ImportExchangeVisitor.VisitPayrunAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrun)">
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.VisitPayrunAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrun)">
             <summary>Visit the payrun</summary>
             <param name="tenant">The tenant</param>
             <param name="payrun">The payrun</param>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ImportExchangeVisitor.SetupPayrunAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrun,PayrollEngine.Client.Model.IPayrun)">
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.SetupPayrunAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrun,PayrollEngine.Client.Model.IPayrun)">
             <summary>Setup the payrun</summary>
             <param name="tenant">The exchange tenant</param>
             <param name="payrun">The payrun</param>
             <param name="targetPayrun">The target payrun</param>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ImportExchangeVisitor.VisitPayrunParameterAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrun,PayrollEngine.Client.Model.IPayrunParameter)">
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.VisitPayrunParameterAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrun,PayrollEngine.Client.Model.IPayrunParameter)">
             <inheritdoc />
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ImportExchangeVisitor.SetupPayrunParameterAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrun,PayrollEngine.Client.Model.IPayrunParameter,PayrollEngine.Client.Model.IPayrunParameter)">
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.SetupPayrunParameterAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrun,PayrollEngine.Client.Model.IPayrunParameter,PayrollEngine.Client.Model.IPayrunParameter)">
             <summary>Setup the payrun</summary>
             <param name="tenant">The exchange tenant</param>
             <param name="payrun">The payrun</param>
             <param name="parameter">The payrun parameter</param>
             <param name="targetPayrunParameter">The target payrun parameter</param>
         </member>
-        <member name="T:PayrollEngine.Client.Exchange.LoadVisitorOptions">
-            <summary>Load visitor options <see cref="T:PayrollEngine.Client.Exchange.ImportExchangeVisitor"/></summary>
+        <member name="T:PayrollEngine.Client.Exchange.ExchangeReader">
+            <summary>Read the exchange model from a file</summary>
         </member>
-        <member name="F:PayrollEngine.Client.Exchange.LoadVisitorOptions.None">
-            <summary>No visitor options</summary>
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeReader.ReadAsync(System.String,System.String)">
+            <summary>Reads the specified file name</summary>
+            <param name="fileName">Name of the file</param>
+            <param name="namespace">The target namespace</param>
+            <returns>The payroll provider</returns>
         </member>
-        <member name="F:PayrollEngine.Client.Exchange.LoadVisitorOptions.TargetLoad">
-            <summary>Load target object</summary>
+        <member name="T:PayrollEngine.Client.Exchange.ExchangeWriter">
+            <summary>Write the exchange model to a JSON file</summary>
         </member>
-        <member name="F:PayrollEngine.Client.Exchange.LoadVisitorOptions.ScriptLoad">
-            <summary>Load scripts from the working folder</summary>
-        </member>
-        <member name="F:PayrollEngine.Client.Exchange.LoadVisitorOptions.CaseDocumentLoad">
-            <summary>Load case documents from the working folder</summary>
-        </member>
-        <member name="F:PayrollEngine.Client.Exchange.LoadVisitorOptions.ReportTemplateLoad">
-            <summary>Load report templates from the working folder</summary>
-        </member>
-        <member name="F:PayrollEngine.Client.Exchange.LoadVisitorOptions.ReportSchemaLoad">
-            <summary>Load report schemas from the working folder</summary>
-        </member>
-        <member name="F:PayrollEngine.Client.Exchange.LoadVisitorOptions.LookupValidation">
-            <summary>Lookup validation</summary>
-        </member>
-        <member name="F:PayrollEngine.Client.Exchange.LoadVisitorOptions.All">
-            <summary>All visitor options</summary>
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeWriter.WriteAsync(PayrollEngine.Client.Model.Exchange,System.String)">
+            <summary>Writes the specified provider</summary>
+            <param name="exchange">The provider</param>
+            <param name="fileName">Name of the file</param>
         </member>
         <member name="T:PayrollEngine.Client.Exchange.NamespaceUpdateTool">
             <summary>Payroll client exchange namespace update</summary>
@@ -1620,14 +1116,6 @@
         <member name="M:PayrollEngine.Client.Exchange.NamespaceUpdateTool.VisitWebhookAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IWebhook)">
             <inheritdoc />
         </member>
-        <member name="T:PayrollEngine.Client.Exchange.PayrollJsonWriter">
-            <summary>Write payroll to a JSON file</summary>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.PayrollJsonWriter.WriteAsync(PayrollEngine.Client.Model.Exchange,System.String)">
-            <summary>Writes the specified provider</summary>
-            <param name="exchange">The provider</param>
-            <param name="fileName">Name of the file</param>
-        </member>
         <member name="T:PayrollEngine.Client.Exchange.ResourcesMonitor`3">
             <summary>
             Class to monitor a resource collection by GET queries
@@ -1674,32 +1162,6 @@
         <member name="F:PayrollEngine.Client.Exchange.ResultExportMode.Results">
             <summary>Export payroll With results</summary>
         </member>
-        <member name="T:PayrollEngine.Client.Exchange.TenantExport">
-            <summary>Export tenant from Payroll API to JSON file</summary>
-        </member>
-        <member name="P:PayrollEngine.Client.Exchange.TenantExport.HttpClient">
-            <summary>The payroll http client</summary>
-        </member>
-        <member name="P:PayrollEngine.Client.Exchange.TenantExport.TenantId">
-            <summary>The tenant id</summary>
-        </member>
-        <member name="P:PayrollEngine.Client.Exchange.TenantExport.ExportMode">
-            <summary>The result export mode</summary>
-        </member>
-        <member name="P:PayrollEngine.Client.Exchange.TenantExport.Namespace">
-            <summary>The export namespace</summary>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.TenantExport.#ctor(PayrollEngine.Client.PayrollHttpClient,System.Int32,PayrollEngine.Client.Exchange.ResultExportMode,System.String)">
-            <summary>Initializes a new instance of the <see cref="T:PayrollEngine.Client.Exchange.TenantExport"/> class</summary>
-            <param name="httpClient">The payroll http client</param>
-            <param name="tenantId">The tenant id</param>
-            <param name="exportMode">The result export mode (default: no result)</param>
-            <param name="namespace">The export namespace</param>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.TenantExport.ExportAsync">
-            <summary>Export payroll</summary>
-            <returns>The exported provide</returns>
-        </member>
         <member name="T:PayrollEngine.Client.Exchange.TextFileCache">
             <summary>Cache for text files</summary>
         </member>
@@ -1709,6 +1171,590 @@
             </summary>
             <param name="fileName">Name of the file</param>
             <returns>The file content as string</returns>
+        </member>
+        <member name="T:PayrollEngine.Client.Exchange.Visitor">
+            <summary>Exchange visitor tool</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.Visitor.#ctor(PayrollEngine.Client.Model.Exchange)">
+            <summary>Initializes a new instance of the <see cref="T:PayrollEngine.Client.Exchange.Visitor"/> class</summary>
+            <remarks>Content is loaded from the working folder</remarks>
+            <param name="exchange">The exchange model</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.Visitor.Execute">
+            <summary>Execute the visitor</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.Visitor.ExecuteAsync">
+            <summary>Execute the visitor</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Exchange.Visitor.VisitExchangeTenant">
+            <summary>Visit the exchange tenant handler</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.Visitor.VisitExchangeTenantAsync(PayrollEngine.Client.Model.IExchangeTenant)">
+            <inheritdoc />
+        </member>
+        <member name="P:PayrollEngine.Client.Exchange.Visitor.VisitRegulationShare">
+            <summary>Visit the regulation share handler</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.Visitor.VisitRegulationShareAsync(PayrollEngine.Client.Model.IRegulationShare)">
+            <inheritdoc />
+        </member>
+        <member name="P:PayrollEngine.Client.Exchange.Visitor.VisitUser">
+            <summary>Visit the user handler</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.Visitor.VisitUserAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IUser)">
+            <inheritdoc />
+        </member>
+        <member name="P:PayrollEngine.Client.Exchange.Visitor.VisitDivision">
+            <summary>Visit the division handler</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.Visitor.VisitDivisionAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IDivision)">
+            <inheritdoc />
+        </member>
+        <member name="P:PayrollEngine.Client.Exchange.Visitor.VisitTask">
+            <summary>Visit the task handler</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.Visitor.VisitTaskAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.ITask)">
+            <inheritdoc />
+        </member>
+        <member name="P:PayrollEngine.Client.Exchange.Visitor.VisitWebhook">
+            <summary>Visit the task handler</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.Visitor.VisitWebhookAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IWebhook)">
+            <inheritdoc />
+        </member>
+        <member name="P:PayrollEngine.Client.Exchange.Visitor.VisitRegulation">
+            <summary>Visit the regulation handler</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.Visitor.VisitRegulationAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet)">
+            <inheritdoc />
+        </member>
+        <member name="P:PayrollEngine.Client.Exchange.Visitor.VisitLookup">
+            <summary>Visit the lookup handler</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.Visitor.VisitLookupAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.ILookupSet)">
+            <inheritdoc />
+        </member>
+        <member name="P:PayrollEngine.Client.Exchange.Visitor.VisitLookupValue">
+            <summary>Visit the lookup value handler</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.Visitor.VisitLookupValueAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.ILookupSet,PayrollEngine.Client.Model.ILookupValue)">
+            <inheritdoc />
+        </member>
+        <member name="P:PayrollEngine.Client.Exchange.Visitor.VisitCase">
+            <summary>Visit the case handler</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.Visitor.VisitCaseAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.ICaseSet)">
+            <inheritdoc />
+        </member>
+        <member name="P:PayrollEngine.Client.Exchange.Visitor.VisitCaseField">
+            <summary>Visit the case field handler</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.Visitor.VisitCaseFieldAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.ICaseSet,PayrollEngine.Client.Model.ICaseField)">
+            <inheritdoc />
+        </member>
+        <member name="P:PayrollEngine.Client.Exchange.Visitor.VisitCaseRelation">
+            <summary>Visit the case relation handler</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.Visitor.VisitCaseRelationAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.ICaseRelation)">
+            <inheritdoc />
+        </member>
+        <member name="P:PayrollEngine.Client.Exchange.Visitor.VisitCollector">
+            <summary>Visit the collector handler</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.Visitor.VisitCollectorAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.ICollector)">
+            <inheritdoc />
+        </member>
+        <member name="P:PayrollEngine.Client.Exchange.Visitor.VisitWageType">
+            <summary>Visit the wage type handler</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.Visitor.VisitWageTypeAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.IWageType)">
+            <inheritdoc />
+        </member>
+        <member name="P:PayrollEngine.Client.Exchange.Visitor.VisitScript">
+            <summary>Visit the script handler</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.Visitor.VisitScriptAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.IScript)">
+            <inheritdoc />
+        </member>
+        <member name="P:PayrollEngine.Client.Exchange.Visitor.VisitReport">
+            <summary>Visit the report handler</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.Visitor.VisitReportAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.IReportSet)">
+            <inheritdoc />
+        </member>
+        <member name="P:PayrollEngine.Client.Exchange.Visitor.VisitReportParameter">
+            <summary>Visit the report parameter handler</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.Visitor.VisitReportParameterAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.IReportSet,PayrollEngine.Client.Model.IReportParameter)">
+            <inheritdoc />
+        </member>
+        <member name="P:PayrollEngine.Client.Exchange.Visitor.VisitReportTemplate">
+            <summary>Visit the report template handler</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.Visitor.VisitReportTemplateAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.IReportSet,PayrollEngine.Client.Model.IReportTemplate)">
+            <inheritdoc />
+        </member>
+        <member name="P:PayrollEngine.Client.Exchange.Visitor.VisitEmployee">
+            <summary>Visit the report template handler</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.Visitor.VisitEmployeeAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IEmployeeSet)">
+            <inheritdoc />
+        </member>
+        <member name="P:PayrollEngine.Client.Exchange.Visitor.VisitPayroll">
+            <summary>Visit the payroll handler</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.Visitor.VisitPayrollAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollSet)">
+            <inheritdoc />
+        </member>
+        <member name="P:PayrollEngine.Client.Exchange.Visitor.VisitPayrollLayer">
+            <summary>Visit the payroll layer handler</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.Visitor.VisitPayrollLayerAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollSet,PayrollEngine.Client.Model.IPayrollLayer)">
+            <inheritdoc />
+        </member>
+        <member name="P:PayrollEngine.Client.Exchange.Visitor.VisitCaseChangeSetup">
+            <summary>Visit the case change setup handler</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.Visitor.VisitCaseChangeSetupAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollSet,PayrollEngine.Client.Model.ICaseChangeSetup)">
+            <inheritdoc />
+        </member>
+        <member name="P:PayrollEngine.Client.Exchange.Visitor.VisitCaseSetup">
+            <summary>Visit the case setup handler</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.Visitor.VisitCaseSetupAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollSet,PayrollEngine.Client.Model.ICaseChangeSetup,PayrollEngine.Client.Model.ICaseSetup)">
+            <inheritdoc />
+        </member>
+        <member name="P:PayrollEngine.Client.Exchange.Visitor.VisitCaseValue">
+            <summary>Visit the case value handler</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.Visitor.VisitCaseValueAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollSet,PayrollEngine.Client.Model.ICaseChangeSetup,PayrollEngine.Client.Model.ICaseSetup,PayrollEngine.Client.Model.ICaseValueSetup)">
+            <inheritdoc />
+        </member>
+        <member name="P:PayrollEngine.Client.Exchange.Visitor.VisitPayrun">
+            <summary>Visit the payrun handler</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.Visitor.VisitPayrunAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrun)">
+            <inheritdoc />
+        </member>
+        <member name="P:PayrollEngine.Client.Exchange.Visitor.VisitPayrunParameter">
+            <summary>Visit the payrun parameter handler</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.Visitor.VisitPayrunParameterAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrun,PayrollEngine.Client.Model.IPayrunParameter)">
+            <inheritdoc />
+        </member>
+        <member name="P:PayrollEngine.Client.Exchange.Visitor.VisitPayrunJobInvocation">
+            <summary>Visit the payrun job invocation handler</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.Visitor.VisitPayrunJobInvocationAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrunJobInvocation)">
+            <inheritdoc />
+        </member>
+        <member name="P:PayrollEngine.Client.Exchange.Visitor.VisitPayrollResult">
+            <summary>Visit the payroll result handler</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.Visitor.VisitPayrollResultAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollResultSet)">
+            <inheritdoc />
+        </member>
+        <member name="P:PayrollEngine.Client.Exchange.Visitor.VisitWageTypeResult">
+            <summary>Visit the wage type result handler</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.Visitor.VisitWageTypeResultAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollResultSet,PayrollEngine.Client.Model.IWageTypeResultSet)">
+            <inheritdoc />
+        </member>
+        <member name="P:PayrollEngine.Client.Exchange.Visitor.VisitWageTypeCustomResult">
+            <summary>Visit the wage type custom result handler</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.Visitor.VisitWageTypeCustomResultAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollResultSet,PayrollEngine.Client.Model.IWageTypeResultSet,PayrollEngine.Client.Model.IWageTypeCustomResult)">
+            <inheritdoc />
+        </member>
+        <member name="P:PayrollEngine.Client.Exchange.Visitor.VisitCollectorResult">
+            <summary>Visit the wage type result handler</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.Visitor.VisitCollectorResultAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollResultSet,PayrollEngine.Client.Model.ICollectorResultSet)">
+            <inheritdoc />
+        </member>
+        <member name="P:PayrollEngine.Client.Exchange.Visitor.VisitCollectorCustomResult">
+            <summary>Visit the wage type custom result handler</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.Visitor.VisitCollectorCustomResultAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollResultSet,PayrollEngine.Client.Model.ICollectorResultSet,PayrollEngine.Client.Model.ICollectorCustomResult)">
+            <inheritdoc />
+        </member>
+        <member name="P:PayrollEngine.Client.Exchange.Visitor.VisitPayrunResult">
+            <summary>Visit the payrun result handler</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.Visitor.VisitPayrunResultAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollResultSet,PayrollEngine.Client.Model.IPayrunResult)">
+            <inheritdoc />
+        </member>
+        <member name="T:PayrollEngine.Client.Exchange.VisitorBase">
+            <summary>Exchange visitor base class</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Exchange.VisitorBase.Exchange">
+            <summary>The exchange model</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.VisitorBase.#ctor(PayrollEngine.Client.Model.Exchange)">
+            <summary>Initializes a new instance of the <see cref="T:PayrollEngine.Client.Exchange.VisitorBase"/> class</summary>
+            <remarks>Content is loaded from the working folder</remarks>
+            <param name="exchange">The exchange model</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitAsync">
+            <summary>Visit the exchange model</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitExchangeTenantsAsync">
+            <summary>Visit the exchange tenants</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitExchangeTenantAsync(PayrollEngine.Client.Model.IExchangeTenant)">
+            <summary>Visit the exchange tenant</summary>
+            <param name="tenant">The exchange tenant</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitRegulationSharesAsync">
+            <summary>Visit the regulation shares</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitRegulationShareAsync(PayrollEngine.Client.Model.IRegulationShare)">
+            <summary>Visit the regulation share</summary>
+            <param name="share">The regulation share</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitUsersAsync(PayrollEngine.Client.Model.IExchangeTenant)">
+            <summary>Visit the users</summary>
+            <param name="tenant">The tenant</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitUserAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IUser)">
+            <summary>Visit the user</summary>
+            <param name="tenant">The tenant</param>
+            <param name="user">The user</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitDivisionsAsync(PayrollEngine.Client.Model.IExchangeTenant)">
+            <summary>Visit the divisions</summary>
+            <param name="tenant">The tenant</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitDivisionAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IDivision)">
+            <summary>Visit the division</summary>
+            <param name="tenant">The tenant</param>
+            <param name="division">The division</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitTasksAsync(PayrollEngine.Client.Model.IExchangeTenant)">
+            <summary>Visit the task</summary>
+            <param name="tenant">The tenant</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitTaskAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.ITask)">
+            <summary>Visit the task</summary>
+            <param name="tenant">The tenant</param>
+            <param name="task">The task</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitWebhooksAsync(PayrollEngine.Client.Model.IExchangeTenant)">
+            <summary>Visit the webhooks</summary>
+            <param name="tenant">The tenant</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitWebhookAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IWebhook)">
+            <summary>Visit the webhook</summary>
+            <param name="tenant">The tenant</param>
+            <param name="webhook">The webhook</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitRegulationsAsync(PayrollEngine.Client.Model.IExchangeTenant)">
+            <summary>Visit the regulation</summary>
+            <param name="tenant">The tenant</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitRegulationAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet)">
+            <summary>Visit the regulation</summary>
+            <param name="tenant">The tenant</param>
+            <param name="regulation">The regulation</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitLookupsAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet)">
+            <summary>Visit the lookups</summary>
+            <param name="tenant">The tenant</param>
+            <param name="regulation">The regulation</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitLookupAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.ILookupSet)">
+            <summary>Visit the lookup</summary>
+            <param name="tenant">The tenant</param>
+            <param name="regulation">The regulation</param>
+            <param name="lookup">The lookup</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitLookupValuesAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.ILookupSet)">
+            <summary>Visit the lookup value</summary>
+            <param name="tenant">The tenant</param>
+            <param name="regulation">The regulation</param>
+            <param name="lookup">The lookup</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitLookupValueAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.ILookupSet,PayrollEngine.Client.Model.ILookupValue)">
+            <summary>Visit the lookup value</summary>
+            <param name="tenant">The tenant</param>
+            <param name="regulation">The regulation</param>
+            <param name="lookup">The lookup</param>
+            <param name="lookupValue">The lookup value</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitCasesAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet)">
+            <summary>Visit the cases</summary>
+            <param name="tenant">The tenant</param>
+            <param name="regulation">The regulation</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitCaseAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.ICaseSet)">
+            <summary>Visit the case</summary>
+            <param name="tenant">The tenant</param>
+            <param name="regulation">The regulation</param>
+            <param name="caseSet">The case</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitCaseFieldsAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.ICaseSet)">
+            <summary>Visit the case fields</summary>
+            <param name="tenant">The tenant</param>
+            <param name="regulation">The regulation</param>
+            <param name="caseSet">The case</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitCaseFieldAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.ICaseSet,PayrollEngine.Client.Model.ICaseField)">
+            <summary>Visit the case field</summary>
+            <param name="tenant">The tenant</param>
+            <param name="regulation">The regulation</param>
+            <param name="caseSet">The case</param>
+            <param name="caseField">The case field</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitCaseRelationsAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet)">
+            <summary>Visit the case relations</summary>
+            <param name="tenant">The tenant</param>
+            <param name="regulation">The regulation</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitCaseRelationAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.ICaseRelation)">
+            <summary>Visit the case relation</summary>
+            <param name="tenant">The tenant</param>
+            <param name="regulation">The regulation</param>
+            <param name="caseRelation">The case relation</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitCollectorsAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet)">
+            <summary>Visit the collectors</summary>
+            <param name="tenant">The tenant</param>
+            <param name="regulation">The regulation</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitCollectorAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.ICollector)">
+            <summary>Visit the collector</summary>
+            <param name="tenant">The tenant</param>
+            <param name="regulation">The regulation</param>
+            <param name="collector">The collector</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitWageTypesAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet)">
+            <summary>Visit the wage types</summary>
+            <param name="tenant">The tenant</param>
+            <param name="regulation">The regulation</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitWageTypeAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.IWageType)">
+            <summary>Visit the wage type</summary>
+            <param name="tenant">The tenant</param>
+            <param name="regulation">The regulation</param>
+            <param name="wageType">The wage type</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitScriptsAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet)">
+            <summary>Visit the scripts</summary>
+            <param name="tenant">The tenant</param>
+            <param name="regulation">The regulation</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitScriptAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.IScript)">
+            <summary>Visit the script</summary>
+            <param name="tenant">The tenant</param>
+            <param name="regulation">The regulation</param>
+            <param name="script">The script</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitReportsAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet)">
+            <summary>Visit the reports</summary>
+            <param name="tenant">The tenant</param>
+            <param name="regulation">The regulation</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitReportAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.IReportSet)">
+            <summary>Visit the report</summary>
+            <param name="tenant">The tenant</param>
+            <param name="regulation">The regulation</param>
+            <param name="report">The report</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitReportParametersAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.IReportSet)">
+            <summary>Visit the report parameters</summary>
+            <param name="tenant">The tenant</param>
+            <param name="regulation">The regulation</param>
+            <param name="report">The report</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitReportParameterAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.IReportSet,PayrollEngine.Client.Model.IReportParameter)">
+            <summary>Visit the report parameter</summary>
+            <param name="tenant">The tenant</param>
+            <param name="regulation">The regulation</param>
+            <param name="report">The report</param>
+            <param name="parameter">The report parameter</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitReportTemplatesAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.IReportSet)">
+            <summary>Visit the report templates</summary>
+            <param name="tenant">The tenant</param>
+            <param name="regulation">The regulation</param>
+            <param name="report">The report</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitReportTemplateAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.IReportSet,PayrollEngine.Client.Model.IReportTemplate)">
+            <summary>Visit the report template</summary>
+            <param name="tenant">The tenant</param>
+            <param name="regulation">The regulation</param>
+            <param name="report">The report</param>
+            <param name="template">The report template</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitEmployeesAsync(PayrollEngine.Client.Model.IExchangeTenant)">
+            <summary>Visit the employees</summary>
+            <param name="tenant">The tenant</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitEmployeeAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IEmployeeSet)">
+            <summary>Visit the employee</summary>
+            <param name="tenant">The tenant</param>
+            <param name="employee">The employee</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitPayrollsAsync(PayrollEngine.Client.Model.IExchangeTenant)">
+            <summary>Visit the payrolls</summary>
+            <param name="tenant">The tenant</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitPayrollAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollSet)">
+            <summary>Visit the payroll</summary>
+            <param name="tenant">The tenant</param>
+            <param name="payroll">The payroll</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitPayrollLayersAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollSet)">
+            <summary>Visit the payroll layers</summary>
+            <param name="tenant">The tenant</param>
+            <param name="payroll">The payroll</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitPayrollLayerAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollSet,PayrollEngine.Client.Model.IPayrollLayer)">
+            <summary>Visit the payroll layer</summary>
+            <param name="tenant">The tenant</param>
+            <param name="payroll">The payroll</param>
+            <param name="layer">The payroll layer</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitCaseChangeSetupsAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollSet)">
+            <summary>Visit the case changes</summary>
+            <param name="tenant">The tenant</param>
+            <param name="payroll">The payroll</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitCaseChangeSetupAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollSet,PayrollEngine.Client.Model.ICaseChangeSetup)">
+            <summary>Visit the case change</summary>
+            <param name="tenant">The tenant</param>
+            <param name="payroll">The payroll</param>
+            <param name="caseChangeSetup">The case change setup</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitCaseSetupAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollSet,PayrollEngine.Client.Model.ICaseChangeSetup,PayrollEngine.Client.Model.ICaseSetup)">
+            <summary>Visit the case change documents</summary>
+            <param name="tenant">The tenant</param>
+            <param name="payroll">The payroll</param>
+            <param name="caseChangeSetup">The case change setup</param>
+            <param name="caseSetup">The case setup</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitRelatedCasesAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollSet,PayrollEngine.Client.Model.ICaseChangeSetup,PayrollEngine.Client.Model.ICaseSetup)">
+            <summary>Visit the related cases</summary>
+            <param name="tenant">The tenant</param>
+            <param name="payroll">The payroll</param>
+            <param name="caseChangeSetup">The case change setup</param>
+            <param name="caseSetup">The case setup</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitCaseValuesAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollSet,PayrollEngine.Client.Model.ICaseChangeSetup,PayrollEngine.Client.Model.ICaseSetup)">
+            <summary>Visit the case values</summary>
+            <param name="tenant">The tenant</param>
+            <param name="payroll">The payroll</param>
+            <param name="caseChangeSetup">The case change setup</param>
+            <param name="caseSetup">The case setup</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitCaseValueAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollSet,PayrollEngine.Client.Model.ICaseChangeSetup,PayrollEngine.Client.Model.ICaseSetup,PayrollEngine.Client.Model.ICaseValueSetup)">
+            <summary>Visit the case value</summary>
+            <param name="tenant">The tenant</param>
+            <param name="payroll">The payroll</param>
+            <param name="caseChangeSetup">The case change setup</param>
+            <param name="caseSetup">The case setup</param>
+            <param name="valueSetup">The case value setup</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitPayrunsAsync(PayrollEngine.Client.Model.IExchangeTenant)">
+            <summary>Visit the payruns</summary>
+            <param name="tenant">The tenant</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitPayrunAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrun)">
+            <summary>Visit the payrun</summary>
+            <param name="tenant">The tenant</param>
+            <param name="payrun">The payrun</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitPayrunParametersAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrun)">
+            <summary>Visit the payrun parameter</summary>
+            <param name="tenant">The tenant</param>
+            <param name="payrun">The payrun</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitPayrunParameterAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrun,PayrollEngine.Client.Model.IPayrunParameter)">
+            <summary>Visit the payrun parameter</summary>
+            <param name="tenant">The tenant</param>
+            <param name="payrun">The payrun</param>
+            <param name="parameter">The payrun parameter</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitPayrunJobsAsync(PayrollEngine.Client.Model.IExchangeTenant)">
+            <summary>Visit the payrun jobs</summary>
+            <param name="tenant">The exchange tenant</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitPayrunJobInvocationsAsync(PayrollEngine.Client.Model.IExchangeTenant)">
+            <summary>Visit the payrun job invocations</summary>
+            <param name="tenant">The exchange tenant</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitPayrunJobInvocationAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrunJobInvocation)">
+            <summary>Visit the payrun job invocation</summary>
+            <param name="tenant">The exchange tenant</param>
+            <param name="invocation">The payrun job invocation</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitPayrollResultsAsync(PayrollEngine.Client.Model.IExchangeTenant)">
+            <summary>Visit the payroll results</summary>
+            <param name="tenant">The exchange tenant</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitPayrollResultAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollResultSet)">
+            <summary>Visit the payroll result</summary>
+            <param name="tenant">The exchange tenant</param>
+            <param name="payrollResult">The payroll result</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitWageTypeResultsAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollResultSet)">
+            <summary>Visit the wage type results</summary>
+            <param name="tenant">The exchange tenant</param>
+            <param name="payrollResult">The payroll result</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitWageTypeResultAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollResultSet,PayrollEngine.Client.Model.IWageTypeResultSet)">
+            <summary>Visit the wage type result</summary>
+            <param name="tenant">The exchange tenant</param>
+            <param name="payrollResult">The payroll result</param>
+            <param name="wageTypeResult">The wage type result</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitWageTypeCustomResultsAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollResultSet,PayrollEngine.Client.Model.IWageTypeResultSet)">
+            <summary>Visit the wage type custom results</summary>
+            <param name="tenant">The exchange tenant</param>
+            <param name="payrollResult">The payroll result</param>
+            <param name="wageTypeResult">The wage type result</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitWageTypeCustomResultAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollResultSet,PayrollEngine.Client.Model.IWageTypeResultSet,PayrollEngine.Client.Model.IWageTypeCustomResult)">
+            <summary>Visit the wage type custom result</summary>
+            <param name="tenant">The exchange tenant</param>
+            <param name="payrollResult">The payroll result</param>
+            <param name="wageTypeResult">The wage type result</param>
+            <param name="wageTypeCustomResult">The wage type custom result</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitCollectorResultsAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollResultSet)">
+            <summary>Visit the collector results</summary>
+            <param name="tenant">The exchange tenant</param>
+            <param name="payrollResult">The payroll result</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitCollectorResultAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollResultSet,PayrollEngine.Client.Model.ICollectorResultSet)">
+            <summary>Visit the collector result</summary>
+            <param name="tenant">The exchange tenant</param>
+            <param name="payrollResult">The payroll result</param>
+            <param name="collectorResult">The collector result</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitCollectorCustomResultsAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollResultSet,PayrollEngine.Client.Model.ICollectorResultSet)">
+            <summary>Visit the collector custom results</summary>
+            <param name="tenant">The exchange tenant</param>
+            <param name="payrollResult">The payroll result</param>
+            <param name="collectorResult">The collector result</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitCollectorCustomResultAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollResultSet,PayrollEngine.Client.Model.ICollectorResultSet,PayrollEngine.Client.Model.ICollectorCustomResult)">
+            <summary>Visit the collector custom result</summary>
+            <param name="tenant">The exchange tenant</param>
+            <param name="payrollResult">The payroll result</param>
+            <param name="collectorResult">The collector result</param>
+            <param name="collectorCustomResult">The collector custom result</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitPayrunResultsAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollResultSet)">
+            <summary>Visit the payrun results</summary>
+            <param name="tenant">The exchange tenant</param>
+            <param name="payrollResult">The payroll result</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitPayrunResultAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollResultSet,PayrollEngine.Client.Model.IPayrunResult)">
+            <summary>Visit the payrun result</summary>
+            <param name="tenant">The exchange tenant</param>
+            <param name="payrollResult">The payroll result</param>
+            <param name="payrunResult">The payrun result</param>
         </member>
         <member name="T:PayrollEngine.Client.GlobalCaseApiEndpoints">
             <summary>Global case api endpoints</summary>

@@ -7,7 +7,7 @@ using Task = System.Threading.Tasks.Task;
 namespace PayrollEngine.Client.Exchange;
 
 /// <summary>Payroll client exchange namespace update</summary>
-public class NamespaceUpdateTool : ExchangeVisitor
+public class NamespaceUpdateTool : Visitor
 {
     private string CurrentNamespace { get; set; }
     private string Namespace { get; }

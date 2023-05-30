@@ -7,7 +7,7 @@ using PayrollEngine.Serialization;
 
 namespace PayrollEngine.Client.Exchange;
 
-/// <summary>Read exchange payroll from file</summary>
+/// <summary>Read the exchange model from a file</summary>
 public static class ExchangeReader
 {
     /// <summary>Reads the specified file name</summary>

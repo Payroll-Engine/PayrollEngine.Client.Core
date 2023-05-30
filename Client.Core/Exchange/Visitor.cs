@@ -5,12 +5,12 @@ using Task = System.Threading.Tasks.Task;
 namespace PayrollEngine.Client.Exchange;
 
 /// <summary>Exchange visitor tool</summary>
-public class ExchangeVisitor : ExchangeVisitorBase
+public class Visitor : VisitorBase
 {
-    /// <summary>Initializes a new instance of the <see cref="ExchangeVisitor"/> class</summary>
+    /// <summary>Initializes a new instance of the <see cref="Visitor"/> class</summary>
     /// <remarks>Content is loaded from the working folder</remarks>
     /// <param name="exchange">The exchange model</param>
-    public ExchangeVisitor(Model.Exchange exchange) :
+    public Visitor(Model.Exchange exchange) :
         base(exchange)
     {
     }
