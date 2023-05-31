@@ -31,8 +31,9 @@ public sealed class PayrollHttpClient : IDisposable
     /// </summary>
     /// <param name="baseUrl">The Uri the request is sent to</param>
     /// <param name="port">The backend port</param>
-    public PayrollHttpClient(string baseUrl, int port) :
-        this(baseUrl, port, TimeSpan.FromSeconds(100))
+    /// <param name="version">The request version</param>
+    public PayrollHttpClient(string baseUrl, int port, Version version = null) :
+        this(baseUrl, port, TimeSpan.FromSeconds(100), version)
     {
     }
 
@@ -40,7 +41,8 @@ public sealed class PayrollHttpClient : IDisposable
     /// <param name="baseUrl">The Uri the request is sent to</param>
     /// <param name="port">The backend port</param>
     /// <param name="requestTimeout">The request timeout</param>
-    public PayrollHttpClient(string baseUrl, int port, TimeSpan requestTimeout)
+    /// <param name="version">The request version</param>
+    public PayrollHttpClient(string baseUrl, int port, TimeSpan requestTimeout, Version version = null)
     {
         if (string.IsNullOrWhiteSpace(baseUrl))
         {
@@ -59,29 +61,38 @@ public sealed class PayrollHttpClient : IDisposable
             BaseAddress = new($"{baseUrl}:{port}/"),
             Timeout = requestTimeout
         };
-        InitHttpClient();
+
+        InitHttpClient(version);
     }
 
     /// <summary>New instance of the payroll http client with a custom http configuration</summary>
     /// <param name="configuration">The HTTP configuration</param>
-    public PayrollHttpClient(PayrollHttpConfiguration configuration) :
-        this(configuration.BaseUrl, configuration.Port, configuration.Timeout)
+    /// <param name="version">The request version</param>
+    public PayrollHttpClient(PayrollHttpConfiguration configuration, Version version = null) :
+        this(configuration.BaseUrl, configuration.Port, configuration.Timeout, version)
     {
     }
 
     /// <summary>New instance of the payroll http client with a custom http client</summary>
     /// <param name="httpClient">The HTTP client</param>
-    public PayrollHttpClient(HttpClient httpClient)
+    /// <param name="version">The request version</param>
+    public PayrollHttpClient(HttpClient httpClient, Version version = null)
     {
         this.httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
-        InitHttpClient();
+        InitHttpClient(version);
     }
 
-    private void InitHttpClient()
+    private void InitHttpClient(Version version)
     {
         httpClient.DefaultRequestHeaders.Accept.Clear();
         httpClient.DefaultRequestHeaders.Accept.Add(
             new(ContentType.Json));
+
+        // version
+        if (version != null)
+        {
+            httpClient.DefaultRequestHeaders.Add("X-Version", version.ToString(2));
+        }
     }
 
     #endregion

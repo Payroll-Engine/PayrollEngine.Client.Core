@@ -7427,26 +7427,30 @@
         <member name="P:PayrollEngine.Client.PayrollHttpClient.Port">
             <summary>The backend port</summary>
         </member>
-        <member name="M:PayrollEngine.Client.PayrollHttpClient.#ctor(System.String,System.Int32)">
+        <member name="M:PayrollEngine.Client.PayrollHttpClient.#ctor(System.String,System.Int32,System.Version)">
             <summary>New instance of the payroll http client with unknown server certificate, timeout is 100 seconds.
             See https://docs.microsoft.com/en-us/dotnet/api/system.net.http.httpclient.timeout
             </summary>
             <param name="baseUrl">The Uri the request is sent to</param>
+            <param name="version">The request version</param>
             <param name="port">The backend port</param>
         </member>
-        <member name="M:PayrollEngine.Client.PayrollHttpClient.#ctor(System.String,System.Int32,System.TimeSpan)">
+        <member name="M:PayrollEngine.Client.PayrollHttpClient.#ctor(System.String,System.Int32,System.TimeSpan,System.Version)">
             <summary>New instance of the payroll http client with unknown server certificate and request timeout</summary>
             <param name="baseUrl">The Uri the request is sent to</param>
             <param name="port">The backend port</param>
             <param name="requestTimeout">The request timeout</param>
+            <param name="version">The request version</param>
         </member>
-        <member name="M:PayrollEngine.Client.PayrollHttpClient.#ctor(PayrollEngine.PayrollHttpConfiguration)">
+        <member name="M:PayrollEngine.Client.PayrollHttpClient.#ctor(PayrollEngine.PayrollHttpConfiguration,System.Version)">
             <summary>New instance of the payroll http client with a custom http configuration</summary>
             <param name="configuration">The HTTP configuration</param>
+            <param name="version">The request version</param>
         </member>
-        <member name="M:PayrollEngine.Client.PayrollHttpClient.#ctor(System.Net.Http.HttpClient)">
+        <member name="M:PayrollEngine.Client.PayrollHttpClient.#ctor(System.Net.Http.HttpClient,System.Version)">
             <summary>New instance of the payroll http client with a custom http client</summary>
             <param name="httpClient">The HTTP client</param>
+            <param name="version">The request version</param>
         </member>
         <member name="P:PayrollEngine.Client.PayrollHttpClient.Address">
             <summary>
