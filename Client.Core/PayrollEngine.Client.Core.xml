@@ -7403,6 +7403,17 @@
         <member name="M:PayrollEngine.Client.PayrollApiEndpoints.PayrollActionsUrl(System.Int32,System.Int32)">
             <summary>The payroll actions URL</summary>
         </member>
+        <member name="T:PayrollEngine.Client.PayrollApiSpecification">
+            <summary>
+            The Payroll Api specification
+            </summary>
+        </member>
+        <member name="P:PayrollEngine.Client.PayrollApiSpecification.CurrentApiVersion">
+            <summary>
+            The current API version
+            <remarks>Update backend version changes here</remarks>
+            </summary>
+        </member>
         <member name="T:PayrollEngine.Client.PayrollConsolidatedResultApiEndpoints">
             <summary>Payroll result case api endpoints</summary>
         </member>
@@ -7432,8 +7443,8 @@
             See https://docs.microsoft.com/en-us/dotnet/api/system.net.http.httpclient.timeout
             </summary>
             <param name="baseUrl">The Uri the request is sent to</param>
-            <param name="version">The request version</param>
             <param name="port">The backend port</param>
+            <param name="version">The request version</param>
         </member>
         <member name="M:PayrollEngine.Client.PayrollHttpClient.#ctor(System.String,System.Int32,System.TimeSpan,System.Version)">
             <summary>New instance of the payroll http client with unknown server certificate and request timeout</summary>

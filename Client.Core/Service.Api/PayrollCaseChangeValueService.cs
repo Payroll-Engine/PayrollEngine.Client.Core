@@ -76,6 +76,13 @@ public class PayrollCaseChangeValueService : Service, IPayrollCaseChangeValueSer
         }
 
         var uri = query.AppendQueryString(PayrollApiEndpoints.PayrollCaseChangeValuesUrl(context.TenantId, context.PayrollId))
+            .AddQueryString(nameof(query.UserId), query.UserId)
+            .AddQueryString(nameof(query.CaseType), query.CaseType)
+            .AddQueryString(nameof(query.DivisionId), query.DivisionId)
+            .AddQueryString(nameof(query.EmployeeId), query.EmployeeId)
+            .AddQueryString(nameof(query.ClusterSetName), query.ClusterSetName)
+            .AddQueryString(nameof(query.ExcludeGlobal), query.ExcludeGlobal)
+            .AddQueryString(nameof(query.Language), query.Language)
             .AddQueryString(nameof(query.RegulationDate), query.RegulationDate)
             .AddQueryString(nameof(query.EvaluationDate), query.EvaluationDate);
         return uri;

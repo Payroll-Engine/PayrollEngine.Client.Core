@@ -89,10 +89,8 @@ public sealed class PayrollHttpClient : IDisposable
             new(ContentType.Json));
 
         // version
-        if (version != null)
-        {
-            httpClient.DefaultRequestHeaders.Add("X-Version", version.ToString(2));
-        }
+        version ??= PayrollApiSpecification.CurrentApiVersion;
+        httpClient.DefaultRequestHeaders.Add("X-Version", version.ToString(2));
     }
 
     #endregion

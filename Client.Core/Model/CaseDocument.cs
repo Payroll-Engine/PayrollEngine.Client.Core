@@ -10,7 +10,6 @@ public class CaseDocument : Model, ICaseDocument, INameObject
     public string Name { get; set; }
 
     /// <inheritdoc/>
-    [Required]
     public string Content { get; set; }
 
     /// <inheritdoc/>
