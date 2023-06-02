@@ -143,9 +143,11 @@ public sealed class PayrollHttpClient : IDisposable
         {
             throw new ArgumentNullException(nameof(response));
         }
-        return response.Headers.Location == null ?
-            0 :
-            response.Headers.Location.GetLastSegmentId();
+        if (response.Headers.Location == null)
+        {
+            throw new PayrollException("Missing location header for the record id");
+        }
+        return response.Headers.Location.GetLastSegmentId();
     }
 
     /// <summary>Get backend resource response</summary>
@@ -338,7 +340,7 @@ public sealed class PayrollHttpClient : IDisposable
             throw new HttpRequestException($"Empty POST response in request {requestUri}");
         }
 
-        if (responseObj is IModel model)
+        if (responseObj is IModel model && model.Id == 0)
         {
             model.Id = GetRecordId(response);
         }
@@ -378,7 +380,7 @@ public sealed class PayrollHttpClient : IDisposable
             throw new HttpRequestException($"Empty POST response in request {requestUri}");
         }
 
-        if (responseObj is IModel model)
+        if (responseObj is IModel model && model.Id == 0)
         {
             model.Id = GetRecordId(response);
         }
@@ -418,7 +420,7 @@ public sealed class PayrollHttpClient : IDisposable
             throw new HttpRequestException($"Empty POST response in request {requestUri}");
         }
 
-        if (responseObj is IModel model)
+        if (responseObj is IModel model && model.Id == 0)
         {
             model.Id = GetRecordId(response);
         }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 namespace PayrollEngine.Client;
 
@@ -70,9 +71,18 @@ public static class ConsoleArguments
 
     /// <summary>Gets the specified index, starting at 1</summary>
     /// <param name="index">The argument index</param>
+    /// <param name="memberName">The caller name</param>
     /// <param name="allowToggle">Argument can be a toggle</param>
     /// <returns>The argument value</returns>
-    public static string Get(int index, bool allowToggle = false)
+    public static string GetMember(int index, [CallerMemberName] string memberName = "", bool allowToggle = false) =>
+        Get(index, memberName, allowToggle);
+
+    /// <summary>Gets the specified index, starting at 1</summary>
+    /// <param name="index">The argument index</param>
+    /// <param name="name">The argument name (optional)</param>
+    /// <param name="allowToggle">Argument can be a toggle (optional)</param>
+    /// <returns>The argument value</returns>
+    public static string Get(int index, string name = null, bool allowToggle = false)
     {
         if (index <= 0)
         {
@@ -82,6 +92,19 @@ public static class ConsoleArguments
         if (CommandLineArgs.Length <= index)
         {
             return null;
+        }
+
+        // named argument
+        if (!string.IsNullOrWhiteSpace(name))
+        {
+            var marker = $"{name}:";
+            foreach (var cmdLineArg in CommandLineArgs)
+            {
+                if (cmdLineArg.StartsWith(marker, StringComparison.InvariantCultureIgnoreCase))
+                {
+                    return cmdLineArg.Substring(marker.Length);
+                }
+            }
         }
 
         var arg = CommandLineArgs[index];
@@ -94,14 +117,15 @@ public static class ConsoleArguments
 
     /// <summary>Gets an integer argument</summary>
     /// <param name="index">The argument index</param>
+    /// <param name="name">The argument name (optional)</param>
     /// <returns>The argument value</returns>
-    public static int? GetInt(int index)
+    public static int? GetInt(int index, string name = null)
     {
         if (index <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(index));
         }
-        var arg = Get(index);
+        var arg = Get(index, name);
         if (!string.IsNullOrWhiteSpace(arg) &&
             int.TryParse(arg, out var value))
         {
@@ -113,10 +137,11 @@ public static class ConsoleArguments
     /// <summary>Gets an integer argument</summary>
     /// <param name="index">The argument index</param>
     /// <param name="defaultValue">The default value</param>
+    /// <param name="name">The argument name (optional)</param>
     /// <returns>The argument value</returns>
-    public static int GetInt(int index, int defaultValue)
+    public static int GetInt(int index, int defaultValue, string name = null)
     {
-        var arg = Get(index);
+        var arg = Get(index, name);
         if (!string.IsNullOrWhiteSpace(arg) &&
             int.TryParse(arg, out var value))
         {
@@ -128,15 +153,16 @@ public static class ConsoleArguments
     /// <summary>Gets a mandatory enum argument</summary>
     /// <typeparam name="T">The enum type</typeparam>
     /// <param name="index">The argument index</param>
+    /// <param name="name">The argument name (optional)</param>
     /// <returns>The argument value</returns>
-    public static T GetEnum<T>(int index)
+    public static T GetEnum<T>(int index, string name = null)
     {
         var enumType = typeof(T);
         if (!enumType.IsEnum)
         {
             throw new ArgumentException("Argument must an enum");
         }
-        var arg = Get(index);
+        var arg = Get(index, name);
         if (string.IsNullOrWhiteSpace(arg))
         {
             throw new ArgumentException($"Missing argument at position {index}", nameof(index));
@@ -156,16 +182,17 @@ public static class ConsoleArguments
     /// <summary>Gets an enum argument</summary>
     /// <typeparam name="T">The enum type</typeparam>
     /// <param name="index">The argument index</param>
+    /// <param name="name">The argument name (optional)</param>
     /// <param name="defaultValue">The default value</param>
     /// <returns>The argument value</returns>
-    public static T GetEnum<T>(int index, T defaultValue)
+    public static T GetEnum<T>(int index, T defaultValue, string name = null)
     {
         var enumType = typeof(T);
         if (!enumType.IsEnum)
         {
             throw new ArgumentException("Argument must an enum");
         }
-        var arg = Get(index);
+        var arg = Get(index, name);
         if (!string.IsNullOrWhiteSpace(arg) &&
             Enum.TryParse(typeof(T), arg, true, out var value))
         {

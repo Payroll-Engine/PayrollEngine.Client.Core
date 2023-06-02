@@ -161,7 +161,7 @@ public abstract class ConsoleProgram<TApp> : ConsoleToolBase, IDisposable
     /// <returns></returns>
     private static bool IsHelpMode()
     {
-        var firstArgument = ConsoleArguments.Get(1, true);
+        var firstArgument = ConsoleArguments.Get(1, allowToggle: true);
         return string.Equals("/?", firstArgument) || string.Equals("-?", firstArgument) ||
                string.Equals("/help", firstArgument, StringComparison.InvariantCultureIgnoreCase);
     }

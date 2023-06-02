@@ -119,33 +119,45 @@
             <param name="argument">The argument</param>
             <returns>True if the specified argument exists</returns>
         </member>
-        <member name="M:PayrollEngine.Client.ConsoleArguments.Get(System.Int32,System.Boolean)">
+        <member name="M:PayrollEngine.Client.ConsoleArguments.GetMember(System.Int32,System.String,System.Boolean)">
             <summary>Gets the specified index, starting at 1</summary>
             <param name="index">The argument index</param>
+            <param name="memberName">The caller name</param>
             <param name="allowToggle">Argument can be a toggle</param>
             <returns>The argument value</returns>
         </member>
-        <member name="M:PayrollEngine.Client.ConsoleArguments.GetInt(System.Int32)">
-            <summary>Gets an integer argument</summary>
+        <member name="M:PayrollEngine.Client.ConsoleArguments.Get(System.Int32,System.String,System.Boolean)">
+            <summary>Gets the specified index, starting at 1</summary>
             <param name="index">The argument index</param>
+            <param name="name">The argument name (optional)</param>
+            <param name="allowToggle">Argument can be a toggle (optional)</param>
             <returns>The argument value</returns>
         </member>
-        <member name="M:PayrollEngine.Client.ConsoleArguments.GetInt(System.Int32,System.Int32)">
+        <member name="M:PayrollEngine.Client.ConsoleArguments.GetInt(System.Int32,System.String)">
+            <summary>Gets an integer argument</summary>
+            <param name="index">The argument index</param>
+            <param name="name">The argument name (optional)</param>
+            <returns>The argument value</returns>
+        </member>
+        <member name="M:PayrollEngine.Client.ConsoleArguments.GetInt(System.Int32,System.Int32,System.String)">
             <summary>Gets an integer argument</summary>
             <param name="index">The argument index</param>
             <param name="defaultValue">The default value</param>
+            <param name="name">The argument name (optional)</param>
             <returns>The argument value</returns>
         </member>
-        <member name="M:PayrollEngine.Client.ConsoleArguments.GetEnum``1(System.Int32)">
+        <member name="M:PayrollEngine.Client.ConsoleArguments.GetEnum``1(System.Int32,System.String)">
             <summary>Gets a mandatory enum argument</summary>
             <typeparam name="T">The enum type</typeparam>
             <param name="index">The argument index</param>
+            <param name="name">The argument name (optional)</param>
             <returns>The argument value</returns>
         </member>
-        <member name="M:PayrollEngine.Client.ConsoleArguments.GetEnum``1(System.Int32,``0)">
+        <member name="M:PayrollEngine.Client.ConsoleArguments.GetEnum``1(System.Int32,``0,System.String)">
             <summary>Gets an enum argument</summary>
             <typeparam name="T">The enum type</typeparam>
             <param name="index">The argument index</param>
+            <param name="name">The argument name (optional)</param>
             <param name="defaultValue">The default value</param>
             <returns>The argument value</returns>
         </member>
