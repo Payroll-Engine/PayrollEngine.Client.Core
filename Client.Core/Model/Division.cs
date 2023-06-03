@@ -15,6 +15,7 @@ public class Division : Model, IDivision, INameObject
     public Dictionary<string, string> NameLocalizations { get; set; }
 
     /// <inheritdoc/>
+    [Required]
     [StringLength(128)]
     public string Culture { get; set; }
 
