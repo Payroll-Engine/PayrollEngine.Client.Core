@@ -119,8 +119,9 @@
             <param name="argument">The argument</param>
             <returns>True if the specified argument exists</returns>
         </member>
-        <member name="M:PayrollEngine.Client.ConsoleArguments.GetMember(System.Int32,System.String,System.Boolean)">
+        <member name="M:PayrollEngine.Client.ConsoleArguments.GetMember(System.Type,System.Int32,System.String,System.Boolean)">
             <summary>Gets the specified index, starting at 1</summary>
+            <param name="type">The source type</param>
             <param name="index">The argument index</param>
             <param name="memberName">The caller name</param>
             <param name="allowToggle">Argument can be a toggle</param>

@@ -70,12 +70,32 @@ public static class ConsoleArguments
     }
 
     /// <summary>Gets the specified index, starting at 1</summary>
+    /// <param name="type">The source type</param>
     /// <param name="index">The argument index</param>
     /// <param name="memberName">The caller name</param>
     /// <param name="allowToggle">Argument can be a toggle</param>
     /// <returns>The argument value</returns>
-    public static string GetMember(int index, [CallerMemberName] string memberName = "", bool allowToggle = false) =>
-        Get(index, memberName, allowToggle);
+    public static string GetMember(Type type, int index, [CallerMemberName] string memberName = "", bool allowToggle = false)
+    {
+        var result = Get(index, memberName, allowToggle);
+        if (result == null)
+        {
+            return null;
+        }
+
+        // test for other type parameter, assuming other properties are also parameters
+        var paramIndex = result.IndexOf(':');
+        if (paramIndex> 0)
+        {
+            var parameter = result.Substring(0, paramIndex);
+            if (!string.IsNullOrEmpty(parameter) || type.GetProperty(parameter) != null)
+            {
+                return null;
+            }
+        }
+
+        return result;
+    }
 
     /// <summary>Gets the specified index, starting at 1</summary>
     /// <param name="index">The argument index</param>

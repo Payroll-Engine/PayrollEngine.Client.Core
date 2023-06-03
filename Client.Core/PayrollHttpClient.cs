@@ -143,11 +143,9 @@ public sealed class PayrollHttpClient : IDisposable
         {
             throw new ArgumentNullException(nameof(response));
         }
-        if (response.Headers.Location == null)
-        {
-            throw new PayrollException("Missing location header for the record id");
-        }
-        return response.Headers.Location.GetLastSegmentId();
+        return response.Headers.Location == null ?
+            0 :
+            response.Headers.Location.GetLastSegmentId();
     }
 
     /// <summary>Get backend resource response</summary>
