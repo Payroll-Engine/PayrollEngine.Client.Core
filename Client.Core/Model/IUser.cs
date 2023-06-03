@@ -21,6 +21,6 @@ public interface IUser : IModel, IAttributeObject, IKeyEquatable<IUser>
     /// <summary>The users language</summary>
     Language Language { get; set; }
 
-    /// <summary>Supervisor user</summary>
-    bool Supervisor { get; set; }
+    /// <summary>The user type</summary>
+    UserType UserType { get; set; }
 }

@@ -5072,8 +5072,8 @@
         <member name="P:PayrollEngine.Client.Model.IUser.Language">
             <summary>The users language</summary>
         </member>
-        <member name="P:PayrollEngine.Client.Model.IUser.Supervisor">
-            <summary>Supervisor user</summary>
+        <member name="P:PayrollEngine.Client.Model.IUser.UserType">
+            <summary>The user type</summary>
         </member>
         <member name="T:PayrollEngine.Client.Model.IWageType">
             <summary>The payroll wage type client object</summary>
@@ -6949,7 +6949,7 @@
         <member name="P:PayrollEngine.Client.Model.User.Language">
             <inheritdoc/>
         </member>
-        <member name="P:PayrollEngine.Client.Model.User.Supervisor">
+        <member name="P:PayrollEngine.Client.Model.User.UserType">
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.User.Attributes">

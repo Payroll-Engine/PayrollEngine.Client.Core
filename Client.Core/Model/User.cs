@@ -33,7 +33,7 @@ public class User : Model, IUser, IIdentifierObject
     public Language Language { get; set; }
 
     /// <inheritdoc/>
-    public bool Supervisor { get; set; }
+    public UserType UserType { get; set; }
 
     /// <inheritdoc/>
     public Dictionary<string, object> Attributes { get; set; }
