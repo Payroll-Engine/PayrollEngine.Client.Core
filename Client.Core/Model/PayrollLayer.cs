@@ -11,8 +11,7 @@ public class PayrollLayer : Model, IPayrollLayer
     public int Level { get; set; }
 
     /// <inheritdoc/>
-    [Required]
-    public int Priority { get; set; }
+    public int Priority { get; set; } = 1;
 
     /// <inheritdoc/>
     [Required]
@@ -45,6 +44,6 @@ public class PayrollLayer : Model, IPayrollLayer
         string.Equals(RegulationName, compare.RegulationName);
 
     /// <inheritdoc/>
-    public override string GetUiString() => 
+    public override string GetUiString() =>
         $"{RegulationName} [{Level}.{Priority}]";
 }

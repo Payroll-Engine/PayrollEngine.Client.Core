@@ -4253,7 +4253,7 @@
             <summary>The layer level</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.IPayrollLayer.Priority">
-            <summary>The layer priority</summary>
+            <summary>The layer priority (default: 1)</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.IPayrollLayer.RegulationName">
             <summary>The regulation name</summary>
@@ -4639,12 +4639,6 @@
         </member>
         <member name="P:PayrollEngine.Client.Model.IPayrunJobInvocation.PayrunName">
             <summary>The payrun name (immutable)</summary>
-        </member>
-        <member name="P:PayrollEngine.Client.Model.IPayrunJobInvocation.PayrollId">
-            <summary>The payroll id (immutable)</summary>
-        </member>
-        <member name="P:PayrollEngine.Client.Model.IPayrunJobInvocation.PayrollName">
-            <summary>The payroll name (immutable)</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.IPayrunJobInvocation.UserId">
             <summary>The user id (immutable)</summary>
@@ -5049,7 +5043,7 @@
             <summary>The culture including the calendar</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.ITenant.Calendar">
-            <summary>The default/fallback calendar</summary>
+            <summary>The tenant calendar, fallback is the default calendar</summary>
         </member>
         <member name="T:PayrollEngine.Client.Model.IUser">
             <summary>The payroll user client object</summary>
@@ -6159,12 +6153,6 @@
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.PayrunJobInvocation.PayrunName">
-            <inheritdoc/>
-        </member>
-        <member name="P:PayrollEngine.Client.Model.PayrunJobInvocation.PayrollId">
-            <inheritdoc/>
-        </member>
-        <member name="P:PayrollEngine.Client.Model.PayrunJobInvocation.PayrollName">
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.PayrunJobInvocation.UserId">

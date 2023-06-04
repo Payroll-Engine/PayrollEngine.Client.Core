@@ -18,12 +18,6 @@ public interface IPayrunJobInvocation : IEquatable<IPayrunJobInvocation>
     /// <summary>The payrun name (immutable)</summary>
     string PayrunName { get; set; }
 
-    /// <summary>The payroll id (immutable)</summary>
-    int PayrollId { get; set; }
-
-    /// <summary>The payroll name (immutable)</summary>
-    string PayrollName { get; set; }
-
     /// <summary>The user id (immutable)</summary>
     int UserId { get; set; }
 

@@ -293,7 +293,6 @@ public class NamespaceUpdateTool : Visitor
     {
         invocation.Name = ApplyNamespace(invocation.Name);
         invocation.PayrunName = ApplyNamespace(invocation.PayrunName);
-        invocation.PayrollName = ApplyNamespace(invocation.PayrollName);
         ApplyNamespace(invocation.EmployeeIdentifiers);
         await base.VisitPayrunJobInvocationAsync(tenant, invocation);
     }

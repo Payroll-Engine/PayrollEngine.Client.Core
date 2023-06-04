@@ -22,13 +22,6 @@ public class PayrunJobInvocation : IPayrunJobInvocation
     public string PayrunName { get; set; }
 
     /// <inheritdoc/>
-    public int PayrollId { get; set; }
-
-    /// <inheritdoc/>
-    [Required]
-    public string PayrollName { get; set; }
-
-    /// <inheritdoc/>
     public int UserId { get; set; }
 
     /// <inheritdoc/>

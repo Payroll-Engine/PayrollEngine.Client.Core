@@ -16,7 +16,7 @@ public class Tenant : Model, ITenant, IIdentifierObject
     public string Culture { get; set; }
 
     /// <inheritdoc/>
-    public CalendarConfiguration Calendar { get; set; }
+    public CalendarConfiguration Calendar { get; set; } = CalendarConfiguration.DefaultConfiguration;
 
     /// <inheritdoc/>
     public Dictionary<string, object> Attributes { get; set; }

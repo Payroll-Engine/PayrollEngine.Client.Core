@@ -6,7 +6,7 @@ public interface IPayrollLayer : IModel, IAttributeObject, IKeyEquatable<IPayrol
     /// <summary>The layer level</summary>
     int Level { get; set; }
 
-    /// <summary>The layer priority</summary>
+    /// <summary>The layer priority (default: 1)</summary>
     int Priority { get; set; }
 
     /// <summary>The regulation name</summary>

@@ -548,10 +548,6 @@ public sealed class ExchangeImport : ExchangeImportVisitor
         }
         invocation.PayrunId = payrun.Id;
 
-        // payroll
-        var payroll = await GetPayrollAsync(tenant.Id, invocation.PayrollName);
-        invocation.PayrollId = payroll.Id;
-
         // user
         var user = await GetUserAsync(tenant.Id, invocation.UserIdentifier);
         if (user == null)
