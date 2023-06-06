@@ -2288,6 +2288,9 @@
         <member name="P:PayrollEngine.Client.Model.CaseField.TimeUnit">
             <inheritdoc/>
         </member>
+        <member name="P:PayrollEngine.Client.Model.CaseField.PeriodAggregation">
+            <inheritdoc/>
+        </member>
         <member name="P:PayrollEngine.Client.Model.CaseField.OverrideType">
             <inheritdoc/>
         </member>
@@ -3616,6 +3619,9 @@
         </member>
         <member name="P:PayrollEngine.Client.Model.ICaseField.TimeUnit">
             <summary>The date unit type</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.ICaseField.PeriodAggregation">
+            <summary>The period aggregation type for <see cref="F:PayrollEngine.CaseFieldTimeType.Period"/></summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.ICaseField.OverrideType">
             <summary>The override type</summary>

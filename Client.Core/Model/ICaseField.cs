@@ -29,6 +29,9 @@ public interface ICaseField : IModel, IAttributeObject, IKeyEquatable<ICaseField
     /// <summary>The date unit type</summary>
     CaseFieldTimeUnit TimeUnit { get; set; }
 
+    /// <summary>The period aggregation type for <see cref="CaseFieldTimeType.Period"/></summary>
+    CaseFieldAggregationType PeriodAggregation { get; set; }
+
     /// <summary>The override type</summary>
     OverrideType OverrideType { get; set; }
 

@@ -33,6 +33,9 @@ public class CaseField : Model, ICaseField, INameObject
     public CaseFieldTimeUnit TimeUnit { get; set; }
 
     /// <inheritdoc/>
+    public CaseFieldAggregationType PeriodAggregation { get; set; }
+
+    /// <inheritdoc/>
     public OverrideType OverrideType { get; set; }
 
     /// <inheritdoc/>

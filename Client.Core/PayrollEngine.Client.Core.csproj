@@ -77,8 +77,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.AspNetCore.WebUtilities" Version="2.2.0" />
-		<PackageReference Include="PayrollEngine.Core" Version="0.5.0-pre-230605-8" />
+		<PackageReference Include="PayrollEngine.Core" Version="0.5.0-pre-230606-3" />
 	</ItemGroup>
 
 	<!-- include xml documention files and json schemas to the nuget package -->
