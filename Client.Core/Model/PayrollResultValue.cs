@@ -25,16 +25,15 @@ public class PayrollResultValue : IPayrollResultValue
     public int ResultParentId { get; set; }
 
     /// <inheritdoc/>
+    public DateTime ResultCreated { get; set; }
+
+    /// <inheritdoc/>
     public decimal ResultNumber { get; set; }
 
-    /// <summary>
-    /// The result start date
-    /// </summary>
+    /// <inheritdoc/>
     public DateTime ResultStart { get; set; }
 
-    /// <summary>
-    /// The result end date
-    /// </summary>
+    /// <inheritdoc/>
     public DateTime ResultEnd { get; set; }
 
     /// <inheritdoc/>

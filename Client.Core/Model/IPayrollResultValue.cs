@@ -23,6 +23,9 @@ public interface IPayrollResultValue : IEquatable<IPayrollResultValue>
     
     /// <summary>The result parent id (e.g. wage typo on custom wage type)</summary>
     int ResultParentId { get; set; }
+    
+    /// <summary>The result creation date</summary>
+    DateTime ResultCreated { get; set; }
 
     /// <summary>The result number (e.g. wage type number)</summary>
     decimal ResultNumber { get; set; }
