@@ -39,9 +39,6 @@ public interface IPayrunJobInvocation : IEquatable<IPayrunJobInvocation>
     /// <summary>The forecast name (immutable)</summary>
     string Forecast { get; set; }
 
-    /// <summary>The payrun job execution mode (immutable)</summary>
-    PayrunJobExecutionMode ExecutionMode { get; set; }
-
     /// <summary>The payrun retro pay mode (immutable)</summary>
     RetroPayMode RetroPayMode { get; set; }
 

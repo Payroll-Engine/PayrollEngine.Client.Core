@@ -31,7 +31,7 @@ public class WageType : Model, IWageType, INameObject
     public ValueType ValueType { get; set; } = ValueType.Money;
 
     /// <inheritdoc/>
-    public CalendarCalculationMode? CalendarCalculationMode { get; set; }
+    public string Calendar { get; set; }
 
     /// <inheritdoc/>
     public List<string> Collectors { get; set; }

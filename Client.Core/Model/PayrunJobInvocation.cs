@@ -44,9 +44,6 @@ public class PayrunJobInvocation : IPayrunJobInvocation
     public string Forecast { get; set; }
 
     /// <inheritdoc/>
-    public PayrunJobExecutionMode ExecutionMode { get; set; }
-
-    /// <inheritdoc/>
     public RetroPayMode RetroPayMode { get; set; }
 
     /// <inheritdoc/>

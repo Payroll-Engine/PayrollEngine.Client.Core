@@ -30,21 +30,25 @@ public static class TenantApiEndpoints
     public static string TenantQueriesUrl(int tenantId) =>
         $"{TenantUrl(tenantId)}/queries";
 
-    /// <summary>The tenant calendar URL</summary>
-    public static string TenantCalendarUrl(int tenantId) =>
-        $"{TenantUrl(tenantId)}/calendar";
+    /// <summary>The calendars URL</summary>
+    public static string CalendarsUrl(int tenantId) =>
+        $"{TenantUrl(tenantId)}/calendars";
 
-    /// <summary>The tenant calendar periods URL</summary>
-    public static string TenantCalendarPeriodsUrl(int tenantId) =>
-        $"{TenantCalendarUrl(tenantId)}/periods";
+    /// <summary>The calendar URL</summary>
+    public static string CalendarUrl(int tenantId, int calendarId) =>
+        $"{CalendarsUrl(tenantId)}/{calendarId}";
 
-    /// <summary>The tenant calendar cycles URL</summary>
-    public static string TenantCalendarCyclesUrl(int tenantId) =>
-        $"{TenantCalendarUrl(tenantId)}/cycles";
+    /// <summary>The calendars periods URL</summary>
+    public static string TenantCalendarsPeriodsUrl(int tenantId) =>
+        $"{CalendarsUrl(tenantId)}/periods";
 
-    /// <summary>The tenant calendar values URL</summary>
-    public static string TenantCalendarValuesUrl(int tenantId) =>
-        $"{TenantCalendarUrl(tenantId)}/values";
+    /// <summary>The calendars cycles URL</summary>
+    public static string TenantCalendarsCyclesUrl(int tenantId) =>
+        $"{CalendarsUrl(tenantId)}/cycles";
+
+    /// <summary>The calendars values URL</summary>
+    public static string TenantCalendarsValuesUrl(int tenantId) =>
+        $"{CalendarsUrl(tenantId)}/values";
 
     /// <summary>The users URL</summary>
     public static string UsersUrl(int tenantId) =>

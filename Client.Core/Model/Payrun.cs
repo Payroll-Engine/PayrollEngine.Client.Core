@@ -65,9 +65,6 @@ public class Payrun : Model, IPayrun, INameObject
 
     /// <inheritdoc/>
     public RetroTimeType RetroTimeType { get; set; }
-
-    /// <inheritdoc/>
-    public CalendarConfiguration Calendar { get; set; }
     
     /// <summary>The payrun parameters</summary>
     public List<PayrunParameter> PayrunParameters { get; set; }

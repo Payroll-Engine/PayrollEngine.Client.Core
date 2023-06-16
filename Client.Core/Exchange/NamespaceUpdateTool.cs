@@ -73,6 +73,13 @@ public class NamespaceUpdateTool : Visitor
     }
 
     /// <inheritdoc />
+    protected override async Task VisitCalendarAsync(IExchangeTenant tenant, ICalendar calendar)
+    {
+        calendar.Name = ApplyNamespace(calendar.Name);
+        await base.VisitCalendarAsync(tenant, calendar);
+    }
+
+    /// <inheritdoc />
     protected override async Task VisitDivisionAsync(IExchangeTenant tenant, IDivision division)
     {
         division.Name = ApplyNamespace(division.Name);

@@ -9,6 +9,9 @@ public interface IExchangeTenant : ITenant, IEquatable<IExchangeTenant>
     /// <summary>The tenant users</summary>
     List<User> Users { get; set; }
 
+    /// <summary>The tenant calendars</summary>
+    List<Calendar> Calendars { get; set; }
+
     /// <summary>The tenant divisions</summary>
     List<Division> Divisions { get; set; }
 

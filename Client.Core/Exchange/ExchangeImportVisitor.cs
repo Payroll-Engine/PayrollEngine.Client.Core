@@ -131,6 +131,39 @@ public abstract class ExchangeImportVisitor : Visitor
 
     #endregion
 
+    #region Calendars
+
+    /// <summary>Get calendar</summary>
+    /// <param name="tenantId">The tenant id</param>
+    /// <param name="name">The calendar name</param>
+    protected virtual async Task<Calendar> GetCalendarAsync(int tenantId, string name) =>
+        await new CalendarService(HttpClient).GetAsync<Calendar>(new(tenantId), name);
+
+    /// <summary>Visit the calendar</summary>
+    /// <param name="tenant">The tenant</param>
+    /// <param name="calendar">The calendar</param>
+    protected override async Task VisitCalendarAsync(IExchangeTenant tenant, ICalendar calendar)
+    {
+        // get calendar
+        var target = TargetLoad ? await GetCalendarAsync(tenant.Id, calendar.Name) : null;
+
+        // setup calendar
+        await SetupCalendarAsync(tenant, calendar, target);
+
+        await base.VisitCalendarAsync(tenant, calendar);
+    }
+
+    /// <summary>Setup the user</summary>
+    /// <param name="tenant">The exchange tenant</param>
+    /// <param name="calendar">The calendar</param>
+    /// <param name="targetCalendar">The target calendar</param>
+    protected virtual async Task SetupCalendarAsync(IExchangeTenant tenant, ICalendar calendar, ICalendar targetCalendar)
+    {
+        await Task.Run(() => { });
+    }
+
+    #endregion
+
     #region Divisions
 
     /// <summary>Get division</summary>

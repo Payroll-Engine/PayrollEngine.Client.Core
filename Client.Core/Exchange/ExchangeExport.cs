@@ -109,6 +109,12 @@ public sealed class ExchangeExport
                 tenant.Users = await LoadUsersAsync(tenant.Id);
             }
 
+            // calendars
+            if (ExportActive(ExportOptions.Calendars))
+            {
+                tenant.Calendars = await LoadCalendarsAsync(tenant.Id);
+            }
+
             // divisions
             if (ExportActive(ExportOptions.Divisions))
             {
@@ -212,6 +218,28 @@ public sealed class ExchangeExport
         }
         var users = (await new UserService(HttpClient).QueryAsync<User>(new(tenantId), query)).ToList();
         return users.Any() ? users : null;
+    }
+
+    #endregion
+
+    #region Calendars
+
+    private async Task<List<Calendar>> LoadCalendarsAsync(int tenantId)
+    {
+        // filter
+        Query query = null;
+        if (ExportOptions.Calendars != null)
+        {
+            string filter = null;
+            foreach (var calendar in ExportOptions.Calendars)
+            {
+                var condition = new Equals(nameof(Calendar.Name), calendar);
+                filter = filter == null ? condition : new Filter(filter).Or(condition);
+            }
+            query = new() { Filter = filter };
+        }
+        var calendars = (await new CalendarService(HttpClient).QueryAsync<Calendar>(new(tenantId), query)).ToList();
+        return calendars.Any() ? calendars : null;
     }
 
     #endregion

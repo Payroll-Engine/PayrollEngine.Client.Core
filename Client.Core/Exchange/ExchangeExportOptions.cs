@@ -22,6 +22,9 @@ public class ExchangeExportOptions
     /// <summary>Export user identifiers</summary>
     public string[] Users { get; set; }
 
+    /// <summary>Export calendars</summary>
+    public string[] Calendars { get; set; }
+
     /// <summary>Export division names</summary>
     public string[] Divisions { get; set; }
 

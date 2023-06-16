@@ -62,6 +62,7 @@ public abstract class VisitorBase
     protected virtual async Task VisitExchangeTenantAsync(IExchangeTenant tenant)
     {
         await VisitUsersAsync(tenant);
+        await VisitCalendarsAsync(tenant);
         await VisitDivisionsAsync(tenant);
         await VisitTasksAsync(tenant);
         await VisitWebhooksAsync(tenant);
@@ -115,6 +116,31 @@ public abstract class VisitorBase
     /// <param name="tenant">The tenant</param>
     /// <param name="user">The user</param>
     protected virtual async Task VisitUserAsync(IExchangeTenant tenant, IUser user)
+    {
+        await Task.Run(() => { });
+    }
+
+    #endregion
+
+    #region Calendar
+
+    /// <summary>Visit the calendars</summary>
+    /// <param name="tenant">The tenant</param>
+    protected virtual async Task VisitCalendarsAsync(IExchangeTenant tenant)
+    {
+        if (tenant.Calendars != null)
+        {
+            foreach (var calendar in tenant.Calendars)
+            {
+                await VisitCalendarAsync(tenant, calendar);
+            }
+        }
+    }
+
+    /// <summary>Visit the calendar</summary>
+    /// <param name="tenant">The tenant</param>
+    /// <param name="calendar">The calendar</param>
+    protected virtual async Task VisitCalendarAsync(IExchangeTenant tenant, ICalendar calendar)
     {
         await Task.Run(() => { });
     }

@@ -477,6 +477,9 @@
         <member name="P:PayrollEngine.Client.Exchange.ExchangeExportOptions.Users">
             <summary>Export user identifiers</summary>
         </member>
+        <member name="P:PayrollEngine.Client.Exchange.ExchangeExportOptions.Calendars">
+            <summary>Export calendars</summary>
+        </member>
         <member name="P:PayrollEngine.Client.Exchange.ExchangeExportOptions.Divisions">
             <summary>Export division names</summary>
         </member>
@@ -552,6 +555,9 @@
             <summary><inheritdoc/></summary>
         </member>
         <member name="M:PayrollEngine.Client.Exchange.ExchangeImport.SetupUserAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IUser,PayrollEngine.Client.Model.IUser)">
+            <summary><inheritdoc/></summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeImport.SetupCalendarAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.ICalendar,PayrollEngine.Client.Model.ICalendar)">
             <summary><inheritdoc/></summary>
         </member>
         <member name="M:PayrollEngine.Client.Exchange.ExchangeImport.SetupDivisionAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IDivision,PayrollEngine.Client.Model.IDivision)">
@@ -717,6 +723,22 @@
             <param name="tenant">The exchange tenant</param>
             <param name="user">The user</param>
             <param name="targetUser">The target user</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.GetCalendarAsync(System.Int32,System.String)">
+            <summary>Get calendar</summary>
+            <param name="tenantId">The tenant id</param>
+            <param name="name">The calendar name</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.VisitCalendarAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.ICalendar)">
+            <summary>Visit the calendar</summary>
+            <param name="tenant">The tenant</param>
+            <param name="calendar">The calendar</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.SetupCalendarAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.ICalendar,PayrollEngine.Client.Model.ICalendar)">
+            <summary>Setup the user</summary>
+            <param name="tenant">The exchange tenant</param>
+            <param name="calendar">The calendar</param>
+            <param name="targetCalendar">The target calendar</param>
         </member>
         <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.GetDivisionAsync(System.Int32,System.String)">
             <summary>Get division</summary>
@@ -1048,6 +1070,9 @@
             <summary>Update the namespace</summary>
         </member>
         <member name="M:PayrollEngine.Client.Exchange.NamespaceUpdateTool.VisitExchangeTenantAsync(PayrollEngine.Client.Model.IExchangeTenant)">
+            <inheritdoc />
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.NamespaceUpdateTool.VisitCalendarAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.ICalendar)">
             <inheritdoc />
         </member>
         <member name="M:PayrollEngine.Client.Exchange.NamespaceUpdateTool.VisitDivisionAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IDivision)">
@@ -1433,6 +1458,15 @@
             <summary>Visit the user</summary>
             <param name="tenant">The tenant</param>
             <param name="user">The user</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitCalendarsAsync(PayrollEngine.Client.Model.IExchangeTenant)">
+            <summary>Visit the calendars</summary>
+            <param name="tenant">The tenant</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitCalendarAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.ICalendar)">
+            <summary>Visit the calendar</summary>
+            <param name="tenant">The tenant</param>
+            <param name="calendar">The calendar</param>
         </member>
         <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitDivisionsAsync(PayrollEngine.Client.Model.IExchangeTenant)">
             <summary>Visit the divisions</summary>
@@ -1937,6 +1971,91 @@
         <member name="M:PayrollEngine.Client.Model.ActionParameterInfo.ToString">
             <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
             <returns>A <see cref="T:System.String" /> that represents this instance</returns>
+        </member>
+        <member name="T:PayrollEngine.Client.Model.Calendar">
+            <summary>The payroll calendar client object</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.Calendar.Name">
+            <summary>The division name</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.Calendar.NameLocalizations">
+            <summary>The localized division names</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.Calendar.CycleTimeUnit">
+            <summary>The cycle time unit</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.Calendar.PeriodTimeUnit">
+            <summary>The period time unit</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.Calendar.TimeMap">
+            <summary>The time map</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.Calendar.FirstMonthOfYear">
+            <summary>The first month of a year</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.Calendar.MonthDayCount">
+            <summary>Override the effective month day count</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.Calendar.YearWeekRule">
+            <summary>Override the calendar year start week rule</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.Calendar.FirstDayOfWeek">
+            <summary>Override the calendar first day of week</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.Calendar.WeekMode">
+            <summary>The week mode (default: week)</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.Calendar.WorkMonday">
+            <summary>Work on monday</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.Calendar.WorkTuesday">
+            <summary>Work on tuesday</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.Calendar.WorkWednesday">
+            <summary>Work on wednesday</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.Calendar.WorkThursday">
+            <summary>Work on thursday</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.Calendar.WorkFriday">
+            <summary>Work on friday</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.Calendar.WorkSaturday">
+            <summary>Work on saturday</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.Calendar.WorkSunday">
+            <summary>Work on sunday</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.Calendar.Attributes">
+            <summary>Custom attributes</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.Calendar.#ctor">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.Calendar.#ctor(PayrollEngine.Client.Model.Calendar)">
+            <summary>Initializes a new instance from a copy</summary>
+            <param name="copySource">The copy source</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.Calendar.Equals(PayrollEngine.Client.Model.ICalendar)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.Calendar.EqualKey(PayrollEngine.Client.Model.ICalendar)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.Calendar.GetUiString">
+            <inheritdoc/>
+        </member>
+        <member name="T:PayrollEngine.Client.Model.CalendarExtensions">
+            <summary>
+            Extension methods for the <see cref="T:PayrollEngine.Client.Model.Calendar"/>
+            </summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.CalendarExtensions.GetWeekOfYear(PayrollEngine.Client.Model.Calendar,System.Globalization.CultureInfo,System.DateTime)">
+            <summary>Returns the week of year for the specified DateTime</summary>
+            <param name="calendar">The payroll calendar</param>
+            <param name="culture">The culture</param>
+            <param name="moment">The moment of the week</param>
+            <returns> The returned value is an integer between 1 and 53</returns>
         </member>
         <member name="T:PayrollEngine.Client.Model.Case">
             <summary>The payroll case client object</summary>
@@ -3196,6 +3315,9 @@
         <member name="P:PayrollEngine.Client.Model.Division.Culture">
             <inheritdoc/>
         </member>
+        <member name="P:PayrollEngine.Client.Model.Division.Calendar">
+            <inheritdoc/>
+        </member>
         <member name="P:PayrollEngine.Client.Model.Division.Attributes">
             <inheritdoc/>
         </member>
@@ -3244,6 +3366,9 @@
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.Employee.Culture">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.Employee.Calendar">
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.Employee.Attributes">
@@ -3323,6 +3448,9 @@
         <member name="P:PayrollEngine.Client.Model.ExchangeTenant.Users">
             <inheritdoc/>
         </member>
+        <member name="P:PayrollEngine.Client.Model.ExchangeTenant.Calendars">
+            <inheritdoc/>
+        </member>
         <member name="P:PayrollEngine.Client.Model.ExchangeTenant.Divisions">
             <inheritdoc/>
         </member>
@@ -3383,6 +3511,60 @@
         </member>
         <member name="M:PayrollEngine.Client.Model.ExchangeTenant.Equals(PayrollEngine.Client.Model.IExchangeTenant)">
             <inheritdoc/>
+        </member>
+        <member name="T:PayrollEngine.Client.Model.ICalendar">
+            <summary>The payroll calendar client object</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.ICalendar.Name">
+            <summary>The calendar name</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.ICalendar.NameLocalizations">
+            <summary>The localized calendar names</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.ICalendar.CycleTimeUnit">
+            <summary>The cycle time unit (default: year)</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.ICalendar.PeriodTimeUnit">
+            <summary>The period time unit (default: calendar month)</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.ICalendar.TimeMap">
+            <summary>The time map (default: period)</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.ICalendar.FirstMonthOfYear">
+            <summary>The first month of a year  (default: january)</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.ICalendar.MonthDayCount">
+            <summary>Override the effective month day count</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.ICalendar.YearWeekRule">
+            <summary>Override the calendar year start week rule</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.ICalendar.FirstDayOfWeek">
+            <summary>Override the calendar first day of week</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.ICalendar.WeekMode">
+            <summary>The week mode (default: week)</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.ICalendar.WorkMonday">
+            <summary>Work on monday (default: true), used by <see cref="F:PayrollEngine.CalendarWeekMode.WorkWeek"/> </summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.ICalendar.WorkTuesday">
+            <summary>Work on tuesday (default: true), used by <see cref="F:PayrollEngine.CalendarWeekMode.WorkWeek"/> </summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.ICalendar.WorkWednesday">
+            <summary>Work on wednesday (default: true), used by <see cref="F:PayrollEngine.CalendarWeekMode.WorkWeek"/> </summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.ICalendar.WorkThursday">
+            <summary>Work on thursday (default: true), used by <see cref="F:PayrollEngine.CalendarWeekMode.WorkWeek"/> </summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.ICalendar.WorkFriday">
+            <summary>Work on friday (default: true), used by <see cref="F:PayrollEngine.CalendarWeekMode.WorkWeek"/> </summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.ICalendar.WorkSaturday">
+            <summary>Work on saturday (default: false), used by <see cref="F:PayrollEngine.CalendarWeekMode.WorkWeek"/> </summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.ICalendar.WorkSunday">
+            <summary>Work on sunday (default: false), used by <see cref="F:PayrollEngine.CalendarWeekMode.WorkWeek"/> </summary>
         </member>
         <member name="T:PayrollEngine.Client.Model.ICase">
             <summary>The payroll case client object</summary>
@@ -4001,6 +4183,9 @@
         <member name="P:PayrollEngine.Client.Model.IDivision.Culture">
             <summary>The culture including the calendar, fallback for employee culture</summary>
         </member>
+        <member name="P:PayrollEngine.Client.Model.IDivision.Calendar">
+            <summary>The division calendar, fallback is the tenant calendar</summary>
+        </member>
         <member name="T:PayrollEngine.Client.Model.IEmployee">
             <summary>The employee client object</summary>
         </member>
@@ -4021,6 +4206,9 @@
         </member>
         <member name="P:PayrollEngine.Client.Model.IEmployee.Culture">
             <summary>The culture including the calendar, fallback is the division culture</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.IEmployee.Calendar">
+            <summary>The employee calendar, fallback is the division calendar</summary>
         </member>
         <member name="T:PayrollEngine.Client.Model.IEmployeeSet">
             <summary>The employee set client object</summary>
@@ -4051,6 +4239,9 @@
         </member>
         <member name="P:PayrollEngine.Client.Model.IExchangeTenant.Users">
             <summary>The tenant users</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.IExchangeTenant.Calendars">
+            <summary>The tenant calendars</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.IExchangeTenant.Divisions">
             <summary>The tenant divisions</summary>
@@ -4215,9 +4406,6 @@
         </member>
         <member name="P:PayrollEngine.Client.Model.IPayroll.DivisionName">
             <summary>The division name (client only)</summary>
-        </member>
-        <member name="P:PayrollEngine.Client.Model.IPayroll.CalendarCalculationMode">
-            <summary>The calendar calculation mode</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.IPayroll.CountryName">
             <summary>The country name (client only)</summary>
@@ -4502,9 +4690,6 @@
         <member name="P:PayrollEngine.Client.Model.IPayrun.RetroTimeType">
             <summary>The payrun retro time type</summary>
         </member>
-        <member name="P:PayrollEngine.Client.Model.IPayrun.Calendar">
-            <summary>The payrun calendar</summary>
-        </member>
         <member name="P:PayrollEngine.Client.Model.IPayrun.PayrunParameters">
             <summary>The payrun parameters</summary>
         </member>
@@ -4669,9 +4854,6 @@
         </member>
         <member name="P:PayrollEngine.Client.Model.IPayrunJobInvocation.Forecast">
             <summary>The forecast name (immutable)</summary>
-        </member>
-        <member name="P:PayrollEngine.Client.Model.IPayrunJobInvocation.ExecutionMode">
-            <summary>The payrun job execution mode (immutable)</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.IPayrunJobInvocation.RetroPayMode">
             <summary>The payrun retro pay mode (immutable)</summary>
@@ -5102,8 +5284,8 @@
         <member name="P:PayrollEngine.Client.Model.IWageType.ValueType">
             <summary>The value type, default is value type money</summary>
         </member>
-        <member name="P:PayrollEngine.Client.Model.IWageType.CalendarCalculationMode">
-            <summary>The calendar calculation mode (default: tenant value)</summary>
+        <member name="P:PayrollEngine.Client.Model.IWageType.Calendar">
+            <summary>The wage type calendar</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.IWageType.Collectors">
             <summary>Associated collectors</summary>
@@ -5537,9 +5719,6 @@
         <member name="P:PayrollEngine.Client.Model.Payroll.DivisionName">
             <inheritdoc/>
         </member>
-        <member name="P:PayrollEngine.Client.Model.Payroll.CalendarCalculationMode">
-            <inheritdoc/>
-        </member>
         <member name="P:PayrollEngine.Client.Model.Payroll.CountryName">
             <inheritdoc/>
         </member>
@@ -5958,9 +6137,6 @@
         <member name="P:PayrollEngine.Client.Model.Payrun.RetroTimeType">
             <inheritdoc/>
         </member>
-        <member name="P:PayrollEngine.Client.Model.Payrun.Calendar">
-            <inheritdoc/>
-        </member>
         <member name="P:PayrollEngine.Client.Model.Payrun.PayrunParameters">
             <summary>The payrun parameters</summary>
         </member>
@@ -6182,9 +6358,6 @@
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.PayrunJobInvocation.Forecast">
-            <inheritdoc/>
-        </member>
-        <member name="P:PayrollEngine.Client.Model.PayrunJobInvocation.ExecutionMode">
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.PayrunJobInvocation.RetroPayMode">
@@ -6999,7 +7172,7 @@
         <member name="P:PayrollEngine.Client.Model.WageType.ValueType">
             <inheritdoc/>
         </member>
-        <member name="P:PayrollEngine.Client.Model.WageType.CalendarCalculationMode">
+        <member name="P:PayrollEngine.Client.Model.WageType.Calendar">
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.WageType.Collectors">
@@ -8822,6 +8995,46 @@
             <summary>Rebuild a the payrun script</summary>
             <param name="payrunName">The payrun name</param>
         </member>
+        <member name="T:PayrollEngine.Client.Service.Api.CalendarService">
+            <summary>Payroll calendar service</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Service.Api.CalendarService.#ctor(PayrollEngine.Client.PayrollHttpClient)">
+            <summary>Initializes a new instance of the <see cref="T:PayrollEngine.Client.Service.Api.CalendarService"/> class</summary>
+            <param name="httpClient">The HTTP client</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Service.Api.CalendarService.QueryAsync``1(PayrollEngine.Client.Service.TenantServiceContext,PayrollEngine.Query)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PayrollEngine.Client.Service.Api.CalendarService.QueryCountAsync(PayrollEngine.Client.Service.TenantServiceContext,PayrollEngine.Query)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PayrollEngine.Client.Service.Api.CalendarService.QueryResultAsync``1(PayrollEngine.Client.Service.TenantServiceContext,PayrollEngine.Query)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PayrollEngine.Client.Service.Api.CalendarService.GetAsync``1(PayrollEngine.Client.Service.TenantServiceContext,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PayrollEngine.Client.Service.Api.CalendarService.GetAsync``1(PayrollEngine.Client.Service.TenantServiceContext,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PayrollEngine.Client.Service.Api.CalendarService.CreateAsync``1(PayrollEngine.Client.Service.TenantServiceContext,``0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PayrollEngine.Client.Service.Api.CalendarService.UpdateAsync``1(PayrollEngine.Client.Service.TenantServiceContext,``0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PayrollEngine.Client.Service.Api.CalendarService.DeleteAsync(PayrollEngine.Client.Service.TenantServiceContext,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PayrollEngine.Client.Service.Api.CalendarService.GetPeriodAsync(System.Int32,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.Int32})">
+            <inheritdoc />
+        </member>
+        <member name="M:PayrollEngine.Client.Service.Api.CalendarService.GetCycleAsync(System.Int32,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.Int32})">
+            <inheritdoc />
+        </member>
+        <member name="M:PayrollEngine.Client.Service.Api.CalendarService.CalculateValueAsync(System.Int32,System.Decimal,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+            <inheritdoc />
+        </member>
         <member name="T:PayrollEngine.Client.Service.Api.CaseFieldService">
             <summary>Payroll case field service</summary>
         </member>
@@ -10171,15 +10384,6 @@
         <member name="M:PayrollEngine.Client.Service.Api.TenantService.GetSharedRegulationsAsync``1(System.Int32,System.Nullable{System.Int32})">
             <inheritdoc />
         </member>
-        <member name="M:PayrollEngine.Client.Service.Api.TenantService.GetCalendarPeriodAsync(System.Int32,PayrollEngine.CalendarCalculationMode,System.Nullable{System.DateTime},PayrollEngine.CalendarConfiguration,System.String,System.Nullable{System.Int32})">
-            <inheritdoc />
-        </member>
-        <member name="M:PayrollEngine.Client.Service.Api.TenantService.GetCalendarCycleAsync(System.Int32,PayrollEngine.CalendarCalculationMode,System.Nullable{System.DateTime},PayrollEngine.CalendarConfiguration,System.String,System.Nullable{System.Int32})">
-            <inheritdoc />
-        </member>
-        <member name="M:PayrollEngine.Client.Service.Api.TenantService.CalculateCalendarValueAsync(System.Int32,PayrollEngine.CalendarCalculationMode,System.Decimal,System.Nullable{System.DateTime},System.Nullable{System.DateTime},PayrollEngine.CalendarConfiguration,System.String)">
-            <inheritdoc />
-        </member>
         <member name="M:PayrollEngine.Client.Service.Api.TenantService.GetAttributeAsync(PayrollEngine.Client.Service.RootServiceContext,System.Int32,System.String)">
             <inheritdoc />
         </member>
@@ -10430,6 +10634,49 @@
             <param name="context">The service context</param>
             <param name="objectId">The object id</param>
             <param name="attributeName">The attribute name</param>
+        </member>
+        <member name="T:PayrollEngine.Client.Service.ICalendarService">
+            <summary>Payroll calendar service</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Service.ICalendarService.GetAsync``1(PayrollEngine.Client.Service.TenantServiceContext,System.String)">
+            <summary>Get calendar by name</summary>
+            <param name="context">The service context</param>
+            <param name="name">The calendar name</param>
+            <returns>The calendar, null if missing</returns>
+        </member>
+        <member name="M:PayrollEngine.Client.Service.ICalendarService.GetPeriodAsync(System.Int32,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.Int32})">
+            <summary>Get tenant calendar period</summary>
+            <param name="tenantId">The tenant id</param>
+            <param name="cultureName">The culture to use (default: tenant culture)</param>
+            <param name="calendarName">The calendar name</param>
+            <param name="periodMoment">The moment within the payrun period (default: now)</param>
+            <param name="offset">The offset:<br />
+            less than zero: past<br />
+            zero: current (default)<br />
+            greater than zero: future<br /></param>
+            <returns>The calendar period</returns>
+        </member>
+        <member name="M:PayrollEngine.Client.Service.ICalendarService.GetCycleAsync(System.Int32,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.Int32})">
+            <summary>Get tenant calendar cycle</summary>
+            <param name="tenantId">The tenant id</param>
+            <param name="cultureName">The culture to use (default: tenant culture)</param>
+            <param name="calendarName">The calendar name</param>
+            <param name="cycleMoment">The moment within the payrun cycle (default: now)</param>
+            <param name="offset">The offset:<br />
+            less than zero: past<br />
+            zero: current (default)<br />
+            greater than zero: future<br /></param>
+            <returns>The calendar cycle</returns>
+        </member>
+        <member name="M:PayrollEngine.Client.Service.ICalendarService.CalculateValueAsync(System.Int32,System.Decimal,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+            <summary>Calculate calendar value</summary>
+            <param name="tenantId">The tenant id</param>
+            <param name="value">The value to calculate</param>
+            <param name="cultureName">The culture to use (default: tenant culture)</param>
+            <param name="calendarName">The calendar name</param>
+            <param name="evaluationDate">The period evaluation date (default: now)</param>
+            <param name="evaluationPeriodDate">The date within the evaluation period (default: evaluation date)</param>
+            <returns>The calendar value</returns>
         </member>
         <member name="T:PayrollEngine.Client.Service.ICaseFieldService">
             <summary>Payroll case field service</summary>
@@ -11327,43 +11574,6 @@
             <param name="parameters">The query parameters</param>
             <returns>The resulting data table</returns>
         </member>
-        <member name="M:PayrollEngine.Client.Service.ITenantService.GetCalendarPeriodAsync(System.Int32,PayrollEngine.CalendarCalculationMode,System.Nullable{System.DateTime},PayrollEngine.CalendarConfiguration,System.String,System.Nullable{System.Int32})">
-            <summary>Get tenant calendar period</summary>
-            <param name="tenantId">The tenant id</param>
-            <param name="calculationMode">The calculation mode</param>
-            <param name="periodMoment">The moment within the payrun period (default: now)</param>
-            <param name="calendar">The calendar configuration (default: tenant calendar)</param>
-            <param name="culture">The culture to use (default: tenant culture)</param>
-            <param name="offset">The offset:<br />
-            less than zero: past<br />
-            zero: current (default)<br />
-            greater than zero: future<br /></param>
-            <returns>The calendar period</returns>
-        </member>
-        <member name="M:PayrollEngine.Client.Service.ITenantService.GetCalendarCycleAsync(System.Int32,PayrollEngine.CalendarCalculationMode,System.Nullable{System.DateTime},PayrollEngine.CalendarConfiguration,System.String,System.Nullable{System.Int32})">
-            <summary>Get tenant calendar cycle</summary>
-            <param name="tenantId">The tenant id</param>
-            <param name="calculationMode">The calculation mode</param>
-            <param name="cycleMoment">The moment within the payrun cycle (default: now)</param>
-            <param name="calendar">The calendar configuration (default: tenant calendar)</param>
-            <param name="culture">The culture to use (default: tenant culture)</param>
-            <param name="offset">The offset:<br />
-            less than zero: past<br />
-            zero: current (default)<br />
-            greater than zero: future<br /></param>
-            <returns>The calendar cycle</returns>
-        </member>
-        <member name="M:PayrollEngine.Client.Service.ITenantService.CalculateCalendarValueAsync(System.Int32,PayrollEngine.CalendarCalculationMode,System.Decimal,System.Nullable{System.DateTime},System.Nullable{System.DateTime},PayrollEngine.CalendarConfiguration,System.String)">
-            <summary>Calculate calendar value</summary>
-            <param name="tenantId">The tenant id</param>
-            <param name="calculationMode">The calculation mode</param>
-            <param name="value">The value to calculate</param>
-            <param name="evaluationDate">The period evaluation date (default: now)</param>
-            <param name="evaluationPeriodDate">The date within the evaluation period (default: evaluation date)</param>
-            <param name="calendar">The calendar configuration (default: tenant calendar)</param>
-            <param name="culture">The culture to use (default: tenant culture)</param>
-            <returns>The calendar value</returns>
-        </member>
         <member name="T:PayrollEngine.Client.Service.IUserService">
             <summary>Payroll user service</summary>
         </member>
@@ -11614,17 +11824,20 @@
         <member name="M:PayrollEngine.Client.TenantApiEndpoints.TenantQueriesUrl(System.Int32)">
             <summary>The tenant queries URL</summary>
         </member>
-        <member name="M:PayrollEngine.Client.TenantApiEndpoints.TenantCalendarUrl(System.Int32)">
-            <summary>The tenant calendar URL</summary>
+        <member name="M:PayrollEngine.Client.TenantApiEndpoints.CalendarsUrl(System.Int32)">
+            <summary>The calendars URL</summary>
         </member>
-        <member name="M:PayrollEngine.Client.TenantApiEndpoints.TenantCalendarPeriodsUrl(System.Int32)">
-            <summary>The tenant calendar periods URL</summary>
+        <member name="M:PayrollEngine.Client.TenantApiEndpoints.CalendarUrl(System.Int32,System.Int32)">
+            <summary>The calendar URL</summary>
         </member>
-        <member name="M:PayrollEngine.Client.TenantApiEndpoints.TenantCalendarCyclesUrl(System.Int32)">
-            <summary>The tenant calendar cycles URL</summary>
+        <member name="M:PayrollEngine.Client.TenantApiEndpoints.TenantCalendarsPeriodsUrl(System.Int32)">
+            <summary>The calendars periods URL</summary>
         </member>
-        <member name="M:PayrollEngine.Client.TenantApiEndpoints.TenantCalendarValuesUrl(System.Int32)">
-            <summary>The tenant calendar values URL</summary>
+        <member name="M:PayrollEngine.Client.TenantApiEndpoints.TenantCalendarsCyclesUrl(System.Int32)">
+            <summary>The calendars cycles URL</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.TenantApiEndpoints.TenantCalendarsValuesUrl(System.Int32)">
+            <summary>The calendars values URL</summary>
         </member>
         <member name="M:PayrollEngine.Client.TenantApiEndpoints.UsersUrl(System.Int32)">
             <summary>The users URL</summary>

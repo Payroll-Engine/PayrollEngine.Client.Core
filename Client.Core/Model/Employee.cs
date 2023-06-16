@@ -31,6 +31,10 @@ public class Employee : Model, IEmployee, IIdentifierObject
     public string Culture { get; set; }
 
     /// <inheritdoc/>
+    [StringLength(128)]
+    public string Calendar { get; set; }
+
+    /// <inheritdoc/>
     public Dictionary<string, object> Attributes { get; set; }
 
     /// <summary>Initializes a new instance</summary>

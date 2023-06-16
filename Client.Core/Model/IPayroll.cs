@@ -23,9 +23,6 @@ public interface IPayroll : IModel, IAttributeObject, IKeyEquatable<IPayroll>
     /// <summary>The division name (client only)</summary>
     string DivisionName { get; set; }
 
-    /// <summary>The calendar calculation mode</summary>
-    CalendarCalculationMode CalendarCalculationMode { get; set; }
-
     /// <summary>The country name (client only)</summary>
     Country? CountryName { get; set; }
 

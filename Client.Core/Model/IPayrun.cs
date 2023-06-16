@@ -62,9 +62,6 @@ public interface IPayrun : IModel, IKeyEquatable<IPayrun>
     /// <summary>The payrun retro time type</summary>
     RetroTimeType RetroTimeType { get; set; }
 
-    /// <summary>The payrun calendar</summary>
-    CalendarConfiguration Calendar { get; set; }
-
     /// <summary>The payrun parameters</summary>
     List<PayrunParameter> PayrunParameters { get; set; }
 }

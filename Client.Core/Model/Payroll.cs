@@ -27,9 +27,6 @@ public class Payroll : Model, IPayroll, INameObject
     public string DivisionName { get; set; }
 
     /// <inheritdoc/>
-    public CalendarCalculationMode CalendarCalculationMode { get; set; }
-
-    /// <inheritdoc/>
     public Country? CountryName { get; set; }
 
     /// <inheritdoc/>

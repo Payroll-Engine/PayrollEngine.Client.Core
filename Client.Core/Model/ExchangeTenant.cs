@@ -9,6 +9,9 @@ public class ExchangeTenant : Tenant, IExchangeTenant
     public List<User> Users { get; set; }
 
     /// <inheritdoc/>
+    public List<Calendar> Calendars { get; set; }
+
+    /// <inheritdoc/>
     public List<Division> Divisions { get; set; }
 
     /// <inheritdoc/>
@@ -78,6 +81,13 @@ public class ExchangeTenant : Tenant, IExchangeTenant
         {
             Users ??= new();
             Users.AddRange(source.Users);
+        }
+
+        // calendars
+        if (source.Calendars != null)
+        {
+            Calendars ??= new();
+            Calendars.AddRange(source.Calendars);
         }
 
         // divisions

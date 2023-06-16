@@ -22,4 +22,7 @@ public interface IEmployee : IModel, IAttributeObject, IKeyEquatable<IEmployee>
 
     /// <summary>The culture including the calendar, fallback is the division culture</summary>
     string Culture { get; set; }
+
+    /// <summary>The employee calendar, fallback is the division calendar</summary>
+    string Calendar { get; set; }
 }

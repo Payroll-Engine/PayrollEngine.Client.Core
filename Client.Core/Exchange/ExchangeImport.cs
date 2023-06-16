@@ -107,6 +107,15 @@ public sealed class ExchangeImport : ExchangeImportVisitor
     }
 
     /// <summary><inheritdoc/></summary>
+    protected override async Task SetupCalendarAsync(IExchangeTenant tenant, ICalendar calendar, ICalendar targetCalendar)
+    {
+        await base.SetupCalendarAsync(tenant, calendar, targetCalendar);
+
+        // upsert object
+        await UpsertObjectAsync(TenantApiEndpoints.CalendarsUrl(tenant.Id), calendar, targetCalendar);
+    }
+
+    /// <summary><inheritdoc/></summary>
     protected override async Task SetupDivisionAsync(IExchangeTenant tenant, IDivision division, IDivision targetDivision)
     {
         await base.SetupDivisionAsync(tenant, division, targetDivision);

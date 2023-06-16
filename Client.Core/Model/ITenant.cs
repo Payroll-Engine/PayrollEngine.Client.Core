@@ -10,5 +10,5 @@ public interface ITenant : IModel, IAttributeObject, IKeyEquatable<ITenant>
     string Culture { get; set; }
 
     /// <summary>The tenant calendar, fallback is the default calendar</summary>
-    CalendarConfiguration Calendar { get; set; }
+    string Calendar { get; set; }
 }
