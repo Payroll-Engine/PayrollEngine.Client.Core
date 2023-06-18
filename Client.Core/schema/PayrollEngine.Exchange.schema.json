@@ -499,7 +499,7 @@
             "Timeless",
             "Moment",
             "Period",
-            "ScaledPeriod"
+            "CalendarPeriod"
           ]
         },
         "timeUnit": {
