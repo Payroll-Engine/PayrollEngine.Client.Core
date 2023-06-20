@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using PayrollEngine.Serialization;
 using JsonSerializer = System.Text.Json.JsonSerializer;
@@ -10,7 +9,6 @@ namespace PayrollEngine.Client.Model;
 public class LookupValue : Model, ILookupValue
 {
     /// <inheritdoc/>
-    [Required]
     public string Key { get; set; }
 
     /// <summary>The lookup key values (client only)</summary>
@@ -27,7 +25,6 @@ public class LookupValue : Model, ILookupValue
     }
 
     /// <inheritdoc/>
-    [Required]
     public string Value { get; set; }
 
     /// <summary>The lookup value object</summary>
