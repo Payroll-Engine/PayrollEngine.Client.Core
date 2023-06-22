@@ -194,7 +194,7 @@ public interface IPayrollService : ICrudService<IPayroll, TenantServiceContext, 
     /// <param name="regulationDate">The regulation date (default: UTC now)</param>
     /// <param name="evaluationDate">The evaluation date (default: UTC now)</param>
     /// <param name="language">The content language</param>
-    /// <returns>The lookup values</returns>
+    /// <returns>The lookup data</returns>
     Task<List<TLookupData>> GetLookupDataAsync<TLookupData>(PayrollServiceContext context, IEnumerable<string> lookupNames,
         DateTime? regulationDate = null, DateTime? evaluationDate = null, Language? language = null)
         where TLookupData : class, ILookupData;
@@ -218,20 +218,20 @@ public interface IPayrollService : ICrudService<IPayroll, TenantServiceContext, 
     /// <param name="regulationDate">The regulation date (default: UTC now)</param>
     /// <param name="evaluationDate">The evaluation date (default: UTC now)</param>
     /// <param name="language">The language</param>
-    /// <returns>The lookup value</returns>
+    /// <returns>The lookup value data</returns>
     Task<LookupValueData> GetLookupValueDataAsync(PayrollServiceContext context, string lookupName, string lookupKey = null,
         decimal? rangeValue = null, DateTime? regulationDate = null, DateTime? evaluationDate = null, Language? language = null);
 
-    /// <summary>Get payroll reports</summary>
+    /// <summary>Get payroll report sets</summary>
     /// <param name="context">The service context</param>
     /// <param name="reportNames">The report names filter (default is all)</param>
     /// <param name="overrideType">The override type filter (default: active)</param>
     /// <param name="regulationDate">The regulation date (default: UTC now)</param>
     /// <param name="evaluationDate">Creation date filter (default: UTC now)</param>
-    /// <returns>Payroll lookups</returns>
-    Task<List<TReport>> GetReportsAsync<TReport>(PayrollServiceContext context, IEnumerable<string> reportNames = null,
+    /// <returns>Payroll report sets</returns>
+    Task<List<TReportSet>> GetReportsAsync<TReportSet>(PayrollServiceContext context, IEnumerable<string> reportNames = null,
         OverrideType? overrideType = null, DateTime? regulationDate = null, DateTime? evaluationDate = null)
-        where TReport : class, IReport;
+        where TReportSet : class, IReportSet;
 
     /// <summary>Get payroll report parameters</summary>
     /// <param name="context">The service context</param>

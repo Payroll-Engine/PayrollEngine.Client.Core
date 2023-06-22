@@ -485,8 +485,8 @@ public class PayrollService : Service, IPayrollService
     }
 
     /// <inheritdoc/>
-    public virtual async Task<List<TReport>> GetReportsAsync<TReport>(PayrollServiceContext context, IEnumerable<string> reportNames = null,
-        OverrideType? overrideType = null, DateTime? regulationDate = null, DateTime? evaluationDate = null) where TReport : class, IReport
+    public virtual async Task<List<TReportSet>> GetReportsAsync<TReportSet>(PayrollServiceContext context, IEnumerable<string> reportNames = null,
+        OverrideType? overrideType = null, DateTime? regulationDate = null, DateTime? evaluationDate = null) where TReportSet : class, IReportSet
     {
         if (context == null)
         {
@@ -498,7 +498,7 @@ public class PayrollService : Service, IPayrollService
             .AddQueryString(nameof(overrideType), overrideType)
             .AddQueryString(nameof(regulationDate), regulationDate)
             .AddQueryString(nameof(evaluationDate), evaluationDate);
-        return await HttpClient.GetCollectionAsync<TReport>(uri);
+        return await HttpClient.GetCollectionAsync<TReportSet>(uri);
     }
 
     /// <inheritdoc/>

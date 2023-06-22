@@ -29,6 +29,13 @@ public class ReportSet : Report, IReportSet
         CopyTool.CopyProperties(copySource, this);
     }
 
+    /// <summary>Initializes a new instance from a copy</summary>
+    /// <param name="copySource">The copy source</param>
+    public ReportSet(Report copySource) :
+        base(copySource)
+    {
+    }
+
     /// <inheritdoc/>
     public virtual bool Equals(IReportSet compare) =>
         CompareTool.EqualProperties(this, compare);

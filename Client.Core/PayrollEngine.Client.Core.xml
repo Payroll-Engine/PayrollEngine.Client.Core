@@ -6863,6 +6863,10 @@
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
+        <member name="M:PayrollEngine.Client.Model.ReportSet.#ctor(PayrollEngine.Client.Model.Report)">
+            <summary>Initializes a new instance from a copy</summary>
+            <param name="copySource">The copy source</param>
+        </member>
         <member name="M:PayrollEngine.Client.Model.ReportSet.Equals(PayrollEngine.Client.Model.IReportSet)">
             <inheritdoc/>
         </member>
@@ -11285,7 +11289,7 @@
             <param name="regulationDate">The regulation date (default: UTC now)</param>
             <param name="evaluationDate">The evaluation date (default: UTC now)</param>
             <param name="language">The content language</param>
-            <returns>The lookup values</returns>
+            <returns>The lookup data</returns>
         </member>
         <member name="M:PayrollEngine.Client.Service.IPayrollService.GetLookupValuesAsync``1(PayrollEngine.Client.Service.PayrollServiceContext,System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
             <summary>Get payroll lookup values</summary>
@@ -11305,16 +11309,16 @@
             <param name="regulationDate">The regulation date (default: UTC now)</param>
             <param name="evaluationDate">The evaluation date (default: UTC now)</param>
             <param name="language">The language</param>
-            <returns>The lookup value</returns>
+            <returns>The lookup value data</returns>
         </member>
         <member name="M:PayrollEngine.Client.Service.IPayrollService.GetReportsAsync``1(PayrollEngine.Client.Service.PayrollServiceContext,System.Collections.Generic.IEnumerable{System.String},System.Nullable{PayrollEngine.OverrideType},System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
-            <summary>Get payroll reports</summary>
+            <summary>Get payroll report sets</summary>
             <param name="context">The service context</param>
             <param name="reportNames">The report names filter (default is all)</param>
             <param name="overrideType">The override type filter (default: active)</param>
             <param name="regulationDate">The regulation date (default: UTC now)</param>
             <param name="evaluationDate">Creation date filter (default: UTC now)</param>
-            <returns>Payroll lookups</returns>
+            <returns>Payroll report sets</returns>
         </member>
         <member name="M:PayrollEngine.Client.Service.IPayrollService.GetReportParametersAsync``1(PayrollEngine.Client.Service.PayrollServiceContext,System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
             <summary>Get payroll report parameters</summary>
