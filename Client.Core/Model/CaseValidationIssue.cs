@@ -15,7 +15,6 @@ public class CaseValidationIssue : IEquatable<CaseValidationIssue>
     public int Number { get; set; }
 
     /// <summary>Gets the name of the case</summary>
-    [Required]
     [StringLength(128)]
     public string CaseName { get; set; }
 
@@ -64,8 +63,7 @@ public class CaseValidationIssue : IEquatable<CaseValidationIssue>
     /// <summary>The localized target case slots</summary>
     public Dictionary<string, string> TargetCaseSlotLocalizations { get; set; }
 
-    /// <summary>Gets the validation message</summary>
-    [Required]
+    /// <summary>The validation message</summary>
     public string Message { get; set; }
 
     /// <summary>Initializes a new instance</summary>

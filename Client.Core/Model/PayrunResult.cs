@@ -11,7 +11,6 @@ public class PayrunResult : Model, IPayrunResult, INameObject
     public int PayrollResultId { get; set; }
 
     /// <inheritdoc/>
-    [Required]
     public string Source { get; set; }
 
     /// <summary>The payrun result name</summary>
@@ -25,7 +24,6 @@ public class PayrunResult : Model, IPayrunResult, INameObject
     public string Slot { get; set; }
 
     /// <inheritdoc/>
-    [Required]
     public ValueType ValueType { get; set; }
 
     /// <inheritdoc/>

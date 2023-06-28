@@ -49,6 +49,9 @@ public interface ICaseChange : IModel, IEquatable<ICaseChange>
     /// <summary>The case values</summary>
     List<CaseValue> Values { get; set; }
 
+    /// <summary>The ignored case values</summary>
+    List<CaseValue> IgnoredValues { get; set; }
+
     /// <summary>The case validation issues</summary>
     List<CaseValidationIssue> Issues { get; set; }
 }

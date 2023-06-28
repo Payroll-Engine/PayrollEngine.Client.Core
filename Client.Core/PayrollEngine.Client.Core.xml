@@ -2196,6 +2196,9 @@
         <member name="P:PayrollEngine.Client.Model.CaseChange.Values">
             <inheritdoc/>
         </member>
+        <member name="P:PayrollEngine.Client.Model.CaseChange.IgnoredValues">
+            <inheritdoc/>
+        </member>
         <member name="P:PayrollEngine.Client.Model.CaseChange.Issues">
             <inheritdoc/>
         </member>
@@ -2877,7 +2880,7 @@
             <summary>The localized target case slots</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.CaseValidationIssue.Message">
-            <summary>Gets the validation message</summary>
+            <summary>The validation message</summary>
         </member>
         <member name="M:PayrollEngine.Client.Model.CaseValidationIssue.#ctor">
             <summary>Initializes a new instance</summary>
@@ -3686,6 +3689,9 @@
         </member>
         <member name="P:PayrollEngine.Client.Model.ICaseChange.Values">
             <summary>The case values</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.ICaseChange.IgnoredValues">
+            <summary>The ignored case values</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.ICaseChange.Issues">
             <summary>The case validation issues</summary>

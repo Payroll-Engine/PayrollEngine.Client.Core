@@ -49,6 +49,9 @@ public class CaseChange : Model, ICaseChange
     public List<CaseValue> Values { get; set; }
 
     /// <inheritdoc/>
+    public List<CaseValue> IgnoredValues { get; set; }
+
+    /// <inheritdoc/>
     public List<CaseValidationIssue> Issues { get; set; }
 
     /// <summary>Initializes a new instance</summary>
@@ -67,7 +70,7 @@ public class CaseChange : Model, ICaseChange
     /// <inheritdoc/>
     public virtual bool Equals(ICaseChange compare) =>
         CompareTool.EqualProperties(this, compare);
-    
+
     /// <inheritdoc/>
     public override string GetUiString() => ValidationCaseName;
 }
