@@ -21,9 +21,6 @@ public class Employee : Model, IEmployee, IIdentifierObject
     public string LastName { get; set; }
 
     /// <inheritdoc/>
-    public Language Language { get; set; }
-
-    /// <inheritdoc/>
     public List<string> Divisions { get; set; }
 
     /// <inheritdoc/>

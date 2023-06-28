@@ -19,8 +19,8 @@ public class ReportResponse : IEquatable<ReportResponse>
     /// <summary>The report name</summary>
     public string ReportName { get; set; }
 
-    /// <summary>The report language</summary>
-    public Language Language { get; set; }
+    /// <summary>The report culture</summary>
+    public string Culture { get; set; }
 
     /// <summary>The report user identifier</summary>
     public string User { get; set; }

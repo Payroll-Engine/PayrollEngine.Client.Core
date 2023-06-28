@@ -1,6 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
-using PayrollEngine.Serialization;
 
 namespace PayrollEngine.Client.Model;
 
@@ -13,8 +11,7 @@ public class LookupData : ILookupData
     public string Name { get; set; }
 
     /// <inheritdoc/>
-    [JsonConverter(typeof(StringNullableEnumConverter<Language?>))]
-    public Language? Language { get; set; }
+    public string Culture { get; set; }
 
     /// <inheritdoc/>
     [Required]

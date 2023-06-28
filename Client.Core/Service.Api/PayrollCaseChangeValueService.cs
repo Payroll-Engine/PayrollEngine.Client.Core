@@ -82,7 +82,7 @@ public class PayrollCaseChangeValueService : Service, IPayrollCaseChangeValueSer
             .AddQueryString(nameof(query.EmployeeId), query.EmployeeId)
             .AddQueryString(nameof(query.ClusterSetName), query.ClusterSetName)
             .AddQueryString(nameof(query.ExcludeGlobal), query.ExcludeGlobal)
-            .AddQueryString(nameof(query.Language), query.Language)
+            .AddQueryString(nameof(query.Culture), query.Culture)
             .AddQueryString(nameof(query.RegulationDate), query.RegulationDate)
             .AddQueryString(nameof(query.EvaluationDate), query.EvaluationDate);
         return uri;

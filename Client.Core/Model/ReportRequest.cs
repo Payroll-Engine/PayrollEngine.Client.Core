@@ -6,8 +6,8 @@ namespace PayrollEngine.Client.Model;
 /// <summary>The report request client object</summary>
 public class ReportRequest : IEquatable<ReportRequest>
 {
-    /// <summary>The report language</summary>
-    public Language Language { get; set; }
+    /// <summary>The report culture</summary>
+    public string Culture { get; set; }
 
     /// <summary>The report user id</summary>
     public int UserId { get; set; }

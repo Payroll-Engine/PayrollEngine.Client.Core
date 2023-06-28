@@ -8,8 +8,8 @@ public interface ILookupData : IEquatable<ILookupData>
     /// <summary>The lookup name</summary>
     string Name { get; set; }
 
-    /// <summary>The language of the values</summary>
-    Language? Language { get; set; }
+    /// <summary>The culture of the values</summary>
+    string Culture { get; set; }
 
     /// <summary>The lookup values</summary>
     LookupValueData[] Values { get; set; }

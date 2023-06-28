@@ -30,9 +30,6 @@ public class User : Model, IUser, IIdentifierObject
     public string Culture { get; set; }
 
     /// <inheritdoc/>
-    public Language Language { get; set; }
-
-    /// <inheritdoc/>
     public UserType UserType { get; set; }
 
     /// <inheritdoc/>

@@ -13,7 +13,7 @@ public class ReportTemplate : Model, IReportTemplate
 
     /// <inheritdoc/>
     [Required]
-    public Language Language { get; set; }
+    public string Culture { get; set; }
 
     /// <inheritdoc/>
     public string Content { get; set; }
@@ -58,5 +58,5 @@ public class ReportTemplate : Model, IReportTemplate
         CompareTool.EqualProperties(this, compare);
 
     /// <inheritdoc/>
-    public override string GetUiString() => Language.ToString();
+    public override string GetUiString() => Culture;
 }

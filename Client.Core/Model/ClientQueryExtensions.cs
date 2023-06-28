@@ -41,7 +41,7 @@ public static class ClientQueryExtensions
         {
             uri = QueryExtensions.AppendQueryString(query, uri)
                 .AddQueryString(nameof(query.DivisionId), query.DivisionId)
-                .AddQueryString(nameof(query.Language), query.Language)
+                .AddQueryString(nameof(query.Culture), query.Culture)
                 .AddQueryString(nameof(query.ExcludeGlobal), query.ExcludeGlobal);
         }
         return uri;
@@ -67,7 +67,7 @@ public static class ClientQueryExtensions
                 .AddQueryString(nameof(query.EvaluationDate), query.EvaluationDate)
 
                 .AddQueryString(nameof(query.DivisionId), query.DivisionId)
-                .AddQueryString(nameof(query.Language), query.Language)
+                .AddQueryString(nameof(query.Culture), query.Culture)
                 .AddQueryString(nameof(query.ExcludeGlobal), query.ExcludeGlobal);
         }
         return uri;
@@ -96,10 +96,10 @@ public static class ClientQueryExtensions
     /// <returns>The combined result</returns>
     public static string AppendQueryString(this ReportTemplateQuery query, string uri)
     {
-        if (query != null && query.Language.HasValue)
+        if (query != null && !string.IsNullOrWhiteSpace(query.Culture))
         {
             uri = QueryExtensions.AppendQueryString(query, uri)
-                .AddQueryString(nameof(query.Language), query.Language);
+                .AddQueryString(nameof(query.Culture), query.Culture);
         }
         return uri;
     }

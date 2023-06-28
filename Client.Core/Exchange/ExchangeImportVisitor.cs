@@ -900,7 +900,7 @@ public abstract class ExchangeImportVisitor : Visitor
 
         // get report template
         var target = TargetLoad ? (await new ReportTemplateService(HttpClient).QueryAsync<ReportTemplate>(
-                new(tenant.Id, regulation.Id, report.Id), new() { Language = template.Language }))
+                new(tenant.Id, regulation.Id, report.Id), new() { Culture = template.Culture }))
             .FirstOrDefault() : null;
 
         // setup report template

@@ -42,13 +42,13 @@ public interface IPayrollService : ICrudService<IPayroll, TenantServiceContext, 
     /// <param name="employeeId">The employee id</param>
     /// <param name="caseSlot">The case slot</param>
     /// <param name="clusterSetName">The cluster set name</param>
-    /// <param name="language">The language</param>
+    /// <param name="culture">The culture</param>
     /// <param name="regulationDate">The regulation date (default: UTC now)</param>
     /// <param name="evaluationDate">Creation date filter (default: UTC now)</param>
     /// <returns>Available derived cases</returns>
     Task<List<TCase>> GetAvailableCasesAsync<TCase>(PayrollServiceContext context, int userId, CaseType caseType,
         IEnumerable<string> caseNames = null, int? employeeId = null, string caseSlot = null, string clusterSetName = null,
-        Language? language = null, DateTime? regulationDate = null, DateTime? evaluationDate = null) where TCase : class, ICase;
+        string culture = null, DateTime? regulationDate = null, DateTime? evaluationDate = null) where TCase : class, ICase;
 
     /// <summary>Build case with fields and related cases</summary>
     /// <param name="context">The service context</param>
@@ -56,13 +56,13 @@ public interface IPayrollService : ICrudService<IPayroll, TenantServiceContext, 
     /// <param name="userId">The user id</param>
     /// <param name="employeeId">The employee id</param>
     /// <param name="clusterSetName">The cluster set name</param>
-    /// <param name="language">The language</param>
+    /// <param name="culture">The culture</param>
     /// <param name="regulationDate">The regulation date (default: UTC now)</param>
     /// <param name="evaluationDate">Creation date filter (default: UTC now)</param>
     /// <param name="caseChangeSetup">The case change setup (optional)</param>
     /// <returns>The created case set</returns>
     Task<TCaseSet> BuildCaseAsync<TCaseSet>(PayrollServiceContext context, string caseName, int userId,
-        int? employeeId = null, string clusterSetName = null, Language? language = null,
+        int? employeeId = null, string clusterSetName = null, string culture = null,
         DateTime? regulationDate = null, DateTime? evaluationDate = null, ICaseChangeSetup caseChangeSetup = null)
         where TCaseSet : class, ICaseSet;
 
@@ -193,10 +193,10 @@ public interface IPayrollService : ICrudService<IPayroll, TenantServiceContext, 
     /// <param name="lookupNames">The lookup names</param>
     /// <param name="regulationDate">The regulation date (default: UTC now)</param>
     /// <param name="evaluationDate">The evaluation date (default: UTC now)</param>
-    /// <param name="language">The content language</param>
+    /// <param name="culture">The content culture</param>
     /// <returns>The lookup data</returns>
     Task<List<TLookupData>> GetLookupDataAsync<TLookupData>(PayrollServiceContext context, IEnumerable<string> lookupNames,
-        DateTime? regulationDate = null, DateTime? evaluationDate = null, Language? language = null)
+        DateTime? regulationDate = null, DateTime? evaluationDate = null, string culture = null)
         where TLookupData : class, ILookupData;
 
     /// <summary>Get payroll lookup values</summary>
@@ -217,10 +217,10 @@ public interface IPayrollService : ICrudService<IPayroll, TenantServiceContext, 
     /// <param name="rangeValue">The lookup range value</param>
     /// <param name="regulationDate">The regulation date (default: UTC now)</param>
     /// <param name="evaluationDate">The evaluation date (default: UTC now)</param>
-    /// <param name="language">The language</param>
+    /// <param name="culture">The culture</param>
     /// <returns>The lookup value data</returns>
     Task<LookupValueData> GetLookupValueDataAsync(PayrollServiceContext context, string lookupName, string lookupKey = null,
-        decimal? rangeValue = null, DateTime? regulationDate = null, DateTime? evaluationDate = null, Language? language = null);
+        decimal? rangeValue = null, DateTime? regulationDate = null, DateTime? evaluationDate = null, string culture = null);
 
     /// <summary>Get payroll report sets</summary>
     /// <param name="context">The service context</param>
@@ -246,12 +246,12 @@ public interface IPayrollService : ICrudService<IPayroll, TenantServiceContext, 
     /// <summary>Get payroll report templates</summary>
     /// <param name="context">The service context</param>
     /// <param name="reportNames">The report names</param>
-    /// <param name="language">The report language</param>
+    /// <param name="culture">The report culture</param>
     /// <param name="regulationDate">The regulation date (default: UTC now)</param>
     /// <param name="evaluationDate">The evaluation date (default: UTC now)</param>
     /// <returns>Payroll report templates</returns>
     Task<List<TReportTemplate>> GetReportTemplatesAsync<TReportTemplate>(PayrollServiceContext context,
-        IEnumerable<string> reportNames = null, Language? language = null, DateTime? regulationDate = null,
+        IEnumerable<string> reportNames = null, string culture = null, DateTime? regulationDate = null,
         DateTime? evaluationDate = null) where TReportTemplate : class, IReportTemplate;
 
     /// <summary>Get payroll scripts</summary>

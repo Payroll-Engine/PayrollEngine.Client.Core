@@ -76,7 +76,7 @@ public class LookupValueService : Service, ILookupValueService
 
     /// <inheritdoc/>
     public virtual async Task<List<T>> GetLookupValuesDataAsync<T>(LookupServiceContext context,
-        Language? language = null) where T : LookupValueData
+        string culture = null) where T : LookupValueData
     {
         if (context == null)
         {
@@ -84,7 +84,7 @@ public class LookupValueService : Service, ILookupValueService
         }
         var uri = RegulationApiEndpoints.RegulationLookupsValuesDataUrl(context.TenantId, 
                 context.RegulationId, context.LookupId)
-            .AddQueryString(nameof(language), language);
+            .AddQueryString(nameof(culture), culture);
         return await HttpClient.GetCollectionAsync<T>(uri);
     }
 

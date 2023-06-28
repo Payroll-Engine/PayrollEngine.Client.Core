@@ -14,9 +14,6 @@ public interface IEmployee : IModel, IAttributeObject, IKeyEquatable<IEmployee>
     /// <summary>The last name of the employee</summary>
     string LastName { get; set; }
 
-    /// <summary>The employees language</summary>
-    Language Language { get; set; }
-
     /// <summary>Employee division names</summary>
     List<string> Divisions { get; set; }
 

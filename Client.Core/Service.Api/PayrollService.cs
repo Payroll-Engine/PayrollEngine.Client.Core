@@ -161,7 +161,7 @@ public class PayrollService : Service, IPayrollService
     /// <inheritdoc/>
     public virtual async Task<List<TCase>> GetAvailableCasesAsync<TCase>(PayrollServiceContext context, int userId,
         CaseType caseType, IEnumerable<string> caseNames = null, int? employeeId = null, string caseSlot = null,
-        string clusterSetName = null, Language? language = null,
+        string clusterSetName = null, string culture = null,
         DateTime? regulationDate = null, DateTime? evaluationDate = null)
         where TCase : class, ICase
     {
@@ -179,7 +179,7 @@ public class PayrollService : Service, IPayrollService
             .AddQueryString(nameof(caseType), caseType)
             .AddCollectionQueryString(nameof(caseNames), caseNames)
             .AddQueryString(nameof(employeeId), employeeId)
-            .AddQueryString(nameof(language), language)
+            .AddQueryString(nameof(culture), culture)
             .AddQueryString(nameof(caseSlot), caseSlot)
             .AddQueryString(nameof(clusterSetName), clusterSetName)
             .AddQueryString(nameof(regulationDate), regulationDate)
@@ -189,7 +189,7 @@ public class PayrollService : Service, IPayrollService
 
     /// <inheritdoc/>
     public virtual async Task<TCaseSet> BuildCaseAsync<TCaseSet>(PayrollServiceContext context, string caseName,
-        int userId, int? employeeId = null, string clusterSetName = null, Language? language = null,
+        int userId, int? employeeId = null, string clusterSetName = null, string culture = null,
         DateTime? regulationDate = null, DateTime? evaluationDate = null, ICaseChangeSetup caseChangeSetup = null)
         where TCaseSet : class, ICaseSet
     {
@@ -209,7 +209,7 @@ public class PayrollService : Service, IPayrollService
         var url = PayrollApiEndpoints.PayrollCaseBuildUrl(context.TenantId, context.PayrollId, caseName)
             .AddQueryString(nameof(userId), userId)
             .AddQueryString(nameof(employeeId), employeeId)
-            .AddQueryString(nameof(language), language)
+            .AddQueryString(nameof(culture), culture)
             .AddQueryString(nameof(clusterSetName), clusterSetName)
             .AddQueryString(nameof(regulationDate), regulationDate)
             .AddQueryString(nameof(evaluationDate), evaluationDate);
@@ -423,7 +423,7 @@ public class PayrollService : Service, IPayrollService
 
     /// <inheritdoc/>
     public virtual async Task<List<TLookupData>> GetLookupDataAsync<TLookupData>(PayrollServiceContext context,
-        IEnumerable<string> lookupNames, DateTime? regulationDate = null, DateTime? evaluationDate = null, Language? language = null)
+        IEnumerable<string> lookupNames, DateTime? regulationDate = null, DateTime? evaluationDate = null, string culture = null)
         where TLookupData : class, ILookupData
     {
         if (context == null)
@@ -439,7 +439,7 @@ public class PayrollService : Service, IPayrollService
             .AddCollectionQueryString(nameof(lookupNames), lookupNames)
             .AddQueryString(nameof(regulationDate), regulationDate)
             .AddQueryString(nameof(evaluationDate), evaluationDate)
-            .AddQueryString(nameof(language), language);
+            .AddQueryString(nameof(culture), culture);
         return await HttpClient.GetCollectionAsync<TLookupData>(uri);
     }
 
@@ -464,7 +464,7 @@ public class PayrollService : Service, IPayrollService
     /// <inheritdoc/>
     public virtual async Task<LookupValueData> GetLookupValueDataAsync(PayrollServiceContext context,
         string lookupName, string lookupKey = null, decimal? rangeValue = null,
-        DateTime? regulationDate = null, DateTime? evaluationDate = null, Language? language = null)
+        DateTime? regulationDate = null, DateTime? evaluationDate = null, string culture = null)
     {
         if (context == null)
         {
@@ -480,7 +480,7 @@ public class PayrollService : Service, IPayrollService
             .AddQueryString(nameof(rangeValue), rangeValue)
             .AddQueryString(nameof(regulationDate), regulationDate)
             .AddQueryString(nameof(evaluationDate), evaluationDate)
-            .AddQueryString(nameof(language), language);
+            .AddQueryString(nameof(culture), culture);
         return await HttpClient.GetAsync<LookupValueData>(uri);
     }
 
@@ -520,7 +520,7 @@ public class PayrollService : Service, IPayrollService
 
     /// <inheritdoc/>
     public virtual async Task<List<TReportTemplate>> GetReportTemplatesAsync<TReportTemplate>(PayrollServiceContext context,
-        IEnumerable<string> reportNames, Language? language = null, DateTime? regulationDate = null, DateTime? evaluationDate = null)
+        IEnumerable<string> reportNames, string culture = null, DateTime? regulationDate = null, DateTime? evaluationDate = null)
         where TReportTemplate : class, IReportTemplate
     {
         if (context == null)
@@ -530,7 +530,7 @@ public class PayrollService : Service, IPayrollService
 
         var uri = PayrollApiEndpoints.PayrollReportTemplatesUrl(context.TenantId, context.PayrollId)
             .AddCollectionQueryString(nameof(reportNames), reportNames)
-            .AddQueryString(nameof(language), language)
+            .AddQueryString(nameof(culture), culture)
             .AddQueryString(nameof(regulationDate), regulationDate)
             .AddQueryString(nameof(evaluationDate), evaluationDate);
         return await HttpClient.GetCollectionAsync<TReportTemplate>(uri);

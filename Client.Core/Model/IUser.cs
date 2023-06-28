@@ -18,9 +18,6 @@ public interface IUser : IModel, IAttributeObject, IKeyEquatable<IUser>
     /// <summary>The users culture</summary>
     string Culture { get; set; }
 
-    /// <summary>The users language</summary>
-    Language Language { get; set; }
-
     /// <summary>The user type</summary>
     UserType UserType { get; set; }
 }

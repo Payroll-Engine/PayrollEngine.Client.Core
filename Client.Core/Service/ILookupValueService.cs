@@ -11,8 +11,8 @@ public interface ILookupValueService : ICrudService<ILookupValue, LookupServiceC
     /// Get lookup values data
     /// </summary>
     /// <param name="context">The service context</param>
-    /// <param name="language">The language</param>
+    /// <param name="culture">The culture</param>
     /// <returns>The lookup value data</returns>
     Task<List<T>> GetLookupValuesDataAsync<T>(LookupServiceContext context,
-        Language? language = null) where T : LookupValueData;
+        string culture = null) where T : LookupValueData;
 }

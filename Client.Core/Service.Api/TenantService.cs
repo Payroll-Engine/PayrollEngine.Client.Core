@@ -150,7 +150,7 @@ public class TenantService : Service, ITenantService
 
     /// <inheritdoc/>
     public virtual async Task<DataTable> ExecuteReportQueryAsync(int tenantId, string methodName,
-        Language? language, Dictionary<string, string> parameters = null)
+        string culture, Dictionary<string, string> parameters = null)
     {
         if (tenantId <= 0)
         {
@@ -163,7 +163,7 @@ public class TenantService : Service, ITenantService
 
         var uri = TenantApiEndpoints.TenantQueriesUrl(tenantId)
             .AddQueryString(nameof(methodName), methodName)
-            .AddQueryString(nameof(language), language);
+            .AddQueryString(nameof(culture), culture);
         // use of POST instead of GET according RFC7231
         // https://datatracker.ietf.org/doc/html/rfc7231#section-4.3.1
         return parameters != null && parameters.Any() ?

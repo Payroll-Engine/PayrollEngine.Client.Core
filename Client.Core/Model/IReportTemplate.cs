@@ -8,8 +8,8 @@ public interface IReportTemplate : IModel, IAttributeObject, IEquatable<IReportT
     /// <summary>The payroll report template name</summary>
     public string Name { get; set; }
 
-    /// <summary>The report language</summary>
-    Language Language { get; set; }
+    /// <summary>The report culture</summary>
+    string Culture { get; set; }
 
     /// <summary>The report content (client owned)</summary>
     string Content { get; set; }

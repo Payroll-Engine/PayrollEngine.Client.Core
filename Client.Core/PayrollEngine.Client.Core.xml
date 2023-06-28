@@ -2255,9 +2255,9 @@
             The division id
             </summary>
         </member>
-        <member name="P:PayrollEngine.Client.Model.CaseChangeQuery.Language">
+        <member name="P:PayrollEngine.Client.Model.CaseChangeQuery.Culture">
             <summary>
-            The language
+            The culture
             </summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.CaseChangeQuery.ExcludeGlobal">
@@ -3362,9 +3362,6 @@
         <member name="P:PayrollEngine.Client.Model.Employee.LastName">
             <inheritdoc/>
         </member>
-        <member name="P:PayrollEngine.Client.Model.Employee.Language">
-            <inheritdoc/>
-        </member>
         <member name="P:PayrollEngine.Client.Model.Employee.Divisions">
             <inheritdoc/>
         </member>
@@ -4204,9 +4201,6 @@
         <member name="P:PayrollEngine.Client.Model.IEmployee.LastName">
             <summary>The last name of the employee</summary>
         </member>
-        <member name="P:PayrollEngine.Client.Model.IEmployee.Language">
-            <summary>The employees language</summary>
-        </member>
         <member name="P:PayrollEngine.Client.Model.IEmployee.Divisions">
             <summary>Employee division names</summary>
         </member>
@@ -4359,8 +4353,8 @@
         <member name="P:PayrollEngine.Client.Model.ILookupData.Name">
             <summary>The lookup name</summary>
         </member>
-        <member name="P:PayrollEngine.Client.Model.ILookupData.Language">
-            <summary>The language of the values</summary>
+        <member name="P:PayrollEngine.Client.Model.ILookupData.Culture">
+            <summary>The culture of the values</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.ILookupData.Values">
             <summary>The lookup values</summary>
@@ -5146,8 +5140,8 @@
         <member name="P:PayrollEngine.Client.Model.IReportTemplate.Name">
             <summary>The payroll report template name</summary>
         </member>
-        <member name="P:PayrollEngine.Client.Model.IReportTemplate.Language">
-            <summary>The report language</summary>
+        <member name="P:PayrollEngine.Client.Model.IReportTemplate.Culture">
+            <summary>The report culture</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.IReportTemplate.Content">
             <summary>The report content (client owned)</summary>
@@ -5259,9 +5253,6 @@
         </member>
         <member name="P:PayrollEngine.Client.Model.IUser.Culture">
             <summary>The users culture</summary>
-        </member>
-        <member name="P:PayrollEngine.Client.Model.IUser.Language">
-            <summary>The users language</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.IUser.UserType">
             <summary>The user type</summary>
@@ -5532,7 +5523,7 @@
         <member name="P:PayrollEngine.Client.Model.LookupData.Name">
             <inheritdoc/>
         </member>
-        <member name="P:PayrollEngine.Client.Model.LookupData.Language">
+        <member name="P:PayrollEngine.Client.Model.LookupData.Culture">
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.LookupData.Values">
@@ -6792,8 +6783,8 @@
         <member name="T:PayrollEngine.Client.Model.ReportRequest">
             <summary>The report request client object</summary>
         </member>
-        <member name="P:PayrollEngine.Client.Model.ReportRequest.Language">
-            <summary>The report language</summary>
+        <member name="P:PayrollEngine.Client.Model.ReportRequest.Culture">
+            <summary>The report culture</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.ReportRequest.UserId">
             <summary>The report user id</summary>
@@ -6829,8 +6820,8 @@
         <member name="P:PayrollEngine.Client.Model.ReportResponse.ReportName">
             <summary>The report name</summary>
         </member>
-        <member name="P:PayrollEngine.Client.Model.ReportResponse.Language">
-            <summary>The report language</summary>
+        <member name="P:PayrollEngine.Client.Model.ReportResponse.Culture">
+            <summary>The report culture</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.ReportResponse.User">
             <summary>The report user identifier</summary>
@@ -6882,7 +6873,7 @@
         <member name="P:PayrollEngine.Client.Model.ReportTemplate.Name">
             <inheritdoc/>
         </member>
-        <member name="P:PayrollEngine.Client.Model.ReportTemplate.Language">
+        <member name="P:PayrollEngine.Client.Model.ReportTemplate.Culture">
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.ReportTemplate.Content">
@@ -6927,9 +6918,9 @@
             Report templates query
             </summary>
         </member>
-        <member name="P:PayrollEngine.Client.Model.ReportTemplateQuery.Language">
+        <member name="P:PayrollEngine.Client.Model.ReportTemplateQuery.Culture">
             <summary>
-            Report language
+            Report culture
             </summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.ReportTemplateQuery.ExcludeContent">
@@ -7123,9 +7114,6 @@
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.User.Culture">
-            <inheritdoc/>
-        </member>
-        <member name="P:PayrollEngine.Client.Model.User.Language">
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.User.UserType">
@@ -9574,7 +9562,7 @@
         <member name="M:PayrollEngine.Client.Service.Api.LookupValueService.GetAsync``1(PayrollEngine.Client.Service.LookupServiceContext,System.Int32)">
             <inheritdoc/>
         </member>
-        <member name="M:PayrollEngine.Client.Service.Api.LookupValueService.GetLookupValuesDataAsync``1(PayrollEngine.Client.Service.LookupServiceContext,System.Nullable{PayrollEngine.Language})">
+        <member name="M:PayrollEngine.Client.Service.Api.LookupValueService.GetLookupValuesDataAsync``1(PayrollEngine.Client.Service.LookupServiceContext,System.String)">
             <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Service.Api.LookupValueService.CreateAsync``1(PayrollEngine.Client.Service.LookupServiceContext,``0)">
@@ -9853,10 +9841,10 @@
         <member name="M:PayrollEngine.Client.Service.Api.PayrollService.DeleteAsync(PayrollEngine.Client.Service.TenantServiceContext,System.Int32)">
             <inheritdoc/>
         </member>
-        <member name="M:PayrollEngine.Client.Service.Api.PayrollService.GetAvailableCasesAsync``1(PayrollEngine.Client.Service.PayrollServiceContext,System.Int32,PayrollEngine.CaseType,System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.String,System.String,System.Nullable{PayrollEngine.Language},System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+        <member name="M:PayrollEngine.Client.Service.Api.PayrollService.GetAvailableCasesAsync``1(PayrollEngine.Client.Service.PayrollServiceContext,System.Int32,PayrollEngine.CaseType,System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.String,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
             <inheritdoc/>
         </member>
-        <member name="M:PayrollEngine.Client.Service.Api.PayrollService.BuildCaseAsync``1(PayrollEngine.Client.Service.PayrollServiceContext,System.String,System.Int32,System.Nullable{System.Int32},System.String,System.Nullable{PayrollEngine.Language},System.Nullable{System.DateTime},System.Nullable{System.DateTime},PayrollEngine.Client.Model.ICaseChangeSetup)">
+        <member name="M:PayrollEngine.Client.Service.Api.PayrollService.BuildCaseAsync``1(PayrollEngine.Client.Service.PayrollServiceContext,System.String,System.Int32,System.Nullable{System.Int32},System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},PayrollEngine.Client.Model.ICaseChangeSetup)">
             <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Service.Api.PayrollService.GetCaseValuesAsync(PayrollEngine.Client.Service.PayrollServiceContext,System.DateTime,System.DateTime,System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.String)">
@@ -9889,13 +9877,13 @@
         <member name="M:PayrollEngine.Client.Service.Api.PayrollService.GetLookupsAsync``1(PayrollEngine.Client.Service.PayrollServiceContext,System.Collections.Generic.IEnumerable{System.String},System.Nullable{PayrollEngine.OverrideType},System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
             <inheritdoc/>
         </member>
-        <member name="M:PayrollEngine.Client.Service.Api.PayrollService.GetLookupDataAsync``1(PayrollEngine.Client.Service.PayrollServiceContext,System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{PayrollEngine.Language})">
+        <member name="M:PayrollEngine.Client.Service.Api.PayrollService.GetLookupDataAsync``1(PayrollEngine.Client.Service.PayrollServiceContext,System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String)">
             <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Service.Api.PayrollService.GetLookupValuesAsync``1(PayrollEngine.Client.Service.PayrollServiceContext,System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
             <inheritdoc/>
         </member>
-        <member name="M:PayrollEngine.Client.Service.Api.PayrollService.GetLookupValueDataAsync(PayrollEngine.Client.Service.PayrollServiceContext,System.String,System.String,System.Nullable{System.Decimal},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{PayrollEngine.Language})">
+        <member name="M:PayrollEngine.Client.Service.Api.PayrollService.GetLookupValueDataAsync(PayrollEngine.Client.Service.PayrollServiceContext,System.String,System.String,System.Nullable{System.Decimal},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String)">
             <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Service.Api.PayrollService.GetReportsAsync``1(PayrollEngine.Client.Service.PayrollServiceContext,System.Collections.Generic.IEnumerable{System.String},System.Nullable{PayrollEngine.OverrideType},System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
@@ -9904,7 +9892,7 @@
         <member name="M:PayrollEngine.Client.Service.Api.PayrollService.GetReportParametersAsync``1(PayrollEngine.Client.Service.PayrollServiceContext,System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
             <inheritdoc/>
         </member>
-        <member name="M:PayrollEngine.Client.Service.Api.PayrollService.GetReportTemplatesAsync``1(PayrollEngine.Client.Service.PayrollServiceContext,System.Collections.Generic.IEnumerable{System.String},System.Nullable{PayrollEngine.Language},System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+        <member name="M:PayrollEngine.Client.Service.Api.PayrollService.GetReportTemplatesAsync``1(PayrollEngine.Client.Service.PayrollServiceContext,System.Collections.Generic.IEnumerable{System.String},System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
             <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Service.Api.PayrollService.GetScriptsAsync``1(PayrollEngine.Client.Service.PayrollServiceContext,System.Collections.Generic.IEnumerable{System.String},System.Nullable{PayrollEngine.OverrideType},System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
@@ -10388,7 +10376,7 @@
         <member name="M:PayrollEngine.Client.Service.Api.TenantService.GetSystemScriptActionsAsync``1(System.Int32,PayrollEngine.FunctionType)">
             <inheritdoc />
         </member>
-        <member name="M:PayrollEngine.Client.Service.Api.TenantService.ExecuteReportQueryAsync(System.Int32,System.String,System.Nullable{PayrollEngine.Language},System.Collections.Generic.Dictionary{System.String,System.String})">
+        <member name="M:PayrollEngine.Client.Service.Api.TenantService.ExecuteReportQueryAsync(System.Int32,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
             <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Service.Api.TenantService.GetSharedRegulationsAsync``1(System.Int32,System.Nullable{System.Int32})">
@@ -10933,12 +10921,12 @@
         <member name="T:PayrollEngine.Client.Service.ILookupValueService">
             <summary>Payroll lookup value service</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Service.ILookupValueService.GetLookupValuesDataAsync``1(PayrollEngine.Client.Service.LookupServiceContext,System.Nullable{PayrollEngine.Language})">
+        <member name="M:PayrollEngine.Client.Service.ILookupValueService.GetLookupValuesDataAsync``1(PayrollEngine.Client.Service.LookupServiceContext,System.String)">
             <summary>
             Get lookup values data
             </summary>
             <param name="context">The service context</param>
-            <param name="language">The language</param>
+            <param name="culture">The culture</param>
             <returns>The lookup value data</returns>
         </member>
         <member name="T:PayrollEngine.Client.Service.INationalCaseChangeService">
@@ -11166,7 +11154,7 @@
             <param name="evaluationDate">Creation date filter (default: UTC now)</param>
             <returns>The payroll regulations, including the shared regulations</returns>
         </member>
-        <member name="M:PayrollEngine.Client.Service.IPayrollService.GetAvailableCasesAsync``1(PayrollEngine.Client.Service.PayrollServiceContext,System.Int32,PayrollEngine.CaseType,System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.String,System.String,System.Nullable{PayrollEngine.Language},System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+        <member name="M:PayrollEngine.Client.Service.IPayrollService.GetAvailableCasesAsync``1(PayrollEngine.Client.Service.PayrollServiceContext,System.Int32,PayrollEngine.CaseType,System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.String,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
             <summary>Get all active and available cases</summary>
             <param name="context">The service context</param>
             <param name="userId">The user id</param>
@@ -11175,19 +11163,19 @@
             <param name="employeeId">The employee id</param>
             <param name="caseSlot">The case slot</param>
             <param name="clusterSetName">The cluster set name</param>
-            <param name="language">The language</param>
+            <param name="culture">The culture</param>
             <param name="regulationDate">The regulation date (default: UTC now)</param>
             <param name="evaluationDate">Creation date filter (default: UTC now)</param>
             <returns>Available derived cases</returns>
         </member>
-        <member name="M:PayrollEngine.Client.Service.IPayrollService.BuildCaseAsync``1(PayrollEngine.Client.Service.PayrollServiceContext,System.String,System.Int32,System.Nullable{System.Int32},System.String,System.Nullable{PayrollEngine.Language},System.Nullable{System.DateTime},System.Nullable{System.DateTime},PayrollEngine.Client.Model.ICaseChangeSetup)">
+        <member name="M:PayrollEngine.Client.Service.IPayrollService.BuildCaseAsync``1(PayrollEngine.Client.Service.PayrollServiceContext,System.String,System.Int32,System.Nullable{System.Int32},System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},PayrollEngine.Client.Model.ICaseChangeSetup)">
             <summary>Build case with fields and related cases</summary>
             <param name="context">The service context</param>
             <param name="caseName">The case name</param>
             <param name="userId">The user id</param>
             <param name="employeeId">The employee id</param>
             <param name="clusterSetName">The cluster set name</param>
-            <param name="language">The language</param>
+            <param name="culture">The culture</param>
             <param name="regulationDate">The regulation date (default: UTC now)</param>
             <param name="evaluationDate">Creation date filter (default: UTC now)</param>
             <param name="caseChangeSetup">The case change setup (optional)</param>
@@ -11288,13 +11276,13 @@
             <param name="evaluationDate">Creation date filter (default: UTC now)</param>
             <returns>Payroll lookups</returns>
         </member>
-        <member name="M:PayrollEngine.Client.Service.IPayrollService.GetLookupDataAsync``1(PayrollEngine.Client.Service.PayrollServiceContext,System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{PayrollEngine.Language})">
+        <member name="M:PayrollEngine.Client.Service.IPayrollService.GetLookupDataAsync``1(PayrollEngine.Client.Service.PayrollServiceContext,System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String)">
             <summary>Get payroll lookup data</summary>
             <param name="context">The service context</param>
             <param name="lookupNames">The lookup names</param>
             <param name="regulationDate">The regulation date (default: UTC now)</param>
             <param name="evaluationDate">The evaluation date (default: UTC now)</param>
-            <param name="language">The content language</param>
+            <param name="culture">The content culture</param>
             <returns>The lookup data</returns>
         </member>
         <member name="M:PayrollEngine.Client.Service.IPayrollService.GetLookupValuesAsync``1(PayrollEngine.Client.Service.PayrollServiceContext,System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
@@ -11306,7 +11294,7 @@
             <param name="evaluationDate">Creation date filter (default: UTC now)</param>
             <returns>Payroll lookup values</returns>
         </member>
-        <member name="M:PayrollEngine.Client.Service.IPayrollService.GetLookupValueDataAsync(PayrollEngine.Client.Service.PayrollServiceContext,System.String,System.String,System.Nullable{System.Decimal},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{PayrollEngine.Language})">
+        <member name="M:PayrollEngine.Client.Service.IPayrollService.GetLookupValueDataAsync(PayrollEngine.Client.Service.PayrollServiceContext,System.String,System.String,System.Nullable{System.Decimal},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String)">
             <summary>Get payroll lookup value data</summary>
             <param name="context">The service context</param>
             <param name="lookupName">The lookup name</param>
@@ -11314,7 +11302,7 @@
             <param name="rangeValue">The lookup range value</param>
             <param name="regulationDate">The regulation date (default: UTC now)</param>
             <param name="evaluationDate">The evaluation date (default: UTC now)</param>
-            <param name="language">The language</param>
+            <param name="culture">The culture</param>
             <returns>The lookup value data</returns>
         </member>
         <member name="M:PayrollEngine.Client.Service.IPayrollService.GetReportsAsync``1(PayrollEngine.Client.Service.PayrollServiceContext,System.Collections.Generic.IEnumerable{System.String},System.Nullable{PayrollEngine.OverrideType},System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
@@ -11334,11 +11322,11 @@
             <param name="evaluationDate">The evaluation date (default: UTC now)</param>
             <returns>Payroll report parameters</returns>
         </member>
-        <member name="M:PayrollEngine.Client.Service.IPayrollService.GetReportTemplatesAsync``1(PayrollEngine.Client.Service.PayrollServiceContext,System.Collections.Generic.IEnumerable{System.String},System.Nullable{PayrollEngine.Language},System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+        <member name="M:PayrollEngine.Client.Service.IPayrollService.GetReportTemplatesAsync``1(PayrollEngine.Client.Service.PayrollServiceContext,System.Collections.Generic.IEnumerable{System.String},System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
             <summary>Get payroll report templates</summary>
             <param name="context">The service context</param>
             <param name="reportNames">The report names</param>
-            <param name="language">The report language</param>
+            <param name="culture">The report culture</param>
             <param name="regulationDate">The regulation date (default: UTC now)</param>
             <param name="evaluationDate">The evaluation date (default: UTC now)</param>
             <returns>Payroll report templates</returns>
@@ -11576,11 +11564,11 @@
             <param name="functionType">The function type</param>
             <returns>The tenant shared regulations</returns>
         </member>
-        <member name="M:PayrollEngine.Client.Service.ITenantService.ExecuteReportQueryAsync(System.Int32,System.String,System.Nullable{PayrollEngine.Language},System.Collections.Generic.Dictionary{System.String,System.String})">
+        <member name="M:PayrollEngine.Client.Service.ITenantService.ExecuteReportQueryAsync(System.Int32,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
             <summary>Execute a report query</summary>
             <param name="tenantId">The tenant id</param>
             <param name="methodName">The query method</param>
-            <param name="language">The data language</param>
+            <param name="culture">The data culture</param>
             <param name="parameters">The query parameters</param>
             <returns>The resulting data table</returns>
         </member>
