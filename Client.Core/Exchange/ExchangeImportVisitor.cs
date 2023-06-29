@@ -985,13 +985,6 @@ public abstract class ExchangeImportVisitor : Visitor
     /// <param name="payroll">The payroll</param>
     protected override async Task VisitPayrollAsync(IExchangeTenant tenant, IPayrollSet payroll)
     {
-        // country
-        if (payroll.Country == 0 && payroll.CountryName.HasValue)
-        {
-            // enum represents the most known countries using the ISO 3166-1 numeric country code
-            payroll.Country = (int)payroll.CountryName.Value;
-        }
-
         // division
         if (tenant.Id > 0 && payroll.DivisionId <= 0 && !string.IsNullOrWhiteSpace(payroll.DivisionName))
         {

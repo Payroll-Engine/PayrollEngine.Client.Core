@@ -4407,12 +4407,6 @@
         <member name="P:PayrollEngine.Client.Model.IPayroll.DivisionName">
             <summary>The division name (client only)</summary>
         </member>
-        <member name="P:PayrollEngine.Client.Model.IPayroll.CountryName">
-            <summary>The country name (client only)</summary>
-        </member>
-        <member name="P:PayrollEngine.Client.Model.IPayroll.Country">
-            <summary>The ISO 3166-1 country code, 0 for undefined</summary>
-        </member>
         <member name="P:PayrollEngine.Client.Model.IPayroll.ClusterSetCase">
             <summary>The case cluster set (undefined: all)</summary>
         </member>
@@ -5714,12 +5708,6 @@
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.Payroll.DivisionName">
-            <inheritdoc/>
-        </member>
-        <member name="P:PayrollEngine.Client.Model.Payroll.CountryName">
-            <inheritdoc/>
-        </member>
-        <member name="P:PayrollEngine.Client.Model.Payroll.Country">
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.Payroll.ClusterSetCase">

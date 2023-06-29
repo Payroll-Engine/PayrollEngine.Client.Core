@@ -350,13 +350,6 @@ public sealed class ExchangeImport : ExchangeImportVisitor
     {
         await base.SetupPayrollAsync(tenant, payroll, targetPayroll);
 
-        // country
-        if (payroll.Country == 0 && payroll.CountryName.HasValue)
-        {
-            // enum represents the most known countries using the ISO 3166-1 numeric country code
-            payroll.Country = (int)payroll.CountryName.Value;
-        }
-
         // task
         if (payroll.DivisionId <= 0 && !string.IsNullOrWhiteSpace(payroll.DivisionName))
         {

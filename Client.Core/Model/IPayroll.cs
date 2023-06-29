@@ -23,12 +23,6 @@ public interface IPayroll : IModel, IAttributeObject, IKeyEquatable<IPayroll>
     /// <summary>The division name (client only)</summary>
     string DivisionName { get; set; }
 
-    /// <summary>The country name (client only)</summary>
-    Country? CountryName { get; set; }
-
-    /// <summary>The ISO 3166-1 country code, 0 for undefined</summary>
-    int Country { get; set; }
-
     /// <summary>The case cluster set (undefined: all)</summary>
     string ClusterSetCase { get; set; }
         

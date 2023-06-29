@@ -27,12 +27,6 @@ public class Payroll : Model, IPayroll, INameObject
     public string DivisionName { get; set; }
 
     /// <inheritdoc/>
-    public Country? CountryName { get; set; }
-
-    /// <inheritdoc/>
-    public int Country { get; set; }
-
-    /// <inheritdoc/>
     [StringLength(128)]
     public string ClusterSetCase { get; set; }
 
