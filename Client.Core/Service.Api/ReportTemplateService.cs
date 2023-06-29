@@ -26,8 +26,10 @@ public class ReportTemplateService : Service, IReportTemplateService
 
         query ??= new();
         query.Result = QueryResultType.Items;
-        var url = query.AppendQueryString(RegulationApiEndpoints.RegulationReportTemplatesUrl(context.TenantId, context.RegulationId, context.ReportId));
-        return await HttpClient.GetCollectionAsync<T>(url);
+
+        var requestUri = RegulationApiEndpoints.RegulationReportTemplatesUrl(context.TenantId, context.RegulationId, context.ReportId)
+            .AddQueryString(nameof(ReportTemplateQuery.Culture), query.Culture);
+        return await HttpClient.GetCollectionAsync<T>(requestUri);
     }
 
     /// <inheritdoc />
@@ -40,8 +42,10 @@ public class ReportTemplateService : Service, IReportTemplateService
 
         query ??= new();
         query.Result = QueryResultType.Count;
-        var url = query.AppendQueryString(RegulationApiEndpoints.RegulationReportTemplatesUrl(context.TenantId, context.RegulationId, context.ReportId));
-        return await HttpClient.GetAsync<long>(url);
+
+        var requestUri = RegulationApiEndpoints.RegulationReportTemplatesUrl(context.TenantId, context.RegulationId, context.ReportId)
+            .AddQueryString(nameof(ReportTemplateQuery.Culture), query.Culture);
+        return await HttpClient.GetAsync<long>(requestUri);
     }
 
     /// <inheritdoc />
@@ -54,8 +58,10 @@ public class ReportTemplateService : Service, IReportTemplateService
 
         query ??= new();
         query.Result = QueryResultType.ItemsWithCount;
-        var url = query.AppendQueryString(RegulationApiEndpoints.RegulationReportTemplatesUrl(context.TenantId, context.RegulationId, context.ReportId));
-        return await HttpClient.GetAsync<QueryResult<T>>(url);
+    
+        var requestUri = RegulationApiEndpoints.RegulationReportTemplatesUrl(context.TenantId, context.RegulationId, context.ReportId)
+            .AddQueryString(nameof(ReportTemplateQuery.Culture), query.Culture);
+        return await HttpClient.GetAsync<QueryResult<T>>(requestUri);
     }
 
     /// <inheritdoc />
