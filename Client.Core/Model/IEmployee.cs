@@ -17,9 +17,9 @@ public interface IEmployee : IModel, IAttributeObject, IKeyEquatable<IEmployee>
     /// <summary>Employee division names</summary>
     List<string> Divisions { get; set; }
 
-    /// <summary>The culture including the calendar, fallback is the division culture</summary>
+    /// <summary>The employee culture name based on RFC 4646 (fallback: division culture)</summary>
     string Culture { get; set; }
 
-    /// <summary>The employee calendar, fallback is the division calendar</summary>
+    /// <summary>The employee calendar (fallback: division calendar)</summary>
     string Calendar { get; set; }
 }

@@ -15,7 +15,7 @@ public interface IUser : IModel, IAttributeObject, IKeyEquatable<IUser>
     /// <summary>The last name of the user</summary>
     string LastName { get; set; }
 
-    /// <summary>The users culture</summary>
+    /// <summary>The user culture name based on RFC 4646</summary>
     string Culture { get; set; }
 
     /// <summary>The user type</summary>

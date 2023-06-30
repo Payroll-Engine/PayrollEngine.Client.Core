@@ -4184,10 +4184,10 @@
             <summary>The localized division names</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.IDivision.Culture">
-            <summary>The culture including the calendar, fallback for employee culture</summary>
+            <summary>The division culture name based on RFC 4646 (fallback: tenant culture)</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.IDivision.Calendar">
-            <summary>The division calendar, fallback is the tenant calendar</summary>
+            <summary>The division calendar (fallback: tenant calendar)</summary>
         </member>
         <member name="T:PayrollEngine.Client.Model.IEmployee">
             <summary>The employee client object</summary>
@@ -4205,10 +4205,10 @@
             <summary>Employee division names</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.IEmployee.Culture">
-            <summary>The culture including the calendar, fallback is the division culture</summary>
+            <summary>The employee culture name based on RFC 4646 (fallback: division culture)</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.IEmployee.Calendar">
-            <summary>The employee calendar, fallback is the division calendar</summary>
+            <summary>The employee calendar (fallback: division calendar)</summary>
         </member>
         <member name="T:PayrollEngine.Client.Model.IEmployeeSet">
             <summary>The employee set client object</summary>
@@ -5225,10 +5225,10 @@
             <summary>The unique identifier of the tenant (immutable)</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.ITenant.Culture">
-            <summary>The culture including the calendar</summary>
+            <summary>The tenant culture name based on RFC 4646 (fallback: system culture)</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.ITenant.Calendar">
-            <summary>The tenant calendar, fallback is the default calendar</summary>
+            <summary>The tenant calendar (fallback: default calendar)</summary>
         </member>
         <member name="T:PayrollEngine.Client.Model.IUser">
             <summary>The payroll user client object</summary>
@@ -5246,7 +5246,7 @@
             <summary>The last name of the user</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.IUser.Culture">
-            <summary>The users culture</summary>
+            <summary>The user culture name based on RFC 4646</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.IUser.UserType">
             <summary>The user type</summary>
@@ -5276,7 +5276,7 @@
             <summary>The value type, default is value type money</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.IWageType.Calendar">
-            <summary>The wage type calendar</summary>
+            <summary>The wage type calendar (fallback: employee calendar)</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.IWageType.Collectors">
             <summary>Associated collectors</summary>

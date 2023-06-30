@@ -26,7 +26,7 @@ public interface IWageType : IModel, IAttributeObject, IKeyEquatable<IWageType>
     /// <summary>The value type, default is value type money</summary>
     ValueType ValueType { get; set; }
 
-    /// <summary>The wage type calendar</summary>
+    /// <summary>The wage type calendar (fallback: employee calendar)</summary>
     string Calendar { get; set; }
 
     /// <summary>Associated collectors</summary>
