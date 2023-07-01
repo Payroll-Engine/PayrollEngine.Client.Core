@@ -30,7 +30,7 @@ public interface ITenantService : ICrudService<ITenant, RootServiceContext, Quer
     /// <summary>Execute a report query</summary>
     /// <param name="tenantId">The tenant id</param>
     /// <param name="methodName">The query method</param>
-    /// <param name="culture">The data culture</param>
+    /// <param name="culture">The culture name based on RFC 4646</param>
     /// <param name="parameters">The query parameters</param>
     /// <returns>The resulting data table</returns>
     Task<DataTable> ExecuteReportQueryAsync(int tenantId, string methodName, string culture,
