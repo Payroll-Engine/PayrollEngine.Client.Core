@@ -9847,7 +9847,7 @@
         <member name="M:PayrollEngine.Client.Service.Api.PayrollService.GetTimeValuesAsync(PayrollEngine.Client.Service.PayrollServiceContext,System.Nullable{System.Int32},System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
             <inheritdoc/>
         </member>
-        <member name="M:PayrollEngine.Client.Service.Api.PayrollService.GetAvailableCaseFieldValuesAsync(PayrollEngine.Client.Service.PayrollServiceContext,System.Int32,System.Collections.Generic.IEnumerable{System.String},System.DateTime,System.DateTime,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+        <member name="M:PayrollEngine.Client.Service.Api.PayrollService.GetAvailableCaseFieldValuesAsync(PayrollEngine.Client.Service.PayrollServiceContext,System.Int32,System.Collections.Generic.IEnumerable{System.String},System.DateTime,System.DateTime,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String)">
             <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Service.Api.PayrollService.AddCaseAsync``2(PayrollEngine.Client.Service.PayrollServiceContext,``0)">
@@ -11195,7 +11195,7 @@
             <param name="evaluationDate">The evaluation date (default: value date)</param>
             <returns>The payroll case value of the case field</returns>
         </member>
-        <member name="M:PayrollEngine.Client.Service.IPayrollService.GetAvailableCaseFieldValuesAsync(PayrollEngine.Client.Service.PayrollServiceContext,System.Int32,System.Collections.Generic.IEnumerable{System.String},System.DateTime,System.DateTime,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+        <member name="M:PayrollEngine.Client.Service.IPayrollService.GetAvailableCaseFieldValuesAsync(PayrollEngine.Client.Service.PayrollServiceContext,System.Int32,System.Collections.Generic.IEnumerable{System.String},System.DateTime,System.DateTime,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String)">
             <summary>Get available case period values</summary>
             <param name="context">The service context</param>
             <param name="userId">The user id</param>
@@ -11205,6 +11205,7 @@
             <param name="employeeId">The employee id, mandatory for employee case</param>
             <param name="regulationDate">The regulation date (default: UTC now)</param>
             <param name="evaluationDate">Creation date filter (default: UTC now)</param>
+            <param name="culture">The query culture name based on RFC 4646</param>
             <returns>Case period values</returns>
         </member>
         <member name="M:PayrollEngine.Client.Service.IPayrollService.AddCaseAsync``2(PayrollEngine.Client.Service.PayrollServiceContext,``0)">

@@ -102,10 +102,11 @@ public interface IPayrollService : ICrudService<IPayroll, TenantServiceContext, 
     /// <param name="employeeId">The employee id, mandatory for employee case</param>
     /// <param name="regulationDate">The regulation date (default: UTC now)</param>
     /// <param name="evaluationDate">Creation date filter (default: UTC now)</param>
+    /// <param name="culture">The query culture name based on RFC 4646</param>
     /// <returns>Case period values</returns>
     Task<List<CaseFieldValue>> GetAvailableCaseFieldValuesAsync(PayrollServiceContext context, int userId,
         IEnumerable<string> caseFieldNames, DateTime startDate, DateTime endDate,
-        int? employeeId = null, DateTime? regulationDate = null, DateTime? evaluationDate = null);
+        int? employeeId = null, DateTime? regulationDate = null, DateTime? evaluationDate = null, string culture = null);
 
     /// <summary>Add case change</summary>
     /// <param name="context">The service context</param>

@@ -265,7 +265,7 @@ public class PayrollService : Service, IPayrollService
     /// <inheritdoc/>
     public virtual async Task<List<CaseFieldValue>> GetAvailableCaseFieldValuesAsync(PayrollServiceContext context,
         int userId, IEnumerable<string> caseFieldNames, DateTime startDate, DateTime endDate, int? employeeId = null,
-        DateTime? regulationDate = null, DateTime? evaluationDate = null)
+        DateTime? regulationDate = null, DateTime? evaluationDate = null, string culture = null)
     {
         if (context == null)
         {
@@ -287,7 +287,8 @@ public class PayrollService : Service, IPayrollService
             .AddQueryString(nameof(endDate), endDate)
             .AddQueryString(nameof(employeeId), employeeId)
             .AddQueryString(nameof(regulationDate), regulationDate)
-            .AddQueryString(nameof(evaluationDate), evaluationDate);
+            .AddQueryString(nameof(evaluationDate), evaluationDate)
+            .AddQueryString(nameof(culture), culture);
         var periodValues = await HttpClient.GetAsync<CaseFieldValue[]>(requestUri);
         return new(periodValues);
     }
