@@ -45,6 +45,9 @@ public class CaseField : Model, ICaseField, INameObject
     public CaseValueCreationMode ValueCreationMode { get; set; }
 
     /// <inheritdoc/>
+    public string Culture { get; set; }
+
+    /// <inheritdoc/>
     public bool ValueMandatory { get; set; }
 
     /// <inheritdoc/>

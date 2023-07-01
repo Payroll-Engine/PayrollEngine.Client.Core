@@ -2422,6 +2422,9 @@
         <member name="P:PayrollEngine.Client.Model.CaseField.ValueCreationMode">
             <inheritdoc/>
         </member>
+        <member name="P:PayrollEngine.Client.Model.CaseField.Culture">
+            <inheritdoc/>
+        </member>
         <member name="P:PayrollEngine.Client.Model.CaseField.ValueMandatory">
             <inheritdoc/>
         </member>
@@ -3816,6 +3819,9 @@
         </member>
         <member name="P:PayrollEngine.Client.Model.ICaseField.ValueCreationMode">
             <summary>The case value creation mode</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.ICaseField.Culture">
+            <summary>The case field culture name based on RFC 4646</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.ICaseField.ValueMandatory">
             <summary>Mandatory case field value</summary>

@@ -41,6 +41,9 @@ public interface ICaseField : IModel, IAttributeObject, IKeyEquatable<ICaseField
     /// <summary>The case value creation mode</summary>
     CaseValueCreationMode ValueCreationMode { get; set; }
 
+    /// <summary>The case field culture name based on RFC 4646</summary>
+    string Culture { get; set; }
+
     /// <summary>Mandatory case field value</summary>
     bool ValueMandatory { get; set; }
 
