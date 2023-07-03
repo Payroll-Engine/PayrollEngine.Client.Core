@@ -6,62 +6,62 @@ namespace PayrollEngine.Client.Model;
 /// <summary>The payroll calendar client object</summary>
 public class Calendar : Model, ICalendar, INameObject
 {
-    /// <summary>The division name</summary>
+    /// <summary>The calendar name</summary>
     [Required]
     [StringLength(128)]
     public string Name { get; set; }
 
-    /// <summary>The localized division names</summary>
+    /// <inheritdoc/>
     public Dictionary<string, string> NameLocalizations { get; set; }
 
-    /// <summary>The cycle time unit</summary>
+    /// <inheritdoc/>
     [Required]
     public CalendarTimeUnit CycleTimeUnit { get; set; } = CalendarTimeUnit.Year;
 
-    /// <summary>The period time unit</summary>
+    /// <inheritdoc/>
     [Required]
     public CalendarTimeUnit PeriodTimeUnit { get; set; } = CalendarTimeUnit.CalendarMonth;
 
-    /// <summary>The time map</summary>
+    /// <inheritdoc/>
     public CalendarTimeMap TimeMap { get; set; } = CalendarTimeMap.Period;
 
-    /// <summary>The first month of a year</summary>
+    /// <inheritdoc/>
     public Month? FirstMonthOfYear { get; set; } = Month.January;
 
-    /// <summary>Override the effective month day count</summary>
-    public decimal? MonthDayCount { get; set; }
+    /// <inheritdoc/>
+    public decimal? PeriodDayCount { get; set; }
 
-    /// <summary>Override the calendar year start week rule</summary>
+    /// <inheritdoc/>
     public CalendarWeekRule? YearWeekRule { get; set; }
 
-    /// <summary>Override the calendar first day of week</summary>
+    /// <inheritdoc/>
     public DayOfWeek? FirstDayOfWeek { get; set; }
 
-    /// <summary>The week mode (default: week)</summary>
+    /// <inheritdoc/>
     public CalendarWeekMode WeekMode { get; set; } = CalendarWeekMode.Week;
 
-    /// <summary>Work on monday</summary>
+    /// <inheritdoc/>
     public bool WorkMonday { get; set; } = true;
 
-    /// <summary>Work on tuesday</summary>
+    /// <inheritdoc/>
     public bool WorkTuesday { get; set; } = true;
 
-    /// <summary>Work on wednesday</summary>
+    /// <inheritdoc/>
     public bool WorkWednesday { get; set; } = true;
 
-    /// <summary>Work on thursday</summary>
+    /// <inheritdoc/>
     public bool WorkThursday { get; set; } = true;
 
-    /// <summary>Work on friday</summary>
+    /// <inheritdoc/>
     public bool WorkFriday { get; set; } = true;
 
-    /// <summary>Work on saturday</summary>
+    /// <inheritdoc/>
     public bool WorkSaturday { get; set; }
 
-    /// <summary>Work on sunday</summary>
+    /// <inheritdoc/>
     public bool WorkSunday { get; set; }
 
-    /// <summary>Custom attributes</summary>
+    /// <inheritdoc/>
     public Dictionary<string, object> Attributes { get; set; }
 
     /// <summary>Initializes a new instance</summary>

@@ -1976,58 +1976,58 @@
             <summary>The payroll calendar client object</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.Calendar.Name">
-            <summary>The division name</summary>
+            <summary>The calendar name</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.Calendar.NameLocalizations">
-            <summary>The localized division names</summary>
+            <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.Calendar.CycleTimeUnit">
-            <summary>The cycle time unit</summary>
+            <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.Calendar.PeriodTimeUnit">
-            <summary>The period time unit</summary>
+            <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.Calendar.TimeMap">
-            <summary>The time map</summary>
+            <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.Calendar.FirstMonthOfYear">
-            <summary>The first month of a year</summary>
+            <inheritdoc/>
         </member>
-        <member name="P:PayrollEngine.Client.Model.Calendar.MonthDayCount">
-            <summary>Override the effective month day count</summary>
+        <member name="P:PayrollEngine.Client.Model.Calendar.PeriodDayCount">
+            <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.Calendar.YearWeekRule">
-            <summary>Override the calendar year start week rule</summary>
+            <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.Calendar.FirstDayOfWeek">
-            <summary>Override the calendar first day of week</summary>
+            <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.Calendar.WeekMode">
-            <summary>The week mode (default: week)</summary>
+            <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.Calendar.WorkMonday">
-            <summary>Work on monday</summary>
+            <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.Calendar.WorkTuesday">
-            <summary>Work on tuesday</summary>
+            <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.Calendar.WorkWednesday">
-            <summary>Work on wednesday</summary>
+            <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.Calendar.WorkThursday">
-            <summary>Work on thursday</summary>
+            <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.Calendar.WorkFriday">
-            <summary>Work on friday</summary>
+            <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.Calendar.WorkSaturday">
-            <summary>Work on saturday</summary>
+            <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.Calendar.WorkSunday">
-            <summary>Work on sunday</summary>
+            <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.Calendar.Attributes">
-            <summary>Custom attributes</summary>
+            <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.Calendar.#ctor">
             <summary>Initializes a new instance</summary>
@@ -3536,8 +3536,8 @@
         <member name="P:PayrollEngine.Client.Model.ICalendar.FirstMonthOfYear">
             <summary>The first month of a year  (default: january)</summary>
         </member>
-        <member name="P:PayrollEngine.Client.Model.ICalendar.MonthDayCount">
-            <summary>Override the effective month day count</summary>
+        <member name="P:PayrollEngine.Client.Model.ICalendar.PeriodDayCount">
+            <summary>Override the effective period day count</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.ICalendar.YearWeekRule">
             <summary>Override the calendar year start week rule</summary>
