@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The payroll calendar client object</summary>
-public class Calendar : Model, ICalendar, INameObject
+public class Calendar : ModelBase, ICalendar, INameObject
 {
     /// <summary>The calendar name</summary>
     [Required]

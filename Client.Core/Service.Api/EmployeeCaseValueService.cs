@@ -6,7 +6,7 @@ using PayrollEngine.Client.Model;
 namespace PayrollEngine.Client.Service.Api;
 
 /// <summary>Payroll employee case value service</summary>
-public class EmployeeCaseValueService : Service, IEmployeeCaseValueService
+public class EmployeeCaseValueService : ServiceBase, IEmployeeCaseValueService
 {
     /// <summary>Initializes a new instance of the <see cref="EmployeeCaseValueService"/> class</summary>
     /// <param name="httpClient">The HTTP client</param>

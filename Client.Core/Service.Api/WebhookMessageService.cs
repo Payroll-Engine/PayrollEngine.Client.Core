@@ -7,7 +7,7 @@ using Task = System.Threading.Tasks.Task;
 namespace PayrollEngine.Client.Service.Api;
 
 /// <summary>Payroll webhook message service</summary>
-public class WebhookMessageService : Service, IWebhookMessageService
+public class WebhookMessageService : ServiceBase, IWebhookMessageService
 {
     /// <summary>Initializes a new instance of the <see cref="WebhookMessageService"/> class</summary>
     /// <param name="httpClient">The Payroll http client</param>

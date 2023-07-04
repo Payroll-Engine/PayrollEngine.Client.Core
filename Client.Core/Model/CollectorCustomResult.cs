@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The collector custom result client object</summary>
-public class CollectorCustomResult : Model, ICollectorCustomResult
+public class CollectorCustomResult : ModelBase, ICollectorCustomResult
 {
     /// <inheritdoc/>
     public int CollectorResultId { get; set; }

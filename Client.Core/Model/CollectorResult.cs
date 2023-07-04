@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The collector result client object</summary>
-public class CollectorResult : Model, ICollectorResult
+public class CollectorResult : ModelBase, ICollectorResult
 {
     /// <inheritdoc/>
     public int PayrollResultId { get; set; }

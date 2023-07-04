@@ -3,7 +3,7 @@
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The case document client object</summary>
-public class CaseDocument : Model, ICaseDocument, INameObject
+public class CaseDocument : ModelBase, ICaseDocument, INameObject
 {
     /// <summary>The case document name</summary>
     [Required]

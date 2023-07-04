@@ -3,7 +3,7 @@
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The payroll result info client object</summary>
-public class PayrollResult : Model, IPayrollResult
+public class PayrollResult : ModelBase, IPayrollResult
 {
     /// <inheritdoc/>
     public int PayrollId { get; set; }

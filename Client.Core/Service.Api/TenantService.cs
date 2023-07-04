@@ -9,7 +9,7 @@ using Task = System.Threading.Tasks.Task;
 namespace PayrollEngine.Client.Service.Api;
 
 /// <summary>Payroll tenant service</summary>
-public class TenantService : Service, ITenantService
+public class TenantService : ServiceBase, ITenantService
 {
     /// <summary>Initializes a new instance of the <see cref="TenantService"/> class</summary>
     /// <param name="httpClient">The Payroll http client</param>

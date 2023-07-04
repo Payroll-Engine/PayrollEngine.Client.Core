@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The payroll case field client object</summary>
-public class CaseField : Model, ICaseField, INameObject
+public class CaseField : ModelBase, ICaseField, INameObject
 {
     /// <summary>The case field name</summary>
     [Required]

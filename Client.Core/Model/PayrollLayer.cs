@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The payroll layer client object</summary>
-public class PayrollLayer : Model, IPayrollLayer
+public class PayrollLayer : ModelBase, IPayrollLayer
 {
     /// <inheritdoc/>
     [Required]

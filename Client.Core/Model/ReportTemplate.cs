@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The payroll report template client object</summary>
-public class ReportTemplate : Model, IReportTemplate
+public class ReportTemplate : ModelBase, IReportTemplate
 {
     /// <inheritdoc/>
     [Required]

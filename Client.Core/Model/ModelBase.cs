@@ -3,7 +3,7 @@
 namespace PayrollEngine.Client.Model;
 
 /// <summary>Base for all Payroll models</summary>
-public abstract class Model : IModel
+public abstract class ModelBase : IModel
 {
     /// <inheritdoc/>
     public int Id { get; set; }
@@ -27,13 +27,13 @@ public abstract class Model : IModel
     public UpdateMode UpdateMode { get; set; }
 
     /// <summary>Initializes a new instance</summary>
-    protected Model()
+    protected ModelBase()
     {
     }
 
     /// <summary>Initializes a new instance from a copy</summary>
     /// <param name="copySource">The copy source</param>
-    protected Model(Model copySource)
+    protected ModelBase(ModelBase copySource)
     {
         CopyTool.CopyProperties(copySource, this);
     }

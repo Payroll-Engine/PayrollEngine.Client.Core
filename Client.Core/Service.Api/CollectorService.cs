@@ -7,7 +7,7 @@ using Task = System.Threading.Tasks.Task;
 namespace PayrollEngine.Client.Service.Api;
 
 /// <summary>Payroll collector service</summary>
-public class CollectorService : Service, ICollectorService
+public class CollectorService : ServiceBase, ICollectorService
 {
     /// <summary>Initializes a new instance of the <see cref="CollectorService"/> class</summary>
     /// <param name="httpClient">The HTTP client</param>

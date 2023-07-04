@@ -3,7 +3,7 @@
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The payroll task object</summary>
-public class Log : Model, ILog
+public class Log : ModelBase, ILog
 {
     /// <inheritdoc/>
     public LogLevel Level { get; set; }

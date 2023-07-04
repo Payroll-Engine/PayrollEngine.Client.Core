@@ -5,7 +5,7 @@ using PayrollEngine.Data;
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The payroll report client object</summary>
-public class Report : Model, IReport, INameObject
+public class Report : ModelBase, IReport, INameObject
 {
     /// <summary>The report name</summary>
     [Required]

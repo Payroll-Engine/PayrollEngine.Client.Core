@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The payroll regulation client object</summary>
-public class Regulation : Model, IRegulation, INameObject
+public class Regulation : ModelBase, IRegulation, INameObject
 {
     /// <summary>The regulation name</summary>
     [Required]

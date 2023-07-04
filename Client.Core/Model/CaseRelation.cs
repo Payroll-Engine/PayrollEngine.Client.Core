@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The payroll case relation client object</summary>
-public class CaseRelation : Model, ICaseRelation
+public class CaseRelation : ModelBase, ICaseRelation
 {
     /// <inheritdoc/>
     [Required]

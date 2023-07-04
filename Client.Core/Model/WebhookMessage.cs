@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The Webhook message client object</summary>
-public class WebhookMessage : Model, IWebhookMessage
+public class WebhookMessage : ModelBase, IWebhookMessage
 {
     /// <inheritdoc/>
     [Required]

@@ -3,7 +3,7 @@
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The tenant client object</summary>
-public class RegulationShare : Model, IRegulationShare
+public class RegulationShare : ModelBase, IRegulationShare
 {
     /// <inheritdoc/>
     public int ProviderTenantId { get; set; }

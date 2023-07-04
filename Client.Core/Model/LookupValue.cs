@@ -6,7 +6,7 @@ using JsonSerializer = System.Text.Json.JsonSerializer;
 namespace PayrollEngine.Client.Model;
 
 /// <summary>Represents a value within a lookup</summary>
-public class LookupValue : Model, ILookupValue
+public class LookupValue : ModelBase, ILookupValue
 {
     /// <inheritdoc/>
     public string Key { get; set; }
@@ -14,7 +14,7 @@ public class LookupValue : Model, ILookupValue
     /// <summary>The lookup key values (client only)</summary>
     public object[] KeyValues
     {
-        get => null;
+        get => default;
         set
         {
             if (value != null && value.Any())

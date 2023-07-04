@@ -6,7 +6,7 @@ using PayrollEngine.Client.Model;
 namespace PayrollEngine.Client.Service.Api;
 
 /// <summary>Payroll payroll consolidated result service</summary>
-public class PayrollConsolidatedResultService : Service, IPayrollConsolidatedResultService
+public class PayrollConsolidatedResultService : ServiceBase, IPayrollConsolidatedResultService
 {
     /// <summary>Initializes a new instance of the <see cref="PayrollConsolidatedResultService"/> class</summary>
     /// <param name="httpClient">The Payroll http client</param>

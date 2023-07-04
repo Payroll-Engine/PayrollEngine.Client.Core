@@ -3,7 +3,7 @@
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The payroll report log client object</summary>
-public class ReportLog : Model, IReportLog
+public class ReportLog : ModelBase, IReportLog
 {
     /// <inheritdoc/>
     public string ReportName { get; set; }

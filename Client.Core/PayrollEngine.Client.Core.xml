@@ -5657,41 +5657,41 @@
             <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
             <returns>A <see cref="T:System.String" /> that represents this instance</returns>
         </member>
-        <member name="T:PayrollEngine.Client.Model.Model">
+        <member name="T:PayrollEngine.Client.Model.ModelBase">
             <summary>Base for all Payroll models</summary>
         </member>
-        <member name="P:PayrollEngine.Client.Model.Model.Id">
+        <member name="P:PayrollEngine.Client.Model.ModelBase.Id">
             <inheritdoc/>
         </member>
-        <member name="P:PayrollEngine.Client.Model.Model.IsExistingObject">
+        <member name="P:PayrollEngine.Client.Model.ModelBase.IsExistingObject">
             <inheritdoc/>
         </member>
-        <member name="P:PayrollEngine.Client.Model.Model.IsNewObject">
+        <member name="P:PayrollEngine.Client.Model.ModelBase.IsNewObject">
             <inheritdoc/>
         </member>
-        <member name="P:PayrollEngine.Client.Model.Model.Status">
+        <member name="P:PayrollEngine.Client.Model.ModelBase.Status">
             <inheritdoc/>
         </member>
-        <member name="P:PayrollEngine.Client.Model.Model.Created">
+        <member name="P:PayrollEngine.Client.Model.ModelBase.Created">
             <inheritdoc/>
         </member>
-        <member name="P:PayrollEngine.Client.Model.Model.Updated">
+        <member name="P:PayrollEngine.Client.Model.ModelBase.Updated">
             <inheritdoc/>
         </member>
-        <member name="P:PayrollEngine.Client.Model.Model.UpdateMode">
+        <member name="P:PayrollEngine.Client.Model.ModelBase.UpdateMode">
             <inheritdoc/>
         </member>
-        <member name="M:PayrollEngine.Client.Model.Model.#ctor">
+        <member name="M:PayrollEngine.Client.Model.ModelBase.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.Model.#ctor(PayrollEngine.Client.Model.Model)">
+        <member name="M:PayrollEngine.Client.Model.ModelBase.#ctor(PayrollEngine.Client.Model.ModelBase)">
             <summary>Initializes a new instance from a copy</summary>
             <param name="copySource">The copy source</param>
         </member>
-        <member name="M:PayrollEngine.Client.Model.Model.GetUiString">
+        <member name="M:PayrollEngine.Client.Model.ModelBase.GetUiString">
             <inheritdoc/>
         </member>
-        <member name="M:PayrollEngine.Client.Model.Model.ToString">
+        <member name="M:PayrollEngine.Client.Model.ModelBase.ToString">
             <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
             <returns>A <see cref="T:System.String" /> that represents this instance</returns>
         </member>
@@ -10284,24 +10284,24 @@
         <member name="M:PayrollEngine.Client.Service.Api.ScriptService.DeleteAsync(PayrollEngine.Client.Service.RegulationServiceContext,System.Int32)">
             <inheritdoc/>
         </member>
-        <member name="T:PayrollEngine.Client.Service.Api.Service">
+        <member name="T:PayrollEngine.Client.Service.Api.ServiceBase">
             <summary>Base client service</summary>
         </member>
-        <member name="P:PayrollEngine.Client.Service.Api.Service.HttpClient">
+        <member name="P:PayrollEngine.Client.Service.Api.ServiceBase.HttpClient">
             <summary>The Payroll http client</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Service.Api.Service.#ctor(PayrollEngine.Client.PayrollHttpClient)">
-            <summary>Initializes a new instance of the <see cref="T:PayrollEngine.Client.Service.Api.Service"/> class</summary>
+        <member name="M:PayrollEngine.Client.Service.Api.ServiceBase.#ctor(PayrollEngine.Client.PayrollHttpClient)">
+            <summary>Initializes a new instance of the <see cref="T:PayrollEngine.Client.Service.Api.ServiceBase"/> class</summary>
             <param name="httpClient">The Payroll http client</param>
         </member>
-        <member name="M:PayrollEngine.Client.Service.Api.Service.AddQueryValue(System.String,System.String,System.Object)">
+        <member name="M:PayrollEngine.Client.Service.Api.ServiceBase.AddQueryValue(System.String,System.String,System.Object)">
             <summary>Append the given query key and value to the URI</summary>
             <param name="uri">The base URI</param>
             <param name="name">The name of the query key</param>
             <param name="value">The query value</param>
             <returns>The combined result</returns>
         </member>
-        <member name="M:PayrollEngine.Client.Service.Api.Service.AddQueryValue(System.String,System.String,System.DateTime)">
+        <member name="M:PayrollEngine.Client.Service.Api.ServiceBase.AddQueryValue(System.String,System.String,System.DateTime)">
             <summary>Append the given query key and date value to the URI</summary>
             <param name="uri">The base URI</param>
             <param name="name">The name of the query key</param>

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The tenant client object</summary>
-public class Tenant : Model, ITenant, IIdentifierObject
+public class Tenant : ModelBase, ITenant, IIdentifierObject
 {
     /// <summary>The tenant identifier</summary>
     [Required]

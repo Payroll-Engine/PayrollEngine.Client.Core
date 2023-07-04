@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace PayrollEngine.Client.Model;
 
 /// <summary>Payroll case value change client object</summary>
-public class CaseChange : Model, ICaseChange
+public class CaseChange : ModelBase, ICaseChange
 {
     /// <inheritdoc/>
     public int UserId { get; set; }

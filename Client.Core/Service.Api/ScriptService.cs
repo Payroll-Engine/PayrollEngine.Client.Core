@@ -7,7 +7,7 @@ using Task = System.Threading.Tasks.Task;
 namespace PayrollEngine.Client.Service.Api;
 
 /// <summary>Payroll script service</summary>
-public class ScriptService : Service, IScriptService
+public class ScriptService : ServiceBase, IScriptService
 {
     /// <summary>Initializes a new instance of the <see cref="ScriptService"/> class</summary>
     /// <param name="httpClient">The Payroll http client</param>

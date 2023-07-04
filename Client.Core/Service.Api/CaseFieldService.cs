@@ -7,7 +7,7 @@ using Task = System.Threading.Tasks.Task;
 namespace PayrollEngine.Client.Service.Api;
 
 /// <summary>Payroll case field service</summary>
-public class CaseFieldService : Service, ICaseFieldService
+public class CaseFieldService : ServiceBase, ICaseFieldService
 {
     /// <summary>Initializes a new instance of the <see cref="CaseFieldService"/> class</summary>
     /// <param name="httpClient">The HTTP client</param>

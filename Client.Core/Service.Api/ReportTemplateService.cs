@@ -7,7 +7,7 @@ using Task = System.Threading.Tasks.Task;
 namespace PayrollEngine.Client.Service.Api;
 
 /// <summary>Payroll report template service</summary>
-public class ReportTemplateService : Service, IReportTemplateService
+public class ReportTemplateService : ServiceBase, IReportTemplateService
 {
     /// <summary>Initializes a new instance of the <see cref="ReportTemplateService"/> class</summary>
     /// <param name="httpClient">The Payroll http client</param>

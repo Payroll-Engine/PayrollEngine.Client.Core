@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The payroll client object</summary>
-public class Payroll : Model, IPayroll, INameObject
+public class Payroll : ModelBase, IPayroll, INameObject
 {
     /// <summary>The payroll name</summary>
     [Required]

@@ -10,7 +10,7 @@ using Task = System.Threading.Tasks.Task;
 namespace PayrollEngine.Client.Service.Api;
 
 /// <summary>Payroll user service</summary>
-public class UserService : Service, IUserService
+public class UserService : ServiceBase, IUserService
 {
     /// <summary>Initializes a new instance of the <see cref="UserService"/> class</summary>
     /// <param name="httpClient">The Payroll http client</param>

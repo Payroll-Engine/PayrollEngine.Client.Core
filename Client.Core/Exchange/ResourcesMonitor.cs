@@ -79,7 +79,7 @@ public class ResourcesMonitor<TModel, TContext, TQuery>
                         // query items created since the last request
                         var query = new TQuery
                         {
-                            Filter = $"{nameof(Model.Model.Created)} gt '{lastRequest.ToUtcString(CultureInfo.CurrentCulture)}'"
+                            Filter = $"{nameof(Model.ModelBase.Created)} gt '{lastRequest.ToUtcString(CultureInfo.CurrentCulture)}'"
                         };
                         var items = (await Service.QueryAsync<TModel>(Context, query)).ToList();
 

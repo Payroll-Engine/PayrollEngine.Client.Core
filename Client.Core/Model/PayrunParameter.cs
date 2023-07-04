@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The payroll payrun parameter client object</summary>
-public class PayrunParameter : Model, IPayrunParameter, INameObject
+public class PayrunParameter : ModelBase, IPayrunParameter, INameObject
 {
     /// <summary>The payrun parameter name</summary>
     [Required]

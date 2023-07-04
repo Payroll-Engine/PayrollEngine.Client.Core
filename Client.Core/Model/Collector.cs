@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The payroll collector client object</summary>
-public class Collector : Model, ICollector, INameObject
+public class Collector : ModelBase, ICollector, INameObject
 {
     /// <summary>The collector name</summary>
     [Required]

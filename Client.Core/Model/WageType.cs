@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The payroll wage type client object</summary>
-public class WageType : Model, IWageType, INameObject
+public class WageType : ModelBase, IWageType, INameObject
 {
     /// <inheritdoc/>
     [Required]

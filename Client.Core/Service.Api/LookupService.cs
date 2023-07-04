@@ -7,7 +7,7 @@ using Task = System.Threading.Tasks.Task;
 namespace PayrollEngine.Client.Service.Api;
 
 /// <summary>Payroll lookup service</summary>
-public class LookupService : Service, ILookupService
+public class LookupService : ServiceBase, ILookupService
 {
     /// <summary>Initializes a new instance of the <see cref="LookupService"/> class</summary>
     /// <param name="httpClient">The HTTP client</param>

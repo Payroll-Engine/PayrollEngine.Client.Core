@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The wage type custom result client object</summary>
-public class WageTypeCustomResult : Model, IWageTypeCustomResult
+public class WageTypeCustomResult : ModelBase, IWageTypeCustomResult
 {
     /// <inheritdoc/>
     public int WageTypeResultId { get; set; }

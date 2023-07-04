@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The payroll task object</summary>
-public class Task : Model, ITask, INameObject
+public class Task : ModelBase, ITask, INameObject
 {
     /// <summary>The task name</summary>
     [Required]

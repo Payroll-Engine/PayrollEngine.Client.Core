@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The payroll case value client object (immutable)</summary>
-public class CaseValue : Model, ICaseValue
+public class CaseValue : ModelBase, ICaseValue
 {
     /// <inheritdoc/>
     public int? DivisionId { get; set; }

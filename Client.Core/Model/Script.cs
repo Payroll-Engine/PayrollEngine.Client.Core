@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The payroll script client object</summary>
-public class Script : Model, IScript, INameObject
+public class Script : ModelBase, IScript, INameObject
 {
     /// <summary>The script name</summary>
     [Required]

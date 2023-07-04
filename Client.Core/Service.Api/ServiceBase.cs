@@ -5,14 +5,14 @@ using Microsoft.AspNetCore.WebUtilities;
 namespace PayrollEngine.Client.Service.Api;
 
 /// <summary>Base client service</summary>
-public abstract class Service
+public abstract class ServiceBase
 {
     /// <summary>The Payroll http client</summary>
     public PayrollHttpClient HttpClient { get; }
 
-    /// <summary>Initializes a new instance of the <see cref="Service"/> class</summary>
+    /// <summary>Initializes a new instance of the <see cref="ServiceBase"/> class</summary>
     /// <param name="httpClient">The Payroll http client</param>
-    protected Service(PayrollHttpClient httpClient)
+    protected ServiceBase(PayrollHttpClient httpClient)
     {
         HttpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
     }

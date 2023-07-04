@@ -7,7 +7,7 @@ using Task = System.Threading.Tasks.Task;
 namespace PayrollEngine.Client.Service.Api;
 
 /// <summary>Payroll calendar service</summary>
-public class CalendarService : Service, ICalendarService
+public class CalendarService : ServiceBase, ICalendarService
 {
     /// <summary>Initializes a new instance of the <see cref="CalendarService"/> class</summary>
     /// <param name="httpClient">The HTTP client</param>

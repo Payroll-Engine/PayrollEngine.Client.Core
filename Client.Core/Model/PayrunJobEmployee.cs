@@ -2,7 +2,7 @@
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The payrun job client object</summary>
-public class PayrunJobEmployee : Model, IPayrunJobEmployee
+public class PayrunJobEmployee : ModelBase, IPayrunJobEmployee
 {
     /// <summary>The employee id (immutable)</summary>
     public int EmployeeId { get; set; }
