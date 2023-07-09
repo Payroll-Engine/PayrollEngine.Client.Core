@@ -161,7 +161,7 @@ public class PayrollService : ServiceBase, IPayrollService
     /// <inheritdoc/>
     public virtual async Task<List<TCase>> GetAvailableCasesAsync<TCase>(PayrollServiceContext context, int userId,
         CaseType caseType, IEnumerable<string> caseNames = null, int? employeeId = null, string caseSlot = null,
-        string clusterSetName = null, string culture = null,
+        string clusterSetName = null, string culture = null,bool? hidden = null,
         DateTime? regulationDate = null, DateTime? evaluationDate = null)
         where TCase : class, ICase
     {
@@ -179,9 +179,10 @@ public class PayrollService : ServiceBase, IPayrollService
             .AddQueryString(nameof(caseType), caseType)
             .AddCollectionQueryString(nameof(caseNames), caseNames)
             .AddQueryString(nameof(employeeId), employeeId)
-            .AddQueryString(nameof(culture), culture)
             .AddQueryString(nameof(caseSlot), caseSlot)
             .AddQueryString(nameof(clusterSetName), clusterSetName)
+            .AddQueryString(nameof(culture), culture)
+            .AddQueryString(nameof(hidden), hidden)
             .AddQueryString(nameof(regulationDate), regulationDate)
             .AddQueryString(nameof(evaluationDate), evaluationDate);
         return await HttpClient.GetCollectionAsync<TCase>(requestUri);

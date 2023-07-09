@@ -46,6 +46,9 @@ public class Case : ModelBase, ICase, INameObject
     public CaseCancellationType CancellationType { get; set; }
 
     /// <inheritdoc/>
+    public bool Hidden { get; set; }
+
+    /// <inheritdoc/>
     public string AvailableExpression { get; set; }
 
     /// <inheritdoc/>
@@ -104,7 +107,7 @@ public class Case : ModelBase, ICase, INameObject
     /// <inheritdoc/>
     public virtual bool EqualKey(ICase compare) =>
         string.Equals(Name, compare?.Name);
-    
+
     /// <inheritdoc/>
     public override string GetUiString() => Name;
 }

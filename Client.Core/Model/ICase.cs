@@ -41,6 +41,9 @@ public interface ICase : IModel, IAttributeObject, IKeyEquatable<ICase>
     /// <summary>The cancellation type</summary>
     CaseCancellationType CancellationType { get; set; }
 
+    /// <summary>Hidden case (default: false)</summary>
+    bool Hidden { get; set; }
+
     /// <summary>The expression used to build a case</summary>
     string AvailableExpression { get; set; }
 

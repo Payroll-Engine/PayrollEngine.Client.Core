@@ -2096,6 +2096,9 @@
         <member name="P:PayrollEngine.Client.Model.Case.CancellationType">
             <inheritdoc/>
         </member>
+        <member name="P:PayrollEngine.Client.Model.Case.Hidden">
+            <inheritdoc/>
+        </member>
         <member name="P:PayrollEngine.Client.Model.Case.AvailableExpression">
             <inheritdoc/>
         </member>
@@ -3607,6 +3610,9 @@
         </member>
         <member name="P:PayrollEngine.Client.Model.ICase.CancellationType">
             <summary>The cancellation type</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.ICase.Hidden">
+            <summary>Hidden case (default: false)</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.ICase.AvailableExpression">
             <summary>The expression used to build a case</summary>
@@ -9835,7 +9841,7 @@
         <member name="M:PayrollEngine.Client.Service.Api.PayrollService.DeleteAsync(PayrollEngine.Client.Service.TenantServiceContext,System.Int32)">
             <inheritdoc/>
         </member>
-        <member name="M:PayrollEngine.Client.Service.Api.PayrollService.GetAvailableCasesAsync``1(PayrollEngine.Client.Service.PayrollServiceContext,System.Int32,PayrollEngine.CaseType,System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.String,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+        <member name="M:PayrollEngine.Client.Service.Api.PayrollService.GetAvailableCasesAsync``1(PayrollEngine.Client.Service.PayrollServiceContext,System.Int32,PayrollEngine.CaseType,System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.String,System.String,System.String,System.Nullable{System.Boolean},System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
             <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Service.Api.PayrollService.BuildCaseAsync``1(PayrollEngine.Client.Service.PayrollServiceContext,System.String,System.Int32,System.Nullable{System.Int32},System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},PayrollEngine.Client.Model.ICaseChangeSetup)">
@@ -11148,7 +11154,7 @@
             <param name="evaluationDate">Creation date filter (default: UTC now)</param>
             <returns>The payroll regulations, including the shared regulations</returns>
         </member>
-        <member name="M:PayrollEngine.Client.Service.IPayrollService.GetAvailableCasesAsync``1(PayrollEngine.Client.Service.PayrollServiceContext,System.Int32,PayrollEngine.CaseType,System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.String,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+        <member name="M:PayrollEngine.Client.Service.IPayrollService.GetAvailableCasesAsync``1(PayrollEngine.Client.Service.PayrollServiceContext,System.Int32,PayrollEngine.CaseType,System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.String,System.String,System.String,System.Nullable{System.Boolean},System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
             <summary>Get all active and available cases</summary>
             <param name="context">The service context</param>
             <param name="userId">The user id</param>
@@ -11158,6 +11164,7 @@
             <param name="caseSlot">The case slot</param>
             <param name="clusterSetName">The cluster set name</param>
             <param name="culture">The culture</param>
+            <param name="hidden">Hidden cases (default: all)</param>
             <param name="regulationDate">The regulation date (default: UTC now)</param>
             <param name="evaluationDate">Creation date filter (default: UTC now)</param>
             <returns>Available derived cases</returns>

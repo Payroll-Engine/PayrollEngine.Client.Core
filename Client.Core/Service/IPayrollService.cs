@@ -43,12 +43,13 @@ public interface IPayrollService : ICrudService<IPayroll, TenantServiceContext, 
     /// <param name="caseSlot">The case slot</param>
     /// <param name="clusterSetName">The cluster set name</param>
     /// <param name="culture">The culture</param>
+    /// <param name="hidden">Hidden cases (default: all)</param>
     /// <param name="regulationDate">The regulation date (default: UTC now)</param>
     /// <param name="evaluationDate">Creation date filter (default: UTC now)</param>
     /// <returns>Available derived cases</returns>
     Task<List<TCase>> GetAvailableCasesAsync<TCase>(PayrollServiceContext context, int userId, CaseType caseType,
         IEnumerable<string> caseNames = null, int? employeeId = null, string caseSlot = null, string clusterSetName = null,
-        string culture = null, DateTime? regulationDate = null, DateTime? evaluationDate = null) where TCase : class, ICase;
+        string culture = null, bool? hidden = null, DateTime? regulationDate = null, DateTime? evaluationDate = null) where TCase : class, ICase;
 
     /// <summary>Build case with fields and related cases</summary>
     /// <param name="context">The service context</param>
