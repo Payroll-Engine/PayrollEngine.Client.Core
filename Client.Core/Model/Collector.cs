@@ -15,7 +15,6 @@ public class Collector : ModelBase, ICollector, INameObject
     public Dictionary<string, string> NameLocalizations { get; set; }
 
     /// <inheritdoc/>
-    [Required]
     public CollectType CollectType { get; set; }
 
     /// <inheritdoc/>

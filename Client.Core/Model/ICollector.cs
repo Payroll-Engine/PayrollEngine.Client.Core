@@ -5,7 +5,7 @@ namespace PayrollEngine.Client.Model;
 /// <summary>The payroll collector client object</summary>
 public interface ICollector : IModel, IAttributeObject, IKeyEquatable<ICollector>
 {
-    /// <summary>The collection type (immutable)</summary>
+    /// <summary>The collection type (immutable, default: summary)</summary>
     CollectType CollectType { get; set; }
 
     /// <summary>The collector name (immutable)</summary>

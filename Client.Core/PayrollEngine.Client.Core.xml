@@ -4052,7 +4052,7 @@
             <summary>The payroll collector client object</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.ICollector.CollectType">
-            <summary>The collection type (immutable)</summary>
+            <summary>The collection type (immutable, default: summary)</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.ICollector.Name">
             <summary>The collector name (immutable)</summary>
