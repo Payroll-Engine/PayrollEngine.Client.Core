@@ -3095,7 +3095,10 @@
         <member name="P:PayrollEngine.Client.Model.Collector.NameLocalizations">
             <inheritdoc/>
         </member>
-        <member name="P:PayrollEngine.Client.Model.Collector.CollectType">
+        <member name="P:PayrollEngine.Client.Model.Collector.CollectMode">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.Collector.Negated">
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.Collector.OverrideType">
@@ -3221,7 +3224,10 @@
         <member name="P:PayrollEngine.Client.Model.CollectorResult.CollectorNameLocalizations">
             <inheritdoc/>
         </member>
-        <member name="P:PayrollEngine.Client.Model.CollectorResult.CollectType">
+        <member name="P:PayrollEngine.Client.Model.CollectorResult.CollectMode">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.CollectorResult.Negated">
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.CollectorResult.ValueType">
@@ -4051,14 +4057,17 @@
         <member name="T:PayrollEngine.Client.Model.ICollector">
             <summary>The payroll collector client object</summary>
         </member>
-        <member name="P:PayrollEngine.Client.Model.ICollector.CollectType">
-            <summary>The collection type (immutable, default: summary)</summary>
-        </member>
         <member name="P:PayrollEngine.Client.Model.ICollector.Name">
             <summary>The collector name (immutable)</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.ICollector.NameLocalizations">
             <summary>The localized collector names</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.ICollector.CollectMode">
+            <summary>The collect mode (immutable, default: summary)</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.ICollector.Negated">
+            <summary>Negated collector result (immutable, default: false)</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.ICollector.OverrideType">
             <summary>The override type</summary>
@@ -4144,8 +4153,11 @@
         <member name="P:PayrollEngine.Client.Model.ICollectorResult.CollectorNameLocalizations">
             <summary>The localized collector names (immutable)</summary>
         </member>
-        <member name="P:PayrollEngine.Client.Model.ICollectorResult.CollectType">
-            <summary>The collection type (immutable)</summary>
+        <member name="P:PayrollEngine.Client.Model.ICollectorResult.CollectMode">
+            <summary>The collect mode (immutable)</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.ICollectorResult.Negated">
+            <summary>Negated collector result (immutable)</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.ICollectorResult.ValueType">
             <summary>The value type (immutable)</summary>

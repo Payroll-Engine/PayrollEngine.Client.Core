@@ -5,14 +5,17 @@ namespace PayrollEngine.Client.Model;
 /// <summary>The payroll collector client object</summary>
 public interface ICollector : IModel, IAttributeObject, IKeyEquatable<ICollector>
 {
-    /// <summary>The collection type (immutable, default: summary)</summary>
-    CollectType CollectType { get; set; }
-
     /// <summary>The collector name (immutable)</summary>
     string Name { get; set; }
 
     /// <summary>The localized collector names</summary>
     Dictionary<string, string> NameLocalizations { get; set; }
+
+    /// <summary>The collect mode (immutable, default: summary)</summary>
+    CollectMode CollectMode { get; set; }
+
+    /// <summary>Negated collector result (immutable, default: false)</summary>
+    bool Negated { get; set; }
 
     /// <summary>The override type</summary>
     OverrideType OverrideType { get; set; }

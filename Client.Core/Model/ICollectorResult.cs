@@ -18,8 +18,11 @@ public interface ICollectorResult : IModel, IAttributeObject, IEquatable<ICollec
     /// <summary>The localized collector names (immutable)</summary>
     Dictionary<string, string> CollectorNameLocalizations { get; set; }
 
-    /// <summary>The collection type (immutable)</summary>
-    CollectType CollectType { get; set; }
+    /// <summary>The collect mode (immutable)</summary>
+    CollectMode CollectMode { get; set; }
+
+    /// <summary>Negated collector result (immutable)</summary>
+    bool Negated { get; set; }
 
     /// <summary>The value type (immutable)</summary>
     ValueType ValueType { get; set; }

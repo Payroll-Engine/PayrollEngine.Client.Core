@@ -15,7 +15,10 @@ public class Collector : ModelBase, ICollector, INameObject
     public Dictionary<string, string> NameLocalizations { get; set; }
 
     /// <inheritdoc/>
-    public CollectType CollectType { get; set; }
+    public CollectMode CollectMode { get; set; }
+
+    /// <inheritdoc/>
+    public bool Negated { get; set; }
 
     /// <inheritdoc/>
     public OverrideType OverrideType { get; set; }

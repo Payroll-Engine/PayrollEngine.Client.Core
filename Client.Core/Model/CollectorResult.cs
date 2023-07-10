@@ -19,7 +19,10 @@ public class CollectorResult : ModelBase, ICollectorResult
     public Dictionary<string, string> CollectorNameLocalizations { get; set; }
 
     /// <inheritdoc/>
-    public CollectType CollectType { get; set; }
+    public CollectMode CollectMode { get; set; }
+
+    /// <inheritdoc/>
+    public bool Negated { get; set; }
 
     /// <inheritdoc/>
     public ValueType ValueType { get; set; }
