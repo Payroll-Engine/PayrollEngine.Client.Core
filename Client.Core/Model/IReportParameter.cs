@@ -20,6 +20,9 @@ public interface IReportParameter : IModel, IAttributeObject, IKeyEquatable<IRep
     /// <summary>The parameter mandatory state</summary>
     bool Mandatory { get; set; }
 
+    /// <summary>Hidden parameter</summary>
+    bool Hidden { get; set; }
+
     /// <summary>The parameter value (JSON)</summary>
     string Value { get; set; }
 

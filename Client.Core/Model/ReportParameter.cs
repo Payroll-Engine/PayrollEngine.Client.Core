@@ -24,6 +24,9 @@ public class ReportParameter : ModelBase, IReportParameter, INameObject
     public bool Mandatory { get; set; }
 
     /// <inheritdoc/>
+    public bool Hidden { get; set; }
+
+    /// <inheritdoc/>
     public string Value { get; set; }
 
     /// <inheritdoc/>

@@ -5128,6 +5128,9 @@
         <member name="P:PayrollEngine.Client.Model.IReportParameter.Mandatory">
             <summary>The parameter mandatory state</summary>
         </member>
+        <member name="P:PayrollEngine.Client.Model.IReportParameter.Hidden">
+            <summary>Hidden parameter</summary>
+        </member>
         <member name="P:PayrollEngine.Client.Model.IReportParameter.Value">
             <summary>The parameter value (JSON)</summary>
         </member>
@@ -6759,6 +6762,9 @@
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.ReportParameter.Mandatory">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.ReportParameter.Hidden">
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.ReportParameter.Value">
