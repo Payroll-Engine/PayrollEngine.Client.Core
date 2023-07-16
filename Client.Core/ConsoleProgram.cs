@@ -185,27 +185,23 @@ public abstract class ConsoleProgram<TApp> : ConsoleToolBase, IDisposable
     /// <summary>Show the connection status, default is true</summary>
     protected virtual bool ShowConnectionInfo => true;
 
-    /// <summary>Get the http configuration</summary>
-    protected virtual Task<PayrollHttpConfiguration> GetHttpConfigurationAsync() =>
-        Task.FromResult(Configuration.GetConfiguration<PayrollHttpConfiguration>());
-
     /// <summary>Setup the http client</summary>
     protected virtual async Task<bool> SetupHttpClientAsync()
     {
         // http client configuration
-        var configuration = await GetHttpConfigurationAsync();
-        if (configuration == null)
+        var httpConfiguration = Configuration.Configuration.GetHttpConfiguration();
+        if (httpConfiguration == null)
         {
             throw new PayrollException("Missing payroll http client configuration");
         }
 
         if (ShowConnectionInfo)
         {
-            WriteInfo($"Connecting to {configuration}...");
+            WriteInfo($"Connecting to {httpConfiguration}...");
         }
 
         // create client
-        HttpClient = new(configuration);
+        HttpClient = new(httpConfiguration);
         if (LogLifecycle)
         {
             Log.Information($"Connected http client to {HttpClient.Address}");

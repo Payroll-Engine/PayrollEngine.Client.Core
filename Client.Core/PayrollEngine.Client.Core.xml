@@ -91,6 +91,12 @@
         <member name="M:PayrollEngine.Client.CompanyCaseApiEndpoints.CompanyCaseChangeUrl(System.Int32,System.Int32)">
             <summary>The company case change URL</summary>
         </member>
+        <member name="T:PayrollEngine.Client.ConfigurationExtensions">
+            <summary>Extension methods for <see cref="T:Microsoft.Extensions.Configuration.IConfiguration"/></summary>
+        </member>
+        <member name="M:PayrollEngine.Client.ConfigurationExtensions.GetHttpConfiguration(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>Get the http configuration</summary>
+        </member>
         <member name="T:PayrollEngine.Client.ConsoleArguments">
             <summary>Represents the environment command line arguments</summary>
         </member>
@@ -249,9 +255,6 @@
         </member>
         <member name="P:PayrollEngine.Client.ConsoleProgram`1.ShowConnectionInfo">
             <summary>Show the connection status, default is true</summary>
-        </member>
-        <member name="M:PayrollEngine.Client.ConsoleProgram`1.GetHttpConfigurationAsync">
-            <summary>Get the http configuration</summary>
         </member>
         <member name="M:PayrollEngine.Client.ConsoleProgram`1.SetupHttpClientAsync">
             <summary>Setup the http client</summary>
