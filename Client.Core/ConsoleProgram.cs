@@ -126,6 +126,7 @@ public abstract class ConsoleProgram<TApp> : ConsoleToolBase, IDisposable
             catch (Exception errorException)
             {
                 var message = $"Error in program error handling: {errorException}";
+                EnsureExitCode();
                 Log.Critical(message);
                 WriteErrorLine(message);
                 PressAnyKey();
@@ -140,10 +141,19 @@ public abstract class ConsoleProgram<TApp> : ConsoleToolBase, IDisposable
             catch (Exception shutdownException)
             {
                 var message = $"Error in program shutdown: {shutdownException}";
+                EnsureExitCode();
                 Log.Critical(message);
                 WriteErrorLine(message);
                 PressAnyKey();
             }
+        }
+    }
+
+    private static void EnsureExitCode()
+    {
+        if (Environment.ExitCode == 0)
+        {
+            Environment.ExitCode = -10;
         }
     }
 

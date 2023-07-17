@@ -1116,7 +1116,6 @@
         </member>
         <member name="M:PayrollEngine.Client.Exchange.NamespaceUpdateTool.VisitLookupAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.ILookupSet)">
             <inheritdoc />
-            <inheritdoc />
         </member>
         <member name="M:PayrollEngine.Client.Exchange.NamespaceUpdateTool.VisitRegulationAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet)">
             <inheritdoc />
