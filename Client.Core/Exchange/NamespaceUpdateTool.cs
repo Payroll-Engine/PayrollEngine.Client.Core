@@ -251,7 +251,6 @@ public class NamespaceUpdateTool : Visitor
     }
 
     /// <inheritdoc />
-    /// <inheritdoc />
     protected override async Task VisitLookupAsync(IExchangeTenant tenant, IRegulationSet regulation, ILookupSet lookup)
     {
         lookup.Name = ApplyNamespace(lookup.Name);
