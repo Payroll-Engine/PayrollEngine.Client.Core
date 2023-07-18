@@ -199,7 +199,7 @@ public abstract class ConsoleProgram<TApp> : ConsoleToolBase, IDisposable
     protected virtual async Task<bool> SetupHttpClientAsync()
     {
         // http client configuration
-        var httpConfiguration = Configuration.Configuration.GetHttpConfiguration();
+        var httpConfiguration = await Configuration.Configuration.GetHttpConfigurationAsync();
         if (httpConfiguration == null)
         {
             throw new PayrollException("Missing payroll http client configuration");

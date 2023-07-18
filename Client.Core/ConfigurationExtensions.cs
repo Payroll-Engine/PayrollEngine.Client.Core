@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 
 namespace PayrollEngine.Client;
@@ -7,14 +9,22 @@ namespace PayrollEngine.Client;
 public static class ConfigurationExtensions
 {
     /// <summary>Get the http configuration</summary>
-    public static PayrollHttpConfiguration GetHttpConfiguration(this IConfiguration configuration)
+    public static async Task<PayrollHttpConfiguration> GetHttpConfigurationAsync(this IConfiguration configuration)
     {
         // priority 1: application configuration
         var httpConfiguration = configuration.GetConfiguration<PayrollHttpConfiguration>();
 
-        // priority 2: environment variables
-        var backendUrl = Environment.GetEnvironmentVariable(SystemSpecification.BackendUrlVariable);
-        var backendPort = Environment.GetEnvironmentVariable(SystemSpecification.BackendPortVariable);
+        // priority 2: shared configuration
+        var sharedConfigFileName = Environment.GetEnvironmentVariable(SystemSpecification.PayrollConfigurationVariable);
+        if (string.IsNullOrWhiteSpace(sharedConfigFileName) || !File.Exists(sharedConfigFileName))
+        {
+            return httpConfiguration;
+        }
+
+        // priority 2: shared configuration
+        var sharedConfig = await SharedConfiguration.ReadAsync();
+        sharedConfig.TryGetValue(PayrollApiSpecification.BackendUrlSetting, out var backendUrl);
+        sharedConfig.TryGetValue(PayrollApiSpecification.BackendPortSetting, out var backendPort);
         var port = 0;
         if (!string.IsNullOrWhiteSpace(backendPort))
         {

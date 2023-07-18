@@ -94,7 +94,7 @@
         <member name="T:PayrollEngine.Client.ConfigurationExtensions">
             <summary>Extension methods for <see cref="T:Microsoft.Extensions.Configuration.IConfiguration"/></summary>
         </member>
-        <member name="M:PayrollEngine.Client.ConfigurationExtensions.GetHttpConfiguration(Microsoft.Extensions.Configuration.IConfiguration)">
+        <member name="M:PayrollEngine.Client.ConfigurationExtensions.GetHttpConfigurationAsync(Microsoft.Extensions.Configuration.IConfiguration)">
             <summary>Get the http configuration</summary>
         </member>
         <member name="T:PayrollEngine.Client.ConsoleArguments">
@@ -7607,6 +7607,12 @@
             <summary>
             The Payroll Api specification
             </summary>
+        </member>
+        <member name="F:PayrollEngine.Client.PayrollApiSpecification.BackendUrlSetting">
+            <summary>Setting name for the payroll backend url</summary>
+        </member>
+        <member name="F:PayrollEngine.Client.PayrollApiSpecification.BackendPortSetting">
+            <summary>Setting name for the payroll backend port</summary>
         </member>
         <member name="P:PayrollEngine.Client.PayrollApiSpecification.CurrentApiVersion">
             <summary>

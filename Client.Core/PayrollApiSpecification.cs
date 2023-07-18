@@ -7,6 +7,12 @@ namespace PayrollEngine.Client
     /// </summary>
     public static class PayrollApiSpecification
     {
+        /// <summary>Setting name for the payroll backend url</summary>
+        public static readonly string BackendUrlSetting = "BackendUrl";
+
+        /// <summary>Setting name for the payroll backend port</summary>
+        public static readonly string BackendPortSetting = "BackendPort";
+
         /// <summary>
         /// The current API version
         /// <remarks>Update backend version changes here</remarks>
