@@ -168,7 +168,7 @@ public abstract class ExchangeImportVisitor : Visitor
 
     /// <summary>Get division</summary>
     /// <param name="tenantId">The tenant id</param>
-    /// <param name="name">The division name</param>
+    /// <param name="name">The division identifier</param>
     protected virtual async Task<Division> GetDivisionAsync(int tenantId, string name) =>
         await new DivisionService(HttpClient).GetAsync<Division>(new(tenantId), name);
 

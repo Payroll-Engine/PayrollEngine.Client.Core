@@ -167,20 +167,24 @@ public class UserService : ServiceBase, IUserService
     }
 
     /// <inheritdoc />
-    public virtual async Task UpdatePasswordAsync(TenantServiceContext context, int userId, string password)
+    public virtual async Task UpdatePasswordAsync(TenantServiceContext context, int userId, PasswordChangeRequest changeRequest)
     {
         if (context == null)
         {
             throw new ArgumentNullException(nameof(context));
         }
-        if (string.IsNullOrWhiteSpace(password))
+        if (changeRequest == null)
         {
-            throw new ArgumentException(nameof(password));
+            throw new ArgumentNullException(nameof(changeRequest));
+        }
+        if (string.IsNullOrWhiteSpace(changeRequest.NewPassword))
+        {
+            throw new ArgumentException(nameof(changeRequest.NewPassword));
         }
 
         // update user password: 200/Ok or 403/Forbidden
         await HttpClient.PutAsync(TenantApiEndpoints.UserPasswordUrl(context.TenantId, userId),
-            DefaultJsonSerializer.SerializeJson(DefaultJsonSerializer.Serialize(password)));
+            DefaultJsonSerializer.SerializeJson(DefaultJsonSerializer.Serialize(changeRequest)));
     }
 
     /// <inheritdoc />

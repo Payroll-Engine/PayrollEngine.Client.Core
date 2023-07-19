@@ -746,7 +746,7 @@
         <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.GetDivisionAsync(System.Int32,System.String)">
             <summary>Get division</summary>
             <param name="tenantId">The tenant id</param>
-            <param name="name">The division name</param>
+            <param name="name">The division identifier</param>
         </member>
         <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.VisitDivisionAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IDivision)">
             <summary>Visit the division</summary>
@@ -10451,7 +10451,7 @@
         <member name="M:PayrollEngine.Client.Service.Api.UserService.TestPasswordAsync(PayrollEngine.Client.Service.TenantServiceContext,System.Int32,System.String)">
             <inheritdoc />
         </member>
-        <member name="M:PayrollEngine.Client.Service.Api.UserService.UpdatePasswordAsync(PayrollEngine.Client.Service.TenantServiceContext,System.Int32,System.String)">
+        <member name="M:PayrollEngine.Client.Service.Api.UserService.UpdatePasswordAsync(PayrollEngine.Client.Service.TenantServiceContext,System.Int32,PayrollEngine.PasswordChangeRequest)">
             <inheritdoc />
         </member>
         <member name="M:PayrollEngine.Client.Service.Api.UserService.GetAttributeAsync(PayrollEngine.Client.Service.TenantServiceContext,System.Int32,System.String)">
@@ -11618,13 +11618,14 @@
             <param name="password">The new user password</param>
             <returns>True for a valid password</returns>
         </member>
-        <member name="M:PayrollEngine.Client.Service.IUserService.UpdatePasswordAsync(PayrollEngine.Client.Service.TenantServiceContext,System.Int32,System.String)">
+        <member name="M:PayrollEngine.Client.Service.IUserService.UpdatePasswordAsync(PayrollEngine.Client.Service.TenantServiceContext,System.Int32,PayrollEngine.PasswordChangeRequest)">
             <summary>
             Update the user password
             </summary>
             <param name="context">The service context</param>
             <param name="userId">The user id</param>
-            <param name="password">The new user password, use null to reset the password</param>
+            <param name="changeRequest">The password change request including the existing and new password</param>
+            <remarks>The existing password is mandatory on password change</remarks>
             <returns>The updated user</returns>
         </member>
         <member name="T:PayrollEngine.Client.Service.IWageTypeService">

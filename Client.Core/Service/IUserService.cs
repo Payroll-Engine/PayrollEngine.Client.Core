@@ -27,7 +27,8 @@ public interface IUserService : ICrudService<IUser, TenantServiceContext, Query>
     /// </summary>
     /// <param name="context">The service context</param>
     /// <param name="userId">The user id</param>
-    /// <param name="password">The new user password, use null to reset the password</param>
+    /// <param name="changeRequest">The password change request including the existing and new password</param>
+    /// <remarks>The existing password is mandatory on password change</remarks>
     /// <returns>The updated user</returns>
-    Task UpdatePasswordAsync(TenantServiceContext context, int userId, string password);
+    Task UpdatePasswordAsync(TenantServiceContext context, int userId, PasswordChangeRequest changeRequest);
 }
