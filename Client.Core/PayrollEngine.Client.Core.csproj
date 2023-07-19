@@ -73,7 +73,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="PayrollEngine.Core" Version="0.5.0-230719" />
+		<PackageReference Include="PayrollEngine.Core" Version="0.5.0-230719-2" />
 	</ItemGroup>
 
 	<!-- include xml documention files and json schemas to the nuget package -->
