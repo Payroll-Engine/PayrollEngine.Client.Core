@@ -7614,6 +7614,9 @@
         <member name="F:PayrollEngine.Client.PayrollApiSpecification.BackendPortSetting">
             <summary>Setting name for the payroll backend port</summary>
         </member>
+        <member name="F:PayrollEngine.Client.PayrollApiSpecification.TenantAuthorizationHeader">
+            <summary>Tenant authorization header</summary>
+        </member>
         <member name="P:PayrollEngine.Client.PayrollApiSpecification.CurrentApiVersion">
             <summary>
             The current API version
@@ -7668,6 +7671,22 @@
             <summary>New instance of the payroll http client with a custom http client</summary>
             <param name="httpClient">The HTTP client</param>
             <param name="version">The request version</param>
+        </member>
+        <member name="M:PayrollEngine.Client.PayrollHttpClient.HasTenantAuthorization">
+            <summary>
+            Test for tenant authorization
+            </summary>
+        </member>
+        <member name="M:PayrollEngine.Client.PayrollHttpClient.SetTenantAuthorization(System.String)">
+            <summary>
+            Set the tenant authorization
+            </summary>
+            <param name="tenantIdentifier">The tenant identifier</param>
+        </member>
+        <member name="M:PayrollEngine.Client.PayrollHttpClient.RemoveTenantAuthorization">
+            <summary>
+            Remove the tenant authorization
+            </summary>
         </member>
         <member name="P:PayrollEngine.Client.PayrollHttpClient.Address">
             <summary>

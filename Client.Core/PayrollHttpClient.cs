@@ -95,6 +95,45 @@ public sealed class PayrollHttpClient : IDisposable
 
     #endregion
 
+    #region Authorization
+
+    /// <summary>
+    /// Test for tenant authorization
+    /// </summary>
+    public bool HasTenantAuthorization() =>
+        httpClient.DefaultRequestHeaders.Contains(PayrollApiSpecification.TenantAuthorizationHeader);
+
+    /// <summary>
+    /// Set the tenant authorization
+    /// </summary>
+    /// <param name="tenantIdentifier">The tenant identifier</param>
+    public void SetTenantAuthorization(string tenantIdentifier)
+    {
+        if (string.IsNullOrWhiteSpace(tenantIdentifier))
+        {
+            throw new ArgumentException(nameof(tenantIdentifier));
+        }
+
+        // remove existing authorization
+        RemoveTenantAuthorization();
+        // set new authorization
+        httpClient.DefaultRequestHeaders.Add(PayrollApiSpecification.TenantAuthorizationHeader, tenantIdentifier);
+    }
+
+    /// <summary>
+    /// Remove the tenant authorization
+    /// </summary>
+    public void RemoveTenantAuthorization()
+    {
+        // remove existing authorization
+        if (HasTenantAuthorization())
+        {
+            httpClient.DefaultRequestHeaders.Remove(PayrollApiSpecification.TenantAuthorizationHeader);
+        }
+    }
+
+    #endregion
+
     #region Connection
 
     /// <summary>

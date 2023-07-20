@@ -13,6 +13,9 @@ namespace PayrollEngine.Client
         /// <summary>Setting name for the payroll backend port</summary>
         public static readonly string BackendPortSetting = "BackendPort";
 
+        /// <summary>Tenant authorization header</summary>
+        public static readonly string TenantAuthorizationHeader = "Auth-Tenant";
+
         /// <summary>
         /// The current API version
         /// <remarks>Update backend version changes here</remarks>
