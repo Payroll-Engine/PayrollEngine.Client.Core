@@ -7,7 +7,6 @@ using PayrollEngine.Client.Scripting.Runtime;
 
 namespace $Namespace$
 {
-    /// <exclude />
     [CaseRelationBuildFunction(
         tenantIdentifier: "$TenantIdentifier$",
         userIdentifier: "$UserIdentifier$",

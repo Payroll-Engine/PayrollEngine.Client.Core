@@ -7,7 +7,6 @@ using PayrollEngine.Client.Scripting.Runtime;
 
 namespace $Namespace$
 {
-    /// <exclude />
     [WageTypeValueFunction(
         tenantIdentifier: "$TenantIdentifier$",
         userIdentifier: "$UserIdentifier$",

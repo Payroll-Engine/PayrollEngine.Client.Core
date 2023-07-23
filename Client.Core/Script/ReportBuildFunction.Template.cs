@@ -8,7 +8,6 @@ using PayrollEngine.Client.Scripting.Runtime;
 
 namespace $Namespace$
 {
-    /// <exclude />
     [ReportBuildFunction(
         tenantIdentifier: "$TenantIdentifier$",
         userIdentifier: "$UserIdentifier$",

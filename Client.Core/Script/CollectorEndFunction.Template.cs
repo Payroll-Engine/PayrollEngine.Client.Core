@@ -7,7 +7,6 @@ using PayrollEngine.Client.Scripting.Runtime;
 
 namespace $Namespace$
 {
-    /// <exclude />
     [CollectorEndFunction(
         tenantIdentifier: "$TenantIdentifier$",
         userIdentifier: "$UserIdentifier$",
