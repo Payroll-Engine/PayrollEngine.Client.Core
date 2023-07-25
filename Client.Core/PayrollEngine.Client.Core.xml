@@ -256,6 +256,9 @@
         <member name="P:PayrollEngine.Client.ConsoleProgram`1.ShowConnectionInfo">
             <summary>Show the connection status, default is true</summary>
         </member>
+        <member name="M:PayrollEngine.Client.ConsoleProgram`1.GetHttpConfigurationAsync">
+            <summary>Get the http configuration</summary>
+        </member>
         <member name="M:PayrollEngine.Client.ConsoleProgram`1.SetupHttpClientAsync">
             <summary>Setup the http client</summary>
         </member>
