@@ -93,7 +93,7 @@
 	</ItemGroup>
 
 	<!--  build json schema -->
-	<Target Name="BuildJsonSchema" AfterTargets="Build">
+	<Target Name="BuildJsonSchema" AfterTargets="Build" Condition="exists('$(PayrollEngineSchemaDir)')">
 		<Message Importance="High" Text="Building json schema: $(ProjectDir)$(OutDir)PayrollEngine.Exchange.schema.json" />
 		<Exec Command="JsonSchemaBuilder $(ProjectDir)$(OutDir)PayrollEngine.Client.Core.dll PayrollEngine.Client.Model.Exchange $(ProjectDir)$(OutDir)PayrollEngine.Exchange.schema.json" />
 	</Target>
