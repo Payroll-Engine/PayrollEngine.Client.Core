@@ -11883,6 +11883,12 @@
         <member name="P:PayrollEngine.Client.Service.WebhookServiceContext.WebhookId">
             <summary>The webhook id</summary>
         </member>
+        <member name="T:PayrollEngine.Client.SharedHttpConfiguration">
+            <summary>Http configuration from environment <see cref="F:PayrollEngine.SystemSpecification.PayrollConfigurationVariable"/></summary>
+        </member>
+        <member name="M:PayrollEngine.Client.SharedHttpConfiguration.GetHttpConfigurationAsync">
+            <summary>Get the http configuration</summary>
+        </member>
         <member name="T:PayrollEngine.Client.TenantApiEndpoints">
             <summary>Tenant api endpoints</summary>
         </member>
