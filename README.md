@@ -1,4 +1,4 @@
-<h1>Payroll Engine Client Core</h1>
+# Payroll Engine Client Core
 
 The base library for each Payroll Engine client, defining the commonality between the backend and the clients:
 - Object model: Swagger schema as C# objects
