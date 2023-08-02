@@ -1,5 +1,5 @@
 # Payroll Engine Client Core
-👉 This repository is part of the [Payroll Engine](https://github.com/Payroll-Engine/PayrollEngine/wiki).
+👉 This library is part of the [Payroll Engine](https://github.com/Payroll-Engine/PayrollEngine/wiki).
 
 The base library for each Payroll Engine client, defining the commonality between the backend and the clients:
 - Object model: Swagger schema as C# objects
