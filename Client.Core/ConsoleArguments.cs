@@ -109,7 +109,9 @@ public static class ConsoleArguments
         }
 
         var arg = CommandLineArgs[index];
-        if (!allowToggle && IsToggleArgument(arg))
+        var namedParameter = arg.IndexOf(':') > 0;
+        // ignore other named parameter
+        if (namedParameter || !allowToggle && IsToggleArgument(arg))
         {
             arg = null;
         }
