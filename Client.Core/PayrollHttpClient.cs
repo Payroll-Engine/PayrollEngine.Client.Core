@@ -29,21 +29,27 @@ public sealed class PayrollHttpClient : IDisposable
     /// <summary>New instance of the payroll http client with unknown server certificate, timeout is 100 seconds.
     /// See https://docs.microsoft.com/en-us/dotnet/api/system.net.http.httpclient.timeout
     /// </summary>
+    /// <param name="httpClientHandler">The http client handler</param>
     /// <param name="baseUrl">The Uri the request is sent to</param>
     /// <param name="port">The backend port</param>
     /// <param name="version">The request version</param>
-    public PayrollHttpClient(string baseUrl, int port, Version version = null) :
-        this(baseUrl, port, TimeSpan.FromSeconds(100), version)
+    public PayrollHttpClient(HttpClientHandler httpClientHandler, string baseUrl, int port, Version version = null) :
+        this(httpClientHandler, baseUrl, port, TimeSpan.FromSeconds(100), version)
     {
     }
 
     /// <summary>New instance of the payroll http client with unknown server certificate and request timeout</summary>
+    /// <param name="httpClientHandler">The http client handler</param>
     /// <param name="baseUrl">The Uri the request is sent to</param>
     /// <param name="port">The backend port</param>
     /// <param name="requestTimeout">The request timeout</param>
     /// <param name="version">The request version</param>
-    public PayrollHttpClient(string baseUrl, int port, TimeSpan requestTimeout, Version version = null)
+    public PayrollHttpClient(HttpClientHandler httpClientHandler, string baseUrl, int port, TimeSpan requestTimeout, Version version = null)
     {
+        if (httpClientHandler == null)
+        {
+            throw new ArgumentNullException(nameof(httpClientHandler));
+        }
         if (string.IsNullOrWhiteSpace(baseUrl))
         {
             throw new ArgumentException(nameof(baseUrl));
@@ -51,11 +57,7 @@ public sealed class PayrollHttpClient : IDisposable
         BaseUrl = baseUrl;
         Port = port;
 
-        // http handler
-        var httpClientHandler = new HttpClientHandler
-        {
-            ServerCertificateCustomValidationCallback = (_, _, _, _) => true
-        };
+        // http client
         httpClient = new(httpClientHandler, false)
         {
             BaseAddress = new($"{baseUrl}:{port}/"),
@@ -66,10 +68,11 @@ public sealed class PayrollHttpClient : IDisposable
     }
 
     /// <summary>New instance of the payroll http client with a custom http configuration</summary>
+    /// <param name="httpClientHandler">The http client handler</param>
     /// <param name="configuration">The HTTP configuration</param>
     /// <param name="version">The request version</param>
-    public PayrollHttpClient(PayrollHttpConfiguration configuration, Version version = null) :
-        this(configuration.BaseUrl, configuration.Port, configuration.Timeout, version)
+    public PayrollHttpClient(HttpClientHandler httpClientHandler, PayrollHttpConfiguration configuration, Version version = null) :
+        this(httpClientHandler, configuration.BaseUrl, configuration.Port, configuration.Timeout, version)
     {
     }
 

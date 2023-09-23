@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Globalization;
+using System.Net.Http;
 using System.Reflection;
 using System.Threading.Tasks;
 
@@ -199,6 +200,10 @@ public abstract class ConsoleProgram<TApp> : ConsoleToolBase, IDisposable
     protected virtual async Task<PayrollHttpConfiguration> GetHttpConfigurationAsync() =>
         await Configuration.Configuration.GetHttpConfigurationAsync();
 
+    /// <summary>Get the http client handler, by default always a valid server certificate</summary>
+    protected virtual async Task<HttpClientHandler> GetHttpClientHandlerAsync() =>
+        await Task.FromResult(new HttpClientHandler());
+
     /// <summary>Setup the http client</summary>
     protected virtual async Task<bool> SetupHttpClientAsync()
     {
@@ -214,8 +219,15 @@ public abstract class ConsoleProgram<TApp> : ConsoleToolBase, IDisposable
             WriteInfo($"Connecting to {httpConfiguration}...");
         }
 
+        // http client handler
+        var httpClientHandler = await GetHttpClientHandlerAsync();
+        if (httpClientHandler == null)
+        {
+            throw new PayrollException("Missing payroll http client handler");
+        }
+
         // create client
-        HttpClient = new(httpConfiguration);
+        HttpClient = new(httpClientHandler, httpConfiguration);
         if (LogLifecycle)
         {
             Log.Information($"Connected http client to {HttpClient.Address}");
@@ -328,7 +340,7 @@ public abstract class ConsoleProgram<TApp> : ConsoleToolBase, IDisposable
     protected virtual string GetProgramVersion()
     {
         var assembly = Assembly.GetEntryAssembly() ?? GetType().Assembly;
-        return "v" + FileVersionInfo.GetVersionInfo(assembly.Location).FileVersion;
+        return "v" + FileVersionInfo.GetVersionInfo(assembly.Location).ProductVersion;
     }
 
     /// <summary>Get the program copyright</summary>

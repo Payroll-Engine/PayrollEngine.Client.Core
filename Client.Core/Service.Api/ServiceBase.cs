@@ -24,8 +24,11 @@ public abstract class ServiceBase
     /// <param name="name">The name of the query key</param>
     /// <param name="value">The query value</param>
     /// <returns>The combined result</returns>
-    protected string AddQueryValue(string uri, string name, object value) =>
-        value != null ? QueryHelpers.AddQueryString(uri, name, value.ToString()) : uri;
+    protected string AddQueryValue(string uri, string name, object value)
+    {
+        var queryValue = value?.ToString();
+        return queryValue != null ? QueryHelpers.AddQueryString(uri, name, queryValue) : uri;
+    }
 
     /// <summary>Append the given query key and date value to the URI</summary>
     /// <param name="uri">The base URI</param>
