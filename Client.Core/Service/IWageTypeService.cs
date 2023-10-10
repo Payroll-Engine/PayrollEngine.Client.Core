@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Globalization;
+using System.Threading.Tasks;
 using PayrollEngine.Client.Model;
 using Task = System.Threading.Tasks.Task;
 
@@ -10,8 +11,9 @@ public interface IWageTypeService : ICrudService<IWageType, RegulationServiceCon
     /// <summary>Get wage type by number</summary>
     /// <param name="context">The service context</param>
     /// <param name="wageTypeNumber">The wage type number</param>
+    /// <param name="culture">The wage type number culture</param>
     /// <returns>The wage type, null if missing</returns>
-    Task<T> GetAsync<T>(RegulationServiceContext context, decimal wageTypeNumber) where T : class, IWageType;
+    Task<T> GetAsync<T>(RegulationServiceContext context, decimal wageTypeNumber, CultureInfo culture) where T : class, IWageType;
 
     /// <summary>Get wage type by name</summary>
     /// <param name="context">The service context</param>
