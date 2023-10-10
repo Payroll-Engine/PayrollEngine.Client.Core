@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 using System.Text.Json.Serialization;
 
 namespace PayrollEngine.Client.Model;
@@ -59,9 +60,10 @@ public class CaseFieldSet : CaseField, ICaseFieldSet
         CompareTool.EqualProperties(this, compare);
 
     /// <summary>Get native value</summary>
+    /// <param name="culture">The culture</param>
     /// <returns>The .net value</returns>
-    public virtual object GetValue() =>
-        ValueConvert.ToValue(Value, ValueType);
+    public virtual object GetValue(CultureInfo culture) =>
+        ValueConvert.ToValue(Value, ValueType, culture);
 
     /// <summary>Set native value</summary>
     public virtual void SetValue(object value) =>
