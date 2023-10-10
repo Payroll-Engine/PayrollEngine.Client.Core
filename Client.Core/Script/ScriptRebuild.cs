@@ -75,6 +75,8 @@ public sealed class ScriptRebuild
         {
             throw new PayrollException($"Unknown regulation {regulationName}");
         }
+
+        // case
         var regulationContext = new RegulationServiceContext(TenantId, regulation.Id);
         switch (scriptObject)
         {
