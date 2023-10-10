@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Threading.Tasks;
 using PayrollEngine.Client.Model;
 using Task = System.Threading.Tasks.Task;
@@ -71,13 +70,12 @@ public class WageTypeService : ServiceBase, IWageTypeService
             throw new ArgumentOutOfRangeException(nameof(wageTypeId));
         }
 
-        return await HttpClient.GetAsync<T>( 
+        return await HttpClient.GetAsync<T>(
             RegulationApiEndpoints.RegulationWageTypeUrl(context.TenantId, context.RegulationId, wageTypeId));
     }
 
     /// <inheritdoc />
-    public virtual async Task<T> GetAsync<T>(RegulationServiceContext context, decimal wageTypeNumber,
-        CultureInfo culture) where T : class, IWageType
+    public virtual async Task<T> GetAsync<T>(RegulationServiceContext context, decimal wageTypeNumber) where T : class, IWageType
     {
         if (context == null)
         {
@@ -85,7 +83,7 @@ public class WageTypeService : ServiceBase, IWageTypeService
         }
 
         // query single item
-        var query = QueryFactory.NewEqualFilterQuery(nameof(wageTypeNumber), wageTypeNumber.ToString(culture));
+        var query = QueryFactory.NewEqualFilterQuery(nameof(wageTypeNumber), wageTypeNumber);
         var uri = query.AppendQueryString(RegulationApiEndpoints.RegulationWageTypesUrl(context.TenantId, context.RegulationId));
         return await HttpClient.GetSingleAsync<T>(uri);
     }

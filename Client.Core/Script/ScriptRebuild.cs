@@ -29,14 +29,6 @@ public sealed class ScriptRebuild
     /// <param name="regulationName">The item name or identifier</param>
     public async Task RebuildRegulationAsync(string regulationName)
     {
-
-        // tenant
-        var tenant = await new TenantService(HttpClient).GetAsync<Tenant>(new(), TenantId);
-        if (tenant == null)
-        {
-            throw new PayrollException($"Unknown tenant with id {TenantId}");
-        }
-
         // regulation
         var tenantContext = new TenantServiceContext(TenantId);
         var regulation = await new RegulationService(HttpClient).GetAsync<Regulation>(tenantContext, regulationName);
@@ -44,10 +36,8 @@ public sealed class ScriptRebuild
         {
             throw new PayrollException($"Unknown regulation {regulationName}");
         }
-
-        // rebuild
         var regulationContext = new RegulationServiceContext(TenantId, regulation.Id);
-        await RebuildRegulationAsync(tenant, regulationContext);
+        await RebuildRegulationAsync(regulationContext);
     }
 
     /// <summary>Rebuild a regulation object script</summary>
@@ -59,13 +49,6 @@ public sealed class ScriptRebuild
         if (string.IsNullOrWhiteSpace(regulationName))
         {
             throw new ArgumentException(nameof(regulationName));
-        }
-
-        // tenant
-        var tenant = await new TenantService(HttpClient).GetAsync<Tenant>(new(), TenantId);
-        if (tenant == null)
-        {
-            throw new PayrollException($"Unknown tenant with id {TenantId}");
         }
 
         // regulation
@@ -88,7 +71,7 @@ public sealed class ScriptRebuild
                 await RebuildCollectorAsync(regulationContext, objectKey);
                 break;
             case RegulationScriptObject.WageType:
-                await RebuildWageTypeAsync(tenant, regulationContext, objectKey);
+                await RebuildWageTypeAsync(regulationContext, objectKey);
                 break;
             case RegulationScriptObject.Report:
                 await RebuildReportAsync(regulationContext, objectKey);
@@ -118,7 +101,7 @@ public sealed class ScriptRebuild
         }
     }
 
-    private async Task RebuildRegulationAsync(Tenant tenant, RegulationServiceContext regulationContext)
+    private async Task RebuildRegulationAsync(RegulationServiceContext regulationContext)
     {
         // cases
         await RebuildCaseAsync(regulationContext);
@@ -127,7 +110,7 @@ public sealed class ScriptRebuild
         // collectors
         await RebuildCollectorAsync(regulationContext);
         // wage types
-        await RebuildWageTypeAsync(tenant, regulationContext);
+        await RebuildWageTypeAsync(regulationContext);
         // reports
         await RebuildReportAsync(regulationContext);
     }
@@ -205,7 +188,7 @@ public sealed class ScriptRebuild
         }
     }
 
-    private async Task RebuildWageTypeAsync(Tenant tenant, RegulationServiceContext regulationContext, string objectKey = null)
+    private async Task RebuildWageTypeAsync(RegulationServiceContext regulationContext, string objectKey = null)
     {
         var wageTypeService = new WageTypeService(HttpClient);
         if (string.IsNullOrWhiteSpace(objectKey))
@@ -218,22 +201,12 @@ public sealed class ScriptRebuild
         }
         else
         {
-            // culture
-            var culture = CultureInfo.CurrentCulture;
-            if (!string.IsNullOrWhiteSpace(tenant.Culture) && !string.Equals(tenant.Culture, culture.Name))
-            {
-                culture = new CultureInfo(tenant.Culture);
-            }
-
-            // wage type
             var wageTypeNumber = decimal.Parse(objectKey, CultureInfo.InvariantCulture);
-            var wageType = await wageTypeService.GetAsync<WageType>(regulationContext, wageTypeNumber, culture);
+            var wageType = await wageTypeService.GetAsync<WageType>(regulationContext, wageTypeNumber);
             if (wageType == null)
             {
                 throw new PayrollException($"Unknown wage type {objectKey}");
             }
-
-            // rebuild
             await wageTypeService.RebuildAsync(regulationContext, wageType.Id);
         }
     }

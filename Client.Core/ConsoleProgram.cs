@@ -3,7 +3,6 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Net.Http;
 using System.Reflection;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace PayrollEngine.Client;
@@ -55,17 +54,14 @@ public abstract class ConsoleProgram<TApp> : ConsoleToolBase, IDisposable
         }
 
         // culture
-        var curCulture = CultureInfo.DefaultThreadCurrentCulture ?? CultureInfo.InvariantCulture;
-        var cultureName = await GetProgramCultureAsync();
-        if (!string.IsNullOrWhiteSpace(cultureName) &&
-            !string.Equals(curCulture.Name, cultureName))
+        var culture = await GetProgramCultureAsync();
+        if (!string.IsNullOrWhiteSpace(culture) &&
+            !string.Equals(CultureInfo.CurrentCulture.Name, culture))
         {
-            var culture = new CultureInfo(cultureName);
-            CultureInfo.DefaultThreadCurrentCulture = culture;
-            Thread.CurrentThread.CurrentCulture = culture;
+            CultureInfo.CurrentCulture = new(culture);
             if (LogLifecycle)
             {
-                Log.Information($"Culture changed to {cultureName}");
+                Log.Information($"Culture changed to {culture}");
             }
         }
 

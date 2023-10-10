@@ -2564,9 +2564,8 @@
         <member name="M:PayrollEngine.Client.Model.CaseFieldSet.Equals(PayrollEngine.Client.Model.ICaseFieldSet)">
             <inheritdoc/>
         </member>
-        <member name="M:PayrollEngine.Client.Model.CaseFieldSet.GetValue(System.Globalization.CultureInfo)">
+        <member name="M:PayrollEngine.Client.Model.CaseFieldSet.GetValue">
             <summary>Get native value</summary>
-            <param name="culture">The culture</param>
             <returns>The .net value</returns>
         </member>
         <member name="M:PayrollEngine.Client.Model.CaseFieldSet.SetValue(System.Object)">
@@ -10545,7 +10544,7 @@
         <member name="M:PayrollEngine.Client.Service.Api.WageTypeService.GetAsync``1(PayrollEngine.Client.Service.RegulationServiceContext,System.Int32)">
             <inheritdoc />
         </member>
-        <member name="M:PayrollEngine.Client.Service.Api.WageTypeService.GetAsync``1(PayrollEngine.Client.Service.RegulationServiceContext,System.Decimal,System.Globalization.CultureInfo)">
+        <member name="M:PayrollEngine.Client.Service.Api.WageTypeService.GetAsync``1(PayrollEngine.Client.Service.RegulationServiceContext,System.Decimal)">
             <inheritdoc />
         </member>
         <member name="M:PayrollEngine.Client.Service.Api.WageTypeService.GetAsync``1(PayrollEngine.Client.Service.RegulationServiceContext,System.String)">
@@ -11694,11 +11693,10 @@
         <member name="T:PayrollEngine.Client.Service.IWageTypeService">
             <summary>Payroll wage type service</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Service.IWageTypeService.GetAsync``1(PayrollEngine.Client.Service.RegulationServiceContext,System.Decimal,System.Globalization.CultureInfo)">
+        <member name="M:PayrollEngine.Client.Service.IWageTypeService.GetAsync``1(PayrollEngine.Client.Service.RegulationServiceContext,System.Decimal)">
             <summary>Get wage type by number</summary>
             <param name="context">The service context</param>
             <param name="wageTypeNumber">The wage type number</param>
-            <param name="culture">The wage type number culture</param>
             <returns>The wage type, null if missing</returns>
         </member>
         <member name="M:PayrollEngine.Client.Service.IWageTypeService.GetAsync``1(PayrollEngine.Client.Service.RegulationServiceContext,System.String)">

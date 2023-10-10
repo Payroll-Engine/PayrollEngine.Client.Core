@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using PayrollEngine.Client.Model;
 using PayrollEngine.Client.Script;
 using PayrollEngine.Client.Service.Api;
-using Calendar = PayrollEngine.Client.Model.Calendar;
 using Task = System.Threading.Tasks.Task;
 
 namespace PayrollEngine.Client.Exchange;
@@ -80,11 +78,6 @@ public abstract class ExchangeImportVisitor : Visitor
     {
         // exchange tenant
         var targetTenant = TargetLoad ? await GetTenantAsync(tenant.Identifier) : null;
-        if (targetTenant != null && string.IsNullOrWhiteSpace(tenant.Culture))
-        {
-            tenant.Culture = targetTenant.Culture;
-        }
-
         await SetupTenantAsync(tenant, targetTenant);
 
         await base.VisitExchangeTenantAsync(tenant);
@@ -686,16 +679,9 @@ public abstract class ExchangeImportVisitor : Visitor
             }
         }
 
-        // culture
-        var culture = CultureInfo.CurrentCulture;
-        if (!string.IsNullOrWhiteSpace(tenant.Culture) && !string.Equals(tenant.Culture, culture.Name))
-        {
-            culture = new CultureInfo(tenant.Culture);
-        }
-
         // get wage type
         var target = TargetLoad ? await new WageTypeService(HttpClient).GetAsync<WageType>(
-            new(tenant.Id, regulation.Id), wageType.WageTypeNumber, culture) : null;
+            new(tenant.Id, regulation.Id), wageType.WageTypeNumber) : null;
 
         // setup wage type
         await SetupWageTypeAsync(tenant, regulation, wageType, target);
