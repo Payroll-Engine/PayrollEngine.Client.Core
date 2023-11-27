@@ -3,6 +3,4 @@
 namespace PayrollEngine.Client.Service;
 
 /// <summary>Regulation share service</summary>
-public interface IRegulationShareService : ICrudService<IRegulationShare, RootServiceContext, Query>, IAttributeService<RootServiceContext>
-{
-}
+public interface IRegulationShareService : ICrudService<IRegulationShare, RootServiceContext, Query>, IAttributeService<RootServiceContext>;

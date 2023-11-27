@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.Serialization;
 
 namespace PayrollEngine.Client;
 
@@ -20,12 +19,6 @@ public class ScriptPublishException : PayrollException
     /// <inheritdoc/>
     public ScriptPublishException(string message, Exception innerException) :
         base(message, innerException)
-    {
-    }
-
-    /// <inheritdoc/>
-    protected ScriptPublishException(SerializationInfo info, StreamingContext context) :
-        base(info, context)
     {
     }
 }

@@ -8710,9 +8710,6 @@
         <member name="M:PayrollEngine.Client.ScriptPublishException.#ctor(System.String,System.Exception)">
             <inheritdoc/>
         </member>
-        <member name="M:PayrollEngine.Client.ScriptPublishException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
-            <inheritdoc/>
-        </member>
         <member name="T:PayrollEngine.Client.Script.DevelopmentScript">
             <summary>Script for development</summary>
         </member>

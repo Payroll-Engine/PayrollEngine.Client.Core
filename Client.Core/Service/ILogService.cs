@@ -3,6 +3,4 @@
 namespace PayrollEngine.Client.Service;
 
 /// <summary>Payroll log service</summary>
-public interface ILogService : ICrudService<ILog, TenantServiceContext, Query>
-{
-}
+public interface ILogService : ICrudService<ILog, TenantServiceContext, Query>;

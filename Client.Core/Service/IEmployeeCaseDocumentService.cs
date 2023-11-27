@@ -3,6 +3,4 @@
 namespace PayrollEngine.Client.Service;
 
 /// <summary>Payroll employee case document service</summary>
-public interface IEmployeeCaseDocumentService : IReadService<ICaseDocument, EmployeeCaseValueServiceContext, Query>
-{
-}
+public interface IEmployeeCaseDocumentService : IReadService<ICaseDocument, EmployeeCaseValueServiceContext, Query>;
