@@ -102,8 +102,8 @@ public static class CaseSetExtensions
 
     private sealed class DerivedCaseNameChecker
     {
-        private readonly HashSet<string> caseNames = new();
-        private readonly HashSet<string> caseFieldNames = new();
+        private readonly HashSet<string> caseNames = [];
+        private readonly HashSet<string> caseFieldNames = [];
 
         internal void Check(CaseSet caseSet)
         {
@@ -117,11 +117,10 @@ public static class CaseSetExtensions
             {
                 throw new PayrollException($"Case {caseSet.Id} without name");
             }
-            if (caseNames.Contains(caseSet.Name))
+            if (!caseNames.Add(caseSet.Name))
             {
                 throw new PayrollException($"Duplicated case name {caseSet.Name}");
             }
-            caseNames.Add(caseSet.Name);
 
             // case field names
             if (caseSet.Fields != null)
@@ -132,11 +131,10 @@ public static class CaseSetExtensions
                     {
                         throw new PayrollException($"Case field {field.Id} without name");
                     }
-                    if (caseFieldNames.Contains(field.Name))
+                    if (!caseFieldNames.Add(field.Name))
                     {
                         throw new PayrollException($"Duplicated case field name {field.Name}");
                     }
-                    caseFieldNames.Add(field.Name);
                 }
             }
 

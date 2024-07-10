@@ -90,7 +90,7 @@ public abstract class ExchangeImportVisitor : Visitor
         await base.VisitExchangeTenantAsync(tenant);
     }
 
-    /// <summary>Setup the tenant</summary>
+    /// <summary>Tenant setup</summary>
     /// <param name="tenant">The exchange tenant</param>
     /// <param name="targetTenant">The target tenant</param>
     protected virtual async Task SetupTenantAsync(IExchangeTenant tenant, ITenant targetTenant)
@@ -127,7 +127,7 @@ public abstract class ExchangeImportVisitor : Visitor
         await base.VisitUserAsync(tenant, user);
     }
 
-    /// <summary>Setup the user</summary>
+    /// <summary>USer setup</summary>
     /// <param name="tenant">The exchange tenant</param>
     /// <param name="user">The user</param>
     /// <param name="targetUser">The target user</param>
@@ -160,7 +160,7 @@ public abstract class ExchangeImportVisitor : Visitor
         await base.VisitCalendarAsync(tenant, calendar);
     }
 
-    /// <summary>Setup the user</summary>
+    /// <summary>USer setup</summary>
     /// <param name="tenant">The exchange tenant</param>
     /// <param name="calendar">The calendar</param>
     /// <param name="targetCalendar">The target calendar</param>
@@ -193,7 +193,7 @@ public abstract class ExchangeImportVisitor : Visitor
         await base.VisitDivisionAsync(tenant, division);
     }
 
-    /// <summary>Setup the user</summary>
+    /// <summary>Division setup</summary>
     /// <param name="tenant">The exchange tenant</param>
     /// <param name="division">The division</param>
     /// <param name="targetDivision">The target division</param>
@@ -221,7 +221,7 @@ public abstract class ExchangeImportVisitor : Visitor
         await base.VisitWebhookAsync(tenant, webhook);
     }
 
-    /// <summary>Setup the webhook</summary>
+    /// <summary>Webhook setup</summary>
     /// <param name="tenant">The exchange tenant</param>
     /// <param name="webhook">The webhook</param>
     /// <param name="targetWebhook">The target webhook</param>
@@ -268,7 +268,7 @@ public abstract class ExchangeImportVisitor : Visitor
         await base.VisitRegulationAsync(tenant, regulation);
     }
 
-    /// <summary>Setup the regulation</summary>
+    /// <summary>Regulation setup</summary>
     /// <param name="tenant">The exchange tenant</param>
     /// <param name="regulation">The regulation</param>
     /// <param name="targetRegulation">The target regulation</param>
@@ -304,7 +304,7 @@ public abstract class ExchangeImportVisitor : Visitor
         await base.VisitLookupAsync(tenant, regulation, lookup);
     }
 
-    /// <summary>Setup the lookup</summary>
+    /// <summary>Lookup setup</summary>
     /// <param name="tenant">The exchange tenant</param>
     /// <param name="regulation">The regulation</param>
     /// <param name="lookup">The lookup</param>
@@ -340,7 +340,7 @@ public abstract class ExchangeImportVisitor : Visitor
         await base.VisitLookupValueAsync(tenant, regulation, lookup, lookupValue);
     }
 
-    /// <summary>Setup the lookup value</summary>
+    /// <summary>Lookup value setup</summary>
     /// <param name="tenant">The exchange tenant</param>
     /// <param name="regulation">The regulation</param>
     /// <param name="lookup">The lookup</param>
@@ -437,7 +437,7 @@ public abstract class ExchangeImportVisitor : Visitor
         await base.VisitCaseAsync(tenant, regulation, caseSet);
     }
 
-    /// <summary>Setup the case</summary>
+    /// <summary>Case setup</summary>
     /// <param name="tenant">The exchange tenant</param>
     /// <param name="regulation">The regulation</param>
     /// <param name="caseSet">The case</param>
@@ -466,7 +466,7 @@ public abstract class ExchangeImportVisitor : Visitor
         await base.VisitCaseFieldAsync(tenant, regulation, caseSet, caseField);
     }
 
-    /// <summary>Setup the case field</summary>
+    /// <summary>Case field setup</summary>
     /// <param name="tenant">The exchange tenant</param>
     /// <param name="regulation">The regulation</param>
     /// <param name="caseSet">The case</param>
@@ -543,7 +543,7 @@ public abstract class ExchangeImportVisitor : Visitor
         await base.VisitCaseRelationAsync(tenant, regulation, caseRelation);
     }
 
-    /// <summary>Setup the case relation</summary>
+    /// <summary>Case relation setup</summary>
     /// <param name="tenant">The exchange tenant</param>
     /// <param name="regulation">The regulation</param>
     /// <param name="caseRelation">The case relation</param>
@@ -628,7 +628,7 @@ public abstract class ExchangeImportVisitor : Visitor
         await base.VisitCollectorAsync(tenant, regulation, collector);
     }
 
-    /// <summary>Setup the case relation</summary>
+    /// <summary>Case relation setup</summary>
     /// <param name="tenant">The exchange tenant</param>
     /// <param name="regulation">The regulation</param>
     /// <param name="collector">The collector</param>
@@ -703,7 +703,7 @@ public abstract class ExchangeImportVisitor : Visitor
         await base.VisitWageTypeAsync(tenant, regulation, wageType);
     }
 
-    /// <summary>Setup the wage type</summary>
+    /// <summary>Wage type setup</summary>
     /// <param name="tenant">The exchange tenant</param>
     /// <param name="regulation">The regulation</param>
     /// <param name="wageType">The wage type</param>
@@ -748,7 +748,7 @@ public abstract class ExchangeImportVisitor : Visitor
         await base.VisitScriptAsync(tenant, regulation, script);
     }
 
-    /// <summary>Setup the script</summary>
+    /// <summary>Script setup</summary>
     /// <param name="tenant">The exchange tenant</param>
     /// <param name="regulation">The regulation</param>
     /// <param name="script">The script</param>
@@ -833,7 +833,7 @@ public abstract class ExchangeImportVisitor : Visitor
         await base.VisitReportAsync(tenant, regulation, report);
     }
 
-    /// <summary>Setup the report</summary>
+    /// <summary>Report setup</summary>
     /// <param name="tenant">The exchange tenant</param>
     /// <param name="regulation">The regulation</param>
     /// <param name="report">The report</param>
@@ -862,7 +862,7 @@ public abstract class ExchangeImportVisitor : Visitor
         await base.VisitReportParameterAsync(tenant, regulation, report, parameter);
     }
 
-    /// <summary>Setup the report parameter</summary>
+    /// <summary>Report parameter setup</summary>
     /// <param name="tenant">The exchange tenant</param>
     /// <param name="regulation">The regulation</param>
     /// <param name="report">The report</param>
@@ -923,7 +923,7 @@ public abstract class ExchangeImportVisitor : Visitor
         await base.VisitReportTemplateAsync(tenant, regulation, report, template);
     }
 
-    /// <summary>Setup the report template</summary>
+    /// <summary>Report template setup</summary>
     /// <param name="tenant">The exchange tenant</param>
     /// <param name="regulation">The regulation</param>
     /// <param name="report">The report</param>
@@ -960,7 +960,7 @@ public abstract class ExchangeImportVisitor : Visitor
         await base.VisitEmployeeAsync(tenant, employee);
     }
 
-    /// <summary>Setup the employee</summary>
+    /// <summary>Employee setup</summary>
     /// <param name="tenant">The exchange tenant</param>
     /// <param name="employee">The employee</param>
     /// <param name="targetEmployee">The target employee</param>
@@ -1020,7 +1020,7 @@ public abstract class ExchangeImportVisitor : Visitor
         await base.VisitPayrollAsync(tenant, payroll);
     }
 
-    /// <summary>Setup the payroll</summary>
+    /// <summary>Payroll setup</summary>
     /// <param name="tenant">The exchange tenant</param>
     /// <param name="payroll">The payroll</param>
     /// <param name="targetPayroll">The target payroll</param>
@@ -1052,7 +1052,7 @@ public abstract class ExchangeImportVisitor : Visitor
         await base.VisitPayrollLayerAsync(tenant, payroll, layer);
     }
 
-    /// <summary>Setup the payroll layer</summary>
+    /// <summary>Payroll layer setup</summary>
     /// <param name="tenant">The exchange tenant</param>
     /// <param name="payroll">The payroll</param>
     /// <param name="layer">The payroll layer</param>
@@ -1157,7 +1157,7 @@ public abstract class ExchangeImportVisitor : Visitor
         await base.VisitCaseChangeSetupAsync(tenant, payroll, caseChangeSetup);
     }
 
-    /// <summary>Setup the case change documents</summary>
+    /// <summary>Case change documents setup</summary>
     /// <param name="caseSetup">The case change</param>
     protected virtual void SetupCaseChangeDocuments(ICaseSetup caseSetup)
     {
@@ -1189,7 +1189,7 @@ public abstract class ExchangeImportVisitor : Visitor
         }
     }
 
-    /// <summary>Setup the case change</summary>
+    /// <summary>Case change setup</summary>
     /// <param name="tenant">The exchange tenant</param>
     /// <param name="payroll">The payroll</param>
     /// <param name="caseChangeSetup">The case change</param>

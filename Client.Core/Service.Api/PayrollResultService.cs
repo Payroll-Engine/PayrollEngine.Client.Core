@@ -5,7 +5,7 @@ using PayrollEngine.Client.Model;
 
 namespace PayrollEngine.Client.Service.Api;
 
-/// <summary>Payroll payroll result service</summary>
+/// <summary>Payroll result service</summary>
 public class PayrollResultService : ServiceBase, IPayrollResultService
 {
     /// <summary>Initializes a new instance of the <see cref="PayrollResultService"/> class</summary>

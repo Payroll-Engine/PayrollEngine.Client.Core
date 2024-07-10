@@ -41,7 +41,7 @@ public class Exchange : IExchange
         // tenants
         if (source.Tenants != null)
         {
-            Tenants ??= new();
+            Tenants ??= [];
             foreach (var sourceTenant in source.Tenants)
             {
                 var tenant = Tenants.FirstOrDefault(x => string.Equals(x.Identifier, sourceTenant.Identifier));
@@ -61,7 +61,7 @@ public class Exchange : IExchange
         // regulation shares
         if (source.RegulationShares != null)
         {
-            RegulationShares ??= new();
+            RegulationShares ??= [];
             RegulationShares.AddRange(source.RegulationShares);
         }
 

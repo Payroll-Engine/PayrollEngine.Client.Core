@@ -28,6 +28,6 @@ public interface IEmployeeCaseChangeService : IReadService<ICaseChange, Employee
     /// <summary>Get employee case change by division</summary>
     /// <param name="context">The service context</param>
     /// <param name="query">The case change query</param>
-    /// <returns>The newly case change</returns>
+    /// <returns>The new case change</returns>
     Task<List<T>> GetAsync<T>(EmployeeServiceContext context, CaseChangeQuery query = null)  where T : class, ICaseChange;
 }

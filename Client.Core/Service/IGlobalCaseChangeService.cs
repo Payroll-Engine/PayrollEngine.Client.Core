@@ -28,6 +28,6 @@ public interface IGlobalCaseChangeService : IReadService<ICaseChange, TenantServ
     /// <summary>Get global case change by division</summary>
     /// <param name="context">The service context</param>
     /// <param name="query">The case change query</param>
-    /// <returns>The newly case change</returns>
+    /// <returns>The new case change</returns>
     Task<List<T>> GetAsync<T>(TenantServiceContext context, CaseChangeQuery query = null) where T : class, ICaseChange;
 }

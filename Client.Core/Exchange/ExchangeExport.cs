@@ -63,7 +63,7 @@ public sealed class ExchangeExport
                 throw new PayrollException($"Unknown tenant with id {id}");
             }
 
-            exchange.Tenants ??= new();
+            exchange.Tenants ??= [];
             exchange.Tenants.Add(tenant);
         }
 

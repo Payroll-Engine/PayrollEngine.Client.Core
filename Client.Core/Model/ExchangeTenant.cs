@@ -79,126 +79,126 @@ public class ExchangeTenant : Tenant, IExchangeTenant
         // users
         if (source.Users != null)
         {
-            Users ??= new();
+            Users ??= [];
             Users.AddRange(source.Users);
         }
 
         // calendars
         if (source.Calendars != null)
         {
-            Calendars ??= new();
+            Calendars ??= [];
             Calendars.AddRange(source.Calendars);
         }
 
         // divisions
         if (source.Divisions != null)
         {
-            Divisions ??= new();
+            Divisions ??= [];
             Divisions.AddRange(source.Divisions);
         }
 
         // tasks
         if (source.Tasks != null)
         {
-            Tasks ??= new();
+            Tasks ??= [];
             Tasks.AddRange(source.Tasks);
         }
 
         // webhooks
         if (source.Webhooks != null)
         {
-            Webhooks ??= new();
+            Webhooks ??= [];
             Webhooks.AddRange(source.Webhooks);
         }
 
         // regulations
         if (source.Regulations != null)
         {
-            Regulations ??= new();
+            Regulations ??= [];
             Regulations.AddRange(source.Regulations);
         }
 
         // global cases
         if (source.GlobalCases != null)
         {
-            GlobalCases ??= new();
+            GlobalCases ??= [];
             GlobalCases.AddRange(source.GlobalCases);
         }
 
         // global values
         if (source.GlobalValues != null)
         {
-            GlobalValues ??= new();
+            GlobalValues ??= [];
             GlobalValues.AddRange(source.GlobalValues);
         }
 
         // national cases
         if (source.NationalCases != null)
         {
-            NationalCases ??= new();
+            NationalCases ??= [];
             NationalCases.AddRange(source.NationalCases);
         }
 
         // national values
         if (source.NationalValues != null)
         {
-            NationalValues ??= new();
+            NationalValues ??= [];
             NationalValues.AddRange(source.NationalValues);
         }
 
         // company cases
         if (source.CompanyCases != null)
         {
-            CompanyCases ??= new();
+            CompanyCases ??= [];
             CompanyCases.AddRange(source.CompanyCases);
         }
 
         // company values
         if (source.CompanyValues != null)
         {
-            CompanyValues ??= new();
+            CompanyValues ??= [];
             CompanyValues.AddRange(source.CompanyValues);
         }
 
         // employees
         if (source.Employees != null)
         {
-            Employees ??= new();
+            Employees ??= [];
             Employees.AddRange(source.Employees);
         }
 
         // payrolls
         if (source.Payrolls != null)
         {
-            Payrolls ??= new();
+            Payrolls ??= [];
             Payrolls.AddRange(source.Payrolls);
         }
 
         // payruns
         if (source.Payruns != null)
         {
-            Payruns ??= new();
+            Payruns ??= [];
             Payruns.AddRange(source.Payruns);
         }
 
         // payrun jobs
         if (source.PayrunJobs != null)
         {
-            PayrunJobs ??= new();
+            PayrunJobs ??= [];
             PayrunJobs.AddRange(source.PayrunJobs);
         }
 
         // payrun job invocations
         if (source.PayrunJobInvocations != null)
         {
-            PayrunJobInvocations ??= new();
+            PayrunJobInvocations ??= [];
             PayrunJobInvocations.AddRange(source.PayrunJobInvocations);
         }
 
         // payroll results
         if (source.PayrollResults != null)
         {
-            PayrollResults ??= new();
+            PayrollResults ??= [];
             PayrollResults.AddRange(source.PayrollResults);
         }
     }

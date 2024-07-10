@@ -5,7 +5,7 @@ using PayrollEngine.Client.Model;
 
 namespace PayrollEngine.Client.Service;
 
-/// <summary>Payroll payroll result service</summary>
+/// <summary>Payroll consolidated result service</summary>
 public interface IPayrollConsolidatedResultService
 {
 

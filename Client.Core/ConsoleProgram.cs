@@ -208,7 +208,7 @@ public abstract class ConsoleProgram<TApp> : ConsoleToolBase, IDisposable
     protected virtual async Task<HttpClientHandler> GetHttpClientHandlerAsync() =>
         await Task.FromResult(new HttpClientHandler());
 
-    /// <summary>Setup the http client</summary>
+    /// <summary>Http client setup</summary>
     protected virtual async Task<bool> SetupHttpClientAsync()
     {
         // http client configuration
@@ -261,7 +261,7 @@ public abstract class ConsoleProgram<TApp> : ConsoleToolBase, IDisposable
     /// <summary>The default culture name</summary>
     protected virtual string DefaultCultureName => "en-US";
 
-    /// <summary>Setup the program culture</summary>
+    /// <summary>Program culture setup</summary>
     protected virtual Task<string> GetProgramCultureAsync() =>
         Task.FromResult(DefaultCultureName);
 

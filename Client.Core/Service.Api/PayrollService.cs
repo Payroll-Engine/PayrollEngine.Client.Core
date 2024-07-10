@@ -7,7 +7,7 @@ using Task = System.Threading.Tasks.Task;
 
 namespace PayrollEngine.Client.Service.Api;
 
-/// <summary>Payroll payroll service</summary>
+/// <summary>Payroll  service</summary>
 public class PayrollService : ServiceBase, IPayrollService
 {
     /// <summary>Initializes a new instance of the <see cref="PayrollService"/> class</summary>
@@ -291,7 +291,7 @@ public class PayrollService : ServiceBase, IPayrollService
             .AddQueryString(nameof(evaluationDate), evaluationDate)
             .AddQueryString(nameof(culture), culture);
         var periodValues = await HttpClient.GetAsync<CaseFieldValue[]>(requestUri);
-        return new(periodValues);
+        return [..periodValues];
     }
 
     /// <inheritdoc/>

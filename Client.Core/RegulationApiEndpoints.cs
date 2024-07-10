@@ -27,7 +27,7 @@ public static class RegulationApiEndpoints
     public static string RegulationCaseRebuildUrl(int tenantId, int regulationId, int caseId) =>
         $"{RegulationCaseUrl(tenantId, regulationId, caseId)}/rebuild";
 
-    /// <summary>The regulations cases case field URL</summary>
+    /// <summary>The regulations cases, case field URL</summary>
     public static string RegulationsCasesCaseFieldUrl(int tenantId, string caseFieldName) =>
         $"{RegulationsCasesUrl(tenantId)}/{caseFieldName}";
 

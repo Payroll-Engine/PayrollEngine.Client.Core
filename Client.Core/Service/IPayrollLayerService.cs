@@ -3,7 +3,7 @@ using PayrollEngine.Client.Model;
 
 namespace PayrollEngine.Client.Service;
 
-/// <summary>Payroll payroll layer service</summary>
+/// <summary>Payroll layer service</summary>
 public interface IPayrollLayerService : ICrudService<IPayrollLayer, PayrollServiceContext, Query>, IAttributeService<PayrollServiceContext>
 {
     /// <summary>Get payroll layer by identifier</summary>

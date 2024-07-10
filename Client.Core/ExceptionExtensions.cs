@@ -44,7 +44,7 @@ public static class ExceptionExtensions
         // use first line only, remove the stack trace lines
         var message = exception.GetBaseMessage();
         message = message.Replace("\\r\\n", "\n");
-        var lines = message.Split(new[] { '\n' });
+        var lines = message.Split(['\n']);
         if (lines.Length > 1)
         {
             message = lines[0];

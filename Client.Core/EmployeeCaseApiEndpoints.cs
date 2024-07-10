@@ -11,11 +11,11 @@ public static class EmployeeCaseApiEndpoints
     public static string EmployeeUrl(int tenantId, int employeeId) =>
         $"{EmployeesUrl(tenantId)}/{employeeId}";
 
-    /// <summary>The employe attributes URL</summary>
+    /// <summary>The employee attributes URL</summary>
     public static string EmployeeAttributesUrl(int tenantId, int employeeId) =>
         $"{EmployeeUrl(tenantId, employeeId)}/{ApiEndpoints.AttributesPath()}";
 
-    /// <summary>The employe attribute URL</summary>
+    /// <summary>The employee attribute URL</summary>
     public static string EmployeeAttributeUrl(int tenantId, int employeeId, string attributeName) =>
         $"{EmployeeAttributesUrl(tenantId, employeeId)}/{attributeName}";
 

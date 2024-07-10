@@ -90,7 +90,7 @@ public interface IPayrunJob : IModel, IAttributeObject, IEquatable<IPayrunJob>
     /// <summary>The job finish date (immutable)</summary>
     public DateTime? Finished { get; set; }
 
-    /// <summary>The create reason (immutable)</summary>
+    /// <summary>The created reason (immutable)</summary>
     public string CreatedReason { get; set; }
 
     /// <summary>The release reason (immutable)</summary>

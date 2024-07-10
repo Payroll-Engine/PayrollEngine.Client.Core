@@ -229,7 +229,7 @@ public static class ConsoleArguments
     public static IEnumerable<string> GetToggles() =>
         CommandLineArgs.Where(IsToggleArgument);
 
-    /// <summary>Gets an toggle with fallback value</summary>
+    /// <summary>Gets a toggle with fallback value</summary>
     /// <typeparam name="T">The enum type</typeparam>
     /// <param name="defaultValue">The default value</param>
     /// <returns>The argument value</returns>

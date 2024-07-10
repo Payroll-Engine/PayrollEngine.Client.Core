@@ -75,7 +75,7 @@ public sealed class PayrollScriptExport
         {
             devScripts.Add(new()
             {
-                FunctionTypes = new(script.FunctionTypes),
+                FunctionTypes = [..script.FunctionTypes],
                 OwnerId = script.Id,
                 ScriptName = script.Name,
                 ClassName = script.Name,

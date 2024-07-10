@@ -42,11 +42,11 @@ public static class TenantApiEndpoints
     public static string TenantCalendarsPeriodsUrl(int tenantId) =>
         $"{CalendarsUrl(tenantId)}/periods";
 
-    /// <summary>The calendars cycles URL</summary>
+    /// <summary>The calendar cycles URL</summary>
     public static string TenantCalendarsCyclesUrl(int tenantId) =>
         $"{CalendarsUrl(tenantId)}/cycles";
 
-    /// <summary>The calendars values URL</summary>
+    /// <summary>The calendar values URL</summary>
     public static string TenantCalendarsValuesUrl(int tenantId) =>
         $"{CalendarsUrl(tenantId)}/values";
 

@@ -313,7 +313,7 @@ public sealed class PayrollHttpClient : IDisposable
         var json = await response.Content.ReadAsStringAsync();
         if (string.IsNullOrWhiteSpace(json))
         {
-            return new();
+            return [];
         }
 
         try
@@ -346,7 +346,7 @@ public sealed class PayrollHttpClient : IDisposable
         var response = await GetAsync(requestUri, DefaultJsonSerializer.SerializeJson(content));
         await EnsureSuccessResponse(response);
         var json = await response.Content.ReadAsStringAsync();
-        return string.IsNullOrWhiteSpace(json) ? new() : DefaultJsonSerializer.Deserialize<List<T>>(json);
+        return string.IsNullOrWhiteSpace(json) ? [] : DefaultJsonSerializer.Deserialize<List<T>>(json);
     }
 
     #endregion

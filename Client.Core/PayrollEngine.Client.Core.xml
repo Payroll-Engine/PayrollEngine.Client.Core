@@ -178,7 +178,7 @@
             <returns>The argument value</returns>
         </member>
         <member name="M:PayrollEngine.Client.ConsoleArguments.GetEnumToggle``1(``0)">
-            <summary>Gets an toggle with fallback value</summary>
+            <summary>Gets a toggle with fallback value</summary>
             <typeparam name="T">The enum type</typeparam>
             <param name="defaultValue">The default value</param>
             <returns>The argument value</returns>
@@ -263,13 +263,13 @@
             <summary>Get the http client handler, by default always a valid server certificate</summary>
         </member>
         <member name="M:PayrollEngine.Client.ConsoleProgram`1.SetupHttpClientAsync">
-            <summary>Setup the http client</summary>
+            <summary>Http client setup</summary>
         </member>
         <member name="P:PayrollEngine.Client.ConsoleProgram`1.DefaultCultureName">
             <summary>The default culture name</summary>
         </member>
         <member name="M:PayrollEngine.Client.ConsoleProgram`1.GetProgramCultureAsync">
-            <summary>Setup the program culture</summary>
+            <summary>Program culture setup</summary>
         </member>
         <member name="P:PayrollEngine.Client.ConsoleProgram`1.WaitOnError">
             <summary>Use error confirmation, default is true</summary>
@@ -384,10 +384,10 @@
             <summary>The employee URL</summary>
         </member>
         <member name="M:PayrollEngine.Client.EmployeeCaseApiEndpoints.EmployeeAttributesUrl(System.Int32,System.Int32)">
-            <summary>The employe attributes URL</summary>
+            <summary>The employee attributes URL</summary>
         </member>
         <member name="M:PayrollEngine.Client.EmployeeCaseApiEndpoints.EmployeeAttributeUrl(System.Int32,System.Int32,System.String)">
-            <summary>The employe attribute URL</summary>
+            <summary>The employee attribute URL</summary>
         </member>
         <member name="M:PayrollEngine.Client.EmployeeCaseApiEndpoints.EmployeeCasesUrl(System.Int32,System.Int32)">
             <summary>The employee cases URL</summary>
@@ -713,7 +713,7 @@
             <param name="tenant">The exchange tenant</param>
         </member>
         <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.SetupTenantAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.ITenant)">
-            <summary>Setup the tenant</summary>
+            <summary>Tenant setup</summary>
             <param name="tenant">The exchange tenant</param>
             <param name="targetTenant">The target tenant</param>
         </member>
@@ -728,7 +728,7 @@
             <param name="user">The user</param>
         </member>
         <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.SetupUserAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IUser,PayrollEngine.Client.Model.IUser)">
-            <summary>Setup the user</summary>
+            <summary>USer setup</summary>
             <param name="tenant">The exchange tenant</param>
             <param name="user">The user</param>
             <param name="targetUser">The target user</param>
@@ -744,7 +744,7 @@
             <param name="calendar">The calendar</param>
         </member>
         <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.SetupCalendarAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.ICalendar,PayrollEngine.Client.Model.ICalendar)">
-            <summary>Setup the user</summary>
+            <summary>USer setup</summary>
             <param name="tenant">The exchange tenant</param>
             <param name="calendar">The calendar</param>
             <param name="targetCalendar">The target calendar</param>
@@ -760,7 +760,7 @@
             <param name="division">The division</param>
         </member>
         <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.SetupDivisionAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IDivision,PayrollEngine.Client.Model.IDivision)">
-            <summary>Setup the user</summary>
+            <summary>Division setup</summary>
             <param name="tenant">The exchange tenant</param>
             <param name="division">The division</param>
             <param name="targetDivision">The target division</param>
@@ -771,7 +771,7 @@
             <param name="webhook">The webhook</param>
         </member>
         <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.SetupWebhookAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IWebhook,PayrollEngine.Client.Model.IWebhook)">
-            <summary>Setup the webhook</summary>
+            <summary>Webhook setup</summary>
             <param name="tenant">The exchange tenant</param>
             <param name="webhook">The webhook</param>
             <param name="targetWebhook">The target webhook</param>
@@ -788,7 +788,7 @@
             <param name="regulation">The regulation</param>
         </member>
         <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.SetupRegulationAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.IRegulation)">
-            <summary>Setup the regulation</summary>
+            <summary>Regulation setup</summary>
             <param name="tenant">The exchange tenant</param>
             <param name="regulation">The regulation</param>
             <param name="targetRegulation">The target regulation</param>
@@ -800,7 +800,7 @@
             <param name="lookup">The lookup</param>
         </member>
         <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.SetupLookupAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.ILookupSet,PayrollEngine.Client.Model.ILookup)">
-            <summary>Setup the lookup</summary>
+            <summary>Lookup setup</summary>
             <param name="tenant">The exchange tenant</param>
             <param name="regulation">The regulation</param>
             <param name="lookup">The lookup</param>
@@ -814,7 +814,7 @@
             <param name="lookupValue">The lookup value</param>
         </member>
         <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.SetupLookupValueAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.ILookupSet,PayrollEngine.Client.Model.ILookupValue,PayrollEngine.Client.Model.ILookupValue)">
-            <summary>Setup the lookup value</summary>
+            <summary>Lookup value setup</summary>
             <param name="tenant">The exchange tenant</param>
             <param name="regulation">The regulation</param>
             <param name="lookup">The lookup</param>
@@ -832,7 +832,7 @@
             <param name="caseSet">The case</param>
         </member>
         <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.SetupCaseAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.ICaseSet,PayrollEngine.Client.Model.ICase)">
-            <summary>Setup the case</summary>
+            <summary>Case setup</summary>
             <param name="tenant">The exchange tenant</param>
             <param name="regulation">The regulation</param>
             <param name="caseSet">The case</param>
@@ -846,7 +846,7 @@
             <param name="caseField">The case field</param>
         </member>
         <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.SetupCaseFieldAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.ICaseSet,PayrollEngine.Client.Model.ICaseField,PayrollEngine.Client.Model.ICaseField)">
-            <summary>Setup the case field</summary>
+            <summary>Case field setup</summary>
             <param name="tenant">The exchange tenant</param>
             <param name="regulation">The regulation</param>
             <param name="caseSet">The case</param>
@@ -860,7 +860,7 @@
             <param name="caseRelation">The case relation</param>
         </member>
         <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.SetupCaseRelationAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.ICaseRelation,PayrollEngine.Client.Model.ICaseRelation)">
-            <summary>Setup the case relation</summary>
+            <summary>Case relation setup</summary>
             <param name="tenant">The exchange tenant</param>
             <param name="regulation">The regulation</param>
             <param name="caseRelation">The case relation</param>
@@ -873,7 +873,7 @@
             <param name="collector">The collector</param>
         </member>
         <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.SetupCollectorAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.ICollector,PayrollEngine.Client.Model.ICollector)">
-            <summary>Setup the case relation</summary>
+            <summary>Case relation setup</summary>
             <param name="tenant">The exchange tenant</param>
             <param name="regulation">The regulation</param>
             <param name="collector">The collector</param>
@@ -886,7 +886,7 @@
             <param name="wageType">The wage type</param>
         </member>
         <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.SetupWageTypeAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.IWageType,PayrollEngine.Client.Model.IWageType)">
-            <summary>Setup the wage type</summary>
+            <summary>Wage type setup</summary>
             <param name="tenant">The exchange tenant</param>
             <param name="regulation">The regulation</param>
             <param name="wageType">The wage type</param>
@@ -899,7 +899,7 @@
             <param name="script">The script</param>
         </member>
         <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.SetupScriptAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.IScript,PayrollEngine.Client.Model.IScript)">
-            <summary>Setup the script</summary>
+            <summary>Script setup</summary>
             <param name="tenant">The exchange tenant</param>
             <param name="regulation">The regulation</param>
             <param name="script">The script</param>
@@ -912,7 +912,7 @@
             <param name="report">The report</param>
         </member>
         <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.SetupReportAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.IReportSet,PayrollEngine.Client.Model.IReportSet)">
-            <summary>Setup the report</summary>
+            <summary>Report setup</summary>
             <param name="tenant">The exchange tenant</param>
             <param name="regulation">The regulation</param>
             <param name="report">The report</param>
@@ -926,7 +926,7 @@
             <param name="parameter">The report parameter</param>
         </member>
         <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.SetupReportParameterAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.IReportSet,PayrollEngine.Client.Model.IReportParameter,PayrollEngine.Client.Model.IReportParameter)">
-            <summary>Setup the report parameter</summary>
+            <summary>Report parameter setup</summary>
             <param name="tenant">The exchange tenant</param>
             <param name="regulation">The regulation</param>
             <param name="report">The report</param>
@@ -941,7 +941,7 @@
             <param name="template">The report template</param>
         </member>
         <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.SetupReportTemplateAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.IReportSet,PayrollEngine.Client.Model.IReportTemplate,PayrollEngine.Client.Model.IReportTemplate)">
-            <summary>Setup the report template</summary>
+            <summary>Report template setup</summary>
             <param name="tenant">The exchange tenant</param>
             <param name="regulation">The regulation</param>
             <param name="report">The report</param>
@@ -959,7 +959,7 @@
             <param name="employee">The employee</param>
         </member>
         <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.SetupEmployeeAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IEmployeeSet,PayrollEngine.Client.Model.IEmployee)">
-            <summary>Setup the employee</summary>
+            <summary>Employee setup</summary>
             <param name="tenant">The exchange tenant</param>
             <param name="employee">The employee</param>
             <param name="targetEmployee">The target employee</param>
@@ -975,7 +975,7 @@
             <param name="payroll">The payroll</param>
         </member>
         <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.SetupPayrollAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollSet,PayrollEngine.Client.Model.IPayroll)">
-            <summary>Setup the payroll</summary>
+            <summary>Payroll setup</summary>
             <param name="tenant">The exchange tenant</param>
             <param name="payroll">The payroll</param>
             <param name="targetPayroll">The target payroll</param>
@@ -987,7 +987,7 @@
             <param name="layer">The payroll layer</param>
         </member>
         <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.SetupPayrollLayerAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollSet,PayrollEngine.Client.Model.IPayrollLayer,PayrollEngine.Client.Model.IPayrollLayer)">
-            <summary>Setup the payroll layer</summary>
+            <summary>Payroll layer setup</summary>
             <param name="tenant">The exchange tenant</param>
             <param name="payroll">The payroll</param>
             <param name="layer">The payroll layer</param>
@@ -1000,11 +1000,11 @@
             <param name="caseChangeSetup">The case change</param>
         </member>
         <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.SetupCaseChangeDocuments(PayrollEngine.Client.Model.ICaseSetup)">
-            <summary>Setup the case change documents</summary>
+            <summary>Case change documents setup</summary>
             <param name="caseSetup">The case change</param>
         </member>
         <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.SetupCaseChangeAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollSet,PayrollEngine.Client.Model.ICaseChangeSetup)">
-            <summary>Setup the case change</summary>
+            <summary>Case change setup</summary>
             <param name="tenant">The exchange tenant</param>
             <param name="payroll">The payroll</param>
             <param name="caseChangeSetup">The case change</param>
@@ -4498,7 +4498,7 @@
             <summary>The employee id (immutable)</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.IPayrollResult.EmployeeIdentifier">
-            <summary>The employe identifier (client only)</summary>
+            <summary>The employee identifier (client only)</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.IPayrollResult.DivisionId">
             <summary>The division id (immutable)</summary>
@@ -4808,7 +4808,7 @@
             <summary>The job finish date (immutable)</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.IPayrunJob.CreatedReason">
-            <summary>The create reason (immutable)</summary>
+            <summary>The created reason (immutable)</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.IPayrunJob.ReleasedReason">
             <summary>The release reason (immutable)</summary>
@@ -8588,7 +8588,7 @@
             <summary>The regulation case rebuild URL</summary>
         </member>
         <member name="M:PayrollEngine.Client.RegulationApiEndpoints.RegulationsCasesCaseFieldUrl(System.Int32,System.String)">
-            <summary>The regulations cases case field URL</summary>
+            <summary>The regulations cases, case field URL</summary>
         </member>
         <member name="M:PayrollEngine.Client.RegulationApiEndpoints.RegulationCaseFieldsUrl(System.Int32,System.Int32,System.Int32)">
             <summary>The regulation case fields URL</summary>
@@ -9733,7 +9733,7 @@
             <inheritdoc/>
         </member>
         <member name="T:PayrollEngine.Client.Service.Api.PayrollCaseChangeValueService">
-            <summary>Payroll payroll case change value service</summary>
+            <summary>Payroll case change value service</summary>
         </member>
         <member name="M:PayrollEngine.Client.Service.Api.PayrollCaseChangeValueService.#ctor(PayrollEngine.Client.PayrollHttpClient)">
             <summary>Initializes a new instance of the <see cref="T:PayrollEngine.Client.Service.Api.PayrollCaseChangeValueService"/> class</summary>
@@ -9771,7 +9771,7 @@
             <inheritdoc/>
         </member>
         <member name="T:PayrollEngine.Client.Service.Api.PayrollLayerService">
-            <summary>Payroll payroll layer service</summary>
+            <summary>Payroll layer service</summary>
         </member>
         <member name="M:PayrollEngine.Client.Service.Api.PayrollLayerService.#ctor(PayrollEngine.Client.PayrollHttpClient)">
             <summary>Initializes a new instance of the <see cref="T:PayrollEngine.Client.Service.Api.PayrollLayerService"/> class</summary>
@@ -9811,7 +9811,7 @@
             <inheritdoc/>
         </member>
         <member name="T:PayrollEngine.Client.Service.Api.PayrollResultService">
-            <summary>Payroll payroll result service</summary>
+            <summary>Payroll result service</summary>
         </member>
         <member name="M:PayrollEngine.Client.Service.Api.PayrollResultService.#ctor(PayrollEngine.Client.PayrollHttpClient)">
             <summary>Initializes a new instance of the <see cref="T:PayrollEngine.Client.Service.Api.PayrollResultService"/> class</summary>
@@ -9894,7 +9894,7 @@
             <inheritdoc/>
         </member>
         <member name="T:PayrollEngine.Client.Service.Api.PayrollService">
-            <summary>Payroll payroll service</summary>
+            <summary>Payroll  service</summary>
         </member>
         <member name="M:PayrollEngine.Client.Service.Api.PayrollService.#ctor(PayrollEngine.Client.PayrollHttpClient)">
             <summary>Initializes a new instance of the <see cref="T:PayrollEngine.Client.Service.Api.PayrollService"/> class</summary>
@@ -10841,7 +10841,7 @@
             <summary>Get company case change by division</summary>
             <param name="context">The service context</param>
             <param name="query">The case change query</param>
-            <returns>The newly case change</returns>
+            <returns>The new case change</returns>
         </member>
         <member name="T:PayrollEngine.Client.Service.ICompanyCaseDocumentService">
             <summary>Payroll company case document service</summary>
@@ -10911,7 +10911,7 @@
             <summary>Get employee case change by division</summary>
             <param name="context">The service context</param>
             <param name="query">The case change query</param>
-            <returns>The newly case change</returns>
+            <returns>The new case change</returns>
         </member>
         <member name="T:PayrollEngine.Client.Service.IEmployeeCaseDocumentService">
             <summary>Payroll employee case document service</summary>
@@ -10961,7 +10961,7 @@
             <summary>Get global case change by division</summary>
             <param name="context">The service context</param>
             <param name="query">The case change query</param>
-            <returns>The newly case change</returns>
+            <returns>The new case change</returns>
         </member>
         <member name="T:PayrollEngine.Client.Service.IGlobalCaseDocumentService">
             <summary>Payroll global case document service</summary>
@@ -11040,7 +11040,7 @@
             <summary>Get national case change by division</summary>
             <param name="context">The service context</param>
             <param name="query">The case change query</param>
-            <returns>The newly case change</returns>
+            <returns>The new case change</returns>
         </member>
         <member name="T:PayrollEngine.Client.Service.INationalCaseDocumentService">
             <summary>Payroll national case document service</summary>
@@ -11060,7 +11060,7 @@
             <summary>Payroll case change value service</summary>
         </member>
         <member name="T:PayrollEngine.Client.Service.IPayrollConsolidatedResultService">
-            <summary>Payroll payroll result service</summary>
+            <summary>Payroll consolidated result service</summary>
         </member>
         <member name="M:PayrollEngine.Client.Service.IPayrollConsolidatedResultService.QueryPayrollResultAsync``1(PayrollEngine.Client.Service.TenantServiceContext,System.Int32,System.Int32,System.DateTime,System.Nullable{System.Int32},System.String,PayrollEngine.PayrunJobStatus,System.Collections.Generic.IEnumerable{System.String})">
             <summary>Query consolidated collector results</summary>
@@ -11117,7 +11117,7 @@
             <returns>The period payrun results</returns>
         </member>
         <member name="T:PayrollEngine.Client.Service.IPayrollLayerService">
-            <summary>Payroll payroll layer service</summary>
+            <summary>Payroll layer service</summary>
         </member>
         <member name="M:PayrollEngine.Client.Service.IPayrollLayerService.GetAsync``1(PayrollEngine.Client.Service.PayrollServiceContext,System.String)">
             <summary>Get payroll layer by identifier</summary>
@@ -11126,7 +11126,7 @@
             <returns>The payroll layer, null if missing</returns>
         </member>
         <member name="T:PayrollEngine.Client.Service.IPayrollResultService">
-            <summary>Payroll payroll result service</summary>
+            <summary>Payroll result service</summary>
         </member>
         <member name="M:PayrollEngine.Client.Service.IPayrollResultService.QueryCollectorResultsAsync``1(PayrollEngine.Client.Service.PayrollResultServiceContext,PayrollEngine.Query)">
             <summary>Query payroll collector results</summary>
@@ -11928,10 +11928,10 @@
             <summary>The calendars periods URL</summary>
         </member>
         <member name="M:PayrollEngine.Client.TenantApiEndpoints.TenantCalendarsCyclesUrl(System.Int32)">
-            <summary>The calendars cycles URL</summary>
+            <summary>The calendar cycles URL</summary>
         </member>
         <member name="M:PayrollEngine.Client.TenantApiEndpoints.TenantCalendarsValuesUrl(System.Int32)">
-            <summary>The calendars values URL</summary>
+            <summary>The calendar values URL</summary>
         </member>
         <member name="M:PayrollEngine.Client.TenantApiEndpoints.UsersUrl(System.Int32)">
             <summary>The users URL</summary>

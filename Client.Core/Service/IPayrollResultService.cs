@@ -4,7 +4,7 @@ using PayrollEngine.Client.Model;
 
 namespace PayrollEngine.Client.Service;
 
-/// <summary>Payroll payroll result service</summary>
+/// <summary>Payroll result service</summary>
 public interface IPayrollResultService : IReadService<IPayrollResult, TenantServiceContext, Query>
 {
 

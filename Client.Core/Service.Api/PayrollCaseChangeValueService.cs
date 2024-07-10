@@ -6,7 +6,7 @@ using Task = System.Threading.Tasks.Task;
 
 namespace PayrollEngine.Client.Service.Api;
 
-/// <summary>Payroll payroll case change value service</summary>
+/// <summary>Payroll case change value service</summary>
 public class PayrollCaseChangeValueService : ServiceBase, IPayrollCaseChangeValueService
 {
     /// <summary>Initializes a new instance of the <see cref="PayrollCaseChangeValueService"/> class</summary>

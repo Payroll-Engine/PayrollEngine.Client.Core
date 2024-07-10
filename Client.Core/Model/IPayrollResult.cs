@@ -20,7 +20,7 @@ public interface IPayrollResult : IModel, IEquatable<IPayrollResult>
     /// <summary>The employee id (immutable)</summary>
     int EmployeeId { get; set; }
 
-    /// <summary>The employe identifier (client only)</summary>
+    /// <summary>The employee identifier (client only)</summary>
     string EmployeeIdentifier { get; set; }
 
     /// <summary>The division id (immutable)</summary>
