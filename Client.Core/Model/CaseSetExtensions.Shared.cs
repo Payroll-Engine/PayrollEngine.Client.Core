@@ -115,11 +115,11 @@ public static class CaseSetExtensions
             // case name
             if (string.IsNullOrWhiteSpace(caseSet.Name))
             {
-                throw new PayrollException($"Case {caseSet.Id} without name");
+                throw new PayrollException($"Case {caseSet.Id} without name.");
             }
             if (!caseNames.Add(caseSet.Name))
             {
-                throw new PayrollException($"Duplicated case name {caseSet.Name}");
+                throw new PayrollException($"Duplicated case name {caseSet.Name}.");
             }
 
             // case field names
@@ -129,11 +129,11 @@ public static class CaseSetExtensions
                 {
                     if (string.IsNullOrWhiteSpace(field.Name))
                     {
-                        throw new PayrollException($"Case field {field.Id} without name");
+                        throw new PayrollException($"Case field {field.Id} without name.");
                     }
                     if (!caseFieldNames.Add(field.Name))
                     {
-                        throw new PayrollException($"Duplicated case field name {field.Name}");
+                        throw new PayrollException($"Duplicated case field name {field.Name}.");
                     }
                 }
             }

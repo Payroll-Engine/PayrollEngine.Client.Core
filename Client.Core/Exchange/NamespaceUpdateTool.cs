@@ -28,7 +28,7 @@ public class NamespaceUpdateTool : Visitor
 
     /// <summary>Update the namespace</summary>
     public void UpdateNamespace() =>
-        Task.Run(UpdateNamespaceAsync).Wait();
+        UpdateNamespaceAsync().Wait();
 
     /// <summary>Update the namespace</summary>
     public virtual async Task UpdateNamespaceAsync()
@@ -41,7 +41,7 @@ public class NamespaceUpdateTool : Visitor
         }
         if (tenants.Count != 1)
         {
-            throw new PayrollException("Multiple exchange tenants not supported for namespace change");
+            throw new PayrollException("Multiple exchange tenants not supported for namespace change.");
         }
         var currentNamespace = tenants.First().Key;
 

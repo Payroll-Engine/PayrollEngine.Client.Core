@@ -17,7 +17,7 @@ public class Visitor : VisitorBase
 
     /// <summary>Execute the visitor</summary>
     public void Execute() =>
-        Task.Run(ExecuteAsync).Wait();
+        ExecuteAsync().Wait();
 
     /// <summary>Execute the visitor</summary>
     public virtual async Task ExecuteAsync() =>

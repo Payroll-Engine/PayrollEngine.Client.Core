@@ -47,7 +47,7 @@ public class ActionInfo : IEquatable<ActionInfo>
         var functionTypeName = classType.Name.RemoveFromEnd("Function");
         if (!Enum.TryParse<FunctionType>(functionTypeName, out var functionType))
         {
-            throw new ArgumentException($"Unknown function type: {classType}", nameof(classType));
+            throw new ArgumentException($"Unknown function type: {classType}.", nameof(classType));
         }
         FunctionType = functionType;
     }

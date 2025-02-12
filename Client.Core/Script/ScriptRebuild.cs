@@ -34,7 +34,7 @@ public sealed class ScriptRebuild
         var tenant = await new TenantService(HttpClient).GetAsync<Tenant>(new(), TenantId);
         if (tenant == null)
         {
-            throw new PayrollException($"Unknown tenant with id {TenantId}");
+            throw new PayrollException($"Unknown tenant with id {TenantId}.");
         }
 
         // regulation
@@ -42,7 +42,7 @@ public sealed class ScriptRebuild
         var regulation = await new RegulationService(HttpClient).GetAsync<Regulation>(tenantContext, regulationName);
         if (regulation == null)
         {
-            throw new PayrollException($"Unknown regulation {regulationName}");
+            throw new PayrollException($"Unknown regulation {regulationName}.");
         }
 
         // rebuild
@@ -65,7 +65,7 @@ public sealed class ScriptRebuild
         var tenant = await new TenantService(HttpClient).GetAsync<Tenant>(new(), TenantId);
         if (tenant == null)
         {
-            throw new PayrollException($"Unknown tenant with id {TenantId}");
+            throw new PayrollException($"Unknown tenant with id {TenantId}.");
         }
 
         // regulation
@@ -73,7 +73,7 @@ public sealed class ScriptRebuild
         var regulation = await new RegulationService(HttpClient).GetAsync<Regulation>(tenantContext, regulationName);
         if (regulation == null)
         {
-            throw new PayrollException($"Unknown regulation {regulationName}");
+            throw new PayrollException($"Unknown regulation {regulationName}.");
         }
 
         // case
@@ -100,7 +100,7 @@ public sealed class ScriptRebuild
         }
     }
 
-    /// <summary>Rebuild a the payrun script</summary>
+    /// <summary>Rebuild the payrun script</summary>
     /// <param name="payrunName">The payrun name</param>
     public async Task RebuildPayrunAsync(string payrunName)
     {
@@ -150,7 +150,7 @@ public sealed class ScriptRebuild
             var @case = await caseService.GetAsync<Case>(regulationContext, objectKey);
             if (@case == null)
             {
-                throw new PayrollException($"Unknown case {objectKey}");
+                throw new PayrollException($"Unknown case {objectKey}.");
             }
             await caseService.RebuildAsync(regulationContext, @case.Id);
         }
@@ -172,14 +172,14 @@ public sealed class ScriptRebuild
             var relatedCases = objectKey.Split(':', StringSplitOptions.RemoveEmptyEntries);
             if (relatedCases.Length != 2)
             {
-                throw new ArgumentException($"invalid case relation {objectKey}");
+                throw new ArgumentException($"invalid case relation {objectKey}.");
             }
 
             var reference = objectKey.ReferenceToRelatedCases();
             var caseRelation = await caseRelationService.GetAsync<CaseRelation>(regulationContext, reference.Item1, reference.Item2);
             if (caseRelation == null)
             {
-                throw new PayrollException($"Unknown case relation {reference.Item1} to {reference.Item2}");
+                throw new PayrollException($"Unknown case relation {reference.Item1} to {reference.Item2}.");
             }
             await caseRelationService.RebuildAsync(regulationContext, caseRelation.Id);
         }
@@ -201,7 +201,7 @@ public sealed class ScriptRebuild
             var collector = await collectorService.GetAsync<Collector>(regulationContext, objectKey);
             if (collector == null)
             {
-                throw new PayrollException($"Unknown collector {objectKey}");
+                throw new PayrollException($"Unknown collector {objectKey}.");
             }
             await collectorService.RebuildAsync(regulationContext, collector.Id);
         }
@@ -232,7 +232,7 @@ public sealed class ScriptRebuild
             var wageType = await wageTypeService.GetAsync<WageType>(regulationContext, wageTypeNumber, culture);
             if (wageType == null)
             {
-                throw new PayrollException($"Unknown wage type {objectKey}");
+                throw new PayrollException($"Unknown wage type {objectKey}.");
             }
 
             // rebuild
@@ -256,7 +256,7 @@ public sealed class ScriptRebuild
             var report = await reportService.GetAsync<Report>(regulationContext, objectKey);
             if (report == null)
             {
-                throw new PayrollException($"Unknown report {objectKey}");
+                throw new PayrollException($"Unknown report {objectKey}.");
             }
             await reportService.RebuildAsync(regulationContext, report.Id);
         }
@@ -268,7 +268,7 @@ public sealed class ScriptRebuild
         var payrun = await payrunService.GetAsync<Payrun>(tenantContext, payrunName);
         if (payrun == null)
         {
-            throw new PayrollException($"Unknown payrun {payrunName}");
+            throw new PayrollException($"Unknown payrun {payrunName}.");
         }
     }
 }

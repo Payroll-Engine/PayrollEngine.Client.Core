@@ -31,7 +31,7 @@ public sealed class ExchangeImport : ExchangeImportVisitor
             exchange.RegulationShares == null || exchange.RegulationShares.Any();
         if (!hasTenants && !hasRegulationShares)
         {
-            throw new PayrollException("Missing import data");
+            throw new PayrollException("Missing import data.");
         }
 
         ImportMode = importMode;
@@ -356,7 +356,7 @@ public sealed class ExchangeImport : ExchangeImportVisitor
             var division = await GetDivisionAsync(tenant.Id, payroll.DivisionName);
             if (division == null)
             {
-                throw new PayrollException($"Missing division with name {payroll.DivisionName}");
+                throw new PayrollException($"Missing division with name {payroll.DivisionName}.");
             }
             payroll.DivisionId = division.Id;
         }
@@ -385,7 +385,7 @@ public sealed class ExchangeImport : ExchangeImportVisitor
         var user = await GetUserAsync(tenant.Id, caseChangeSetup.UserIdentifier);
         if (user == null)
         {
-            throw new PayrollException($"Unknown user with identifier {caseChangeSetup.UserIdentifier}");
+            throw new PayrollException($"Unknown user with identifier {caseChangeSetup.UserIdentifier}.");
         }
         caseChangeSetup.UserId = user.Id;
 
@@ -395,7 +395,7 @@ public sealed class ExchangeImport : ExchangeImportVisitor
             var employee = await GetEmployeeAsync(tenant.Id, caseChangeSetup.EmployeeIdentifier);
             if (employee == null)
             {
-                throw new PayrollException($"Missing case change employee with identifier {caseChangeSetup.EmployeeIdentifier}");
+                throw new PayrollException($"Missing case change employee with identifier {caseChangeSetup.EmployeeIdentifier}.");
             }
             caseChangeSetup.EmployeeId = employee.Id;
         }
@@ -406,7 +406,7 @@ public sealed class ExchangeImport : ExchangeImportVisitor
             var division = await GetDivisionAsync(tenant.Id, caseChangeSetup.DivisionName);
             if (division == null)
             {
-                throw new PayrollException($"Missing case change division with name {caseChangeSetup.DivisionName}");
+                throw new PayrollException($"Missing case change division with name {caseChangeSetup.DivisionName}.");
             }
             caseChangeSetup.DivisionId = division.Id;
         }
@@ -425,7 +425,7 @@ public sealed class ExchangeImport : ExchangeImportVisitor
                 var division = await GetDivisionAsync(tenant.Id, caseValue.DivisionName);
                 if (division == null)
                 {
-                    throw new PayrollException($"Missing case value division with name {caseChangeSetup.DivisionName}");
+                    throw new PayrollException($"Missing case value division with name {caseChangeSetup.DivisionName}.");
                 }
                 caseValue.DivisionId = division.Id;
             }
@@ -466,7 +466,7 @@ public sealed class ExchangeImport : ExchangeImportVisitor
                 caseChange.Case.CaseName, caseChange.UserId, caseChange.EmployeeId);
             if (cancellationCase == null)
             {
-                throw new PayrollException($"Unknown cancellation case {caseChange.Case.CaseName}");
+                throw new PayrollException($"Unknown cancellation case {caseChange.Case.CaseName}.");
             }
 
             // find the cancellation case change
@@ -492,7 +492,7 @@ public sealed class ExchangeImport : ExchangeImportVisitor
                 case CaseType.Employee:
                     if (!caseChange.EmployeeId.HasValue)
                     {
-                        throw new PayrollException($"Missing employee identifier on case change {caseChange.Case.CaseName}");
+                        throw new PayrollException($"Missing employee identifier on case change {caseChange.Case.CaseName}.");
                     }
                     cancellationCaseChange = (await new EmployeeCaseChangeService(HttpClient).QueryAsync<CaseChange>(
                         new(tenantId, caseChange.EmployeeId.Value), query)).FirstOrDefault();
@@ -500,7 +500,7 @@ public sealed class ExchangeImport : ExchangeImportVisitor
             }
             if (cancellationCaseChange == null)
             {
-                throw new PayrollException($"Unknown cancellation case {caseChange.Case.CaseName} created on {caseChange.CancellationCreated.Value}");
+                throw new PayrollException($"Unknown cancellation case {caseChange.Case.CaseName} created on {caseChange.CancellationCreated.Value}.");
             }
 
             // setup cancellation id
@@ -510,7 +510,7 @@ public sealed class ExchangeImport : ExchangeImportVisitor
         var newCaseChange = await new PayrollService(HttpClient).AddCaseAsync<T, CaseChange>(payrollContext, caseChange);
         if (newCaseChange.Issues != null && newCaseChange.Issues.Any())
         {
-            throw new PayrollException($"Issues on case change {caseChange.Case.CaseName}: {string.Join(',', newCaseChange.Issues.Select(x => x.Message))}");
+            throw new PayrollException($"Issues on case change {caseChange.Case.CaseName}: {string.Join(',', newCaseChange.Issues.Select(x => x.Message))}.");
         }
     }
 
@@ -546,7 +546,7 @@ public sealed class ExchangeImport : ExchangeImportVisitor
         var payrun = await GetPayrunAsync(tenant.Id, invocation.PayrunName);
         if (payrun == null)
         {
-            throw new PayrollException($"Unknown payrun with name {invocation.PayrunName}");
+            throw new PayrollException($"Unknown payrun with name {invocation.PayrunName}.");
         }
         invocation.PayrunId = payrun.Id;
 
@@ -554,7 +554,7 @@ public sealed class ExchangeImport : ExchangeImportVisitor
         var user = await GetUserAsync(tenant.Id, invocation.UserIdentifier);
         if (user == null)
         {
-            throw new PayrollException($"Unknown user with identifier {invocation.UserIdentifier}");
+            throw new PayrollException($"Unknown user with identifier {invocation.UserIdentifier}.");
         }
         invocation.UserId = user.Id;
 
@@ -564,14 +564,14 @@ public sealed class ExchangeImport : ExchangeImportVisitor
         var payrunJobId = PayrollHttpClient.GetRecordId(response);
         if (payrunJobId <= 0)
         {
-            throw new PayrollException($"Error while creating the payrun job {invocation.Name}");
+            throw new PayrollException($"Error while creating the payrun job {invocation.Name}.");
         }
         invocation.PayrunJobId = payrunJobId;
 
         var payrunJob = await GetPayrunJobAsync(tenant.Id, payrunJobId);
         if (payrunJob == null)
         {
-            throw new PayrollException($"Missing payrun job with id {payrunJobId}");
+            throw new PayrollException($"Missing payrun job with id {payrunJobId}.");
         }
 
         // payrun job status

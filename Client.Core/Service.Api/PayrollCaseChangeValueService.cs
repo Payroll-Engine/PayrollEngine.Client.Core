@@ -40,7 +40,7 @@ public class PayrollCaseChangeValueService : ServiceBase, IPayrollCaseChangeValu
     }
 
     /// <inheritdoc/>
-    public virtual async Task<T> GetAsync<T>(PayrollServiceContext context, int objectId) where T : class, ICaseChangeCaseValue
+    public virtual Task<T> GetAsync<T>(PayrollServiceContext context, int objectId) where T : class, ICaseChangeCaseValue
     {
         if (context == null)
         {
@@ -52,8 +52,7 @@ public class PayrollCaseChangeValueService : ServiceBase, IPayrollCaseChangeValu
         }
 
         Log.Error("Unsupported get request on CaseChangeCaseValue");
-        await Task.Run(() => { });
-        return default;
+        return Task.FromResult(default(T));
     }
 
     private static string GetPayrollCaseChangeValuesUrl(QueryResultType resultType, PayrollServiceContext context, PayrollCaseChangeQuery query = null)

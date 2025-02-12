@@ -27,7 +27,7 @@ public static class ExchangeReader
         // import file
         if (!File.Exists(fileName))
         {
-            throw new PayrollException($"Missing exchange file {fileName}");
+            throw new PayrollException($"Missing exchange file {fileName}.");
         }
 
         Model.Exchange exchange;
@@ -42,7 +42,7 @@ public static class ExchangeReader
         }
         if (exchange == null)
         {
-            throw new PayrollException($"Invalid exchange content in file {fileName}");
+            throw new PayrollException($"Invalid exchange content in file {fileName}.");
         }
 
         // namespace change
@@ -59,7 +59,7 @@ public static class ExchangeReader
         var json = await File.ReadAllTextAsync(fileName);
         if (string.IsNullOrWhiteSpace(json))
         {
-            throw new PayrollException($"Invalid exchange JSON file {fileName}");
+            throw new PayrollException($"Invalid exchange JSON file {fileName}.");
         }
         return JsonToExchange(json);
     }
@@ -75,7 +75,7 @@ public static class ExchangeReader
             var entries = archive.Entries.Where(x => x.Name.EndsWith(".json")).OrderBy(x => x.Name).ToList();
             if (!entries.Any())
             {
-                throw new PayrollException($"Empty exchange archive {fileName}");
+                throw new PayrollException($"Empty exchange archive {fileName}.");
             }
 
             // combine archive files into one exchange
@@ -93,7 +93,7 @@ public static class ExchangeReader
         }
         catch (Exception exception)
         {
-            throw new PayrollException($"Invalid exchange archive {fileName}", exception);
+            throw new PayrollException($"Invalid exchange archive {fileName}.", exception);
         }
     }
 
@@ -101,7 +101,7 @@ public static class ExchangeReader
     {
         if (string.IsNullOrWhiteSpace(json))
         {
-            throw new PayrollException("Invalid exchange json");
+            throw new PayrollException("Invalid exchange json.");
         }
         // exchange import from JSON
         var entryExchange = DefaultJsonSerializer.Deserialize<Model.Exchange>(json);

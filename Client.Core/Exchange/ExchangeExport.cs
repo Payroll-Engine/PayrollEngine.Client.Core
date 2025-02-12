@@ -36,7 +36,7 @@ public sealed class ExchangeExport
     /// <summary>Export tenant to exchange</summary>
     /// <returns>The exchange model</returns>
     public async Task<Client.Model.Exchange> ExportAsync(int tenantId) =>
-        await ExportAsync(new[] { tenantId });
+        await ExportAsync([tenantId]);
 
     /// <summary>Export tenants to exchange</summary>
     /// <returns>The exchange model</returns>
@@ -60,7 +60,7 @@ public sealed class ExchangeExport
             var tenant = await LoadTenantAsync(id);
             if (tenant == null)
             {
-                throw new PayrollException($"Unknown tenant with id {id}");
+                throw new PayrollException($"Unknown tenant with id {id}.");
             }
 
             exchange.Tenants ??= [];
@@ -582,7 +582,7 @@ public sealed class ExchangeExport
             var division = await LoadDivisionAsync(tenantId, payroll.DivisionId);
             if (division == null)
             {
-                throw new PayrollException($"Missing division with id {payroll.DivisionId}");
+                throw new PayrollException($"Missing division with id {payroll.DivisionId}.");
             }
             payroll.DivisionName = division.Name;
 
@@ -679,7 +679,7 @@ public sealed class ExchangeExport
                 var payroll = await new PayrollService(HttpClient).GetAsync<Payroll>(new(tenantId), payrunJob.PayrollId);
                 if (payroll == null)
                 {
-                    throw new PayrollException($"Unknown payroll with id {payrunJob.PayrollId}");
+                    throw new PayrollException($"Unknown payroll with id {payrunJob.PayrollId}.");
                 }
                 payrunJob.PayrollName = payroll.Name;
 
@@ -687,7 +687,7 @@ public sealed class ExchangeExport
                 var division = await LoadDivisionAsync(tenantId, payroll.DivisionId);
                 if (division == null)
                 {
-                    throw new PayrollException($"Missing division with id {payroll.DivisionId}");
+                    throw new PayrollException($"Missing division with id {payroll.DivisionId}.");
                 }
                 payrunJob.DivisionId = division.Id;
             }

@@ -93,10 +93,8 @@ public abstract class ExchangeImportVisitor : Visitor
     /// <summary>Tenant setup</summary>
     /// <param name="tenant">The exchange tenant</param>
     /// <param name="targetTenant">The target tenant</param>
-    protected virtual async Task SetupTenantAsync(IExchangeTenant tenant, ITenant targetTenant)
-    {
-        await Task.Run(() => { });
-    }
+    protected virtual Task SetupTenantAsync(IExchangeTenant tenant, ITenant targetTenant) =>
+        Task.CompletedTask;
 
     #endregion
 
@@ -131,10 +129,8 @@ public abstract class ExchangeImportVisitor : Visitor
     /// <param name="tenant">The exchange tenant</param>
     /// <param name="user">The user</param>
     /// <param name="targetUser">The target user</param>
-    protected virtual async Task SetupUserAsync(IExchangeTenant tenant, IUser user, IUser targetUser)
-    {
-        await Task.Run(() => { });
-    }
+    protected virtual Task SetupUserAsync(IExchangeTenant tenant, IUser user, IUser targetUser) =>
+        Task.CompletedTask;
 
     #endregion
 
@@ -164,10 +160,8 @@ public abstract class ExchangeImportVisitor : Visitor
     /// <param name="tenant">The exchange tenant</param>
     /// <param name="calendar">The calendar</param>
     /// <param name="targetCalendar">The target calendar</param>
-    protected virtual async Task SetupCalendarAsync(IExchangeTenant tenant, ICalendar calendar, ICalendar targetCalendar)
-    {
-        await Task.Run(() => { });
-    }
+    protected virtual Task SetupCalendarAsync(IExchangeTenant tenant, ICalendar calendar, ICalendar targetCalendar) =>
+        Task.CompletedTask;
 
     #endregion
 
@@ -197,10 +191,8 @@ public abstract class ExchangeImportVisitor : Visitor
     /// <param name="tenant">The exchange tenant</param>
     /// <param name="division">The division</param>
     /// <param name="targetDivision">The target division</param>
-    protected virtual async Task SetupDivisionAsync(IExchangeTenant tenant, IDivision division, IDivision targetDivision)
-    {
-        await Task.Run(() => { });
-    }
+    protected virtual Task SetupDivisionAsync(IExchangeTenant tenant, IDivision division, IDivision targetDivision) =>
+        Task.CompletedTask;
 
     #endregion
 
@@ -225,10 +217,8 @@ public abstract class ExchangeImportVisitor : Visitor
     /// <param name="tenant">The exchange tenant</param>
     /// <param name="webhook">The webhook</param>
     /// <param name="targetWebhook">The target webhook</param>
-    protected virtual async Task SetupWebhookAsync(IExchangeTenant tenant, IWebhook webhook, IWebhook targetWebhook)
-    {
-        await Task.Run(() => { });
-    }
+    protected virtual Task SetupWebhookAsync(IExchangeTenant tenant, IWebhook webhook, IWebhook targetWebhook) =>
+        Task.CompletedTask;
 
     #endregion
 
@@ -272,11 +262,8 @@ public abstract class ExchangeImportVisitor : Visitor
     /// <param name="tenant">The exchange tenant</param>
     /// <param name="regulation">The regulation</param>
     /// <param name="targetRegulation">The target regulation</param>
-    protected virtual async Task SetupRegulationAsync(IExchangeTenant tenant, IRegulationSet regulation,
-        IRegulation targetRegulation)
-    {
-        await Task.Run(() => { });
-    }
+    protected virtual Task SetupRegulationAsync(IExchangeTenant tenant, IRegulationSet regulation, IRegulation targetRegulation) =>
+        Task.CompletedTask;
 
     #endregion
 
@@ -309,10 +296,8 @@ public abstract class ExchangeImportVisitor : Visitor
     /// <param name="regulation">The regulation</param>
     /// <param name="lookup">The lookup</param>
     /// <param name="targetLookup">The target lookup</param>
-    protected virtual async Task SetupLookupAsync(IExchangeTenant tenant, IRegulationSet regulation, ILookupSet lookup, ILookup targetLookup)
-    {
-        await Task.Run(() => { });
-    }
+    protected virtual Task SetupLookupAsync(IExchangeTenant tenant, IRegulationSet regulation, ILookupSet lookup, ILookup targetLookup) =>
+        Task.CompletedTask;
 
     /// <summary>Visit the lookup value</summary>
     /// <param name="tenant">The tenant</param>
@@ -324,7 +309,7 @@ public abstract class ExchangeImportVisitor : Visitor
         // key
         if (string.IsNullOrWhiteSpace(lookupValue.Key))
         {
-            throw new PayrollException("Lookup value without key");
+            throw new PayrollException("Lookup value without key.");
         }
 
         // get lookup value by key and range value
@@ -346,11 +331,9 @@ public abstract class ExchangeImportVisitor : Visitor
     /// <param name="lookup">The lookup</param>
     /// <param name="lookupValue">The lookup value</param>
     /// <param name="targetLookupValue">The target lookup value</param>
-    protected virtual async Task SetupLookupValueAsync(IExchangeTenant tenant, IRegulationSet regulation, ILookupSet lookup,
-        ILookupValue lookupValue, ILookupValue targetLookupValue)
-    {
-        await Task.Run(() => { });
-    }
+    protected virtual Task SetupLookupValueAsync(IExchangeTenant tenant, IRegulationSet regulation, ILookupSet lookup,
+        ILookupValue lookupValue, ILookupValue targetLookupValue) =>
+        Task.CompletedTask;
 
     /// <summary>Validate the lookup</summary>
     /// <param name="lookup">The lookup</param>
@@ -362,7 +345,7 @@ public abstract class ExchangeImportVisitor : Visitor
             var valueKey = lookupValue.Key.ToPayrollHash(lookupValue.RangeValue);
             if (valueKeys.TryGetValue(valueKey, out var key))
             {
-                throw new PayrollException($"Duplicated lookup value: key={key.Key}, range-value={key.RangeValue}");
+                throw new PayrollException($"Duplicated lookup value: key={key.Key}, range-value={key.RangeValue}.");
             }
             valueKeys.Add(valueKey, lookupValue);
         }
@@ -392,7 +375,7 @@ public abstract class ExchangeImportVisitor : Visitor
                     regulation.Name, caseSet.Name);
                 if (string.IsNullOrWhiteSpace(caseSet.AvailableExpression))
                 {
-                    throw new PayrollException($"Missing or invalid script file {caseSet.AvailableExpressionFile}");
+                    throw new PayrollException($"Missing or invalid script file {caseSet.AvailableExpressionFile}.");
                 }
             }
             // case build expression file
@@ -407,7 +390,7 @@ public abstract class ExchangeImportVisitor : Visitor
                     regulation.Name, caseSet.Name);
                 if (string.IsNullOrWhiteSpace(caseSet.BuildExpression))
                 {
-                    throw new PayrollException($"Missing or invalid script file {caseSet.BuildExpressionFile}");
+                    throw new PayrollException($"Missing or invalid script file {caseSet.BuildExpressionFile}.");
                 }
             }
             // case validate expression file
@@ -422,7 +405,7 @@ public abstract class ExchangeImportVisitor : Visitor
                     regulation.Name, caseSet.Name);
                 if (string.IsNullOrWhiteSpace(caseSet.ValidateExpression))
                 {
-                    throw new PayrollException($"Missing or invalid script file {caseSet.ValidateExpressionFile}");
+                    throw new PayrollException($"Missing or invalid script file {caseSet.ValidateExpressionFile}.");
                 }
             }
         }
@@ -442,11 +425,9 @@ public abstract class ExchangeImportVisitor : Visitor
     /// <param name="regulation">The regulation</param>
     /// <param name="caseSet">The case</param>
     /// <param name="targetCase">The target case</param>
-    protected virtual async Task SetupCaseAsync(IExchangeTenant tenant, IRegulationSet regulation,
-        ICaseSet caseSet, ICase targetCase)
-    {
-        await Task.Run(() => { });
-    }
+    protected virtual Task SetupCaseAsync(IExchangeTenant tenant, IRegulationSet regulation,
+        ICaseSet caseSet, ICase targetCase) =>
+        Task.CompletedTask;
 
     /// <summary>Visit the case field</summary>
     /// <param name="tenant">The tenant</param>
@@ -472,11 +453,9 @@ public abstract class ExchangeImportVisitor : Visitor
     /// <param name="caseSet">The case</param>
     /// <param name="caseField">The case field</param>
     /// <param name="targetCaseField">The target case field</param>
-    protected virtual async Task SetupCaseFieldAsync(IExchangeTenant tenant, IRegulationSet regulation,
-        ICaseSet caseSet, ICaseField caseField, ICaseField targetCaseField)
-    {
-        await Task.Run(() => { });
-    }
+    protected virtual Task SetupCaseFieldAsync(IExchangeTenant tenant, IRegulationSet regulation,
+        ICaseSet caseSet, ICaseField caseField, ICaseField targetCaseField) =>
+        Task.CompletedTask;
 
     #endregion
 
@@ -507,7 +486,7 @@ public abstract class ExchangeImportVisitor : Visitor
                 if (string.IsNullOrWhiteSpace(caseRelation.BuildExpression))
                 {
                     throw new PayrollException(
-                        $"Missing or invalid script file {caseRelation.BuildExpressionFile}");
+                        $"Missing or invalid script file {caseRelation.BuildExpressionFile}.");
                 }
             }
 
@@ -527,7 +506,7 @@ public abstract class ExchangeImportVisitor : Visitor
                 if (string.IsNullOrWhiteSpace(caseRelation.ValidateExpression))
                 {
                     throw new PayrollException(
-                        $"Missing or invalid script file {caseRelation.ValidateExpressionFile}");
+                        $"Missing or invalid script file {caseRelation.ValidateExpressionFile}.");
                 }
             }
         }
@@ -548,11 +527,9 @@ public abstract class ExchangeImportVisitor : Visitor
     /// <param name="regulation">The regulation</param>
     /// <param name="caseRelation">The case relation</param>
     /// <param name="targetCaseRelation">The target case relation</param>
-    protected virtual async Task SetupCaseRelationAsync(IExchangeTenant tenant, IRegulationSet regulation,
-        ICaseRelation caseRelation, ICaseRelation targetCaseRelation)
-    {
-        await Task.Run(() => { });
-    }
+    protected virtual Task SetupCaseRelationAsync(IExchangeTenant tenant, IRegulationSet regulation,
+        ICaseRelation caseRelation, ICaseRelation targetCaseRelation) =>
+        Task.CompletedTask;
 
     #endregion
 
@@ -579,7 +556,7 @@ public abstract class ExchangeImportVisitor : Visitor
                     regulation.Name, collector.Name);
                 if (string.IsNullOrWhiteSpace(collector.StartExpression))
                 {
-                    throw new PayrollException($"Missing or invalid script file {collector.StartExpressionFile}");
+                    throw new PayrollException($"Missing or invalid script file {collector.StartExpressionFile}.");
                 }
             }
 
@@ -596,7 +573,7 @@ public abstract class ExchangeImportVisitor : Visitor
                     regulation.Name, collector.Name);
                 if (string.IsNullOrWhiteSpace(collector.ApplyExpression))
                 {
-                    throw new PayrollException($"Missing or invalid script file {collector.ApplyExpressionFile}");
+                    throw new PayrollException($"Missing or invalid script file {collector.ApplyExpressionFile}.");
                 }
             }
 
@@ -613,7 +590,7 @@ public abstract class ExchangeImportVisitor : Visitor
                     regulation.Name, collector.Name);
                 if (string.IsNullOrWhiteSpace(collector.EndExpression))
                 {
-                    throw new PayrollException($"Missing or invalid script file {collector.EndExpressionFile}");
+                    throw new PayrollException($"Missing or invalid script file {collector.EndExpressionFile}.");
                 }
             }
         }
@@ -633,11 +610,9 @@ public abstract class ExchangeImportVisitor : Visitor
     /// <param name="regulation">The regulation</param>
     /// <param name="collector">The collector</param>
     /// <param name="targetCollector">The target collector</param>
-    protected virtual async Task SetupCollectorAsync(IExchangeTenant tenant, IRegulationSet regulation,
-        ICollector collector, ICollector targetCollector)
-    {
-        await Task.Run(() => { });
-    }
+    protected virtual Task SetupCollectorAsync(IExchangeTenant tenant, IRegulationSet regulation,
+        ICollector collector, ICollector targetCollector) =>
+        Task.CompletedTask;
 
     #endregion
 
@@ -664,7 +639,7 @@ public abstract class ExchangeImportVisitor : Visitor
                     regulation.Name, wageType.WageTypeNumber);
                 if (string.IsNullOrWhiteSpace(wageType.ValueExpression))
                 {
-                    throw new PayrollException($"Missing or invalid script file {wageType.ValueExpressionFile}");
+                    throw new PayrollException($"Missing or invalid script file {wageType.ValueExpressionFile}.");
                 }
             }
 
@@ -681,7 +656,7 @@ public abstract class ExchangeImportVisitor : Visitor
                     regulation.Name, wageType.WageTypeNumber);
                 if (string.IsNullOrWhiteSpace(wageType.ResultExpression))
                 {
-                    throw new PayrollException($"Missing or invalid script file {wageType.ResultExpressionFile}");
+                    throw new PayrollException($"Missing or invalid script file {wageType.ResultExpressionFile}.");
                 }
             }
         }
@@ -708,11 +683,9 @@ public abstract class ExchangeImportVisitor : Visitor
     /// <param name="regulation">The regulation</param>
     /// <param name="wageType">The wage type</param>
     /// <param name="targetWageType">The target wage type</param>
-    protected virtual async Task SetupWageTypeAsync(IExchangeTenant tenant, IRegulationSet regulation,
-        IWageType wageType, IWageType targetWageType)
-    {
-        await Task.Run(() => { });
-    }
+    protected virtual Task SetupWageTypeAsync(IExchangeTenant tenant, IRegulationSet regulation,
+        IWageType wageType, IWageType targetWageType) =>
+        Task.CompletedTask;
 
     #endregion
 
@@ -733,7 +706,7 @@ public abstract class ExchangeImportVisitor : Visitor
                 script.Value = ReadTextFile(script.ValueFile);
                 if (string.IsNullOrWhiteSpace(script.Value))
                 {
-                    throw new PayrollException($"Missing script value in file {script.ValueFile}");
+                    throw new PayrollException($"Missing script value in file {script.ValueFile}.");
                 }
             }
         }
@@ -753,11 +726,9 @@ public abstract class ExchangeImportVisitor : Visitor
     /// <param name="regulation">The regulation</param>
     /// <param name="script">The script</param>
     /// <param name="targetScript">The target script</param>
-    protected virtual async Task SetupScriptAsync(IExchangeTenant tenant, IRegulationSet regulation,
-        IScript script, IScript targetScript)
-    {
-        await Task.Run(() => { });
-    }
+    protected virtual Task SetupScriptAsync(IExchangeTenant tenant, IRegulationSet regulation,
+        IScript script, IScript targetScript) =>
+        Task.CompletedTask;
 
     #endregion
 
@@ -784,7 +755,7 @@ public abstract class ExchangeImportVisitor : Visitor
                     regulation.Name, report.Name);
                 if (string.IsNullOrWhiteSpace(report.BuildExpression))
                 {
-                    throw new PayrollException($"Missing or invalid script file {report.BuildExpressionFile}");
+                    throw new PayrollException($"Missing or invalid script file {report.BuildExpressionFile}.");
                 }
             }
 
@@ -801,7 +772,7 @@ public abstract class ExchangeImportVisitor : Visitor
                     regulation.Name, report.Name);
                 if (string.IsNullOrWhiteSpace(report.StartExpression))
                 {
-                    throw new PayrollException($"Missing or invalid script file {report.StartExpressionFile}");
+                    throw new PayrollException($"Missing or invalid script file {report.StartExpressionFile}.");
                 }
             }
 
@@ -818,7 +789,7 @@ public abstract class ExchangeImportVisitor : Visitor
                     regulation.Name, report.Name);
                 if (string.IsNullOrWhiteSpace(report.EndExpression))
                 {
-                    throw new PayrollException($"Missing or invalid script file {report.EndExpressionFile}");
+                    throw new PayrollException($"Missing or invalid script file {report.EndExpressionFile}.");
                 }
             }
         }
@@ -838,11 +809,9 @@ public abstract class ExchangeImportVisitor : Visitor
     /// <param name="regulation">The regulation</param>
     /// <param name="report">The report</param>
     /// <param name="targetReport">The target report</param>
-    protected virtual async Task SetupReportAsync(IExchangeTenant tenant, IRegulationSet regulation,
-        IReportSet report, IReportSet targetReport)
-    {
-        await Task.Run(() => { });
-    }
+    protected virtual Task SetupReportAsync(IExchangeTenant tenant, IRegulationSet regulation,
+        IReportSet report, IReportSet targetReport) =>
+        Task.CompletedTask;
 
     /// <summary>Visit the report parameter</summary>
     /// <param name="tenant">The tenant</param>
@@ -868,11 +837,9 @@ public abstract class ExchangeImportVisitor : Visitor
     /// <param name="report">The report</param>
     /// <param name="parameter">The report parameter</param>
     /// <param name="targetParameter">The target report parameter</param>
-    protected virtual async Task SetupReportParameterAsync(IExchangeTenant tenant, IRegulationSet regulation,
-        IReportSet report, IReportParameter parameter, IReportParameter targetParameter)
-    {
-        await Task.Run(() => { });
-    }
+    protected virtual Task SetupReportParameterAsync(IExchangeTenant tenant, IRegulationSet regulation,
+        IReportSet report, IReportParameter parameter, IReportParameter targetParameter) =>
+        Task.CompletedTask;
 
     /// <summary>Visit the report template</summary>
     /// <param name="tenant">The tenant</param>
@@ -888,7 +855,7 @@ public abstract class ExchangeImportVisitor : Visitor
             template.Content = BinaryFile.Read(template.ContentFile);
             if (string.IsNullOrWhiteSpace(template.Content))
             {
-                throw new PayrollException($"Missing report template content from file {template.ContentFile}");
+                throw new PayrollException($"Missing report template content from file {template.ContentFile}.");
             }
 
             // content type
@@ -908,7 +875,7 @@ public abstract class ExchangeImportVisitor : Visitor
             template.Schema = BinaryFile.Read(template.SchemaFile);
             if (string.IsNullOrWhiteSpace(template.Schema))
             {
-                throw new PayrollException($"Missing report template schema from file {template.SchemaFile}");
+                throw new PayrollException($"Missing report template schema from file {template.SchemaFile}.");
             }
         }
 
@@ -929,11 +896,9 @@ public abstract class ExchangeImportVisitor : Visitor
     /// <param name="report">The report</param>
     /// <param name="template">The report template</param>
     /// <param name="targetTemplate">The target report template</param>
-    protected virtual async Task SetupReportTemplateAsync(IExchangeTenant tenant, IRegulationSet regulation,
-        IReportSet report, IReportTemplate template, IReportTemplate targetTemplate)
-    {
-        await Task.Run(() => { });
-    }
+    protected virtual Task SetupReportTemplateAsync(IExchangeTenant tenant, IRegulationSet regulation,
+        IReportSet report, IReportTemplate template, IReportTemplate targetTemplate) =>
+        Task.CompletedTask;
 
     #endregion
 
@@ -964,11 +929,9 @@ public abstract class ExchangeImportVisitor : Visitor
     /// <param name="tenant">The exchange tenant</param>
     /// <param name="employee">The employee</param>
     /// <param name="targetEmployee">The target employee</param>
-    protected virtual async Task SetupEmployeeAsync(IExchangeTenant tenant, IEmployeeSet employee,
-        IEmployee targetEmployee)
-    {
-        await Task.Run(() => { });
-    }
+    protected virtual Task SetupEmployeeAsync(IExchangeTenant tenant, IEmployeeSet employee,
+        IEmployee targetEmployee) =>
+        Task.CompletedTask;
 
     #endregion
 
@@ -989,7 +952,7 @@ public abstract class ExchangeImportVisitor : Visitor
             new(tenantId), payrollName) : null;
         if (payroll == null)
         {
-            throw new PayrollException($"Unknown payroll with name {payrollName}");
+            throw new PayrollException($"Unknown payroll with name {payrollName}.");
         }
         return payroll;
     }
@@ -1005,7 +968,7 @@ public abstract class ExchangeImportVisitor : Visitor
             var division = await GetDivisionAsync(tenant.Id, payroll.DivisionName);
             if (division == null)
             {
-                throw new PayrollException($"Missing division with name {payroll.DivisionName}");
+                throw new PayrollException($"Missing division with name {payroll.DivisionName}.");
             }
             payroll.DivisionId = division.Id;
         }
@@ -1024,11 +987,9 @@ public abstract class ExchangeImportVisitor : Visitor
     /// <param name="tenant">The exchange tenant</param>
     /// <param name="payroll">The payroll</param>
     /// <param name="targetPayroll">The target payroll</param>
-    protected virtual async Task SetupPayrollAsync(IExchangeTenant tenant, IPayrollSet payroll,
-        IPayroll targetPayroll)
-    {
-        await Task.Run(() => { });
-    }
+    protected virtual Task SetupPayrollAsync(IExchangeTenant tenant, IPayrollSet payroll,
+        IPayroll targetPayroll) =>
+        Task.CompletedTask;
 
     #endregion
 
@@ -1057,11 +1018,9 @@ public abstract class ExchangeImportVisitor : Visitor
     /// <param name="payroll">The payroll</param>
     /// <param name="layer">The payroll layer</param>
     /// <param name="targetLayer">The target payroll layer</param>
-    protected virtual async Task SetupPayrollLayerAsync(IExchangeTenant tenant, IPayrollSet payroll,
-        IPayrollLayer layer, IPayrollLayer targetLayer)
-    {
-        await Task.Run(() => { });
-    }
+    protected virtual Task SetupPayrollLayerAsync(IExchangeTenant tenant, IPayrollSet payroll,
+        IPayrollLayer layer, IPayrollLayer targetLayer) =>
+        Task.CompletedTask;
 
     #endregion
 
@@ -1082,7 +1041,7 @@ public abstract class ExchangeImportVisitor : Visitor
                 var user = await GetUserAsync(tenant.Id, caseChangeSetup.UserIdentifier);
                 if (user == null)
                 {
-                    throw new PayrollException($"Unknown user with identifier {caseChangeSetup.UserIdentifier}");
+                    throw new PayrollException($"Unknown user with identifier {caseChangeSetup.UserIdentifier}.");
                 }
                 caseChangeSetup.UserId = user.Id;
             }
@@ -1093,7 +1052,7 @@ public abstract class ExchangeImportVisitor : Visitor
                 var employee = await GetEmployeeAsync(tenant.Id, caseChangeSetup.EmployeeIdentifier);
                 if (employee == null)
                 {
-                    throw new PayrollException($"Missing case change employee with identifier {caseChangeSetup.EmployeeIdentifier}");
+                    throw new PayrollException($"Missing case change employee with identifier {caseChangeSetup.EmployeeIdentifier}.");
                 }
                 caseChangeSetup.EmployeeId = employee.Id;
             }
@@ -1104,7 +1063,7 @@ public abstract class ExchangeImportVisitor : Visitor
                 var division = await GetDivisionAsync(tenant.Id, caseChangeSetup.DivisionName);
                 if (division == null)
                 {
-                    throw new PayrollException($"Missing case change division with name {caseChangeSetup.DivisionName}");
+                    throw new PayrollException($"Missing case change division with name {caseChangeSetup.DivisionName}.");
                 }
                 caseChangeSetup.DivisionId = division.Id;
             }
@@ -1123,7 +1082,7 @@ public abstract class ExchangeImportVisitor : Visitor
                     var division = await GetDivisionAsync(tenant.Id, caseValue.DivisionName);
                     if (division == null)
                     {
-                        throw new PayrollException($"Missing case value division with name {caseChangeSetup.DivisionName}");
+                        throw new PayrollException($"Missing case value division with name {caseChangeSetup.DivisionName}.");
                     }
                     caseValue.DivisionId = division.Id;
                 }
@@ -1193,11 +1152,9 @@ public abstract class ExchangeImportVisitor : Visitor
     /// <param name="tenant">The exchange tenant</param>
     /// <param name="payroll">The payroll</param>
     /// <param name="caseChangeSetup">The case change</param>
-    protected virtual async Task SetupCaseChangeAsync(IExchangeTenant tenant, IPayrollSet payroll,
-        ICaseChangeSetup caseChangeSetup)
-    {
-        await Task.Run(() => { });
-    }
+    protected virtual Task SetupCaseChangeAsync(IExchangeTenant tenant, IPayrollSet payroll,
+        ICaseChangeSetup caseChangeSetup) =>
+        Task.CompletedTask;
 
     #endregion
 
@@ -1243,7 +1200,7 @@ public abstract class ExchangeImportVisitor : Visitor
                     payrun.Name);
                 if (string.IsNullOrWhiteSpace(payrun.StartExpression))
                 {
-                    throw new PayrollException($"Missing or invalid script file {payrun.StartExpressionFile}");
+                    throw new PayrollException($"Missing or invalid script file {payrun.StartExpressionFile}.");
                 }
             }
 
@@ -1261,7 +1218,7 @@ public abstract class ExchangeImportVisitor : Visitor
                 if (string.IsNullOrWhiteSpace(payrun.EmployeeAvailableExpression))
                 {
                     throw new PayrollException(
-                        $"Missing or invalid script file {payrun.EmployeeAvailableExpressionFile}");
+                        $"Missing or invalid script file {payrun.EmployeeAvailableExpressionFile}.");
                 }
             }
 
@@ -1279,7 +1236,7 @@ public abstract class ExchangeImportVisitor : Visitor
                 if (string.IsNullOrWhiteSpace(payrun.EmployeeStartExpression))
                 {
                     throw new PayrollException(
-                        $"Missing or invalid script file {payrun.EmployeeStartExpressionFile}");
+                        $"Missing or invalid script file {payrun.EmployeeStartExpressionFile}.");
                 }
             }
 
@@ -1297,7 +1254,7 @@ public abstract class ExchangeImportVisitor : Visitor
                 if (string.IsNullOrWhiteSpace(payrun.WageTypeAvailableExpression))
                 {
                     throw new PayrollException(
-                        $"Missing or invalid script file {payrun.WageTypeAvailableExpressionFile}");
+                        $"Missing or invalid script file {payrun.WageTypeAvailableExpressionFile}.");
                 }
             }
 
@@ -1315,7 +1272,7 @@ public abstract class ExchangeImportVisitor : Visitor
                 if (string.IsNullOrWhiteSpace(payrun.EmployeeEndExpression))
                 {
                     throw new PayrollException(
-                        $"Missing or invalid script file {payrun.EmployeeEndExpressionFile}");
+                        $"Missing or invalid script file {payrun.EmployeeEndExpressionFile}.");
                 }
             }
 
@@ -1332,7 +1289,7 @@ public abstract class ExchangeImportVisitor : Visitor
                     payrun.Name);
                 if (string.IsNullOrWhiteSpace(payrun.EndExpression))
                 {
-                    throw new PayrollException($"Missing or invalid script file {payrun.EndExpressionFile}");
+                    throw new PayrollException($"Missing or invalid script file {payrun.EndExpressionFile}.");
                 }
             }
         }
@@ -1351,15 +1308,13 @@ public abstract class ExchangeImportVisitor : Visitor
         await base.VisitPayrunAsync(tenant, payrun);
     }
 
-    /// <summary>Setup the payrun</summary>
+    /// <summary>Payrun setup</summary>
     /// <param name="tenant">The exchange tenant</param>
     /// <param name="payrun">The payrun</param>
     /// <param name="targetPayrun">The target payrun</param>
-    protected virtual async Task SetupPayrunAsync(IExchangeTenant tenant, IPayrun payrun,
-        IPayrun targetPayrun)
-    {
-        await Task.Run(() => { });
-    }
+    protected virtual Task SetupPayrunAsync(IExchangeTenant tenant, IPayrun payrun,
+        IPayrun targetPayrun) =>
+        Task.CompletedTask;
 
     /// <inheritdoc />
     protected override async Task VisitPayrunParameterAsync(IExchangeTenant tenant, IPayrun payrun,
@@ -1372,16 +1327,14 @@ public abstract class ExchangeImportVisitor : Visitor
         await base.VisitPayrunParameterAsync(tenant, payrun, parameter);
     }
 
-    /// <summary>Setup the payrun</summary>
+    /// <summary>Payrun setup</summary>
     /// <param name="tenant">The exchange tenant</param>
     /// <param name="payrun">The payrun</param>
     /// <param name="parameter">The payrun parameter</param>
     /// <param name="targetPayrunParameter">The target payrun parameter</param>
-    protected virtual async Task SetupPayrunParameterAsync(IExchangeTenant tenant, IPayrun payrun,
-        IPayrunParameter parameter, IPayrunParameter targetPayrunParameter)
-    {
-        await Task.Run(() => { });
-    }
+    protected virtual Task SetupPayrunParameterAsync(IExchangeTenant tenant, IPayrun payrun,
+        IPayrunParameter parameter, IPayrunParameter targetPayrunParameter) =>
+        Task.CompletedTask;
 
     #endregion
 

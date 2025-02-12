@@ -18,5 +18,5 @@ public interface IReportSetService : ICreateService<IReportSet, RegulationServic
     /// <param name="name">The id of the report</param>
     /// <param name="reportRequest">The report request</param>
     /// <returns>The report set</returns>
-    Task<T> GetAsync<T>(RegulationServiceContext context, string name, ReportRequest reportRequest = null) where T : class, IReportSet;
+    Task<T> GetAsync<T>(RegulationServiceContext context, string name, ReportRequest reportRequest) where T : class, IReportSet;
 }

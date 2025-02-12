@@ -25,6 +25,11 @@ public class LookupSettings : IEquatable<LookupSettings>
     /// <param name="source">The copy source</param>
     public LookupSettings(LookupSettings source)
     {
+        if (source == null)
+        {
+            throw new ArgumentNullException(nameof(source));
+        }
+
         LookupName = source.LookupName;
         ValueFieldName = source.ValueFieldName;
         TextFieldName = source.TextFieldName;

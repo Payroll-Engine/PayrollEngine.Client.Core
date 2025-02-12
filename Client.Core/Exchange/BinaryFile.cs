@@ -17,7 +17,7 @@ public static class BinaryFile
         }
         if (!File.Exists(fileName))
         {
-            throw new PayrollException($"Missing file {new FileInfo(fileName).FullName}");
+            throw new PayrollException($"Missing file {new FileInfo(fileName).FullName}.");
         }
 
         using var stream = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);

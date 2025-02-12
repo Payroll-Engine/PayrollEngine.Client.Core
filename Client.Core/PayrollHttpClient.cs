@@ -16,13 +16,7 @@ namespace PayrollEngine.Client;
 /// <summary>Http client for the Payroll Engine API</summary>
 public sealed class PayrollHttpClient : IDisposable
 {
-    private readonly HttpClient httpClient;
-
-    /// <summary>The backend base url</summary>
-    public string BaseUrl { get; }
-
-    /// <summary>The backend port</summary>
-    public int Port { get; }
+    private HttpClient HttpClient { get; }
 
     #region Constructor
 
@@ -33,8 +27,9 @@ public sealed class PayrollHttpClient : IDisposable
     /// <param name="baseUrl">The Uri the request is sent to</param>
     /// <param name="port">The backend port</param>
     /// <param name="version">The request version</param>
-    public PayrollHttpClient(HttpClientHandler httpClientHandler, string baseUrl, int port, Version version = null) :
-        this(httpClientHandler, baseUrl, port, TimeSpan.FromSeconds(100), version)
+    public PayrollHttpClient(HttpClientHandler httpClientHandler, string baseUrl,
+        int port = 0, Version version = null) :
+        this(httpClientHandler, baseUrl, TimeSpan.FromSeconds(100), port, version)
     {
     }
 
@@ -44,7 +39,8 @@ public sealed class PayrollHttpClient : IDisposable
     /// <param name="port">The backend port</param>
     /// <param name="requestTimeout">The request timeout</param>
     /// <param name="version">The request version</param>
-    public PayrollHttpClient(HttpClientHandler httpClientHandler, string baseUrl, int port, TimeSpan requestTimeout, Version version = null)
+    public PayrollHttpClient(HttpClientHandler httpClientHandler, string baseUrl,
+        TimeSpan requestTimeout, int port = 0, Version version = null)
     {
         if (httpClientHandler == null)
         {
@@ -54,13 +50,11 @@ public sealed class PayrollHttpClient : IDisposable
         {
             throw new ArgumentException(nameof(baseUrl));
         }
-        BaseUrl = baseUrl;
-        Port = port;
 
         // http client
-        httpClient = new(httpClientHandler, false)
+        HttpClient = new(httpClientHandler, false)
         {
-            BaseAddress = new($"{baseUrl}:{port}/"),
+            BaseAddress = port > 0 ? new Uri($"{baseUrl}:{port}/") : new Uri($"{baseUrl}/"),
             Timeout = requestTimeout
         };
 
@@ -71,8 +65,9 @@ public sealed class PayrollHttpClient : IDisposable
     /// <param name="httpClientHandler">The http client handler</param>
     /// <param name="configuration">The HTTP configuration</param>
     /// <param name="version">The request version</param>
-    public PayrollHttpClient(HttpClientHandler httpClientHandler, PayrollHttpConfiguration configuration, Version version = null) :
-        this(httpClientHandler, configuration.BaseUrl, configuration.Port, configuration.Timeout, version)
+    public PayrollHttpClient(HttpClientHandler httpClientHandler,
+        PayrollHttpConfiguration configuration, Version version = null) :
+        this(httpClientHandler, configuration.BaseUrl, configuration.Timeout, configuration.Port, version)
     {
     }
 
@@ -81,19 +76,58 @@ public sealed class PayrollHttpClient : IDisposable
     /// <param name="version">The request version</param>
     public PayrollHttpClient(HttpClient httpClient, Version version = null)
     {
-        this.httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+        this.HttpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
         InitHttpClient(version);
     }
 
     private void InitHttpClient(Version version)
     {
-        httpClient.DefaultRequestHeaders.Accept.Clear();
-        httpClient.DefaultRequestHeaders.Accept.Add(
+        HttpClient.DefaultRequestHeaders.Accept.Clear();
+        HttpClient.DefaultRequestHeaders.Accept.Add(
             new(ContentType.Json));
 
         // version
         version ??= PayrollApiSpecification.CurrentApiVersion;
-        httpClient.DefaultRequestHeaders.Add("X-Version", version.ToString(2));
+        HttpClient.DefaultRequestHeaders.Add("X-Version", version.ToString(2));
+    }
+
+    #endregion
+
+    #region Authentication
+
+    /// <summary>
+    /// Test for api key
+    /// </summary>
+    public bool HasApiKey() =>
+        HttpClient.DefaultRequestHeaders.Contains(PayrollApiSpecification.ApiKeyHeader);
+
+    /// <summary>
+    /// Set the api key
+    /// </summary>
+    /// <param name="apiKey">The api key</param>
+    public void SetApiKey(string apiKey)
+    {
+        if (string.IsNullOrWhiteSpace(apiKey))
+        {
+            throw new ArgumentException(nameof(apiKey));
+        }
+
+        // remove existing api
+        RemoveApiKey();
+        // set api key header
+        HttpClient.DefaultRequestHeaders.Add(PayrollApiSpecification.ApiKeyHeader, apiKey);
+    }
+
+    /// <summary>
+    /// Remove the api key
+    /// </summary>
+    public void RemoveApiKey()
+    {
+        // remove existing api key header
+        if (HasApiKey())
+        {
+            HttpClient.DefaultRequestHeaders.Remove(PayrollApiSpecification.ApiKeyHeader);
+        }
     }
 
     #endregion
@@ -104,7 +138,20 @@ public sealed class PayrollHttpClient : IDisposable
     /// Test for tenant authorization
     /// </summary>
     public bool HasTenantAuthorization() =>
-        httpClient.DefaultRequestHeaders.Contains(PayrollApiSpecification.TenantAuthorizationHeader);
+        HttpClient.DefaultRequestHeaders.Contains(PayrollApiSpecification.TenantAuthorizationHeader);
+
+    /// <summary>
+    /// Get the tenant authorization
+    /// </summary>
+    public string GetTenantAuthorization()
+    {
+        if (!HasTenantAuthorization())
+        {
+            return null;
+        }
+        var values = HttpClient.DefaultRequestHeaders.GetValues(PayrollApiSpecification.TenantAuthorizationHeader);
+        return values.FirstOrDefault();
+    }
 
     /// <summary>
     /// Set the tenant authorization
@@ -120,7 +167,7 @@ public sealed class PayrollHttpClient : IDisposable
         // remove existing authorization
         RemoveTenantAuthorization();
         // set new authorization
-        httpClient.DefaultRequestHeaders.Add(PayrollApiSpecification.TenantAuthorizationHeader, tenantIdentifier);
+        HttpClient.DefaultRequestHeaders.Add(PayrollApiSpecification.TenantAuthorizationHeader, tenantIdentifier);
     }
 
     /// <summary>
@@ -131,7 +178,7 @@ public sealed class PayrollHttpClient : IDisposable
         // remove existing authorization
         if (HasTenantAuthorization())
         {
-            httpClient.DefaultRequestHeaders.Remove(PayrollApiSpecification.TenantAuthorizationHeader);
+            HttpClient.DefaultRequestHeaders.Remove(PayrollApiSpecification.TenantAuthorizationHeader);
         }
     }
 
@@ -143,30 +190,27 @@ public sealed class PayrollHttpClient : IDisposable
     /// The http address
     /// </summary>
     public string Address =>
-        httpClient.BaseAddress != null ? httpClient.BaseAddress.AbsoluteUri : null;
+        HttpClient.BaseAddress != null ? HttpClient.BaseAddress.AbsoluteUri : null;
 
     /// <summary>Test for the client internet connection</summary>
+    /// <param name="address">The address to test</param>
     /// <returns>True if internet connection is available</returns>
-    public bool IsConnectionAvailable() =>
-        Task.Run(IsConnectionAvailableAsync).Result;
-
-    /// <summary>Test for the client internet connection</summary>
-    /// <returns>True if internet connection is available</returns>
-    public async Task<bool> IsConnectionAvailableAsync()
+    public async Task<bool> IsConnectionAvailableAsync(string address)
     {
-        if (httpClient.BaseAddress == null)
+        if (string.IsNullOrWhiteSpace(address))
         {
-            return false;
+            throw new ArgumentException(nameof(address));
         }
 
         try
         {
             // get test
-            var httpResponse = await httpClient.GetAsync(Address);
+            var httpResponse = await HttpClient.GetAsync(address);
             return httpResponse.IsSuccessStatusCode;
         }
-        catch
+        catch (Exception exception)
         {
+            Log.Error(exception, exception.GetBaseException().Message);
             // ignored
         }
         return false;
@@ -201,7 +245,7 @@ public sealed class PayrollHttpClient : IDisposable
         }
 
         LogStopwatch.Start(GetLogName(nameof(GetAsync), requestUri));
-        var response = await httpClient.GetAsync(requestUri);
+        var response = await HttpClient.GetAsync(requestUri);
         LogStopwatch.Stop(GetLogName(nameof(GetAsync), requestUri));
 
         await EnsureSuccessResponse(response);
@@ -231,7 +275,7 @@ public sealed class PayrollHttpClient : IDisposable
         };
 
         LogStopwatch.Start(GetLogName(nameof(GetAsync), requestUri));
-        var response = await httpClient.SendAsync(request).ConfigureAwait(false);
+        var response = await HttpClient.SendAsync(request).ConfigureAwait(false);
         LogStopwatch.Stop(GetLogName(nameof(GetAsync), requestUri));
 
         await EnsureSuccessResponse(response);
@@ -306,7 +350,7 @@ public sealed class PayrollHttpClient : IDisposable
         }
 
         LogStopwatch.Start(GetLogName(nameof(GetCollectionAsync), requestUri));
-        using var response = await httpClient.GetAsync(requestUri);
+        using var response = await HttpClient.GetAsync(requestUri);
         LogStopwatch.Stop(GetLogName(nameof(GetCollectionAsync), requestUri));
 
         await EnsureSuccessResponse(response);
@@ -344,7 +388,6 @@ public sealed class PayrollHttpClient : IDisposable
         }
 
         var response = await GetAsync(requestUri, DefaultJsonSerializer.SerializeJson(content));
-        await EnsureSuccessResponse(response);
         var json = await response.Content.ReadAsStringAsync();
         return string.IsNullOrWhiteSpace(json) ? [] : DefaultJsonSerializer.Deserialize<List<T>>(json);
     }
@@ -364,7 +407,7 @@ public sealed class PayrollHttpClient : IDisposable
         }
 
         LogStopwatch.Start(GetLogName(nameof(PostAsync), requestUri));
-        using var response = await httpClient.PostAsync(requestUri, null);
+        using var response = await HttpClient.PostAsync(requestUri, null);
         LogStopwatch.Stop(GetLogName(nameof(PostAsync), requestUri));
 
         await EnsureSuccessResponse(response);
@@ -404,7 +447,7 @@ public sealed class PayrollHttpClient : IDisposable
         }
 
         LogStopwatch.Start(GetLogName(nameof(PostAsync), requestUri));
-        using var response = await httpClient.PostAsync(requestUri, DefaultJsonSerializer.SerializeJson(content));
+        using var response = await HttpClient.PostAsync(requestUri, DefaultJsonSerializer.SerializeJson(content));
         LogStopwatch.Stop(GetLogName(nameof(PostAsync), requestUri));
 
         await EnsureSuccessResponse(response);
@@ -412,7 +455,7 @@ public sealed class PayrollHttpClient : IDisposable
         var json = await response.Content.ReadAsStringAsync();
         if (string.IsNullOrWhiteSpace(json))
         {
-            return default;
+            return null;
         }
         var responseObj = DefaultJsonSerializer.Deserialize<T>(json);
         if (responseObj == null)
@@ -444,7 +487,7 @@ public sealed class PayrollHttpClient : IDisposable
         }
 
         LogStopwatch.Start(GetLogName(nameof(PostAsync), requestUri));
-        using var response = await httpClient.PostAsync(requestUri, DefaultJsonSerializer.SerializeJson(content));
+        using var response = await HttpClient.PostAsync(requestUri, DefaultJsonSerializer.SerializeJson(content));
         LogStopwatch.Stop(GetLogName(nameof(PostAsync), requestUri));
 
         await EnsureSuccessResponse(response);
@@ -502,7 +545,7 @@ public sealed class PayrollHttpClient : IDisposable
         }
 
         LogStopwatch.Start(GetLogName(nameof(PostAsync), requestUri));
-        var response = await httpClient.PostAsync(requestUri, content);
+        var response = await HttpClient.PostAsync(requestUri, content);
         LogStopwatch.Stop(GetLogName(nameof(PostAsync), requestUri));
 
         await EnsureSuccessResponse(response);
@@ -545,7 +588,7 @@ public sealed class PayrollHttpClient : IDisposable
         }
 
         LogStopwatch.Start(GetLogName(nameof(PutAsync), requestUri));
-        using var response = await httpClient.PutAsync(requestUri, content);
+        using var response = await HttpClient.PutAsync(requestUri, content);
         LogStopwatch.Stop(GetLogName(nameof(PutAsync), requestUri));
 
         await EnsureSuccessResponse(response);
@@ -569,7 +612,7 @@ public sealed class PayrollHttpClient : IDisposable
         requestUri = $"{requestUri}/{content.Id}";
 
         LogStopwatch.Start(GetLogName(nameof(PutAsync), requestUri));
-        using var response = await httpClient.PutAsync(requestUri, DefaultJsonSerializer.SerializeJson(content));
+        using var response = await HttpClient.PutAsync(requestUri, DefaultJsonSerializer.SerializeJson(content));
         LogStopwatch.Stop(GetLogName(nameof(PutAsync), requestUri));
 
         await EnsureSuccessResponse(response);
@@ -606,7 +649,7 @@ public sealed class PayrollHttpClient : IDisposable
             if (newObject.UpdateMode is UpdateMode.Update)
             {
                 requestUri = $"{requestUri}/{newObject.Id}";
-                using var response = await httpClient.PutAsync(requestUri, DefaultJsonSerializer.SerializeJson(newObject));
+                using var response = await HttpClient.PutAsync(requestUri, DefaultJsonSerializer.SerializeJson(newObject));
                 await EnsureSuccessResponse(response);
                 LogPut(requestUri, newObject);
             }
@@ -621,12 +664,12 @@ public sealed class PayrollHttpClient : IDisposable
             // reset the id
             newObject.Id = 0;
 
-            using var response = await httpClient.PostAsync(requestUri, DefaultJsonSerializer.SerializeJson(newObject));
+            using var response = await HttpClient.PostAsync(requestUri, DefaultJsonSerializer.SerializeJson(newObject));
             await EnsureSuccessResponse(response);
             newObject.Id = GetRecordId(response);
             if (newObject.Id <= 0)
             {
-                throw new PayrollException($"error while creating new record of object {newObject}");
+                throw new PayrollException($"error while creating new record of object {newObject}.");
             }
             LogPost(requestUri, newObject);
         }
@@ -652,7 +695,7 @@ public sealed class PayrollHttpClient : IDisposable
 
         requestUri = requestUri.EnsureEnd("/");
         LogStopwatch.Start(GetLogName(nameof(DeleteAsync), requestUri));
-        using var response = await httpClient.DeleteAsync($"{requestUri}{id}");
+        using var response = await HttpClient.DeleteAsync($"{requestUri}{id}");
         LogStopwatch.Stop(GetLogName(nameof(DeleteAsync), requestUri));
 
         await EnsureSuccessResponse(response);
@@ -669,7 +712,7 @@ public sealed class PayrollHttpClient : IDisposable
 
         requestUri = requestUri.EnsureEnd("/");
         LogStopwatch.Start(GetLogName(nameof(DeleteAsync), requestUri));
-        using var response = await httpClient.DeleteAsync(requestUri);
+        using var response = await HttpClient.DeleteAsync(requestUri);
         LogStopwatch.Stop(GetLogName(nameof(DeleteAsync), requestUri));
 
         await EnsureSuccessResponse(response);
@@ -690,7 +733,7 @@ public sealed class PayrollHttpClient : IDisposable
         }
 
         LogStopwatch.Start(GetLogName(nameof(GetAttributeAsync), requestUri));
-        using var response = await httpClient.GetAsync(requestUri);
+        using var response = await HttpClient.GetAsync(requestUri);
         LogStopwatch.Stop(GetLogName(nameof(GetAttributeAsync), requestUri));
 
         // not found on missing attribute
@@ -718,7 +761,7 @@ public sealed class PayrollHttpClient : IDisposable
         }
 
         LogStopwatch.Start(GetLogName(nameof(PostAttributeAsync), requestUri));
-        using var response = await httpClient.PostAsync(requestUri, DefaultJsonSerializer.SerializeJson(attributeValue));
+        using var response = await HttpClient.PostAsync(requestUri, DefaultJsonSerializer.SerializeJson(attributeValue));
         LogStopwatch.Stop(GetLogName(nameof(PostAttributeAsync), requestUri));
 
         await EnsureSuccessResponse(response);
@@ -736,7 +779,7 @@ public sealed class PayrollHttpClient : IDisposable
         }
 
         LogStopwatch.Start(GetLogName(nameof(DeleteAttributeAsync), requestUri));
-        using var response = await httpClient.DeleteAsync(requestUri);
+        using var response = await HttpClient.DeleteAsync(requestUri);
         LogStopwatch.Stop(GetLogName(nameof(DeleteAttributeAsync), requestUri));
 
         await EnsureSuccessResponse(response);

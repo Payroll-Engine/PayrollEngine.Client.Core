@@ -73,10 +73,6 @@
 		</EmbeddedResource>
 	</ItemGroup>
 
-	<ItemGroup>
-		<PackageReference Include="PayrollEngine.Core" Version="0.8.0-beta.2" />
-	</ItemGroup>
-
 	<!-- include xml documention files and json schemas to the nuget package -->
 	<ItemGroup>
 		<None Include="$(OutputDir)*.xml" Pack="true">
@@ -91,6 +87,9 @@
 	    <Pack>True</Pack>
 	    <PackagePath>\</PackagePath>
 	  </None>
+	</ItemGroup>
+	<ItemGroup>
+	  <PackageReference Include="PayrollEngine.Core" Version="0.9.0-beta.1" />
 	</ItemGroup>
 
 	<!--  build json schema -->

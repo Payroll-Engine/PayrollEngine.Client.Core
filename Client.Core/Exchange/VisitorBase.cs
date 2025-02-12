@@ -22,7 +22,7 @@ public abstract class VisitorBase
         var hasRegulationShares = exchange.RegulationShares == null || exchange.RegulationShares.Any();
         if (!hasTenants && !hasRegulationShares)
         {
-            throw new PayrollException("Missing exchange data");
+            throw new PayrollException("Missing exchange data.");
         }
     }
 
@@ -90,10 +90,8 @@ public abstract class VisitorBase
 
     /// <summary>Visit the regulation share</summary>
     /// <param name="share">The regulation share</param>
-    protected virtual async Task VisitRegulationShareAsync(IRegulationShare share)
-    {
-        await Task.Run(() => { });
-    }
+    protected virtual Task VisitRegulationShareAsync(IRegulationShare share) =>
+        Task.CompletedTask;
 
     #endregion
 
@@ -115,10 +113,8 @@ public abstract class VisitorBase
     /// <summary>Visit the user</summary>
     /// <param name="tenant">The tenant</param>
     /// <param name="user">The user</param>
-    protected virtual async Task VisitUserAsync(IExchangeTenant tenant, IUser user)
-    {
-        await Task.Run(() => { });
-    }
+    protected virtual Task VisitUserAsync(IExchangeTenant tenant, IUser user) =>
+        Task.CompletedTask;
 
     #endregion
 
@@ -140,10 +136,8 @@ public abstract class VisitorBase
     /// <summary>Visit the calendar</summary>
     /// <param name="tenant">The tenant</param>
     /// <param name="calendar">The calendar</param>
-    protected virtual async Task VisitCalendarAsync(IExchangeTenant tenant, ICalendar calendar)
-    {
-        await Task.Run(() => { });
-    }
+    protected virtual Task VisitCalendarAsync(IExchangeTenant tenant, ICalendar calendar) =>
+        Task.CompletedTask;
 
     #endregion
 
@@ -165,10 +159,8 @@ public abstract class VisitorBase
     /// <summary>Visit the division</summary>
     /// <param name="tenant">The tenant</param>
     /// <param name="division">The division</param>
-    protected virtual async Task VisitDivisionAsync(IExchangeTenant tenant, IDivision division)
-    {
-        await Task.Run(() => { });
-    }
+    protected virtual Task VisitDivisionAsync(IExchangeTenant tenant, IDivision division) =>
+        Task.CompletedTask;
 
     #endregion
 
@@ -190,10 +182,8 @@ public abstract class VisitorBase
     /// <summary>Visit the task</summary>
     /// <param name="tenant">The tenant</param>
     /// <param name="task">The task</param>
-    protected virtual async Task VisitTaskAsync(IExchangeTenant tenant, ITask task)
-    {
-        await Task.Run(() => { });
-    }
+    protected virtual Task VisitTaskAsync(IExchangeTenant tenant, ITask task) =>
+        Task.CompletedTask;
 
     #endregion
 
@@ -215,10 +205,8 @@ public abstract class VisitorBase
     /// <summary>Visit the webhook</summary>
     /// <param name="tenant">The tenant</param>
     /// <param name="webhook">The webhook</param>
-    protected virtual async Task VisitWebhookAsync(IExchangeTenant tenant, IWebhook webhook)
-    {
-        await Task.Run(() => { });
-    }
+    protected virtual Task VisitWebhookAsync(IExchangeTenant tenant, IWebhook webhook) =>
+        Task.CompletedTask;
 
     #endregion
 
@@ -299,10 +287,9 @@ public abstract class VisitorBase
     /// <param name="regulation">The regulation</param>
     /// <param name="lookup">The lookup</param>
     /// <param name="lookupValue">The lookup value</param>
-    protected virtual async Task VisitLookupValueAsync(IExchangeTenant tenant, IRegulationSet regulation, ILookupSet lookup, ILookupValue lookupValue)
-    {
-        await Task.Run(() => { });
-    }
+    protected virtual Task VisitLookupValueAsync(IExchangeTenant tenant, IRegulationSet regulation,
+        ILookupSet lookup, ILookupValue lookupValue) =>
+        Task.CompletedTask;
 
     #endregion
 
@@ -351,11 +338,9 @@ public abstract class VisitorBase
     /// <param name="regulation">The regulation</param>
     /// <param name="caseSet">The case</param>
     /// <param name="caseField">The case field</param>
-    protected virtual async Task VisitCaseFieldAsync(IExchangeTenant tenant, IRegulationSet regulation,
-        ICaseSet caseSet, ICaseField caseField)
-    {
-        await Task.Run(() => { });
-    }
+    protected virtual Task VisitCaseFieldAsync(IExchangeTenant tenant, IRegulationSet regulation,
+        ICaseSet caseSet, ICaseField caseField) =>
+        Task.CompletedTask;
 
     #endregion
 
@@ -379,11 +364,9 @@ public abstract class VisitorBase
     /// <param name="tenant">The tenant</param>
     /// <param name="regulation">The regulation</param>
     /// <param name="caseRelation">The case relation</param>
-    protected virtual async Task VisitCaseRelationAsync(IExchangeTenant tenant, IRegulationSet regulation,
-        ICaseRelation caseRelation)
-    {
-        await Task.Run(() => { });
-    }
+    protected virtual Task VisitCaseRelationAsync(IExchangeTenant tenant, IRegulationSet regulation,
+        ICaseRelation caseRelation) =>
+        Task.CompletedTask;
 
     #endregion
 
@@ -407,10 +390,8 @@ public abstract class VisitorBase
     /// <param name="tenant">The tenant</param>
     /// <param name="regulation">The regulation</param>
     /// <param name="collector">The collector</param>
-    protected virtual async Task VisitCollectorAsync(IExchangeTenant tenant, IRegulationSet regulation, ICollector collector)
-    {
-        await Task.Run(() => { });
-    }
+    protected virtual Task VisitCollectorAsync(IExchangeTenant tenant, IRegulationSet regulation, ICollector collector) =>
+        Task.CompletedTask;
 
     #endregion
 
@@ -434,10 +415,8 @@ public abstract class VisitorBase
     /// <param name="tenant">The tenant</param>
     /// <param name="regulation">The regulation</param>
     /// <param name="wageType">The wage type</param>
-    protected virtual async Task VisitWageTypeAsync(IExchangeTenant tenant, IRegulationSet regulation, IWageType wageType)
-    {
-        await Task.Run(() => { });
-    }
+    protected virtual Task VisitWageTypeAsync(IExchangeTenant tenant, IRegulationSet regulation, IWageType wageType) =>
+        Task.CompletedTask;
 
     #endregion
 
@@ -461,11 +440,9 @@ public abstract class VisitorBase
     /// <param name="tenant">The tenant</param>
     /// <param name="regulation">The regulation</param>
     /// <param name="script">The script</param>
-    protected virtual async Task VisitScriptAsync(IExchangeTenant tenant, IRegulationSet regulation,
-        IScript script)
-    {
-        await Task.Run(() => { });
-    }
+    protected virtual Task VisitScriptAsync(IExchangeTenant tenant, IRegulationSet regulation,
+        IScript script) =>
+        Task.CompletedTask;
 
     #endregion
 
@@ -516,11 +493,9 @@ public abstract class VisitorBase
     /// <param name="regulation">The regulation</param>
     /// <param name="report">The report</param>
     /// <param name="parameter">The report parameter</param>
-    protected virtual async Task VisitReportParameterAsync(IExchangeTenant tenant, IRegulationSet regulation,
-        IReportSet report, IReportParameter parameter)
-    {
-        await Task.Run(() => { });
-    }
+    protected virtual Task VisitReportParameterAsync(IExchangeTenant tenant, IRegulationSet regulation,
+        IReportSet report, IReportParameter parameter) =>
+        Task.CompletedTask;
 
     /// <summary>Visit the report templates</summary>
     /// <param name="tenant">The tenant</param>
@@ -543,11 +518,9 @@ public abstract class VisitorBase
     /// <param name="regulation">The regulation</param>
     /// <param name="report">The report</param>
     /// <param name="template">The report template</param>
-    protected virtual async Task VisitReportTemplateAsync(IExchangeTenant tenant, IRegulationSet regulation,
-        IReportSet report, IReportTemplate template)
-    {
-        await Task.Run(() => { });
-    }
+    protected virtual Task VisitReportTemplateAsync(IExchangeTenant tenant, IRegulationSet regulation,
+        IReportSet report, IReportTemplate template) =>
+        Task.CompletedTask;
 
     #endregion
 
@@ -569,10 +542,8 @@ public abstract class VisitorBase
     /// <summary>Visit the employee</summary>
     /// <param name="tenant">The tenant</param>
     /// <param name="employee">The employee</param>
-    protected virtual async Task VisitEmployeeAsync(IExchangeTenant tenant, IEmployeeSet employee)
-    {
-        await Task.Run(() => { });
-    }
+    protected virtual Task VisitEmployeeAsync(IExchangeTenant tenant, IEmployeeSet employee) =>
+        Task.CompletedTask;
 
     #endregion
 
@@ -622,11 +593,9 @@ public abstract class VisitorBase
     /// <param name="tenant">The tenant</param>
     /// <param name="payroll">The payroll</param>
     /// <param name="layer">The payroll layer</param>
-    protected virtual async Task VisitPayrollLayerAsync(IExchangeTenant tenant, IPayrollSet payroll,
-        IPayrollLayer layer)
-    {
-        await Task.Run(() => { });
-    }
+    protected virtual Task VisitPayrollLayerAsync(IExchangeTenant tenant, IPayrollSet payroll,
+        IPayrollLayer layer) =>
+        Task.CompletedTask;
 
     #endregion
 
@@ -710,11 +679,9 @@ public abstract class VisitorBase
     /// <param name="caseChangeSetup">The case change setup</param>
     /// <param name="caseSetup">The case setup</param>
     /// <param name="valueSetup">The case value setup</param>
-    protected virtual async Task VisitCaseValueAsync(IExchangeTenant tenant, IPayrollSet payroll,
-        ICaseChangeSetup caseChangeSetup, ICaseSetup caseSetup, ICaseValueSetup valueSetup)
-    {
-        await Task.Run(() => { });
-    }
+    protected virtual Task VisitCaseValueAsync(IExchangeTenant tenant, IPayrollSet payroll,
+        ICaseChangeSetup caseChangeSetup, ICaseSetup caseSetup, ICaseValueSetup valueSetup) =>
+        Task.CompletedTask;
 
     #endregion
 
@@ -753,18 +720,15 @@ public abstract class VisitorBase
                 await VisitPayrunParameterAsync(tenant, payrun, parameter);
             }
         }
-        await Task.Run(() => { });
     }
 
     /// <summary>Visit the payrun parameter</summary>
     /// <param name="tenant">The tenant</param>
     /// <param name="payrun">The payrun</param>
     /// <param name="parameter">The payrun parameter</param>
-    protected virtual async Task VisitPayrunParameterAsync(IExchangeTenant tenant, IPayrun payrun,
-        IPayrunParameter parameter)
-    {
-        await Task.Run(() => { });
-    }
+    protected virtual Task VisitPayrunParameterAsync(IExchangeTenant tenant, IPayrun payrun,
+        IPayrunParameter parameter) =>
+        Task.CompletedTask;
 
     #endregion
 
@@ -795,11 +759,9 @@ public abstract class VisitorBase
     /// <summary>Visit the payrun job invocation</summary>
     /// <param name="tenant">The exchange tenant</param>
     /// <param name="invocation">The payrun job invocation</param>
-    protected virtual async Task VisitPayrunJobInvocationAsync(IExchangeTenant tenant,
-        IPayrunJobInvocation invocation)
-    {
-        await Task.Run(() => { });
-    }
+    protected virtual Task VisitPayrunJobInvocationAsync(IExchangeTenant tenant,
+        IPayrunJobInvocation invocation) =>
+        Task.CompletedTask;
 
     #endregion
 
@@ -875,12 +837,10 @@ public abstract class VisitorBase
     /// <param name="payrollResult">The payroll result</param>
     /// <param name="wageTypeResult">The wage type result</param>
     /// <param name="wageTypeCustomResult">The wage type custom result</param>
-    protected virtual async Task VisitWageTypeCustomResultAsync(IExchangeTenant tenant,
+    protected virtual Task VisitWageTypeCustomResultAsync(IExchangeTenant tenant,
         IPayrollResultSet payrollResult, IWageTypeResultSet wageTypeResult,
-        IWageTypeCustomResult wageTypeCustomResult)
-    {
-        await Task.Run(() => { });
-    }
+        IWageTypeCustomResult wageTypeCustomResult) =>
+        Task.CompletedTask;
 
     /// <summary>Visit the collector results</summary>
     /// <param name="tenant">The exchange tenant</param>
@@ -928,12 +888,10 @@ public abstract class VisitorBase
     /// <param name="payrollResult">The payroll result</param>
     /// <param name="collectorResult">The collector result</param>
     /// <param name="collectorCustomResult">The collector custom result</param>
-    protected virtual async Task VisitCollectorCustomResultAsync(IExchangeTenant tenant,
+    protected virtual Task VisitCollectorCustomResultAsync(IExchangeTenant tenant,
         IPayrollResultSet payrollResult, ICollectorResultSet collectorResult,
-        ICollectorCustomResult collectorCustomResult)
-    {
-        await Task.Run(() => { });
-    }
+        ICollectorCustomResult collectorCustomResult) =>
+        Task.CompletedTask;
 
     /// <summary>Visit the payrun results</summary>
     /// <param name="tenant">The exchange tenant</param>
@@ -954,11 +912,9 @@ public abstract class VisitorBase
     /// <param name="tenant">The exchange tenant</param>
     /// <param name="payrollResult">The payroll result</param>
     /// <param name="payrunResult">The payrun result</param>
-    protected virtual async Task VisitPayrunResultAsync(IExchangeTenant tenant,
-        IPayrollResultSet payrollResult, IPayrunResult payrunResult)
-    {
-        await Task.Run(() => { });
-    }
+    protected virtual Task VisitPayrunResultAsync(IExchangeTenant tenant,
+        IPayrollResultSet payrollResult, IPayrunResult payrunResult) =>
+        Task.CompletedTask;
 
     #endregion
 

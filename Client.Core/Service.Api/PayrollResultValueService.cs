@@ -53,7 +53,7 @@ public class PayrollResultValueService : ServiceBase, IPayrollResultValueService
     }
 
     /// <inheritdoc/>
-    public virtual async Task<T> GetAsync<T>(PayrollResultValueServiceContext context, int objectId) where T : class, IPayrollResultValue
+    public virtual Task<T> GetAsync<T>(PayrollResultValueServiceContext context, int objectId) where T : class, IPayrollResultValue
     {
         if (context == null)
         {
@@ -65,8 +65,7 @@ public class PayrollResultValueService : ServiceBase, IPayrollResultValueService
         }
 
         Log.Error("Unsupported get request on PayrollResultValue");
-        await Task.Run(() => { });
-        return default;
+        return Task.FromResult(default(T));
     }
 
     private static string GetPayrollResultValuesUrl(QueryResultType resultType, PayrollResultValueServiceContext context, Query query = null)

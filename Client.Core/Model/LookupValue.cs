@@ -14,7 +14,7 @@ public class LookupValue : ModelBase, ILookupValue
     /// <summary>The lookup key values (client only)</summary>
     public object[] KeyValues
     {
-        get => default;
+        get => null;
         set
         {
             if (value != null && value.Any())

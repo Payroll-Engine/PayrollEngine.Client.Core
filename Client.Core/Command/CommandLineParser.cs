@@ -3,30 +3,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 
-namespace PayrollEngine.Client;
+namespace PayrollEngine.Client.Command;
 
 /// <summary>Represents the environment command line arguments</summary>
-public static class ConsoleArguments
+public class CommandLineParser(string[] commandLineArgs)
 {
-    private static string[] CommandLineArgs { get; } = Environment.GetCommandLineArgs();
+    private string[] CommandLineArgs { get; } = commandLineArgs ?? throw new ArgumentNullException(nameof(commandLineArgs));
 
     /// <summary>Get the command line arguments count, excluding the implicit parameter at index 0</summary>
-    public static int ParameterCount =>
+    public int ParameterCount =>
         Count - 1;
 
     /// <summary>Get the command line arguments count</summary>
-    public static int Count =>
+    public int Count =>
         CommandLineArgs.Length;
 
     /// <summary>Determines whether the specified argument exists</summary>
     /// <param name="name">The argument</param>
     /// <returns>True if the specified argument exists</returns>
-    public static bool Contains(string name) =>
+    private bool Contains(string name) =>
         CommandLineArgs.FirstOrDefault(x => string.Equals(name, x, StringComparison.InvariantCultureIgnoreCase)) != null;
 
     /// <summary>Determines whether the specified argument exists</summary>
     /// <returns>True if the specified toggle exists</returns>
-    public static bool IsValidOrder()
+    public bool IsValidOrder()
     {
         var arguments = CommandLineArgs;
         int? firstToggleIndex = null;
@@ -48,7 +48,7 @@ public static class ConsoleArguments
     /// <summary>Determines whether the specified argument exists</summary>
     /// <param name="toggleValue">The toggle value</param>
     /// <returns>True if the specified toggle exists</returns>
-    public static bool ContainsToggle(string toggleValue)
+    private bool ContainsToggle(string toggleValue)
     {
         if (IsToggleArgument(toggleValue))
         {
@@ -60,7 +60,7 @@ public static class ConsoleArguments
     /// <summary>Determines whether the specified argument is a toggle</summary>
     /// <param name="argument">The argument</param>
     /// <returns>True if the specified argument exists</returns>
-    public static bool IsToggleArgument(string argument)
+    private bool IsToggleArgument(string argument)
     {
         if (string.IsNullOrWhiteSpace(argument))
         {
@@ -70,12 +70,11 @@ public static class ConsoleArguments
     }
 
     /// <summary>Gets the specified index, starting at 1</summary>
-    /// <param name="type">The source type</param>
     /// <param name="index">The argument index</param>
     /// <param name="memberName">The caller name</param>
     /// <param name="allowToggle">Argument can be a toggle</param>
     /// <returns>The argument value</returns>
-    public static string GetMember(Type type, int index, [CallerMemberName] string memberName = "", bool allowToggle = false) =>
+    public string GetMember(int index, [CallerMemberName] string memberName = "", bool allowToggle = false) =>
         Get(index, memberName, allowToggle);
 
     /// <summary>Gets the specified index, starting at 1</summary>
@@ -83,14 +82,14 @@ public static class ConsoleArguments
     /// <param name="name">The argument name (optional)</param>
     /// <param name="allowToggle">Argument can be a toggle (optional)</param>
     /// <returns>The argument value</returns>
-    public static string Get(int index, string name = null, bool allowToggle = false)
+    public string Get(int index, string name = null, bool allowToggle = false)
     {
         if (index <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(index));
         }
 
-        if (CommandLineArgs.Length <= index)
+        if (CommandLineArgs.Length <= index || index >= CommandLineArgs.Length)
         {
             return null;
         }
@@ -98,31 +97,54 @@ public static class ConsoleArguments
         // named argument
         if (!string.IsNullOrWhiteSpace(name))
         {
-            var marker = $"{name}:";
-            foreach (var cmdLineArg in CommandLineArgs)
+            var value = GetByName(name);
+            if (value != null)
             {
-                if (cmdLineArg.StartsWith(marker, StringComparison.InvariantCultureIgnoreCase))
-                {
-                    return cmdLineArg.Substring(marker.Length);
-                }
+                return value;
             }
         }
 
         var arg = CommandLineArgs[index];
-        var namedParameter = arg.IndexOf(':') > 0;
-        // ignore other named parameter
-        if (namedParameter || !allowToggle && IsToggleArgument(arg))
+
+        // name
+        if (name != null)
         {
-            arg = null;
+            var namedParameter = arg.IndexOf(':') > 0;
+            // ignore other named parameter
+            if (namedParameter || !allowToggle && IsToggleArgument(arg))
+            {
+                arg = null;
+            }
         }
+
         return arg;
+    }
+
+    /// <summary>Get argument by name</summary>
+    /// <param name="name">The argument name (optional)</param>
+    /// <returns>The argument value</returns>
+    public string GetByName(string name)
+    {
+        if (string.IsNullOrWhiteSpace(name))
+        {
+            throw new ArgumentException(nameof(name));
+        }
+        var marker = $"{name}:";
+        foreach (var cmdLineArg in CommandLineArgs)
+        {
+            if (cmdLineArg.StartsWith(marker, StringComparison.InvariantCultureIgnoreCase))
+            {
+                return cmdLineArg.Substring(marker.Length);
+            }
+        }
+        return null;
     }
 
     /// <summary>Gets an integer argument</summary>
     /// <param name="index">The argument index</param>
     /// <param name="name">The argument name (optional)</param>
     /// <returns>The argument value</returns>
-    public static int? GetInt(int index, string name = null)
+    public int? GetInt(int index, string name = null)
     {
         if (index <= 0)
         {
@@ -142,7 +164,7 @@ public static class ConsoleArguments
     /// <param name="defaultValue">The default value</param>
     /// <param name="name">The argument name (optional)</param>
     /// <returns>The argument value</returns>
-    public static int GetInt(int index, int defaultValue, string name = null)
+    public int GetInt(int index, int defaultValue, string name = null)
     {
         var arg = Get(index, name);
         if (!string.IsNullOrWhiteSpace(arg) &&
@@ -158,7 +180,7 @@ public static class ConsoleArguments
     /// <param name="index">The argument index</param>
     /// <param name="name">The argument name (optional)</param>
     /// <returns>The argument value</returns>
-    public static T GetEnum<T>(int index, string name = null)
+    public T GetEnum<T>(int index, string name = null)
     {
         var enumType = typeof(T);
         if (!enumType.IsEnum)
@@ -188,7 +210,7 @@ public static class ConsoleArguments
     /// <param name="name">The argument name (optional)</param>
     /// <param name="defaultValue">The default value</param>
     /// <returns>The argument value</returns>
-    public static T GetEnum<T>(int index, T defaultValue, string name = null)
+    public T GetEnum<T>(int index, T defaultValue, string name = null)
     {
         var enumType = typeof(T);
         if (!enumType.IsEnum)
@@ -207,7 +229,7 @@ public static class ConsoleArguments
     /// <summary>Gets an enum toggle is present: /toggle or -toggle</summary>
     /// <typeparam name="T">The enum type</typeparam>
     /// <returns>The argument value</returns>
-    public static T? GetEnumToggle<T>() where T : struct, Enum
+    private T? GetEnumToggle<T>() where T : struct, Enum
     {
         var enumType = typeof(T);
         if (!enumType.IsEnum)
@@ -226,20 +248,20 @@ public static class ConsoleArguments
 
     /// <summary>Gets all toggle with fallback value</summary>
     /// <returns>The argument value</returns>
-    public static IEnumerable<string> GetToggles() =>
+    public IEnumerable<string> GetToggles() =>
         CommandLineArgs.Where(IsToggleArgument);
 
     /// <summary>Gets a toggle with fallback value</summary>
     /// <typeparam name="T">The enum type</typeparam>
     /// <param name="defaultValue">The default value</param>
     /// <returns>The argument value</returns>
-    public static T GetEnumToggle<T>(T defaultValue) where T : struct, Enum =>
+    public T GetEnumToggle<T>(T defaultValue) where T : struct, Enum =>
         GetEnumToggle<T>() ?? defaultValue;
 
     /// <summary>Test for unknown toggle arguments</summary>
     /// <param name="enumTypes">The supported enum types</param>
     /// <returns>The unknown argument</returns>
-    public static string TestUnknownToggles(IEnumerable<Type> enumTypes)
+    public string TestUnknownToggles(IEnumerable<Type> enumTypes)
     {
         var enumTypesArray = enumTypes.ToArray();
         // test for unknown toggles
@@ -276,7 +298,7 @@ public static class ConsoleArguments
     /// <summary>Test for multiple toggles</summary>
     /// <param name="enumTypes">The supported enum types</param>
     /// <returns>The failed type</returns>
-    public static Type TestMultipleToggles(IEnumerable<Type> enumTypes)
+    public Type TestMultipleToggles(IEnumerable<Type> enumTypes)
     {
         foreach (var enumType in enumTypes)
         {
@@ -287,4 +309,83 @@ public static class ConsoleArguments
         }
         return null;
     }
+
+    /// <summary>
+    /// Get all arguments.
+    /// </summary>
+    public string[] GetArguments()
+    {
+        if (commandLineArgs.Length <= 2)
+        {
+            return null;
+        }
+        return CommandLineArgs.Skip(2).ToArray();
+    }
+
+    #region Static
+
+    /// <summary>New command line parser from environment command line arguments</summary>
+    public static CommandLineParser NewFromEnvironment() =>
+        new(Environment.GetCommandLineArgs());
+
+    /// <summary>New command line parser from command string</summary>
+    public static CommandLineParser NewFromCommand(string command) =>
+        new(SplitCommandArguments(command));
+
+    /// <summary>Split command string into parameters</summary>
+    /// <remarks>see https://stackoverflow.com/a/66450199</remarks>
+    private static string[] SplitCommandArguments(string command)
+    {
+        if (string.IsNullOrWhiteSpace(command))
+        {
+            throw new ArgumentException(nameof(command));
+        }
+
+        var result = new List<string> {
+            // copy first parameter from the environment to keep the same array indexes
+            Environment.GetCommandLineArgs()[0]
+        };
+        if (string.IsNullOrWhiteSpace(command))
+        {
+            return result.ToArray();
+        }
+
+        var text = string.Empty;
+        var doubleQuote = false;
+        var singleQuote = false;
+
+        var index = 0;
+        while (index < command.Length)
+        {
+            if (command[index] == ' ' && !doubleQuote && !singleQuote)
+            {
+                if (!string.IsNullOrWhiteSpace(text.Trim()))
+                {
+                    result.Add(text.Trim());
+                }
+                text = string.Empty;
+            }
+
+            if (command[index] == '"')
+            {
+                doubleQuote = !doubleQuote;
+            }
+
+            if (command[index] == '\'')
+            {
+                singleQuote = !singleQuote;
+            }
+            text += command[index];
+            index++;
+        }
+
+        if (!string.IsNullOrWhiteSpace(text.Trim()))
+        {
+            result.Add(text.Trim());
+        }
+        return result.ToArray();
+    }
+
+    #endregion
+
 }

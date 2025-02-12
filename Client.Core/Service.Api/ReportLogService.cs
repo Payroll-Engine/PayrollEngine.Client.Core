@@ -90,7 +90,7 @@ public class ReportLogService : ServiceBase, IReportLogService
 
     /// <inheritdoc />
     public virtual Task UpdateAsync<T>(TenantServiceContext context, T log) where T : class, IReportLog =>
-        throw new NotSupportedException("Update of report log is not supported");
+        throw new NotSupportedException("Update of report log is not supported.");
 
     /// <inheritdoc />
     public virtual async Task DeleteAsync(TenantServiceContext context, int logId)

@@ -24,7 +24,7 @@ public class TextFileCache
         }
         if (!File.Exists(fileName))
         {
-            throw new PayrollException($"Missing file {new FileInfo(fileName).FullName}");
+            throw new PayrollException($"Missing file {new FileInfo(fileName).FullName}.");
         }
 
         // use cache

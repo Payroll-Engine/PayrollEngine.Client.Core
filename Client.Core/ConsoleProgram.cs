@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Net.Http;
+using System.Threading;
+using System.Reflection;
 using System.Diagnostics;
 using System.Globalization;
-using System.Net.Http;
-using System.Reflection;
-using System.Threading;
 using System.Threading.Tasks;
+using System.Security.Authentication;
 
 namespace PayrollEngine.Client;
 
@@ -84,6 +85,9 @@ public abstract class ConsoleProgram<TApp> : ConsoleToolBase, IDisposable
         return Task.CompletedTask;
     }
 
+    /// <summary>Show full error log (default: false)</summary>
+    protected virtual bool FullErrorLog() => false;
+
     /// <summary>Execute the program</summary>
     public virtual async Task ExecuteAsync()
     {
@@ -124,6 +128,13 @@ public abstract class ConsoleProgram<TApp> : ConsoleToolBase, IDisposable
         }
         catch (Exception exception)
         {
+            // full error log
+            if (FullErrorLog())
+            {
+                Log.Error(exception, exception.GetBaseException().Message);
+            }
+
+            // user notification
             try
             {
                 await NotifyGlobalErrorAsync(exception);
@@ -201,12 +212,19 @@ public abstract class ConsoleProgram<TApp> : ConsoleToolBase, IDisposable
     protected virtual bool ShowConnectionInfo => true;
 
     /// <summary>Get the http configuration</summary>
+    /// <remarks>This request ignores the web host variable</remarks>
     protected virtual async Task<PayrollHttpConfiguration> GetHttpConfigurationAsync() =>
         await Configuration.Configuration.GetHttpConfigurationAsync();
 
     /// <summary>Get the http client handler, by default always a valid server certificate</summary>
-    protected virtual async Task<HttpClientHandler> GetHttpClientHandlerAsync() =>
-        await Task.FromResult(new HttpClientHandler());
+    protected virtual async Task<HttpClientHandler> GetHttpClientHandlerAsync()
+    {
+        var handler = new HttpClientHandler
+        {
+            SslProtocols = SslProtocols.Tls12 | SslProtocols.Tls13
+        };
+        return await Task.FromResult(handler);
+    }
 
     /// <summary>Http client setup</summary>
     protected virtual async Task<bool> SetupHttpClientAsync()
@@ -215,9 +233,16 @@ public abstract class ConsoleProgram<TApp> : ConsoleToolBase, IDisposable
         var httpConfiguration = await GetHttpConfigurationAsync();
         if (httpConfiguration == null)
         {
-            throw new PayrollException("Missing payroll http client configuration");
+            OnMissingHttpConfiguration();
+            return false;
+        }
+        if (!httpConfiguration.Valid())
+        {
+            OnInvalidHttpConfiguration(httpConfiguration);
+            return false;
         }
 
+        // connection info
         if (ShowConnectionInfo)
         {
             WriteInfo($"Connecting to {httpConfiguration}...");
@@ -227,31 +252,83 @@ public abstract class ConsoleProgram<TApp> : ConsoleToolBase, IDisposable
         var httpClientHandler = await GetHttpClientHandlerAsync();
         if (httpClientHandler == null)
         {
-            throw new PayrollException("Missing payroll http client handler");
+            throw new PayrollException("Missing Payroll HTTP client handler.");
         }
 
         // create client
         HttpClient = new(httpClientHandler, httpConfiguration);
-        if (LogLifecycle)
+
+        // api key
+        var apiKey = GetApiKey(httpConfiguration);
+        if (!string.IsNullOrWhiteSpace(apiKey))
         {
-            Log.Information($"Connected http client to {HttpClient.Address}");
+            HttpClient.SetApiKey(apiKey);
         }
 
         // connection test
-        var setup = await HttpClient.IsConnectionAvailableAsync();
-
+        var setup = await HttpClient.IsConnectionAvailableAsync(TenantApiEndpoints.TenantsUrl());
         if (ShowConnectionInfo)
         {
             WriteInfoLine("done.");
             WriteLine();
         }
 
+        // setup error
         if (!setup)
         {
             await NotifyConnectionErrorAsync();
         }
 
+        // log
+        if (LogLifecycle)
+        {
+            Log.Information($"Connected http client to {HttpClient.Address}");
+        }
+
         return setup;
+    }
+
+    /// <summary>
+    /// Handler on missing http configuration
+    /// </summary>
+    protected virtual void OnMissingHttpConfiguration()
+    {
+        WriteErrorLine("Missing Payroll HTTP client configuration.");
+        WriteLine();
+        WriteLine("Please specify the Payroll HTTP client configuration in the following locations:");
+        WriteLine($"  1. Environment variable `{SystemSpecification.PayrollApiConnection}` - connection string with the HTTP client configuration");
+        WriteLine($"  2. Environment variable `{SystemSpecification.PayrollApiConfiguration}` - file name containing the HTTP client configuration");
+        WriteLine($"  3. File `{PayrollApiSpecification.ApiSettingsFileName}` - API configuration file located in the program folder");
+        WriteLine("  4. File `appsettings.json` - API configuration from the program configuration file");
+        if (WaitOnError)
+        {
+            PressAnyKey();
+        }
+    }
+
+    /// <summary>
+    /// Handler on invalid http configuration
+    /// </summary>
+    protected virtual void OnInvalidHttpConfiguration(PayrollHttpConfiguration _)
+    {
+        WriteErrorLine("Invalid Payroll HTTP client configuration.");
+        if (WaitOnError)
+        {
+            PressAnyKey();
+        }
+    }
+
+    private static string GetApiKey(PayrollHttpConfiguration httpConfiguration)
+    {
+        // priority 1: environment variable (console app does not support web host environment variables)
+        var apiKey = Environment.GetEnvironmentVariable(SystemSpecification.PayrollApiKey);
+        if (!string.IsNullOrWhiteSpace(apiKey))
+        {
+            return apiKey;
+        }
+
+        // priority 2: http configuration
+        return httpConfiguration.ApiKey;
     }
 
     #endregion
@@ -278,7 +355,7 @@ public abstract class ConsoleProgram<TApp> : ConsoleToolBase, IDisposable
     /// <summary>Connection error handler</summary>
     protected virtual async Task NotifyConnectionErrorAsync()
     {
-        await NotifyErrorAsync($"Backend connection {HttpClient.Address} is not available.");
+        await NotifyErrorAsync($"Backend connection {HttpClient.Address} is not available or cannot be accessed.");
     }
 
     /// <summary>Notify global error</summary>

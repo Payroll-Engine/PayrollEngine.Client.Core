@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Threading;
+using System.Globalization;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 using PayrollEngine.Client.Service;
 
 namespace PayrollEngine.Client.Exchange;
@@ -51,60 +51,57 @@ public class ResourcesMonitor<TModel, TContext, TQuery>
     }
 
     /// <summary>
-    /// Start the monitoring
-    /// see https://nitinmanju.medium.com/a-simple-scheduled-task-using-c-and-net-c9d3230769ea
+    /// Start the monitoring async
     /// </summary>
-    public Task Start(CancellationToken token)
+    public async Task StartAsync(CancellationToken token)
     {
         var interval = Interval;
         if (interval < MinInterval)
         {
             interval = MinInterval;
         }
-        return Task.Run(async () =>
+
+        try
         {
-            try
+            IsRunning = true;
+            while (!token.IsCancellationRequested)
             {
-                IsRunning = true;
-                while (!token.IsCancellationRequested)
+                // skip initial query
+                if (lastRequest == DateTime.MinValue)
                 {
-                    // skip initial query
-                    if (lastRequest == DateTime.MinValue)
-                    {
-                        // initialize for the next iteration
-                        lastRequest = Date.Now;
-                    }
-                    else
-                    {
-                        // query items created since the last request
-                        var query = new TQuery
-                        {
-                            Filter = $"{nameof(Model.ModelBase.Created)} gt '{lastRequest.ToUtcString(CultureInfo.CurrentCulture)}'"
-                        };
-                        var items = (await Service.QueryAsync<TModel>(Context, query)).ToList();
-
-                        // update loop trigger
-                        lastRequest = Date.Now;
-
-                        // external handler
-                        if (items.Any())
-                        {
-                            ChangeHandler(items);
-                        }
-                    }
-
-                    // delay between request
-                    await Task.Delay(interval, token);
+                    // initialize for the next iteration
+                    lastRequest = Date.Now;
                 }
+                else
+                {
+                    // query items created since the last request
+                    var query = new TQuery
+                    {
+                        Filter = $"{nameof(Model.ModelBase.Created)} gt '{lastRequest.ToUtcString(CultureInfo.CurrentCulture)}'"
+                    };
+                    var items = (await Service.QueryAsync<TModel>(Context, query)).ToList();
+
+                    // update loop trigger
+                    lastRequest = Date.Now;
+
+                    // external handler
+                    if (items.Any())
+                    {
+                        ChangeHandler(items);
+                    }
+                }
+
+                // delay between request
+                await Task.Delay(interval, token);
             }
-            catch (Exception exception)
-            {
-                Log.Error(exception, "Resource monitoring error");
-            }
-            finally
-            {
-                IsRunning = false;
-            }
-        }, token);
+        }
+        catch (Exception exception)
+        {
+            Log.Error(exception, "Resource monitoring error");
+        }
+        finally
+        {
+            IsRunning = false;
+        }
     }
 }

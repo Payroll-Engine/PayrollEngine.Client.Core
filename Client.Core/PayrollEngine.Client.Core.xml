@@ -61,6 +61,544 @@
         <member name="P:PayrollEngine.Client.ApiException.StackTrace">
             <summary>The error stack trace</summary>
         </member>
+        <member name="T:PayrollEngine.Client.Command.CommandAttribute">
+            <summary>
+            Payroll engine client command attribute.
+            </summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Command.CommandAttribute.Name">
+            <summary>
+            Command name
+            </summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Command.CommandAttribute.#ctor(System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="name">Command name</param>
+        </member>
+        <member name="T:PayrollEngine.Client.Command.CommandBase">
+            <inheritdoc />
+        </member>
+        <member name="P:PayrollEngine.Client.Command.CommandBase.Name">
+            <inheritdoc />
+        </member>
+        <member name="M:PayrollEngine.Client.Command.CommandBase.GetParameters(PayrollEngine.Client.Command.CommandLineParser)">
+            <inheritdoc />
+        </member>
+        <member name="M:PayrollEngine.Client.Command.CommandBase.ExecuteAsync(PayrollEngine.Client.Command.CommandContext,PayrollEngine.Client.Command.ICommandParameters)">
+            <inheritdoc />
+        </member>
+        <member name="M:PayrollEngine.Client.Command.CommandBase.OnExecute(PayrollEngine.Client.Command.CommandContext,PayrollEngine.Client.Command.ICommandParameters)">
+            <summary>
+            Execute command.
+            </summary>
+            <param name="context">Command context.</param>
+            <param name="parameters">Command parameters.</param>
+            <returns>Error code, zero on valid command execution.</returns>
+        </member>
+        <member name="M:PayrollEngine.Client.Command.CommandBase.ShowHelp(PayrollEngine.Client.Command.ICommandConsole)">
+            <inheritdoc />
+        </member>
+        <member name="M:PayrollEngine.Client.Command.CommandBase.DisplayTitle(PayrollEngine.Client.Command.ICommandConsole,System.String)">
+            <summary>
+            Display program title.
+            </summary>
+            <param name="console">Command console.</param>
+            <param name="title">Application title.</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Command.CommandBase.ProcessError(PayrollEngine.Client.Command.ICommandConsole,System.Exception)">
+            <summary>
+            Process command error.
+            </summary>
+            <param name="console">Command console.</param>
+            <param name="exception">Command error.</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Command.CommandBase.DisplayResponseContent(PayrollEngine.Client.Command.ICommandConsole,System.Net.Http.HttpResponseMessage)">
+            <summary>
+            Display respondent content.
+            </summary>
+            <param name="console"></param>
+            <param name="response"></param>
+            <returns></returns>
+        </member>
+        <member name="M:PayrollEngine.Client.Command.CommandBase.ToString">
+            <inheritdoc />
+        </member>
+        <member name="T:PayrollEngine.Client.Command.CommandBase`1">
+            <inheritdoc />
+        </member>
+        <member name="M:PayrollEngine.Client.Command.CommandBase`1.Execute(PayrollEngine.Client.Command.CommandContext,`0)">
+            <summary>
+            Execute command.
+            </summary>
+            <param name="context">Command context.</param>
+            <param name="parameters">Command parameters.</param>
+            <returns>Error code, zero on valid command execution.</returns>
+        </member>
+        <member name="M:PayrollEngine.Client.Command.CommandBase`1.OnExecute(PayrollEngine.Client.Command.CommandContext,PayrollEngine.Client.Command.ICommandParameters)">
+            <summary>
+            Execute command.
+            </summary>
+            <param name="context">Command context.</param>
+            <param name="parameters">Command parameters.</param>
+            <returns>Error code, zero on valid command execution.</returns>
+        </member>
+        <member name="T:PayrollEngine.Client.Command.CommandConsole">
+            <inheritdoc />
+        </member>
+        <member name="P:PayrollEngine.Client.Command.CommandConsole.DisplayLevel">
+            <inheritdoc />
+        </member>
+        <member name="P:PayrollEngine.Client.Command.CommandConsole.ErrorMode">
+            <inheritdoc />
+        </member>
+        <member name="P:PayrollEngine.Client.Command.CommandConsole.WaitMode">
+            <inheritdoc />
+        </member>
+        <member name="M:PayrollEngine.Client.Command.CommandConsole.DisplaySuccessLine(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:PayrollEngine.Client.Command.CommandConsole.DisplayTitleLine(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:PayrollEngine.Client.Command.CommandConsole.DisplayInfo(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:PayrollEngine.Client.Command.CommandConsole.DisplayInfoLine(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:PayrollEngine.Client.Command.CommandConsole.DisplayErrorLine(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:PayrollEngine.Client.Command.CommandConsole.DisplayText(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:PayrollEngine.Client.Command.CommandConsole.DisplayNewLine">
+            <inheritdoc />
+        </member>
+        <member name="M:PayrollEngine.Client.Command.CommandConsole.DisplayTextLine(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:PayrollEngine.Client.Command.CommandConsole.WriteErrorLine(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="T:PayrollEngine.Client.Command.CommandContext">
+            <summary>
+            Command context.
+            </summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Command.CommandContext.#ctor(PayrollEngine.Client.Command.CommandManager,PayrollEngine.Client.Command.ICommandConsole,PayrollEngine.Client.Command.DisplayLevel)">
+            <summary>
+            Command context.
+            </summary>
+            <param name="commandManager">Command manager.</param>
+            <param name="console">Command console.</param>
+            <param name="displayLevel">Command display level.</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Command.CommandContext.#ctor(PayrollEngine.Client.Command.CommandManager,PayrollEngine.Client.PayrollHttpClient,PayrollEngine.ILogger,PayrollEngine.Client.Command.ICommandConsole,PayrollEngine.Client.Command.DisplayLevel)">
+            <summary>
+            Command context.
+            </summary>
+            <param name="commandManager">Command manager.</param>
+            <param name="httpClient">Http client.</param>
+            <param name="logger">Command logger.</param>
+            <param name="console">Command console.</param>
+            <param name="displayLevel">Command display level.</param>
+        </member>
+        <member name="P:PayrollEngine.Client.Command.CommandContext.CommandManager">
+            <summary>
+            Command manager.
+            </summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Command.CommandContext.Console">
+            <summary>
+            Command console.
+            </summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Command.CommandContext.HttpClient">
+            <summary>
+            Http client.
+            </summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Command.CommandContext.Logger">
+            <summary>
+            Command logger.
+            </summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Command.CommandContext.DisplayLevel">
+            <summary>
+            Command info level.
+            </summary>
+        </member>
+        <member name="T:PayrollEngine.Client.Command.CommandLineParser">
+            <summary>Represents the environment command line arguments</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Command.CommandLineParser.#ctor(System.String[])">
+            <summary>Represents the environment command line arguments</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Command.CommandLineParser.ParameterCount">
+            <summary>Get the command line arguments count, excluding the implicit parameter at index 0</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Command.CommandLineParser.Count">
+            <summary>Get the command line arguments count</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Command.CommandLineParser.Contains(System.String)">
+            <summary>Determines whether the specified argument exists</summary>
+            <param name="name">The argument</param>
+            <returns>True if the specified argument exists</returns>
+        </member>
+        <member name="M:PayrollEngine.Client.Command.CommandLineParser.IsValidOrder">
+            <summary>Determines whether the specified argument exists</summary>
+            <returns>True if the specified toggle exists</returns>
+        </member>
+        <member name="M:PayrollEngine.Client.Command.CommandLineParser.ContainsToggle(System.String)">
+            <summary>Determines whether the specified argument exists</summary>
+            <param name="toggleValue">The toggle value</param>
+            <returns>True if the specified toggle exists</returns>
+        </member>
+        <member name="M:PayrollEngine.Client.Command.CommandLineParser.IsToggleArgument(System.String)">
+            <summary>Determines whether the specified argument is a toggle</summary>
+            <param name="argument">The argument</param>
+            <returns>True if the specified argument exists</returns>
+        </member>
+        <member name="M:PayrollEngine.Client.Command.CommandLineParser.GetMember(System.Int32,System.String,System.Boolean)">
+            <summary>Gets the specified index, starting at 1</summary>
+            <param name="index">The argument index</param>
+            <param name="memberName">The caller name</param>
+            <param name="allowToggle">Argument can be a toggle</param>
+            <returns>The argument value</returns>
+        </member>
+        <member name="M:PayrollEngine.Client.Command.CommandLineParser.Get(System.Int32,System.String,System.Boolean)">
+            <summary>Gets the specified index, starting at 1</summary>
+            <param name="index">The argument index</param>
+            <param name="name">The argument name (optional)</param>
+            <param name="allowToggle">Argument can be a toggle (optional)</param>
+            <returns>The argument value</returns>
+        </member>
+        <member name="M:PayrollEngine.Client.Command.CommandLineParser.GetByName(System.String)">
+            <summary>Get argument by name</summary>
+            <param name="name">The argument name (optional)</param>
+            <returns>The argument value</returns>
+        </member>
+        <member name="M:PayrollEngine.Client.Command.CommandLineParser.GetInt(System.Int32,System.String)">
+            <summary>Gets an integer argument</summary>
+            <param name="index">The argument index</param>
+            <param name="name">The argument name (optional)</param>
+            <returns>The argument value</returns>
+        </member>
+        <member name="M:PayrollEngine.Client.Command.CommandLineParser.GetInt(System.Int32,System.Int32,System.String)">
+            <summary>Gets an integer argument</summary>
+            <param name="index">The argument index</param>
+            <param name="defaultValue">The default value</param>
+            <param name="name">The argument name (optional)</param>
+            <returns>The argument value</returns>
+        </member>
+        <member name="M:PayrollEngine.Client.Command.CommandLineParser.GetEnum``1(System.Int32,System.String)">
+            <summary>Gets a mandatory enum argument</summary>
+            <typeparam name="T">The enum type</typeparam>
+            <param name="index">The argument index</param>
+            <param name="name">The argument name (optional)</param>
+            <returns>The argument value</returns>
+        </member>
+        <member name="M:PayrollEngine.Client.Command.CommandLineParser.GetEnum``1(System.Int32,``0,System.String)">
+            <summary>Gets an enum argument</summary>
+            <typeparam name="T">The enum type</typeparam>
+            <param name="index">The argument index</param>
+            <param name="name">The argument name (optional)</param>
+            <param name="defaultValue">The default value</param>
+            <returns>The argument value</returns>
+        </member>
+        <member name="M:PayrollEngine.Client.Command.CommandLineParser.GetEnumToggle``1">
+            <summary>Gets an enum toggle is present: /toggle or -toggle</summary>
+            <typeparam name="T">The enum type</typeparam>
+            <returns>The argument value</returns>
+        </member>
+        <member name="M:PayrollEngine.Client.Command.CommandLineParser.GetToggles">
+            <summary>Gets all toggle with fallback value</summary>
+            <returns>The argument value</returns>
+        </member>
+        <member name="M:PayrollEngine.Client.Command.CommandLineParser.GetEnumToggle``1(``0)">
+            <summary>Gets a toggle with fallback value</summary>
+            <typeparam name="T">The enum type</typeparam>
+            <param name="defaultValue">The default value</param>
+            <returns>The argument value</returns>
+        </member>
+        <member name="M:PayrollEngine.Client.Command.CommandLineParser.TestUnknownToggles(System.Collections.Generic.IEnumerable{System.Type})">
+            <summary>Test for unknown toggle arguments</summary>
+            <param name="enumTypes">The supported enum types</param>
+            <returns>The unknown argument</returns>
+        </member>
+        <member name="M:PayrollEngine.Client.Command.CommandLineParser.TestMultipleToggles(System.Collections.Generic.IEnumerable{System.Type})">
+            <summary>Test for multiple toggles</summary>
+            <param name="enumTypes">The supported enum types</param>
+            <returns>The failed type</returns>
+        </member>
+        <member name="M:PayrollEngine.Client.Command.CommandLineParser.GetArguments">
+            <summary>
+            Get all arguments.
+            </summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Command.CommandLineParser.NewFromEnvironment">
+            <summary>New command line parser from environment command line arguments</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Command.CommandLineParser.NewFromCommand(System.String)">
+            <summary>New command line parser from command string</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Command.CommandLineParser.SplitCommandArguments(System.String)">
+            <summary>Split command string into parameters</summary>
+            <remarks>see https://stackoverflow.com/a/66450199</remarks>
+        </member>
+        <member name="T:PayrollEngine.Client.Command.CommandManager">
+            <summary>
+            Command manager
+            </summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Command.CommandManager.#ctor(PayrollEngine.Client.Command.ICommandConsole,PayrollEngine.ILogger)">
+            <summary>
+            Command manager
+            </summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Command.CommandManager.HelpCommandName">
+            <summary>
+            Name fo the help command (default: Help)
+            </summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Command.CommandManager.CommandFileExtension">
+            <summary>
+            Extension for command files (default: <see cref="F:PayrollEngine.IO.FileExtensions.PayrollEngineCommand"/>)
+            </summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Command.CommandManager.RegisterAssembly(System.Reflection.Assembly)">
+            <summary>
+            Register assembly commands
+            </summary>
+            <param name="assembly">Source assembly</param>
+        </member>
+        <member name="P:PayrollEngine.Client.Command.CommandManager.HasCommands">
+            <summary>
+            Test for any command
+            </summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Command.CommandManager.GetCommands">
+            <summary>
+            List of available commands
+            </summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Command.CommandManager.GetCommand(System.String)">
+            <summary>
+            Get command by name
+            </summary>
+            <param name="name">Command name</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Command.CommandManager.ExecuteAsync(PayrollEngine.Client.PayrollHttpClient)">
+            <summary>
+            Execute command using the environment command line arguments
+            </summary>
+            <returns>Exit code</returns>
+        </member>
+        <member name="M:PayrollEngine.Client.Command.CommandManager.ExecuteAsync(PayrollEngine.Client.PayrollHttpClient,PayrollEngine.Client.Command.ICommand)">
+            <summary>
+            Execute specific command using the environment command line arguments
+            </summary>
+            <returns>Exit code</returns>
+        </member>
+        <member name="M:PayrollEngine.Client.Command.CommandManager.ExecuteAsync(PayrollEngine.Client.PayrollHttpClient,PayrollEngine.Client.Command.ICommand,PayrollEngine.Client.Command.CommandLineParser)">
+            <summary>
+            Execute specific command using a custom command line parser
+            </summary>
+            <returns>Exit code</returns>
+        </member>
+        <member name="T:PayrollEngine.Client.Command.DisplayLevel">
+            <summary>
+            Console display level.
+            </summary>
+        </member>
+        <member name="F:PayrollEngine.Client.Command.DisplayLevel.Full">
+            <summary>
+            Display all messages.
+            </summary>
+        </member>
+        <member name="F:PayrollEngine.Client.Command.DisplayLevel.Compact">
+            <summary>
+            Display key messages.
+            </summary>
+        </member>
+        <member name="F:PayrollEngine.Client.Command.DisplayLevel.Silent">
+            <summary>
+            No messages.
+            </summary>
+        </member>
+        <member name="T:PayrollEngine.Client.Command.ErrorMode">
+            <summary>
+            Command error mode.
+            </summary>
+        </member>
+        <member name="F:PayrollEngine.Client.Command.ErrorMode.Errors">
+            <summary>
+            Show errors.
+            </summary>
+        </member>
+        <member name="F:PayrollEngine.Client.Command.ErrorMode.NoErrors">
+            <summary>
+            Do not show errors.
+            </summary>
+        </member>
+        <member name="T:PayrollEngine.Client.Command.ICommand">
+            <summary>
+            Command interface.
+            </summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Command.ICommand.Name">
+            <summary>
+            Command name.
+            </summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Command.ICommand.GetParameters(PayrollEngine.Client.Command.CommandLineParser)">
+            <summary>
+            Get command parameters.
+            </summary>
+            <param name="parser">Command line parser.</param>
+            <returns></returns>
+        </member>
+        <member name="M:PayrollEngine.Client.Command.ICommand.ExecuteAsync(PayrollEngine.Client.Command.CommandContext,PayrollEngine.Client.Command.ICommandParameters)">
+            <summary>
+            Execute command.
+            </summary>
+            <param name="context">Command context.</param>
+            <param name="parameters">Command parameters.</param>
+            <returns>Error code, zero on valid command execution.</returns>
+        </member>
+        <member name="M:PayrollEngine.Client.Command.ICommand.ShowHelp(PayrollEngine.Client.Command.ICommandConsole)">
+            <summary>
+            Show command help.
+            </summary>
+            <param name="console">Display console.</param>
+        </member>
+        <member name="T:PayrollEngine.Client.Command.ICommandConsole">
+            <summary>
+            Command console contract.
+            </summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Command.ICommandConsole.DisplayLevel">
+            <summary>
+            Display level.
+            </summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Command.ICommandConsole.ErrorMode">
+            <summary>
+            Error mode.
+            </summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Command.ICommandConsole.WaitMode">
+            <summary>
+            Wait mode.
+            </summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Command.ICommandConsole.DisplaySuccessLine(System.String)">
+            <summary>
+            Display success line.
+            </summary>
+            <param name="text">Text to display.</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Command.ICommandConsole.DisplayTitleLine(System.String)">
+            <summary>
+            Display title line.
+            </summary>
+            <param name="text">Text to display.</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Command.ICommandConsole.DisplayInfo(System.String)">
+            <summary>
+            Display info.
+            </summary>
+            <param name="text">Text to display.</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Command.ICommandConsole.DisplayInfoLine(System.String)">
+            <summary>
+            Display info line.
+            </summary>
+            <param name="text">Text to display.</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Command.ICommandConsole.DisplayErrorLine(System.String)">
+            <summary>
+            Display error line.
+            </summary>
+            <param name="text">Text to display.</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Command.ICommandConsole.DisplayText(System.String)">
+            <summary>
+            Display text.
+            </summary>
+            <param name="text">Text to display.</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Command.ICommandConsole.DisplayNewLine">
+            <summary>
+            Display new line.
+            </summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Command.ICommandConsole.DisplayTextLine(System.String)">
+            <summary>
+            Display text line.
+            </summary>
+            <param name="text">Text to display.</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Command.ICommandConsole.WriteErrorLine(System.String)">
+            <summary>
+            Write error line.
+            </summary>
+            <param name="text">Text to display.</param>
+        </member>
+        <member name="T:PayrollEngine.Client.Command.ICommandParameters">
+            <summary>
+            Command parameters contract.
+            </summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Command.ICommandParameters.Toggles">
+            <summary>
+            Command toggles.
+            </summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Command.ICommandParameters.Test">
+            <summary>
+            Test for valid command parameters.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:PayrollEngine.Client.Command.PathChangeMode">
+            <summary>
+            Command path change mode.
+            </summary>
+        </member>
+        <member name="F:PayrollEngine.Client.Command.PathChangeMode.ChangePath">
+            <summary>
+            Change current path to the command file path.
+            </summary>
+        </member>
+        <member name="F:PayrollEngine.Client.Command.PathChangeMode.KeepPath">
+            <summary>
+            Remain on the current path.
+            </summary>
+        </member>
+        <member name="T:PayrollEngine.Client.Command.WaitMode">
+            <summary>
+            Command wait mode.
+            </summary>
+        </member>
+        <member name="F:PayrollEngine.Client.Command.WaitMode.WaitError">
+            <summary>
+            Wait on error.
+            </summary>
+        </member>
+        <member name="F:PayrollEngine.Client.Command.WaitMode.Wait">
+            <summary>
+            Wait always.
+            </summary>
+        </member>
+        <member name="F:PayrollEngine.Client.Command.WaitMode.NoWait">
+            <summary>
+            Do not wait.
+            </summary>
+        </member>
         <member name="T:PayrollEngine.Client.CompanyCaseApiEndpoints">
             <summary>Company case api endpoints</summary>
         </member>
@@ -94,8 +632,21 @@
         <member name="T:PayrollEngine.Client.ConfigurationExtensions">
             <summary>Extension methods for <see cref="T:Microsoft.Extensions.Configuration.IConfiguration"/></summary>
         </member>
+        <member name="M:PayrollEngine.Client.ConfigurationExtensions.GetHttpConfigurationAsync">
+            <summary>Get the http configuration by priority:
+            1. Environment variable payroll api connection
+            2. Environment variable payroll api configuration (link to JSON file)
+            3. Api configuration located in the app folder (apisettings.json)
+            </summary>
+        </member>
         <member name="M:PayrollEngine.Client.ConfigurationExtensions.GetHttpConfigurationAsync(Microsoft.Extensions.Configuration.IConfiguration)">
-            <summary>Get the http configuration</summary>
+            <summary>Get the http configuration by priority:
+            1. Environment variable payroll api connection
+            2. Environment variable payroll api configuration (link to JSON file)
+            3. Api configuration located in the app folder (apisettings.json)
+            4. Application configuration (appsettings.json)
+            </summary>
+            <param name="configuration">Application configuration</param>
         </member>
         <member name="T:PayrollEngine.Client.ConsoleArguments">
             <summary>Represents the environment command line arguments</summary>
@@ -231,6 +782,9 @@
         <member name="M:PayrollEngine.Client.ConsoleProgram`1.ShutdownAsync">
             <summary>Shutdown the program</summary>
         </member>
+        <member name="M:PayrollEngine.Client.ConsoleProgram`1.FullErrorLog">
+            <summary>Show full error log (default: false)</summary>
+        </member>
         <member name="M:PayrollEngine.Client.ConsoleProgram`1.ExecuteAsync">
             <summary>Execute the program</summary>
         </member>
@@ -258,12 +812,23 @@
         </member>
         <member name="M:PayrollEngine.Client.ConsoleProgram`1.GetHttpConfigurationAsync">
             <summary>Get the http configuration</summary>
+            <remarks>This request ignores the web host variable</remarks>
         </member>
         <member name="M:PayrollEngine.Client.ConsoleProgram`1.GetHttpClientHandlerAsync">
             <summary>Get the http client handler, by default always a valid server certificate</summary>
         </member>
         <member name="M:PayrollEngine.Client.ConsoleProgram`1.SetupHttpClientAsync">
             <summary>Http client setup</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.ConsoleProgram`1.OnMissingHttpConfiguration">
+            <summary>
+            Handler on missing http configuration
+            </summary>
+        </member>
+        <member name="M:PayrollEngine.Client.ConsoleProgram`1.OnInvalidHttpConfiguration(PayrollEngine.Client.PayrollHttpConfiguration)">
+            <summary>
+            Handler on invalid http configuration
+            </summary>
         </member>
         <member name="P:PayrollEngine.Client.ConsoleProgram`1.DefaultCultureName">
             <summary>The default culture name</summary>
@@ -1031,7 +1596,7 @@
             <param name="payrun">The payrun</param>
         </member>
         <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.SetupPayrunAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrun,PayrollEngine.Client.Model.IPayrun)">
-            <summary>Setup the payrun</summary>
+            <summary>Payrun setup</summary>
             <param name="tenant">The exchange tenant</param>
             <param name="payrun">The payrun</param>
             <param name="targetPayrun">The target payrun</param>
@@ -1040,7 +1605,7 @@
             <inheritdoc />
         </member>
         <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.SetupPayrunParameterAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrun,PayrollEngine.Client.Model.IPayrunParameter,PayrollEngine.Client.Model.IPayrunParameter)">
-            <summary>Setup the payrun</summary>
+            <summary>Payrun setup</summary>
             <param name="tenant">The exchange tenant</param>
             <param name="payrun">The payrun</param>
             <param name="parameter">The payrun parameter</param>
@@ -1193,10 +1758,9 @@
             <param name="context">The execution context</param>
             <param name="changeHandler">The monitoring handler</param>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ResourcesMonitor`3.Start(System.Threading.CancellationToken)">
+        <member name="M:PayrollEngine.Client.Exchange.ResourcesMonitor`3.StartAsync(System.Threading.CancellationToken)">
             <summary>
-            Start the monitoring
-            see https://nitinmanju.medium.com/a-simple-scheduled-task-using-c-and-net-c9d3230769ea
+            Start the monitoring async
             </summary>
         </member>
         <member name="T:PayrollEngine.Client.Exchange.ResultExportMode">
@@ -7621,8 +8185,19 @@
         <member name="F:PayrollEngine.Client.PayrollApiSpecification.BackendPortSetting">
             <summary>Setting name for the payroll backend port</summary>
         </member>
+        <member name="F:PayrollEngine.Client.PayrollApiSpecification.BackendApiKey">
+            <summary>Setting name for the payroll api key</summary>
+        </member>
+        <member name="F:PayrollEngine.Client.PayrollApiSpecification.ApiKeyHeader">
+            <summary>API key header</summary>
+            <remarks>see backend specification</remarks>
+        </member>
         <member name="F:PayrollEngine.Client.PayrollApiSpecification.TenantAuthorizationHeader">
             <summary>Tenant authorization header</summary>
+            <remarks>see backend specification</remarks>
+        </member>
+        <member name="F:PayrollEngine.Client.PayrollApiSpecification.ApiSettingsFileName">
+            <summary>File name containing the api settings</summary>
         </member>
         <member name="P:PayrollEngine.Client.PayrollApiSpecification.CurrentApiVersion">
             <summary>
@@ -7648,12 +8223,6 @@
         <member name="T:PayrollEngine.Client.PayrollHttpClient">
             <summary>Http client for the Payroll Engine API</summary>
         </member>
-        <member name="P:PayrollEngine.Client.PayrollHttpClient.BaseUrl">
-            <summary>The backend base url</summary>
-        </member>
-        <member name="P:PayrollEngine.Client.PayrollHttpClient.Port">
-            <summary>The backend port</summary>
-        </member>
         <member name="M:PayrollEngine.Client.PayrollHttpClient.#ctor(System.Net.Http.HttpClientHandler,System.String,System.Int32,System.Version)">
             <summary>New instance of the payroll http client with unknown server certificate, timeout is 100 seconds.
             See https://docs.microsoft.com/en-us/dotnet/api/system.net.http.httpclient.timeout
@@ -7663,7 +8232,7 @@
             <param name="port">The backend port</param>
             <param name="version">The request version</param>
         </member>
-        <member name="M:PayrollEngine.Client.PayrollHttpClient.#ctor(System.Net.Http.HttpClientHandler,System.String,System.Int32,System.TimeSpan,System.Version)">
+        <member name="M:PayrollEngine.Client.PayrollHttpClient.#ctor(System.Net.Http.HttpClientHandler,System.String,System.TimeSpan,System.Int32,System.Version)">
             <summary>New instance of the payroll http client with unknown server certificate and request timeout</summary>
             <param name="httpClientHandler">The http client handler</param>
             <param name="baseUrl">The Uri the request is sent to</param>
@@ -7682,9 +8251,30 @@
             <param name="httpClient">The HTTP client</param>
             <param name="version">The request version</param>
         </member>
+        <member name="M:PayrollEngine.Client.PayrollHttpClient.HasApiKey">
+            <summary>
+            Test for api key
+            </summary>
+        </member>
+        <member name="M:PayrollEngine.Client.PayrollHttpClient.SetApiKey(System.String)">
+            <summary>
+            Set the api key
+            </summary>
+            <param name="apiKey">The api key</param>
+        </member>
+        <member name="M:PayrollEngine.Client.PayrollHttpClient.RemoveApiKey">
+            <summary>
+            Remove the api key
+            </summary>
+        </member>
         <member name="M:PayrollEngine.Client.PayrollHttpClient.HasTenantAuthorization">
             <summary>
             Test for tenant authorization
+            </summary>
+        </member>
+        <member name="M:PayrollEngine.Client.PayrollHttpClient.GetTenantAuthorization">
+            <summary>
+            Get the tenant authorization
             </summary>
         </member>
         <member name="M:PayrollEngine.Client.PayrollHttpClient.SetTenantAuthorization(System.String)">
@@ -7703,12 +8293,9 @@
             The http address
             </summary>
         </member>
-        <member name="M:PayrollEngine.Client.PayrollHttpClient.IsConnectionAvailable">
+        <member name="M:PayrollEngine.Client.PayrollHttpClient.IsConnectionAvailableAsync(System.String)">
             <summary>Test for the client internet connection</summary>
-            <returns>True if internet connection is available</returns>
-        </member>
-        <member name="M:PayrollEngine.Client.PayrollHttpClient.IsConnectionAvailableAsync">
-            <summary>Test for the client internet connection</summary>
+            <param name="address">The address to test</param>
             <returns>True if internet connection is available</returns>
         </member>
         <member name="M:PayrollEngine.Client.PayrollHttpClient.GetRecordId(System.Net.Http.HttpResponseMessage)">
@@ -7875,11 +8462,12 @@
             <param name="baseUrl">The Uri the request is sent to</param>
             <param name="port">The backend port</param>
         </member>
-        <member name="M:PayrollEngine.Client.PayrollHttpConfiguration.#ctor(System.String,System.Int32,System.TimeSpan)">
+        <member name="M:PayrollEngine.Client.PayrollHttpConfiguration.#ctor(System.String,System.Int32,System.TimeSpan,System.String)">
             <summary>New instance of Payroll Engine http client with unknown server certificate and request timeout</summary>
             <param name="baseUrl">The Uri the request is sent to</param>
             <param name="port">The backend port</param>
             <param name="requestTimeout">The request timeout</param>
+            <param name="apiKey">Api key</param>
         </member>
         <member name="F:PayrollEngine.Client.PayrollHttpConfiguration.DefaultTimeout">
             <summary>The default API request timeout</summary>
@@ -7893,8 +8481,18 @@
         <member name="P:PayrollEngine.Client.PayrollHttpConfiguration.Timeout">
             <summary>The API request timeout</summary>
         </member>
+        <member name="P:PayrollEngine.Client.PayrollHttpConfiguration.ApiKey">
+            <summary>The API key</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.PayrollHttpConfiguration.Valid">
+            <summary>Test for valid configuration</summary>
+        </member>
         <member name="M:PayrollEngine.Client.PayrollHttpConfiguration.ToString">
             <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.PayrollHttpConfiguration.FromConnectionString(System.String)">
+            <summary>Payroll http configuration from a connection string</summary>
+            <param name="connectionString">Configuration connection string</param>
         </member>
         <member name="T:PayrollEngine.Client.PayrollResultApiEndpoints">
             <summary>Payroll result case api endpoints</summary>
@@ -9076,7 +9674,7 @@
             <param name="objectKey">The object key</param>
         </member>
         <member name="M:PayrollEngine.Client.Script.ScriptRebuild.RebuildPayrunAsync(System.String)">
-            <summary>Rebuild a the payrun script</summary>
+            <summary>Rebuild the payrun script</summary>
             <param name="payrunName">The payrun name</param>
         </member>
         <member name="T:PayrollEngine.Client.Service.Api.CalendarService">
@@ -11887,12 +12485,6 @@
         </member>
         <member name="P:PayrollEngine.Client.Service.WebhookServiceContext.WebhookId">
             <summary>The webhook id</summary>
-        </member>
-        <member name="T:PayrollEngine.Client.SharedHttpConfiguration">
-            <summary>Http configuration from environment <see cref="F:PayrollEngine.SystemSpecification.PayrollConfigurationVariable"/></summary>
-        </member>
-        <member name="M:PayrollEngine.Client.SharedHttpConfiguration.GetHttpConfigurationAsync">
-            <summary>Get the http configuration</summary>
         </member>
         <member name="T:PayrollEngine.Client.TenantApiEndpoints">
             <summary>Tenant api endpoints</summary>
