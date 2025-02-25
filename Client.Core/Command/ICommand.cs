@@ -13,6 +13,11 @@ public interface ICommand
     string Name { get; }
 
     /// <summary>
+    /// Backend command.
+    /// </summary>
+    bool BackendCommand { get; }
+
+    /// <summary>
     /// Get command parameters.
     /// </summary>
     /// <param name="parser">Command line parser.</param>

@@ -12,6 +12,9 @@ public abstract class CommandBase : ICommand
     public virtual string Name => GetType().Name;
 
     /// <inheritdoc />
+    public virtual bool BackendCommand => true;
+
+    /// <inheritdoc />
     public abstract ICommandParameters GetParameters(CommandLineParser parser);
 
     /// <inheritdoc />
@@ -59,12 +62,17 @@ public abstract class CommandBase : ICommand
             return;
         }
 
-        // log
-        Log.Error(exception, exception.GetBaseException().Message);
-
-        // display
-        var message = exception.GetApiErrorMessage();
-        console.DisplayErrorLine(message);
+        // api error
+        var apiError = exception.GetApiErrorMessage();
+        if (!string.IsNullOrWhiteSpace(apiError))
+        {
+            console.DisplayErrorLine(apiError);
+        }
+        else
+        {
+            // generic error log
+            Log.Error(exception, exception.GetBaseException().Message);
+        }
     }
 
     /// <summary>

@@ -96,10 +96,30 @@ public class CommandManager(ICommandConsole console, ILogger logger = null)
     }
 
     /// <summary>
+    /// Get command line command
+    /// </summary>
+    public ICommand GetCommandLineCommand()
+    {
+        var parser = CommandLineParser.NewFromEnvironment();
+        if (parser.Count == 0)
+        {
+            return null;
+        }
+
+        var argCommand = parser.Get(1);
+        if (string.IsNullOrWhiteSpace(argCommand))
+        {
+            return null;
+        }
+
+        return GetCommand(argCommand);
+    }
+
+    /// <summary>
     /// Execute command using the environment command line arguments
     /// </summary>
     /// <returns>Exit code</returns>
-    public async Task<int> ExecuteAsync(PayrollHttpClient httpClient)
+    public async Task<int> ExecuteAsync(PayrollHttpClient httpClient = null)
     {
         var parser = CommandLineParser.NewFromEnvironment();
         if (parser.Count == 0)
@@ -125,7 +145,7 @@ public class CommandManager(ICommandConsole console, ILogger logger = null)
             // command file
             if (!string.IsNullOrWhiteSpace(argCommand) && IsCommandFile(argCommand))
             {
-                return await ExecuteFileAsync(httpClient, parser);
+                return await ExecuteFileAsync(parser, httpClient);
             }
 
             // single command using the environment command line parser
@@ -140,27 +160,23 @@ public class CommandManager(ICommandConsole console, ILogger logger = null)
         {
             return -1;
         }
-        return await ExecuteAsync(httpClient, command, parser);
+        return await ExecuteAsync(command, parser, httpClient);
     }
 
     /// <summary>
     /// Execute specific command using the environment command line arguments
     /// </summary>
     /// <returns>Exit code</returns>
-    public async Task<int> ExecuteAsync(PayrollHttpClient httpClient, ICommand command) =>
-        await ExecuteAsync(httpClient, command, CommandLineParser.NewFromEnvironment());
+    public async Task<int> ExecuteAsync(ICommand command, PayrollHttpClient httpClient = null) =>
+        await ExecuteAsync(command, CommandLineParser.NewFromEnvironment(), httpClient);
 
     /// <summary>
     /// Execute specific command using a custom command line parser
     /// </summary>
     /// <returns>Exit code</returns>
-    private async Task<int> ExecuteAsync(PayrollHttpClient httpClient,
-        ICommand command, CommandLineParser commandLineParser)
+    private async Task<int> ExecuteAsync(ICommand command, CommandLineParser commandLineParser,
+        PayrollHttpClient httpClient = null)
     {
-        if (httpClient == null)
-        {
-            throw new ArgumentNullException(nameof(httpClient));
-        }
         if (command == null)
         {
             throw new ArgumentNullException(nameof(command));
@@ -199,9 +215,9 @@ public class CommandManager(ICommandConsole console, ILogger logger = null)
 
             var context = new CommandContext(
                 commandManager: this,
-                httpClient: httpClient,
-                logger: Logger,
                 console: Console,
+                logger: Logger,
+                httpClient: httpClient,
                 displayLevel: Console.DisplayLevel);
             var result = await command.ExecuteAsync(context, parameters);
             Logger?.Trace($"{command} result: {result}");
@@ -238,12 +254,8 @@ public class CommandManager(ICommandConsole console, ILogger logger = null)
         internal List<FileItem> Children { get; } = [];
     }
 
-    private async Task<int> ExecuteFileAsync(PayrollHttpClient httpClient, CommandLineParser parser)
+    private async Task<int> ExecuteFileAsync(CommandLineParser parser, PayrollHttpClient httpClient = null)
     {
-        if (httpClient == null)
-        {
-            throw new ArgumentNullException(nameof(httpClient));
-        }
         if (parser == null)
         {
             throw new ArgumentNullException(nameof(parser));
@@ -261,7 +273,7 @@ public class CommandManager(ICommandConsole console, ILogger logger = null)
 
         foreach (var item in items)
         {
-            var exitCode = await ExecuteFileItemAsync(httpClient, item);
+            var exitCode = await ExecuteFileItemAsync(item, httpClient);
             if (exitCode != 0)
             {
                 return exitCode;
@@ -274,12 +286,12 @@ public class CommandManager(ICommandConsole console, ILogger logger = null)
         return 0;
     }
 
-    private async Task<int> ExecuteFileItemAsync(PayrollHttpClient httpClient, FileItem item)
+    private async Task<int> ExecuteFileItemAsync(FileItem item, PayrollHttpClient httpClient = null)
     {
         // command
         if (item.Command != null)
         {
-            return await ExecuteAsync(httpClient, item.Command, item.Parser);
+            return await ExecuteAsync(item.Command, item.Parser, httpClient);
         }
 
         // command file
@@ -303,7 +315,7 @@ public class CommandManager(ICommandConsole console, ILogger logger = null)
         // process children
         foreach (var children in item.Children)
         {
-            var result = await ExecuteFileItemAsync(httpClient, children);
+            var result = await ExecuteFileItemAsync(children, httpClient);
             if (result != 0)
             {
                 return result;

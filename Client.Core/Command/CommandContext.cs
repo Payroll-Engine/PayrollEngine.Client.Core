@@ -11,30 +11,17 @@ public class CommandContext
     /// Command context.
     /// </summary>
     /// <param name="commandManager">Command manager.</param>
-    /// <param name="console">Command console.</param>
-    /// <param name="displayLevel">Command display level.</param>
-    public CommandContext(CommandManager commandManager, ICommandConsole console, DisplayLevel displayLevel = DisplayLevel.Full)
-    {
-        CommandManager = commandManager ?? throw new ArgumentNullException(nameof(commandManager));
-        Console = console ?? throw new ArgumentNullException(nameof(console));
-        DisplayLevel = displayLevel;
-    }
-
-    /// <summary>
-    /// Command context.
-    /// </summary>
-    /// <param name="commandManager">Command manager.</param>
-    /// <param name="httpClient">Http client.</param>
     /// <param name="logger">Command logger.</param>
     /// <param name="console">Command console.</param>
+    /// <param name="httpClient">Http client.</param>
     /// <param name="displayLevel">Command display level.</param>
-    public CommandContext(CommandManager commandManager, PayrollHttpClient httpClient,
-        ILogger logger, ICommandConsole console, DisplayLevel displayLevel = DisplayLevel.Full)
+    public CommandContext(CommandManager commandManager, ICommandConsole console, ILogger logger = null,
+        PayrollHttpClient httpClient = null, DisplayLevel displayLevel = DisplayLevel.Full)
     {
         CommandManager = commandManager ?? throw new ArgumentNullException(nameof(commandManager));
         Console = console ?? throw new ArgumentNullException(nameof(console));
-        HttpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
-        Logger = logger ?? throw new ArgumentNullException(nameof(logger));
+        Logger = logger;
+        HttpClient = httpClient;
         DisplayLevel = displayLevel;
     }
 

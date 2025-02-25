@@ -112,7 +112,7 @@ public abstract class ConsoleProgram<TApp> : ConsoleToolBase, IDisposable
             await SetupLogAsync();
 
             // http client
-            if (UseHttpClient && !await SetupHttpClientAsync())
+            if (UseHttpClient() && !await SetupHttpClientAsync())
             {
                 return;
             }
@@ -184,7 +184,6 @@ public abstract class ConsoleProgram<TApp> : ConsoleToolBase, IDisposable
     protected virtual int MandatoryArgumentCount => 0;
 
     /// <summary>Test for single command line argument help</summary>
-    /// <returns></returns>
     private static bool IsHelpMode()
     {
         var firstArgument = ConsoleArguments.Get(1, allowToggle: true);
@@ -206,7 +205,7 @@ public abstract class ConsoleProgram<TApp> : ConsoleToolBase, IDisposable
     protected PayrollHttpClient HttpClient { get; private set; }
 
     /// <summary>Use the payroll http client, default is true</summary>
-    protected virtual bool UseHttpClient => true;
+    protected virtual bool UseHttpClient() => true;
 
     /// <summary>Show the connection status, default is true</summary>
     protected virtual bool ShowConnectionInfo => true;

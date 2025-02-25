@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Net;
+using System.Linq;
 using System.Text;
+using System.Net.Http;
 using System.Text.Json;
 
 namespace PayrollEngine.Client;
@@ -40,24 +43,22 @@ public static class ExceptionExtensions
             return apiException.Message;
         }
 
-        // maybe a plain exception message
-        // use first line only, remove the stack trace lines
-        var message = exception.GetBaseMessage();
-        message = message.Replace("\\r\\n", "\n");
-        var lines = message.Split(['\n']);
-        if (lines.Length > 1)
+        // script errors
+        var scriptErrors = GetScriptErrors(exception);
+        if (scriptErrors != null)
         {
-            message = lines[0];
+            return string.Join("\n", scriptErrors);
         }
 
-        // trim quotes and line separators
-        return message.Trim('\r', '\n', '"');
+        // plain exception message
+        // use first line only, remove the stack trace lines
+        return GetPlainErrorMessage(exception, maxLines: 1);
     }
 
     /// <summary>Get the exception message from an API error</summary>
     /// <param name="exception">The exception</param>
     /// <returns>The payroll API error, null on others errors</returns>
-    public static ApiError GetApiError(this Exception exception)
+    private static ApiError GetApiError(this Exception exception)
     {
         if (exception == null)
         {
@@ -91,7 +92,7 @@ public static class ExceptionExtensions
     /// <summary>Get the exception message from an API exception</summary>
     /// <param name="exception">The exception</param>
     /// <returns>The payroll API error, null on others errors</returns>
-    public static ApiException GetApiException(Exception exception)
+    private static ApiException GetApiException(Exception exception)
     {
         if (exception == null)
         {
@@ -120,6 +121,45 @@ public static class ExceptionExtensions
             return null;
         }
         return null;
+    }
+
+    /// <summary>Get script errors</summary>
+    /// <param name="exception">The exception</param>
+    /// <returns>The payroll API error, null on others errors</returns>
+    private static string GetScriptErrors(Exception exception)
+    {
+        // script errors resulting to a http request exception with status code unprocessable
+        if (exception is not HttpRequestException httpException ||
+            httpException.StatusCode != HttpStatusCode.UnprocessableContent)
+        {
+            return null;
+        }
+
+        // script errors
+        var message = GetPlainErrorMessage(exception);
+        return string.IsNullOrWhiteSpace(message) ? null : message;
+    }
+
+    /// <summary>Get plain error message</summary>
+    /// <param name="exception">The exception</param>
+    /// <param name="maxLines">Maximum exception lines</param>
+    private static string GetPlainErrorMessage(Exception exception, int maxLines = 0)
+    {
+        var message = exception.GetBaseMessage();
+        message = message.Replace(@"\r\n", "\n");
+        var lines = message.Split(['\n'], StringSplitOptions.RemoveEmptyEntries).ToList();
+
+        if (maxLines > 0 && lines.Count > maxLines)
+        {
+            lines.RemoveRange(maxLines, lines.Count - maxLines);
+        }
+
+        // trim quotes and line separators
+        for (var i = 0; i < lines.Count; i++)
+        {
+            lines[i] = lines[i].Trim('\r', '\n', '"');
+        }
+        return string.Join("\n", lines);
     }
 
     private static string GetExceptionMessage(Exception exception) =>

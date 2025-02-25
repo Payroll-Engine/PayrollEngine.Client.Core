@@ -109,7 +109,7 @@ public class CommandLineParser(string[] commandLineArgs)
         // name
         if (name != null)
         {
-            var namedParameter = arg.IndexOf(':') > 0;
+            var namedParameter = arg.StartsWith($"{name}:", StringComparison.InvariantCultureIgnoreCase);
             // ignore other named parameter
             if (namedParameter || !allowToggle && IsToggleArgument(arg))
             {

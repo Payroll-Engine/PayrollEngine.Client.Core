@@ -83,6 +83,9 @@
         <member name="P:PayrollEngine.Client.Command.CommandBase.Name">
             <inheritdoc />
         </member>
+        <member name="P:PayrollEngine.Client.Command.CommandBase.BackendCommand">
+            <inheritdoc />
+        </member>
         <member name="M:PayrollEngine.Client.Command.CommandBase.GetParameters(PayrollEngine.Client.Command.CommandLineParser)">
             <inheritdoc />
         </member>
@@ -188,22 +191,14 @@
             Command context.
             </summary>
         </member>
-        <member name="M:PayrollEngine.Client.Command.CommandContext.#ctor(PayrollEngine.Client.Command.CommandManager,PayrollEngine.Client.Command.ICommandConsole,PayrollEngine.Client.Command.DisplayLevel)">
+        <member name="M:PayrollEngine.Client.Command.CommandContext.#ctor(PayrollEngine.Client.Command.CommandManager,PayrollEngine.Client.Command.ICommandConsole,PayrollEngine.ILogger,PayrollEngine.Client.PayrollHttpClient,PayrollEngine.Client.Command.DisplayLevel)">
             <summary>
             Command context.
             </summary>
             <param name="commandManager">Command manager.</param>
-            <param name="console">Command console.</param>
-            <param name="displayLevel">Command display level.</param>
-        </member>
-        <member name="M:PayrollEngine.Client.Command.CommandContext.#ctor(PayrollEngine.Client.Command.CommandManager,PayrollEngine.Client.PayrollHttpClient,PayrollEngine.ILogger,PayrollEngine.Client.Command.ICommandConsole,PayrollEngine.Client.Command.DisplayLevel)">
-            <summary>
-            Command context.
-            </summary>
-            <param name="commandManager">Command manager.</param>
-            <param name="httpClient">Http client.</param>
             <param name="logger">Command logger.</param>
             <param name="console">Command console.</param>
+            <param name="httpClient">Http client.</param>
             <param name="displayLevel">Command display level.</param>
         </member>
         <member name="P:PayrollEngine.Client.Command.CommandContext.CommandManager">
@@ -391,19 +386,24 @@
             </summary>
             <param name="name">Command name</param>
         </member>
+        <member name="M:PayrollEngine.Client.Command.CommandManager.GetCommandLineCommand">
+            <summary>
+            Get command line command
+            </summary>
+        </member>
         <member name="M:PayrollEngine.Client.Command.CommandManager.ExecuteAsync(PayrollEngine.Client.PayrollHttpClient)">
             <summary>
             Execute command using the environment command line arguments
             </summary>
             <returns>Exit code</returns>
         </member>
-        <member name="M:PayrollEngine.Client.Command.CommandManager.ExecuteAsync(PayrollEngine.Client.PayrollHttpClient,PayrollEngine.Client.Command.ICommand)">
+        <member name="M:PayrollEngine.Client.Command.CommandManager.ExecuteAsync(PayrollEngine.Client.Command.ICommand,PayrollEngine.Client.PayrollHttpClient)">
             <summary>
             Execute specific command using the environment command line arguments
             </summary>
             <returns>Exit code</returns>
         </member>
-        <member name="M:PayrollEngine.Client.Command.CommandManager.ExecuteAsync(PayrollEngine.Client.PayrollHttpClient,PayrollEngine.Client.Command.ICommand,PayrollEngine.Client.Command.CommandLineParser)">
+        <member name="M:PayrollEngine.Client.Command.CommandManager.ExecuteAsync(PayrollEngine.Client.Command.ICommand,PayrollEngine.Client.Command.CommandLineParser,PayrollEngine.Client.PayrollHttpClient)">
             <summary>
             Execute specific command using a custom command line parser
             </summary>
@@ -452,6 +452,11 @@
         <member name="P:PayrollEngine.Client.Command.ICommand.Name">
             <summary>
             Command name.
+            </summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Command.ICommand.BackendCommand">
+            <summary>
+            Backend command.
             </summary>
         </member>
         <member name="M:PayrollEngine.Client.Command.ICommand.GetParameters(PayrollEngine.Client.Command.CommandLineParser)">
@@ -796,7 +801,6 @@
         </member>
         <member name="M:PayrollEngine.Client.ConsoleProgram`1.IsHelpMode">
             <summary>Test for single command line argument help</summary>
-            <returns></returns>
         </member>
         <member name="M:PayrollEngine.Client.ConsoleProgram`1.HelpAsync">
             <summary>Show the program help</summary>
@@ -804,7 +808,7 @@
         <member name="P:PayrollEngine.Client.ConsoleProgram`1.HttpClient">
             <summary>The payroll http client</summary>
         </member>
-        <member name="P:PayrollEngine.Client.ConsoleProgram`1.UseHttpClient">
+        <member name="M:PayrollEngine.Client.ConsoleProgram`1.UseHttpClient">
             <summary>Use the payroll http client, default is true</summary>
         </member>
         <member name="P:PayrollEngine.Client.ConsoleProgram`1.ShowConnectionInfo">
@@ -998,6 +1002,16 @@
             <summary>Get the exception message from an API exception</summary>
             <param name="exception">The exception</param>
             <returns>The payroll API error, null on others errors</returns>
+        </member>
+        <member name="M:PayrollEngine.Client.ExceptionExtensions.GetScriptErrors(System.Exception)">
+            <summary>Get script errors</summary>
+            <param name="exception">The exception</param>
+            <returns>The payroll API error, null on others errors</returns>
+        </member>
+        <member name="M:PayrollEngine.Client.ExceptionExtensions.GetPlainErrorMessage(System.Exception,System.Int32)">
+            <summary>Get plain error message</summary>
+            <param name="exception">The exception</param>
+            <param name="maxLines">Maximum exception lines</param>
         </member>
         <member name="T:PayrollEngine.Client.Exchange.BinaryFile">
             <summary>Binary file</summary>
