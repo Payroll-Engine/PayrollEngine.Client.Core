@@ -77,20 +77,23 @@ public interface IPayrollService : ICrudService<IPayroll, TenantServiceContext, 
     /// <param name="endDate">The time period end date</param>
     /// <param name="caseFieldNames">The case field names</param>
     /// <param name="employeeId">The employee id</param>
+    /// <param name="regulationDate">The regulation date (default: UTC now)</param>
+    /// <param name="evaluationDate">The evaluation date (default: UTC now)</param>
     /// <param name="caseSlot">The case slot</param>
     /// <returns>The case value periods</returns>
     Task<List<CaseFieldValue>> GetCaseValuesAsync(PayrollServiceContext context, DateTime startDate, DateTime endDate,
-        IEnumerable<string> caseFieldNames, int? employeeId = null, string caseSlot = null);
+        IEnumerable<string> caseFieldNames, int? employeeId = null, 
+        DateTime? regulationDate = null, DateTime? evaluationDate = null, string caseSlot = null);
 
     /// <summary>Get payroll case values from a specific time moment</summary>
     /// <param name="context">The service context</param>
     /// <param name="employeeId">The employee id</param>
     /// <param name="caseFieldNames">The case field names</param>
     /// <param name="valueDate">The moment of the value (default: UTC now)</param>
-    /// <param name="regulationDate">The regulation date (default: UTC now)</param>
+    /// <param name="regulationDate">The regulation date (default: value date)</param>
     /// <param name="evaluationDate">The evaluation date (default: value date)</param>
     /// <returns>The payroll case value of the case field</returns>
-    Task<List<CaseValue>> GetTimeValuesAsync(PayrollServiceContext context, int? employeeId = null,
+    Task<List<CaseValue>> GetCaseTimeValuesAsync(PayrollServiceContext context, int? employeeId = null,
         IEnumerable<string> caseFieldNames = null, DateTime? valueDate = null,
         DateTime? regulationDate = null, DateTime? evaluationDate = null);
 
@@ -228,11 +231,12 @@ public interface IPayrollService : ICrudService<IPayroll, TenantServiceContext, 
     /// <param name="context">The service context</param>
     /// <param name="reportNames">The report names filter (default is all)</param>
     /// <param name="overrideType">The override type filter (default: active)</param>
+    /// <param name="userType">The user type filter (default: active)</param>
     /// <param name="regulationDate">The regulation date (default: UTC now)</param>
     /// <param name="evaluationDate">Creation date filter (default: UTC now)</param>
     /// <returns>Payroll report sets</returns>
     Task<List<TReportSet>> GetReportsAsync<TReportSet>(PayrollServiceContext context, IEnumerable<string> reportNames = null,
-        OverrideType? overrideType = null, DateTime? regulationDate = null, DateTime? evaluationDate = null)
+        OverrideType? overrideType = null, UserType? userType = null, DateTime? regulationDate = null, DateTime? evaluationDate = null)
         where TReportSet : class, IReportSet;
 
     /// <summary>Get payroll report parameters</summary>

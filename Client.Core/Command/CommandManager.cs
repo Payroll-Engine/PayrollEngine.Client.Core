@@ -239,18 +239,29 @@ public class CommandManager(ICommandConsole console, ILogger logger = null)
 
     #region Command File
 
-    private class FileItem(string text, ICommand command, CommandLineParser parser)
+    private class FileItem
     {
-        public FileItem(string text, CommandLineParser parser, List<FileItem> children) :
+        public FileItem(string text, string path, CommandLineParser parser, List<FileItem> children) :
             this(text, null, parser)
         {
+            Path = path;
             Parser = parser;
             Children = children;
         }
 
-        internal string Text { get; } = text;
-        public ICommand Command { get; } = command;
-        public CommandLineParser Parser { get; } = parser;
+        // ReSharper disable once ConvertToPrimaryConstructor
+        public FileItem(string text, ICommand command, CommandLineParser parser)
+        {
+            Text = text;
+            Command = command;
+            Parser = parser;
+        }
+
+        // ReSharper disable once UnusedAutoPropertyAccessor.Local
+        internal string Text { get; }
+        internal string Path { get; }
+        public ICommand Command { get; }
+        public CommandLineParser Parser { get; }
         internal List<FileItem> Children { get; } = [];
     }
 
@@ -288,19 +299,19 @@ public class CommandManager(ICommandConsole console, ILogger logger = null)
 
     private async Task<int> ExecuteFileItemAsync(FileItem item, PayrollHttpClient httpClient = null)
     {
+        // command file
+        // working dir
+        var currentDirectory = Directory.GetCurrentDirectory();
+        if (!string.IsNullOrWhiteSpace(item.Path) &&
+            item.Parser.GetEnumToggle(PathChangeMode.ChangePath) == PathChangeMode.ChangePath)
+        {
+            EnsureCurrentDirectory(item.Path);
+        }
+
         // command
         if (item.Command != null)
         {
             return await ExecuteAsync(item.Command, item.Parser, httpClient);
-        }
-
-        // command file
-        // working dir
-        var currentDirectory = Directory.GetCurrentDirectory();
-        if (item.Parser.GetEnumToggle(PathChangeMode.ChangePath) == PathChangeMode.ChangePath)
-        {
-            var directory = new FileInfo(item.Text).DirectoryName;
-            EnsureCurrentDirectory(directory);
         }
 
         // display
@@ -330,19 +341,47 @@ public class CommandManager(ICommandConsole console, ILogger logger = null)
         return 0;
     }
 
-    private List<FileItem> ReadCommandFile(CommandLineParser fileParser)
+    private List<FileItem> ReadCommandFile(CommandLineParser parser, bool rootCommandFile = false)
     {
         // test file
-        var fileName = fileParser.Get(1);
+        var fileName = parser.Get(1);
         if (!IsCommandFile(fileName))
         {
             return null;
         }
 
+        var fileItems = new List<FileItem>();
         var info = new FileInfo(fileName);
         var fileBaseName = info.Name;
 
+        // command file
+        if (!rootCommandFile && IsCommandFile(fileName))
+        {
+            var parsedLine = ParseParameters(parser, fileName);
+            // transfer command line arguments
+            var lineParser = new CommandLineParser(parser.Arguments);
+
+            var linePathMode = lineParser.GetEnumToggle<PathChangeMode>(default);
+            Logger?.Trace($"Command file {fileName} (path-mode: {linePathMode})");
+            var commandFileItems = ReadCommandFile(lineParser, rootCommandFile: true);
+
+            // restore working dir
+            if (linePathMode == PathChangeMode.ChangePath)
+            {
+                EnsureCurrentDirectory(info.DirectoryName);
+            }
+
+            // add file item
+            if (commandFileItems != null)
+            {
+                var fileItem = new FileItem(parsedLine, info.DirectoryName, lineParser, commandFileItems);
+                fileItems.Add(fileItem);
+            }
+            return fileItems;
+        }
+
         // ensure working dir
+        var pathMode = parser.GetEnumToggle<PathChangeMode>(default);
         var startDirectory = Directory.GetCurrentDirectory();
         EnsureCurrentDirectory(info.DirectoryName);
         if (!File.Exists(fileBaseName))
@@ -352,9 +391,8 @@ public class CommandManager(ICommandConsole console, ILogger logger = null)
         }
 
         // read commands
-        var fileItems = new List<FileItem>();
         var lines = File.ReadAllLines(fileBaseName).Select(x => x.Trim()).ToList();
-        Logger?.Trace($"Parsing command file {fileBaseName} ({lines.Count} lines)");
+        Logger?.Trace($"Parsing command file {fileBaseName} ({lines.Count} lines,  path-mode: {pathMode}))");
 
         var error = false;
         foreach (var line in lines)
@@ -365,7 +403,7 @@ public class CommandManager(ICommandConsole console, ILogger logger = null)
                 continue;
             }
 
-            var parsedLine = ParseParameters(fileParser, line);
+            var parsedLine = ParseParameters(parser, line);
 
             var lineParser = CommandLineParser.NewFromCommand(parsedLine);
             var name = lineParser.Get(1);
@@ -373,16 +411,20 @@ public class CommandManager(ICommandConsole console, ILogger logger = null)
             // command file
             if (IsCommandFile(name))
             {
-                Logger?.Trace($"Command file {fileName} command file: {parsedLine}");
                 var commandFileItems = ReadCommandFile(lineParser);
+                var linePathMode = lineParser.GetEnumToggle<PathChangeMode>(default);
+                Logger?.Trace($"Command file {fileName} command file: {parsedLine} (path-mode: {linePathMode})");
 
                 // restore working dir
-                EnsureCurrentDirectory(info.DirectoryName);
+                if (linePathMode == PathChangeMode.ChangePath)
+                {
+                    EnsureCurrentDirectory(info.DirectoryName);
+                }
 
                 // add file item
                 if (commandFileItems != null)
                 {
-                    var fileItem = new FileItem(parsedLine, lineParser, commandFileItems);
+                    var fileItem = new FileItem(parsedLine, info.DirectoryName, lineParser, commandFileItems);
                     fileItems.Add(fileItem);
                 }
                 continue;

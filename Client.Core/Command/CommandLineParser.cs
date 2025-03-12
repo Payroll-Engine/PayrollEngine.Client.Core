@@ -1,14 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 
 namespace PayrollEngine.Client.Command;
 
 /// <summary>Represents the environment command line arguments</summary>
-public class CommandLineParser(string[] commandLineArgs)
+public class CommandLineParser(string[] arguments)
 {
-    private string[] CommandLineArgs { get; } = commandLineArgs ?? throw new ArgumentNullException(nameof(commandLineArgs));
+    /// <summary>Command line arguments</summary>
+    public string[] Arguments { get; } = arguments ?? throw new ArgumentNullException(nameof(arguments));
 
     /// <summary>Get the command line arguments count, excluding the implicit parameter at index 0</summary>
     public int ParameterCount =>
@@ -16,23 +17,22 @@ public class CommandLineParser(string[] commandLineArgs)
 
     /// <summary>Get the command line arguments count</summary>
     public int Count =>
-        CommandLineArgs.Length;
+        Arguments.Length;
 
     /// <summary>Determines whether the specified argument exists</summary>
     /// <param name="name">The argument</param>
     /// <returns>True if the specified argument exists</returns>
     private bool Contains(string name) =>
-        CommandLineArgs.FirstOrDefault(x => string.Equals(name, x, StringComparison.InvariantCultureIgnoreCase)) != null;
+        Arguments.FirstOrDefault(x => string.Equals(name, x, StringComparison.InvariantCultureIgnoreCase)) != null;
 
     /// <summary>Determines whether the specified argument exists</summary>
     /// <returns>True if the specified toggle exists</returns>
     public bool IsValidOrder()
     {
-        var arguments = CommandLineArgs;
         int? firstToggleIndex = null;
-        for (var i = 0; i < arguments.Length; i++)
+        for (var i = 0; i < Arguments.Length; i++)
         {
-            var argument = arguments[i];
+            var argument = Arguments[i];
             if (IsToggleArgument(argument))
             {
                 firstToggleIndex ??= i;
@@ -79,8 +79,8 @@ public class CommandLineParser(string[] commandLineArgs)
 
     /// <summary>Gets the specified index, starting at 1</summary>
     /// <param name="index">The argument index</param>
-    /// <param name="name">The argument name (optional)</param>
-    /// <param name="allowToggle">Argument can be a toggle (optional)</param>
+    /// <param name="name">The argument name (default=null)</param>
+    /// <param name="allowToggle">Argument can be a toggle (default: false)</param>
     /// <returns>The argument value</returns>
     public string Get(int index, string name = null, bool allowToggle = false)
     {
@@ -89,7 +89,7 @@ public class CommandLineParser(string[] commandLineArgs)
             throw new ArgumentOutOfRangeException(nameof(index));
         }
 
-        if (CommandLineArgs.Length <= index || index >= CommandLineArgs.Length)
+        if (Arguments.Length <= index || index >= Arguments.Length)
         {
             return null;
         }
@@ -104,7 +104,7 @@ public class CommandLineParser(string[] commandLineArgs)
             }
         }
 
-        var arg = CommandLineArgs[index];
+        var arg = Arguments[index];
 
         // name
         if (name != null)
@@ -130,7 +130,7 @@ public class CommandLineParser(string[] commandLineArgs)
             throw new ArgumentException(nameof(name));
         }
         var marker = $"{name}:";
-        foreach (var cmdLineArg in CommandLineArgs)
+        foreach (var cmdLineArg in Arguments)
         {
             if (cmdLineArg.StartsWith(marker, StringComparison.InvariantCultureIgnoreCase))
             {
@@ -249,7 +249,7 @@ public class CommandLineParser(string[] commandLineArgs)
     /// <summary>Gets all toggle with fallback value</summary>
     /// <returns>The argument value</returns>
     public IEnumerable<string> GetToggles() =>
-        CommandLineArgs.Where(IsToggleArgument);
+        Arguments.Where(IsToggleArgument);
 
     /// <summary>Gets a toggle with fallback value</summary>
     /// <typeparam name="T">The enum type</typeparam>
@@ -265,10 +265,10 @@ public class CommandLineParser(string[] commandLineArgs)
     {
         var enumTypesArray = enumTypes.ToArray();
         // test for unknown toggles
-        for (var i = 1; i < CommandLineArgs.Length; i++)
+        for (var i = 1; i < Arguments.Length; i++)
         {
             // command line argument
-            var arg = CommandLineArgs[i];
+            var arg = Arguments[i];
             if (!IsToggleArgument(arg))
             {
                 continue;
@@ -315,11 +315,11 @@ public class CommandLineParser(string[] commandLineArgs)
     /// </summary>
     public string[] GetArguments()
     {
-        if (commandLineArgs.Length <= 2)
+        if (arguments.Length <= 2)
         {
             return null;
         }
-        return CommandLineArgs.Skip(2).ToArray();
+        return Arguments.Skip(2).ToArray();
     }
 
     #region Static
@@ -327,6 +327,7 @@ public class CommandLineParser(string[] commandLineArgs)
     /// <summary>New command line parser from environment command line arguments</summary>
     public static CommandLineParser NewFromEnvironment() =>
         new(Environment.GetCommandLineArgs());
+
 
     /// <summary>New command line parser from command string</summary>
     public static CommandLineParser NewFromCommand(string command) =>

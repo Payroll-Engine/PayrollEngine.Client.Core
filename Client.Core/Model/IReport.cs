@@ -24,6 +24,9 @@ public interface IReport : IModel, IAttributeObject, IKeyEquatable<IReport>
     /// <summary>The report attribute mode</summary>
     ReportAttributeMode AttributeMode { get; set; }
 
+    /// <summary>The user type (default: employee)</summary>
+    UserType UserType { get; set; }
+
     /// <summary>The report queries, key is the query name and value the api operation name</summary>
     Dictionary<string, string> Queries { get; set; }
 

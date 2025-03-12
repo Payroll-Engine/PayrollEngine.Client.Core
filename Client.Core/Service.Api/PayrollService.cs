@@ -161,7 +161,7 @@ public class PayrollService : ServiceBase, IPayrollService
     /// <inheritdoc/>
     public virtual async Task<List<TCase>> GetAvailableCasesAsync<TCase>(PayrollServiceContext context, int userId,
         CaseType caseType, IEnumerable<string> caseNames = null, int? employeeId = null, string caseSlot = null,
-        string clusterSetName = null, string culture = null,bool? hidden = null,
+        string clusterSetName = null, string culture = null, bool? hidden = null,
         DateTime? regulationDate = null, DateTime? evaluationDate = null)
         where TCase : class, ICase
     {
@@ -227,8 +227,9 @@ public class PayrollService : ServiceBase, IPayrollService
     #region Case Values
 
     /// <inheritdoc/>
-    public virtual async Task<List<CaseFieldValue>> GetCaseValuesAsync(PayrollServiceContext context, DateTime startDate, DateTime endDate,
-        IEnumerable<string> caseFieldNames, int? employeeId = null, string caseSlot = null)
+    public virtual async Task<List<CaseFieldValue>> GetCaseValuesAsync(PayrollServiceContext context,
+        DateTime startDate, DateTime endDate, IEnumerable<string> caseFieldNames, int? employeeId = null,
+        DateTime? regulationDate = null, DateTime? evaluationDate = null, string caseSlot = null)
     {
         if (context == null)
         {
@@ -240,12 +241,14 @@ public class PayrollService : ServiceBase, IPayrollService
             .AddQueryString(nameof(startDate), startDate)
             .AddQueryString(nameof(endDate), endDate)
             .AddQueryString(nameof(employeeId), employeeId)
+            .AddQueryString(nameof(regulationDate), regulationDate)
+            .AddQueryString(nameof(evaluationDate), evaluationDate)
             .AddQueryString(nameof(caseSlot), caseSlot);
         return (await HttpClient.GetAsync<IEnumerable<CaseFieldValue>>(url)).ToList();
     }
 
     /// <inheritdoc/>
-    public virtual async Task<List<CaseValue>> GetTimeValuesAsync(PayrollServiceContext context,
+    public virtual async Task<List<CaseValue>> GetCaseTimeValuesAsync(PayrollServiceContext context,
         int? employeeId = null, IEnumerable<string> caseFieldNames = null,
         DateTime? valueDate = null, DateTime? regulationDate = null, DateTime? evaluationDate = null)
     {
@@ -291,7 +294,7 @@ public class PayrollService : ServiceBase, IPayrollService
             .AddQueryString(nameof(evaluationDate), evaluationDate)
             .AddQueryString(nameof(culture), culture);
         var periodValues = await HttpClient.GetAsync<CaseFieldValue[]>(requestUri);
-        return [..periodValues];
+        return [.. periodValues];
     }
 
     /// <inheritdoc/>
@@ -488,7 +491,8 @@ public class PayrollService : ServiceBase, IPayrollService
 
     /// <inheritdoc/>
     public virtual async Task<List<TReportSet>> GetReportsAsync<TReportSet>(PayrollServiceContext context, IEnumerable<string> reportNames = null,
-        OverrideType? overrideType = null, DateTime? regulationDate = null, DateTime? evaluationDate = null) where TReportSet : class, IReportSet
+        OverrideType? overrideType = null, UserType? userType = null,
+        DateTime? regulationDate = null, DateTime? evaluationDate = null) where TReportSet : class, IReportSet
     {
         if (context == null)
         {
@@ -498,6 +502,7 @@ public class PayrollService : ServiceBase, IPayrollService
         var uri = PayrollApiEndpoints.PayrollReportsUrl(context.TenantId, context.PayrollId)
             .AddCollectionQueryString(nameof(reportNames), reportNames)
             .AddQueryString(nameof(overrideType), overrideType)
+            .AddQueryString(nameof(userType), userType)
             .AddQueryString(nameof(regulationDate), regulationDate)
             .AddQueryString(nameof(evaluationDate), evaluationDate);
         return await HttpClient.GetCollectionAsync<TReportSet>(uri);

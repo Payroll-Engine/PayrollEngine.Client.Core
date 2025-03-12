@@ -232,6 +232,9 @@
         <member name="M:PayrollEngine.Client.Command.CommandLineParser.#ctor(System.String[])">
             <summary>Represents the environment command line arguments</summary>
         </member>
+        <member name="P:PayrollEngine.Client.Command.CommandLineParser.Arguments">
+            <summary>Command line arguments</summary>
+        </member>
         <member name="P:PayrollEngine.Client.Command.CommandLineParser.ParameterCount">
             <summary>Get the command line arguments count, excluding the implicit parameter at index 0</summary>
         </member>
@@ -267,8 +270,8 @@
         <member name="M:PayrollEngine.Client.Command.CommandLineParser.Get(System.Int32,System.String,System.Boolean)">
             <summary>Gets the specified index, starting at 1</summary>
             <param name="index">The argument index</param>
-            <param name="name">The argument name (optional)</param>
-            <param name="allowToggle">Argument can be a toggle (optional)</param>
+            <param name="name">The argument name (default=null)</param>
+            <param name="allowToggle">Argument can be a toggle (default: false)</param>
             <returns>The argument value</returns>
         </member>
         <member name="M:PayrollEngine.Client.Command.CommandLineParser.GetByName(System.String)">
@@ -3326,6 +3329,12 @@
         <member name="P:PayrollEngine.Client.Model.CaseSet.CancellationDate">
             <inheritdoc/>
         </member>
+        <member name="P:PayrollEngine.Client.Model.CaseSet.Reason">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.CaseSet.Forecast">
+            <inheritdoc/>
+        </member>
         <member name="P:PayrollEngine.Client.Model.CaseSet.Fields">
             <inheritdoc/>
         </member>
@@ -4557,6 +4566,12 @@
         <member name="P:PayrollEngine.Client.Model.ICaseSet.CancellationDate">
             <summary>The cancellation date</summary>
         </member>
+        <member name="P:PayrollEngine.Client.Model.ICaseSet.Reason">
+            <summary>The change reason</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.ICaseSet.Forecast">
+            <summary>The change forecast</summary>
+        </member>
         <member name="P:PayrollEngine.Client.Model.ICaseSet.Fields">
             <summary>The derived case fields</summary>
         </member>
@@ -5648,6 +5663,9 @@
         </member>
         <member name="P:PayrollEngine.Client.Model.IReport.AttributeMode">
             <summary>The report attribute mode</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.IReport.UserType">
+            <summary>The user type (default: employee)</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.IReport.Queries">
             <summary>The report queries, key is the query name and value the api operation name</summary>
@@ -7251,6 +7269,9 @@
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.Report.AttributeMode">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.Report.UserType">
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.Report.Queries">
@@ -10545,10 +10566,10 @@
         <member name="M:PayrollEngine.Client.Service.Api.PayrollService.BuildCaseAsync``1(PayrollEngine.Client.Service.PayrollServiceContext,System.String,System.Int32,System.Nullable{System.Int32},System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},PayrollEngine.Client.Model.ICaseChangeSetup)">
             <inheritdoc/>
         </member>
-        <member name="M:PayrollEngine.Client.Service.Api.PayrollService.GetCaseValuesAsync(PayrollEngine.Client.Service.PayrollServiceContext,System.DateTime,System.DateTime,System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.String)">
+        <member name="M:PayrollEngine.Client.Service.Api.PayrollService.GetCaseValuesAsync(PayrollEngine.Client.Service.PayrollServiceContext,System.DateTime,System.DateTime,System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String)">
             <inheritdoc/>
         </member>
-        <member name="M:PayrollEngine.Client.Service.Api.PayrollService.GetTimeValuesAsync(PayrollEngine.Client.Service.PayrollServiceContext,System.Nullable{System.Int32},System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+        <member name="M:PayrollEngine.Client.Service.Api.PayrollService.GetCaseTimeValuesAsync(PayrollEngine.Client.Service.PayrollServiceContext,System.Nullable{System.Int32},System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
             <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Service.Api.PayrollService.GetAvailableCaseFieldValuesAsync(PayrollEngine.Client.Service.PayrollServiceContext,System.Int32,System.Collections.Generic.IEnumerable{System.String},System.DateTime,System.DateTime,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String)">
@@ -10584,7 +10605,7 @@
         <member name="M:PayrollEngine.Client.Service.Api.PayrollService.GetLookupValueDataAsync(PayrollEngine.Client.Service.PayrollServiceContext,System.String,System.String,System.Nullable{System.Decimal},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String)">
             <inheritdoc/>
         </member>
-        <member name="M:PayrollEngine.Client.Service.Api.PayrollService.GetReportsAsync``1(PayrollEngine.Client.Service.PayrollServiceContext,System.Collections.Generic.IEnumerable{System.String},System.Nullable{PayrollEngine.OverrideType},System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+        <member name="M:PayrollEngine.Client.Service.Api.PayrollService.GetReportsAsync``1(PayrollEngine.Client.Service.PayrollServiceContext,System.Collections.Generic.IEnumerable{System.String},System.Nullable{PayrollEngine.OverrideType},System.Nullable{PayrollEngine.UserType},System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
             <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Service.Api.PayrollService.GetReportParametersAsync``1(PayrollEngine.Client.Service.PayrollServiceContext,System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
@@ -11880,23 +11901,25 @@
             <param name="caseChangeSetup">The case change setup (optional)</param>
             <returns>The created case set</returns>
         </member>
-        <member name="M:PayrollEngine.Client.Service.IPayrollService.GetCaseValuesAsync(PayrollEngine.Client.Service.PayrollServiceContext,System.DateTime,System.DateTime,System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.String)">
+        <member name="M:PayrollEngine.Client.Service.IPayrollService.GetCaseValuesAsync(PayrollEngine.Client.Service.PayrollServiceContext,System.DateTime,System.DateTime,System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String)">
             <summary>Get raw case values by date range and case field name</summary>
             <param name="context">The service context</param>
             <param name="startDate">The time period start date</param>
             <param name="endDate">The time period end date</param>
             <param name="caseFieldNames">The case field names</param>
             <param name="employeeId">The employee id</param>
+            <param name="regulationDate">The regulation date (default: UTC now)</param>
+            <param name="evaluationDate">The evaluation date (default: UTC now)</param>
             <param name="caseSlot">The case slot</param>
             <returns>The case value periods</returns>
         </member>
-        <member name="M:PayrollEngine.Client.Service.IPayrollService.GetTimeValuesAsync(PayrollEngine.Client.Service.PayrollServiceContext,System.Nullable{System.Int32},System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+        <member name="M:PayrollEngine.Client.Service.IPayrollService.GetCaseTimeValuesAsync(PayrollEngine.Client.Service.PayrollServiceContext,System.Nullable{System.Int32},System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
             <summary>Get payroll case values from a specific time moment</summary>
             <param name="context">The service context</param>
             <param name="employeeId">The employee id</param>
             <param name="caseFieldNames">The case field names</param>
             <param name="valueDate">The moment of the value (default: UTC now)</param>
-            <param name="regulationDate">The regulation date (default: UTC now)</param>
+            <param name="regulationDate">The regulation date (default: value date)</param>
             <param name="evaluationDate">The evaluation date (default: value date)</param>
             <returns>The payroll case value of the case field</returns>
         </member>
@@ -12005,11 +12028,12 @@
             <param name="culture">The culture</param>
             <returns>The lookup value data</returns>
         </member>
-        <member name="M:PayrollEngine.Client.Service.IPayrollService.GetReportsAsync``1(PayrollEngine.Client.Service.PayrollServiceContext,System.Collections.Generic.IEnumerable{System.String},System.Nullable{PayrollEngine.OverrideType},System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+        <member name="M:PayrollEngine.Client.Service.IPayrollService.GetReportsAsync``1(PayrollEngine.Client.Service.PayrollServiceContext,System.Collections.Generic.IEnumerable{System.String},System.Nullable{PayrollEngine.OverrideType},System.Nullable{PayrollEngine.UserType},System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
             <summary>Get payroll report sets</summary>
             <param name="context">The service context</param>
             <param name="reportNames">The report names filter (default is all)</param>
             <param name="overrideType">The override type filter (default: active)</param>
+            <param name="userType">The user type filter (default: active)</param>
             <param name="regulationDate">The regulation date (default: UTC now)</param>
             <param name="evaluationDate">Creation date filter (default: UTC now)</param>
             <returns>Payroll report sets</returns>

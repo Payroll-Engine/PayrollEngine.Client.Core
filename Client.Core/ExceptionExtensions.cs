@@ -26,11 +26,14 @@ public static class ExceptionExtensions
         {
             var buffer = new StringBuilder();
             buffer.AppendLine(apiError.Title);
-            foreach (var error in apiError.Errors)
+            if (apiError.Errors != null)
             {
-                foreach (var errorValue in error.Value)
+                foreach (var error in apiError.Errors)
                 {
-                    buffer.AppendLine($"{error.Key}: {errorValue.Trim()}");
+                    foreach (var errorValue in error.Value)
+                    {
+                        buffer.AppendLine($"{error.Key}: {errorValue.Trim()}");
+                    }
                 }
             }
             return buffer.ToString().Trim('\r', '\n', '"');
@@ -77,7 +80,7 @@ public static class ExceptionExtensions
         try
         {
             var apiError = JsonSerializer.Deserialize<ApiError>(message);
-            if (apiError.Status != 0)
+            if (apiError != null && apiError.Status != 0)
             {
                 return apiError;
             }

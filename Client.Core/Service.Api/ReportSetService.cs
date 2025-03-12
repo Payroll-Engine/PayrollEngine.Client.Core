@@ -95,7 +95,7 @@ public class ReportSetService : ServiceBase, IReportSetService
         // use of POST instead of GET according RFC7231
         // https://datatracker.ietf.org/doc/html/rfc7231#section-4.3.1
         return reportRequest == null ? 
-            await HttpClient.PostAsync<T>(uri) : 
+            await HttpClient.PostAsync<ReportRequest, T>(uri, new ReportRequest()) : 
             await HttpClient.PostAsync<ReportRequest, T>(uri, reportRequest);
     }
 

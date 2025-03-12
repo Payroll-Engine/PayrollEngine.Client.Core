@@ -64,7 +64,7 @@ public class PayrunJobInvocation : IPayrunJobInvocation
     public string Reason { get; set; }
 
     /// <inheritdoc/>
-    public LogLevel LogLevel { get; set; } = LogLevel.Warning;
+    public LogLevel LogLevel { get; set; } = LogLevel.Information;
 
     /// <inheritdoc/>
     public List<string> EmployeeIdentifiers { get; set; }

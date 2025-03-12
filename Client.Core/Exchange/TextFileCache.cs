@@ -22,6 +22,8 @@ public class TextFileCache
         {
             throw new ArgumentException(nameof(fileName));
         }
+
+        fileName = Path.GetFullPath(fileName);
         if (!File.Exists(fileName))
         {
             throw new PayrollException($"Missing file {new FileInfo(fileName).FullName}.");

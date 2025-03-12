@@ -18,6 +18,12 @@ public interface ICaseSet : ICase, IEquatable<ICaseSet>
     /// <summary>The cancellation date</summary>
     DateTime? CancellationDate { get; set; }
 
+    /// <summary>The change reason</summary>
+    string Reason { get; set; }
+
+    /// <summary>The change forecast</summary>
+    string Forecast { get; set; }
+
     /// <summary>The derived case fields</summary>
     List<CaseFieldSet> Fields { get; set; }
 

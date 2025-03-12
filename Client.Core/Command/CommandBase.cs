@@ -61,18 +61,18 @@ public abstract class CommandBase : ICommand
         {
             return;
         }
+        var message = exception.GetBaseException().Message;
 
         // api error
         var apiError = exception.GetApiErrorMessage();
         if (!string.IsNullOrWhiteSpace(apiError))
         {
+            message = apiError;
             console.DisplayErrorLine(apiError);
         }
-        else
-        {
-            // generic error log
-            Log.Error(exception, exception.GetBaseException().Message);
-        }
+
+        // log
+        Log.Error(exception, message);
     }
 
     /// <summary>

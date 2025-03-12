@@ -22,6 +22,12 @@ public class CaseSet : Case, ICaseSet
     public DateTime? CancellationDate { get; set; }
 
     /// <inheritdoc/>
+    public string Reason { get; set; }
+
+    /// <inheritdoc/>
+    public string Forecast { get; set; }
+
+    /// <inheritdoc/>
     public List<CaseFieldSet> Fields { get; set; }
 
     /// <inheritdoc/>

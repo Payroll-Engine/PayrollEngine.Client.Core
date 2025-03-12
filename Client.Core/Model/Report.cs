@@ -28,6 +28,9 @@ public class Report : ModelBase, IReport, INameObject
     public ReportAttributeMode AttributeMode { get; set; }
 
     /// <inheritdoc/>
+    public UserType UserType { get; set; }
+
+    /// <inheritdoc/>
     public Dictionary<string, string> Queries { get; set; }
 
     /// <inheritdoc/>
@@ -80,7 +83,7 @@ public class Report : ModelBase, IReport, INameObject
     /// <inheritdoc/>
     public virtual bool EqualKey(IReport compare) =>
         string.Equals(Name, compare?.Name);
-   
+
     /// <inheritdoc/>
     public override string GetUiString() => Name;
 }

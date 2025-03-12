@@ -849,14 +849,11 @@ public abstract class ExchangeImportVisitor : Visitor
     protected override async Task VisitReportTemplateAsync(IExchangeTenant tenant, IRegulationSet regulation,
         IReportSet report, IReportTemplate template)
     {
-        // report content file
-        if (ReportTemplateLoad && string.IsNullOrWhiteSpace(template.Content) && !string.IsNullOrWhiteSpace(template.ContentFile))
+        // report content file (binary or xsl text file)
+        if (ReportTemplateLoad && string.IsNullOrWhiteSpace(template.Content) &&
+            !string.IsNullOrWhiteSpace(template.ContentFile))
         {
-            template.Content = BinaryFile.Read(template.ContentFile);
-            if (string.IsNullOrWhiteSpace(template.Content))
-            {
-                throw new PayrollException($"Missing report template content from file {template.ContentFile}.");
-            }
+            template.Content = ReadTemplateContent(template.ContentFile);
 
             // content type
             if (string.IsNullOrWhiteSpace(template.ContentType))
@@ -869,14 +866,11 @@ public abstract class ExchangeImportVisitor : Visitor
             }
         }
 
-        // report schema file
-        if (ReportSchemaLoad && string.IsNullOrWhiteSpace(template.Schema) && !string.IsNullOrWhiteSpace(template.SchemaFile))
+        // report schema file (xsd text file)
+        if (ReportSchemaLoad && string.IsNullOrWhiteSpace(template.Schema) &&
+            !string.IsNullOrWhiteSpace(template.SchemaFile))
         {
-            template.Schema = BinaryFile.Read(template.SchemaFile);
-            if (string.IsNullOrWhiteSpace(template.Schema))
-            {
-                throw new PayrollException($"Missing report template schema from file {template.SchemaFile}.");
-            }
+            template.Schema = ReadTemplateContent(template.SchemaFile);
         }
 
         // get report template
@@ -888,6 +882,35 @@ public abstract class ExchangeImportVisitor : Visitor
         await SetupReportTemplateAsync(tenant, regulation, report, template, target);
 
         await base.VisitReportTemplateAsync(tenant, regulation, report, template);
+    }
+
+    private string ReadTemplateContent(string fileName)
+    {
+        if (!File.Exists(fileName))
+        {
+            throw new PayrollException($"Invalid report template file {fileName}.");
+        }
+
+        string content;
+
+        // text file
+        var firstLine = File.ReadLines(fileName).First();
+        if (!string.IsNullOrWhiteSpace(firstLine) && firstLine.Trim().StartsWith("<?xml "))
+        {
+            content = ReadTextFile(fileName);
+        }
+        else
+        {
+            // binary file
+            content = BinaryFile.Read(fileName);
+        }
+
+        // content test
+        if (string.IsNullOrWhiteSpace(content))
+        {
+            throw new PayrollException($"Missing report template content from file {fileName}.");
+        }
+        return content;
     }
 
     /// <summary>Report template setup</summary>
