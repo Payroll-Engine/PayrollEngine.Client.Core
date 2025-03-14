@@ -12554,14 +12554,14 @@
         <member name="M:PayrollEngine.Client.TenantApiEndpoints.CalendarUrl(System.Int32,System.Int32)">
             <summary>The calendar URL</summary>
         </member>
-        <member name="M:PayrollEngine.Client.TenantApiEndpoints.TenantCalendarsPeriodsUrl(System.Int32)">
-            <summary>The calendars periods URL</summary>
+        <member name="M:PayrollEngine.Client.TenantApiEndpoints.TenantCalendarsPeriodUrl(System.Int32)">
+            <summary>The calendars period URL</summary>
         </member>
-        <member name="M:PayrollEngine.Client.TenantApiEndpoints.TenantCalendarsCyclesUrl(System.Int32)">
-            <summary>The calendar cycles URL</summary>
+        <member name="M:PayrollEngine.Client.TenantApiEndpoints.TenantCalendarsCycleUrl(System.Int32)">
+            <summary>The calendar cycle URL</summary>
         </member>
-        <member name="M:PayrollEngine.Client.TenantApiEndpoints.TenantCalendarsValuesUrl(System.Int32)">
-            <summary>The calendar values URL</summary>
+        <member name="M:PayrollEngine.Client.TenantApiEndpoints.TenantCalendarsValueUrl(System.Int32)">
+            <summary>The calendar value URL</summary>
         </member>
         <member name="M:PayrollEngine.Client.TenantApiEndpoints.UsersUrl(System.Int32)">
             <summary>The users URL</summary>

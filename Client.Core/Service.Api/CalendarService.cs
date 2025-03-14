@@ -147,7 +147,7 @@ public class CalendarService : ServiceBase, ICalendarService
             throw new ArgumentOutOfRangeException(nameof(tenantId));
         }
 
-        var url = TenantApiEndpoints.TenantCalendarsPeriodsUrl(tenantId)
+        var url = TenantApiEndpoints.TenantCalendarsPeriodUrl(tenantId)
             .AddQueryString(nameof(cultureName), cultureName)
             .AddQueryString(nameof(calendarName), calendarName)
             .AddQueryString(nameof(periodMoment), periodMoment)
@@ -164,7 +164,7 @@ public class CalendarService : ServiceBase, ICalendarService
             throw new ArgumentOutOfRangeException(nameof(tenantId));
         }
 
-        var url = TenantApiEndpoints.TenantCalendarsCyclesUrl(tenantId)
+        var url = TenantApiEndpoints.TenantCalendarsCycleUrl(tenantId)
             .AddQueryString(nameof(cultureName), cultureName)
             .AddQueryString(nameof(calendarName), calendarName)
             .AddQueryString(nameof(cycleMoment), cycleMoment)
@@ -183,7 +183,7 @@ public class CalendarService : ServiceBase, ICalendarService
             throw new ArgumentOutOfRangeException(nameof(tenantId));
         }
 
-        var url = TenantApiEndpoints.TenantCalendarsValuesUrl(tenantId)
+        var url = TenantApiEndpoints.TenantCalendarsValueUrl(tenantId)
             .AddQueryString(nameof(cultureName), cultureName)
             .AddQueryString(nameof(calendarName), calendarName)
             .AddQueryString(nameof(value), value)
