@@ -249,7 +249,7 @@ public class PayrollService : ServiceBase, IPayrollService
 
     /// <inheritdoc/>
     public virtual async Task<List<CaseValue>> GetCaseTimeValuesAsync(PayrollServiceContext context,
-        int? employeeId = null, IEnumerable<string> caseFieldNames = null,
+        CaseType caseType, int? employeeId = null, IEnumerable<string> caseFieldNames = null,
         DateTime? valueDate = null, DateTime? regulationDate = null, DateTime? evaluationDate = null)
     {
         if (context == null)
@@ -258,6 +258,7 @@ public class PayrollService : ServiceBase, IPayrollService
         }
 
         var url = PayrollApiEndpoints.PayrollCaseValuesTimeUrl(context.TenantId, context.PayrollId)
+            .AddQueryString(nameof(caseType), caseType)
             .AddQueryString(nameof(employeeId), employeeId)
             .AddCollectionQueryString(nameof(caseFieldNames), caseFieldNames)
             .AddQueryString(nameof(valueDate), valueDate)
@@ -482,6 +483,7 @@ public class PayrollService : ServiceBase, IPayrollService
 
         var uri = PayrollApiEndpoints.PayrollLookupValuesDataUrl(context.TenantId, context.PayrollId)
             .AddQueryString(nameof(lookupName), lookupName)
+            .AddQueryString(nameof(lookupKey), lookupKey)
             .AddQueryString(nameof(rangeValue), rangeValue)
             .AddQueryString(nameof(regulationDate), regulationDate)
             .AddQueryString(nameof(evaluationDate), evaluationDate)
@@ -490,8 +492,8 @@ public class PayrollService : ServiceBase, IPayrollService
     }
 
     /// <inheritdoc/>
-    public virtual async Task<List<TReportSet>> GetReportsAsync<TReportSet>(PayrollServiceContext context, IEnumerable<string> reportNames = null,
-        OverrideType? overrideType = null, UserType? userType = null,
+    public virtual async Task<List<TReportSet>> GetReportsAsync<TReportSet>(PayrollServiceContext context,
+        IEnumerable<string> reportNames = null, OverrideType? overrideType = null, UserType? userType = null,
         DateTime? regulationDate = null, DateTime? evaluationDate = null) where TReportSet : class, IReportSet
     {
         if (context == null)

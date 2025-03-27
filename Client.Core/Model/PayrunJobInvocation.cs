@@ -64,6 +64,9 @@ public class PayrunJobInvocation : IPayrunJobInvocation
     public string Reason { get; set; }
 
     /// <inheritdoc/>
+    public bool StoreEmptyResults { get; set; }
+
+    /// <inheritdoc/>
     public LogLevel LogLevel { get; set; } = LogLevel.Information;
 
     /// <inheritdoc/>

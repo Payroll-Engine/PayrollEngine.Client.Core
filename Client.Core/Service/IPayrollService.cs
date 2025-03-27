@@ -87,14 +87,15 @@ public interface IPayrollService : ICrudService<IPayroll, TenantServiceContext, 
 
     /// <summary>Get payroll case values from a specific time moment</summary>
     /// <param name="context">The service context</param>
+    /// <param name="caseType">The case type</param>
     /// <param name="employeeId">The employee id</param>
     /// <param name="caseFieldNames">The case field names</param>
     /// <param name="valueDate">The moment of the value (default: UTC now)</param>
     /// <param name="regulationDate">The regulation date (default: value date)</param>
     /// <param name="evaluationDate">The evaluation date (default: value date)</param>
     /// <returns>The payroll case value of the case field</returns>
-    Task<List<CaseValue>> GetCaseTimeValuesAsync(PayrollServiceContext context, int? employeeId = null,
-        IEnumerable<string> caseFieldNames = null, DateTime? valueDate = null,
+    Task<List<CaseValue>> GetCaseTimeValuesAsync(PayrollServiceContext context, CaseType caseType,
+        int? employeeId = null, IEnumerable<string> caseFieldNames = null, DateTime? valueDate = null,
         DateTime? regulationDate = null, DateTime? evaluationDate = null);
 
     /// <summary>Get available case period values</summary>

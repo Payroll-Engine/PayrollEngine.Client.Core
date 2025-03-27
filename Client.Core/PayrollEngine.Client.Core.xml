@@ -5493,6 +5493,9 @@
         <member name="P:PayrollEngine.Client.Model.IPayrunJobInvocation.Reason">
             <summary>The execution reason (immutable)</summary>
         </member>
+        <member name="P:PayrollEngine.Client.Model.IPayrunJobInvocation.StoreEmptyResults">
+            <summary>Store empty employee results (default: false)</summary>
+        </member>
         <member name="P:PayrollEngine.Client.Model.IPayrunJobInvocation.LogLevel">
             <summary>The function log level, default is information</summary>
         </member>
@@ -6993,6 +6996,9 @@
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.PayrunJobInvocation.Reason">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.PayrunJobInvocation.StoreEmptyResults">
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.PayrunJobInvocation.LogLevel">
@@ -10569,7 +10575,7 @@
         <member name="M:PayrollEngine.Client.Service.Api.PayrollService.GetCaseValuesAsync(PayrollEngine.Client.Service.PayrollServiceContext,System.DateTime,System.DateTime,System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String)">
             <inheritdoc/>
         </member>
-        <member name="M:PayrollEngine.Client.Service.Api.PayrollService.GetCaseTimeValuesAsync(PayrollEngine.Client.Service.PayrollServiceContext,System.Nullable{System.Int32},System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+        <member name="M:PayrollEngine.Client.Service.Api.PayrollService.GetCaseTimeValuesAsync(PayrollEngine.Client.Service.PayrollServiceContext,PayrollEngine.CaseType,System.Nullable{System.Int32},System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
             <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Service.Api.PayrollService.GetAvailableCaseFieldValuesAsync(PayrollEngine.Client.Service.PayrollServiceContext,System.Int32,System.Collections.Generic.IEnumerable{System.String},System.DateTime,System.DateTime,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String)">
@@ -11913,9 +11919,10 @@
             <param name="caseSlot">The case slot</param>
             <returns>The case value periods</returns>
         </member>
-        <member name="M:PayrollEngine.Client.Service.IPayrollService.GetCaseTimeValuesAsync(PayrollEngine.Client.Service.PayrollServiceContext,System.Nullable{System.Int32},System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+        <member name="M:PayrollEngine.Client.Service.IPayrollService.GetCaseTimeValuesAsync(PayrollEngine.Client.Service.PayrollServiceContext,PayrollEngine.CaseType,System.Nullable{System.Int32},System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
             <summary>Get payroll case values from a specific time moment</summary>
             <param name="context">The service context</param>
+            <param name="caseType">The case type</param>
             <param name="employeeId">The employee id</param>
             <param name="caseFieldNames">The case field names</param>
             <param name="valueDate">The moment of the value (default: UTC now)</param>

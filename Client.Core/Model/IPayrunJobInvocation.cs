@@ -56,6 +56,9 @@ public interface IPayrunJobInvocation : IEquatable<IPayrunJobInvocation>
 
     /// <summary>The execution reason (immutable)</summary>
     string Reason { get; set; }
+    
+    /// <summary>Store empty employee results (default: false)</summary>
+    bool StoreEmptyResults { get; set; }
 
     /// <summary>The function log level, default is information</summary>
     LogLevel LogLevel { get; set; }
