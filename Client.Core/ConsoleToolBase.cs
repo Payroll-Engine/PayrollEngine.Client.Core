@@ -6,16 +6,15 @@ namespace PayrollEngine.Client;
 public abstract class ConsoleToolBase
 {
     /// <summary>Obtains the next character or function key pressed by the user</summary>
-    /// <param name="intercept">Determines whether to display the pressed key in the console window. true to not display the pressed key; otherwise, false</param>
-    public static ConsoleKeyInfo ReadKey(bool intercept) =>
-        Console.ReadKey(intercept);
+    public static int Read() =>
+        Console.Read();
 
     /// <summary>Wait for key input</summary>
     public static void PressAnyKey()
     {
         WriteLine();
         Write("Press any key...");
-        ReadKey(true);
+        Read();
     }
 
     /// <summary>The console success foreground color</summary>

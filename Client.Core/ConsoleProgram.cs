@@ -99,6 +99,9 @@ public abstract class ConsoleProgram<TApp> : ConsoleToolBase, IDisposable
                 await ShowTitleAsync();
             }
 
+            // log
+            await SetupLogAsync();
+
             // help
             if ((UseHelpArgument && IsHelpMode()) ||
                 (MandatoryArgumentCount > 0 && ConsoleArguments.ParameterCount < MandatoryArgumentCount))
@@ -107,9 +110,6 @@ public abstract class ConsoleProgram<TApp> : ConsoleToolBase, IDisposable
                 PressAnyKey();
                 return;
             }
-
-            // log
-            await SetupLogAsync();
 
             // http client
             if (UseHttpClient() && !await SetupHttpClientAsync())
