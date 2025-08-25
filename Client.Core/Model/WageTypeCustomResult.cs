@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace PayrollEngine.Client.Model;
 
@@ -8,37 +9,48 @@ namespace PayrollEngine.Client.Model;
 public class WageTypeCustomResult : ModelBase, IWageTypeCustomResult
 {
     /// <inheritdoc/>
+    [JsonPropertyOrder(100)]
     public int WageTypeResultId { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(101)]
     public decimal WageTypeNumber { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(102)]
     public string WageTypeName { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(103)]
     public Dictionary<string, string> WageTypeNameLocalizations { get; set; }
 
     /// <inheritdoc/>
     [Required]
+    [JsonPropertyOrder(104)]
     public string Source { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(105)]
     public ValueType ValueType { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(106)]
     public decimal Value { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(107)]
     public DateTime Start { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(108)]
     public DateTime End { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(109)]
     public List<string> Tags { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(110)]
     public Dictionary<string, object> Attributes { get; set; }
 
     /// <summary>Initializes a new instance</summary>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace PayrollEngine.Client.Model;
 
@@ -8,35 +9,45 @@ namespace PayrollEngine.Client.Model;
 public class CollectorCustomResult : ModelBase, ICollectorCustomResult
 {
     /// <inheritdoc/>
+    [JsonPropertyOrder(100)]
     public int CollectorResultId { get; set; }
 
     /// <inheritdoc/>
     [Required]
+    [JsonPropertyOrder(100)]
     public string CollectorName { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(101)]
     public Dictionary<string, string> CollectorNameLocalizations { get; set; }
 
     /// <inheritdoc/>
     [Required]
+    [JsonPropertyOrder(102)]
     public string Source { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(103)]
     public ValueType ValueType { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(104)]
     public decimal Value { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(105)]
     public DateTime Start { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(106)]
     public DateTime End { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(107)]
     public List<string> Tags { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(108)]
     public Dictionary<string, object> Attributes { get; set; }
 
     /// <summary>Initializes a new instance</summary>

@@ -1,10 +1,13 @@
 ﻿
+using System.Text.Json.Serialization;
+
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The payrun job client object</summary>
 public class PayrunJobEmployee : ModelBase, IPayrunJobEmployee
 {
     /// <summary>The employee id (immutable)</summary>
+    [JsonPropertyOrder(100)]
     public int EmployeeId { get; set; }
 
     /// <summary>Initializes a new instance</summary>

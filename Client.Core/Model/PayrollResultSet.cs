@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace PayrollEngine.Client.Model;
 
@@ -7,15 +8,19 @@ namespace PayrollEngine.Client.Model;
 public class PayrollResultSet : PayrollResult, IPayrollResultSet
 {
     /// <inheritdoc/>
+    [JsonPropertyOrder(200)]
     public DateTime? RetroPeriodStart { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(201)]
     public List<WageTypeResultSet> WageTypeResults { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(202)]
     public List<CollectorResultSet> CollectorResults { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(203)]
     public List<PayrunResult> PayrunResults { get; set; }
 
     /// <summary>Initializes a new instance</summary>

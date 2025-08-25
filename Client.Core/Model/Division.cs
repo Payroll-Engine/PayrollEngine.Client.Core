@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace PayrollEngine.Client.Model;
 
@@ -9,20 +10,25 @@ public class Division : ModelBase, IDivision, INameObject
     /// <summary>The division name</summary>
     [Required]
     [StringLength(128)]
+    [JsonPropertyOrder(100)]
     public string Name { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(101)]
     public Dictionary<string, string> NameLocalizations { get; set; }
 
     /// <inheritdoc/>
     [StringLength(128)]
+    [JsonPropertyOrder(102)]
     public string Culture { get; set; }
 
     /// <inheritdoc/>
     [StringLength(128)]
+    [JsonPropertyOrder(103)]
     public string Calendar { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(104)]
     public Dictionary<string, object> Attributes { get; set; }
 
     /// <summary>Initializes a new instance</summary>

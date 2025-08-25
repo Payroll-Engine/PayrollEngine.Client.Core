@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace PayrollEngine.Client.Model;
 
@@ -9,31 +10,39 @@ public class WebhookMessage : ModelBase, IWebhookMessage
     /// <inheritdoc/>
     [Required]
     [StringLength(128)]
+    [JsonPropertyOrder(100)]
     public string ActionName { get; set; }
 
     /// <inheritdoc/>
     [Required]
     [StringLength(128)]
+    [JsonPropertyOrder(101)]
     public string ReceiverAddress { get; set; }
 
     /// <inheritdoc/>
     [Required]
+    [JsonPropertyOrder(102)]
     public DateTime RequestDate { get; set; }
 
     /// <inheritdoc/>
     [Required]
+    [JsonPropertyOrder(103)]
     public string RequestMessage { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(104)]
     public string RequestOperation { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(105)]
     public DateTime ResponseDate { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(106)]
     public int ResponseStatus { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(107)]
     public string ResponseMessage { get; set; }
 
     /// <summary>Initializes a new instance</summary>

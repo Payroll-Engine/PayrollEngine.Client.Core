@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace PayrollEngine.Client.Model;
 
@@ -6,6 +7,7 @@ namespace PayrollEngine.Client.Model;
 public class WageTypeResultSet : WageTypeResult, IWageTypeResultSet
 {
     /// <inheritdoc/>
+    [JsonPropertyOrder(200)]
     public List<WageTypeCustomResult> CustomResults { get; set; }
 
     /// <summary>Initializes a new instance</summary>

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace PayrollEngine.Client.Model;
 
@@ -9,17 +10,21 @@ public class Tenant : ModelBase, ITenant, IIdentifierObject
     /// <summary>The tenant identifier</summary>
     [Required]
     [StringLength(128)]
+    [JsonPropertyOrder(100)]
     public string Identifier { get; set; }
 
     /// <inheritdoc/>
     [StringLength(128)]
+    [JsonPropertyOrder(101)]
     public string Culture { get; set; }
 
     /// <inheritdoc/>
     [StringLength(128)]
+    [JsonPropertyOrder(102)]
     public string Calendar { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(103)]
     public Dictionary<string, object> Attributes { get; set; }
 
     /// <summary>Initializes a new instance</summary>

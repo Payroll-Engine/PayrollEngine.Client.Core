@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace PayrollEngine.Client.Model;
 
@@ -9,27 +10,35 @@ public class PayrunParameter : ModelBase, IPayrunParameter, INameObject
     /// <summary>The payrun parameter name</summary>
     [Required]
     [StringLength(128)]
+    [JsonPropertyOrder(100)]
     public string Name { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(101)]
     public Dictionary<string, string> NameLocalizations { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(102)]
     public string Description { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(103)]
     public Dictionary<string, string> DescriptionLocalizations { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(104)]
     public bool Mandatory { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(105)]
     public string Value { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(106)]
     public ValueType ValueType { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(100)]
     public Dictionary<string, object> Attributes { get; set; }
 
     /// <summary>Initializes a new instance of the <see cref="PayrunParameter"/> class</summary>

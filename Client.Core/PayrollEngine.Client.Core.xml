@@ -2705,12 +2705,6 @@
         <member name="P:PayrollEngine.Client.Model.Case.ValidateExpressionFile">
             <inheritdoc/>
         </member>
-        <member name="P:PayrollEngine.Client.Model.Case.Lookups">
-            <inheritdoc/>
-        </member>
-        <member name="P:PayrollEngine.Client.Model.Case.Slots">
-            <inheritdoc/>
-        </member>
         <member name="P:PayrollEngine.Client.Model.Case.AvailableActions">
             <inheritdoc/>
         </member>
@@ -2720,10 +2714,16 @@
         <member name="P:PayrollEngine.Client.Model.Case.ValidateActions">
             <inheritdoc/>
         </member>
-        <member name="P:PayrollEngine.Client.Model.Case.Attributes">
+        <member name="P:PayrollEngine.Client.Model.Case.Lookups">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.Case.Slots">
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.Case.Clusters">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.Case.Attributes">
             <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.Case.#ctor">
@@ -3254,10 +3254,10 @@
         <member name="P:PayrollEngine.Client.Model.CaseRelation.ValidateActions">
             <inheritdoc/>
         </member>
-        <member name="P:PayrollEngine.Client.Model.CaseRelation.Attributes">
+        <member name="P:PayrollEngine.Client.Model.CaseRelation.Clusters">
             <inheritdoc/>
         </member>
-        <member name="P:PayrollEngine.Client.Model.CaseRelation.Clusters">
+        <member name="P:PayrollEngine.Client.Model.CaseRelation.Attributes">
             <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.CaseRelation.#ctor">
@@ -3732,10 +3732,10 @@
         <member name="P:PayrollEngine.Client.Model.Collector.EndExpressionFile">
             <inheritdoc/>
         </member>
-        <member name="P:PayrollEngine.Client.Model.Collector.Attributes">
+        <member name="P:PayrollEngine.Client.Model.Collector.Clusters">
             <inheritdoc/>
         </member>
-        <member name="P:PayrollEngine.Client.Model.Collector.Clusters">
+        <member name="P:PayrollEngine.Client.Model.Collector.Attributes">
             <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.Collector.#ctor">
@@ -4023,13 +4023,18 @@
         <member name="T:PayrollEngine.Client.Model.Exchange">
             <summary>The exchange object</summary>
         </member>
+        <member name="P:PayrollEngine.Client.Model.Exchange.Schema">
+            <summary>
+            Json schema
+            </summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.Exchange.CreatedObjectDate">
+            <inheritdoc/>
+        </member>
         <member name="P:PayrollEngine.Client.Model.Exchange.Tenants">
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.Exchange.RegulationShares">
-            <inheritdoc/>
-        </member>
-        <member name="P:PayrollEngine.Client.Model.Exchange.CreatedObjectDate">
             <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.Exchange.#ctor">
@@ -6120,10 +6125,10 @@
         <member name="P:PayrollEngine.Client.Model.Lookup.DescriptionLocalizations">
             <inheritdoc/>
         </member>
-        <member name="P:PayrollEngine.Client.Model.Lookup.OverrideType">
+        <member name="P:PayrollEngine.Client.Model.Lookup.RangeSize">
             <inheritdoc/>
         </member>
-        <member name="P:PayrollEngine.Client.Model.Lookup.RangeSize">
+        <member name="P:PayrollEngine.Client.Model.Lookup.OverrideType">
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.Lookup.Attributes">
@@ -6287,6 +6292,7 @@
         </member>
         <member name="T:PayrollEngine.Client.Model.ModelBase">
             <summary>Base for all Payroll models</summary>
+            <remarks>JSON property order range from 0 to 99</remarks>
         </member>
         <member name="P:PayrollEngine.Client.Model.ModelBase.Id">
             <inheritdoc/>
@@ -7176,10 +7182,10 @@
         <member name="P:PayrollEngine.Client.Model.RegulationSet.CaseRelations">
             <inheritdoc/>
         </member>
-        <member name="P:PayrollEngine.Client.Model.RegulationSet.WageTypes">
+        <member name="P:PayrollEngine.Client.Model.RegulationSet.Collectors">
             <inheritdoc/>
         </member>
-        <member name="P:PayrollEngine.Client.Model.RegulationSet.Collectors">
+        <member name="P:PayrollEngine.Client.Model.RegulationSet.WageTypes">
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.RegulationSet.Lookups">
@@ -7279,12 +7285,6 @@
         <member name="P:PayrollEngine.Client.Model.Report.UserType">
             <inheritdoc/>
         </member>
-        <member name="P:PayrollEngine.Client.Model.Report.Queries">
-            <inheritdoc/>
-        </member>
-        <member name="P:PayrollEngine.Client.Model.Report.Relations">
-            <inheritdoc/>
-        </member>
         <member name="P:PayrollEngine.Client.Model.Report.BuildExpression">
             <inheritdoc/>
         </member>
@@ -7306,10 +7306,16 @@
         <member name="P:PayrollEngine.Client.Model.Report.OverrideType">
             <inheritdoc/>
         </member>
-        <member name="P:PayrollEngine.Client.Model.Report.Attributes">
+        <member name="P:PayrollEngine.Client.Model.Report.Queries">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.Report.Relations">
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.Report.Clusters">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.Report.Attributes">
             <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.Report.#ctor">
@@ -7682,9 +7688,7 @@
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.Task.Attributes">
-            <summary>
-            Custom attributes
-            </summary>
+            <summary>Custom attributes</summary>
         </member>
         <member name="M:PayrollEngine.Client.Model.Task.#ctor">
             <inheritdoc/>
@@ -7804,12 +7808,6 @@
         <member name="P:PayrollEngine.Client.Model.WageType.Calendar">
             <inheritdoc/>
         </member>
-        <member name="P:PayrollEngine.Client.Model.WageType.Collectors">
-            <inheritdoc/>
-        </member>
-        <member name="P:PayrollEngine.Client.Model.WageType.CollectorGroups">
-            <inheritdoc/>
-        </member>
         <member name="P:PayrollEngine.Client.Model.WageType.ValueExpression">
             <inheritdoc/>
         </member>
@@ -7822,10 +7820,16 @@
         <member name="P:PayrollEngine.Client.Model.WageType.ResultExpressionFile">
             <inheritdoc/>
         </member>
-        <member name="P:PayrollEngine.Client.Model.WageType.Attributes">
+        <member name="P:PayrollEngine.Client.Model.WageType.Collectors">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.WageType.CollectorGroups">
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.WageType.Clusters">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.WageType.Attributes">
             <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.WageType.#ctor">

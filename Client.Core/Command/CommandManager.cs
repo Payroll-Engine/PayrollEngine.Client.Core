@@ -21,12 +21,12 @@ public class CommandManager(ICommandConsole console, ILogger logger = null)
     /// <summary>
     /// Name fo the help command (default: Help)
     /// </summary>
-    private string HelpCommandName => "Help";
+    private static string HelpCommandName => "Help";
 
     /// <summary>
     /// Extension for command files (default: <see cref="FileExtensions.PayrollEngineCommand"/>)
     /// </summary>
-    private string CommandFileExtension => FileExtensions.PayrollEngineCommand;
+    private static string CommandFileExtension => FileExtensions.PayrollEngineCommand;
 
     /// <summary>
     /// Register assembly commands
@@ -239,9 +239,9 @@ public class CommandManager(ICommandConsole console, ILogger logger = null)
 
     #region Command File
 
-    private class FileItem
+    private sealed class FileItem
     {
-        public FileItem(string text, string path, CommandLineParser parser, List<FileItem> children) :
+        internal FileItem(string text, string path, CommandLineParser parser, List<FileItem> children) :
             this(text, null, parser)
         {
             Path = path;
@@ -250,7 +250,7 @@ public class CommandManager(ICommandConsole console, ILogger logger = null)
         }
 
         // ReSharper disable once ConvertToPrimaryConstructor
-        public FileItem(string text, ICommand command, CommandLineParser parser)
+        internal FileItem(string text, ICommand command, CommandLineParser parser)
         {
             Text = text;
             Command = command;
@@ -260,8 +260,8 @@ public class CommandManager(ICommandConsole console, ILogger logger = null)
         // ReSharper disable once UnusedAutoPropertyAccessor.Local
         internal string Text { get; }
         internal string Path { get; }
-        public ICommand Command { get; }
-        public CommandLineParser Parser { get; }
+        internal ICommand Command { get; }
+        internal CommandLineParser Parser { get; }
         internal List<FileItem> Children { get; } = [];
     }
 
@@ -486,7 +486,7 @@ public class CommandManager(ICommandConsole console, ILogger logger = null)
         return line;
     }
 
-    private bool IsCommandFile(string fileName)
+    private static bool IsCommandFile(string fileName)
     {
         if (string.IsNullOrWhiteSpace(fileName) || !File.Exists(fileName))
         {

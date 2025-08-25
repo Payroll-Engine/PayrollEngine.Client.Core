@@ -6,7 +6,7 @@ namespace PayrollEngine.Client.Command;
 /// Payroll engine client command attribute.
 /// </summary>
 [AttributeUsage(AttributeTargets.Class)]
-public class CommandAttribute : Attribute
+public sealed class CommandAttribute : Attribute
 {
     /// <summary>
     /// Command name

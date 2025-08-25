@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace PayrollEngine.Client.Model;
 
@@ -6,58 +7,75 @@ namespace PayrollEngine.Client.Model;
 public class ExchangeTenant : Tenant, IExchangeTenant
 {
     /// <inheritdoc/>
+    [JsonPropertyOrder(200)]
     public List<User> Users { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(201)]
     public List<Calendar> Calendars { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(202)]
     public List<Division> Divisions { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(203)]
     public List<Task> Tasks { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(204)]
     public List<WebhookSet> Webhooks { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(205)]
     public List<RegulationSet> Regulations { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(210)]
     public List<CaseChange> GlobalCases { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(211)]
     public List<CaseValue> GlobalValues { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(212)]
     public List<CaseChange> NationalCases { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(213)]
     public List<CaseValue> NationalValues { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(214)]
     public List<CaseChange> CompanyCases { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(215)]
     public List<CaseValue> CompanyValues { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(300)]
     public List<EmployeeSet> Employees { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(400)]
     public List<PayrollSet> Payrolls { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(401)]
     public List<Payrun> Payruns { get; set; }
 
-
     /// <inheritdoc/>
+    [JsonPropertyOrder(402)]
     public List<PayrunJob> PayrunJobs { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(403)]
     public List<PayrunJobInvocation> PayrunJobInvocations { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(404)]
     public List<PayrollResultSet> PayrollResults { get; set; }
 
     /// <summary>Initializes a new instance</summary>

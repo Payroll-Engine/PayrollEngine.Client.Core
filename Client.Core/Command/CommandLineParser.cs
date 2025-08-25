@@ -60,7 +60,7 @@ public class CommandLineParser(string[] arguments)
     /// <summary>Determines whether the specified argument is a toggle</summary>
     /// <param name="argument">The argument</param>
     /// <returns>True if the specified argument exists</returns>
-    private bool IsToggleArgument(string argument)
+    private static bool IsToggleArgument(string argument)
     {
         if (string.IsNullOrWhiteSpace(argument))
         {

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace PayrollEngine.Client.Model;
 
@@ -8,16 +9,20 @@ public class PayrollLayer : ModelBase, IPayrollLayer
 {
     /// <inheritdoc/>
     [Required]
+    [JsonPropertyOrder(100)]
     public int Level { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(101)]
     public int Priority { get; set; } = 1;
 
     /// <inheritdoc/>
     [Required]
+    [JsonPropertyOrder(102)]
     public string RegulationName { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(103)]
     public Dictionary<string, object> Attributes { get; set; }
 
     /// <summary>Initializes a new instance</summary>

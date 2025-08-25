@@ -1,11 +1,14 @@
 ﻿using System;
+using System.Text.Json.Serialization;
 
 namespace PayrollEngine.Client.Model;
 
 /// <summary>Base for all Payroll models</summary>
+/// <remarks>JSON property order range from 0 to 99</remarks>
 public abstract class ModelBase : IModel
 {
     /// <inheritdoc/>
+    [JsonPropertyOrder(1)]
     public int Id { get; set; }
 
     /// <inheritdoc/>
@@ -15,15 +18,19 @@ public abstract class ModelBase : IModel
     public bool IsNewObject => !IsExistingObject;
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(2)]
     public ObjectStatus Status { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(3)]
     public DateTime Created { get; set; } = Date.MinValue;
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(4)]
     public DateTime Updated { get; set; } = Date.MinValue;
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(5)]
     public UpdateMode UpdateMode { get; set; }
 
     /// <summary>Initializes a new instance</summary>

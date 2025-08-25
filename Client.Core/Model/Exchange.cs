@@ -2,21 +2,32 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Text.Json.Serialization;
 
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The exchange object</summary>
 public class Exchange : IExchange
 {
+    /// <summary>
+    /// Json schema
+    /// </summary>
+    [JsonPropertyName("$schema")]
+    [JsonPropertyOrder(1)]
+    public string Schema { get; set; }
+
+    /// <inheritdoc/>
+    [JsonPropertyOrder(2)]
+    public DateTime? CreatedObjectDate { get; set; }
+
     /// <inheritdoc/>
     [Required]
+    [JsonPropertyOrder(3)]
     public List<ExchangeTenant> Tenants { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(4)]
     public List<RegulationShare> RegulationShares { get; set; }
-
-    /// <inheritdoc/>
-    public DateTime? CreatedObjectDate { get; set; }
 
     /// <summary>Initializes a new instance</summary>
     public Exchange()

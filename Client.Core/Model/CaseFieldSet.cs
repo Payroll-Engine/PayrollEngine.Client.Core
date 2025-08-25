@@ -11,25 +11,32 @@ public class CaseFieldSet : CaseField, ICaseFieldSet
 {
     /// <inheritdoc/>
     [StringLength(128)]
+    [JsonPropertyOrder(200)]
     public string DisplayName { get; set; }
 
     /// <inheritdoc/>
     [StringLength(128)]
+    [JsonPropertyOrder(201)]
     public string CaseSlot { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(202)]
     public Dictionary<string, string> CaseSlotLocalizations { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(203)]
     public string Value { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(204)]
     public DateTime? Start { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(205)]
     public DateTime? End { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(206)]
     public DateTime? CancellationDate { get; set; }
 
     /// <summary>Test for existing value</summary>

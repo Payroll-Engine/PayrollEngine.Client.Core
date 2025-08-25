@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace PayrollEngine.Client.Model;
 
@@ -8,43 +9,55 @@ namespace PayrollEngine.Client.Model;
 public class PayrunResult : ModelBase, IPayrunResult, INameObject
 {
     /// <inheritdoc/>
+    [JsonPropertyOrder(100)]
     public int PayrollResultId { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(101)]
     public string Source { get; set; }
 
     /// <summary>The payrun result name</summary>
     [Required]
+    [JsonPropertyOrder(102)]
     public string Name { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(103)]
     public Dictionary<string, string> NameLocalizations { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(104)]
     public string Slot { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(105)]
     public ValueType ValueType { get; set; }
 
     /// <inheritdoc/>
     [Required]
+    [JsonPropertyOrder(106)]
     public string Value { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(107)]
     public decimal? NumericValue { get; set; }
 
     /// <inheritdoc/>
     [Required]
+    [JsonPropertyOrder(108)]
     public DateTime Start { get; set; }
 
     /// <inheritdoc/>
     [Required]
+    [JsonPropertyOrder(109)]
     public DateTime End { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(110)]
     public List<string> Tags { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(111)]
     public Dictionary<string, object> Attributes { get; set; }
 
     /// <summary>Initializes a new instance</summary>

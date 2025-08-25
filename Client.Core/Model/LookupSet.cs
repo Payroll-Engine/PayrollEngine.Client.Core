@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace PayrollEngine.Client.Model;
 
@@ -8,6 +9,7 @@ public class LookupSet : Lookup, ILookupSet
 {
     /// <inheritdoc/>
     [Required]
+    [JsonPropertyOrder(200)]
     public List<LookupValue> Values { get; set; }
 
     /// <summary>Initializes a new instance</summary>

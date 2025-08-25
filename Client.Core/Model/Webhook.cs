@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace PayrollEngine.Client.Model;
 
@@ -9,18 +10,22 @@ public class Webhook : ModelBase, IWebhook, INameObject
     /// <summary>The webhook name</summary>
     [Required]
     [StringLength(128)]
+    [JsonPropertyOrder(100)]
     public string Name { get; set; }
 
     /// <inheritdoc/>
     [Required]
     [StringLength(128)]
+    [JsonPropertyOrder(101)]
     public string ReceiverAddress { get; set; }
 
     /// <inheritdoc/>
     [Required]
+    [JsonPropertyOrder(102)]
     public WebhookAction Action { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(103)]
     public Dictionary<string, object> Attributes { get; set; }
 
     /// <summary>Initializes a new instance</summary>

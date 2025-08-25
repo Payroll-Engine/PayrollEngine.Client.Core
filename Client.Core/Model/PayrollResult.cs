@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.Json.Serialization;
 
 namespace PayrollEngine.Client.Model;
 
@@ -6,42 +7,55 @@ namespace PayrollEngine.Client.Model;
 public class PayrollResult : ModelBase, IPayrollResult
 {
     /// <inheritdoc/>
+    [JsonPropertyOrder(100)]
     public int PayrollId { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(101)]
     public int PayrunId { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(102)]
     public int PayrunJobId { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(103)]
     public string PayrunJobName { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(104)]
     public int EmployeeId { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(105)]
     public string EmployeeIdentifier { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(106)]
     public int DivisionId { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(107)]
     public string CycleName { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(108)]
     public DateTime CycleStart { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(109)]
     public DateTime CycleEnd { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(110)]
     public string PeriodName { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(111)]
     public DateTime PeriodStart { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(112)]
     public DateTime PeriodEnd { get; set; }
 
     /// <summary>Initializes a new instance</summary>

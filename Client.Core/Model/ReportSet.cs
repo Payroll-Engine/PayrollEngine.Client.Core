@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace PayrollEngine.Client.Model;
 
@@ -8,12 +9,15 @@ namespace PayrollEngine.Client.Model;
 public class ReportSet : Report, IReportSet
 {
     /// <inheritdoc/>
+    [JsonPropertyOrder(200)]
     public int RegulationId { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(201)]
     public List<ReportParameter> Parameters { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(202)]
     public List<ReportTemplate> Templates { get; set; }
 
     /// <summary>Initializes a new instance</summary>

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace PayrollEngine.Client.Model;
 
@@ -8,15 +9,19 @@ public class CaseSetup : ModelBase, ICaseSetup
 {
     /// <inheritdoc/>
     [Required]
+    [JsonPropertyOrder(100)]
     public string CaseName { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(101)]
     public string CaseSlot { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(102)]
     public List<CaseValueSetup> Values { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(103)]
     public List<CaseSetup> RelatedCases { get; set; }
 
     /// <summary>Initializes a new instance</summary>

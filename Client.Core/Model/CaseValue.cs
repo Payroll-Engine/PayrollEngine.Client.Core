@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace PayrollEngine.Client.Model;
 
@@ -8,66 +9,85 @@ namespace PayrollEngine.Client.Model;
 public class CaseValue : ModelBase, ICaseValue
 {
     /// <inheritdoc/>
+    [JsonPropertyOrder(100)]
     public int? DivisionId { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(101)]
     public int? EmployeeId { get; set; }
 
     /// <inheritdoc/>
     [StringLength(128)]
+    [JsonPropertyOrder(102)]
     public string DivisionName { get; set; }
 
     /// <inheritdoc/>
     [StringLength(128)]
+    [JsonPropertyOrder(103)]
     public string CaseName { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(104)]
     public Dictionary<string, string> CaseNameLocalizations { get; set; }
 
     /// <inheritdoc/>
     [Required]
     [StringLength(128)]
+    [JsonPropertyOrder(105)]
     public string CaseFieldName { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(100)]
     public Dictionary<string, string> CaseFieldNameLocalizations { get; set; }
 
     /// <inheritdoc/>
     [StringLength(128)]
+    [JsonPropertyOrder(106)]
     public string CaseSlot { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(107)]
     public Dictionary<string, string> CaseSlotLocalizations { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(108)]
     public ValueType ValueType { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(109)]
     public string Value { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(110)]
     public decimal? NumericValue { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(111)]
     public CaseRelationReference CaseRelation { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(112)]
     public DateTime? CancellationDate { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(113)]
     public DateTime? Start { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(114)]
     public DateTime? End { get; set; }
 
     /// <inheritdoc/>
     [StringLength(128)]
+    [JsonPropertyOrder(115)]
     public string Forecast { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(116)]
     public List<string> Tags { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(117)]
     public Dictionary<string, object> Attributes { get; set; }
 
     /// <summary>Initializes a new instance</summary>

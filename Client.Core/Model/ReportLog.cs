@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.Json.Serialization;
 
 namespace PayrollEngine.Client.Model;
 
@@ -6,18 +7,23 @@ namespace PayrollEngine.Client.Model;
 public class ReportLog : ModelBase, IReportLog
 {
     /// <inheritdoc/>
+    [JsonPropertyOrder(100)]
     public string ReportName { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(101)]
     public DateTime ReportDate { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(102)]
     public string Key { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(103)]
     public string User { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(104)]
     public string Message { get; set; }
 
     /// <summary>Initializes a new instance of the <see cref="ReportLog"/> class</summary>

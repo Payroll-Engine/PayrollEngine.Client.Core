@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace PayrollEngine.Client.Model;
 
@@ -6,9 +7,11 @@ namespace PayrollEngine.Client.Model;
 public class EmployeeSet : Employee, IEmployeeSet
 {
     /// <inheritdoc/>
+    [JsonPropertyOrder(200)]
     public List<CaseChange> Cases { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(201)]
     public List<CaseValue> Values { get; set; }
 
     /// <summary>Initializes a new instance</summary>
