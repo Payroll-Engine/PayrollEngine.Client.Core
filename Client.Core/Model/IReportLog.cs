@@ -6,6 +6,7 @@ namespace PayrollEngine.Client.Model;
 public interface IReportLog : IModel, IEquatable<IReportLog>
 {
     /// <summary>The report name (immutable)</summary>
+    // ReSharper disable once UnusedMemberInSuper.Global
     public string ReportName { get; set; }
 
     /// <summary>The report date (immutable)</summary>

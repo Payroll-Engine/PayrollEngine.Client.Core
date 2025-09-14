@@ -51,6 +51,10 @@ public class PayrollResultValue : IPayrollResultValue
     public string ResultValue { get; set; }
 
     /// <inheritdoc/>
+    [StringLength(128)]
+    public string ResultCulture { get; set; }
+
+    /// <inheritdoc/>
     public decimal? ResultNumericValue { get; set; }
 
     /// <inheritdoc/>

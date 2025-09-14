@@ -3,6 +3,7 @@
 namespace PayrollEngine.Client.Service;
 
 /// <summary>Payroll backend service with Create and Read operations</summary>
+// ReSharper disable UnusedMemberInSuper.Global
 public interface ICreateService<in TModel, in TContext, in TQuery> : IReadService<TModel, TContext, TQuery>
     where TContext : IServiceContext
     where TQuery : Query

@@ -5,6 +5,7 @@ using PayrollEngine.Client.Model;
 namespace PayrollEngine.Client.Service;
 
 /// <summary>Payroll result service</summary>
+// ReSharper disable UnusedMemberInSuper.Global
 public interface IPayrollResultService : IReadService<IPayrollResult, TenantServiceContext, Query>
 {
 

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The payrun job client object</summary>
+// ReSharper disable UnusedMemberInSuper.Global
 public interface IPayrunJob : IModel, IAttributeObject, IEquatable<IPayrunJob>
 {
     /// <summary>The job name (immutable)</summary>

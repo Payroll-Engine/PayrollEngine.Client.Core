@@ -22,6 +22,9 @@ public interface ICollector : IModel, IAttributeObject, IKeyEquatable<ICollector
 
     /// <summary>The value type, default is value type money</summary>
     ValueType ValueType { get; set; }
+    
+    /// <summary>The collector culture name based on RFC 4646</summary>
+    string Culture { get; set; }
 
     /// <summary>Associated collector groups</summary>
     List<string> CollectorGroups { get; set; }

@@ -3,6 +3,7 @@
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The payroll case field client object</summary>
+// ReSharper disable UnusedMemberInSuper.Global
 public interface ICaseField : IModel, IAttributeObject, IKeyEquatable<ICaseField>
 {
     /// <summary>The case field name (immutable)</summary>

@@ -3,6 +3,7 @@
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The payroll script client object</summary>
+// ReSharper disable UnusedMemberInSuper.Global
 public interface IScript : IModel, IKeyEquatable<IScript>
 {
     /// <summary>The script name (immutable)</summary>

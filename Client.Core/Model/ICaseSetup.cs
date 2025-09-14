@@ -4,6 +4,7 @@ using System.Collections.Generic;
 namespace PayrollEngine.Client.Model;
 
 /// <summary>Payroll case setup client object</summary>
+// ReSharper disable UnusedMemberInSuper.Global
 public interface ICaseSetup : IModel, IEquatable<ICaseSetup>
 {
     /// <summary>The case name</summary>

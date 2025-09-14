@@ -6,6 +6,7 @@ using Task = System.Threading.Tasks.Task;
 namespace PayrollEngine.Client.Service;
 
 /// <summary>Payroll lookup set service</summary>
+// ReSharper disable UnusedMemberInSuper.Global
 public interface ILookupSetService : ICreateService<ILookupSet, RegulationServiceContext, Query>
 {
     /// <summary>Get lookup set by name</summary>

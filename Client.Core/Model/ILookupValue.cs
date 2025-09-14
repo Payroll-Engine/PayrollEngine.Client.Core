@@ -3,6 +3,7 @@
 namespace PayrollEngine.Client.Model;
 
 /// <summary>Represents a value within a lookup</summary>
+// ReSharper disable UnusedMemberInSuper.Global
 public interface ILookupValue : IModel, IKeyEquatable<ILookupValue>
 {
     /// <summary>The lookup key</summary>

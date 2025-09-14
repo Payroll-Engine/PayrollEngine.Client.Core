@@ -4,9 +4,11 @@ using System.ComponentModel.DataAnnotations;
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The payroll log object</summary>
+// ReSharper disable UnusedMemberInSuper.Global
 public interface ILog : IModel, IEquatable<ILog>
 {
     /// <summary>The log level (immutable)</summary>
+    // ReSharper disable once UnusedMemberInSuper.Global
     LogLevel Level { get; set; }
 
     /// <summary>The log message name (immutable)</summary>

@@ -3536,6 +3536,9 @@
         <member name="P:PayrollEngine.Client.Model.CaseValue.NumericValue">
             <inheritdoc/>
         </member>
+        <member name="P:PayrollEngine.Client.Model.CaseValue.Culture">
+            <inheritdoc/>
+        </member>
         <member name="P:PayrollEngine.Client.Model.CaseValue.CaseRelation">
             <inheritdoc/>
         </member>
@@ -3702,6 +3705,9 @@
         <member name="P:PayrollEngine.Client.Model.Collector.ValueType">
             <inheritdoc/>
         </member>
+        <member name="P:PayrollEngine.Client.Model.Collector.Culture">
+            <inheritdoc/>
+        </member>
         <member name="P:PayrollEngine.Client.Model.Collector.CollectorGroups">
             <inheritdoc/>
         </member>
@@ -3775,6 +3781,9 @@
         <member name="P:PayrollEngine.Client.Model.CollectorCustomResult.Value">
             <inheritdoc/>
         </member>
+        <member name="P:PayrollEngine.Client.Model.CollectorCustomResult.Culture">
+            <inheritdoc/>
+        </member>
         <member name="P:PayrollEngine.Client.Model.CollectorCustomResult.Start">
             <inheritdoc/>
         </member>
@@ -3829,6 +3838,9 @@
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.CollectorResult.Value">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.CollectorResult.Culture">
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.CollectorResult.Start">
@@ -4636,6 +4648,9 @@
         <member name="P:PayrollEngine.Client.Model.ICaseValue.NumericValue">
             <summary>The case numeric value</summary>
         </member>
+        <member name="P:PayrollEngine.Client.Model.ICaseValue.Culture">
+            <summary>The case value culture name based on RFC 4646</summary>
+        </member>
         <member name="P:PayrollEngine.Client.Model.ICaseValue.CaseRelation">
             <summary>The case relation</summary>
         </member>
@@ -4680,6 +4695,9 @@
         </member>
         <member name="P:PayrollEngine.Client.Model.ICollector.ValueType">
             <summary>The value type, default is value type money</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.ICollector.Culture">
+            <summary>The collector culture name based on RFC 4646</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.ICollector.CollectorGroups">
             <summary>Associated collector groups</summary>
@@ -4735,6 +4753,9 @@
         <member name="P:PayrollEngine.Client.Model.ICollectorCustomResult.Value">
             <summary>The collector custom result value (immutable)</summary>
         </member>
+        <member name="P:PayrollEngine.Client.Model.ICollectorCustomResult.Culture">
+            <summary>The collector custom result culture name based on RFC 4646+</summary>
+        </member>
         <member name="P:PayrollEngine.Client.Model.ICollectorCustomResult.Start">
             <summary>The period starting date for the value</summary>
         </member>
@@ -4770,6 +4791,9 @@
         </member>
         <member name="P:PayrollEngine.Client.Model.ICollectorResult.Value">
             <summary>The collector result value (immutable)</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.ICollectorResult.Culture">
+            <summary>The collector result culture name based on RFC 4646</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.ICollectorResult.Start">
             <summary>The starting date for the value (immutable)</summary>
@@ -5179,6 +5203,9 @@
         <member name="P:PayrollEngine.Client.Model.IPayrollResultValue.ResultValue">
             <summary>The result value (JSON)</summary>
         </member>
+        <member name="P:PayrollEngine.Client.Model.IPayrollResultValue.ResultCulture">
+            <summary>The result culture</summary>
+        </member>
         <member name="P:PayrollEngine.Client.Model.IPayrollResultValue.ResultNumericValue">
             <summary>The result numeric value</summary>
         </member>
@@ -5557,6 +5584,9 @@
         <member name="P:PayrollEngine.Client.Model.IPayrunResult.Value">
             <summary>The result value (immutable)</summary>
         </member>
+        <member name="P:PayrollEngine.Client.Model.IPayrunResult.Culture">
+            <summary>The payrun result culture name based on RFC 4646</summary>
+        </member>
         <member name="P:PayrollEngine.Client.Model.IPayrunResult.NumericValue">
             <summary>The numeric result value (immutable)</summary>
         </member>
@@ -5917,6 +5947,9 @@
         <member name="P:PayrollEngine.Client.Model.IWageType.Calendar">
             <summary>The wage type calendar (fallback: employee calendar)</summary>
         </member>
+        <member name="P:PayrollEngine.Client.Model.IWageType.Culture">
+            <summary>The wage type culture name based on RFC 4646</summary>
+        </member>
         <member name="P:PayrollEngine.Client.Model.IWageType.Collectors">
             <summary>Associated collectors</summary>
         </member>
@@ -5962,6 +5995,9 @@
         <member name="P:PayrollEngine.Client.Model.IWageTypeCustomResult.Value">
             <summary>The wage type custom result value (immutable)</summary>
         </member>
+        <member name="P:PayrollEngine.Client.Model.IWageTypeCustomResult.Culture">
+            <summary>The wage type custom result culture name based on RFC 4646</summary>
+        </member>
         <member name="P:PayrollEngine.Client.Model.IWageTypeCustomResult.Start">
             <summary>The period starting date for the value</summary>
         </member>
@@ -5994,6 +6030,9 @@
         </member>
         <member name="P:PayrollEngine.Client.Model.IWageTypeResult.Value">
             <summary>The wage type result value (immutable)</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.IWageTypeResult.Culture">
+            <summary>The wage type result culture name based on RFC 4646</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.IWageTypeResult.Start">
             <summary>The starting date for the value (immutable)</summary>
@@ -6599,6 +6638,9 @@
         <member name="P:PayrollEngine.Client.Model.PayrollResultValue.ResultValue">
             <inheritdoc/>
         </member>
+        <member name="P:PayrollEngine.Client.Model.PayrollResultValue.ResultCulture">
+            <inheritdoc/>
+        </member>
         <member name="P:PayrollEngine.Client.Model.PayrollResultValue.ResultNumericValue">
             <inheritdoc/>
         </member>
@@ -7090,6 +7132,9 @@
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.PayrunResult.Value">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.PayrunResult.Culture">
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.PayrunResult.NumericValue">
@@ -7808,6 +7853,9 @@
         <member name="P:PayrollEngine.Client.Model.WageType.Calendar">
             <inheritdoc/>
         </member>
+        <member name="P:PayrollEngine.Client.Model.WageType.Culture">
+            <inheritdoc/>
+        </member>
         <member name="P:PayrollEngine.Client.Model.WageType.ValueExpression">
             <inheritdoc/>
         </member>
@@ -7872,6 +7920,9 @@
         <member name="P:PayrollEngine.Client.Model.WageTypeCustomResult.Value">
             <inheritdoc/>
         </member>
+        <member name="P:PayrollEngine.Client.Model.WageTypeCustomResult.Culture">
+            <inheritdoc/>
+        </member>
         <member name="P:PayrollEngine.Client.Model.WageTypeCustomResult.Start">
             <inheritdoc/>
         </member>
@@ -7923,6 +7974,9 @@
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.WageTypeResult.Value">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.WageTypeResult.Culture">
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.WageTypeResult.Start">

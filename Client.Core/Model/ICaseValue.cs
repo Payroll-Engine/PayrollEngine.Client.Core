@@ -4,6 +4,7 @@ using System.Collections.Generic;
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The case value (immutable)</summary>
+// ReSharper disable UnusedMemberInSuper.Global
 public interface ICaseValue : IModel, IAttributeObject, IEquatable<ICaseValue>
 {
     /// <summary>The division id (immutable), Mandatory for case values with local value scope <see cref="CaseField.ValueScope"/></summary>
@@ -41,6 +42,9 @@ public interface ICaseValue : IModel, IAttributeObject, IEquatable<ICaseValue>
 
     /// <summary>The case numeric value</summary>
     decimal? NumericValue { get; set; }
+
+    /// <summary>The case value culture name based on RFC 4646</summary>
+    string Culture { get; set; }
 
     /// <summary>The case relation</summary>
     CaseRelationReference CaseRelation { get; set; }

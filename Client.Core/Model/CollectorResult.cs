@@ -41,18 +41,22 @@ public class CollectorResult : ModelBase, ICollectorResult
 
     /// <inheritdoc/>
     [JsonPropertyOrder(108)]
-    public DateTime Start { get; set; }
+    public string Culture { get; set; }
 
     /// <inheritdoc/>
     [JsonPropertyOrder(109)]
-    public DateTime End { get; set; }
+    public DateTime Start { get; set; }
 
     /// <inheritdoc/>
     [JsonPropertyOrder(110)]
-    public List<string> Tags { get; set; }
+    public DateTime End { get; set; }
 
     /// <inheritdoc/>
     [JsonPropertyOrder(111)]
+    public List<string> Tags { get; set; }
+
+    /// <inheritdoc/>
+    [JsonPropertyOrder(112)]
     public Dictionary<string, object> Attributes { get; set; }
 
     /// <summary>Initializes a new instance</summary>

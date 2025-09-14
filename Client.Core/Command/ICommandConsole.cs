@@ -3,6 +3,7 @@
 /// <summary>
 /// Command console contract.
 /// </summary>
+// ReSharper disable UnusedMemberInSuper.Global
 public interface ICommandConsole
 {
     /// <summary>

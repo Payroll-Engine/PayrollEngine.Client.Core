@@ -6,6 +6,7 @@ using Task = System.Threading.Tasks.Task;
 namespace PayrollEngine.Client.Service;
 
 /// <summary>Payroll wage type service</summary>
+// ReSharper disable UnusedMemberInSuper.Global
 public interface IWageTypeService : ICrudService<IWageType, RegulationServiceContext, Query>
 {
     /// <summary>Get wage type by number</summary>

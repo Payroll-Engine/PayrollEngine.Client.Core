@@ -4,6 +4,7 @@ using System.Collections.Generic;
 namespace PayrollEngine.Client.Model;
 
 /// <summary>Payroll case value change client object</summary>
+// ReSharper disable UnusedMemberInSuper.Global
 public interface ICaseChange : IModel, IEquatable<ICaseChange>
 {
     /// <summary>The change user id</summary>

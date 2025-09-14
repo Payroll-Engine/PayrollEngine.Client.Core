@@ -28,6 +28,9 @@ public interface IWageType : IModel, IAttributeObject, IKeyEquatable<IWageType>
 
     /// <summary>The wage type calendar (fallback: employee calendar)</summary>
     string Calendar { get; set; }
+    
+    /// <summary>The wage type culture name based on RFC 4646</summary>
+    string Culture { get; set; }
 
     /// <summary>Associated collectors</summary>
     List<string> Collectors { get; set; }

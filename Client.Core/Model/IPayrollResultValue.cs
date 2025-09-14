@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 namespace PayrollEngine.Client.Model;
 
 /// <summary>Payroll result value</summary>
+// ReSharper disable UnusedMemberInSuper.Global
 public interface IPayrollResultValue : IEquatable<IPayrollResultValue>
 {
     /// <summary>The payroll result id</summary>
@@ -49,6 +50,10 @@ public interface IPayrollResultValue : IEquatable<IPayrollResultValue>
     /// <summary>The result value (JSON)</summary>
     [StringLength(128)]
     string ResultValue { get; set; }
+    
+    /// <summary>The result culture</summary>
+    [StringLength(128)]
+    string ResultCulture { get; set; }
 
     /// <summary>The result numeric value</summary>
     decimal? ResultNumericValue { get; set; }

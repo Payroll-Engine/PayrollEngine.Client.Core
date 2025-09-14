@@ -131,7 +131,7 @@ public static class ExceptionExtensions
     /// <returns>The payroll API error, null on others errors</returns>
     private static string GetScriptErrors(Exception exception)
     {
-        // script errors resulting to a http request exception with status code unprocessable
+        // script errors resulting to http request exception with status code unprocessable
         if (exception is not HttpRequestException httpException ||
             httpException.StatusCode != HttpStatusCode.UnprocessableContent)
         {

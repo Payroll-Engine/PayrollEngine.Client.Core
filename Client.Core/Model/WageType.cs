@@ -44,34 +44,38 @@ public class WageType : ModelBase, IWageType, INameObject
 
     /// <inheritdoc/>
     [JsonPropertyOrder(107)]
-    public string ValueExpression { get; set; }
+    public string Culture { get; set; }
 
     /// <inheritdoc/>
     [JsonPropertyOrder(108)]
-    public string ValueExpressionFile { get; set; }
+    public string ValueExpression { get; set; }
 
     /// <inheritdoc/>
     [JsonPropertyOrder(109)]
-    public string ResultExpression { get; set; }
+    public string ValueExpressionFile { get; set; }
 
     /// <inheritdoc/>
     [JsonPropertyOrder(110)]
-    public string ResultExpressionFile { get; set; }
+    public string ResultExpression { get; set; }
 
     /// <inheritdoc/>
     [JsonPropertyOrder(111)]
-    public List<string> Collectors { get; set; }
+    public string ResultExpressionFile { get; set; }
 
     /// <inheritdoc/>
     [JsonPropertyOrder(112)]
-    public List<string> CollectorGroups { get; set; }
+    public List<string> Collectors { get; set; }
 
     /// <inheritdoc/>
     [JsonPropertyOrder(113)]
-    public List<string> Clusters { get; set; }
+    public List<string> CollectorGroups { get; set; }
 
     /// <inheritdoc/>
     [JsonPropertyOrder(114)]
+    public List<string> Clusters { get; set; }
+
+    /// <inheritdoc/>
+    [JsonPropertyOrder(115)]
     public Dictionary<string, object> Attributes { get; set; }
 
     /// <summary>Initializes a new instance</summary>

@@ -4,6 +4,7 @@ using System.Text.Json.Serialization;
 namespace PayrollEngine.Client;
 
 /// <summary>Base for all Payroll models</summary>
+// ReSharper disable UnusedMemberInSuper.Global
 public interface IModel
 {
     /// <summary>The unique object id (immutable)</summary>

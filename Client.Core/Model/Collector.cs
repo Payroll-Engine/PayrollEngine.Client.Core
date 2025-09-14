@@ -35,50 +35,54 @@ public class Collector : ModelBase, ICollector, INameObject
 
     /// <inheritdoc/>
     [JsonPropertyOrder(106)]
-    public List<string> CollectorGroups { get; set; }
+    public string Culture { get; set; }
 
     /// <inheritdoc/>
     [JsonPropertyOrder(107)]
-    public decimal? Threshold { get; set; }
+    public List<string> CollectorGroups { get; set; }
 
     /// <inheritdoc/>
     [JsonPropertyOrder(108)]
-    public decimal? MinResult { get; set; }
+    public decimal? Threshold { get; set; }
 
     /// <inheritdoc/>
     [JsonPropertyOrder(109)]
-    public decimal? MaxResult { get; set; }
+    public decimal? MinResult { get; set; }
 
     /// <inheritdoc/>
     [JsonPropertyOrder(110)]
-    public string StartExpression { get; set; }
+    public decimal? MaxResult { get; set; }
 
     /// <inheritdoc/>
     [JsonPropertyOrder(111)]
-    public string StartExpressionFile { get; set; }
+    public string StartExpression { get; set; }
 
     /// <inheritdoc/>
     [JsonPropertyOrder(112)]
-    public string ApplyExpression { get; set; }
+    public string StartExpressionFile { get; set; }
 
     /// <inheritdoc/>
     [JsonPropertyOrder(113)]
-    public string ApplyExpressionFile { get; set; }
+    public string ApplyExpression { get; set; }
 
     /// <inheritdoc/>
     [JsonPropertyOrder(114)]
-    public string EndExpression { get; set; }
+    public string ApplyExpressionFile { get; set; }
 
     /// <inheritdoc/>
     [JsonPropertyOrder(115)]
-    public string EndExpressionFile { get; set; }
+    public string EndExpression { get; set; }
 
     /// <inheritdoc/>
     [JsonPropertyOrder(116)]
-    public List<string> Clusters { get; set; }
+    public string EndExpressionFile { get; set; }
 
     /// <inheritdoc/>
     [JsonPropertyOrder(117)]
+    public List<string> Clusters { get; set; }
+
+    /// <inheritdoc/>
+    [JsonPropertyOrder(118)]
     public Dictionary<string, object> Attributes { get; set; }
 
     /// <summary>Initializes a new instance</summary>

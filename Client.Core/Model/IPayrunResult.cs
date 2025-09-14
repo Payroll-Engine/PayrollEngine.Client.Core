@@ -26,6 +26,9 @@ public interface IPayrunResult : IModel, IAttributeObject, IEquatable<IPayrunRes
 
     /// <summary>The result value (immutable)</summary>
     string Value { get; set; }
+    
+    /// <summary>The payrun result culture name based on RFC 4646</summary>
+    string Culture { get; set; }
 
     /// <summary>The numeric result value (immutable)</summary>
     decimal? NumericValue { get; set; }

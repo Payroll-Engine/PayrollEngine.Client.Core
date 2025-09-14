@@ -6,6 +6,7 @@ using Task = System.Threading.Tasks.Task;
 namespace PayrollEngine.Client.Service;
 
 /// <summary>Payroll payrun job service</summary>
+// ReSharper disable UnusedMemberInSuper.Global
 public interface IPayrunJobService : ICrudService<IPayrunJob, TenantServiceContext, Query>, IAttributeService<TenantServiceContext>
 {
     /// <summary>Query employee payrun jobs</summary>

@@ -40,24 +40,28 @@ public class PayrunResult : ModelBase, IPayrunResult, INameObject
 
     /// <inheritdoc/>
     [JsonPropertyOrder(107)]
+    public string Culture { get; set; }
+
+    /// <inheritdoc/>
+    [JsonPropertyOrder(108)]
     public decimal? NumericValue { get; set; }
 
     /// <inheritdoc/>
     [Required]
-    [JsonPropertyOrder(108)]
+    [JsonPropertyOrder(109)]
     public DateTime Start { get; set; }
 
     /// <inheritdoc/>
     [Required]
-    [JsonPropertyOrder(109)]
+    [JsonPropertyOrder(110)]
     public DateTime End { get; set; }
 
     /// <inheritdoc/>
-    [JsonPropertyOrder(110)]
+    [JsonPropertyOrder(111)]
     public List<string> Tags { get; set; }
 
     /// <inheritdoc/>
-    [JsonPropertyOrder(111)]
+    [JsonPropertyOrder(112)]
     public Dictionary<string, object> Attributes { get; set; }
 
     /// <summary>Initializes a new instance</summary>

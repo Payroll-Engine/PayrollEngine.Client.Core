@@ -4,6 +4,7 @@ using System.Collections.Generic;
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The tenant client object</summary>
+// ReSharper disable UnusedMemberInSuper.Global
 public interface IExchangeTenant : ITenant, IEquatable<IExchangeTenant>
 {
     /// <summary>The tenant users</summary>

@@ -3,6 +3,7 @@
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The payroll calendar client object</summary>
+// ReSharper disable UnusedMemberInSuper.Global
 public interface ICalendar : IModel, IAttributeObject, IKeyEquatable<ICalendar>
 {
     /// <summary>The calendar name</summary>

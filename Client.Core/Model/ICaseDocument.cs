@@ -3,6 +3,7 @@
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The case document client object</summary>
+// ReSharper disable UnusedMemberInSuper.Global
 public interface ICaseDocument : IModel, IEquatable<ICaseDocument>
 {
     /// <summary>The document name</summary>

@@ -23,6 +23,9 @@ public interface ICollectorCustomResult : IModel, IAttributeObject, IEquatable<I
 
     /// <summary>The collector custom result value (immutable)</summary>
     decimal Value { get; set; }
+    
+    /// <summary>The collector custom result culture name based on RFC 4646+</summary>
+    string Culture { get; set; }
 
     /// <summary>The period starting date for the value</summary>
     DateTime Start { get; set; }

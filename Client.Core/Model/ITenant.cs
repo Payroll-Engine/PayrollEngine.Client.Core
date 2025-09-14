@@ -1,6 +1,7 @@
 ﻿namespace PayrollEngine.Client.Model;
 
 /// <summary>The tenant client object</summary>
+// ReSharper disable UnusedMemberInSuper.Global
 public interface ITenant : IModel, IAttributeObject, IKeyEquatable<ITenant>
 {
     /// <summary>The unique identifier of the tenant (immutable)</summary>

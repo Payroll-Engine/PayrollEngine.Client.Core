@@ -5,6 +5,7 @@ using Task = System.Threading.Tasks.Task;
 namespace PayrollEngine.Client.Service;
 
 /// <summary>Payroll collector service</summary>
+// ReSharper disable UnusedMemberInSuper.Global
 public interface ICollectorService : ICrudService<ICollector, RegulationServiceContext, Query>
 {
     /// <summary>Get collector by name</summary>

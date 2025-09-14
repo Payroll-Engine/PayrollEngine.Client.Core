@@ -5,6 +5,7 @@ using Task = System.Threading.Tasks.Task;
 namespace PayrollEngine.Client.Service;
 
 /// <summary>Payroll case service</summary>
+// ReSharper disable UnusedMemberInSuper.Global
 public interface ICaseService : ICrudService<ICase, RegulationServiceContext, Query>
 {
     /// <summary>Get case by name</summary>

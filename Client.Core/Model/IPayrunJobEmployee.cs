@@ -3,6 +3,7 @@
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The payrun job client object</summary>
+// ReSharper disable UnusedMemberInSuper.Global
 public interface IPayrunJobEmployee : IModel, IEquatable<IPayrunJobEmployee>
 {
     /// <summary>The employee id (immutable)</summary>

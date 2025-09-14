@@ -302,6 +302,16 @@ public sealed class ExchangeImport : ExchangeImportVisitor
     {
         await base.SetupScriptAsync(tenant, regulation, script, targetScript);
 
+        // update mode
+        if (script.UpdateMode == UpdateMode.Update)
+        {
+            // content required
+            if (string.IsNullOrWhiteSpace(script.Value))
+            {
+                throw new PayrollException($"Missing content in script {script.Name}.");
+            }
+        }
+
         // update script
         await UpsertObjectAsync(RegulationApiEndpoints.RegulationScriptsUrl(tenant.Id, regulation.Id), script, targetScript);
     }
@@ -359,6 +369,16 @@ public sealed class ExchangeImport : ExchangeImportVisitor
                 throw new PayrollException($"Missing division with name {payroll.DivisionName}.");
             }
             payroll.DivisionId = division.Id;
+        }
+
+        // update mode
+        if (payroll.UpdateMode == UpdateMode.Update)
+        {
+            // division id required
+            if (payroll.DivisionId == 0)
+            {
+                throw new PayrollException($"Missing division name in payroll {payroll.Name}.");
+            }
         }
 
         // update payroll

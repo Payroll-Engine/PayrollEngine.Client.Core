@@ -29,6 +29,9 @@ public interface ICollectorResult : IModel, IAttributeObject, IEquatable<ICollec
 
     /// <summary>The collector result value (immutable)</summary>
     decimal Value { get; set; }
+    
+    /// <summary>The collector result culture name based on RFC 4646</summary>
+    string Culture { get; set; }
 
     /// <summary>The starting date for the value (immutable)</summary>
     DateTime Start { get; set; }
