@@ -208,17 +208,10 @@ public sealed class ExchangeImport : ExchangeImportVisitor
         // cleanup existing lookups
         var resLookups = new LookupSetService(HttpClient);
         var context = new RegulationServiceContext(tenant.Id, regulation.Id);
-        var existingLookups = await resLookups.QueryAsync<LookupSet>(context);
         foreach (var lookup in lookups)
         {
             // validate lookup
             ValidateLookup(lookup);
-            // get existing object
-            var existingLookup = existingLookups.FirstOrDefault(x => string.Equals(x.Name, lookup.Name));
-            if (existingLookup != null)
-            {
-                await resLookups.DeleteAsync(context, existingLookup.Id);
-            }
         }
 
         // created date

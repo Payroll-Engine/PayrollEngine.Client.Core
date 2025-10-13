@@ -20,10 +20,21 @@ public abstract class CommandBase : ICommand
     /// <inheritdoc />
     public async Task<int> ExecuteAsync(CommandContext context, ICommandParameters parameters)
     {
-        if (!string.IsNullOrWhiteSpace(parameters.Test()))
+        // parameter test
+        var error = parameters.Test();
+        if (!string.IsNullOrWhiteSpace(error))
         {
+            // logger
+            context.Logger?.Error(error);
+
+            // console
+            if (context.DisplayLevel == DisplayLevel.Full)
+            {
+                context.Console.DisplayErrorLine(error);
+            }
             return -1;
         }
+
         return await OnExecute(context, parameters);
     }
 
