@@ -35,6 +35,7 @@ public class LookupValue : ModelBase, ILookupValue
     public string Value { get; set; }
 
     /// <summary>The lookup value object</summary>
+    [JsonReadOnly]
     [JsonPropertyOrder(103)]
     public object ValueObject
     {

@@ -28,14 +28,18 @@ public class Lookup : ModelBase, ILookup, INameObject
 
     /// <inheritdoc/>
     [JsonPropertyOrder(103)]
-    public decimal? RangeSize { get; set; }
+    public LookupRangeMode RangeMode { get; set; }
 
     /// <inheritdoc/>
     [JsonPropertyOrder(104)]
-    public OverrideType OverrideType { get; set; }
+    public decimal? RangeSize { get; set; }
 
     /// <inheritdoc/>
     [JsonPropertyOrder(105)]
+    public OverrideType OverrideType { get; set; }
+
+    /// <inheritdoc/>
+    [JsonPropertyOrder(106)]
     public Dictionary<string, object> Attributes { get; set; }
 
     /// <summary>Initializes a new instance</summary>

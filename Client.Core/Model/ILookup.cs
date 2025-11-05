@@ -21,6 +21,9 @@ public interface ILookup : IModel, IAttributeObject, IKeyEquatable<ILookup>
     /// <summary>The override type</summary>
     OverrideType OverrideType { get; set; }
 
+    /// <summary>Lookup range mode</summary>
+    LookupRangeMode RangeMode { get; set; }
+
     /// <summary>The lookup range size</summary>
     decimal? RangeSize { get; set; }
 }
