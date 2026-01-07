@@ -1,24 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using PayrollEngine.Action;
 
 namespace PayrollEngine.Client.Model;
 
-/// <summary>Cluster set</summary>
+/// <summary>Action info</summary>
 public class ActionInfo : IEquatable<ActionInfo>
 {
     /// <summary>The extension function type</summary>
     public FunctionType FunctionType { get; set; }
 
-    /// <summary>The action namespace</summary>
-    public string Namespace { get; set; }
-
     /// <summary>The action name</summary>
     [Required]
     public string Name { get; set; }
-
-    /// <summary>The full name</summary>
-    public string FullName => $"{Namespace}.{Name}";
 
     /// <summary>The action description</summary>
     public string Description { get; set; }

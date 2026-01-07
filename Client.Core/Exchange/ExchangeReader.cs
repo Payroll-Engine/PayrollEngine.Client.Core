@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
-using System.IO.Compression;
 using System.Linq;
+using System.IO.Compression;
 using System.Threading.Tasks;
 using PayrollEngine.Serialization;
 
@@ -69,7 +69,7 @@ public static class ExchangeReader
         try
         {
             var exchange = new Model.Exchange();
-            using var archive = ZipFile.OpenRead(fileName);
+            await using var archive = await ZipFile.OpenReadAsync(fileName);
 
             // process *.json archive entries ordered by name
             var entries = archive.Entries.Where(x => x.Name.EndsWith(".json")).OrderBy(x => x.Name).ToList();
@@ -81,7 +81,7 @@ public static class ExchangeReader
             // combine archive files into one exchange
             foreach (var entry in entries)
             {
-                await using var stream = entry.Open();
+                await using var stream = await entry.OpenAsync();
                 using var reader = new StreamReader(stream);
                 var json = await reader.ReadToEndAsync();
                 var entryExchange = JsonToExchange(json);

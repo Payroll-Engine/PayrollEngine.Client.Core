@@ -50,6 +50,12 @@ public interface IWageType : IModel, IAttributeObject, IKeyEquatable<IWageType>
     /// <summary>Expression: calculates of the wage type result attributes file</summary>
     string ResultExpressionFile { get; set; }
 
+    /// <summary>The wage type value actions</summary>
+    List<string> ValueActions { get; set; }
+
+    /// <summary>The wage type result actions</summary>
+    List<string> ResultActions { get; set; }
+
     /// <summary>The wage type clusters</summary>
     List<string> Clusters { get; set; }
 }

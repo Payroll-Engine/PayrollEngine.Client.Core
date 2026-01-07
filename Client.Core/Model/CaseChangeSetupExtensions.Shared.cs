@@ -105,35 +105,37 @@ public static class CaseChangeSetupExtensions
         return null;
     }
 
-    /// <summary>Search for duplicated case value</summary>
     /// <param name="caseChangeSetup">The case change setup</param>
-    /// <returns>The duplicated case value, null without duplicates</returns>
-    public static CaseValue FindDuplicatedCaseValue(this CaseChangeSetup caseChangeSetup)
+    extension(CaseChangeSetup caseChangeSetup)
     {
-        var caseValueLookup = new Dictionary<Tuple<string, string>, CaseValue>();
-        foreach (var caseValue in caseChangeSetup.CollectCaseValues())
+        /// <summary>Search for duplicated case value</summary>
+        /// <returns>The duplicated case value, null without duplicates</returns>
+        public CaseValue FindDuplicatedCaseValue()
         {
-            var key = new Tuple<string, string>(caseValue.CaseFieldName, caseValue.CaseSlot);
-            if (!caseValueLookup.TryAdd(key, caseValue))
+            var caseValueLookup = new Dictionary<Tuple<string, string>, CaseValue>();
+            foreach (var caseValue in caseChangeSetup.CollectCaseValues())
             {
-                // duplicated case value
-                return caseValue;
+                var key = new Tuple<string, string>(caseValue.CaseFieldName, caseValue.CaseSlot);
+                if (!caseValueLookup.TryAdd(key, caseValue))
+                {
+                    // duplicated case value
+                    return caseValue;
+                }
             }
+            return null;
         }
-        return null;
-    }
 
-    /// <summary>Collect all case setups</summary>
-    /// <param name="caseChangeSetup">The case change setup</param>
-    /// <returns>List if case setups</returns>
-    public static List<ICaseSetup> CollectCaseSetups(this CaseChangeSetup caseChangeSetup)
-    {
-        var caseSetups = new List<ICaseSetup>();
-        if (caseChangeSetup != null)
+        /// <summary>Collect all case setups</summary>
+        /// <returns>List if case setups</returns>
+        public List<ICaseSetup> CollectCaseSetups()
         {
-            CollectCaseSetups(caseChangeSetup.Case, caseSetups);
+            var caseSetups = new List<ICaseSetup>();
+            if (caseChangeSetup != null)
+            {
+                CollectCaseSetups(caseChangeSetup.Case, caseSetups);
+            }
+            return caseSetups;
         }
-        return caseSetups;
     }
 
     private static void CollectCaseSetups(ICaseSetup caseSetup, List<ICaseSetup> caseSetups)

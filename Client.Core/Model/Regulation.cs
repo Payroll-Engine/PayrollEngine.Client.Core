@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using System.ComponentModel.DataAnnotations;
 
 namespace PayrollEngine.Client.Model;
 
@@ -19,36 +19,41 @@ public class Regulation : ModelBase, IRegulation, INameObject
     public Dictionary<string, string> NameLocalizations { get; set; }
 
     /// <inheritdoc/>
+    [StringLength(128)]
     [JsonPropertyOrder(102)]
-    public int Version { get; set; }
+    public string Namespace { get; set; }
 
     /// <inheritdoc/>
     [JsonPropertyOrder(103)]
-    public bool SharedRegulation { get; set; }
+    public int Version { get; set; }
 
     /// <inheritdoc/>
     [JsonPropertyOrder(104)]
+    public bool SharedRegulation { get; set; }
+
+    /// <inheritdoc/>
+    [JsonPropertyOrder(105)]
     public DateTime? ValidFrom { get; set; }
 
     /// <inheritdoc/>
     [StringLength(128)]
-    [JsonPropertyOrder(105)]
+    [JsonPropertyOrder(106)]
     public string Owner { get; set; }
 
     /// <inheritdoc/>
-    [JsonPropertyOrder(106)]
+    [JsonPropertyOrder(107)]
     public string Description { get; set; }
 
     /// <inheritdoc/>
-    [JsonPropertyOrder(107)]
+    [JsonPropertyOrder(108)]
     public Dictionary<string, string> DescriptionLocalizations { get; set; }
 
     /// <inheritdoc/>
-    [JsonPropertyOrder(108)]
+    [JsonPropertyOrder(109)]
     public List<string> BaseRegulations { get; set; }
 
     /// <inheritdoc/>
-    [JsonPropertyOrder(109)]
+    [JsonPropertyOrder(110)]
     public Dictionary<string, object> Attributes { get; set; }
 
     /// <summary>Initializes a new instance</summary>
@@ -71,7 +76,7 @@ public class Regulation : ModelBase, IRegulation, INameObject
     /// <inheritdoc/>
     public virtual bool EqualKey(IRegulation compare) =>
         string.Equals(Name, compare?.Name);
-   
+
     /// <inheritdoc/>
     public override string GetUiString() => Name;
 }

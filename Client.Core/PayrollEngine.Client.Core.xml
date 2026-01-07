@@ -991,14 +991,10 @@
             <summary>Extension methods for <see cref="T:System.Exception"/></summary>
         </member>
         <member name="M:PayrollEngine.Client.ExceptionExtensions.GetApiErrorMessage(System.Exception)">
-            <summary>Get the exception message from an API error</summary>
-            <param name="exception">The exception</param>
-            <returns>The payroll API error, null on others errors</returns>
+            <inheritdoc cref="M:PayrollEngine.Client.ExceptionExtensions.&lt;G&gt;$6A188C7A03CB85FC44DF3FD030EA0664.GetApiErrorMessage"/>
         </member>
         <member name="M:PayrollEngine.Client.ExceptionExtensions.GetApiError(System.Exception)">
-            <summary>Get the exception message from an API error</summary>
-            <param name="exception">The exception</param>
-            <returns>The payroll API error, null on others errors</returns>
+            <inheritdoc cref="M:PayrollEngine.Client.ExceptionExtensions.&lt;G&gt;$6A188C7A03CB85FC44DF3FD030EA0664.GetApiError"/>
         </member>
         <member name="M:PayrollEngine.Client.ExceptionExtensions.GetApiException(System.Exception)">
             <summary>Get the exception message from an API exception</summary>
@@ -1014,6 +1010,17 @@
             <summary>Get plain error message</summary>
             <param name="exception">The exception</param>
             <param name="maxLines">Maximum exception lines</param>
+        </member>
+        <member name="T:PayrollEngine.Client.ExceptionExtensions.&lt;G&gt;$6A188C7A03CB85FC44DF3FD030EA0664.&lt;M&gt;$43A2C71DD069D5B12A01854DB648ED17">
+            <param name="exception">The exception</param>
+        </member>
+        <member name="M:PayrollEngine.Client.ExceptionExtensions.&lt;G&gt;$6A188C7A03CB85FC44DF3FD030EA0664.GetApiErrorMessage">
+            <summary>Get the exception message from an API error</summary>
+            <returns>The payroll API error, null on others errors</returns>
+        </member>
+        <member name="M:PayrollEngine.Client.ExceptionExtensions.&lt;G&gt;$6A188C7A03CB85FC44DF3FD030EA0664.GetApiError">
+            <summary>Get the exception message from an API error</summary>
+            <returns>The payroll API error, null on others errors</returns>
         </member>
         <member name="T:PayrollEngine.Client.Exchange.BinaryFile">
             <summary>Binary file</summary>
@@ -2449,19 +2456,13 @@
             <summary>The object UI string</summary>
         </member>
         <member name="T:PayrollEngine.Client.Model.ActionInfo">
-            <summary>Cluster set</summary>
+            <summary>Action info</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.ActionInfo.FunctionType">
             <summary>The extension function type</summary>
         </member>
-        <member name="P:PayrollEngine.Client.Model.ActionInfo.Namespace">
-            <summary>The action namespace</summary>
-        </member>
         <member name="P:PayrollEngine.Client.Model.ActionInfo.Name">
             <summary>The action name</summary>
-        </member>
-        <member name="P:PayrollEngine.Client.Model.ActionInfo.FullName">
-            <summary>The full name</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.ActionInfo.Description">
             <summary>The action description</summary>
@@ -2932,19 +2933,26 @@
             <param name="caseSlot">The case slot</param>
         </member>
         <member name="M:PayrollEngine.Client.Model.CaseChangeSetupExtensions.FindDuplicatedCaseValue(PayrollEngine.Client.Model.CaseChangeSetup)">
-            <summary>Search for duplicated case value</summary>
-            <param name="caseChangeSetup">The case change setup</param>
-            <returns>The duplicated case value, null without duplicates</returns>
+            <inheritdoc cref="M:PayrollEngine.Client.Model.CaseChangeSetupExtensions.&lt;G&gt;$F8F542D6204886C40073EC6E48A6F39C.FindDuplicatedCaseValue"/>
         </member>
         <member name="M:PayrollEngine.Client.Model.CaseChangeSetupExtensions.CollectCaseSetups(PayrollEngine.Client.Model.CaseChangeSetup)">
-            <summary>Collect all case setups</summary>
-            <param name="caseChangeSetup">The case change setup</param>
-            <returns>List if case setups</returns>
+            <inheritdoc cref="M:PayrollEngine.Client.Model.CaseChangeSetupExtensions.&lt;G&gt;$F8F542D6204886C40073EC6E48A6F39C.CollectCaseSetups"/>
         </member>
         <member name="M:PayrollEngine.Client.Model.CaseChangeSetupExtensions.CollectCaseValues(PayrollEngine.Client.Model.ICaseChangeSetup)">
             <summary>Collect all case values</summary>
             <param name="caseChangeSetup">The case change setup</param>
             <returns>List if case values</returns>
+        </member>
+        <member name="T:PayrollEngine.Client.Model.CaseChangeSetupExtensions.&lt;G&gt;$F8F542D6204886C40073EC6E48A6F39C.&lt;M&gt;$5FC5B53797FA410557CD6DA275F1E86B">
+            <param name="caseChangeSetup">The case change setup</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.CaseChangeSetupExtensions.&lt;G&gt;$F8F542D6204886C40073EC6E48A6F39C.FindDuplicatedCaseValue">
+            <summary>Search for duplicated case value</summary>
+            <returns>The duplicated case value, null without duplicates</returns>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.CaseChangeSetupExtensions.&lt;G&gt;$F8F542D6204886C40073EC6E48A6F39C.CollectCaseSetups">
+            <summary>Collect all case setups</summary>
+            <returns>List if case setups</returns>
         </member>
         <member name="T:PayrollEngine.Client.Model.CaseDocument">
             <summary>The case document client object</summary>
@@ -3047,12 +3055,6 @@
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.CaseField.Clusters">
-            <inheritdoc/>
-        </member>
-        <member name="P:PayrollEngine.Client.Model.CaseField.BuildActions">
-            <inheritdoc/>
-        </member>
-        <member name="P:PayrollEngine.Client.Model.CaseField.ValidateActions">
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.CaseField.Attributes">
@@ -3358,24 +3360,33 @@
             <summary>Extension methods for the <see cref="T:PayrollEngine.Client.Model.CaseSet"/></summary>
         </member>
         <member name="M:PayrollEngine.Client.Model.CaseSetExtensions.FindCase(PayrollEngine.Client.Model.CaseSet,System.String)">
+            <inheritdoc cref="M:PayrollEngine.Client.Model.CaseSetExtensions.&lt;G&gt;$92DCC4749EE6EDA090426A70E2538699.FindCase(System.String)"/>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.CaseSetExtensions.FindCaseField(PayrollEngine.Client.Model.CaseSet,System.String)">
+            <inheritdoc cref="M:PayrollEngine.Client.Model.CaseSetExtensions.&lt;G&gt;$92DCC4749EE6EDA090426A70E2538699.FindCaseField(System.String)"/>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.CaseSetExtensions.EnsureUniqueNames(PayrollEngine.Client.Model.CaseSet)">
+            <inheritdoc cref="M:PayrollEngine.Client.Model.CaseSetExtensions.&lt;G&gt;$92DCC4749EE6EDA090426A70E2538699.EnsureUniqueNames"/>
+        </member>
+        <member name="T:PayrollEngine.Client.Model.CaseSetExtensions.&lt;G&gt;$92DCC4749EE6EDA090426A70E2538699.&lt;M&gt;$877876511CBB1988A17BD95128899350">
+            <param name="caseSet">The case to search</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.CaseSetExtensions.&lt;G&gt;$92DCC4749EE6EDA090426A70E2538699.FindCase(System.String)">
             <summary>
             Find case by name, considering related cases
             </summary>
-            <param name="caseSet">The case to search</param>
             <param name="caseName">The name of the case</param>
             <returns>The value case field matching the name, null on missing case field</returns>
         </member>
-        <member name="M:PayrollEngine.Client.Model.CaseSetExtensions.FindCaseField(PayrollEngine.Client.Model.CaseSet,System.String)">
+        <member name="M:PayrollEngine.Client.Model.CaseSetExtensions.&lt;G&gt;$92DCC4749EE6EDA090426A70E2538699.FindCaseField(System.String)">
             <summary>
             Find case field by name, considering related cases
             </summary>
-            <param name="caseSet">The case to search</param>
             <param name="caseFieldName">The name of the case field</param>
             <returns>The value case field matching the name, null on missing case field</returns>
         </member>
-        <member name="M:PayrollEngine.Client.Model.CaseSetExtensions.EnsureUniqueNames(PayrollEngine.Client.Model.CaseSet)">
+        <member name="M:PayrollEngine.Client.Model.CaseSetExtensions.&lt;G&gt;$92DCC4749EE6EDA090426A70E2538699.EnsureUniqueNames">
             <summary>Ensure unique case names and case field names, including related cases</summary>
-            <param name="caseSet">The derived case to test</param>
             <returns>throws a payroll exception if the derived case is invalid</returns>
         </member>
         <member name="T:PayrollEngine.Client.Model.CaseSetup">
@@ -3628,17 +3639,10 @@
             <returns>The combined result</returns>
         </member>
         <member name="M:PayrollEngine.Client.Model.ClientQueryExtensions.BuildQueryString(PayrollEngine.Client.Model.CaseChangeQuery,System.String,System.Nullable{PayrollEngine.QueryResultType})">
-            <summary>Build a case change query</summary>
-            <param name="query">The query to append</param>
-            <param name="uri">The base URI</param>
-            <param name="resultType">The result type</param>
-            <returns>The combined result</returns>
+            <inheritdoc cref="M:PayrollEngine.Client.Model.ClientQueryExtensions.&lt;G&gt;$5E5F6A6564DE851C7C3D43778E6726A5.BuildQueryString(System.String,System.Nullable{PayrollEngine.QueryResultType})"/>
         </member>
         <member name="M:PayrollEngine.Client.Model.ClientQueryExtensions.AppendQueryString(PayrollEngine.Client.Model.CaseChangeQuery,System.String)">
-            <summary>Append the given object query key and value to the URI</summary>
-            <param name="query">The query to append</param>
-            <param name="uri">The base URI</param>
-            <returns>The combined result</returns>
+            <inheritdoc cref="M:PayrollEngine.Client.Model.ClientQueryExtensions.&lt;G&gt;$5E5F6A6564DE851C7C3D43778E6726A5.AppendQueryString(System.String)"/>
         </member>
         <member name="M:PayrollEngine.Client.Model.ClientQueryExtensions.AppendQueryString(PayrollEngine.Client.Model.PayrollCaseChangeQuery,System.String)">
             <summary>Append the given object query key and value to the URI</summary>
@@ -3655,6 +3659,20 @@
         <member name="M:PayrollEngine.Client.Model.ClientQueryExtensions.AppendQueryString(PayrollEngine.Client.Model.ReportTemplateQuery,System.String)">
             <summary>Append the given object query key and value to the URI</summary>
             <param name="query">The query to append</param>
+            <param name="uri">The base URI</param>
+            <returns>The combined result</returns>
+        </member>
+        <member name="T:PayrollEngine.Client.Model.ClientQueryExtensions.&lt;G&gt;$5E5F6A6564DE851C7C3D43778E6726A5.&lt;M&gt;$7A9629C53BECE0FFAEBDFB52D9ED0C8A">
+            <param name="query">The query to append</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.ClientQueryExtensions.&lt;G&gt;$5E5F6A6564DE851C7C3D43778E6726A5.BuildQueryString(System.String,System.Nullable{PayrollEngine.QueryResultType})">
+            <summary>Build a case change query</summary>
+            <param name="uri">The base URI</param>
+            <param name="resultType">The result type</param>
+            <returns>The combined result</returns>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.ClientQueryExtensions.&lt;G&gt;$5E5F6A6564DE851C7C3D43778E6726A5.AppendQueryString(System.String)">
+            <summary>Append the given object query key and value to the URI</summary>
             <param name="uri">The base URI</param>
             <returns>The combined result</returns>
         </member>
@@ -3736,6 +3754,15 @@
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.Collector.EndExpressionFile">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.Collector.StartActions">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.Collector.ApplyActions">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.Collector.EndActions">
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.Collector.Clusters">
@@ -4480,12 +4507,6 @@
         <member name="P:PayrollEngine.Client.Model.ICaseField.Clusters">
             <summary>The case field clusters</summary>
         </member>
-        <member name="P:PayrollEngine.Client.Model.ICaseField.BuildActions">
-            <summary>The case field build actions</summary>
-        </member>
-        <member name="P:PayrollEngine.Client.Model.ICaseField.ValidateActions">
-            <summary>The case field validate actions</summary>
-        </member>
         <member name="P:PayrollEngine.Client.Model.ICaseField.ValueAttributes">
             <summary>Custom value attributes</summary>
         </member>
@@ -4728,6 +4749,15 @@
         </member>
         <member name="P:PayrollEngine.Client.Model.ICollector.EndExpressionFile">
             <summary>Expression used while the collector is ended file</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.ICollector.StartActions">
+            <summary>The collector start actions</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.ICollector.ApplyActions">
+            <summary>The collector apply actions</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.ICollector.EndActions">
+            <summary>The collector end actions</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.ICollector.Clusters">
             <summary>The collector clusters</summary>
@@ -5611,6 +5641,9 @@
         <member name="P:PayrollEngine.Client.Model.IRegulation.NameLocalizations">
             <summary>The localized regulation names</summary>
         </member>
+        <member name="P:PayrollEngine.Client.Model.IRegulation.Namespace">
+            <summary>The regulation namespace</summary>
+        </member>
         <member name="P:PayrollEngine.Client.Model.IRegulation.Version">
             <summary>The regulation version, unique per regulation name</summary>
         </member>
@@ -5970,6 +6003,12 @@
         </member>
         <member name="P:PayrollEngine.Client.Model.IWageType.ResultExpressionFile">
             <summary>Expression: calculates of the wage type result attributes file</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.IWageType.ValueActions">
+            <summary>The wage type value actions</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.IWageType.ResultActions">
+            <summary>The wage type result actions</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.IWageType.Clusters">
             <summary>The wage type clusters</summary>
@@ -7211,6 +7250,9 @@
         <member name="P:PayrollEngine.Client.Model.Regulation.NameLocalizations">
             <inheritdoc/>
         </member>
+        <member name="P:PayrollEngine.Client.Model.Regulation.Namespace">
+            <inheritdoc/>
+        </member>
         <member name="P:PayrollEngine.Client.Model.Regulation.Version">
             <inheritdoc/>
         </member>
@@ -7899,6 +7941,12 @@
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.WageType.ResultExpressionFile">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.WageType.ValueActions">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.WageType.ResultActions">
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.WageType.Collectors">
@@ -11191,6 +11239,9 @@
         <member name="M:PayrollEngine.Client.Service.Api.TenantService.GetSystemScriptActionsAsync``1(System.Int32,PayrollEngine.FunctionType)">
             <inheritdoc />
         </member>
+        <member name="M:PayrollEngine.Client.Service.Api.TenantService.GetSystemScriptActionPropertiesAsync``1(System.Int32,PayrollEngine.FunctionType,System.Boolean)">
+            <inheritdoc />
+        </member>
         <member name="M:PayrollEngine.Client.Service.Api.TenantService.ExecuteReportQueryAsync(System.Int32,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
             <inheritdoc/>
         </member>
@@ -12383,7 +12434,14 @@
             <summary>Get the system script actions</summary>
             <param name="tenantId">The tenant id</param>
             <param name="functionType">The function type</param>
-            <returns>The tenant shared regulations</returns>
+            <returns>The system action scripts</returns>
+        </member>
+        <member name="M:PayrollEngine.Client.Service.ITenantService.GetSystemScriptActionPropertiesAsync``1(System.Int32,PayrollEngine.FunctionType,System.Boolean)">
+            <summary>Get the system script action properties</summary>
+            <param name="tenantId">The tenant id</param>
+            <param name="functionType">The function type</param>
+            <param name="readOnly">Read-only properties only (default: true)</param>
+            <returns>The system action script properties</returns>
         </member>
         <member name="M:PayrollEngine.Client.Service.ITenantService.ExecuteReportQueryAsync(System.Int32,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
             <summary>Execute a report query</summary>
@@ -12639,8 +12697,14 @@
         <member name="M:PayrollEngine.Client.TenantApiEndpoints.TenantSharedRegulationsUrl(System.Int32)">
             <summary>The tenant shared regulations URL</summary>
         </member>
+        <member name="M:PayrollEngine.Client.TenantApiEndpoints.TenantSystemUrl(System.Int32)">
+            <summary>The tenant system URL</summary>
+        </member>
         <member name="M:PayrollEngine.Client.TenantApiEndpoints.TenantActionsUrl(System.Int32)">
             <summary>The tenant actions URL</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.TenantApiEndpoints.TenantActionPropertiesUrl(System.Int32)">
+            <summary>The tenant action properties URL</summary>
         </member>
         <member name="M:PayrollEngine.Client.TenantApiEndpoints.TenantQueriesUrl(System.Int32)">
             <summary>The tenant queries URL</summary>

@@ -22,9 +22,17 @@ public static class TenantApiEndpoints
     public static string TenantSharedRegulationsUrl(int tenantId) =>
         $"{TenantUrl(tenantId)}/shared/regulations";
 
+    /// <summary>The tenant system URL</summary>
+    public static string TenantSystemUrl(int tenantId) =>
+        $"{TenantUrl(tenantId)}/system";
+
     /// <summary>The tenant actions URL</summary>
     public static string TenantActionsUrl(int tenantId) =>
-        $"{TenantUrl(tenantId)}/actions";
+        $"{TenantSystemUrl(tenantId)}/actions";
+
+    /// <summary>The tenant action properties URL</summary>
+    public static string TenantActionPropertiesUrl(int tenantId) =>
+        $"{TenantSystemUrl(tenantId)}/properties";
 
     /// <summary>The tenant queries URL</summary>
     public static string TenantQueriesUrl(int tenantId) =>

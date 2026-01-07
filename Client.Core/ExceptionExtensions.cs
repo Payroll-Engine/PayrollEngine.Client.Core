@@ -10,86 +10,88 @@ namespace PayrollEngine.Client;
 /// <summary>Extension methods for <see cref="Exception"/></summary>
 public static class ExceptionExtensions
 {
-    /// <summary>Get the exception message from an API error</summary>
     /// <param name="exception">The exception</param>
-    /// <returns>The payroll API error, null on others errors</returns>
-    public static string GetApiErrorMessage(this Exception exception)
+    extension(Exception exception)
     {
-        if (exception == null)
+        /// <summary>Get the exception message from an API error</summary>
+        /// <returns>The payroll API error, null on others errors</returns>
+        public string GetApiErrorMessage()
         {
-            return null;
-        }
-
-        // api error
-        ApiError apiError = GetApiError(exception);
-        if (apiError != null)
-        {
-            var buffer = new StringBuilder();
-            buffer.AppendLine(apiError.Title);
-            if (apiError.Errors != null)
+            if (exception == null)
             {
-                foreach (var error in apiError.Errors)
+                return null;
+            }
+
+            // api error
+            ApiError apiError = exception.GetApiError();
+            if (apiError != null)
+            {
+                var buffer = new StringBuilder();
+                buffer.AppendLine(apiError.Title);
+                if (apiError.Errors != null)
                 {
-                    foreach (var errorValue in error.Value)
+                    foreach (var error in apiError.Errors)
                     {
-                        buffer.AppendLine($"{error.Key}: {errorValue.Trim()}");
+                        foreach (var errorValue in error.Value)
+                        {
+                            buffer.AppendLine($"{error.Key}: {errorValue.Trim()}");
+                        }
                     }
                 }
+                return buffer.ToString().Trim('\r', '\n', '"');
             }
-            return buffer.ToString().Trim('\r', '\n', '"');
-        }
 
-        // api exception
-        var apiException = GetApiException(exception);
-        if (apiException != null)
-        {
-            return apiException.Message;
-        }
-
-        // script errors
-        var scriptErrors = GetScriptErrors(exception);
-        if (scriptErrors != null)
-        {
-            return string.Join("\n", scriptErrors);
-        }
-
-        // plain exception message
-        // use first line only, remove the stack trace lines
-        return GetPlainErrorMessage(exception, maxLines: 1);
-    }
-
-    /// <summary>Get the exception message from an API error</summary>
-    /// <param name="exception">The exception</param>
-    /// <returns>The payroll API error, null on others errors</returns>
-    private static ApiError GetApiError(this Exception exception)
-    {
-        if (exception == null)
-        {
-            return null;
-        }
-
-        var message = GetExceptionMessage(exception);
-
-        // test for api error json
-        if (!message.StartsWith('{') || !message.EndsWith('}') ||
-            !message.Contains(nameof(ApiError.Status), StringComparison.InvariantCultureIgnoreCase))
-        {
-            return null;
-        }
-
-        try
-        {
-            var apiError = JsonSerializer.Deserialize<ApiError>(message);
-            if (apiError != null && apiError.Status != 0)
+            // api exception
+            var apiException = GetApiException(exception);
+            if (apiException != null)
             {
-                return apiError;
+                return apiException.Message;
             }
+
+            // script errors
+            var scriptErrors = GetScriptErrors(exception);
+            if (scriptErrors != null)
+            {
+                return string.Join("\n", scriptErrors);
+            }
+
+            // plain exception message
+            // use first line only, remove the stack trace lines
+            return GetPlainErrorMessage(exception, maxLines: 1);
         }
-        catch
+
+        /// <summary>Get the exception message from an API error</summary>
+        /// <returns>The payroll API error, null on others errors</returns>
+        private ApiError GetApiError()
         {
+            if (exception == null)
+            {
+                return null;
+            }
+
+            var message = GetExceptionMessage(exception);
+
+            // test for api error json
+            if (!message.StartsWith('{') || !message.EndsWith('}') ||
+                !message.Contains(nameof(ApiError.Status), StringComparison.InvariantCultureIgnoreCase))
+            {
+                return null;
+            }
+
+            try
+            {
+                var apiError = JsonSerializer.Deserialize<ApiError>(message);
+                if (apiError != null && apiError.Status != 0)
+                {
+                    return apiError;
+                }
+            }
+            catch
+            {
+                return null;
+            }
             return null;
         }
-        return null;
     }
 
     /// <summary>Get the exception message from an API exception</summary>

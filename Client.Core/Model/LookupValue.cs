@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
-using PayrollEngine.Serialization;
 using JsonSerializer = System.Text.Json.JsonSerializer;
+using PayrollEngine.Serialization;
 
 namespace PayrollEngine.Client.Model;
 
@@ -13,16 +13,14 @@ public class LookupValue : ModelBase, ILookupValue
     [JsonPropertyOrder(100)]
     public string Key { get; set; }
 
-    private object[] keyValues;
-
     /// <summary>The lookup key values (client only)</summary>
     [JsonPropertyOrder(101)]
     public object[] KeyValues
     {
-        get => keyValues;
+        get;
         set
         {
-            keyValues = value;
+            field = value;
             if (value != null && value.Any())
             {
                 Key = JsonSerializer.Serialize(value);

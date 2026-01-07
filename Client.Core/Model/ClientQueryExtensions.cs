@@ -17,34 +17,36 @@ public static class ClientQueryExtensions
         return uri;
     }
 
-    /// <summary>Build a case change query</summary>
     /// <param name="query">The query to append</param>
-    /// <param name="uri">The base URI</param>
-    /// <param name="resultType">The result type</param>
-    /// <returns>The combined result</returns>
-    public static string BuildQueryString(this CaseChangeQuery query, string uri,
-        QueryResultType? resultType = null)
+    extension(CaseChangeQuery query)
     {
-        // ensure query
-        query ??= new();
-        query.Result = resultType;
-        return query.AppendQueryString(uri);
-    }
-
-    /// <summary>Append the given object query key and value to the URI</summary>
-    /// <param name="query">The query to append</param>
-    /// <param name="uri">The base URI</param>
-    /// <returns>The combined result</returns>
-    public static string AppendQueryString(this CaseChangeQuery query, string uri)
-    {
-        if (query != null)
+        /// <summary>Build a case change query</summary>
+        /// <param name="uri">The base URI</param>
+        /// <param name="resultType">The result type</param>
+        /// <returns>The combined result</returns>
+        public string BuildQueryString(string uri,
+            QueryResultType? resultType = null)
         {
-            uri = QueryExtensions.AppendQueryString(query, uri)
-                .AddQueryString(nameof(query.DivisionId), query.DivisionId)
-                .AddQueryString(nameof(query.Culture), query.Culture)
-                .AddQueryString(nameof(query.ExcludeGlobal), query.ExcludeGlobal);
+            // ensure query
+            query ??= new();
+            query.Result = resultType;
+            return query.AppendQueryString(uri);
         }
-        return uri;
+
+        /// <summary>Append the given object query key and value to the URI</summary>
+        /// <param name="uri">The base URI</param>
+        /// <returns>The combined result</returns>
+        public string AppendQueryString(string uri)
+        {
+            if (query != null)
+            {
+                uri = QueryExtensions.AppendQueryString(query, uri)
+                    .AddQueryString(nameof(query.DivisionId), query.DivisionId)
+                    .AddQueryString(nameof(query.Culture), query.Culture)
+                    .AddQueryString(nameof(query.ExcludeGlobal), query.ExcludeGlobal);
+            }
+            return uri;
+        }
     }
 
     /// <summary>Append the given object query key and value to the URI</summary>

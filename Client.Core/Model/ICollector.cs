@@ -56,6 +56,15 @@ public interface ICollector : IModel, IAttributeObject, IKeyEquatable<ICollector
     /// <summary>Expression used while the collector is ended file</summary>
     string EndExpressionFile { get; set; }
 
+    /// <summary>The collector start actions</summary>
+    List<string> StartActions { get; set; }
+
+    /// <summary>The collector apply actions</summary>
+    List<string> ApplyActions { get; set; }
+
+    /// <summary>The collector end actions</summary>
+    List<string> EndActions { get; set; }
+
     /// <summary>The collector clusters</summary>
     List<string> Clusters { get; set; }
 }

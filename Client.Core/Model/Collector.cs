@@ -79,10 +79,22 @@ public class Collector : ModelBase, ICollector, INameObject
 
     /// <inheritdoc/>
     [JsonPropertyOrder(117)]
-    public List<string> Clusters { get; set; }
+    public List<string> StartActions { get; set; }
 
     /// <inheritdoc/>
     [JsonPropertyOrder(118)]
+    public List<string> ApplyActions { get; set; }
+
+    /// <inheritdoc/>
+    [JsonPropertyOrder(119)]
+    public List<string> EndActions { get; set; }
+
+    /// <inheritdoc/>
+    [JsonPropertyOrder(120)]
+    public List<string> Clusters { get; set; }
+
+    /// <inheritdoc/>
+    [JsonPropertyOrder(121)]
     public Dictionary<string, object> Attributes { get; set; }
 
     /// <summary>Initializes a new instance</summary>

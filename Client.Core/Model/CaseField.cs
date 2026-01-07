@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using System.ComponentModel.DataAnnotations;
 
 namespace PayrollEngine.Client.Model;
 
@@ -104,14 +104,6 @@ public class CaseField : ModelBase, ICaseField, INameObject
     /// <inheritdoc/>
     [JsonPropertyOrder(123)]
     public List<string> Clusters { get; set; }
-
-    /// <inheritdoc/>
-    [JsonPropertyOrder(124)]
-    public List<string> BuildActions { get; set; }
-
-    /// <inheritdoc/>
-    [JsonPropertyOrder(125)]
-    public List<string> ValidateActions { get; set; }
 
     /// <inheritdoc/>
     [JsonPropertyOrder(126)]

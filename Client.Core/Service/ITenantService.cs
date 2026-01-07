@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using PayrollEngine.Client.Model;
+﻿using System.Threading.Tasks;
+using System.Collections.Generic;
 using PayrollEngine.Data;
+using PayrollEngine.Client.Model;
 
 namespace PayrollEngine.Client.Service;
 
@@ -23,8 +23,17 @@ public interface ITenantService : ICrudService<ITenant, RootServiceContext, Quer
     /// <summary>Get the system script actions</summary>
     /// <param name="tenantId">The tenant id</param>
     /// <param name="functionType">The function type</param>
-    /// <returns>The tenant shared regulations</returns>
+    /// <returns>The system action scripts</returns>
     Task<List<TAction>> GetSystemScriptActionsAsync<TAction>(int tenantId, FunctionType functionType = FunctionType.All)
+        where TAction : ActionInfo;
+
+    /// <summary>Get the system script action properties</summary>
+    /// <param name="tenantId">The tenant id</param>
+    /// <param name="functionType">The function type</param>
+    /// <param name="readOnly">Read-only properties only (default: true)</param>
+    /// <returns>The system action script properties</returns>
+    Task<List<TAction>> GetSystemScriptActionPropertiesAsync<TAction>(int tenantId,
+        FunctionType functionType = FunctionType.All, bool readOnly = true)
         where TAction : ActionInfo;
 
     /// <summary>Execute a report query</summary>

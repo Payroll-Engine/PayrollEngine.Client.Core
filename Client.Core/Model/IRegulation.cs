@@ -12,6 +12,9 @@ public interface IRegulation : IModel, IAttributeObject, IKeyEquatable<IRegulati
     /// <summary>The localized regulation names</summary>
     Dictionary<string, string> NameLocalizations { get; set; }
 
+    /// <summary>The regulation namespace</summary>
+    string Namespace { get; set; }
+
     /// <summary>The regulation version, unique per regulation name</summary>
     int Version { get; set; }
 

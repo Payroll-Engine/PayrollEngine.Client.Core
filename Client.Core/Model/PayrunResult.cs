@@ -47,12 +47,10 @@ public class PayrunResult : ModelBase, IPayrunResult, INameObject
     public decimal? NumericValue { get; set; }
 
     /// <inheritdoc/>
-    [Required]
     [JsonPropertyOrder(109)]
     public DateTime Start { get; set; }
 
     /// <inheritdoc/>
-    [Required]
     [JsonPropertyOrder(110)]
     public DateTime End { get; set; }
 

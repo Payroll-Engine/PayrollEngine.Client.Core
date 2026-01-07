@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using PayrollEngine.Client.Model;
-using PayrollEngine.Data;
+using System.Collections.Generic;
 using Task = System.Threading.Tasks.Task;
+using PayrollEngine.Data;
+using PayrollEngine.Client.Model;
 
 namespace PayrollEngine.Client.Service.Api;
 
@@ -145,6 +145,17 @@ public class TenantService : ServiceBase, ITenantService
     {
         var url = TenantApiEndpoints.TenantActionsUrl(tenantId)
             .AddQueryString(nameof(functionType), functionType);
+        return await HttpClient.GetCollectionAsync<TAction>(url);
+    }
+
+    /// <inheritdoc />
+    public virtual async Task<List<TAction>> GetSystemScriptActionPropertiesAsync<TAction>(int tenantId,
+        FunctionType functionType, bool readOnly = true)
+        where TAction : ActionInfo
+    {
+        var url = TenantApiEndpoints.TenantActionPropertiesUrl(tenantId)
+            .AddQueryString(nameof(functionType), functionType)
+            .AddQueryString(nameof(readOnly), readOnly);
         return await HttpClient.GetCollectionAsync<TAction>(url);
     }
 

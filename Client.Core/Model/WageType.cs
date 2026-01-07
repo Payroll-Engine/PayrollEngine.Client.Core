@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using System.ComponentModel.DataAnnotations;
 
 namespace PayrollEngine.Client.Model;
 
@@ -64,18 +64,26 @@ public class WageType : ModelBase, IWageType, INameObject
 
     /// <inheritdoc/>
     [JsonPropertyOrder(112)]
-    public List<string> Collectors { get; set; }
-
+    public List<string> ValueActions { get; set; }
+    
     /// <inheritdoc/>
     [JsonPropertyOrder(113)]
-    public List<string> CollectorGroups { get; set; }
+    public List<string> ResultActions { get; set; }
 
     /// <inheritdoc/>
     [JsonPropertyOrder(114)]
-    public List<string> Clusters { get; set; }
+    public List<string> Collectors { get; set; }
 
     /// <inheritdoc/>
     [JsonPropertyOrder(115)]
+    public List<string> CollectorGroups { get; set; }
+
+    /// <inheritdoc/>
+    [JsonPropertyOrder(116)]
+    public List<string> Clusters { get; set; }
+
+    /// <inheritdoc/>
+    [JsonPropertyOrder(117)]
     public Dictionary<string, object> Attributes { get; set; }
 
     /// <summary>Initializes a new instance</summary>

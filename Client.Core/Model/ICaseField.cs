@@ -78,12 +78,6 @@ public interface ICaseField : IModel, IAttributeObject, IKeyEquatable<ICaseField
     /// <summary>The case field clusters</summary>
     List<string> Clusters { get; set; }
 
-    /// <summary>The case field build actions</summary>
-    List<string> BuildActions { get; set; }
-
-    /// <summary>The case field validate actions</summary>
-    List<string> ValidateActions { get; set; }
-
     /// <summary>Custom value attributes</summary>
     Dictionary<string, object> ValueAttributes { get; set; }
 }

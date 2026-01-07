@@ -3,13 +3,13 @@
 #define LOG_STOPWATCH
 #endif
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using PayrollEngine.Serialization;
+using System.Collections.Generic;
 using Task = System.Threading.Tasks.Task;
+using PayrollEngine.Serialization;
 
 namespace PayrollEngine.Client;
 
@@ -832,7 +832,7 @@ public sealed class PayrollHttpClient : IDisposable
     /// <summary>Ensure valid http response</summary>
     /// <param name="response">The http response message</param>
     /// <exception cref="HttpRequestException">Throws an exception if response has invalid status code</exception>
-    private async Task EnsureSuccessResponse(HttpResponseMessage response)
+    private static async Task EnsureSuccessResponse(HttpResponseMessage response)
     {
         if (response.IsSuccessStatusCode)
         {
