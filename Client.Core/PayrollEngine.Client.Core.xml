@@ -8477,7 +8477,7 @@
             <param name="address">The address to test</param>
             <returns>True if internet connection is available</returns>
         </member>
-        <member name="M:PayrollEngine.Client.PayrollHttpClient.GetRecordId(System.Net.Http.HttpResponseMessage)">
+        <member name="M:PayrollEngine.Client.PayrollHttpClient.GetRecordIdAsync(System.Net.Http.HttpResponseMessage)">
             <summary>Get record id from the response (last uri segment)</summary>
             <param name="response">The http response message</param>
             <returns>The new record id</returns>

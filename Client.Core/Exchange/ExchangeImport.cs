@@ -585,7 +585,9 @@ public sealed class ExchangeImport : ExchangeImportVisitor
         // create new payrun job (POST only)
         using var response = await HttpClient.PostAsync(PayrunApiEndpoints.PayrunJobsUrl(tenant.Id),
             DefaultJsonSerializer.SerializeJson(invocation));
-        var payrunJobId = PayrollHttpClient.GetRecordId(response);
+
+        // payrun job id
+        var payrunJobId =  await PayrollHttpClient.GetRecordIdAsync(response);
         if (payrunJobId <= 0)
         {
             throw new PayrollException($"Error while creating the payrun job {invocation.Name}.");

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.Text.Json;
 using Task = System.Threading.Tasks.Task;
 using PayrollEngine.Serialization;
 
@@ -223,15 +224,32 @@ public sealed class PayrollHttpClient : IDisposable
     /// <summary>Get record id from the response (last uri segment)</summary>
     /// <param name="response">The http response message</param>
     /// <returns>The new record id</returns>
-    public static int GetRecordId(HttpResponseMessage response)
+    public static async Task<int> GetRecordIdAsync(HttpResponseMessage response)
     {
         if (response == null)
         {
             throw new ArgumentNullException(nameof(response));
         }
-        return response.Headers.Location == null ?
-            0 :
-            response.Headers.Location.GetLastSegmentId();
+
+        // location header
+        if (response.Headers.Location != null && 
+            response.Headers.Location.TryGetLastSegmentId(out var id))
+        {
+            return id;
+        }
+
+        // created object
+        var json = await response.Content.ReadAsStringAsync();
+        if (!string.IsNullOrWhiteSpace(json))
+        {
+            var obj = DefaultJsonSerializer.Deserialize<Dictionary<string, object>>(json);
+            if (obj.TryGetValue("id", out var objId) && objId is JsonElement jsonValue)
+            {
+                return jsonValue.GetInt32();
+            }
+        }
+
+        return 0;
     }
 
     /// <summary>Get backend resource response</summary>
@@ -299,7 +317,7 @@ public sealed class PayrollHttpClient : IDisposable
         {
             return default;
         }
-        return string.IsNullOrWhiteSpace(json) ? default : DefaultJsonSerializer.Deserialize<T>(json);
+        return DefaultJsonSerializer.Deserialize<T>(json);
     }
 
     /// <summary>Get backend resource with request content</summary>
@@ -425,7 +443,7 @@ public sealed class PayrollHttpClient : IDisposable
 
         if (responseObj is IModel model && model.Id == 0)
         {
-            model.Id = GetRecordId(response);
+            model.Id = await GetRecordIdAsync(response);
         }
         LogPost(requestUri, responseObj);
         return responseObj;
@@ -465,7 +483,7 @@ public sealed class PayrollHttpClient : IDisposable
 
         if (responseObj is IModel model && model.Id == 0)
         {
-            model.Id = GetRecordId(response);
+            model.Id = await GetRecordIdAsync(response);
         }
         LogPost(requestUri, responseObj);
         return responseObj;
@@ -505,7 +523,7 @@ public sealed class PayrollHttpClient : IDisposable
 
         if (responseObj is IModel model && model.Id == 0)
         {
-            model.Id = GetRecordId(response);
+            model.Id = await GetRecordIdAsync(response);
         }
         LogPost(requestUri, responseObj);
         return responseObj;
@@ -666,7 +684,7 @@ public sealed class PayrollHttpClient : IDisposable
 
             using var response = await HttpClient.PostAsync(requestUri, DefaultJsonSerializer.SerializeJson(newObject));
             await EnsureSuccessResponse(response);
-            newObject.Id = GetRecordId(response);
+            newObject.Id = await GetRecordIdAsync(response);
             if (newObject.Id <= 0)
             {
                 throw new PayrollException($"error while creating new record of object {newObject}.");
