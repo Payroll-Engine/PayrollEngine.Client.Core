@@ -89,7 +89,7 @@
 	  </None>
 	</ItemGroup>
 	<ItemGroup>
-	  <PackageReference Include="PayrollEngine.Core" Version="0.9.0-beta.14" />
+	  <PackageReference Include="PayrollEngine.Core" Version="0.9.0-beta.15" />
 	</ItemGroup>
 
 	<!--  build json schema -->
