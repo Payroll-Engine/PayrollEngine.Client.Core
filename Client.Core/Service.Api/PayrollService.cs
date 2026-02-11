@@ -492,6 +492,29 @@ public class PayrollService : ServiceBase, IPayrollService
     }
 
     /// <inheritdoc/>
+    public virtual async Task<List<LookupRangeResult>> GetLookupRangesAsync(PayrollServiceContext context,
+        IEnumerable<string> lookupNames, decimal? rangeValue = null,
+        DateTime? regulationDate = null, DateTime? evaluationDate = null, string culture = null)
+    {
+        if (context == null)
+        {
+            throw new ArgumentNullException(nameof(context));
+        }
+        if (lookupNames == null)
+        {
+            throw new ArgumentException(nameof(lookupNames));
+        }
+
+        var uri = PayrollApiEndpoints.PayrollLookupRangesUrl(context.TenantId, context.PayrollId)
+            .AddCollectionQueryString(nameof(lookupNames), lookupNames)
+            .AddQueryString(nameof(rangeValue), rangeValue)
+            .AddQueryString(nameof(regulationDate), regulationDate)
+            .AddQueryString(nameof(evaluationDate), evaluationDate)
+            .AddQueryString(nameof(culture), culture);
+        return await HttpClient.GetCollectionAsync<LookupRangeResult>(uri);
+    }
+
+    /// <inheritdoc/>
     public virtual async Task<List<TReportSet>> GetReportsAsync<TReportSet>(PayrollServiceContext context,
         IEnumerable<string> reportNames = null, OverrideType? overrideType = null, UserType? userType = null,
         DateTime? regulationDate = null, DateTime? evaluationDate = null) where TReportSet : class, IReportSet

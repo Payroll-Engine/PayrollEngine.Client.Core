@@ -99,6 +99,10 @@ public static class PayrollApiEndpoints
     public static string PayrollLookupValuesDataUrl(int tenantId, int payrollId) =>
         $"{PayrollLookupValuesUrl(tenantId, payrollId)}/data";
 
+    /// <summary>The payroll lookup ranges URL</summary>
+    public static string PayrollLookupRangesUrl(int tenantId, int payrollId) =>
+        $"{PayrollLookupsUrl(tenantId, payrollId)}/ranges";
+
     /// <summary>The payroll reports URL</summary>
     public static string PayrollReportsUrl(int tenantId, int payrollId) =>
         $"{PayrollUrl(tenantId, payrollId)}/reports";

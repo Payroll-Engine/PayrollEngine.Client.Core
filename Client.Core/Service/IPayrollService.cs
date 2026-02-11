@@ -229,6 +229,18 @@ public interface IPayrollService : ICrudService<IPayroll, TenantServiceContext, 
     Task<LookupValueData> GetLookupValueDataAsync(PayrollServiceContext context, string lookupName, string lookupKey = null,
         decimal? rangeValue = null, DateTime? regulationDate = null, DateTime? evaluationDate = null, string culture = null);
 
+    /// <summary>Get payroll lookup range brackets</summary>
+    /// <param name="context">The service context</param>
+    /// <param name="lookupNames">The lookup names (case-insensitive)</param>
+    /// <param name="rangeValue">Optional value to find matching bracket(s)</param>
+    /// <param name="regulationDate">The regulation date (default: UTC now)</param>
+    /// <param name="evaluationDate">The evaluation date (default: UTC now)</param>
+    /// <param name="culture">The content culture</param>
+    /// <returns>The lookup range results</returns>
+    Task<List<LookupRangeResult>> GetLookupRangesAsync(PayrollServiceContext context, IEnumerable<string> lookupNames,
+        decimal? rangeValue = null, DateTime? regulationDate = null, DateTime? evaluationDate = null,
+        string culture = null);
+
     /// <summary>Get payroll report sets</summary>
     /// <param name="context">The service context</param>
     /// <param name="reportNames">The report names filter (default is all)</param>

@@ -5049,6 +5049,66 @@
         <member name="P:PayrollEngine.Client.Model.ILookupData.RangeSize">
             <summary>The lookup range size</summary>
         </member>
+        <member name="T:PayrollEngine.Client.Model.ILookupRangeBracket">
+            <summary>
+            A lookup range bracket with computed bounds
+            </summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.ILookupRangeBracket.Key">
+            <summary>
+            The lookup value key
+            </summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.ILookupRangeBracket.Value">
+            <summary>
+            The lookup value as JSON
+            </summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.ILookupRangeBracket.RangeStart">
+            <summary>
+            The range start value
+            </summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.ILookupRangeBracket.RangeEnd">
+            <summary>
+            The range end value (unbound bracket: Decimal.MaxValue)
+            </summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.ILookupRangeBracket.RangeValue">
+            <summary>
+            The brackets range value
+            </summary>
+            <remarks>
+            Threshold lookup: value within the matching bracket.
+            Progressive lookup: matching bracket value range, except the last one which the value within his range.
+            Other: null.
+            </remarks>
+        </member>
+        <member name="T:PayrollEngine.Client.Model.ILookupRangeResult">
+            <summary>
+            Result of a lookup range bracket computation
+            </summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.ILookupRangeResult.LookupName">
+            <summary>
+            The lookup name
+            </summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.ILookupRangeResult.RangeMode">
+            <summary>
+            The lookup range mode
+            </summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.ILookupRangeResult.RangeSize">
+            <summary>
+            The lookup range size
+            </summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.ILookupRangeResult.Brackets">
+            <summary>
+            Range brackets
+            </summary>
+        </member>
         <member name="T:PayrollEngine.Client.Model.ILookupSet">
             <summary>Lookup including the lookup value</summary>
         </member>
@@ -6262,6 +6322,59 @@
         <member name="M:PayrollEngine.Client.Model.LookupData.ToString">
             <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
             <returns>A <see cref="T:System.String" /> that represents this instance</returns>
+        </member>
+        <member name="T:PayrollEngine.Client.Model.LookupRangeBracket">
+            <summary>
+            A lookup range bracket with computed bounds
+            </summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.LookupRangeBracket.Key">
+            <summary>
+            The lookup value key
+            </summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.LookupRangeBracket.Value">
+            <summary>
+            The lookup value as JSON
+            </summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.LookupRangeBracket.RangeStart">
+            <summary>
+            The range start (lower bound)
+            </summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.LookupRangeBracket.RangeEnd">
+            <summary>
+            The range end (upper bound), Decimal.MaxValue for unbounded last bracket
+            </summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.LookupRangeBracket.RangeValue">
+            <summary>
+            The original range value from the lookup value
+            </summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.LookupRangeBracket.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="T:PayrollEngine.Client.Model.LookupRangeResult">
+            <summary>
+            Result of a lookup range bracket computation
+            </summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.LookupRangeResult.LookupName">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.LookupRangeResult.RangeMode">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.LookupRangeResult.RangeSize">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.LookupRangeResult.Brackets">
+            <inheritdoc/>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.LookupRangeResult.ToString">
+            <inheritdoc/>
         </member>
         <member name="T:PayrollEngine.Client.Model.LookupSet">
             <summary>Lookup including the lookup value</summary>
@@ -8337,6 +8450,9 @@
         </member>
         <member name="M:PayrollEngine.Client.PayrollApiEndpoints.PayrollLookupValuesDataUrl(System.Int32,System.Int32)">
             <summary>The payroll lookup values data URL</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.PayrollApiEndpoints.PayrollLookupRangesUrl(System.Int32,System.Int32)">
+            <summary>The payroll lookup ranges URL</summary>
         </member>
         <member name="M:PayrollEngine.Client.PayrollApiEndpoints.PayrollReportsUrl(System.Int32,System.Int32)">
             <summary>The payroll reports URL</summary>
@@ -10749,6 +10865,9 @@
         <member name="M:PayrollEngine.Client.Service.Api.PayrollService.GetLookupValueDataAsync(PayrollEngine.Client.Service.PayrollServiceContext,System.String,System.String,System.Nullable{System.Decimal},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String)">
             <inheritdoc/>
         </member>
+        <member name="M:PayrollEngine.Client.Service.Api.PayrollService.GetLookupRangesAsync(PayrollEngine.Client.Service.PayrollServiceContext,System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Decimal},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String)">
+            <inheritdoc/>
+        </member>
         <member name="M:PayrollEngine.Client.Service.Api.PayrollService.GetReportsAsync``1(PayrollEngine.Client.Service.PayrollServiceContext,System.Collections.Generic.IEnumerable{System.String},System.Nullable{PayrollEngine.OverrideType},System.Nullable{PayrollEngine.UserType},System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
             <inheritdoc/>
         </member>
@@ -12175,6 +12294,16 @@
             <param name="evaluationDate">The evaluation date (default: UTC now)</param>
             <param name="culture">The culture</param>
             <returns>The lookup value data</returns>
+        </member>
+        <member name="M:PayrollEngine.Client.Service.IPayrollService.GetLookupRangesAsync(PayrollEngine.Client.Service.PayrollServiceContext,System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Decimal},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String)">
+            <summary>Get payroll lookup range brackets</summary>
+            <param name="context">The service context</param>
+            <param name="lookupNames">The lookup names (case-insensitive)</param>
+            <param name="rangeValue">Optional value to find matching bracket(s)</param>
+            <param name="regulationDate">The regulation date (default: UTC now)</param>
+            <param name="evaluationDate">The evaluation date (default: UTC now)</param>
+            <param name="culture">The content culture</param>
+            <returns>The lookup range results</returns>
         </member>
         <member name="M:PayrollEngine.Client.Service.IPayrollService.GetReportsAsync``1(PayrollEngine.Client.Service.PayrollServiceContext,System.Collections.Generic.IEnumerable{System.String},System.Nullable{PayrollEngine.OverrideType},System.Nullable{PayrollEngine.UserType},System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
             <summary>Get payroll report sets</summary>
