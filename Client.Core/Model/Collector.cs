@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using System.ComponentModel.DataAnnotations;
 
 namespace PayrollEngine.Client.Model;
 
@@ -31,7 +32,8 @@ public class Collector : ModelBase, ICollector, INameObject
 
     /// <inheritdoc/>
     [JsonPropertyOrder(105)]
-    public ValueType ValueType { get; set; } = ValueType.Decimal;
+    [DefaultValue(ValueType.Money)]
+    public ValueType ValueType { get; set; } = ValueType.Money;
 
     /// <inheritdoc/>
     [JsonPropertyOrder(106)]

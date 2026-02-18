@@ -49,3 +49,6 @@ The configuration of the Payroll HTTP client is determined by the following prio
 Supported runtime environment variables:
 - *PayrollEngineSchemaDir* - the Json schema destination directory (optional)
 - *PayrollEnginePackageDir* - the NuGet package destination directory (optional)
+
+## Third party components
+- YAML serialization with [YamlDotNet](https://github.com/aaubry/YamlDotNet) - license `MIT`

@@ -5,22 +5,25 @@ using PayrollEngine.Serialization;
 
 namespace PayrollEngine.Client.Exchange;
 
-/// <summary>Write the exchange model to a JSON file</summary>
-public static class ExchangeWriter
+/// <summary>Write model to JSON file</summary>
+public static class JsonWriter
 {
     /// <summary>Writes the specified provider</summary>
-    /// <param name="exchange">The provider</param>
+    /// <param name="obj">The provider</param>
     /// <param name="fileName">Name of the file</param>
-    public static async Task WriteAsync(Model.Exchange exchange, string fileName)
+    public static async Task ToFileAsync<T>(T obj, string fileName) where T : class
     {
-        if (exchange == null)
+        if (obj == null)
         {
-            throw new ArgumentNullException(nameof(exchange));
+            throw new ArgumentNullException(nameof(obj));
         }
         if (string.IsNullOrWhiteSpace(fileName))
         {
             throw new ArgumentException(nameof(fileName));
         }
+
+        // serialize
+        var json = DefaultJsonSerializer.Serialize(obj);
 
         // target folder
         var fileInfo = new FileInfo(fileName);
@@ -29,12 +32,23 @@ public static class ExchangeWriter
             Directory.CreateDirectory(fileInfo.DirectoryName);
         }
 
+        // skip same existing file
+        if (File.Exists(fileName))
+        {
+            var existing = await File.ReadAllTextAsync(fileName);
+            if (string.Equals(existing, json))
+            {
+                return;
+            }
+        }
+        
         // export file
         if (File.Exists(fileInfo.FullName))
         {
             File.Delete(fileInfo.FullName);
         }
-        var json = DefaultJsonSerializer.Serialize(exchange);
+
+        // write file
         await File.WriteAllTextAsync(fileInfo.FullName, json);
     }
 }

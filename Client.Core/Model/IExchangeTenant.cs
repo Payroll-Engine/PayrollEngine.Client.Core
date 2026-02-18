@@ -16,6 +16,9 @@ public interface IExchangeTenant : ITenant, IEquatable<IExchangeTenant>
     /// <summary>The tenant divisions</summary>
     List<Division> Divisions { get; set; }
 
+    /// <summary>The tenant employees</summary>
+    List<EmployeeSet> Employees { get; set; }
+
     /// <summary>The tenant tasks</summary>
     List<Task> Tasks { get; set; }
 
@@ -42,9 +45,6 @@ public interface IExchangeTenant : ITenant, IEquatable<IExchangeTenant>
 
     /// <summary>The tenant company values</summary>
     List<CaseValue> CompanyValues { get; set; }
-
-    /// <summary>The tenant employees</summary>
-    List<EmployeeSet> Employees { get; set; }
 
     /// <summary>The tenant payrolls</summary>
     List<PayrollSet> Payrolls { get; set; }

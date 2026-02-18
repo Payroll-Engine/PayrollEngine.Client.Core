@@ -8,22 +8,22 @@ namespace PayrollEngine.Client.Model;
 /// <summary>The payrun result client object</summary>
 public class PayrunResult : ModelBase, IPayrunResult, INameObject
 {
-    /// <inheritdoc/>
-    [JsonPropertyOrder(100)]
-    public int PayrollResultId { get; set; }
-
-    /// <inheritdoc/>
-    [JsonPropertyOrder(101)]
-    public string Source { get; set; }
-
     /// <summary>The payrun result name</summary>
     [Required]
-    [JsonPropertyOrder(102)]
+    [JsonPropertyOrder(100)]
     public string Name { get; set; }
 
     /// <inheritdoc/>
-    [JsonPropertyOrder(103)]
+    [JsonPropertyOrder(101)]
     public Dictionary<string, string> NameLocalizations { get; set; }
+
+    /// <inheritdoc/>
+    [JsonPropertyOrder(102)]
+    public int PayrollResultId { get; set; }
+
+    /// <inheritdoc/>
+    [JsonPropertyOrder(103)]
+    public string Source { get; set; }
 
     /// <inheritdoc/>
     [JsonPropertyOrder(104)]

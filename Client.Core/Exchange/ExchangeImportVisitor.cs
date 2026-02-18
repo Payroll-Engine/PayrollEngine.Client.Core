@@ -1,30 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
 using System.Linq;
+using System.Globalization;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+using Task = System.Threading.Tasks.Task;
+using Calendar = PayrollEngine.Client.Model.Calendar;
 using PayrollEngine.Client.Model;
 using PayrollEngine.Client.Script;
 using PayrollEngine.Client.Service.Api;
-using Calendar = PayrollEngine.Client.Model.Calendar;
-using Task = System.Threading.Tasks.Task;
 
 namespace PayrollEngine.Client.Exchange;
 
 /// <summary>Import exchange from JSON file to Payroll API</summary>
-public abstract class ExchangeImportVisitor : Visitor
+public abstract class ExchangeImportVisitor : AttachmentsLoader
 {
-    private readonly TextFileCache textFiles = new();
-
     /// <summary>The visitor load options</summary>
     public ExchangeImportOptions ImportOptions { get; }
 
     /// <summary>The Payroll http client</summary>
     public PayrollHttpClient HttpClient { get; }
-
-    /// <summary>The script parser</summary>
-    public IScriptParser ScriptParser { get; }
 
     /// <summary>Initializes a new instance of the <see cref="VisitorBase"/> class</summary>
     /// <remarks>Content is loaded from the working folder</remarks>
@@ -34,18 +28,14 @@ public abstract class ExchangeImportVisitor : Visitor
     /// <param name="importOptions">The import options</param>
     protected ExchangeImportVisitor(PayrollHttpClient httpClient, Client.Model.Exchange exchange,
         IScriptParser scriptParser, ExchangeImportOptions importOptions = null) :
-        base(exchange)
+        base(exchange, scriptParser)
     {
         HttpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
-        ScriptParser = scriptParser ?? throw new ArgumentNullException(nameof(scriptParser));
         ImportOptions = importOptions ?? new();
     }
 
     /// <summary>Load target object</summary>
     protected bool TargetLoad => ImportOptions.TargetLoad;
-
-    /// <summary>Load scripts from the working folder</summary>
-    protected bool ScriptLoad => ImportOptions.ScriptLoad;
 
     /// <summary>Load case documents from the working folder</summary>
     protected bool CaseDocumentLoad => ImportOptions.CaseDocumentLoad;
@@ -58,14 +48,6 @@ public abstract class ExchangeImportVisitor : Visitor
 
     /// <summary>Load report schemas from the working folder</summary>
     protected bool LookupValidation => ImportOptions.LookupValidation;
-
-    /// <summary>
-    /// Reads a text file as string
-    /// </summary>
-    /// <param name="fileName">Name of the file</param>
-    /// <returns>The file content as string</returns>
-    protected string ReadTextFile(string fileName) =>
-        textFiles.ReadTextFile(fileName);
 
     #region Tenant
 
@@ -275,6 +257,7 @@ public abstract class ExchangeImportVisitor : Visitor
     /// <param name="lookup">The lookup</param>
     protected override async Task VisitLookupAsync(IExchangeTenant tenant, IRegulationSet regulation, ILookupSet lookup)
     {
+
         // validate lookup
         if (LookupValidation)
         {
@@ -306,6 +289,7 @@ public abstract class ExchangeImportVisitor : Visitor
     /// <param name="lookupValue">The lookup value</param>
     protected override async Task VisitLookupValueAsync(IExchangeTenant tenant, IRegulationSet regulation, ILookupSet lookup, ILookupValue lookupValue)
     {
+
         // key
         if (string.IsNullOrWhiteSpace(lookupValue.Key))
         {
@@ -361,55 +345,6 @@ public abstract class ExchangeImportVisitor : Visitor
     /// <param name="caseSet">The case</param>
     protected override async Task VisitCaseAsync(IExchangeTenant tenant, IRegulationSet regulation, ICaseSet caseSet)
     {
-        if (ScriptLoad)
-        {
-            // case available expression file
-            if (string.IsNullOrWhiteSpace(caseSet.AvailableExpression) && !string.IsNullOrWhiteSpace(caseSet.AvailableExpressionFile))
-            {
-                caseSet.AvailableExpression = ScriptParser.CaseParser.GetCaseAvailableScript(
-                    new()
-                    {
-                        TenantIdentifier = tenant.Identifier,
-                        SourceCode = ReadTextFile(caseSet.AvailableExpressionFile)
-                    },
-                    regulation.Name, caseSet.Name);
-                if (string.IsNullOrWhiteSpace(caseSet.AvailableExpression))
-                {
-                    throw new PayrollException($"Missing or invalid script file {caseSet.AvailableExpressionFile}.");
-                }
-            }
-            // case build expression file
-            if (string.IsNullOrWhiteSpace(caseSet.BuildExpression) && !string.IsNullOrWhiteSpace(caseSet.BuildExpressionFile))
-            {
-                caseSet.BuildExpression = ScriptParser.CaseParser.GetCaseBuildScript(
-                    new()
-                    {
-                        TenantIdentifier = tenant.Identifier,
-                        SourceCode = ReadTextFile(caseSet.BuildExpressionFile)
-                    },
-                    regulation.Name, caseSet.Name);
-                if (string.IsNullOrWhiteSpace(caseSet.BuildExpression))
-                {
-                    throw new PayrollException($"Missing or invalid script file {caseSet.BuildExpressionFile}.");
-                }
-            }
-            // case validate expression file
-            if (string.IsNullOrWhiteSpace(caseSet.ValidateExpression) && !string.IsNullOrWhiteSpace(caseSet.ValidateExpressionFile))
-            {
-                caseSet.ValidateExpression = ScriptParser.CaseParser.GetCaseValidateScript(
-                    new()
-                    {
-                        TenantIdentifier = tenant.Identifier,
-                        SourceCode = ReadTextFile(caseSet.ValidateExpressionFile)
-                    },
-                    regulation.Name, caseSet.Name);
-                if (string.IsNullOrWhiteSpace(caseSet.ValidateExpression))
-                {
-                    throw new PayrollException($"Missing or invalid script file {caseSet.ValidateExpressionFile}.");
-                }
-            }
-        }
-
         // get case
         var target = TargetLoad ? await new CaseService(HttpClient).GetAsync<CaseSet>(
             new(tenant.Id, regulation.Id), caseSet.Name) : null;
@@ -419,15 +354,6 @@ public abstract class ExchangeImportVisitor : Visitor
 
         await base.VisitCaseAsync(tenant, regulation, caseSet);
     }
-
-    /// <summary>Case setup</summary>
-    /// <param name="tenant">The exchange tenant</param>
-    /// <param name="regulation">The regulation</param>
-    /// <param name="caseSet">The case</param>
-    /// <param name="targetCase">The target case</param>
-    protected virtual Task SetupCaseAsync(IExchangeTenant tenant, IRegulationSet regulation,
-        ICaseSet caseSet, ICase targetCase) =>
-        Task.CompletedTask;
 
     /// <summary>Visit the case field</summary>
     /// <param name="tenant">The tenant</param>
@@ -468,49 +394,6 @@ public abstract class ExchangeImportVisitor : Visitor
     protected override async Task VisitCaseRelationAsync(IExchangeTenant tenant, IRegulationSet regulation,
         ICaseRelation caseRelation)
     {
-        if (ScriptLoad)
-        {
-            // case relation build expression file
-            if (string.IsNullOrWhiteSpace(caseRelation.BuildExpression) &&
-                !string.IsNullOrWhiteSpace(caseRelation.BuildExpressionFile))
-            {
-                caseRelation.BuildExpression = ScriptParser.CaseRelationParser.GetCaseRelationBuildScript(
-                    new()
-                    {
-                        TenantIdentifier = tenant.Identifier,
-                        SourceCode = ReadTextFile(caseRelation.BuildExpressionFile)
-                    },
-                    regulation.Name,
-                    caseRelation.SourceCaseName, caseRelation.TargetCaseName,
-                    caseRelation.SourceCaseSlot, caseRelation.TargetCaseSlot);
-                if (string.IsNullOrWhiteSpace(caseRelation.BuildExpression))
-                {
-                    throw new PayrollException(
-                        $"Missing or invalid script file {caseRelation.BuildExpressionFile}.");
-                }
-            }
-
-            // case relation validate expression file
-            if (string.IsNullOrWhiteSpace(caseRelation.ValidateExpression) &&
-                !string.IsNullOrWhiteSpace(caseRelation.ValidateExpressionFile))
-            {
-                caseRelation.ValidateExpression = ScriptParser.CaseRelationParser.GetCaseRelationValidateScript(
-                    new()
-                    {
-                        TenantIdentifier = tenant.Identifier,
-                        SourceCode = ReadTextFile(caseRelation.ValidateExpressionFile)
-                    },
-                    regulation.Name,
-                    caseRelation.SourceCaseName, caseRelation.TargetCaseName,
-                    caseRelation.SourceCaseSlot, caseRelation.TargetCaseSlot);
-                if (string.IsNullOrWhiteSpace(caseRelation.ValidateExpression))
-                {
-                    throw new PayrollException(
-                        $"Missing or invalid script file {caseRelation.ValidateExpressionFile}.");
-                }
-            }
-        }
-
         // get case relation
         var target = TargetLoad ? await new CaseRelationService(HttpClient)
             .GetAsync<CaseRelation>(new(tenant.Id, regulation.Id), caseRelation.SourceCaseName,
@@ -522,15 +405,6 @@ public abstract class ExchangeImportVisitor : Visitor
         await base.VisitCaseRelationAsync(tenant, regulation, caseRelation);
     }
 
-    /// <summary>Case relation setup</summary>
-    /// <param name="tenant">The exchange tenant</param>
-    /// <param name="regulation">The regulation</param>
-    /// <param name="caseRelation">The case relation</param>
-    /// <param name="targetCaseRelation">The target case relation</param>
-    protected virtual Task SetupCaseRelationAsync(IExchangeTenant tenant, IRegulationSet regulation,
-        ICaseRelation caseRelation, ICaseRelation targetCaseRelation) =>
-        Task.CompletedTask;
-
     #endregion
 
     #region Collector
@@ -541,60 +415,6 @@ public abstract class ExchangeImportVisitor : Visitor
     /// <param name="collector">The collector</param>
     protected override async Task VisitCollectorAsync(IExchangeTenant tenant, IRegulationSet regulation, ICollector collector)
     {
-        if (ScriptLoad)
-        {
-            // collector start expression file
-            if (string.IsNullOrWhiteSpace(collector.StartExpression) &&
-                !string.IsNullOrWhiteSpace(collector.StartExpressionFile))
-            {
-                collector.StartExpression = ScriptParser.CollectorParser.GetCollectorStartScript(
-                    new()
-                    {
-                        TenantIdentifier = tenant.Identifier,
-                        SourceCode = ReadTextFile(collector.StartExpressionFile)
-                    },
-                    regulation.Name, collector.Name);
-                if (string.IsNullOrWhiteSpace(collector.StartExpression))
-                {
-                    throw new PayrollException($"Missing or invalid script file {collector.StartExpressionFile}.");
-                }
-            }
-
-            // collector apply expression file
-            if (string.IsNullOrWhiteSpace(collector.ApplyExpression) &&
-                !string.IsNullOrWhiteSpace(collector.ApplyExpressionFile))
-            {
-                collector.ApplyExpression = ScriptParser.CollectorParser.GetCollectorApplyScript(
-                    new()
-                    {
-                        TenantIdentifier = tenant.Identifier,
-                        SourceCode = ReadTextFile(collector.ApplyExpressionFile)
-                    },
-                    regulation.Name, collector.Name);
-                if (string.IsNullOrWhiteSpace(collector.ApplyExpression))
-                {
-                    throw new PayrollException($"Missing or invalid script file {collector.ApplyExpressionFile}.");
-                }
-            }
-
-            // collector end expression file
-            if (string.IsNullOrWhiteSpace(collector.EndExpression) &&
-                !string.IsNullOrWhiteSpace(collector.EndExpressionFile))
-            {
-                collector.EndExpression = ScriptParser.CollectorParser.GetCollectorEndScript(
-                    new()
-                    {
-                        TenantIdentifier = tenant.Identifier,
-                        SourceCode = ReadTextFile(collector.EndExpressionFile)
-                    },
-                    regulation.Name, collector.Name);
-                if (string.IsNullOrWhiteSpace(collector.EndExpression))
-                {
-                    throw new PayrollException($"Missing or invalid script file {collector.EndExpressionFile}.");
-                }
-            }
-        }
-
         // get collector
         var target = TargetLoad ? await new CollectorService(HttpClient).GetAsync<Collector>(
             new(tenant.Id, regulation.Id), collector.Name) : null;
@@ -604,15 +424,6 @@ public abstract class ExchangeImportVisitor : Visitor
 
         await base.VisitCollectorAsync(tenant, regulation, collector);
     }
-
-    /// <summary>Case relation setup</summary>
-    /// <param name="tenant">The exchange tenant</param>
-    /// <param name="regulation">The regulation</param>
-    /// <param name="collector">The collector</param>
-    /// <param name="targetCollector">The target collector</param>
-    protected virtual Task SetupCollectorAsync(IExchangeTenant tenant, IRegulationSet regulation,
-        ICollector collector, ICollector targetCollector) =>
-        Task.CompletedTask;
 
     #endregion
 
@@ -624,43 +435,6 @@ public abstract class ExchangeImportVisitor : Visitor
     /// <param name="wageType">The wage type</param>
     protected override async Task VisitWageTypeAsync(IExchangeTenant tenant, IRegulationSet regulation, IWageType wageType)
     {
-        if (ScriptLoad)
-        {
-            // wage type value expression file
-            if (string.IsNullOrWhiteSpace(wageType.ValueExpression) &&
-                !string.IsNullOrWhiteSpace(wageType.ValueExpressionFile))
-            {
-                wageType.ValueExpression = ScriptParser.WageTypeParser.GetWageTypeValueScript(
-                    new()
-                    {
-                        TenantIdentifier = tenant.Identifier,
-                        SourceCode = ReadTextFile(wageType.ValueExpressionFile)
-                    },
-                    regulation.Name, wageType.WageTypeNumber);
-                if (string.IsNullOrWhiteSpace(wageType.ValueExpression))
-                {
-                    throw new PayrollException($"Missing or invalid script file {wageType.ValueExpressionFile}.");
-                }
-            }
-
-            // wage type result expression file
-            if (string.IsNullOrWhiteSpace(wageType.ResultExpression) &&
-                !string.IsNullOrWhiteSpace(wageType.ResultExpressionFile))
-            {
-                wageType.ResultExpression = ScriptParser.WageTypeParser.GetWageTypeResultScript(
-                    new()
-                    {
-                        TenantIdentifier = tenant.Identifier,
-                        SourceCode = ReadTextFile(wageType.ResultExpression)
-                    },
-                    regulation.Name, wageType.WageTypeNumber);
-                if (string.IsNullOrWhiteSpace(wageType.ResultExpression))
-                {
-                    throw new PayrollException($"Missing or invalid script file {wageType.ResultExpressionFile}.");
-                }
-            }
-        }
-
         // culture
         var culture = CultureInfo.CurrentCulture;
         if (!string.IsNullOrWhiteSpace(tenant.Culture) && !string.Equals(tenant.Culture, culture.Name))
@@ -678,15 +452,6 @@ public abstract class ExchangeImportVisitor : Visitor
         await base.VisitWageTypeAsync(tenant, regulation, wageType);
     }
 
-    /// <summary>Wage type setup</summary>
-    /// <param name="tenant">The exchange tenant</param>
-    /// <param name="regulation">The regulation</param>
-    /// <param name="wageType">The wage type</param>
-    /// <param name="targetWageType">The target wage type</param>
-    protected virtual Task SetupWageTypeAsync(IExchangeTenant tenant, IRegulationSet regulation,
-        IWageType wageType, IWageType targetWageType) =>
-        Task.CompletedTask;
-
     #endregion
 
     #region Script
@@ -698,19 +463,6 @@ public abstract class ExchangeImportVisitor : Visitor
     protected override async Task VisitScriptAsync(IExchangeTenant tenant, IRegulationSet regulation,
         IScript script)
     {
-        if (ScriptLoad)
-        {
-            // script value file
-            if (string.IsNullOrWhiteSpace(script.Value) && !string.IsNullOrWhiteSpace(script.ValueFile))
-            {
-                script.Value = ReadTextFile(script.ValueFile);
-                if (string.IsNullOrWhiteSpace(script.Value))
-                {
-                    throw new PayrollException($"Missing script value in file {script.ValueFile}.");
-                }
-            }
-        }
-
         // get script
         var target = TargetLoad ? await new ScriptService(HttpClient).GetAsync<Client.Model.Script>(
             new(tenant.Id, regulation.Id), script.Name) : null;
@@ -720,15 +472,6 @@ public abstract class ExchangeImportVisitor : Visitor
 
         await base.VisitScriptAsync(tenant, regulation, script);
     }
-
-    /// <summary>Script setup</summary>
-    /// <param name="tenant">The exchange tenant</param>
-    /// <param name="regulation">The regulation</param>
-    /// <param name="script">The script</param>
-    /// <param name="targetScript">The target script</param>
-    protected virtual Task SetupScriptAsync(IExchangeTenant tenant, IRegulationSet regulation,
-        IScript script, IScript targetScript) =>
-        Task.CompletedTask;
 
     #endregion
 
@@ -740,60 +483,6 @@ public abstract class ExchangeImportVisitor : Visitor
     /// <param name="report">The report</param>
     protected override async Task VisitReportAsync(IExchangeTenant tenant, IRegulationSet regulation, IReportSet report)
     {
-        if (ScriptLoad)
-        {
-            // report build expression file
-            if (string.IsNullOrWhiteSpace(report.BuildExpression) &&
-                !string.IsNullOrWhiteSpace(report.BuildExpressionFile))
-            {
-                report.BuildExpression = ScriptParser.ReportParser.GetReportBuildScript(
-                    new()
-                    {
-                        TenantIdentifier = tenant.Identifier,
-                        SourceCode = ReadTextFile(report.BuildExpressionFile)
-                    },
-                    regulation.Name, report.Name);
-                if (string.IsNullOrWhiteSpace(report.BuildExpression))
-                {
-                    throw new PayrollException($"Missing or invalid script file {report.BuildExpressionFile}.");
-                }
-            }
-
-            // report start expression file
-            if (string.IsNullOrWhiteSpace(report.StartExpression) &&
-                !string.IsNullOrWhiteSpace(report.StartExpressionFile))
-            {
-                report.StartExpression = ScriptParser.ReportParser.GetReportStartScript(
-                    new()
-                    {
-                        TenantIdentifier = tenant.Identifier,
-                        SourceCode = ReadTextFile(report.StartExpressionFile)
-                    },
-                    regulation.Name, report.Name);
-                if (string.IsNullOrWhiteSpace(report.StartExpression))
-                {
-                    throw new PayrollException($"Missing or invalid script file {report.StartExpressionFile}.");
-                }
-            }
-
-            // report end expression file
-            if (string.IsNullOrWhiteSpace(report.EndExpression) &&
-                !string.IsNullOrWhiteSpace(report.EndExpressionFile))
-            {
-                report.EndExpression = ScriptParser.ReportParser.GetReportEndScript(
-                    new()
-                    {
-                        TenantIdentifier = tenant.Identifier,
-                        SourceCode = ReadTextFile(report.EndExpressionFile)
-                    },
-                    regulation.Name, report.Name);
-                if (string.IsNullOrWhiteSpace(report.EndExpression))
-                {
-                    throw new PayrollException($"Missing or invalid script file {report.EndExpressionFile}.");
-                }
-            }
-        }
-
         // get report
         var target = TargetLoad ? await new ReportSetService(HttpClient).GetAsync<ReportSet>(
             new(tenant.Id, regulation.Id), report.Name) : null;
@@ -803,15 +492,6 @@ public abstract class ExchangeImportVisitor : Visitor
 
         await base.VisitReportAsync(tenant, regulation, report);
     }
-
-    /// <summary>Report setup</summary>
-    /// <param name="tenant">The exchange tenant</param>
-    /// <param name="regulation">The regulation</param>
-    /// <param name="report">The report</param>
-    /// <param name="targetReport">The target report</param>
-    protected virtual Task SetupReportAsync(IExchangeTenant tenant, IRegulationSet regulation,
-        IReportSet report, IReportSet targetReport) =>
-        Task.CompletedTask;
 
     /// <summary>Visit the report parameter</summary>
     /// <param name="tenant">The tenant</param>
@@ -849,30 +529,6 @@ public abstract class ExchangeImportVisitor : Visitor
     protected override async Task VisitReportTemplateAsync(IExchangeTenant tenant, IRegulationSet regulation,
         IReportSet report, IReportTemplate template)
     {
-        // report content file (binary or xsl text file)
-        if (ReportTemplateLoad && string.IsNullOrWhiteSpace(template.Content) &&
-            !string.IsNullOrWhiteSpace(template.ContentFile))
-        {
-            template.Content = ReadTemplateContent(template.ContentFile);
-
-            // content type
-            if (string.IsNullOrWhiteSpace(template.ContentType))
-            {
-                var extension = Path.GetExtension(template.ContentFile);
-                if (!string.IsNullOrWhiteSpace(extension))
-                {
-                    template.ContentType = extension.TrimStart('.');
-                }
-            }
-        }
-
-        // report schema file (xsd text file)
-        if (ReportSchemaLoad && string.IsNullOrWhiteSpace(template.Schema) &&
-            !string.IsNullOrWhiteSpace(template.SchemaFile))
-        {
-            template.Schema = ReadTemplateContent(template.SchemaFile);
-        }
-
         // get report template
         var target = TargetLoad ? (await new ReportTemplateService(HttpClient).QueryAsync<ReportTemplate>(
                 new(tenant.Id, regulation.Id, report.Id), new() { Culture = template.Culture }))
@@ -883,45 +539,6 @@ public abstract class ExchangeImportVisitor : Visitor
 
         await base.VisitReportTemplateAsync(tenant, regulation, report, template);
     }
-
-    private string ReadTemplateContent(string fileName)
-    {
-        if (!File.Exists(fileName))
-        {
-            throw new PayrollException($"Invalid report template file {fileName}.");
-        }
-
-        string content;
-
-        // text file
-        var firstLine = File.ReadLines(fileName).First();
-        if (!string.IsNullOrWhiteSpace(firstLine) && firstLine.Trim().StartsWith("<?xml "))
-        {
-            content = ReadTextFile(fileName);
-        }
-        else
-        {
-            // binary file
-            content = BinaryFile.Read(fileName);
-        }
-
-        // content test
-        if (string.IsNullOrWhiteSpace(content))
-        {
-            throw new PayrollException($"Missing report template content from file {fileName}.");
-        }
-        return content;
-    }
-
-    /// <summary>Report template setup</summary>
-    /// <param name="tenant">The exchange tenant</param>
-    /// <param name="regulation">The regulation</param>
-    /// <param name="report">The report</param>
-    /// <param name="template">The report template</param>
-    /// <param name="targetTemplate">The target report template</param>
-    protected virtual Task SetupReportTemplateAsync(IExchangeTenant tenant, IRegulationSet regulation,
-        IReportSet report, IReportTemplate template, IReportTemplate targetTemplate) =>
-        Task.CompletedTask;
 
     #endregion
 
@@ -1208,115 +825,6 @@ public abstract class ExchangeImportVisitor : Visitor
     /// <param name="payrun">The payrun</param>
     protected override async Task VisitPayrunAsync(IExchangeTenant tenant, IPayrun payrun)
     {
-        if (ScriptLoad)
-        {
-            // payrun start expression file
-            if (string.IsNullOrWhiteSpace(payrun.StartExpression) &&
-                !string.IsNullOrWhiteSpace(payrun.StartExpressionFile))
-            {
-                payrun.StartExpression = ScriptParser.PayrunParser.GetPayrunStartScript(
-                    new()
-                    {
-                        TenantIdentifier = tenant.Identifier,
-                        SourceCode = ReadTextFile(payrun.StartExpressionFile)
-                    },
-                    payrun.Name);
-                if (string.IsNullOrWhiteSpace(payrun.StartExpression))
-                {
-                    throw new PayrollException($"Missing or invalid script file {payrun.StartExpressionFile}.");
-                }
-            }
-
-            // payrun employee available expression file
-            if (string.IsNullOrWhiteSpace(payrun.EmployeeAvailableExpression) &&
-                !string.IsNullOrWhiteSpace(payrun.EmployeeAvailableExpressionFile))
-            {
-                payrun.EmployeeAvailableExpression = ScriptParser.PayrunParser.GetPayrunEmployeeAvailableScript(
-                    new()
-                    {
-                        TenantIdentifier = tenant.Identifier,
-                        SourceCode = ReadTextFile(payrun.EmployeeAvailableExpressionFile)
-                    },
-                    payrun.Name);
-                if (string.IsNullOrWhiteSpace(payrun.EmployeeAvailableExpression))
-                {
-                    throw new PayrollException(
-                        $"Missing or invalid script file {payrun.EmployeeAvailableExpressionFile}.");
-                }
-            }
-
-            // payrun employee start expression file
-            if (string.IsNullOrWhiteSpace(payrun.EmployeeStartExpression) &&
-                !string.IsNullOrWhiteSpace(payrun.EmployeeStartExpressionFile))
-            {
-                payrun.EmployeeStartExpression = ScriptParser.PayrunParser.GetPayrunEmployeeStartScript(
-                    new()
-                    {
-                        TenantIdentifier = tenant.Identifier,
-                        SourceCode = ReadTextFile(payrun.EmployeeStartExpressionFile)
-                    },
-                    payrun.Name);
-                if (string.IsNullOrWhiteSpace(payrun.EmployeeStartExpression))
-                {
-                    throw new PayrollException(
-                        $"Missing or invalid script file {payrun.EmployeeStartExpressionFile}.");
-                }
-            }
-
-            // payrun wage type available expression file
-            if (string.IsNullOrWhiteSpace(payrun.WageTypeAvailableExpression) &&
-                !string.IsNullOrWhiteSpace(payrun.WageTypeAvailableExpressionFile))
-            {
-                payrun.WageTypeAvailableExpression = ScriptParser.PayrunParser.GetPayrunWageTypeAvailableScript(
-                    new()
-                    {
-                        TenantIdentifier = tenant.Identifier,
-                        SourceCode = ReadTextFile(payrun.WageTypeAvailableExpressionFile)
-                    },
-                    payrun.Name);
-                if (string.IsNullOrWhiteSpace(payrun.WageTypeAvailableExpression))
-                {
-                    throw new PayrollException(
-                        $"Missing or invalid script file {payrun.WageTypeAvailableExpressionFile}.");
-                }
-            }
-
-            // payrun employee end expression file
-            if (string.IsNullOrWhiteSpace(payrun.EmployeeEndExpression) &&
-                !string.IsNullOrWhiteSpace(payrun.EmployeeEndExpressionFile))
-            {
-                payrun.EmployeeEndExpression = ScriptParser.PayrunParser.GetPayrunEmployeeEndScript(
-                    new()
-                    {
-                        TenantIdentifier = tenant.Identifier,
-                        SourceCode = ReadTextFile(payrun.EmployeeEndExpressionFile)
-                    },
-                    payrun.Name);
-                if (string.IsNullOrWhiteSpace(payrun.EmployeeEndExpression))
-                {
-                    throw new PayrollException(
-                        $"Missing or invalid script file {payrun.EmployeeEndExpressionFile}.");
-                }
-            }
-
-            // payrun end expression file
-            if (string.IsNullOrWhiteSpace(payrun.EndExpression) &&
-                !string.IsNullOrWhiteSpace(payrun.EndExpressionFile))
-            {
-                payrun.EndExpression = ScriptParser.PayrunParser.GetPayrunEndScript(
-                    new()
-                    {
-                        TenantIdentifier = tenant.Identifier,
-                        SourceCode = ReadTextFile(payrun.EndExpressionFile)
-                    },
-                    payrun.Name);
-                if (string.IsNullOrWhiteSpace(payrun.EndExpression))
-                {
-                    throw new PayrollException($"Missing or invalid script file {payrun.EndExpressionFile}.");
-                }
-            }
-        }
-
         // payroll
         if (tenant.Id > 0 && !string.IsNullOrWhiteSpace(payrun.PayrollName))
         {
@@ -1330,14 +838,6 @@ public abstract class ExchangeImportVisitor : Visitor
 
         await base.VisitPayrunAsync(tenant, payrun);
     }
-
-    /// <summary>Payrun setup</summary>
-    /// <param name="tenant">The exchange tenant</param>
-    /// <param name="payrun">The payrun</param>
-    /// <param name="targetPayrun">The target payrun</param>
-    protected virtual Task SetupPayrunAsync(IExchangeTenant tenant, IPayrun payrun,
-        IPayrun targetPayrun) =>
-        Task.CompletedTask;
 
     /// <inheritdoc />
     protected override async Task VisitPayrunParameterAsync(IExchangeTenant tenant, IPayrun payrun,

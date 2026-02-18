@@ -9,90 +9,90 @@ namespace PayrollEngine.Client.Model;
 public class CaseValue : ModelBase, ICaseValue
 {
     /// <inheritdoc/>
+    [StringLength(128)]
     [JsonPropertyOrder(100)]
-    public int? DivisionId { get; set; }
-
-    /// <inheritdoc/>
-    [JsonPropertyOrder(101)]
-    public int? EmployeeId { get; set; }
-
-    /// <inheritdoc/>
-    [StringLength(128)]
-    [JsonPropertyOrder(102)]
-    public string DivisionName { get; set; }
-
-    /// <inheritdoc/>
-    [StringLength(128)]
-    [JsonPropertyOrder(103)]
     public string CaseName { get; set; }
 
     /// <inheritdoc/>
-    [JsonPropertyOrder(104)]
+    [JsonPropertyOrder(101)]
     public Dictionary<string, string> CaseNameLocalizations { get; set; }
 
     /// <inheritdoc/>
     [Required]
     [StringLength(128)]
-    [JsonPropertyOrder(105)]
+    [JsonPropertyOrder(102)]
     public string CaseFieldName { get; set; }
 
     /// <inheritdoc/>
-    [JsonPropertyOrder(100)]
+    [JsonPropertyOrder(103)]
     public Dictionary<string, string> CaseFieldNameLocalizations { get; set; }
 
     /// <inheritdoc/>
     [StringLength(128)]
-    [JsonPropertyOrder(106)]
+    [JsonPropertyOrder(104)]
     public string CaseSlot { get; set; }
 
     /// <inheritdoc/>
-    [JsonPropertyOrder(107)]
+    [JsonPropertyOrder(105)]
     public Dictionary<string, string> CaseSlotLocalizations { get; set; }
 
     /// <inheritdoc/>
-    [JsonPropertyOrder(108)]
+    [JsonPropertyOrder(106)]
     public ValueType ValueType { get; set; }
 
     /// <inheritdoc/>
-    [JsonPropertyOrder(109)]
+    [JsonPropertyOrder(107)]
     public string Value { get; set; }
 
     /// <inheritdoc/>
-    [JsonPropertyOrder(110)]
+    [JsonPropertyOrder(108)]
     public decimal? NumericValue { get; set; }
 
     /// <inheritdoc/>
-    [JsonPropertyOrder(111)]
+    [JsonPropertyOrder(109)]
     public string Culture { get; set; }
 
     /// <inheritdoc/>
-    [JsonPropertyOrder(112)]
+    [JsonPropertyOrder(110)]
     public CaseRelationReference CaseRelation { get; set; }
 
     /// <inheritdoc/>
-    [JsonPropertyOrder(113)]
+    [JsonPropertyOrder(111)]
     public DateTime? CancellationDate { get; set; }
 
     /// <inheritdoc/>
-    [JsonPropertyOrder(114)]
+    [JsonPropertyOrder(112)]
     public DateTime? Start { get; set; }
 
     /// <inheritdoc/>
-    [JsonPropertyOrder(115)]
+    [JsonPropertyOrder(113)]
     public DateTime? End { get; set; }
 
     /// <inheritdoc/>
     [StringLength(128)]
-    [JsonPropertyOrder(116)]
+    [JsonPropertyOrder(114)]
     public string Forecast { get; set; }
 
     /// <inheritdoc/>
-    [JsonPropertyOrder(117)]
+    [JsonPropertyOrder(115)]
     public List<string> Tags { get; set; }
 
     /// <inheritdoc/>
-    [JsonPropertyOrder(118)]
+    [JsonPropertyOrder(116)]
     public Dictionary<string, object> Attributes { get; set; }
+
+    /// <inheritdoc/>
+    [StringLength(128)]
+    [JsonPropertyOrder(117)]
+    public string DivisionName { get; set; }
+
+    /// <inheritdoc/>
+    [JsonPropertyOrder(118)]
+    public int? DivisionId { get; set; }
+
+    /// <inheritdoc/>
+    [JsonPropertyOrder(119)]
+    public int? EmployeeId { get; set; }
 
     /// <summary>Initializes a new instance</summary>
     public CaseValue()

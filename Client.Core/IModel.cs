@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Text.Json.Serialization;
 
 namespace PayrollEngine.Client;
 
@@ -11,11 +10,9 @@ public interface IModel
     int Id { get; set; }
 
     /// <summary>Test for existing object (opposite of <see cref="IsNewObject"/>)</summary>
-    [JsonIgnore]
     bool IsExistingObject { get; }
 
     /// <summary>Test for new object (opposite of <see cref="IsExistingObject"/>)</summary>
-    [JsonIgnore]
     bool IsNewObject { get; }
 
     /// <summary>The status of the object</summary>

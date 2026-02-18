@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -67,6 +68,7 @@ public class PayrunJobInvocation : IPayrunJobInvocation
     public bool StoreEmptyResults { get; set; }
 
     /// <inheritdoc/>
+    [DefaultValue(LogLevel.Information)]
     public LogLevel LogLevel { get; set; } = LogLevel.Information;
 
     /// <inheritdoc/>

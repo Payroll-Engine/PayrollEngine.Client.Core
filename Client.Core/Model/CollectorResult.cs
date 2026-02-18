@@ -9,55 +9,55 @@ public class CollectorResult : ModelBase, ICollectorResult
 {
     /// <inheritdoc/>
     [JsonPropertyOrder(100)]
-    public int PayrollResultId { get; set; }
-
-    /// <inheritdoc/>
-    [JsonPropertyOrder(101)]
-    public int CollectorId { get; set; }
-
-    /// <inheritdoc/>
-    [JsonPropertyOrder(102)]
     public string CollectorName { get; set; }
 
     /// <inheritdoc/>
-    [JsonPropertyOrder(103)]
+    [JsonPropertyOrder(101)]
     public Dictionary<string, string> CollectorNameLocalizations { get; set; }
 
     /// <inheritdoc/>
-    [JsonPropertyOrder(104)]
+    [JsonPropertyOrder(102)]
     public CollectMode CollectMode { get; set; }
 
     /// <inheritdoc/>
-    [JsonPropertyOrder(105)]
+    [JsonPropertyOrder(103)]
     public bool Negated { get; set; }
 
     /// <inheritdoc/>
-    [JsonPropertyOrder(106)]
+    [JsonPropertyOrder(104)]
     public ValueType ValueType { get; set; }
 
     /// <inheritdoc/>
-    [JsonPropertyOrder(107)]
+    [JsonPropertyOrder(105)]
     public decimal Value { get; set; }
 
     /// <inheritdoc/>
-    [JsonPropertyOrder(108)]
+    [JsonPropertyOrder(106)]
     public string Culture { get; set; }
 
     /// <inheritdoc/>
-    [JsonPropertyOrder(109)]
+    [JsonPropertyOrder(107)]
     public DateTime Start { get; set; }
 
     /// <inheritdoc/>
-    [JsonPropertyOrder(110)]
+    [JsonPropertyOrder(108)]
     public DateTime End { get; set; }
 
     /// <inheritdoc/>
-    [JsonPropertyOrder(111)]
+    [JsonPropertyOrder(109)]
     public List<string> Tags { get; set; }
 
     /// <inheritdoc/>
-    [JsonPropertyOrder(112)]
+    [JsonPropertyOrder(110)]
     public Dictionary<string, object> Attributes { get; set; }
+
+    /// <inheritdoc/>
+    [JsonPropertyOrder(111)]
+    public int PayrollResultId { get; set; }
+
+    /// <inheritdoc/>
+    [JsonPropertyOrder(112)]
+    public int CollectorId { get; set; }
 
     /// <summary>Initializes a new instance</summary>
     public CollectorResult()

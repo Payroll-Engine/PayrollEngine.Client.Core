@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using Task = System.Threading.Tasks.Task;
 using PayrollEngine.Client.Model;
 using PayrollEngine.Client.Script;
+using PayrollEngine.Serialization;
 using PayrollEngine.Client.Service;
 using PayrollEngine.Client.Service.Api;
-using PayrollEngine.Serialization;
 
 namespace PayrollEngine.Client.Exchange;
 
@@ -587,7 +587,7 @@ public sealed class ExchangeImport : ExchangeImportVisitor
             DefaultJsonSerializer.SerializeJson(invocation));
 
         // payrun job id
-        var payrunJobId =  await PayrollHttpClient.GetRecordIdAsync(response);
+        var payrunJobId = await PayrollHttpClient.GetRecordIdAsync(response);
         if (payrunJobId <= 0)
         {
             throw new PayrollException($"Error while creating the payrun job {invocation.Name}.");

@@ -1022,6 +1022,88 @@
             <summary>Get the exception message from an API error</summary>
             <returns>The payroll API error, null on others errors</returns>
         </member>
+        <member name="T:PayrollEngine.Client.Exchange.AttachmentsLoader">
+            <summary>Exchange attachment loader</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Exchange.AttachmentsLoader.ScriptParser">
+            <summary>The script parser</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.AttachmentsLoader.#ctor(PayrollEngine.Client.Model.Exchange,PayrollEngine.Client.Script.IScriptParser,System.Boolean)">
+            <summary>Initializes a new instance of the <see cref="T:PayrollEngine.Client.Exchange.AttachmentsLoader"/> class</summary>
+            <remarks>Content is loaded from the working folder</remarks>
+            <param name="exchange">The exchange model</param>
+            <param name="scriptParser">The script parser</param>
+            <param name="resetFileName">Reset the file name</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.AttachmentsLoader.Read">
+            <summary>Read attachments</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.AttachmentsLoader.ReadAsync">
+            <summary>Read attachments</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.AttachmentsLoader.SetupCaseAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.ICaseSet,PayrollEngine.Client.Model.ICase)">
+            <summary>Case setup</summary>
+            <param name="tenant">The exchange tenant</param>
+            <param name="regulation">The regulation</param>
+            <param name="caseSet">The case</param>
+            <param name="targetCase">The target case</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.AttachmentsLoader.SetupCaseRelationAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.ICaseRelation,PayrollEngine.Client.Model.ICaseRelation)">
+            <summary>Case relation setup</summary>
+            <param name="tenant">The exchange tenant</param>
+            <param name="regulation">The regulation</param>
+            <param name="caseRelation">The case relation</param>
+            <param name="targetCaseRelation">The target case relation</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.AttachmentsLoader.SetupCollectorAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.ICollector,PayrollEngine.Client.Model.ICollector)">
+            <summary>Case relation setup</summary>
+            <param name="tenant">The exchange tenant</param>
+            <param name="regulation">The regulation</param>
+            <param name="collector">The collector</param>
+            <param name="targetCollector">The target collector</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.AttachmentsLoader.SetupWageTypeAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.IWageType,PayrollEngine.Client.Model.IWageType)">
+            <summary>Wage type setup</summary>
+            <param name="tenant">The exchange tenant</param>
+            <param name="regulation">The regulation</param>
+            <param name="wageType">The wage type</param>
+            <param name="targetWageType">The target wage type</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.AttachmentsLoader.SetupScriptAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.IScript,PayrollEngine.Client.Model.IScript)">
+            <summary>Script setup</summary>
+            <param name="tenant">The exchange tenant</param>
+            <param name="regulation">The regulation</param>
+            <param name="script">The script</param>
+            <param name="targetScript">The target script</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.AttachmentsLoader.SetupReportAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.IReportSet,PayrollEngine.Client.Model.IReportSet)">
+            <summary>Report setup</summary>
+            <param name="tenant">The exchange tenant</param>
+            <param name="regulation">The regulation</param>
+            <param name="report">The report</param>
+            <param name="targetReport">The target report</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.AttachmentsLoader.SetupReportTemplateAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.IReportSet,PayrollEngine.Client.Model.IReportTemplate,PayrollEngine.Client.Model.IReportTemplate)">
+            <summary>Report template setup</summary>
+            <param name="tenant">The exchange tenant</param>
+            <param name="regulation">The regulation</param>
+            <param name="report">The report</param>
+            <param name="template">The report template</param>
+            <param name="targetTemplate">The target report template</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.AttachmentsLoader.SetupPayrunAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrun,PayrollEngine.Client.Model.IPayrun)">
+            <summary>Payrun setup</summary>
+            <param name="tenant">The exchange tenant</param>
+            <param name="payrun">The payrun</param>
+            <param name="targetPayrun">The target payrun</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.AttachmentsLoader.ReadTextFile(System.String)">
+            <summary>
+            Reads a text file as string
+            </summary>
+            <param name="fileName">Name of the file</param>
+            <returns>The file content as string</returns>
+        </member>
         <member name="T:PayrollEngine.Client.Exchange.BinaryFile">
             <summary>Binary file</summary>
         </member>
@@ -1232,9 +1314,6 @@
         <member name="P:PayrollEngine.Client.Exchange.ExchangeImportOptions.TargetLoad">
             <summary>Load target object</summary>
         </member>
-        <member name="P:PayrollEngine.Client.Exchange.ExchangeImportOptions.ScriptLoad">
-            <summary>Load scripts from the working folder</summary>
-        </member>
         <member name="P:PayrollEngine.Client.Exchange.ExchangeImportOptions.CaseDocumentLoad">
             <summary>Load case documents from the working folder</summary>
         </member>
@@ -1256,9 +1335,6 @@
         <member name="P:PayrollEngine.Client.Exchange.ExchangeImportVisitor.HttpClient">
             <summary>The Payroll http client</summary>
         </member>
-        <member name="P:PayrollEngine.Client.Exchange.ExchangeImportVisitor.ScriptParser">
-            <summary>The script parser</summary>
-        </member>
         <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.#ctor(PayrollEngine.Client.PayrollHttpClient,PayrollEngine.Client.Model.Exchange,PayrollEngine.Client.Script.IScriptParser,PayrollEngine.Client.Exchange.ExchangeImportOptions)">
             <summary>Initializes a new instance of the <see cref="T:PayrollEngine.Client.Exchange.VisitorBase"/> class</summary>
             <remarks>Content is loaded from the working folder</remarks>
@@ -1269,9 +1345,6 @@
         </member>
         <member name="P:PayrollEngine.Client.Exchange.ExchangeImportVisitor.TargetLoad">
             <summary>Load target object</summary>
-        </member>
-        <member name="P:PayrollEngine.Client.Exchange.ExchangeImportVisitor.ScriptLoad">
-            <summary>Load scripts from the working folder</summary>
         </member>
         <member name="P:PayrollEngine.Client.Exchange.ExchangeImportVisitor.CaseDocumentLoad">
             <summary>Load case documents from the working folder</summary>
@@ -1284,13 +1357,6 @@
         </member>
         <member name="P:PayrollEngine.Client.Exchange.ExchangeImportVisitor.LookupValidation">
             <summary>Load report schemas from the working folder</summary>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.ReadTextFile(System.String)">
-            <summary>
-            Reads a text file as string
-            </summary>
-            <param name="fileName">Name of the file</param>
-            <returns>The file content as string</returns>
         </member>
         <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.GetTenantAsync(System.String)">
             <summary>Get tenant</summary>
@@ -1419,13 +1485,6 @@
             <param name="regulation">The regulation</param>
             <param name="caseSet">The case</param>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.SetupCaseAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.ICaseSet,PayrollEngine.Client.Model.ICase)">
-            <summary>Case setup</summary>
-            <param name="tenant">The exchange tenant</param>
-            <param name="regulation">The regulation</param>
-            <param name="caseSet">The case</param>
-            <param name="targetCase">The target case</param>
-        </member>
         <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.VisitCaseFieldAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.ICaseSet,PayrollEngine.Client.Model.ICaseField)">
             <summary>Visit the case field</summary>
             <param name="tenant">The tenant</param>
@@ -1447,25 +1506,11 @@
             <param name="regulation">The regulation</param>
             <param name="caseRelation">The case relation</param>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.SetupCaseRelationAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.ICaseRelation,PayrollEngine.Client.Model.ICaseRelation)">
-            <summary>Case relation setup</summary>
-            <param name="tenant">The exchange tenant</param>
-            <param name="regulation">The regulation</param>
-            <param name="caseRelation">The case relation</param>
-            <param name="targetCaseRelation">The target case relation</param>
-        </member>
         <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.VisitCollectorAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.ICollector)">
             <summary>Visit the collector</summary>
             <param name="tenant">The tenant</param>
             <param name="regulation">The regulation</param>
             <param name="collector">The collector</param>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.SetupCollectorAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.ICollector,PayrollEngine.Client.Model.ICollector)">
-            <summary>Case relation setup</summary>
-            <param name="tenant">The exchange tenant</param>
-            <param name="regulation">The regulation</param>
-            <param name="collector">The collector</param>
-            <param name="targetCollector">The target collector</param>
         </member>
         <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.VisitWageTypeAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.IWageType)">
             <summary>Visit the wage type</summary>
@@ -1473,38 +1518,17 @@
             <param name="regulation">The regulation</param>
             <param name="wageType">The wage type</param>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.SetupWageTypeAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.IWageType,PayrollEngine.Client.Model.IWageType)">
-            <summary>Wage type setup</summary>
-            <param name="tenant">The exchange tenant</param>
-            <param name="regulation">The regulation</param>
-            <param name="wageType">The wage type</param>
-            <param name="targetWageType">The target wage type</param>
-        </member>
         <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.VisitScriptAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.IScript)">
             <summary>Visit the script</summary>
             <param name="tenant">The tenant</param>
             <param name="regulation">The regulation</param>
             <param name="script">The script</param>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.SetupScriptAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.IScript,PayrollEngine.Client.Model.IScript)">
-            <summary>Script setup</summary>
-            <param name="tenant">The exchange tenant</param>
-            <param name="regulation">The regulation</param>
-            <param name="script">The script</param>
-            <param name="targetScript">The target script</param>
-        </member>
         <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.VisitReportAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.IReportSet)">
             <summary>Visit the script</summary>
             <param name="tenant">The tenant</param>
             <param name="regulation">The regulation</param>
             <param name="report">The report</param>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.SetupReportAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.IReportSet,PayrollEngine.Client.Model.IReportSet)">
-            <summary>Report setup</summary>
-            <param name="tenant">The exchange tenant</param>
-            <param name="regulation">The regulation</param>
-            <param name="report">The report</param>
-            <param name="targetReport">The target report</param>
         </member>
         <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.VisitReportParameterAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.IReportSet,PayrollEngine.Client.Model.IReportParameter)">
             <summary>Visit the report parameter</summary>
@@ -1527,14 +1551,6 @@
             <param name="regulation">The regulation</param>
             <param name="report">The report</param>
             <param name="template">The report template</param>
-        </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.SetupReportTemplateAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.IReportSet,PayrollEngine.Client.Model.IReportTemplate,PayrollEngine.Client.Model.IReportTemplate)">
-            <summary>Report template setup</summary>
-            <param name="tenant">The exchange tenant</param>
-            <param name="regulation">The regulation</param>
-            <param name="report">The report</param>
-            <param name="template">The report template</param>
-            <param name="targetTemplate">The target report template</param>
         </member>
         <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.GetEmployeeAsync(System.Int32,System.String)">
             <summary>Get employee</summary>
@@ -1618,12 +1634,6 @@
             <param name="tenant">The tenant</param>
             <param name="payrun">The payrun</param>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.SetupPayrunAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrun,PayrollEngine.Client.Model.IPayrun)">
-            <summary>Payrun setup</summary>
-            <param name="tenant">The exchange tenant</param>
-            <param name="payrun">The payrun</param>
-            <param name="targetPayrun">The target payrun</param>
-        </member>
         <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.VisitPayrunParameterAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrun,PayrollEngine.Client.Model.IPayrunParameter)">
             <inheritdoc />
         </member>
@@ -1634,21 +1644,46 @@
             <param name="parameter">The payrun parameter</param>
             <param name="targetPayrunParameter">The target payrun parameter</param>
         </member>
-        <member name="T:PayrollEngine.Client.Exchange.ExchangeReader">
-            <summary>Read the exchange model from a file</summary>
+        <member name="T:PayrollEngine.Client.Exchange.FileReader">
+            <summary>Read exchange mode from a file</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeReader.ReadAsync(System.String,System.String)">
-            <summary>Reads the specified file name</summary>
+        <member name="M:PayrollEngine.Client.Exchange.FileReader.Read``1(System.String)">
+            <summary>Read object from file</summary>
             <param name="fileName">Name of the file</param>
-            <param name="namespace">The target namespace</param>
-            <returns>The payroll provider</returns>
+            <remarks>Supported file types are JSON/YAML and archives including JSON/YAML</remarks>
         </member>
-        <member name="T:PayrollEngine.Client.Exchange.ExchangeWriter">
-            <summary>Write the exchange model to a JSON file</summary>
+        <member name="M:PayrollEngine.Client.Exchange.FileReader.ReadArchiveAsync``1(System.String)">
+            <summary>
+            Read archive
+            </summary>
+            <param name="fileName">File to read</param>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeWriter.WriteAsync(PayrollEngine.Client.Model.Exchange,System.String)">
+        <member name="T:PayrollEngine.Client.Exchange.FileWriter">
+            <summary>Write exchange object to file</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.FileWriter.Write``1(``0,System.String)">
+            <summary>Writes object to file</summary>
+            <param name="obj">The object to store</param>
+            <param name="fileName">Name of the file</param>
+            <remarks>Supported file types JSON/YAML</remarks>
+        </member>
+        <member name="T:PayrollEngine.Client.Exchange.JsonReader">
+            <summary>Read model from a JSON file</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.JsonReader.FromFileAsync``1(System.String)">
+            <summary>Read object from JSON file</summary>
+            <param name="fileName">Name of the file</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.JsonReader.FromJson``1(System.String)">
+            <summary>Read object from JSON string</summary>
+            <param name="json">Object JSON</param>
+        </member>
+        <member name="T:PayrollEngine.Client.Exchange.JsonWriter">
+            <summary>Write model to JSON file</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.JsonWriter.ToFileAsync``1(``0,System.String)">
             <summary>Writes the specified provider</summary>
-            <param name="exchange">The provider</param>
+            <param name="obj">The provider</param>
             <param name="fileName">Name of the file</param>
         </member>
         <member name="T:PayrollEngine.Client.Exchange.NamespaceUpdateTool">
@@ -2398,6 +2433,97 @@
             <param name="payrollResult">The payroll result</param>
             <param name="payrunResult">The payrun result</param>
         </member>
+        <member name="T:PayrollEngine.Client.Exchange.YamlDateTimeConverter">
+            <summary>Custom YAML type converter for DateTime support</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.YamlDateTimeConverter.Accepts(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.YamlDateTimeConverter.ReadYaml(YamlDotNet.Core.IParser,System.Type,YamlDotNet.Serialization.ObjectDeserializer)">
+            <inheritdoc />
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.YamlDateTimeConverter.WriteYaml(YamlDotNet.Core.IEmitter,System.Object,System.Type,YamlDotNet.Serialization.ObjectSerializer)">
+            <inheritdoc />
+        </member>
+        <member name="T:PayrollEngine.Client.Exchange.YamlDictionaryTypeConverter">
+            <summary>Custom YAML type converter for dictionary support</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.YamlDictionaryTypeConverter.Accepts(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.YamlDictionaryTypeConverter.ReadYaml(YamlDotNet.Core.IParser,System.Type,YamlDotNet.Serialization.ObjectDeserializer)">
+            <inheritdoc />
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.YamlDictionaryTypeConverter.WriteYaml(YamlDotNet.Core.IEmitter,System.Object,System.Type,YamlDotNet.Serialization.ObjectSerializer)">
+            <inheritdoc />
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.YamlDictionaryTypeConverter.ReadValue(YamlDotNet.Core.IParser,System.Type)">
+            <summary>
+            Read parser value
+            </summary>
+            <param name="parser">YAML parser</param>
+            <param name="type">Value type</param>
+        </member>
+        <member name="T:PayrollEngine.Client.Exchange.YamlEnumTypeConverter">
+            <summary>Custom YAML type converter for enum support</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.YamlEnumTypeConverter.Accepts(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.YamlEnumTypeConverter.ReadYaml(YamlDotNet.Core.IParser,System.Type,YamlDotNet.Serialization.ObjectDeserializer)">
+            <inheritdoc />
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.YamlEnumTypeConverter.WriteYaml(YamlDotNet.Core.IEmitter,System.Object,System.Type,YamlDotNet.Serialization.ObjectSerializer)">
+            <inheritdoc />
+        </member>
+        <member name="T:PayrollEngine.Client.Exchange.PropertyFilteringInspector">
+            <summary>
+            Property filter inspector
+            </summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.PropertyFilteringInspector.#ctor(YamlDotNet.Serialization.ITypeInspector)">
+            <summary>
+            Default constructor
+            </summary>
+            <param name="inner">Inner inspector</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.PropertyFilteringInspector.GetProperties(System.Type,System.Object)">
+            <summary>
+            Get available properties
+            </summary>
+            <param name="type">Object type</param>
+            <param name="container">Object container</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.PropertyFilteringInspector.GetEnumValue(System.Object)">
+            <summary>
+            Get enum value string
+            </summary>
+            <param name="enumValue">Enum value</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.PropertyFilteringInspector.GetEnumName(System.Type,System.String)">
+            <summary>
+            Get enum name
+            </summary>
+            <param name="enumType">Enum type</param>
+            <param name="name">Enum name</param>
+        </member>
+        <member name="T:PayrollEngine.Client.Exchange.YamlReader">
+            <summary>Read model from a YAML file</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.YamlReader.FromFileAsync``1(System.String)">
+            <summary>Load YAML file and deserialize directly to Exchange object</summary>
+            <param name="fileName">Name of the file</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.YamlReader.FromYaml``1(System.String)">
+            <summary>Deserialize YAML to object</summary>
+            <param name="yaml">Yaml content</param>
+        </member>
+        <member name="T:PayrollEngine.Client.Exchange.YamlWriter">
+            <summary>Write model to YAML file</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.YamlWriter.ToFileAsync``1(``0,System.String)">
+            <summary>Save obj object to YAML file</summary>
+        </member>
         <member name="T:PayrollEngine.Client.GlobalCaseApiEndpoints">
             <summary>Global case api endpoints</summary>
         </member>
@@ -2649,11 +2775,11 @@
         <member name="T:PayrollEngine.Client.Model.Case">
             <summary>The payroll case client object</summary>
         </member>
-        <member name="P:PayrollEngine.Client.Model.Case.CaseType">
-            <inheritdoc/>
-        </member>
         <member name="P:PayrollEngine.Client.Model.Case.Name">
             <summary>The case name</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.Case.CaseType">
+            <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.Case.NameLocalizations">
             <inheritdoc/>
@@ -3511,15 +3637,6 @@
         <member name="T:PayrollEngine.Client.Model.CaseValue">
             <summary>The payroll case value client object (immutable)</summary>
         </member>
-        <member name="P:PayrollEngine.Client.Model.CaseValue.DivisionId">
-            <inheritdoc/>
-        </member>
-        <member name="P:PayrollEngine.Client.Model.CaseValue.EmployeeId">
-            <inheritdoc/>
-        </member>
-        <member name="P:PayrollEngine.Client.Model.CaseValue.DivisionName">
-            <inheritdoc/>
-        </member>
         <member name="P:PayrollEngine.Client.Model.CaseValue.CaseName">
             <inheritdoc/>
         </member>
@@ -3569,6 +3686,15 @@
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.CaseValue.Attributes">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.CaseValue.DivisionName">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.CaseValue.DivisionId">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.CaseValue.EmployeeId">
             <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.CaseValue.#ctor">
@@ -3843,12 +3969,6 @@
         <member name="T:PayrollEngine.Client.Model.CollectorResult">
             <summary>The collector result client object</summary>
         </member>
-        <member name="P:PayrollEngine.Client.Model.CollectorResult.PayrollResultId">
-            <inheritdoc/>
-        </member>
-        <member name="P:PayrollEngine.Client.Model.CollectorResult.CollectorId">
-            <inheritdoc/>
-        </member>
         <member name="P:PayrollEngine.Client.Model.CollectorResult.CollectorName">
             <inheritdoc/>
         </member>
@@ -3880,6 +4000,12 @@
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.CollectorResult.Attributes">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.CollectorResult.PayrollResultId">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.CollectorResult.CollectorId">
             <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.CollectorResult.#ctor">
@@ -4105,6 +4231,9 @@
         <member name="P:PayrollEngine.Client.Model.ExchangeTenant.Divisions">
             <inheritdoc/>
         </member>
+        <member name="P:PayrollEngine.Client.Model.ExchangeTenant.Employees">
+            <inheritdoc/>
+        </member>
         <member name="P:PayrollEngine.Client.Model.ExchangeTenant.Tasks">
             <inheritdoc/>
         </member>
@@ -4130,9 +4259,6 @@
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.ExchangeTenant.CompanyValues">
-            <inheritdoc/>
-        </member>
-        <member name="P:PayrollEngine.Client.Model.ExchangeTenant.Employees">
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.ExchangeTenant.Payrolls">
@@ -4915,9 +5041,6 @@
         <member name="P:PayrollEngine.Client.Model.IExchange.CreatedObjectDate">
             <summary>The default created date for new objects</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Model.IExchange.Import(PayrollEngine.Client.Model.IExchange)">
-            <summary>The import exchange</summary>
-        </member>
         <member name="T:PayrollEngine.Client.Model.IExchangeTenant">
             <summary>The tenant client object</summary>
         </member>
@@ -4929,6 +5052,9 @@
         </member>
         <member name="P:PayrollEngine.Client.Model.IExchangeTenant.Divisions">
             <summary>The tenant divisions</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.IExchangeTenant.Employees">
+            <summary>The tenant employees</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.IExchangeTenant.Tasks">
             <summary>The tenant tasks</summary>
@@ -4957,9 +5083,6 @@
         <member name="P:PayrollEngine.Client.Model.IExchangeTenant.CompanyValues">
             <summary>The tenant company values</summary>
         </member>
-        <member name="P:PayrollEngine.Client.Model.IExchangeTenant.Employees">
-            <summary>The tenant employees</summary>
-        </member>
         <member name="P:PayrollEngine.Client.Model.IExchangeTenant.Payrolls">
             <summary>The tenant payrolls</summary>
         </member>
@@ -4977,6 +5100,12 @@
         </member>
         <member name="M:PayrollEngine.Client.Model.IExchangeTenant.Import(PayrollEngine.Client.Model.IExchangeTenant)">
             <summary>The import exchange tenant</summary>
+        </member>
+        <member name="T:PayrollEngine.Client.Model.IImportObject`1">
+            <summary>An import object</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.IImportObject`1.Import(`0)">
+            <summary>The object exchange</summary>
         </member>
         <member name="T:PayrollEngine.Client.Model.IKeyEquatable`1">
             <summary>Model equitable</summary>
@@ -6658,13 +6787,13 @@
         <member name="T:PayrollEngine.Client.Model.PayrollLayer">
             <summary>The payroll layer client object</summary>
         </member>
+        <member name="P:PayrollEngine.Client.Model.PayrollLayer.RegulationName">
+            <inheritdoc/>
+        </member>
         <member name="P:PayrollEngine.Client.Model.PayrollLayer.Level">
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.PayrollLayer.Priority">
-            <inheritdoc/>
-        </member>
-        <member name="P:PayrollEngine.Client.Model.PayrollLayer.RegulationName">
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.PayrollLayer.Attributes">
@@ -6689,16 +6818,16 @@
         <member name="T:PayrollEngine.Client.Model.PayrollResult">
             <summary>The payroll result info client object</summary>
         </member>
-        <member name="P:PayrollEngine.Client.Model.PayrollResult.PayrollId">
-            <inheritdoc/>
-        </member>
-        <member name="P:PayrollEngine.Client.Model.PayrollResult.PayrunId">
+        <member name="P:PayrollEngine.Client.Model.PayrollResult.PayrunJobName">
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.PayrollResult.PayrunJobId">
             <inheritdoc/>
         </member>
-        <member name="P:PayrollEngine.Client.Model.PayrollResult.PayrunJobName">
+        <member name="P:PayrollEngine.Client.Model.PayrollResult.PayrollId">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.PayrollResult.PayrunId">
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.PayrollResult.EmployeeId">
@@ -6932,12 +7061,6 @@
         <member name="T:PayrollEngine.Client.Model.Payrun">
             <summary>The payrun client object</summary>
         </member>
-        <member name="P:PayrollEngine.Client.Model.Payrun.PayrollId">
-            <inheritdoc/>
-        </member>
-        <member name="P:PayrollEngine.Client.Model.Payrun.PayrollName">
-            <inheritdoc/>
-        </member>
         <member name="P:PayrollEngine.Client.Model.Payrun.Name">
             <summary>The payrun name</summary>
         </member>
@@ -6987,6 +7110,12 @@
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.Payrun.RetroTimeType">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.Payrun.PayrollId">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.Payrun.PayrollName">
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.Payrun.PayrunParameters">
@@ -7298,16 +7427,16 @@
         <member name="T:PayrollEngine.Client.Model.PayrunResult">
             <summary>The payrun result client object</summary>
         </member>
-        <member name="P:PayrollEngine.Client.Model.PayrunResult.PayrollResultId">
-            <inheritdoc/>
-        </member>
-        <member name="P:PayrollEngine.Client.Model.PayrunResult.Source">
-            <inheritdoc/>
-        </member>
         <member name="P:PayrollEngine.Client.Model.PayrunResult.Name">
             <summary>The payrun result name</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.PayrunResult.NameLocalizations">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.PayrunResult.PayrollResultId">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.PayrunResult.Source">
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.PayrunResult.Slot">
@@ -8093,13 +8222,13 @@
         <member name="T:PayrollEngine.Client.Model.WageTypeCustomResult">
             <summary>The wage type custom result client object</summary>
         </member>
-        <member name="P:PayrollEngine.Client.Model.WageTypeCustomResult.WageTypeResultId">
-            <inheritdoc/>
-        </member>
         <member name="P:PayrollEngine.Client.Model.WageTypeCustomResult.WageTypeNumber">
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.WageTypeCustomResult.WageTypeName">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.WageTypeCustomResult.WageTypeResultId">
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.WageTypeCustomResult.WageTypeNameLocalizations">
@@ -8149,13 +8278,13 @@
         <member name="T:PayrollEngine.Client.Model.WageTypeResult">
             <summary>The wage type result client object</summary>
         </member>
+        <member name="P:PayrollEngine.Client.Model.WageTypeResult.WageTypeNumber">
+            <inheritdoc/>
+        </member>
         <member name="P:PayrollEngine.Client.Model.WageTypeResult.PayrollResultId">
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.WageTypeResult.WageTypeId">
-            <inheritdoc/>
-        </member>
-        <member name="P:PayrollEngine.Client.Model.WageTypeResult.WageTypeNumber">
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.WageTypeResult.WageTypeName">

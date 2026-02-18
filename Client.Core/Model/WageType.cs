@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.ComponentModel;
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 
@@ -36,6 +37,7 @@ public class WageType : ModelBase, IWageType, INameObject
 
     /// <inheritdoc/>
     [JsonPropertyOrder(105)]
+    [DefaultValue(ValueType.Money)]
     public ValueType ValueType { get; set; } = ValueType.Money;
 
     /// <inheritdoc/>

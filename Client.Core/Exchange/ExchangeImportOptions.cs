@@ -7,9 +7,6 @@ public class ExchangeImportOptions
     /// <summary>Load target object</summary>
     public bool TargetLoad { get; set; } = true;
 
-    /// <summary>Load scripts from the working folder</summary>
-    public bool ScriptLoad { get; set; } = true;
-
     /// <summary>Load case documents from the working folder</summary>
     public bool CaseDocumentLoad { get; set; } = true;
 

@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using System.ComponentModel.DataAnnotations;
 
 namespace PayrollEngine.Client.Model;
 
@@ -29,10 +30,12 @@ public class Calendar : ModelBase, ICalendar, INameObject
 
     /// <inheritdoc/>
     [JsonPropertyOrder(104)]
+    [DefaultValue(CalendarTimeMap.Period)]
     public CalendarTimeMap TimeMap { get; set; } = CalendarTimeMap.Period;
 
     /// <inheritdoc/>
     [JsonPropertyOrder(105)]
+    [DefaultValue(Month.January)]
     public Month? FirstMonthOfYear { get; set; } = Month.January;
 
     /// <inheritdoc/>
@@ -53,22 +56,27 @@ public class Calendar : ModelBase, ICalendar, INameObject
 
     /// <inheritdoc/>
     [JsonPropertyOrder(110)]
+    [DefaultValue(true)]
     public bool WorkMonday { get; set; } = true;
 
     /// <inheritdoc/>
     [JsonPropertyOrder(111)]
+    [DefaultValue(true)]
     public bool WorkTuesday { get; set; } = true;
 
     /// <inheritdoc/>
     [JsonPropertyOrder(112)]
+    [DefaultValue(true)]
     public bool WorkWednesday { get; set; } = true;
 
     /// <inheritdoc/>
     [JsonPropertyOrder(113)]
+    [DefaultValue(true)]
     public bool WorkThursday { get; set; } = true;
 
     /// <inheritdoc/>
     [JsonPropertyOrder(114)]
+    [DefaultValue(true)]
     public bool WorkFriday { get; set; } = true;
 
     /// <inheritdoc/>

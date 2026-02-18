@@ -8,17 +8,18 @@ namespace PayrollEngine.Client.Model;
 /// <summary>The wage type custom result client object</summary>
 public class WageTypeCustomResult : ModelBase, IWageTypeCustomResult
 {
-    /// <inheritdoc/>
-    [JsonPropertyOrder(100)]
-    public int WageTypeResultId { get; set; }
 
     /// <inheritdoc/>
-    [JsonPropertyOrder(101)]
+    [JsonPropertyOrder(100)]
     public decimal WageTypeNumber { get; set; }
 
     /// <inheritdoc/>
-    [JsonPropertyOrder(102)]
+    [JsonPropertyOrder(101)]
     public string WageTypeName { get; set; }
+
+    /// <inheritdoc/>
+    [JsonPropertyOrder(102)]
+    public int WageTypeResultId { get; set; }
 
     /// <inheritdoc/>
     [JsonPropertyOrder(103)]

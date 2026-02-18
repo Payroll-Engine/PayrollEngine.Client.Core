@@ -8,29 +8,31 @@ namespace PayrollEngine.Client.Model;
 public abstract class ModelBase : IModel
 {
     /// <inheritdoc/>
-    [JsonPropertyOrder(1)]
+    [JsonPropertyOrder(1000)]
     public int Id { get; set; }
 
     /// <inheritdoc/>
+    [JsonIgnore]
     public bool IsExistingObject => Id != 0;
 
     /// <inheritdoc/>
+    [JsonIgnore]
     public bool IsNewObject => !IsExistingObject;
 
     /// <inheritdoc/>
-    [JsonPropertyOrder(2)]
+    [JsonPropertyOrder(1002)]
     public ObjectStatus Status { get; set; }
 
     /// <inheritdoc/>
-    [JsonPropertyOrder(3)]
+    [JsonPropertyOrder(1003)]
     public DateTime Created { get; set; } = Date.MinValue;
 
     /// <inheritdoc/>
-    [JsonPropertyOrder(4)]
+    [JsonPropertyOrder(1004)]
     public DateTime Updated { get; set; } = Date.MinValue;
 
     /// <inheritdoc/>
-    [JsonPropertyOrder(5)]
+    [JsonPropertyOrder(1005)]
     public UpdateMode UpdateMode { get; set; }
 
     /// <summary>Initializes a new instance</summary>

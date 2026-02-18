@@ -7,16 +7,16 @@ namespace PayrollEngine.Client.Model;
 /// <summary>The payroll case client object</summary>
 public class Case : ModelBase, ICase, INameObject
 {
-    /// <inheritdoc/>
-    [Required]
-    [JsonPropertyOrder(100)]
-    public CaseType CaseType { get; set; }
-
     /// <summary>The case name</summary>
     [Required]
     [StringLength(128)]
-    [JsonPropertyOrder(101)]
+    [JsonPropertyOrder(100)]
     public string Name { get; set; }
+
+    /// <inheritdoc/>
+    [Required]
+    [JsonPropertyOrder(101)]
+    public CaseType CaseType { get; set; }
 
     /// <inheritdoc/>
     [JsonPropertyOrder(102)]

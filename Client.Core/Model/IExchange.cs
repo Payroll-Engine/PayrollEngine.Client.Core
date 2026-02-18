@@ -5,7 +5,7 @@ namespace PayrollEngine.Client.Model;
 
 /// <summary>The exchange object</summary>
 // ReSharper disable UnusedMemberInSuper.Global
-public interface IExchange : IEquatable<IExchange>
+public interface IExchange : IEquatable<IExchange>, IImportObject<IExchange>
 {
     /// <summary>The tenants</summary>
     List<ExchangeTenant> Tenants { get; set; }
@@ -15,7 +15,4 @@ public interface IExchange : IEquatable<IExchange>
 
     /// <summary>The default created date for new objects</summary>
     DateTime? CreatedObjectDate { get; set; }
-
-    /// <summary>The import exchange</summary>
-    void Import(IExchange source);
 }

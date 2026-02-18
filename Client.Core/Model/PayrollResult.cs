@@ -8,19 +8,19 @@ public class PayrollResult : ModelBase, IPayrollResult
 {
     /// <inheritdoc/>
     [JsonPropertyOrder(100)]
-    public int PayrollId { get; set; }
+    public string PayrunJobName { get; set; }
 
     /// <inheritdoc/>
     [JsonPropertyOrder(101)]
-    public int PayrunId { get; set; }
-
-    /// <inheritdoc/>
-    [JsonPropertyOrder(102)]
     public int PayrunJobId { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(102)]
+    public int PayrollId { get; set; }
+
+    /// <inheritdoc/>
     [JsonPropertyOrder(103)]
-    public string PayrunJobName { get; set; }
+    public int PayrunId { get; set; }
 
     /// <inheritdoc/>
     [JsonPropertyOrder(104)]

@@ -9,17 +9,17 @@ namespace PayrollEngine.Client.Model;
 public class WageTypeResult : ModelBase, IWageTypeResult
 {
     /// <inheritdoc/>
+    [Required]
     [JsonPropertyOrder(100)]
-    public int PayrollResultId { get; set; }
+    public decimal WageTypeNumber { get; set; }
 
     /// <inheritdoc/>
     [JsonPropertyOrder(101)]
-    public int WageTypeId { get; set; }
+    public int PayrollResultId { get; set; }
 
     /// <inheritdoc/>
-    [Required]
     [JsonPropertyOrder(102)]
-    public decimal WageTypeNumber { get; set; }
+    public int WageTypeId { get; set; }
 
     /// <inheritdoc/>
     [JsonPropertyOrder(103)]

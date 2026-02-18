@@ -20,14 +20,18 @@ public class ExchangeTenant : Tenant, IExchangeTenant
 
     /// <inheritdoc/>
     [JsonPropertyOrder(203)]
-    public List<Task> Tasks { get; set; }
+    public List<EmployeeSet> Employees { get; set; }
 
     /// <inheritdoc/>
     [JsonPropertyOrder(204)]
-    public List<WebhookSet> Webhooks { get; set; }
+    public List<Task> Tasks { get; set; }
 
     /// <inheritdoc/>
     [JsonPropertyOrder(205)]
+    public List<WebhookSet> Webhooks { get; set; }
+
+    /// <inheritdoc/>
+    [JsonPropertyOrder(206)]
     public List<RegulationSet> Regulations { get; set; }
 
     /// <inheritdoc/>
@@ -56,26 +60,22 @@ public class ExchangeTenant : Tenant, IExchangeTenant
 
     /// <inheritdoc/>
     [JsonPropertyOrder(300)]
-    public List<EmployeeSet> Employees { get; set; }
-
-    /// <inheritdoc/>
-    [JsonPropertyOrder(400)]
     public List<PayrollSet> Payrolls { get; set; }
 
     /// <inheritdoc/>
-    [JsonPropertyOrder(401)]
+    [JsonPropertyOrder(301)]
     public List<Payrun> Payruns { get; set; }
 
     /// <inheritdoc/>
-    [JsonPropertyOrder(402)]
+    [JsonPropertyOrder(302)]
     public List<PayrunJob> PayrunJobs { get; set; }
 
     /// <inheritdoc/>
-    [JsonPropertyOrder(403)]
+    [JsonPropertyOrder(303)]
     public List<PayrunJobInvocation> PayrunJobInvocations { get; set; }
 
     /// <inheritdoc/>
-    [JsonPropertyOrder(404)]
+    [JsonPropertyOrder(304)]
     public List<PayrollResultSet> PayrollResults { get; set; }
 
     /// <summary>Initializes a new instance</summary>
