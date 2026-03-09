@@ -351,7 +351,7 @@ public class NamespaceUpdateTool : Visitor
     }
 
     /// <inheritdoc />
-    protected override async Task VisitWebhookAsync(IExchangeTenant tenant, IWebhook webhook)
+    protected override async Task VisitWebhookAsync(IExchangeTenant tenant, IWebhookSet webhook)
     {
         webhook.Name = ApplyNamespace(webhook.Name);
         await base.VisitWebhookAsync(tenant, webhook);

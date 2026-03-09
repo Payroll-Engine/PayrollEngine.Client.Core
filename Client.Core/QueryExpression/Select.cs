@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace PayrollEngine.Client.QueryExpression;
 
@@ -12,10 +12,7 @@ public class Select
     /// <param name="fields">The query select fields</param>
     public Select(params string[] fields)
     {
-        if (fields == null)
-        {
-            throw new ArgumentNullException(nameof(fields));
-        }
+        ArgumentNullException.ThrowIfNull(fields);
         Expression = string.Join(',', fields);
     }
 

@@ -4,7 +4,9 @@ using System.Collections.Generic;
 namespace PayrollEngine.Client.Model;
 
 /// <summary>The collector result client object</summary>
-public interface ICollectorResult : IModel, IAttributeObject, IEquatable<ICollectorResult>
+public interface ICollectorResult : IModel, IAttributeObject,
+    IEquatable<ICollectorResult>, INumericValueResult
+
 {
     /// <summary>The payroll result id (immutable)</summary>
     int PayrollResultId { get; set; }
@@ -26,9 +28,6 @@ public interface ICollectorResult : IModel, IAttributeObject, IEquatable<ICollec
 
     /// <summary>The value type (immutable)</summary>
     ValueType ValueType { get; set; }
-
-    /// <summary>The collector result value (immutable)</summary>
-    decimal Value { get; set; }
     
     /// <summary>The collector result culture name based on RFC 4646</summary>
     string Culture { get; set; }
@@ -41,10 +40,4 @@ public interface ICollectorResult : IModel, IAttributeObject, IEquatable<ICollec
 
     /// <summary>The result tags</summary>
     List<string> Tags { get; set; }
-
-    /// <summary>Test if two collector values are almost equals</summary>
-    /// <param name="compare">The value to compare</param>
-    /// <param name="precision">The test precision</param>
-    /// <returns>True for almost equal value</returns>
-    bool AlmostEqualValue(decimal? compare, int precision);
 }

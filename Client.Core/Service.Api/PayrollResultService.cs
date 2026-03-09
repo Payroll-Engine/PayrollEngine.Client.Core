@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using PayrollEngine.Client.Model;
@@ -20,10 +20,7 @@ public class PayrollResultService : ServiceBase, IPayrollResultService
     /// <inheritdoc/>
     public virtual async Task<List<T>> QueryAsync<T>(TenantServiceContext context, Query query = null) where T : class, IPayrollResult
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.Items;
@@ -34,10 +31,7 @@ public class PayrollResultService : ServiceBase, IPayrollResultService
     /// <inheritdoc/>
     public virtual async Task<long> QueryCountAsync(TenantServiceContext context, Query query = null)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.Count;
@@ -48,10 +42,7 @@ public class PayrollResultService : ServiceBase, IPayrollResultService
     /// <inheritdoc/>
     public virtual async Task<QueryResult<T>> QueryResultAsync<T>(TenantServiceContext context, Query query = null) where T : class, IPayrollResult
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.ItemsWithCount;
@@ -62,10 +53,7 @@ public class PayrollResultService : ServiceBase, IPayrollResultService
     /// <inheritdoc/>
     public virtual async Task<T> GetAsync<T>(TenantServiceContext context, int payrollResultId) where T : class, IPayrollResult
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (payrollResultId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(payrollResultId));
@@ -82,10 +70,7 @@ public class PayrollResultService : ServiceBase, IPayrollResultService
     public async Task<List<TCollectorResult>> QueryCollectorResultsAsync<TCollectorResult>(PayrollResultServiceContext context,
         Query query = null) where TCollectorResult : class, ICollectorResult
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.Items;
@@ -96,10 +81,7 @@ public class PayrollResultService : ServiceBase, IPayrollResultService
     /// <inheritdoc/>
     public virtual async Task<long> QueryCollectorResultsCountAsync(PayrollResultServiceContext context, Query query = null)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.Count;
@@ -111,10 +93,7 @@ public class PayrollResultService : ServiceBase, IPayrollResultService
     public virtual async Task<QueryResult<TCollectorResult>> QueryCollectorResultsResultAsync<TCollectorResult>(
         PayrollResultServiceContext context, Query query = null) where TCollectorResult : class, ICollectorResult
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.ItemsWithCount;
@@ -126,10 +105,7 @@ public class PayrollResultService : ServiceBase, IPayrollResultService
     public virtual async Task<List<TCollectorCustomResult>> QueryCollectorCustomResultsAsync<TCollectorCustomResult>(TenantServiceContext context,
         int payrollResultId, int collectorResultId, Query query = null) where TCollectorCustomResult : class, ICollectorCustomResult
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (payrollResultId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(payrollResultId));
@@ -152,10 +128,7 @@ public class PayrollResultService : ServiceBase, IPayrollResultService
     public async Task<List<TWageTypeResult>> QueryWageTypeResultsAsync<TWageTypeResult>(PayrollResultServiceContext context,
         Query query = null) where TWageTypeResult : class, IWageTypeResult
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.Items;
@@ -166,10 +139,7 @@ public class PayrollResultService : ServiceBase, IPayrollResultService
     /// <inheritdoc/>
     public virtual async Task<long> QueryWageTypeResultsCountAsync(PayrollResultServiceContext context, Query query = null)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.Count;
@@ -181,10 +151,7 @@ public class PayrollResultService : ServiceBase, IPayrollResultService
     public virtual async Task<QueryResult<TWageTypeResult>> QueryWageTypeResultsResultAsync<TWageTypeResult>(
         PayrollResultServiceContext context, Query query = null) where TWageTypeResult : class, IWageTypeResult
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.ItemsWithCount;
@@ -196,10 +163,7 @@ public class PayrollResultService : ServiceBase, IPayrollResultService
     public virtual async Task<List<TWageTypeCustomResult>> QueryWageTypeCustomResultsAsync<TWageTypeCustomResult>(TenantServiceContext context,
         int payrollResultId, int wageTypeResultId, Query query = null) where TWageTypeCustomResult : class, IWageTypeCustomResult
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (payrollResultId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(payrollResultId));
@@ -222,10 +186,7 @@ public class PayrollResultService : ServiceBase, IPayrollResultService
     public async Task<List<TPayrunResult>> QueryPayrunResultsAsync<TPayrunResult>(PayrollResultServiceContext context,
         Query query = null) where TPayrunResult : class, IPayrunResult
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.Items;
@@ -236,10 +197,7 @@ public class PayrollResultService : ServiceBase, IPayrollResultService
     /// <inheritdoc/>
     public virtual async Task<long> QueryPayrunResultsCountAsync(PayrollResultServiceContext context, Query query = null)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.Count;
@@ -251,10 +209,7 @@ public class PayrollResultService : ServiceBase, IPayrollResultService
     public virtual async Task<QueryResult<TPayrunResult>> QueryPayrunResultsResultAsync<TPayrunResult>(
         PayrollResultServiceContext context, Query query = null) where TPayrunResult : class, IPayrunResult
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.ItemsWithCount;
@@ -270,10 +225,7 @@ public class PayrollResultService : ServiceBase, IPayrollResultService
     public virtual async Task<List<TPayrollResultSet>> QueryPayrollResultSetsAsync<TPayrollResultSet>(
         TenantServiceContext context, Query query = null) where TPayrollResultSet : class, IPayrollResultSet
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.Items;
@@ -284,10 +236,7 @@ public class PayrollResultService : ServiceBase, IPayrollResultService
     /// <inheritdoc/>
     public virtual async Task<long> QueryPayrollResultSetsCountAsync(TenantServiceContext context, Query query = null)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.Count;
@@ -299,10 +248,7 @@ public class PayrollResultService : ServiceBase, IPayrollResultService
     public virtual async Task<QueryResult<TPayrollResultSet>> QueryPayrollResultSetsResultAsync<TPayrollResultSet>(
         TenantServiceContext context, Query query = null) where TPayrollResultSet : class, IPayrollResultSet
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.ItemsWithCount;
@@ -314,10 +260,7 @@ public class PayrollResultService : ServiceBase, IPayrollResultService
     public virtual async Task<TPayrollResultSet> GetPayrollResultSetAsync<TPayrollResultSet>(PayrollResultServiceContext context)
         where TPayrollResultSet : class, IPayrollResultSet
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         return await HttpClient.GetAsync<TPayrollResultSet>(PayrollResultApiEndpoints.PayrollResultSetUrl(context.TenantId, context.PayrollResultId));
     }

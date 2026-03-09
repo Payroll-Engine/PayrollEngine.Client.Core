@@ -34,14 +34,8 @@ public static class YamlWriter
     /// <summary>Save obj object to YAML file</summary>
     public static async Task ToFileAsync<T>(T obj, string fileName) where T : class
     {
-        if (obj == null)
-        {
-            throw new ArgumentNullException(nameof(obj));
-        }
-        if (string.IsNullOrWhiteSpace(fileName))
-        {
-            throw new ArgumentException(nameof(fileName));
-        }
+        ArgumentNullException.ThrowIfNull(obj);
+        ArgumentException.ThrowIfNullOrWhiteSpace(fileName);
 
         // serialize
         var yaml = Serializer.Serialize(obj).Trim();

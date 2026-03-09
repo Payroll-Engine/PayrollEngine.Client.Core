@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using PayrollEngine.Client.Model;
@@ -19,10 +19,7 @@ public class ReportSetService : ServiceBase, IReportSetService
     /// <inheritdoc/>
     public virtual async Task<List<T>> QueryAsync<T>(RegulationServiceContext context, Query query = null) where T : class, IReportSet
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.Items;
@@ -33,10 +30,7 @@ public class ReportSetService : ServiceBase, IReportSetService
     /// <inheritdoc/>
     public virtual async Task<long> QueryCountAsync(RegulationServiceContext context, Query query = null)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.Count;
@@ -47,10 +41,7 @@ public class ReportSetService : ServiceBase, IReportSetService
     /// <inheritdoc/>
     public virtual async Task<QueryResult<T>> QueryResultAsync<T>(RegulationServiceContext context, Query query = null) where T : class, IReportSet
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.ItemsWithCount;
@@ -61,14 +52,8 @@ public class ReportSetService : ServiceBase, IReportSetService
     /// <inheritdoc/>
     public virtual async Task<T> CreateAsync<T>(RegulationServiceContext context, T report) where T : class, IReportSet
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
-        if (report == null)
-        {
-            throw new ArgumentNullException(nameof(report));
-        }
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentNullException.ThrowIfNull(report);
 
         return await HttpClient.PostAsync(RegulationApiEndpoints.RegulationReportSetsUrl(context.TenantId, context.RegulationId), report);
     }
@@ -80,10 +65,7 @@ public class ReportSetService : ServiceBase, IReportSetService
     /// <inheritdoc/>
     public virtual async Task<T> GetAsync<T>(RegulationServiceContext context, int reportId, ReportRequest reportRequest) where T : class, IReportSet
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (reportId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(reportId));
@@ -102,14 +84,8 @@ public class ReportSetService : ServiceBase, IReportSetService
     /// <inheritdoc />
     public virtual async Task<T> GetAsync<T>(RegulationServiceContext context, string name, ReportRequest reportRequest = null) where T : class, IReportSet
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
-        if (string.IsNullOrWhiteSpace(name))
-        {
-            throw new ArgumentException(nameof(name));
-        }
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentException.ThrowIfNullOrWhiteSpace(name);
 
         // query report id
         var query = QueryFactory.NewNameQuery(name);
@@ -127,10 +103,7 @@ public class ReportSetService : ServiceBase, IReportSetService
     /// <inheritdoc/>
     public virtual async Task DeleteAsync(RegulationServiceContext context, int reportId)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (reportId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(reportId));

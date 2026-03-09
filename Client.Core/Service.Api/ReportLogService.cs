@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using PayrollEngine.Client.Model;
@@ -19,10 +19,7 @@ public class ReportLogService : ServiceBase, IReportLogService
     /// <inheritdoc />
     public virtual async Task<List<T>> QueryAsync<T>(TenantServiceContext context, Query query = null) where T : class, IReportLog
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.Items;
@@ -33,10 +30,7 @@ public class ReportLogService : ServiceBase, IReportLogService
     /// <inheritdoc />
     public virtual async Task<long> QueryCountAsync(TenantServiceContext context, Query query = null)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.Count;
@@ -47,10 +41,7 @@ public class ReportLogService : ServiceBase, IReportLogService
     /// <inheritdoc />
     public virtual async Task<QueryResult<T>> QueryResultAsync<T>(TenantServiceContext context, Query query = null) where T : class, IReportLog
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.ItemsWithCount;
@@ -61,10 +52,7 @@ public class ReportLogService : ServiceBase, IReportLogService
     /// <inheritdoc />
     public virtual async Task<T> GetAsync<T>(TenantServiceContext context, int logId) where T : class, IReportLog
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (logId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(logId));
@@ -76,14 +64,8 @@ public class ReportLogService : ServiceBase, IReportLogService
     /// <inheritdoc />
     public virtual async Task<T> CreateAsync<T>(TenantServiceContext context, T log) where T : class, IReportLog
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
-        if (log == null)
-        {
-            throw new ArgumentNullException(nameof(log));
-        }
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentNullException.ThrowIfNull(log);
 
         return await HttpClient.PostAsync(TenantApiEndpoints.ReportLogsUrl(context.TenantId), log);
     }
@@ -95,10 +77,7 @@ public class ReportLogService : ServiceBase, IReportLogService
     /// <inheritdoc />
     public virtual async Task DeleteAsync(TenantServiceContext context, int logId)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (logId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(logId));

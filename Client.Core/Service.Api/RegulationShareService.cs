@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using PayrollEngine.Client.Model;
@@ -19,10 +19,7 @@ public class RegulationShareService : ServiceBase, IRegulationShareService
     /// <inheritdoc />
     public virtual async Task<List<T>> QueryAsync<T>(RootServiceContext context, Query query = null) where T : class, IRegulationShare
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.Items;
@@ -33,10 +30,7 @@ public class RegulationShareService : ServiceBase, IRegulationShareService
     /// <inheritdoc />
     public virtual async Task<long> QueryCountAsync(RootServiceContext context, Query query = null)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.Count;
@@ -47,10 +41,7 @@ public class RegulationShareService : ServiceBase, IRegulationShareService
     /// <inheritdoc />
     public virtual async Task<QueryResult<T>> QueryResultAsync<T>(RootServiceContext context, Query query = null) where T : class, IRegulationShare
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.ItemsWithCount;
@@ -61,10 +52,7 @@ public class RegulationShareService : ServiceBase, IRegulationShareService
     /// <inheritdoc />
     public virtual async Task<T> GetAsync<T>(RootServiceContext context, int shareId) where T : class, IRegulationShare
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (shareId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(shareId));
@@ -76,14 +64,8 @@ public class RegulationShareService : ServiceBase, IRegulationShareService
     /// <inheritdoc />
     public virtual async Task<T> CreateAsync<T>(RootServiceContext context, T tenant) where T : class, IRegulationShare
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
-        if (tenant == null)
-        {
-            throw new ArgumentNullException(nameof(tenant));
-        }
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentNullException.ThrowIfNull(tenant);
 
         return await HttpClient.PostAsync(ApiEndpoints.SharesRegulationsUrl(), tenant);
     }
@@ -91,14 +73,8 @@ public class RegulationShareService : ServiceBase, IRegulationShareService
     /// <inheritdoc />
     public virtual async Task UpdateAsync<T>(RootServiceContext context, T share) where T : class, IRegulationShare
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
-        if (share == null)
-        {
-            throw new ArgumentNullException(nameof(share));
-        }
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentNullException.ThrowIfNull(share);
 
         await HttpClient.PutAsync(ApiEndpoints.SharesRegulationsUrl(), share);
     }
@@ -106,10 +82,7 @@ public class RegulationShareService : ServiceBase, IRegulationShareService
     /// <inheritdoc />
     public virtual async Task DeleteAsync(RootServiceContext context, int shareId)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (shareId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(shareId));
@@ -123,18 +96,12 @@ public class RegulationShareService : ServiceBase, IRegulationShareService
     /// <inheritdoc />
     public virtual async Task<string> GetAttributeAsync(RootServiceContext context, int shareId, string attributeName)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (shareId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(shareId));
         }
-        if (string.IsNullOrWhiteSpace(attributeName))
-        {
-            throw new ArgumentException(nameof(attributeName));
-        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(attributeName);
 
         return await HttpClient.GetAttributeAsync(ApiEndpoints.SharesRegulationAttributeUrl(shareId, attributeName));
     }
@@ -142,18 +109,12 @@ public class RegulationShareService : ServiceBase, IRegulationShareService
     /// <inheritdoc />
     public virtual async Task SetAttributeAsync(RootServiceContext context, int shareId, string attributeName, string attributeValue)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (shareId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(shareId));
         }
-        if (string.IsNullOrWhiteSpace(attributeName))
-        {
-            throw new ArgumentException(nameof(attributeName));
-        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(attributeName);
 
         await HttpClient.PostAttributeAsync(ApiEndpoints.SharesRegulationAttributesUrl(shareId), attributeValue);
     }
@@ -161,18 +122,12 @@ public class RegulationShareService : ServiceBase, IRegulationShareService
     /// <inheritdoc />
     public virtual async Task DeleteAttributeAsync(RootServiceContext context, int shareId, string attributeName)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (shareId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(shareId));
         }
-        if (string.IsNullOrWhiteSpace(attributeName))
-        {
-            throw new ArgumentException(nameof(attributeName));
-        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(attributeName);
 
         await HttpClient.DeleteAttributeAsync(ApiEndpoints.SharesRegulationAttributesUrl(shareId));
     }

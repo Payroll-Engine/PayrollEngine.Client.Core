@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Threading.Tasks;
 
 namespace PayrollEngine.Client.Command;
@@ -22,14 +22,8 @@ public abstract class CommandBase<TArgs> : CommandBase where TArgs : ICommandPar
     /// <returns>Error code, zero on valid command execution.</returns>
     protected override async Task<int> OnExecute(CommandContext context, ICommandParameters parameters)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
-        if (parameters == null)
-        {
-            throw new ArgumentNullException(nameof(parameters));
-        }
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentNullException.ThrowIfNull(parameters);
         return await Execute(context, (TArgs)parameters);
     }
 }

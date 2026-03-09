@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using PayrollEngine.Client.Model;
@@ -19,10 +19,7 @@ public class ReportTemplateService : ServiceBase, IReportTemplateService
     /// <inheritdoc />
     public virtual async Task<List<T>> QueryAsync<T>(ReportServiceContext context, ReportTemplateQuery query = null) where T : class, IReportTemplate
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.Items;
@@ -35,10 +32,7 @@ public class ReportTemplateService : ServiceBase, IReportTemplateService
     /// <inheritdoc />
     public virtual async Task<long> QueryCountAsync(ReportServiceContext context, ReportTemplateQuery query = null)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.Count;
@@ -51,10 +45,7 @@ public class ReportTemplateService : ServiceBase, IReportTemplateService
     /// <inheritdoc />
     public virtual async Task<QueryResult<T>> QueryResultAsync<T>(ReportServiceContext context, ReportTemplateQuery query = null) where T : class, IReportTemplate
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.ItemsWithCount;
@@ -67,10 +58,7 @@ public class ReportTemplateService : ServiceBase, IReportTemplateService
     /// <inheritdoc />
     public virtual async Task<T> GetAsync<T>(ReportServiceContext context, int templateId) where T : class, IReportTemplate
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (templateId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(templateId));
@@ -83,14 +71,8 @@ public class ReportTemplateService : ServiceBase, IReportTemplateService
     /// <inheritdoc />
     public virtual async Task<T> CreateAsync<T>(ReportServiceContext context, T template) where T : class, IReportTemplate
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
-        if (template == null)
-        {
-            throw new ArgumentNullException(nameof(template));
-        }
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentNullException.ThrowIfNull(template);
 
         return await HttpClient.PostAsync(
             RegulationApiEndpoints.RegulationReportTemplatesUrl(context.TenantId, context.RegulationId, context.ReportId), template);
@@ -99,14 +81,8 @@ public class ReportTemplateService : ServiceBase, IReportTemplateService
     /// <inheritdoc />
     public virtual async Task UpdateAsync<T>(ReportServiceContext context, T template) where T : class, IReportTemplate
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
-        if (template == null)
-        {
-            throw new ArgumentNullException(nameof(template));
-        }
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentNullException.ThrowIfNull(template);
 
         await HttpClient.PutAsync(RegulationApiEndpoints.RegulationReportTemplatesUrl(context.TenantId, context.RegulationId, context.ReportId), template);
     }
@@ -114,10 +90,7 @@ public class ReportTemplateService : ServiceBase, IReportTemplateService
     /// <inheritdoc />
     public virtual async Task DeleteAsync(ReportServiceContext context, int templateId)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (templateId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(templateId));

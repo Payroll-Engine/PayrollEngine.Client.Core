@@ -30,10 +30,7 @@ public static class YamlReader
     /// <param name="fileName">Name of the file</param>
     public static async Task<T> FromFileAsync<T>(string fileName) where T : class
     {
-        if (string.IsNullOrWhiteSpace(fileName))
-        {
-            throw new ArgumentException(nameof(fileName));
-        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(fileName);
 
         // ensure full path
         fileName = Path.GetFullPath(fileName);

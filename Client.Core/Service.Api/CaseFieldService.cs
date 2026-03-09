@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using PayrollEngine.Client.Model;
@@ -19,10 +19,7 @@ public class CaseFieldService : ServiceBase, ICaseFieldService
     /// <inheritdoc/>
     public virtual async Task<List<T>> QueryAsync<T>(CaseServiceContext context, Query query = null) where T : class, ICaseField
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.Items;
@@ -33,10 +30,7 @@ public class CaseFieldService : ServiceBase, ICaseFieldService
     /// <inheritdoc/>
     public virtual async Task<long> QueryCountAsync(CaseServiceContext context, Query query = null)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.Count;
@@ -47,10 +41,7 @@ public class CaseFieldService : ServiceBase, ICaseFieldService
     /// <inheritdoc/>
     public virtual async Task<QueryResult<T>> QueryResultAsync<T>(CaseServiceContext context, Query query = null) where T : class, ICaseField
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.ItemsWithCount;
@@ -61,10 +52,7 @@ public class CaseFieldService : ServiceBase, ICaseFieldService
     /// <inheritdoc/>
     public virtual async Task<T> GetAsync<T>(CaseServiceContext context, int caseFieldId) where T : class, ICaseField
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (caseFieldId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(caseFieldId));
@@ -77,14 +65,8 @@ public class CaseFieldService : ServiceBase, ICaseFieldService
     /// <inheritdoc/>
     public virtual async Task<T> GetAsync<T>(CaseServiceContext context, string name) where T : class, ICaseField
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
-        if (string.IsNullOrWhiteSpace(name))
-        {
-            throw new ArgumentException(nameof(name));
-        }
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentException.ThrowIfNullOrWhiteSpace(name);
 
         // query single item
         var query = QueryFactory.NewNameQuery(name);
@@ -95,14 +77,8 @@ public class CaseFieldService : ServiceBase, ICaseFieldService
     /// <inheritdoc/>
     public virtual async Task<T> CreateAsync<T>(CaseServiceContext context, T caseField) where T : class, ICaseField
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
-        if (caseField == null)
-        {
-            throw new ArgumentNullException(nameof(caseField));
-        }
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentNullException.ThrowIfNull(caseField);
 
         return await HttpClient.PostAsync(
             RegulationApiEndpoints.RegulationCaseFieldsUrl(context.TenantId, context.RegulationId, context.CaseId),
@@ -112,14 +88,8 @@ public class CaseFieldService : ServiceBase, ICaseFieldService
     /// <inheritdoc/>
     public virtual async Task UpdateAsync<T>(CaseServiceContext context, T caseField) where T : class, ICaseField
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
-        if (caseField == null)
-        {
-            throw new ArgumentNullException(nameof(caseField));
-        }
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentNullException.ThrowIfNull(caseField);
 
         await HttpClient.PutAsync(
             RegulationApiEndpoints.RegulationCaseFieldsUrl(context.TenantId, context.RegulationId, context.CaseId),
@@ -129,10 +99,7 @@ public class CaseFieldService : ServiceBase, ICaseFieldService
     /// <inheritdoc/>
     public virtual async Task DeleteAsync(CaseServiceContext context, int caseFieldId)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (caseFieldId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(caseFieldId));

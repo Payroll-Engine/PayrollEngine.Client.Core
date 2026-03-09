@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace PayrollEngine.Client.Command;
 
@@ -18,8 +18,10 @@ public class CommandContext
     public CommandContext(CommandManager commandManager, ICommandConsole console, ILogger logger = null,
         PayrollHttpClient httpClient = null, DisplayLevel displayLevel = DisplayLevel.Full)
     {
-        CommandManager = commandManager ?? throw new ArgumentNullException(nameof(commandManager));
-        Console = console ?? throw new ArgumentNullException(nameof(console));
+        ArgumentNullException.ThrowIfNull(commandManager);
+        CommandManager = commandManager;
+        ArgumentNullException.ThrowIfNull(console);
+        Console = console;
         Logger = logger;
         HttpClient = httpClient;
         DisplayLevel = displayLevel;

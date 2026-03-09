@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using PayrollEngine.Client.Model;
@@ -19,10 +19,7 @@ public class PayrunJobService : ServiceBase, IPayrunJobService
     /// <inheritdoc/>
     public virtual async Task<List<T>> QueryAsync<T>(TenantServiceContext context, Query query = null) where T : class, IPayrunJob
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.Items;
@@ -33,10 +30,7 @@ public class PayrunJobService : ServiceBase, IPayrunJobService
     /// <inheritdoc/>
     public virtual async Task<long> QueryCountAsync(TenantServiceContext context, Query query = null)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.Count;
@@ -47,10 +41,7 @@ public class PayrunJobService : ServiceBase, IPayrunJobService
     /// <inheritdoc/>
     public virtual async Task<QueryResult<T>> QueryResultAsync<T>(TenantServiceContext context, Query query = null) where T : class, IPayrunJob
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.ItemsWithCount;
@@ -62,10 +53,7 @@ public class PayrunJobService : ServiceBase, IPayrunJobService
     public virtual async Task<List<T>> QueryEmployeePayrunJobsAsync<T>(TenantServiceContext context,
         int employeeId, Query query = null) where T : class, IPayrunJob
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (employeeId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(employeeId));
@@ -81,10 +69,7 @@ public class PayrunJobService : ServiceBase, IPayrunJobService
     public virtual async Task<long> QueryEmployeePayrunJobsCountAsync(TenantServiceContext context,
         int employeeId, Query query = null)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (employeeId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(employeeId));
@@ -100,10 +85,7 @@ public class PayrunJobService : ServiceBase, IPayrunJobService
     public virtual async Task<QueryResult<T>> QueryEmployeePayrunJobsCountAsync<T>(TenantServiceContext context,
         int employeeId, Query query = null) where T : class, IPayrunJob
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (employeeId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(employeeId));
@@ -118,10 +100,7 @@ public class PayrunJobService : ServiceBase, IPayrunJobService
     /// <inheritdoc/>
     public virtual async Task<T> GetAsync<T>(TenantServiceContext context, int payrunJobId) where T : class, IPayrunJob
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (payrunJobId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(payrunJobId));
@@ -133,14 +112,8 @@ public class PayrunJobService : ServiceBase, IPayrunJobService
     /// <inheritdoc/>
     public virtual async Task<T> GetAsync<T>(TenantServiceContext context, string name) where T : class, IPayrunJob
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
-        if (string.IsNullOrWhiteSpace(name))
-        {
-            throw new ArgumentException(nameof(name));
-        }
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentException.ThrowIfNullOrWhiteSpace(name);
 
         // query single item
         var query = QueryFactory.NewNameQuery(name);
@@ -152,10 +125,7 @@ public class PayrunJobService : ServiceBase, IPayrunJobService
     /// <inheritdoc/>
     public virtual async Task<string> GetJobStatusAsync(TenantServiceContext context, int payrunJobId)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (payrunJobId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(payrunJobId));
@@ -165,16 +135,20 @@ public class PayrunJobService : ServiceBase, IPayrunJobService
     }
 
     /// <inheritdoc/>
+    public virtual async Task<T> PreviewJobAsync<T>(TenantServiceContext context, PayrunJobInvocation jobInvocation) where T : class, IPayrollResultSet
+    {
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentNullException.ThrowIfNull(jobInvocation);
+
+        return await HttpClient.PostAsync<PayrunJobInvocation, T>(PayrunApiEndpoints.PayrunJobPreviewUrl(context.TenantId),
+            jobInvocation);
+    }
+
+    /// <inheritdoc/>
     public virtual async Task<T> StartJobAsync<T>(TenantServiceContext context, PayrunJobInvocation jobInvocation) where T : class, IPayrunJob
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
-        if (jobInvocation == null)
-        {
-            throw new ArgumentNullException(nameof(jobInvocation));
-        }
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentNullException.ThrowIfNull(jobInvocation);
 
         return await HttpClient.PostAsync<PayrunJobInvocation, T>(PayrunApiEndpoints.PayrunJobsUrl(context.TenantId),
             jobInvocation);
@@ -184,10 +158,7 @@ public class PayrunJobService : ServiceBase, IPayrunJobService
     public virtual async Task ChangeJobStatusAsync(TenantServiceContext context, int payrunJobId,
         PayrunJobStatus jobStatus, int userId, string reason, bool patchMode)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (payrunJobId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(payrunJobId));
@@ -196,10 +167,7 @@ public class PayrunJobService : ServiceBase, IPayrunJobService
         {
             throw new ArgumentOutOfRangeException(nameof(userId));
         }
-        if (string.IsNullOrWhiteSpace(reason))
-        {
-            throw new ArgumentException(nameof(reason));
-        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(reason);
 
         var url = PayrunApiEndpoints.PayrunJobStatusUrl(context.TenantId, payrunJobId)
             .AddQueryString(nameof(userId), userId)
@@ -211,14 +179,8 @@ public class PayrunJobService : ServiceBase, IPayrunJobService
     /// <inheritdoc/>
     public virtual async Task<T> CreateAsync<T>(TenantServiceContext context, T payrunJob) where T : class, IPayrunJob
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
-        if (payrunJob == null)
-        {
-            throw new ArgumentNullException(nameof(payrunJob));
-        }
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentNullException.ThrowIfNull(payrunJob);
 
         return await HttpClient.PostAsync(PayrunApiEndpoints.PayrunJobsUrl(context.TenantId), payrunJob);
     }
@@ -226,14 +188,8 @@ public class PayrunJobService : ServiceBase, IPayrunJobService
     /// <inheritdoc/>
     public virtual async Task UpdateAsync<T>(TenantServiceContext context, T payrunJob) where T : class, IPayrunJob
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
-        if (payrunJob == null)
-        {
-            throw new ArgumentNullException(nameof(payrunJob));
-        }
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentNullException.ThrowIfNull(payrunJob);
 
         await HttpClient.PutAsync(PayrunApiEndpoints.PayrunJobsUrl(context.TenantId), payrunJob);
     }
@@ -241,10 +197,7 @@ public class PayrunJobService : ServiceBase, IPayrunJobService
     /// <inheritdoc/>
     public virtual async Task DeleteAsync(TenantServiceContext context, int payrunJobId)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (payrunJobId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(payrunJobId));
@@ -256,18 +209,12 @@ public class PayrunJobService : ServiceBase, IPayrunJobService
     /// <inheritdoc/>
     public virtual async Task<string> GetAttributeAsync(TenantServiceContext context, int payrunJobId, string attributeName)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (payrunJobId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(payrunJobId));
         }
-        if (string.IsNullOrWhiteSpace(attributeName))
-        {
-            throw new ArgumentException(nameof(attributeName));
-        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(attributeName);
 
         return await HttpClient.GetAttributeAsync(
             PayrunApiEndpoints.PayrunJobAttributeUrl(context.TenantId, payrunJobId, attributeName));
@@ -276,18 +223,12 @@ public class PayrunJobService : ServiceBase, IPayrunJobService
     /// <inheritdoc/>
     public virtual async Task SetAttributeAsync(TenantServiceContext context, int payrunJobId, string attributeName, string attributeValue)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (payrunJobId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(payrunJobId));
         }
-        if (string.IsNullOrWhiteSpace(attributeName))
-        {
-            throw new ArgumentException(nameof(attributeName));
-        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(attributeName);
 
         await HttpClient.PostAttributeAsync(
             PayrunApiEndpoints.PayrunJobAttributeUrl(context.TenantId, payrunJobId, attributeName), attributeValue);
@@ -296,18 +237,12 @@ public class PayrunJobService : ServiceBase, IPayrunJobService
     /// <inheritdoc/>
     public virtual async Task DeleteAttributeAsync(TenantServiceContext context, int payrunJobId, string attributeName)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (payrunJobId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(payrunJobId));
         }
-        if (string.IsNullOrWhiteSpace(attributeName))
-        {
-            throw new ArgumentException(nameof(attributeName));
-        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(attributeName);
 
         await HttpClient.DeleteAttributeAsync(PayrunApiEndpoints.PayrunJobAttributeUrl(context.TenantId, payrunJobId,
             attributeName));

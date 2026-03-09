@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace PayrollEngine.Client.QueryExpression;
@@ -113,20 +113,14 @@ public class QueryParameters : Dictionary<string, string>
     /// <summary>Query name parameter</summary>
     public QueryParameters Name(string name)
     {
-        if (string.IsNullOrWhiteSpace(name))
-        {
-            throw new ArgumentException(nameof(name));
-        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(name);
         return Parameter("Name", name);
     }
 
     /// <summary>Query identifier parameter</summary>
     public QueryParameters Identifier(string identifier)
     {
-        if (string.IsNullOrWhiteSpace(identifier))
-        {
-            throw new ArgumentException(nameof(identifier));
-        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(identifier);
         return Parameter("Identifier", identifier);
     }
 
@@ -141,10 +135,7 @@ public class QueryParameters : Dictionary<string, string>
     /// <summary>Query parameter</summary>
     public QueryParameters Parameter(Parameter parameter)
     {
-        if (parameter == null)
-        {
-            throw new ArgumentNullException(nameof(parameter));
-        }
+        ArgumentNullException.ThrowIfNull(parameter);
 
         if (parameter.Value == null)
         {

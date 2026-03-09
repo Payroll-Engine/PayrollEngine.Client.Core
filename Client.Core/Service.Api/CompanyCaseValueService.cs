@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using PayrollEngine.Client.Model;
@@ -18,10 +18,7 @@ public class CompanyCaseValueService : ServiceBase, ICompanyCaseValueService
     /// <inheritdoc/>
     public virtual async Task<List<T>> QueryAsync<T>(TenantServiceContext context, CaseValueQuery query = null) where T : class, ICaseValue
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.Items;
@@ -32,10 +29,7 @@ public class CompanyCaseValueService : ServiceBase, ICompanyCaseValueService
     /// <inheritdoc/>
     public virtual async Task<long> QueryCountAsync(TenantServiceContext context, CaseValueQuery query = null)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.Count;
@@ -46,10 +40,7 @@ public class CompanyCaseValueService : ServiceBase, ICompanyCaseValueService
     /// <inheritdoc/>
     public virtual async Task<QueryResult<T>> QueryResultAsync<T>(TenantServiceContext context, CaseValueQuery query = null) where T : class, ICaseValue
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.ItemsWithCount;
@@ -60,10 +51,7 @@ public class CompanyCaseValueService : ServiceBase, ICompanyCaseValueService
     /// <inheritdoc/>
     public virtual async Task<T> GetAsync<T>(TenantServiceContext context, int companyCaseValueId) where T : class, ICaseValue
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (companyCaseValueId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(companyCaseValueId));
@@ -75,14 +63,8 @@ public class CompanyCaseValueService : ServiceBase, ICompanyCaseValueService
     /// <inheritdoc/>
     public virtual async Task<IEnumerable<string>> GetCaseValueSlotsAsync(TenantServiceContext context, string caseFieldName)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
-        if (string.IsNullOrWhiteSpace(caseFieldName))
-        {
-            throw new ArgumentException(nameof(caseFieldName));
-        }
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentException.ThrowIfNullOrWhiteSpace(caseFieldName);
 
         var requestUri = CompanyCaseApiEndpoints.CompanyCaseSlotsUrl(context.TenantId);
         requestUri = requestUri.AddQueryString(nameof(caseFieldName), caseFieldName);

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using PayrollEngine.Serialization;
 using YamlDotNet.Serialization;
@@ -19,7 +19,8 @@ public class PropertyFilteringInspector : TypeInspectorSkeleton
     /// <param name="inner">Inner inspector</param>
     public PropertyFilteringInspector(ITypeInspector inner)
     {
-        this.inner = inner ?? throw new ArgumentNullException(nameof(inner));
+        ArgumentNullException.ThrowIfNull(inner);
+        this.inner = inner;
     }
 
     /// <summary>

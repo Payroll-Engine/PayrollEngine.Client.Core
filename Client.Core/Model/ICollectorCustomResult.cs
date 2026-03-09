@@ -4,7 +4,8 @@ using System.Collections.Generic;
 namespace PayrollEngine.Client.Model;
 
 /// <summary>Custom collector result client object</summary>
-public interface ICollectorCustomResult : IModel, IAttributeObject, IEquatable<ICollectorCustomResult>
+public interface ICollectorCustomResult : IModel, IAttributeObject, 
+    IEquatable<ICollectorCustomResult>, INumericValueResult
 {
     /// <summary>The wage type result id (immutable)</summary>
     int CollectorResultId { get; set; }
@@ -21,9 +22,6 @@ public interface ICollectorCustomResult : IModel, IAttributeObject, IEquatable<I
     /// <summary>The value type (immutable)</summary>
     ValueType ValueType { get; set; }
 
-    /// <summary>The collector custom result value (immutable)</summary>
-    decimal Value { get; set; }
-    
     /// <summary>The collector custom result culture name based on RFC 4646+</summary>
     string Culture { get; set; }
 

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -18,10 +18,7 @@ public class TextFileCache
     /// <returns>The file content as string</returns>
     public string ReadTextFile(string fileName)
     {
-        if (string.IsNullOrWhiteSpace(fileName))
-        {
-            throw new ArgumentException(nameof(fileName));
-        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(fileName);
 
         fileName = Path.GetFullPath(fileName);
         if (!File.Exists(fileName))

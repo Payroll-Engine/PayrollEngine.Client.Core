@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Collections.Generic;
@@ -22,10 +22,7 @@ public class PayrollService : ServiceBase, IPayrollService
     /// <inheritdoc/>
     public virtual async Task<List<T>> QueryAsync<T>(TenantServiceContext context, Query query = null) where T : class, IPayroll
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.Items;
@@ -36,10 +33,7 @@ public class PayrollService : ServiceBase, IPayrollService
     /// <inheritdoc/>
     public virtual async Task<long> QueryCountAsync(TenantServiceContext context, Query query = null)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.Count;
@@ -50,10 +44,7 @@ public class PayrollService : ServiceBase, IPayrollService
     /// <inheritdoc/>
     public virtual async Task<QueryResult<T>> QueryResultAsync<T>(TenantServiceContext context, Query query = null) where T : class, IPayroll
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.ItemsWithCount;
@@ -64,10 +55,7 @@ public class PayrollService : ServiceBase, IPayrollService
     /// <inheritdoc/>
     public virtual async Task<T> GetAsync<T>(TenantServiceContext context, int payrollId) where T : class, IPayroll
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (payrollId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(payrollId));
@@ -79,14 +67,8 @@ public class PayrollService : ServiceBase, IPayrollService
     /// <inheritdoc/>
     public virtual async Task<T> GetAsync<T>(TenantServiceContext context, string name) where T : class, IPayroll
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
-        if (string.IsNullOrWhiteSpace(name))
-        {
-            throw new ArgumentException(nameof(name));
-        }
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentException.ThrowIfNullOrWhiteSpace(name);
 
         // query single item
         var query = QueryFactory.NewNameQuery(name);
@@ -98,10 +80,7 @@ public class PayrollService : ServiceBase, IPayrollService
     public virtual async Task<List<T>> GetRegulationsAsync<T>(PayrollServiceContext context, DateTime? regulationDate = null,
         DateTime? evaluationDate = null) where T : class, IRegulation
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         var requestUri = PayrollApiEndpoints.PayrollRegulationsUrl(context.TenantId, context.PayrollId)
             .AddQueryString(nameof(regulationDate), regulationDate)
@@ -112,14 +91,8 @@ public class PayrollService : ServiceBase, IPayrollService
     /// <inheritdoc/>
     public virtual async Task<T> CreateAsync<T>(TenantServiceContext context, T payroll) where T : class, IPayroll
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
-        if (payroll == null)
-        {
-            throw new ArgumentNullException(nameof(payroll));
-        }
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentNullException.ThrowIfNull(payroll);
 
         return await HttpClient.PostAsync(PayrollApiEndpoints.PayrollsUrl(context.TenantId), payroll);
     }
@@ -127,14 +100,8 @@ public class PayrollService : ServiceBase, IPayrollService
     /// <inheritdoc/>
     public virtual async Task UpdateAsync<T>(TenantServiceContext context, T payroll) where T : class, IPayroll
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
-        if (payroll == null)
-        {
-            throw new ArgumentNullException(nameof(payroll));
-        }
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentNullException.ThrowIfNull(payroll);
 
         await HttpClient.PutAsync(PayrollApiEndpoints.PayrollsUrl(context.TenantId), payroll);
     }
@@ -142,10 +109,7 @@ public class PayrollService : ServiceBase, IPayrollService
     /// <inheritdoc/>
     public virtual async Task DeleteAsync(TenantServiceContext context, int payrollId)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (payrollId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(payrollId));
@@ -165,10 +129,7 @@ public class PayrollService : ServiceBase, IPayrollService
         DateTime? regulationDate = null, DateTime? evaluationDate = null)
         where TCase : class, ICase
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (userId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(userId));
@@ -194,14 +155,8 @@ public class PayrollService : ServiceBase, IPayrollService
         DateTime? regulationDate = null, DateTime? evaluationDate = null, ICaseChangeSetup caseChangeSetup = null)
         where TCaseSet : class, ICaseSet
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
-        if (string.IsNullOrWhiteSpace(caseName))
-        {
-            throw new ArgumentException(nameof(caseName));
-        }
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentException.ThrowIfNullOrWhiteSpace(caseName);
         if (userId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(userId));
@@ -231,10 +186,7 @@ public class PayrollService : ServiceBase, IPayrollService
         DateTime startDate, DateTime endDate, IEnumerable<string> caseFieldNames, int? employeeId = null,
         DateTime? regulationDate = null, DateTime? evaluationDate = null, string caseSlot = null)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         var url = PayrollApiEndpoints.PayrollCasesValuesUrl(context.TenantId, context.PayrollId)
             .AddCollectionQueryString(nameof(caseFieldNames), caseFieldNames)
@@ -252,10 +204,7 @@ public class PayrollService : ServiceBase, IPayrollService
         CaseType caseType, int? employeeId = null, IEnumerable<string> caseFieldNames = null,
         DateTime? valueDate = null, DateTime? regulationDate = null, DateTime? evaluationDate = null)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         var url = PayrollApiEndpoints.PayrollCaseValuesTimeUrl(context.TenantId, context.PayrollId)
             .AddQueryString(nameof(caseType), caseType)
@@ -272,18 +221,12 @@ public class PayrollService : ServiceBase, IPayrollService
         int userId, IEnumerable<string> caseFieldNames, DateTime startDate, DateTime endDate, int? employeeId = null,
         DateTime? regulationDate = null, DateTime? evaluationDate = null, string culture = null)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (userId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(userId));
         }
-        if (caseFieldNames == null)
-        {
-            throw new ArgumentNullException(nameof(caseFieldNames));
-        }
+        ArgumentNullException.ThrowIfNull(caseFieldNames);
 
         var requestUri = PayrollApiEndpoints.PayrollCasesValuesPeriodsUrl(context.TenantId, context.PayrollId)
             .AddQueryString(nameof(userId), userId)
@@ -303,18 +246,24 @@ public class PayrollService : ServiceBase, IPayrollService
         where TCaseChangeSetup : class, ICaseChangeSetup
         where TCaseChange : class, ICaseChange
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
-        if (caseChangeSetup == null)
-        {
-            throw new ArgumentNullException(nameof(caseChangeSetup));
-        }
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentNullException.ThrowIfNull(caseChangeSetup);
 
         var requestUri = PayrollApiEndpoints.PayrollCasesUrl(context.TenantId, context.PayrollId);
         requestUri = requestUri.AddQueryString(nameof(caseChangeSetup.EmployeeId), caseChangeSetup.EmployeeId);
         return await HttpClient.PostAsync<TCaseChangeSetup, TCaseChange>(requestUri, caseChangeSetup);
+    }
+
+    /// <inheritdoc/>
+    public async Task<int> AddCasesBulkAsync<TCaseChangeSetup, TCaseChange>(PayrollServiceContext context, IEnumerable<TCaseChangeSetup> caseChangeSetups) 
+        where TCaseChangeSetup : class, ICaseChangeSetup 
+        where TCaseChange : class, ICaseChange
+    {
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentNullException.ThrowIfNull(caseChangeSetups);
+
+        var requestUri = PayrollApiEndpoints.PayrollCasesBulkUrl(context.TenantId, context.PayrollId);
+        return await HttpClient.PostAsync<IEnumerable<TCaseChangeSetup>, int>(requestUri, caseChangeSetups);
     }
 
     #endregion
@@ -326,10 +275,7 @@ public class PayrollService : ServiceBase, IPayrollService
         IEnumerable<string> caseNames = null, OverrideType? overrideType = null, DateTime? regulationDate = null, DateTime? evaluationDate = null)
         where TCase : class, ICase
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         var uri = PayrollApiEndpoints.PayrollCasesUrl(context.TenantId, context.PayrollId)
             .AddQueryString(nameof(caseType), caseType)
@@ -344,10 +290,7 @@ public class PayrollService : ServiceBase, IPayrollService
     public virtual async Task<List<TCaseField>> GetCaseFieldsAsync<TCaseField>(PayrollServiceContext context, IEnumerable<string> caseFieldNames = null,
         OverrideType? overrideType = null, DateTime? regulationDate = null, DateTime? evaluationDate = null) where TCaseField : class, ICaseField
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         var uri = PayrollApiEndpoints.PayrollCaseFieldsUrl(context.TenantId, context.PayrollId)
             .AddCollectionQueryString(nameof(caseFieldNames), caseFieldNames)
@@ -362,10 +305,7 @@ public class PayrollService : ServiceBase, IPayrollService
         string sourceCaseName = null, string targetCaseName = null, OverrideType? overrideType = null,
         DateTime? regulationDate = null, DateTime? evaluationDate = null) where TCaseRelation : class, ICaseRelation
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         var uri = PayrollApiEndpoints.PayrollCaseRelationsUrl(context.TenantId, context.PayrollId)
             .AddQueryString(nameof(sourceCaseName), sourceCaseName)
@@ -380,10 +320,7 @@ public class PayrollService : ServiceBase, IPayrollService
     public virtual async Task<List<TWageType>> GetWageTypesAsync<TWageType>(PayrollServiceContext context, IEnumerable<decimal> wageTypeNumbers = null,
         OverrideType? overrideType = null, DateTime? regulationDate = null, DateTime? evaluationDate = null) where TWageType : class, IWageType
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         var uri = PayrollApiEndpoints.PayrollWageTypesUrl(context.TenantId, context.PayrollId)
             .AddCollectionQueryString(nameof(wageTypeNumbers), wageTypeNumbers)
@@ -397,10 +334,7 @@ public class PayrollService : ServiceBase, IPayrollService
     public virtual async Task<List<TCollector>> GetCollectorsAsync<TCollector>(PayrollServiceContext context, IEnumerable<string> collectorNames = null,
         OverrideType? overrideType = null, DateTime? regulationDate = null, DateTime? evaluationDate = null) where TCollector : class, ICollector
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         var uri = PayrollApiEndpoints.PayrollCollectorsUrl(context.TenantId, context.PayrollId)
             .AddCollectionQueryString(nameof(collectorNames), collectorNames)
@@ -414,10 +348,7 @@ public class PayrollService : ServiceBase, IPayrollService
     public virtual async Task<List<TLookup>> GetLookupsAsync<TLookup>(PayrollServiceContext context, IEnumerable<string> lookupNames = null,
         OverrideType? overrideType = null, DateTime? regulationDate = null, DateTime? evaluationDate = null) where TLookup : class, ILookup
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         var uri = PayrollApiEndpoints.PayrollLookupsUrl(context.TenantId, context.PayrollId)
             .AddCollectionQueryString(nameof(lookupNames), lookupNames)
@@ -432,10 +363,7 @@ public class PayrollService : ServiceBase, IPayrollService
         IEnumerable<string> lookupNames, DateTime? regulationDate = null, DateTime? evaluationDate = null, string culture = null)
         where TLookupData : class, ILookupData
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (lookupNames == null)
         {
             throw new ArgumentException(nameof(lookupNames));
@@ -454,10 +382,7 @@ public class PayrollService : ServiceBase, IPayrollService
         IEnumerable<string> lookupNames = null, IEnumerable<string> lookupKeys = null, DateTime? regulationDate = null,
         DateTime? evaluationDate = null) where TLookupValue : class, ILookupValue
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         var uri = PayrollApiEndpoints.PayrollLookupValuesUrl(context.TenantId, context.PayrollId)
             .AddCollectionQueryString(nameof(lookupNames), lookupNames)
@@ -472,14 +397,8 @@ public class PayrollService : ServiceBase, IPayrollService
         string lookupName, string lookupKey = null, decimal? rangeValue = null,
         DateTime? regulationDate = null, DateTime? evaluationDate = null, string culture = null)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
-        if (string.IsNullOrWhiteSpace(lookupName))
-        {
-            throw new ArgumentException(nameof(lookupName));
-        }
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentException.ThrowIfNullOrWhiteSpace(lookupName);
 
         var uri = PayrollApiEndpoints.PayrollLookupValuesDataUrl(context.TenantId, context.PayrollId)
             .AddQueryString(nameof(lookupName), lookupName)
@@ -496,10 +415,7 @@ public class PayrollService : ServiceBase, IPayrollService
         IEnumerable<string> lookupNames, decimal? rangeValue = null,
         DateTime? regulationDate = null, DateTime? evaluationDate = null, string culture = null)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (lookupNames == null)
         {
             throw new ArgumentException(nameof(lookupNames));
@@ -519,10 +435,7 @@ public class PayrollService : ServiceBase, IPayrollService
         IEnumerable<string> reportNames = null, OverrideType? overrideType = null, UserType? userType = null,
         DateTime? regulationDate = null, DateTime? evaluationDate = null) where TReportSet : class, IReportSet
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         var uri = PayrollApiEndpoints.PayrollReportsUrl(context.TenantId, context.PayrollId)
             .AddCollectionQueryString(nameof(reportNames), reportNames)
@@ -538,10 +451,7 @@ public class PayrollService : ServiceBase, IPayrollService
         IEnumerable<string> reportNames, DateTime? regulationDate = null, DateTime? evaluationDate = null)
         where TReportParameter : class, IReportParameter
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         var uri = PayrollApiEndpoints.PayrollReportParametersUrl(context.TenantId, context.PayrollId)
             .AddCollectionQueryString(nameof(reportNames), reportNames)
@@ -555,10 +465,7 @@ public class PayrollService : ServiceBase, IPayrollService
         IEnumerable<string> reportNames, string culture = null, DateTime? regulationDate = null, DateTime? evaluationDate = null)
         where TReportTemplate : class, IReportTemplate
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         var uri = PayrollApiEndpoints.PayrollReportTemplatesUrl(context.TenantId, context.PayrollId)
             .AddCollectionQueryString(nameof(reportNames), reportNames)
@@ -572,10 +479,7 @@ public class PayrollService : ServiceBase, IPayrollService
     public virtual async Task<List<TScript>> GetScriptsAsync<TScript>(PayrollServiceContext context, IEnumerable<string> scriptNames = null,
         OverrideType? overrideType = null, DateTime? regulationDate = null, DateTime? evaluationDate = null) where TScript : class, IScript
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         var uri = PayrollApiEndpoints.PayrollScriptsUrl(context.TenantId, context.PayrollId)
             .AddCollectionQueryString(nameof(scriptNames), scriptNames)
@@ -590,10 +494,7 @@ public class PayrollService : ServiceBase, IPayrollService
         OverrideType? overrideType = null, FunctionType? functionType = null, DateTime? regulationDate = null,
         DateTime? evaluationDate = null) where TAction : ActionInfo
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         var uri = PayrollApiEndpoints.PayrollActionsUrl(context.TenantId, context.PayrollId)
             .AddCollectionQueryString(nameof(scriptNames), scriptNames)
@@ -611,18 +512,12 @@ public class PayrollService : ServiceBase, IPayrollService
     /// <inheritdoc/>
     public virtual async Task<string> GetAttributeAsync(TenantServiceContext context, int payrollId, string attributeName)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (payrollId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(payrollId));
         }
-        if (string.IsNullOrWhiteSpace(attributeName))
-        {
-            throw new ArgumentException(nameof(attributeName));
-        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(attributeName);
 
         return await HttpClient.GetAttributeAsync(PayrollApiEndpoints.PayrollAttributeUrl(context.TenantId, payrollId,
             attributeName));
@@ -631,18 +526,12 @@ public class PayrollService : ServiceBase, IPayrollService
     /// <inheritdoc/>
     public virtual async Task SetAttributeAsync(TenantServiceContext context, int payrollId, string attributeName, string attributeValue)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (payrollId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(payrollId));
         }
-        if (string.IsNullOrWhiteSpace(attributeName))
-        {
-            throw new ArgumentException(nameof(attributeName));
-        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(attributeName);
 
         await HttpClient.PostAttributeAsync(PayrollApiEndpoints.PayrollAttributeUrl(context.TenantId, payrollId,
             attributeName), attributeValue);
@@ -651,18 +540,12 @@ public class PayrollService : ServiceBase, IPayrollService
     /// <inheritdoc/>
     public virtual async Task DeleteAttributeAsync(TenantServiceContext context, int payrollId, string attributeName)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (payrollId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(payrollId));
         }
-        if (string.IsNullOrWhiteSpace(attributeName))
-        {
-            throw new ArgumentException(nameof(attributeName));
-        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(attributeName);
 
         await HttpClient.DeleteAttributeAsync(PayrollApiEndpoints.PayrollAttributeUrl(context.TenantId, payrollId,
             attributeName));

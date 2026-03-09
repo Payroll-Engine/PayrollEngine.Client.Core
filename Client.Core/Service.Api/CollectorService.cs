@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using PayrollEngine.Client.Model;
@@ -19,10 +19,7 @@ public class CollectorService : ServiceBase, ICollectorService
     /// <inheritdoc/>
     public virtual async Task<List<T>> QueryAsync<T>(RegulationServiceContext context, Query query = null) where T : class, ICollector
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.Items;
@@ -33,10 +30,7 @@ public class CollectorService : ServiceBase, ICollectorService
     /// <inheritdoc/>
     public virtual async Task<long> QueryCountAsync(RegulationServiceContext context, Query query = null)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.Count;
@@ -47,10 +41,7 @@ public class CollectorService : ServiceBase, ICollectorService
     /// <inheritdoc/>
     public virtual async Task<QueryResult<T>> QueryResultAsync<T>(RegulationServiceContext context, Query query = null) where T : class, ICollector
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.ItemsWithCount;
@@ -61,10 +52,7 @@ public class CollectorService : ServiceBase, ICollectorService
     /// <inheritdoc/>
     public virtual async Task<T> GetAsync<T>(RegulationServiceContext context, int collectorId) where T : class, ICollector
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (collectorId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(collectorId));
@@ -77,14 +65,8 @@ public class CollectorService : ServiceBase, ICollectorService
     /// <inheritdoc/>
     public virtual async Task<T> GetAsync<T>(RegulationServiceContext context, string name) where T : class, ICollector
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
-        if (string.IsNullOrWhiteSpace(name))
-        {
-            throw new ArgumentException(nameof(name));
-        }
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentException.ThrowIfNullOrWhiteSpace(name);
 
         // query single item
         var query = QueryFactory.NewNameQuery(name);
@@ -95,14 +77,8 @@ public class CollectorService : ServiceBase, ICollectorService
     /// <inheritdoc/>
     public virtual async Task<T> CreateAsync<T>(RegulationServiceContext context, T collector) where T : class, ICollector
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
-        if (collector == null)
-        {
-            throw new ArgumentNullException(nameof(collector));
-        }
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentNullException.ThrowIfNull(collector);
 
         return await HttpClient.PostAsync(
             RegulationApiEndpoints.RegulationCollectorsUrl(context.TenantId, context.RegulationId), collector);
@@ -111,14 +87,8 @@ public class CollectorService : ServiceBase, ICollectorService
     /// <inheritdoc/>
     public virtual async Task UpdateAsync<T>(RegulationServiceContext context, T collector) where T : class, ICollector
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
-        if (collector == null)
-        {
-            throw new ArgumentNullException(nameof(collector));
-        }
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentNullException.ThrowIfNull(collector);
 
         await HttpClient.PutAsync(RegulationApiEndpoints.RegulationCollectorsUrl(context.TenantId, context.RegulationId),
             collector);
@@ -127,10 +97,7 @@ public class CollectorService : ServiceBase, ICollectorService
     /// <inheritdoc/>
     public virtual async Task RebuildAsync(RegulationServiceContext context, int collectorId)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (collectorId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(collectorId));
@@ -142,10 +109,7 @@ public class CollectorService : ServiceBase, ICollectorService
     /// <inheritdoc/>
     public virtual async Task DeleteAsync(RegulationServiceContext context, int collectorId)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (collectorId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(collectorId));

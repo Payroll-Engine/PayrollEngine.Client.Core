@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using PayrollEngine.Client.Model;
 using Task = System.Threading.Tasks.Task;
@@ -16,10 +16,11 @@ public abstract class VisitorBase
     /// <param name="exchange">The exchange model</param>
     protected VisitorBase(Model.Exchange exchange)
     {
-        Exchange = exchange ?? throw new ArgumentNullException(nameof(exchange));
+        ArgumentNullException.ThrowIfNull(exchange);
+        Exchange = exchange;
 
-        var hasTenants = exchange.Tenants == null || exchange.Tenants.Any();
-        var hasRegulationShares = exchange.RegulationShares == null || exchange.RegulationShares.Any();
+        var hasTenants = exchange.Tenants != null && exchange.Tenants.Any();
+        var hasRegulationShares = exchange.RegulationShares != null && exchange.RegulationShares.Any();
         if (!hasTenants && !hasRegulationShares)
         {
             throw new PayrollException("Missing exchange data.");
@@ -205,7 +206,7 @@ public abstract class VisitorBase
     /// <summary>Visit the webhook</summary>
     /// <param name="tenant">The tenant</param>
     /// <param name="webhook">The webhook</param>
-    protected virtual Task VisitWebhookAsync(IExchangeTenant tenant, IWebhook webhook) =>
+    protected virtual Task VisitWebhookAsync(IExchangeTenant tenant, IWebhookSet webhook) =>
         Task.CompletedTask;
 
     #endregion
@@ -738,9 +739,23 @@ public abstract class VisitorBase
     /// <param name="tenant">The exchange tenant</param>
     protected virtual async Task VisitPayrunJobsAsync(IExchangeTenant tenant)
     {
+        if (tenant.PayrunJobs != null)
+        {
+            foreach (var payrunJob in tenant.PayrunJobs)
+            {
+                await VisitPayrunJobAsync(tenant, payrunJob);
+            }
+        }
+
         // only payrun job invocations
         await VisitPayrunJobInvocationsAsync(tenant);
     }
+
+    /// <summary>Visit the payrun job</summary>
+    /// <param name="tenant">The exchange tenant</param>
+    /// <param name="payrunJob">The payrun job</param>
+    protected virtual Task VisitPayrunJobAsync(IExchangeTenant tenant, IPayrunJob payrunJob) =>
+        Task.CompletedTask;
 
     /// <summary>Visit the payrun job invocations</summary>
     /// <param name="tenant">The exchange tenant</param>

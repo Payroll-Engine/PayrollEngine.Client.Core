@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using PayrollEngine.Client.Model;
@@ -19,10 +19,7 @@ public class PayrollResultValueService : ServiceBase, IPayrollResultValueService
     /// <inheritdoc/>
     public virtual async Task<List<T>> QueryAsync<T>(PayrollResultValueServiceContext context, Query query = null) where T : class, IPayrollResultValue
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         var uri = GetPayrollResultValuesUrl(QueryResultType.Items, context, query);
         return await HttpClient.GetCollectionAsync<T>(uri);
@@ -31,10 +28,7 @@ public class PayrollResultValueService : ServiceBase, IPayrollResultValueService
     /// <inheritdoc/>
     public virtual async Task<long> QueryCountAsync(PayrollResultValueServiceContext context, Query query = null)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         var uri = GetPayrollResultValuesUrl(QueryResultType.Count, context, query);
         return await HttpClient.GetAsync<long>(uri);
@@ -43,10 +37,7 @@ public class PayrollResultValueService : ServiceBase, IPayrollResultValueService
     /// <inheritdoc/>
     public virtual async Task<QueryResult<T>> QueryResultAsync<T>(PayrollResultValueServiceContext context, Query query = null) where T : class, IPayrollResultValue
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         var uri = GetPayrollResultValuesUrl(QueryResultType.ItemsWithCount, context, query);
         return await HttpClient.GetAsync<QueryResult<T>>(uri);
@@ -55,10 +46,7 @@ public class PayrollResultValueService : ServiceBase, IPayrollResultValueService
     /// <inheritdoc/>
     public virtual Task<T> GetAsync<T>(PayrollResultValueServiceContext context, int objectId) where T : class, IPayrollResultValue
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (objectId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(objectId));
@@ -70,10 +58,7 @@ public class PayrollResultValueService : ServiceBase, IPayrollResultValueService
 
     private static string GetPayrollResultValuesUrl(QueryResultType resultType, PayrollResultValueServiceContext context, Query query = null)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = resultType;

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using PayrollEngine.Client.Model;
@@ -19,10 +19,7 @@ public class CaseRelationService : ServiceBase, ICaseRelationService
     /// <inheritdoc/>
     public virtual async Task<List<T>> QueryAsync<T>(RegulationServiceContext context, Query query = null) where T : class, ICaseRelation
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.Items;
@@ -33,10 +30,7 @@ public class CaseRelationService : ServiceBase, ICaseRelationService
     /// <inheritdoc/>
     public virtual async Task<long> QueryCountAsync(RegulationServiceContext context, Query query = null)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.Count;
@@ -47,10 +41,7 @@ public class CaseRelationService : ServiceBase, ICaseRelationService
     /// <inheritdoc/>
     public virtual async Task<QueryResult<T>> QueryResultAsync<T>(RegulationServiceContext context, Query query = null) where T : class, ICaseRelation
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.ItemsWithCount;
@@ -61,10 +52,7 @@ public class CaseRelationService : ServiceBase, ICaseRelationService
     /// <inheritdoc/>
     public virtual async Task<T> GetAsync<T>(RegulationServiceContext context, int caseRelationId) where T : class, ICaseRelation
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (caseRelationId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(caseRelationId));
@@ -78,18 +66,9 @@ public class CaseRelationService : ServiceBase, ICaseRelationService
     public virtual async Task<T> GetAsync<T>(RegulationServiceContext context, string sourceCaseName, string targetCaseName,
         string sourceCaseSlot = null, string targetCaseSlot = null) where T : class, ICaseRelation
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
-        if (string.IsNullOrWhiteSpace(sourceCaseName))
-        {
-            throw new ArgumentException(nameof(sourceCaseName));
-        }
-        if (string.IsNullOrWhiteSpace(targetCaseName))
-        {
-            throw new ArgumentException(nameof(targetCaseName));
-        }
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentException.ThrowIfNullOrWhiteSpace(sourceCaseName);
+        ArgumentException.ThrowIfNullOrWhiteSpace(targetCaseName);
 
         // query case relation by case names and slots
         var queryValues = new Dictionary<string, object>
@@ -113,14 +92,8 @@ public class CaseRelationService : ServiceBase, ICaseRelationService
     /// <inheritdoc/>
     public virtual async Task<T> CreateAsync<T>(RegulationServiceContext context, T caseRelation) where T : class, ICaseRelation
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
-        if (caseRelation == null)
-        {
-            throw new ArgumentNullException(nameof(caseRelation));
-        }
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentNullException.ThrowIfNull(caseRelation);
 
         return await HttpClient.PostAsync(
             RegulationApiEndpoints.RegulationCaseRelationsUrl(context.TenantId, context.RegulationId), caseRelation);
@@ -129,14 +102,8 @@ public class CaseRelationService : ServiceBase, ICaseRelationService
     /// <inheritdoc/>
     public virtual async Task UpdateAsync<T>(RegulationServiceContext context, T caseRelation) where T : class, ICaseRelation
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
-        if (caseRelation == null)
-        {
-            throw new ArgumentNullException(nameof(caseRelation));
-        }
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentNullException.ThrowIfNull(caseRelation);
 
         await HttpClient.PutAsync(RegulationApiEndpoints.RegulationCaseRelationsUrl(context.TenantId, context.RegulationId),
             caseRelation);
@@ -145,10 +112,7 @@ public class CaseRelationService : ServiceBase, ICaseRelationService
     /// <inheritdoc/>
     public virtual async Task RebuildAsync(RegulationServiceContext context, int caseRelationId)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (caseRelationId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(caseRelationId));
@@ -160,10 +124,7 @@ public class CaseRelationService : ServiceBase, ICaseRelationService
     /// <inheritdoc/>
     public virtual async Task DeleteAsync(RegulationServiceContext context, int caseRelationId)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (caseRelationId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(caseRelationId));

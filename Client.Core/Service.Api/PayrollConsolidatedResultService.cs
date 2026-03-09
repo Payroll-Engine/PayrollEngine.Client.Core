@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using PayrollEngine.Client.Model;
@@ -20,10 +20,7 @@ public class PayrollConsolidatedResultService : ServiceBase, IPayrollConsolidate
         int payrunId, int employeeId, DateTime periodStart, int? divisionId, string forecast, PayrunJobStatus jobStatus, IEnumerable<string> tags)
         where TConsolidatedPayrollResult : class, IConsolidatedPayrollResult
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (payrunId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(payrunId));
@@ -49,10 +46,7 @@ public class PayrollConsolidatedResultService : ServiceBase, IPayrollConsolidate
         int payrunId, int employeeId, IEnumerable<DateTime> periodStarts, int? divisionId, IEnumerable<string> collectorNames,
         string forecast, PayrunJobStatus jobStatus, IEnumerable<string> tags, DateTime? evaluationDate) where TCollectorResult : class, ICollectorResult
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (payrunId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(payrunId));
@@ -80,10 +74,7 @@ public class PayrollConsolidatedResultService : ServiceBase, IPayrollConsolidate
         IEnumerable<decimal> wageTypeNumbers, string forecast, PayrunJobStatus jobStatus, IEnumerable<string> tags,
         DateTime? evaluationDate) where TWageTypeResult : class, IWageTypeResult
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (payrunId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(payrunId));
@@ -111,10 +102,7 @@ public class PayrollConsolidatedResultService : ServiceBase, IPayrollConsolidate
         IEnumerable<string> names, string forecast,PayrunJobStatus jobStatus, IEnumerable<string> tags,
         DateTime? evaluationDate) where TPayrunResult : class, IPayrunResult
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (payrunId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(payrunId));

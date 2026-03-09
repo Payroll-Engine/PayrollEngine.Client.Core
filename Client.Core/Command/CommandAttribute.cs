@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace PayrollEngine.Client.Command;
 
@@ -19,10 +19,7 @@ public sealed class CommandAttribute : Attribute
     /// <param name="name">Command name</param>
     public CommandAttribute(string name)
     {
-        if (string.IsNullOrWhiteSpace(name))
-        {
-            throw new ArgumentException(nameof(name));
-        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(name);
         Name = name;
     }
 }

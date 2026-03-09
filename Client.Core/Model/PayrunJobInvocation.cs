@@ -16,14 +16,8 @@ public class PayrunJobInvocation : IPayrunJobInvocation
     public string Owner { get; set; }
 
     /// <inheritdoc/>
-    public int PayrunId { get; set; }
-
-    /// <inheritdoc/>
     [Required]
     public string PayrunName { get; set; }
-
-    /// <inheritdoc/>
-    public int UserId { get; set; }
 
     /// <inheritdoc/>
     [Required]

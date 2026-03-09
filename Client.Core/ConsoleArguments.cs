@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -166,11 +166,7 @@ public static class ConsoleArguments
             throw new ArgumentException("Argument must an enum.");
         }
         var arg = Get(index, name);
-        if (string.IsNullOrWhiteSpace(arg))
-        {
-            throw new ArgumentException($"Missing argument at position {index}.", nameof(index));
-
-        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(arg);
         if (string.IsNullOrWhiteSpace(arg))
         {
             return default;

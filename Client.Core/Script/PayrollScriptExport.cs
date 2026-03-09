@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -29,8 +29,10 @@ public sealed class PayrollScriptExport
     public PayrollScriptExport(PayrollHttpClient httpClient, ScriptExportContext context)
     {
         Assembly = GetType().Assembly;
-        HttpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
-        Context = context ?? throw new ArgumentNullException(nameof(context));
+        ArgumentNullException.ThrowIfNull(httpClient);
+        HttpClient = httpClient;
+        ArgumentNullException.ThrowIfNull(context);
+        Context = context;
     }
 
     /// <summary>Export regulation scripts</summary>
@@ -219,10 +221,7 @@ public sealed class PayrollScriptExport
         FunctionType functionType, string expression, Dictionary<string, string> customVariables)
 
     {
-        if (string.IsNullOrWhiteSpace(scriptName))
-        {
-            throw new ArgumentException(nameof(scriptName));
-        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(scriptName);
 
         // no scripting expression
         if (Context.ExportMode == ScriptExportMode.Existing && string.IsNullOrWhiteSpace(expression))

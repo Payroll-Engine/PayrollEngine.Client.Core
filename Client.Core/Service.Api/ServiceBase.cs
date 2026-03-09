@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Globalization;
 using Microsoft.AspNetCore.WebUtilities;
 
@@ -14,7 +14,8 @@ public abstract class ServiceBase
     /// <param name="httpClient">The Payroll http client</param>
     protected ServiceBase(PayrollHttpClient httpClient)
     {
-        HttpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+        ArgumentNullException.ThrowIfNull(httpClient);
+        HttpClient = httpClient;
     }
 
     #region Query

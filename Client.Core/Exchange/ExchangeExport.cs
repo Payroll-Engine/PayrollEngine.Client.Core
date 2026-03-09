@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -28,7 +28,8 @@ public sealed class ExchangeExport
     public ExchangeExport(PayrollHttpClient httpClient, ExchangeExportOptions exportOptions = null,
         string @namespace = null)
     {
-        HttpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+        ArgumentNullException.ThrowIfNull(httpClient);
+        HttpClient = httpClient;
         ExportOptions = exportOptions ?? new();
         Namespace = @namespace;
     }
@@ -42,10 +43,7 @@ public sealed class ExchangeExport
     /// <returns>The exchange model</returns>
     public async Task<Client.Model.Exchange> ExportAsync(IEnumerable<int> tenantIds)
     {
-        if (tenantIds == null)
-        {
-            throw new ArgumentNullException(nameof(tenantIds));
-        }
+        ArgumentNullException.ThrowIfNull(tenantIds);
         var ids = tenantIds.ToList();
 
         var exchange = new Client.Model.Exchange

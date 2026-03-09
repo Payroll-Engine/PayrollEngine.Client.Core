@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Threading;
 using System.Globalization;
@@ -45,9 +45,12 @@ public class ResourcesMonitor<TModel, TContext, TQuery>
     public ResourcesMonitor(IReadService<TModel, TContext, TQuery> service,
         TContext context, Action<ICollection<TModel>> changeHandler)
     {
-        Service = service ?? throw new ArgumentNullException(nameof(service));
-        Context = context ?? throw new ArgumentNullException(nameof(context));
-        ChangeHandler = changeHandler ?? throw new ArgumentNullException(nameof(changeHandler));
+        ArgumentNullException.ThrowIfNull(service);
+        Service = service;
+        ArgumentNullException.ThrowIfNull(context);
+        Context = context;
+        ArgumentNullException.ThrowIfNull(changeHandler);
+        ChangeHandler = changeHandler;
     }
 
     /// <summary>

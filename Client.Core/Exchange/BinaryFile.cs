@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 
 namespace PayrollEngine.Client.Exchange;
@@ -11,10 +11,7 @@ public static class BinaryFile
     /// <returns>The file content as base 64 string</returns>
     public static string Read(string fileName)
     {
-        if (string.IsNullOrWhiteSpace(fileName))
-        {
-            throw new ArgumentException(nameof(fileName));
-        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(fileName);
         if (!File.Exists(fileName))
         {
             throw new PayrollException($"Missing file {new FileInfo(fileName).FullName}.");

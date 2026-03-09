@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace PayrollEngine.Client.Model;
@@ -13,10 +13,7 @@ public static class CaseChangeSetupExtensions
     /// <returns>The case value or null on missing case value</returns>
     public static CaseSetup FindCaseSetup(this CaseChangeSetup caseChangeSetup, string caseName, string caseSlot = null)
     {
-        if (string.IsNullOrWhiteSpace(caseName))
-        {
-            throw new ArgumentException(nameof(caseName));
-        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(caseName);
         return caseChangeSetup == null ? null : FindCase(caseChangeSetup.Case, caseName, caseSlot);
     }
 
@@ -56,10 +53,7 @@ public static class CaseChangeSetupExtensions
     /// <returns>The case value or null on missing case value</returns>
     public static CaseValue FindCaseValue(this CaseChangeSetup caseChangeSetup, string caseFieldName, string caseSlot = null)
     {
-        if (string.IsNullOrWhiteSpace(caseFieldName))
-        {
-            throw new ArgumentException(nameof(caseFieldName));
-        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(caseFieldName);
         return caseChangeSetup == null ? null : FindCaseValue(caseChangeSetup.Case, caseFieldName, caseSlot);
     }
 

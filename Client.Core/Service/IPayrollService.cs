@@ -123,6 +123,14 @@ public interface IPayrollService : ICrudService<IPayroll, TenantServiceContext, 
         where TCaseChangeSetup : class, ICaseChangeSetup
         where TCaseChange : class, ICaseChange;
 
+    /// <summary>Bulk create case changes</summary>
+    /// <param name="context">The service context</param>
+    /// <param name="caseChangeSetups">The case change setups</param>
+    /// <returns>The number of created case changes</returns>
+    Task<int> AddCasesBulkAsync<TCaseChangeSetup, TCaseChange>(PayrollServiceContext context, IEnumerable<TCaseChangeSetup> caseChangeSetups)
+        where TCaseChangeSetup : class, ICaseChangeSetup
+        where TCaseChange : class, ICaseChange;
+
     #endregion
 
     #region Payroll Regulation Items

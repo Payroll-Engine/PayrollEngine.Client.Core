@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Globalization;
 
 namespace PayrollEngine.Client.QueryExpression;
@@ -22,10 +22,7 @@ public abstract class ConditionFilter : Filter
     protected ConditionFilter(string field, string @operator, object value) :
         base($"{field} {@operator} {GetFilterValue(value)}")
     {
-        if (string.IsNullOrWhiteSpace(field))
-        {
-            throw new ArgumentException(nameof(field));
-        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(field);
         if (string.IsNullOrWhiteSpace(@operator))
         {
             throw new ArgumentException(nameof(@operator));

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using PayrollEngine.Client.Model;
@@ -19,10 +19,7 @@ public class LookupSetService : ServiceBase, ILookupSetService
     /// <inheritdoc/>
     public virtual async Task<List<T>> QueryAsync<T>(RegulationServiceContext context, Query query = null) where T : class, ILookupSet
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.Items;
@@ -33,10 +30,7 @@ public class LookupSetService : ServiceBase, ILookupSetService
     /// <inheritdoc/>
     public virtual async Task<long> QueryCountAsync(RegulationServiceContext context, Query query = null)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.Count;
@@ -47,10 +41,7 @@ public class LookupSetService : ServiceBase, ILookupSetService
     /// <inheritdoc/>
     public virtual async Task<QueryResult<T>> QueryResultAsync<T>(RegulationServiceContext context, Query query = null) where T : class, ILookupSet
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.ItemsWithCount;
@@ -61,10 +52,7 @@ public class LookupSetService : ServiceBase, ILookupSetService
     /// <inheritdoc/>
     public virtual async Task<T> GetAsync<T>(RegulationServiceContext context, int lookupSetId) where T : class, ILookupSet
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (lookupSetId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(lookupSetId));
@@ -77,14 +65,8 @@ public class LookupSetService : ServiceBase, ILookupSetService
     /// <inheritdoc/>
     public virtual async Task<T> GetAsync<T>(RegulationServiceContext context, string name) where T : class, ILookupSet
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
-        if (string.IsNullOrWhiteSpace(name))
-        {
-            throw new ArgumentException(nameof(name));
-        }
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentException.ThrowIfNullOrWhiteSpace(name);
 
         // query single item
         var query = QueryFactory.NewNameQuery(name);
@@ -95,14 +77,8 @@ public class LookupSetService : ServiceBase, ILookupSetService
     /// <inheritdoc/>
     public virtual async Task<T> CreateAsync<T>(RegulationServiceContext context, T lookup) where T : class, ILookupSet
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
-        if (lookup == null)
-        {
-            throw new ArgumentNullException(nameof(lookup));
-        }
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentNullException.ThrowIfNull(lookup);
 
         await CreateAsync(context, new List<T> { lookup });
         return lookup;
@@ -111,14 +87,8 @@ public class LookupSetService : ServiceBase, ILookupSetService
     /// <inheritdoc/>
     public virtual async Task CreateAsync<T>(RegulationServiceContext context, IEnumerable<T> lookupSets) where T : class, ILookupSet
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
-        if (lookupSets == null)
-        {
-            throw new ArgumentNullException(nameof(lookupSets));
-        }
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentNullException.ThrowIfNull(lookupSets);
 
         await HttpClient.PostAsync(RegulationApiEndpoints.RegulationLookupSetsUrl(context.TenantId, context.RegulationId),
             lookupSets);
@@ -127,10 +97,7 @@ public class LookupSetService : ServiceBase, ILookupSetService
     /// <inheritdoc/>
     public virtual async Task DeleteAsync(RegulationServiceContext context, int lookupSetId)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (lookupSetId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(lookupSetId));

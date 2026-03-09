@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -44,10 +44,7 @@ public class Exchange : IExchange
     /// <inheritdoc/>
     public virtual void Import(IExchange source)
     {
-        if (source == null)
-        {
-            throw new ArgumentNullException(nameof(source));
-        }
+        ArgumentNullException.ThrowIfNull(source);
 
         // tenants
         if (source.Tenants != null)

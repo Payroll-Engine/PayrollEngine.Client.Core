@@ -26,9 +26,9 @@ public sealed class ExchangeImport : ExchangeImportVisitor
         ExchangeImportOptions importOptions = null, DataImportMode importMode = DataImportMode.Single) :
         base(httpClient, exchange, scriptParser, importOptions)
     {
-        var hasTenants = exchange.Tenants == null || exchange.Tenants.Any();
+        var hasTenants = exchange.Tenants != null && exchange.Tenants.Any();
         var hasRegulationShares =
-            exchange.RegulationShares == null || exchange.RegulationShares.Any();
+            exchange.RegulationShares != null && exchange.RegulationShares.Any();
         if (!hasTenants && !hasRegulationShares)
         {
             throw new PayrollException("Missing import data.");
@@ -351,12 +351,48 @@ public sealed class ExchangeImport : ExchangeImportVisitor
     }
 
     /// <summary><inheritdoc/></summary>
+    protected override async Task VisitEmployeesAsync(IExchangeTenant tenant)
+    {
+        if (tenant.Employees != null)
+        {
+            switch (ImportMode)
+            {
+                case DataImportMode.Single:
+                    await base.VisitEmployeesAsync(tenant);
+                    break;
+                case DataImportMode.Bulk:
+                    await SetupBulkEmployeesAsync(tenant, tenant.Employees);
+                    break;
+            }
+        }
+    }
+
+    /// <summary><inheritdoc/></summary>
     protected override async Task SetupEmployeeAsync(IExchangeTenant tenant, IEmployeeSet employee, IEmployee targetEmployee)
     {
         await base.SetupEmployeeAsync(tenant, employee, targetEmployee);
 
         // update employee
         await UpsertObjectAsync(EmployeeCaseApiEndpoints.EmployeesUrl(tenant.Id), employee, targetEmployee);
+    }
+
+    private async Task SetupBulkEmployeesAsync(IExchangeTenant tenant, ICollection<EmployeeSet> employees)
+    {
+        // created date
+        if (Exchange.CreatedObjectDate.HasValue)
+        {
+            foreach (var employee in employees)
+            {
+                if (!employee.Created.IsDefined())
+                {
+                    employee.Created = Exchange.CreatedObjectDate.Value;
+                }
+            }
+        }
+
+        // bulk create employees
+        await new EmployeeService(HttpClient).CreateEmployeesBulkAsync(
+            new TenantServiceContext(tenant.Id), employees);
     }
 
     /// <summary><inheritdoc/></summary>
@@ -397,6 +433,125 @@ public sealed class ExchangeImport : ExchangeImportVisitor
 
         // update payroll layer
         await UpsertObjectAsync(PayrollApiEndpoints.PayrollLayersUrl(tenant.Id, payroll.Id), layer, targetLayer);
+    }
+
+    /// <summary><inheritdoc/></summary>
+    protected override async Task VisitCaseChangeSetupsAsync(IExchangeTenant tenant, IPayrollSet payroll)
+    {
+        if (payroll.Cases != null)
+        {
+            switch (ImportMode)
+            {
+                case DataImportMode.Single:
+                    await base.VisitCaseChangeSetupsAsync(tenant, payroll);
+                    break;
+                case DataImportMode.Bulk:
+                    // split: cancellation case changes must be processed individually
+                    var bulkCases = new List<CaseChangeSetup>();
+                    var singleCases = new List<CaseChangeSetup>();
+                    foreach (var caseChangeSetup in payroll.Cases)
+                    {
+                        if (caseChangeSetup.CancellationId.HasValue ||
+                            caseChangeSetup.CancellationCreated.HasValue)
+                        {
+                            singleCases.Add(caseChangeSetup);
+                        }
+                        else
+                        {
+                            bulkCases.Add(caseChangeSetup);
+                        }
+                    }
+                    // bulk import for regular case changes
+                    if (bulkCases.Any())
+                    {
+                        await SetupBulkCaseChangesAsync(tenant, payroll, bulkCases);
+                    }
+                    // single import for cancellation case changes
+                    foreach (var caseChangeSetup in singleCases)
+                    {
+                        await VisitCaseChangeSetupAsync(tenant, payroll, caseChangeSetup);
+                    }
+                    break;
+            }
+        }
+    }
+
+    private async Task SetupBulkCaseChangesAsync(IExchangeTenant tenant, IPayrollSet payroll,
+        ICollection<CaseChangeSetup> caseChangeSetups)
+    {
+        var payrollContext = new PayrollServiceContext(tenant.Id, payroll.Id);
+
+        foreach (var caseChangeSetup in caseChangeSetups)
+        {
+            // user
+            var user = await GetUserAsync(tenant.Id, caseChangeSetup.UserIdentifier);
+            if (user == null)
+            {
+                throw new PayrollException($"Unknown user with identifier {caseChangeSetup.UserIdentifier}.");
+            }
+            caseChangeSetup.UserId = user.Id;
+
+            // employee
+            if (!caseChangeSetup.EmployeeId.HasValue && !string.IsNullOrWhiteSpace(caseChangeSetup.EmployeeIdentifier))
+            {
+                var employee = await GetEmployeeAsync(tenant.Id, caseChangeSetup.EmployeeIdentifier);
+                if (employee == null)
+                {
+                    throw new PayrollException($"Missing case change employee with identifier {caseChangeSetup.EmployeeIdentifier}.");
+                }
+                caseChangeSetup.EmployeeId = employee.Id;
+            }
+
+            // division
+            if (!caseChangeSetup.DivisionId.HasValue && !string.IsNullOrWhiteSpace(caseChangeSetup.DivisionName))
+            {
+                var division = await GetDivisionAsync(tenant.Id, caseChangeSetup.DivisionName);
+                if (division == null)
+                {
+                    throw new PayrollException($"Missing case change division with name {caseChangeSetup.DivisionName}.");
+                }
+                caseChangeSetup.DivisionId = division.Id;
+            }
+
+            // case values
+            var caseValues = caseChangeSetup.CollectCaseValues();
+            foreach (var caseValue in caseValues)
+            {
+                if (caseChangeSetup.DivisionId.HasValue)
+                {
+                    caseValue.DivisionId = caseChangeSetup.DivisionId.Value;
+                }
+                else if (!caseValue.DivisionId.HasValue && !string.IsNullOrWhiteSpace(caseValue.DivisionName))
+                {
+                    var division = await GetDivisionAsync(tenant.Id, caseValue.DivisionName);
+                    if (division == null)
+                    {
+                        throw new PayrollException($"Missing case value division with name {caseChangeSetup.DivisionName}.");
+                    }
+                    caseValue.DivisionId = division.Id;
+                }
+            }
+
+            // created date
+            if (Exchange.CreatedObjectDate.HasValue)
+            {
+                if (!caseChangeSetup.Created.IsDefined())
+                {
+                    caseChangeSetup.Created = Exchange.CreatedObjectDate.Value;
+                }
+                foreach (var caseValue in caseValues)
+                {
+                    if (!caseValue.Created.IsDefined())
+                    {
+                        caseValue.Created = Exchange.CreatedObjectDate.Value;
+                    }
+                }
+            }
+        }
+
+        // bulk create case changes
+        await new PayrollService(HttpClient).AddCasesBulkAsync<CaseChangeSetup, CaseChange>(
+            payrollContext, caseChangeSetups);
     }
 
     /// <summary><inheritdoc/></summary>
@@ -557,10 +712,6 @@ public sealed class ExchangeImport : ExchangeImportVisitor
         await UpsertObjectAsync(PayrunApiEndpoints.PayrunParametersUrl(tenant.Id, payrun.Id), parameter, targetParameter);
     }
 
-    private async Task ChangeJobStatusAsync(int tenantId, int payrunJobId,
-        PayrunJobStatus jobStatus, int userId, string reason, bool patchMode) =>
-        await new PayrunJobService(HttpClient).ChangeJobStatusAsync(new(tenantId), payrunJobId, jobStatus, userId, reason, patchMode);
-
     /// <summary><inheritdoc/></summary>
     protected override async Task VisitPayrunJobInvocationAsync(IExchangeTenant tenant, IPayrunJobInvocation invocation)
     {
@@ -572,7 +723,7 @@ public sealed class ExchangeImport : ExchangeImportVisitor
         {
             throw new PayrollException($"Unknown payrun with name {invocation.PayrunName}.");
         }
-        invocation.PayrunId = payrun.Id;
+        invocation.PayrunName = payrun.Name;
 
         // user
         var user = await GetUserAsync(tenant.Id, invocation.UserIdentifier);
@@ -580,9 +731,9 @@ public sealed class ExchangeImport : ExchangeImportVisitor
         {
             throw new PayrollException($"Unknown user with identifier {invocation.UserIdentifier}.");
         }
-        invocation.UserId = user.Id;
+        invocation.UserIdentifier = user.Identifier;
 
-        // create new payrun job (POST only)
+        // create new payrun job (POST only, async: returns 202 Accepted)
         using var response = await HttpClient.PostAsync(PayrunApiEndpoints.PayrunJobsUrl(tenant.Id),
             DefaultJsonSerializer.SerializeJson(invocation));
 
@@ -594,18 +745,32 @@ public sealed class ExchangeImport : ExchangeImportVisitor
         }
         invocation.PayrunJobId = payrunJobId;
 
-        var payrunJob = await GetPayrunJobAsync(tenant.Id, payrunJobId);
-        if (payrunJob == null)
+        // poll until the backend worker has finished (JobEnd != null)
+        PayrunJob payrunJob = null;
+        var retryCount = 0;
+        const int maxRetries = 12000;   // 10 minutes at 50ms interval
+        const int retryDelayMs = 50;
+        while (retryCount < maxRetries)
         {
-            throw new PayrollException($"Missing payrun job with id {payrunJobId}.");
+            payrunJob = await GetPayrunJobAsync(tenant.Id, payrunJobId);
+            if (payrunJob == null)
+            {
+                throw new PayrollException($"Missing payrun job with id {payrunJobId}.");
+            }
+            if (payrunJob.JobEnd.HasValue)
+            {
+                break;
+            }
+            await System.Threading.Tasks.Task.Delay(retryDelayMs);
+            retryCount++;
         }
-
-        // payrun job status
-        if (payrunJob.JobStatus != PayrunJobStatus.Abort &&
-            invocation.JobStatus != PayrunJobStatus.Draft)
+        if (payrunJob == null || !payrunJob.JobEnd.HasValue)
         {
-            await ChangeJobStatusAsync(tenant.Id, payrunJobId, invocation.JobStatus,
-                user.Id, invocation.Reason, true);
+            throw new PayrollException($"Timeout waiting for payrun job {invocation.Name} to complete.");
+        }
+        if (payrunJob.JobStatus == PayrunJobStatus.Abort || payrunJob.JobStatus == PayrunJobStatus.Cancel)
+        {
+            throw new PayrollException($"Payrun job {invocation.Name} ended with status {payrunJob.JobStatus}: {payrunJob.Message}.");
         }
     }
 }

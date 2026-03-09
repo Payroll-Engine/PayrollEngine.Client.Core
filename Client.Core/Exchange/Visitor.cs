@@ -99,7 +99,7 @@ public class Visitor : VisitorBase
     public Action<IExchangeTenant, IWebhook> VisitWebhook { get; set; }
 
     /// <inheritdoc />
-    protected override async Task VisitWebhookAsync(IExchangeTenant tenant, IWebhook webhook)
+    protected override async Task VisitWebhookAsync(IExchangeTenant tenant, IWebhookSet webhook)
     {
         VisitWebhook?.Invoke(tenant, webhook);
         await base.VisitWebhookAsync(tenant, webhook);

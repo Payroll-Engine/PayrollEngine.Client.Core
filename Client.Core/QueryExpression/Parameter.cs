@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Text.Json;
 
 namespace PayrollEngine.Client.QueryExpression
@@ -18,10 +18,7 @@ namespace PayrollEngine.Client.QueryExpression
         public Parameter(string name, object value) :
             base(GetValueExpression(value))
         {
-            if (string.IsNullOrWhiteSpace(name))
-            {
-                throw new ArgumentException(nameof(name));
-            }
+            ArgumentException.ThrowIfNullOrWhiteSpace(name);
             Name = name;
             Value = value;
         }

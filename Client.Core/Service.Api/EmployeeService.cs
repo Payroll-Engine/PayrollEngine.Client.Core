@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using PayrollEngine.Client.Model;
@@ -19,10 +19,7 @@ public class EmployeeService : ServiceBase, IEmployeeService
     /// <inheritdoc/>
     public virtual async Task<List<T>> QueryAsync<T>(TenantServiceContext context, DivisionQuery query = null) where T : class, IEmployee
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.Items;
@@ -33,10 +30,7 @@ public class EmployeeService : ServiceBase, IEmployeeService
     /// <inheritdoc/>
     public virtual async Task<long> QueryCountAsync(TenantServiceContext context, DivisionQuery query = null)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.Count;
@@ -47,10 +41,7 @@ public class EmployeeService : ServiceBase, IEmployeeService
     /// <inheritdoc/>
     public virtual async Task<QueryResult<T>> QueryResultAsync<T>(TenantServiceContext context, DivisionQuery query = null) where T : class, IEmployee
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.ItemsWithCount;
@@ -61,10 +52,7 @@ public class EmployeeService : ServiceBase, IEmployeeService
     /// <inheritdoc/>
     public virtual async Task<T> GetAsync<T>(TenantServiceContext context, int employeeId) where T : class, IEmployee
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (employeeId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(employeeId));
@@ -76,14 +64,8 @@ public class EmployeeService : ServiceBase, IEmployeeService
     /// <inheritdoc/>
     public virtual async Task<T> GetAsync<T>(TenantServiceContext context, string identifier) where T : class, IEmployee
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
-        if (string.IsNullOrWhiteSpace(identifier))
-        {
-            throw new ArgumentException(nameof(identifier));
-        }
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentException.ThrowIfNullOrWhiteSpace(identifier);
 
         // query single item
         var query = QueryFactory.NewIdentifierQuery(identifier);
@@ -92,16 +74,20 @@ public class EmployeeService : ServiceBase, IEmployeeService
     }
 
     /// <inheritdoc/>
+    public async Task<int> CreateEmployeesBulkAsync<T>(TenantServiceContext context, IEnumerable<T> employees)
+        where T : class, IEmployee
+    {
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentNullException.ThrowIfNull(employees);
+
+        return await HttpClient.PostAsync<IEnumerable<T>, int>(
+            EmployeeCaseApiEndpoints.EmployeesBulkUrl(context.TenantId), employees);
+    }
+    /// <inheritdoc/>
     public virtual async Task<T> CreateAsync<T>(TenantServiceContext context, T employee) where T : class, IEmployee
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
-        if (employee == null)
-        {
-            throw new ArgumentNullException(nameof(employee));
-        }
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentNullException.ThrowIfNull(employee);
 
         return await HttpClient.PostAsync(EmployeeCaseApiEndpoints.EmployeesUrl(context.TenantId), employee);
     }
@@ -109,14 +95,8 @@ public class EmployeeService : ServiceBase, IEmployeeService
     /// <inheritdoc/>
     public virtual async Task UpdateAsync<T>(TenantServiceContext context, T employee) where T : class, IEmployee
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
-        if (employee == null)
-        {
-            throw new ArgumentNullException(nameof(employee));
-        }
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentNullException.ThrowIfNull(employee);
 
         await HttpClient.PutAsync(EmployeeCaseApiEndpoints.EmployeesUrl(context.TenantId), employee);
     }
@@ -124,10 +104,7 @@ public class EmployeeService : ServiceBase, IEmployeeService
     /// <inheritdoc/>
     public virtual async Task DeleteAsync(TenantServiceContext context, int employeeId)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (employeeId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(employeeId));
@@ -139,18 +116,12 @@ public class EmployeeService : ServiceBase, IEmployeeService
     /// <inheritdoc/>
     public virtual async Task<string> GetAttributeAsync(TenantServiceContext context, int employeeId, string attributeName)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (employeeId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(employeeId));
         }
-        if (string.IsNullOrWhiteSpace(attributeName))
-        {
-            throw new ArgumentException(nameof(attributeName));
-        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(attributeName);
 
         return await HttpClient.GetAttributeAsync(EmployeeCaseApiEndpoints.EmployeeAttributeUrl(context.TenantId, employeeId,
             attributeName));
@@ -159,18 +130,12 @@ public class EmployeeService : ServiceBase, IEmployeeService
     /// <inheritdoc/>
     public virtual async Task SetAttributeAsync(TenantServiceContext context, int employeeId, string attributeName, string attributeValue)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (employeeId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(employeeId));
         }
-        if (string.IsNullOrWhiteSpace(attributeName))
-        {
-            throw new ArgumentException(nameof(attributeName));
-        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(attributeName);
 
         await HttpClient.PostAttributeAsync(EmployeeCaseApiEndpoints.EmployeeAttributeUrl(context.TenantId, employeeId,
             attributeName), attributeValue);
@@ -179,18 +144,12 @@ public class EmployeeService : ServiceBase, IEmployeeService
     /// <inheritdoc/>
     public virtual async Task DeleteAttributeAsync(TenantServiceContext context, int employeeId, string attributeName)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (employeeId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(employeeId));
         }
-        if (string.IsNullOrWhiteSpace(attributeName))
-        {
-            throw new ArgumentException(nameof(attributeName));
-        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(attributeName);
 
         await HttpClient.DeleteAttributeAsync(EmployeeCaseApiEndpoints.EmployeeAttributeUrl(context.TenantId, employeeId, attributeName));
     }

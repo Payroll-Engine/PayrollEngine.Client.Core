@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Collections.Generic;
 
@@ -29,10 +29,7 @@ public class PayrollHttpConfiguration
     /// <param name="apiKey">Api key</param>
     public PayrollHttpConfiguration(string baseUrl, int port, TimeSpan requestTimeout, string apiKey)
     {
-        if (string.IsNullOrWhiteSpace(baseUrl))
-        {
-            throw new ArgumentException(nameof(baseUrl));
-        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(baseUrl);
         BaseUrl = baseUrl;
         Port = port;
         Timeout = requestTimeout;
@@ -66,10 +63,7 @@ public class PayrollHttpConfiguration
     /// <param name="connectionString">Configuration connection string</param>
     public static PayrollHttpConfiguration FromConnectionString(string connectionString)
     {
-        if (string.IsNullOrWhiteSpace(connectionString))
-        {
-            throw new ArgumentException(nameof(connectionString));
-        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(connectionString);
 
         var tokens = connectionString.Split(';', StringSplitOptions.RemoveEmptyEntries).
             Select(x => x.Trim()).ToList();
@@ -82,7 +76,10 @@ public class PayrollHttpConfiguration
         var portString = GetConnectionStringValue(tokens, nameof(Port));
         if (!string.IsNullOrWhiteSpace(portString))
         {
-            port = int.Parse(portString);
+            if (!int.TryParse(portString, out port))
+            {
+                throw new FormatException($"Invalid port value: {portString}");
+            }
         }
 
         // timeout
@@ -90,7 +87,10 @@ public class PayrollHttpConfiguration
         var timeoutString = GetConnectionStringValue(tokens, nameof(Timeout));
         if (!string.IsNullOrWhiteSpace(timeoutString))
         {
-            timeout = TimeSpan.Parse(timeoutString);
+            if (!TimeSpan.TryParse(timeoutString, out timeout))
+            {
+                throw new FormatException($"Invalid timeout value: {timeoutString}");
+            }
         }
 
         // api key

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using PayrollEngine.Client.Model;
@@ -19,10 +19,7 @@ public class PayrollLayerService : ServiceBase, IPayrollLayerService
     /// <inheritdoc/>
     public virtual async Task<List<T>> QueryAsync<T>(PayrollServiceContext context, Query query = null) where T : class, IPayrollLayer
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.Items;
@@ -33,10 +30,7 @@ public class PayrollLayerService : ServiceBase, IPayrollLayerService
     /// <inheritdoc/>
     public virtual async Task<long> QueryCountAsync(PayrollServiceContext context, Query query = null)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.Count;
@@ -47,10 +41,7 @@ public class PayrollLayerService : ServiceBase, IPayrollLayerService
     /// <inheritdoc/>
     public virtual async Task<QueryResult<T>> QueryResultAsync<T>(PayrollServiceContext context, Query query = null) where T : class, IPayrollLayer
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.ItemsWithCount;
@@ -61,10 +52,7 @@ public class PayrollLayerService : ServiceBase, IPayrollLayerService
     /// <inheritdoc/>
     public virtual async Task<T> GetAsync<T>(PayrollServiceContext context, int payrollLayerId) where T : class, IPayrollLayer
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (payrollLayerId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(payrollLayerId));
@@ -77,14 +65,8 @@ public class PayrollLayerService : ServiceBase, IPayrollLayerService
     /// <inheritdoc/>
     public virtual async Task<T> GetAsync<T>(PayrollServiceContext context, string identifier) where T : class, IPayrollLayer
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
-        if (string.IsNullOrWhiteSpace(identifier))
-        {
-            throw new ArgumentException(nameof(identifier));
-        }
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentException.ThrowIfNullOrWhiteSpace(identifier);
 
         // query single item
         var query = QueryFactory.NewIdentifierQuery(identifier);
@@ -95,14 +77,8 @@ public class PayrollLayerService : ServiceBase, IPayrollLayerService
     /// <inheritdoc/>
     public virtual async Task<T> CreateAsync<T>(PayrollServiceContext context, T payrollLayer) where T : class, IPayrollLayer
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
-        if (payrollLayer == null)
-        {
-            throw new ArgumentNullException(nameof(payrollLayer));
-        }
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentNullException.ThrowIfNull(payrollLayer);
 
         return await HttpClient.PostAsync(PayrollApiEndpoints.PayrollLayersUrl(context.TenantId, context.PayrollId),
             payrollLayer);
@@ -111,14 +87,8 @@ public class PayrollLayerService : ServiceBase, IPayrollLayerService
     /// <inheritdoc/>
     public virtual async Task UpdateAsync<T>(PayrollServiceContext context, T payrollLayer) where T : class, IPayrollLayer
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
-        if (payrollLayer == null)
-        {
-            throw new ArgumentNullException(nameof(payrollLayer));
-        }
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentNullException.ThrowIfNull(payrollLayer);
 
         await HttpClient.PutAsync(PayrollApiEndpoints.PayrollLayersUrl(context.TenantId, context.PayrollId), payrollLayer);
     }
@@ -126,10 +96,7 @@ public class PayrollLayerService : ServiceBase, IPayrollLayerService
     /// <inheritdoc/>
     public virtual async Task DeleteAsync(PayrollServiceContext context, int payrollLayerId)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (payrollLayerId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(payrollLayerId));
@@ -142,18 +109,12 @@ public class PayrollLayerService : ServiceBase, IPayrollLayerService
     /// <inheritdoc/>
     public virtual async Task<string> GetAttributeAsync(PayrollServiceContext context, int payrollLayerId, string attributeName)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (payrollLayerId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(payrollLayerId));
         }
-        if (string.IsNullOrWhiteSpace(attributeName))
-        {
-            throw new ArgumentException(nameof(attributeName));
-        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(attributeName);
 
         return await HttpClient.GetAttributeAsync(
             PayrollApiEndpoints.PayrollLayerAttributeUrl(context.TenantId, context.PayrollId, payrollLayerId, attributeName));
@@ -162,18 +123,12 @@ public class PayrollLayerService : ServiceBase, IPayrollLayerService
     /// <inheritdoc/>
     public virtual async Task SetAttributeAsync(PayrollServiceContext context, int payrollLayerId, string attributeName, string attributeValue)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (payrollLayerId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(payrollLayerId));
         }
-        if (string.IsNullOrWhiteSpace(attributeName))
-        {
-            throw new ArgumentException(nameof(attributeName));
-        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(attributeName);
 
         await HttpClient.PostAttributeAsync(
             PayrollApiEndpoints.PayrollLayerAttributeUrl(context.TenantId, context.PayrollId, payrollLayerId, attributeName), attributeValue);
@@ -182,18 +137,12 @@ public class PayrollLayerService : ServiceBase, IPayrollLayerService
     /// <inheritdoc/>
     public virtual async Task DeleteAttributeAsync(PayrollServiceContext context, int payrollLayerId, string attributeName)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (payrollLayerId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(payrollLayerId));
         }
-        if (string.IsNullOrWhiteSpace(attributeName))
-        {
-            throw new ArgumentException(nameof(attributeName));
-        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(attributeName);
 
         await HttpClient.DeleteAttributeAsync(
             PayrollApiEndpoints.PayrollLayerAttributeUrl(context.TenantId, context.PayrollId, payrollLayerId, attributeName));

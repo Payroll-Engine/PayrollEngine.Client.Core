@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using PayrollEngine.Client.Model;
@@ -19,10 +19,7 @@ public class DivisionService : ServiceBase, IDivisionService
     /// <inheritdoc/>
     public virtual async Task<List<T>> QueryAsync<T>(TenantServiceContext context, Query query = null) where T : class, IDivision
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.Items;
@@ -33,10 +30,7 @@ public class DivisionService : ServiceBase, IDivisionService
     /// <inheritdoc/>
     public virtual async Task<long> QueryCountAsync(TenantServiceContext context, Query query = null)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.Count;
@@ -47,10 +41,7 @@ public class DivisionService : ServiceBase, IDivisionService
     /// <inheritdoc/>
     public virtual async Task<QueryResult<T>> QueryResultAsync<T>(TenantServiceContext context, Query query = null) where T : class, IDivision
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.ItemsWithCount;
@@ -61,10 +52,7 @@ public class DivisionService : ServiceBase, IDivisionService
     /// <inheritdoc/>
     public virtual async Task<T> GetAsync<T>(TenantServiceContext context, int divisionId) where T : class, IDivision
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (divisionId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(divisionId));
@@ -76,14 +64,8 @@ public class DivisionService : ServiceBase, IDivisionService
     /// <inheritdoc/>
     public virtual async Task<T> GetAsync<T>(TenantServiceContext context, string name) where T : class, IDivision
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
-        if (string.IsNullOrWhiteSpace(name))
-        {
-            throw new ArgumentException(nameof(name));
-        }
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentException.ThrowIfNullOrWhiteSpace(name);
 
         // query single item
         var query = QueryFactory.NewNameQuery(name);
@@ -94,14 +76,8 @@ public class DivisionService : ServiceBase, IDivisionService
     /// <inheritdoc/>
     public virtual async Task<T> CreateAsync<T>(TenantServiceContext context, T division) where T : class, IDivision
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
-        if (division == null)
-        {
-            throw new ArgumentNullException(nameof(division));
-        }
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentNullException.ThrowIfNull(division);
 
         return await HttpClient.PostAsync(TenantApiEndpoints.DivisionsUrl(context.TenantId), division);
     }
@@ -109,14 +85,8 @@ public class DivisionService : ServiceBase, IDivisionService
     /// <inheritdoc/>
     public virtual async Task UpdateAsync<T>(TenantServiceContext context, T division) where T : class, IDivision
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
-        if (division == null)
-        {
-            throw new ArgumentNullException(nameof(division));
-        }
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentNullException.ThrowIfNull(division);
 
         await HttpClient.PutAsync(TenantApiEndpoints.DivisionsUrl(context.TenantId), division);
     }
@@ -124,10 +94,7 @@ public class DivisionService : ServiceBase, IDivisionService
     /// <inheritdoc/>
     public virtual async Task DeleteAsync(TenantServiceContext context, int divisionId)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (divisionId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(divisionId));

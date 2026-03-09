@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using PayrollEngine.Client.Model;
@@ -19,10 +19,7 @@ public class ReportParameterService : ServiceBase, IReportParameterService
     /// <inheritdoc />
     public virtual async Task<List<T>> QueryAsync<T>(ReportServiceContext context, Query query = null) where T : class, IReportParameter
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.Items;
@@ -33,10 +30,7 @@ public class ReportParameterService : ServiceBase, IReportParameterService
     /// <inheritdoc />
     public virtual async Task<long> QueryCountAsync(ReportServiceContext context, Query query = null)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.Count;
@@ -47,10 +41,7 @@ public class ReportParameterService : ServiceBase, IReportParameterService
     /// <inheritdoc />
     public virtual async Task<QueryResult<T>> QueryResultAsync<T>(ReportServiceContext context, Query query = null) where T : class, IReportParameter
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.ItemsWithCount;
@@ -61,10 +52,7 @@ public class ReportParameterService : ServiceBase, IReportParameterService
     /// <inheritdoc />
     public virtual async Task<T> GetAsync<T>(ReportServiceContext context, int parameterId) where T : class, IReportParameter
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (parameterId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(parameterId));
@@ -77,14 +65,8 @@ public class ReportParameterService : ServiceBase, IReportParameterService
     /// <inheritdoc />
     public virtual async Task<T> GetAsync<T>(ReportServiceContext context, string name) where T : class, IReportParameter
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
-        if (string.IsNullOrWhiteSpace(name))
-        {
-            throw new ArgumentException(nameof(name));
-        }
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentException.ThrowIfNullOrWhiteSpace(name);
 
         // query single item
         var query = QueryFactory.NewNameQuery(name);
@@ -95,14 +77,8 @@ public class ReportParameterService : ServiceBase, IReportParameterService
     /// <inheritdoc />
     public virtual async Task<T> CreateAsync<T>(ReportServiceContext context, T parameter) where T : class, IReportParameter
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
-        if (parameter == null)
-        {
-            throw new ArgumentNullException(nameof(parameter));
-        }
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentNullException.ThrowIfNull(parameter);
 
         return await HttpClient.PostAsync(
             RegulationApiEndpoints.RegulationReportParametersUrl(context.TenantId, context.RegulationId, context.ReportId), parameter);
@@ -111,14 +87,8 @@ public class ReportParameterService : ServiceBase, IReportParameterService
     /// <inheritdoc />
     public virtual async Task UpdateAsync<T>(ReportServiceContext context, T parameter) where T : class, IReportParameter
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
-        if (parameter == null)
-        {
-            throw new ArgumentNullException(nameof(parameter));
-        }
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentNullException.ThrowIfNull(parameter);
 
         await HttpClient.PutAsync(RegulationApiEndpoints.RegulationReportParametersUrl(context.TenantId, context.RegulationId, context.ReportId), parameter);
     }
@@ -126,10 +96,7 @@ public class ReportParameterService : ServiceBase, IReportParameterService
     /// <inheritdoc />
     public virtual async Task DeleteAsync(ReportServiceContext context, int parameterId)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (parameterId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(parameterId));

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using PayrollEngine.Client.Model;
@@ -42,10 +42,7 @@ public class PayrollCaseChangeValueService : ServiceBase, IPayrollCaseChangeValu
     /// <inheritdoc/>
     public virtual Task<T> GetAsync<T>(PayrollServiceContext context, int objectId) where T : class, ICaseChangeCaseValue
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (objectId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(objectId));
@@ -57,10 +54,7 @@ public class PayrollCaseChangeValueService : ServiceBase, IPayrollCaseChangeValu
 
     private static string GetPayrollCaseChangeValuesUrl(QueryResultType resultType, PayrollServiceContext context, PayrollCaseChangeQuery query = null)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = resultType;

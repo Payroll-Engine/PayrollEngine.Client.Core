@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Collections.Generic;
 
@@ -17,10 +17,7 @@ public static class CaseSetExtensions
         /// <returns>The value case field matching the name, null on missing case field</returns>
         public CaseSet FindCase(string caseName)
         {
-            if (string.IsNullOrWhiteSpace(caseName))
-            {
-                throw new ArgumentException(nameof(caseName));
-            }
+            ArgumentException.ThrowIfNullOrWhiteSpace(caseName);
             if (caseSet != null)
             {
                 // local case
@@ -53,10 +50,7 @@ public static class CaseSetExtensions
         /// <returns>The value case field matching the name, null on missing case field</returns>
         public CaseFieldSet FindCaseField(string caseFieldName)
         {
-            if (string.IsNullOrWhiteSpace(caseFieldName))
-            {
-                throw new ArgumentException(nameof(caseFieldName));
-            }
+            ArgumentException.ThrowIfNullOrWhiteSpace(caseFieldName);
             if (caseSet == null)
             {
                 return null;

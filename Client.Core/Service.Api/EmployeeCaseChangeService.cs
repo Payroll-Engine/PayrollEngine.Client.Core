@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using PayrollEngine.Client.Model;
@@ -18,10 +18,7 @@ public class EmployeeCaseChangeService : ServiceBase, IEmployeeCaseChangeService
     /// <inheritdoc/>
     public virtual async Task<List<T>> QueryAsync<T>(EmployeeServiceContext context, CaseChangeQuery query = null) where T : class, ICaseChange
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         var url = query.BuildQueryString(EmployeeCaseApiEndpoints.EmployeeCaseChangesUrl(context.TenantId, context.EmployeeId), QueryResultType.Items);
         return await HttpClient.GetCollectionAsync<T>(url);
     }
@@ -29,10 +26,7 @@ public class EmployeeCaseChangeService : ServiceBase, IEmployeeCaseChangeService
     /// <inheritdoc/>
     public virtual async Task<long> QueryCountAsync(EmployeeServiceContext context, CaseChangeQuery query = null)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         var url = query.BuildQueryString(EmployeeCaseApiEndpoints.EmployeeCaseChangesUrl(context.TenantId, context.EmployeeId), QueryResultType.Count);
         return await HttpClient.GetAsync<long>(url);
     }
@@ -40,10 +34,7 @@ public class EmployeeCaseChangeService : ServiceBase, IEmployeeCaseChangeService
     /// <inheritdoc/>
     public virtual async Task<QueryResult<T>> QueryResultAsync<T>(EmployeeServiceContext context, CaseChangeQuery query = null) where T : class, ICaseChange
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         var url = query.BuildQueryString(EmployeeCaseApiEndpoints.EmployeeCaseChangesUrl(context.TenantId, context.EmployeeId), QueryResultType.ItemsWithCount);
         return await HttpClient.GetAsync<QueryResult<T>>(url);
     }
@@ -51,10 +42,7 @@ public class EmployeeCaseChangeService : ServiceBase, IEmployeeCaseChangeService
     /// <inheritdoc/>
     public virtual async Task<List<T>> QueryValuesAsync<T>(EmployeeServiceContext context, CaseChangeQuery query = null) where T : class, ICaseChangeCaseValue
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         var url = query.BuildQueryString(EmployeeCaseApiEndpoints.EmployeeCaseChangesValuesUrl(context.TenantId, context.EmployeeId), QueryResultType.Items);
         return await HttpClient.GetCollectionAsync<T>(url);
     }
@@ -62,10 +50,7 @@ public class EmployeeCaseChangeService : ServiceBase, IEmployeeCaseChangeService
     /// <inheritdoc/>
     public virtual async Task<long> QueryValuesCountAsync(EmployeeServiceContext context, CaseChangeQuery query = null)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         var url = query.BuildQueryString(EmployeeCaseApiEndpoints.EmployeeCaseChangesValuesUrl(context.TenantId, context.EmployeeId), QueryResultType.Count);
         return await HttpClient.GetAsync<long>(url);
     }
@@ -73,10 +58,7 @@ public class EmployeeCaseChangeService : ServiceBase, IEmployeeCaseChangeService
     /// <inheritdoc/>
     public virtual async Task<QueryResult<T>> QueryValuesResultAsync<T>(EmployeeServiceContext context, CaseChangeQuery query = null) where T : class, ICaseChangeCaseValue
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         var url = query.BuildQueryString(EmployeeCaseApiEndpoints.EmployeeCaseChangesValuesUrl(context.TenantId, context.EmployeeId), QueryResultType.ItemsWithCount);
         return await HttpClient.GetAsync<QueryResult<T>>(url);
     }
@@ -84,10 +66,7 @@ public class EmployeeCaseChangeService : ServiceBase, IEmployeeCaseChangeService
     /// <inheritdoc/>
     public virtual async Task<T> GetAsync<T>(EmployeeServiceContext context, int caseChangeId) where T : class, ICaseChange
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (caseChangeId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(caseChangeId));
@@ -101,10 +80,7 @@ public class EmployeeCaseChangeService : ServiceBase, IEmployeeCaseChangeService
     public virtual async Task<List<T>> GetAsync<T>(EmployeeServiceContext context, CaseChangeQuery query = null)
         where T : class, ICaseChange
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         var url = query.BuildQueryString(EmployeeCaseApiEndpoints.EmployeeCaseChangesUrl(context.TenantId, context.EmployeeId));
         return await HttpClient.GetCollectionAsync<T>(url);

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using PayrollEngine.Client.Model;
@@ -18,10 +18,7 @@ public class CompanyCaseDocumentService : ServiceBase, ICompanyCaseDocumentServi
     /// <inheritdoc/>
     public virtual async Task<List<T>> QueryAsync<T>(CaseValueServiceContext context, Query query = null) where T : class, ICaseDocument
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new CaseValueQuery();
         query.Result = QueryResultType.Items;
@@ -32,10 +29,7 @@ public class CompanyCaseDocumentService : ServiceBase, ICompanyCaseDocumentServi
     /// <inheritdoc/>
     public virtual async Task<long> QueryCountAsync(CaseValueServiceContext context, Query query = null)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new CaseValueQuery();
         query.Result = QueryResultType.Count;
@@ -46,10 +40,7 @@ public class CompanyCaseDocumentService : ServiceBase, ICompanyCaseDocumentServi
     /// <inheritdoc/>
     public virtual async Task<QueryResult<T>> QueryResultAsync<T>(CaseValueServiceContext context, Query query = null) where T : class, ICaseDocument
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new CaseValueQuery();
         query.Result = QueryResultType.ItemsWithCount;
@@ -60,10 +51,7 @@ public class CompanyCaseDocumentService : ServiceBase, ICompanyCaseDocumentServi
     /// <inheritdoc/>
     public virtual async Task<T> GetAsync<T>(CaseValueServiceContext context, int documentId) where T : class, ICaseDocument
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (documentId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(documentId));

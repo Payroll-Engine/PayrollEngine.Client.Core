@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -125,10 +125,7 @@ public class CommandLineParser(string[] arguments)
     /// <returns>The argument value</returns>
     public string GetByName(string name)
     {
-        if (string.IsNullOrWhiteSpace(name))
-        {
-            throw new ArgumentException(nameof(name));
-        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(name);
         var marker = $"{name}:";
         foreach (var cmdLineArg in Arguments)
         {
@@ -188,11 +185,7 @@ public class CommandLineParser(string[] arguments)
             throw new ArgumentException("Argument must an enum.");
         }
         var arg = Get(index, name);
-        if (string.IsNullOrWhiteSpace(arg))
-        {
-            throw new ArgumentException($"Missing argument at position {index}.", nameof(index));
-
-        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(arg);
         if (string.IsNullOrWhiteSpace(arg))
         {
             return default;
@@ -337,10 +330,7 @@ public class CommandLineParser(string[] arguments)
     /// <remarks>see https://stackoverflow.com/a/66450199</remarks>
     private static string[] SplitCommandArguments(string command)
     {
-        if (string.IsNullOrWhiteSpace(command))
-        {
-            throw new ArgumentException(nameof(command));
-        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(command);
 
         var result = new List<string> {
             // copy first parameter from the environment to keep the same array indexes

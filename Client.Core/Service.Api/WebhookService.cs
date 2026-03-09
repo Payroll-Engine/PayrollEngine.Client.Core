@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using PayrollEngine.Client.Model;
@@ -20,10 +20,7 @@ public class WebhookService : ServiceBase, IWebhookService
     public virtual async Task<List<T>> QueryAsync<T>(TenantServiceContext context, Query query = null)
         where T : class, IWebhook
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.Items;
@@ -34,10 +31,7 @@ public class WebhookService : ServiceBase, IWebhookService
     /// <inheritdoc />
     public virtual async Task<long> QueryCountAsync(TenantServiceContext context, Query query = null)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.Count;
@@ -49,10 +43,7 @@ public class WebhookService : ServiceBase, IWebhookService
     public virtual async Task<QueryResult<T>> QueryResultAsync<T>(TenantServiceContext context, Query query = null)
         where T : class, IWebhook
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.ItemsWithCount;
@@ -63,10 +54,7 @@ public class WebhookService : ServiceBase, IWebhookService
     /// <inheritdoc />
     public virtual async Task<T> GetAsync<T>(TenantServiceContext context, int webhookId) where T : class, IWebhook
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (webhookId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(webhookId));
@@ -78,14 +66,8 @@ public class WebhookService : ServiceBase, IWebhookService
     /// <inheritdoc />
     public virtual async Task<T> GetAsync<T>(TenantServiceContext context, string name) where T : class, IWebhook
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
-        if (string.IsNullOrWhiteSpace(name))
-        {
-            throw new ArgumentException(nameof(name));
-        }
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentException.ThrowIfNullOrWhiteSpace(name);
 
         // query single item
         var query = QueryFactory.NewNameQuery(name);
@@ -96,14 +78,8 @@ public class WebhookService : ServiceBase, IWebhookService
     /// <inheritdoc />
     public virtual async Task<T> CreateAsync<T>(TenantServiceContext context, T webhook) where T : class, IWebhook
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
-        if (webhook == null)
-        {
-            throw new ArgumentNullException(nameof(webhook));
-        }
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentNullException.ThrowIfNull(webhook);
 
         return await HttpClient.PostAsync(TenantApiEndpoints.WebhooksUrl(context.TenantId), webhook);
     }
@@ -111,14 +87,8 @@ public class WebhookService : ServiceBase, IWebhookService
     /// <inheritdoc />
     public virtual async Task UpdateAsync<T>(TenantServiceContext context, T webhook) where T : class, IWebhook
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
-        if (webhook == null)
-        {
-            throw new ArgumentNullException(nameof(webhook));
-        }
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentNullException.ThrowIfNull(webhook);
 
         await HttpClient.PutAsync(TenantApiEndpoints.WebhooksUrl(context.TenantId), webhook);
     }
@@ -126,10 +96,7 @@ public class WebhookService : ServiceBase, IWebhookService
     /// <inheritdoc />
     public virtual async Task DeleteAsync(TenantServiceContext context, int webhookId)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (webhookId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(webhookId));
@@ -141,18 +108,12 @@ public class WebhookService : ServiceBase, IWebhookService
     /// <inheritdoc />
     public virtual async Task<string> GetAttributeAsync(TenantServiceContext context, int webhookId, string attributeName)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (webhookId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(webhookId));
         }
-        if (string.IsNullOrWhiteSpace(attributeName))
-        {
-            throw new ArgumentException(nameof(attributeName));
-        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(attributeName);
 
         return await HttpClient.GetAttributeAsync(TenantApiEndpoints.WebhookAttributeUrl(context.TenantId, webhookId,
             attributeName));
@@ -161,18 +122,12 @@ public class WebhookService : ServiceBase, IWebhookService
     /// <inheritdoc />
     public virtual async Task SetAttributeAsync(TenantServiceContext context, int webhookId, string attributeName, string attributeValue)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (webhookId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(webhookId));
         }
-        if (string.IsNullOrWhiteSpace(attributeName))
-        {
-            throw new ArgumentException(nameof(attributeName));
-        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(attributeName);
 
         await HttpClient.PostAttributeAsync(TenantApiEndpoints.WebhookAttributeUrl(context.TenantId, webhookId,
             attributeName), attributeValue);
@@ -181,18 +136,12 @@ public class WebhookService : ServiceBase, IWebhookService
     /// <inheritdoc />
     public virtual async Task DeleteAttributeAsync(TenantServiceContext context, int webhookId, string attributeName)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (webhookId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(webhookId));
         }
-        if (string.IsNullOrWhiteSpace(attributeName))
-        {
-            throw new ArgumentException(nameof(attributeName));
-        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(attributeName);
 
         await HttpClient.DeleteAttributeAsync(TenantApiEndpoints.WebhookAttributeUrl(context.TenantId, webhookId,
             attributeName));

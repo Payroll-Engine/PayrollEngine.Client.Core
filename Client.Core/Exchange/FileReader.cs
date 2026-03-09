@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Linq;
 using System.IO.Compression;
@@ -15,12 +15,9 @@ public static class FileReader
     /// <summary>Read object from file</summary>
     /// <param name="fileName">Name of the file</param>
     /// <remarks>Supported file types are JSON/YAML and archives including JSON/YAML</remarks>
-    public static async Task<T> Read<T>(string fileName) where T : class, new()
+    public static async Task<T> ReadAsync<T>(string fileName) where T : class, new()
     {
-        if (string.IsNullOrWhiteSpace(fileName))
-        {
-            throw new ArgumentException(nameof(fileName));
-        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(fileName);
 
         // ensure full path
         fileName = Path.GetFullPath(fileName);

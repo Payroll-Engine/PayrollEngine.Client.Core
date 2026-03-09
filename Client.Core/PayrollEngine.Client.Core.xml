@@ -951,6 +951,9 @@
         <member name="M:PayrollEngine.Client.EmployeeCaseApiEndpoints.EmployeesUrl(System.Int32)">
             <summary>The employees URL</summary>
         </member>
+        <member name="M:PayrollEngine.Client.EmployeeCaseApiEndpoints.EmployeesBulkUrl(System.Int32)">
+            <summary>The employees bulk URL</summary>
+        </member>
         <member name="M:PayrollEngine.Client.EmployeeCaseApiEndpoints.EmployeeUrl(System.Int32,System.Int32)">
             <summary>The employee URL</summary>
         </member>
@@ -1287,6 +1290,9 @@
         <member name="M:PayrollEngine.Client.Exchange.ExchangeImport.SetupReportTemplateAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.IReportSet,PayrollEngine.Client.Model.IReportTemplate,PayrollEngine.Client.Model.IReportTemplate)">
             <summary><inheritdoc/></summary>
         </member>
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeImport.VisitEmployeesAsync(PayrollEngine.Client.Model.IExchangeTenant)">
+            <summary><inheritdoc/></summary>
+        </member>
         <member name="M:PayrollEngine.Client.Exchange.ExchangeImport.SetupEmployeeAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IEmployeeSet,PayrollEngine.Client.Model.IEmployee)">
             <summary><inheritdoc/></summary>
         </member>
@@ -1294,6 +1300,9 @@
             <summary><inheritdoc/></summary>
         </member>
         <member name="M:PayrollEngine.Client.Exchange.ExchangeImport.SetupPayrollLayerAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollSet,PayrollEngine.Client.Model.IPayrollLayer,PayrollEngine.Client.Model.IPayrollLayer)">
+            <summary><inheritdoc/></summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeImport.VisitCaseChangeSetupsAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollSet)">
             <summary><inheritdoc/></summary>
         </member>
         <member name="M:PayrollEngine.Client.Exchange.ExchangeImport.SetupCaseChangeAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollSet,PayrollEngine.Client.Model.ICaseChangeSetup)">
@@ -1419,7 +1428,7 @@
             <param name="division">The division</param>
             <param name="targetDivision">The target division</param>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.VisitWebhookAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IWebhook)">
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.VisitWebhookAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IWebhookSet)">
             <summary>Visit the webhook</summary>
             <param name="tenant">The tenant</param>
             <param name="webhook">The webhook</param>
@@ -1644,10 +1653,107 @@
             <param name="parameter">The payrun parameter</param>
             <param name="targetPayrunParameter">The target payrun parameter</param>
         </member>
+        <member name="T:PayrollEngine.Client.Exchange.ExchangeMerge">
+            <summary>Payroll exchange merge</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Exchange.ExchangeMerge.Target">
+            <summary>
+            Target exchange model
+            </summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeMerge.#ctor(PayrollEngine.Client.Model.Exchange)">
+            <summary>Initializes a new instance of the <see cref="T:PayrollEngine.Client.Exchange.NamespaceUpdateTool"/> class</summary>
+            <remarks>Merge source exchange</remarks>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeMerge.MergeToAsync(PayrollEngine.Client.Model.Exchange)">
+            <summary>Merge source exchange to target exchange</summary>
+            <param name="target">Merge target exchange</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeMerge.VisitExchangeTenantAsync(PayrollEngine.Client.Model.IExchangeTenant)">
+            <inheritdoc />
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeMerge.VisitRegulationShareAsync(PayrollEngine.Client.Model.IRegulationShare)">
+            <inheritdoc />
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeMerge.VisitUserAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IUser)">
+            <inheritdoc />
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeMerge.VisitCalendarAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.ICalendar)">
+            <inheritdoc />
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeMerge.VisitDivisionAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IDivision)">
+            <inheritdoc />
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeMerge.VisitTaskAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.ITask)">
+            <inheritdoc />
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeMerge.VisitWebhookAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IWebhookSet)">
+            <inheritdoc />
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeMerge.VisitRegulationAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet)">
+            <inheritdoc />
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeMerge.VisitLookupAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.ILookupSet)">
+            <inheritdoc />
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeMerge.VisitLookupValueAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.ILookupSet,PayrollEngine.Client.Model.ILookupValue)">
+            <inheritdoc />
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeMerge.VisitCaseAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.ICaseSet)">
+            <inheritdoc />
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeMerge.VisitCaseFieldAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.ICaseSet,PayrollEngine.Client.Model.ICaseField)">
+            <inheritdoc />
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeMerge.VisitCaseRelationAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.ICaseRelation)">
+            <inheritdoc />
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeMerge.VisitCollectorAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.ICollector)">
+            <inheritdoc />
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeMerge.VisitWageTypeAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.IWageType)">
+            <inheritdoc />
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeMerge.VisitScriptAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.IScript)">
+            <inheritdoc />
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeMerge.VisitReportAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.IReportSet)">
+            <inheritdoc />
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeMerge.VisitReportParameterAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.IReportSet,PayrollEngine.Client.Model.IReportParameter)">
+            <inheritdoc />
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeMerge.VisitReportTemplateAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet,PayrollEngine.Client.Model.IReportSet,PayrollEngine.Client.Model.IReportTemplate)">
+            <inheritdoc />
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeMerge.VisitEmployeeAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IEmployeeSet)">
+            <inheritdoc />
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeMerge.VisitPayrollAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollSet)">
+            <inheritdoc />
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeMerge.VisitPayrollLayerAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollSet,PayrollEngine.Client.Model.IPayrollLayer)">
+            <inheritdoc />
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeMerge.VisitCaseChangeSetupAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollSet,PayrollEngine.Client.Model.ICaseChangeSetup)">
+            <inheritdoc />
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeMerge.VisitPayrunAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrun)">
+            <inheritdoc />
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeMerge.VisitPayrunJobAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrunJob)">
+            <inheritdoc />
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeMerge.VisitPayrunJobInvocationAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrunJobInvocation)">
+            <inheritdoc />
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeMerge.VisitPayrollResultAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrollResultSet)">
+            <inheritdoc />
+        </member>
         <member name="T:PayrollEngine.Client.Exchange.FileReader">
             <summary>Read exchange mode from a file</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.FileReader.Read``1(System.String)">
+        <member name="M:PayrollEngine.Client.Exchange.FileReader.ReadAsync``1(System.String)">
             <summary>Read object from file</summary>
             <param name="fileName">Name of the file</param>
             <remarks>Supported file types are JSON/YAML and archives including JSON/YAML</remarks>
@@ -1661,7 +1767,7 @@
         <member name="T:PayrollEngine.Client.Exchange.FileWriter">
             <summary>Write exchange object to file</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.FileWriter.Write``1(``0,System.String)">
+        <member name="M:PayrollEngine.Client.Exchange.FileWriter.WriteAsync``1(``0,System.String)">
             <summary>Writes object to file</summary>
             <param name="obj">The object to store</param>
             <param name="fileName">Name of the file</param>
@@ -1782,7 +1888,7 @@
         <member name="M:PayrollEngine.Client.Exchange.NamespaceUpdateTool.VisitTaskAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.ITask)">
             <inheritdoc />
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.NamespaceUpdateTool.VisitWebhookAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IWebhook)">
+        <member name="M:PayrollEngine.Client.Exchange.NamespaceUpdateTool.VisitWebhookAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IWebhookSet)">
             <inheritdoc />
         </member>
         <member name="T:PayrollEngine.Client.Exchange.ResourcesMonitor`3">
@@ -1887,7 +1993,7 @@
         <member name="P:PayrollEngine.Client.Exchange.Visitor.VisitWebhook">
             <summary>Visit the task handler</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.Visitor.VisitWebhookAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IWebhook)">
+        <member name="M:PayrollEngine.Client.Exchange.Visitor.VisitWebhookAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IWebhookSet)">
             <inheritdoc />
         </member>
         <member name="P:PayrollEngine.Client.Exchange.Visitor.VisitRegulation">
@@ -2120,7 +2226,7 @@
             <summary>Visit the webhooks</summary>
             <param name="tenant">The tenant</param>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitWebhookAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IWebhook)">
+        <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitWebhookAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IWebhookSet)">
             <summary>Visit the webhook</summary>
             <param name="tenant">The tenant</param>
             <param name="webhook">The webhook</param>
@@ -2355,6 +2461,11 @@
         <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitPayrunJobsAsync(PayrollEngine.Client.Model.IExchangeTenant)">
             <summary>Visit the payrun jobs</summary>
             <param name="tenant">The exchange tenant</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitPayrunJobAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IPayrunJob)">
+            <summary>Visit the payrun job</summary>
+            <param name="tenant">The exchange tenant</param>
+            <param name="payrunJob">The payrun job</param>
         </member>
         <member name="M:PayrollEngine.Client.Exchange.VisitorBase.VisitPayrunJobInvocationsAsync(PayrollEngine.Client.Model.IExchangeTenant)">
             <summary>Visit the payrun job invocations</summary>
@@ -3959,6 +4070,9 @@
         <member name="M:PayrollEngine.Client.Model.CollectorCustomResult.Equals(PayrollEngine.Client.Model.ICollectorCustomResult)">
             <inheritdoc/>
         </member>
+        <member name="M:PayrollEngine.Client.Model.CollectorCustomResult.AlmostEqualValue(System.Nullable{System.Decimal},System.Int32)">
+            <inheritdoc/>
+        </member>
         <member name="M:PayrollEngine.Client.Model.CollectorCustomResult.GetUiString">
             <inheritdoc/>
         </member>
@@ -4906,9 +5020,6 @@
         <member name="P:PayrollEngine.Client.Model.ICollectorCustomResult.ValueType">
             <summary>The value type (immutable)</summary>
         </member>
-        <member name="P:PayrollEngine.Client.Model.ICollectorCustomResult.Value">
-            <summary>The collector custom result value (immutable)</summary>
-        </member>
         <member name="P:PayrollEngine.Client.Model.ICollectorCustomResult.Culture">
             <summary>The collector custom result culture name based on RFC 4646+</summary>
         </member>
@@ -4945,9 +5056,6 @@
         <member name="P:PayrollEngine.Client.Model.ICollectorResult.ValueType">
             <summary>The value type (immutable)</summary>
         </member>
-        <member name="P:PayrollEngine.Client.Model.ICollectorResult.Value">
-            <summary>The collector result value (immutable)</summary>
-        </member>
         <member name="P:PayrollEngine.Client.Model.ICollectorResult.Culture">
             <summary>The collector result culture name based on RFC 4646</summary>
         </member>
@@ -4959,12 +5067,6 @@
         </member>
         <member name="P:PayrollEngine.Client.Model.ICollectorResult.Tags">
             <summary>The result tags</summary>
-        </member>
-        <member name="M:PayrollEngine.Client.Model.ICollectorResult.AlmostEqualValue(System.Nullable{System.Decimal},System.Int32)">
-            <summary>Test if two collector values are almost equals</summary>
-            <param name="compare">The value to compare</param>
-            <param name="precision">The test precision</param>
-            <returns>True for almost equal value</returns>
         </member>
         <member name="T:PayrollEngine.Client.Model.ICollectorResultSet">
             <summary>The collector result set client object</summary>
@@ -5261,6 +5363,19 @@
         </member>
         <member name="P:PayrollEngine.Client.Model.ILookupValue.OverrideType">
             <summary>The override type</summary>
+        </member>
+        <member name="T:PayrollEngine.Client.Model.INumericValueResult">
+            <summary>Numeric value result</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.INumericValueResult.Value">
+            <summary>The collector custom result value (immutable)</summary>
+            <remarks>Nullable for tests</remarks>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.INumericValueResult.AlmostEqualValue(System.Nullable{System.Decimal},System.Int32)">
+            <summary>Test if value is almost equal value using a test precision</summary>
+            <param name="compare">The value to compare</param>
+            <param name="precision">The test precision</param>
+            <returns>True for almost equal values</returns>
         </member>
         <member name="T:PayrollEngine.Client.Model.IPayroll">
             <summary>The payroll client object</summary>
@@ -5701,14 +5816,8 @@
         <member name="P:PayrollEngine.Client.Model.IPayrunJobInvocation.Owner">
             <summary>The job owner (immutable)</summary>
         </member>
-        <member name="P:PayrollEngine.Client.Model.IPayrunJobInvocation.PayrunId">
-            <summary>The payrun id (immutable)</summary>
-        </member>
         <member name="P:PayrollEngine.Client.Model.IPayrunJobInvocation.PayrunName">
             <summary>The payrun name (immutable)</summary>
-        </member>
-        <member name="P:PayrollEngine.Client.Model.IPayrunJobInvocation.UserId">
-            <summary>The user id (immutable)</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.IPayrunJobInvocation.UserIdentifier">
             <summary>The user identifier (immutable)</summary>
@@ -6223,9 +6332,6 @@
         <member name="P:PayrollEngine.Client.Model.IWageTypeCustomResult.ValueType">
             <summary>The value type (immutable)</summary>
         </member>
-        <member name="P:PayrollEngine.Client.Model.IWageTypeCustomResult.Value">
-            <summary>The wage type custom result value (immutable)</summary>
-        </member>
         <member name="P:PayrollEngine.Client.Model.IWageTypeCustomResult.Culture">
             <summary>The wage type custom result culture name based on RFC 4646</summary>
         </member>
@@ -6259,9 +6365,6 @@
         <member name="P:PayrollEngine.Client.Model.IWageTypeResult.ValueType">
             <summary>The value type (immutable)</summary>
         </member>
-        <member name="P:PayrollEngine.Client.Model.IWageTypeResult.Value">
-            <summary>The wage type result value (immutable)</summary>
-        </member>
         <member name="P:PayrollEngine.Client.Model.IWageTypeResult.Culture">
             <summary>The wage type result culture name based on RFC 4646</summary>
         </member>
@@ -6273,12 +6376,6 @@
         </member>
         <member name="P:PayrollEngine.Client.Model.IWageTypeResult.Tags">
             <summary>The result tags</summary>
-        </member>
-        <member name="M:PayrollEngine.Client.Model.IWageTypeResult.AlmostEqualValue(System.Nullable{System.Decimal},System.Int32)">
-            <summary>Test if value is almost equal value using a test precision</summary>
-            <param name="compare">The value to compare</param>
-            <param name="precision">The test precision</param>
-            <returns>True for almost equal values</returns>
         </member>
         <member name="T:PayrollEngine.Client.Model.IWageTypeResultSet">
             <summary>The wage type result set client object</summary>
@@ -7314,13 +7411,7 @@
         <member name="P:PayrollEngine.Client.Model.PayrunJobInvocation.Owner">
             <inheritdoc/>
         </member>
-        <member name="P:PayrollEngine.Client.Model.PayrunJobInvocation.PayrunId">
-            <inheritdoc/>
-        </member>
         <member name="P:PayrollEngine.Client.Model.PayrunJobInvocation.PayrunName">
-            <inheritdoc/>
-        </member>
-        <member name="P:PayrollEngine.Client.Model.PayrunJobInvocation.UserId">
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.PayrunJobInvocation.UserIdentifier">
@@ -8268,6 +8359,9 @@
         <member name="M:PayrollEngine.Client.Model.WageTypeCustomResult.Equals(PayrollEngine.Client.Model.IWageTypeCustomResult)">
             <inheritdoc/>
         </member>
+        <member name="M:PayrollEngine.Client.Model.WageTypeCustomResult.AlmostEqualValue(System.Nullable{System.Decimal},System.Int32)">
+            <inheritdoc/>
+        </member>
         <member name="M:PayrollEngine.Client.Model.WageTypeCustomResult.GetUiString">
             <inheritdoc/>
         </member>
@@ -8538,6 +8632,9 @@
         <member name="M:PayrollEngine.Client.PayrollApiEndpoints.PayrollCasesUrl(System.Int32,System.Int32)">
             <summary>The payroll cases URL</summary>
         </member>
+        <member name="M:PayrollEngine.Client.PayrollApiEndpoints.PayrollCasesBulkUrl(System.Int32,System.Int32)">
+            <summary>The payroll cases bulk URL</summary>
+        </member>
         <member name="M:PayrollEngine.Client.PayrollApiEndpoints.PayrollCasesAvailableUrl(System.Int32,System.Int32)">
             <summary>The payroll available cases URL</summary>
         </member>
@@ -8646,6 +8743,8 @@
         </member>
         <member name="T:PayrollEngine.Client.PayrollHttpClient">
             <summary>Http client for the Payroll Engine API</summary>
+            <remarks>This class is not thread-safe. Do not share instances across threads
+            or modify headers (API key, tenant authorization) concurrently.</remarks>
         </member>
         <member name="M:PayrollEngine.Client.PayrollHttpClient.#ctor(System.Net.Http.HttpClientHandler,System.String,System.Int32,System.Version)">
             <summary>New instance of the payroll http client with unknown server certificate, timeout is 100 seconds.
@@ -8870,6 +8969,9 @@
         <member name="M:PayrollEngine.Client.PayrollHttpClient.ToString">
             <summary>The string representation</summary>
         </member>
+        <member name="P:PayrollEngine.Client.PayrollHttpClient.OwnsHttpClient">
+            <summary>The ownership flag indicates whether this instance owns the HttpClient</summary>
+        </member>
         <member name="M:PayrollEngine.Client.PayrollHttpClient.Dispose">
             <summary>Dispose http client</summary>
         </member>
@@ -8980,6 +9082,9 @@
         </member>
         <member name="M:PayrollEngine.Client.PayrunApiEndpoints.PayrunJobsUrl(System.Int32)">
             <summary>The payrun jobs URL</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.PayrunApiEndpoints.PayrunJobPreviewUrl(System.Int32)">
+            <summary>The payrun job preview URL</summary>
         </member>
         <member name="M:PayrollEngine.Client.PayrunApiEndpoints.PayrunJobEmployeesUrl(System.Int32)">
             <summary>The payrun job employees URL</summary>
@@ -10471,6 +10576,9 @@
         <member name="M:PayrollEngine.Client.Service.Api.EmployeeService.GetAsync``1(PayrollEngine.Client.Service.TenantServiceContext,System.String)">
             <inheritdoc/>
         </member>
+        <member name="M:PayrollEngine.Client.Service.Api.EmployeeService.CreateEmployeesBulkAsync``1(PayrollEngine.Client.Service.TenantServiceContext,System.Collections.Generic.IEnumerable{``0})">
+            <inheritdoc/>
+        </member>
         <member name="M:PayrollEngine.Client.Service.Api.EmployeeService.CreateAsync``1(PayrollEngine.Client.Service.TenantServiceContext,``0)">
             <inheritdoc/>
         </member>
@@ -10967,6 +11075,9 @@
         <member name="M:PayrollEngine.Client.Service.Api.PayrollService.AddCaseAsync``2(PayrollEngine.Client.Service.PayrollServiceContext,``0)">
             <inheritdoc/>
         </member>
+        <member name="M:PayrollEngine.Client.Service.Api.PayrollService.AddCasesBulkAsync``2(PayrollEngine.Client.Service.PayrollServiceContext,System.Collections.Generic.IEnumerable{``0})">
+            <inheritdoc/>
+        </member>
         <member name="M:PayrollEngine.Client.Service.Api.PayrollService.GetCasesAsync``1(PayrollEngine.Client.Service.PayrollServiceContext,System.Nullable{PayrollEngine.CaseType},System.Collections.Generic.IEnumerable{System.String},System.Nullable{PayrollEngine.OverrideType},System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
             <inheritdoc/>
         </member>
@@ -11053,6 +11164,9 @@
             <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Service.Api.PayrunJobService.GetJobStatusAsync(PayrollEngine.Client.Service.TenantServiceContext,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PayrollEngine.Client.Service.Api.PayrunJobService.PreviewJobAsync``1(PayrollEngine.Client.Service.TenantServiceContext,PayrollEngine.Client.Model.PayrunJobInvocation)">
             <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Service.Api.PayrunJobService.StartJobAsync``1(PayrollEngine.Client.Service.TenantServiceContext,PayrollEngine.Client.Model.PayrunJobInvocation)">
@@ -11964,6 +12078,12 @@
             <param name="identifier">The employee identifier</param>
             <returns>The employee, null if missing</returns>
         </member>
+        <member name="M:PayrollEngine.Client.Service.IEmployeeService.CreateEmployeesBulkAsync``1(PayrollEngine.Client.Service.TenantServiceContext,System.Collections.Generic.IEnumerable{``0})">
+            <summary>Query items and count of objects</summary>
+            <param name="context">The service context</param>
+            <param name="employees">The employees to create</param>
+            <returns>The number of created employees</returns>
+        </member>
         <member name="T:PayrollEngine.Client.Service.IGlobalCaseChangeService">
             <summary>Payroll global case change service</summary>
         </member>
@@ -12339,6 +12459,12 @@
             <returns>The created case change</returns>
             
         </member>
+        <member name="M:PayrollEngine.Client.Service.IPayrollService.AddCasesBulkAsync``2(PayrollEngine.Client.Service.PayrollServiceContext,System.Collections.Generic.IEnumerable{``0})">
+            <summary>Bulk create case changes</summary>
+            <param name="context">The service context</param>
+            <param name="caseChangeSetups">The case change setups</param>
+            <returns>The number of created case changes</returns>
+        </member>
         <member name="M:PayrollEngine.Client.Service.IPayrollService.GetCasesAsync``1(PayrollEngine.Client.Service.PayrollServiceContext,System.Nullable{PayrollEngine.CaseType},System.Collections.Generic.IEnumerable{System.String},System.Nullable{PayrollEngine.OverrideType},System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
             <summary>Get payroll cases</summary>
             <param name="context">The service context</param>
@@ -12515,6 +12641,15 @@
             <param name="context">The service context</param>
             <param name="payrunJobId">The payrun job id</param>
             <returns>The payrun job status</returns>
+        </member>
+        <member name="M:PayrollEngine.Client.Service.IPayrunJobService.PreviewJobAsync``1(PayrollEngine.Client.Service.TenantServiceContext,PayrollEngine.Client.Model.PayrunJobInvocation)">
+            <summary>
+            Preview a payrun job for a single employee (synchronous).
+            Returns calculation results as a PayrollResultSet without persisting to the database.
+            </summary>
+            <param name="context">The service context</param>
+            <param name="jobInvocation">The payrun job invocation with exactly one employee identifier</param>
+            <returns>The payroll result set containing wage type results, collector results, and payrun results</returns>
         </member>
         <member name="M:PayrollEngine.Client.Service.IPayrunJobService.StartJobAsync``1(PayrollEngine.Client.Service.TenantServiceContext,PayrollEngine.Client.Model.PayrunJobInvocation)">
             <summary>Start a payrun job, if the payroll has no previous draft payrun</summary>

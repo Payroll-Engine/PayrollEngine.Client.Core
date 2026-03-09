@@ -25,7 +25,6 @@ public interface IPayrunJobService : ICrudService<IPayrunJob, TenantServiceConte
     /// <returns>Payrun jobs of the employee</returns>
     Task<long> QueryEmployeePayrunJobsCountAsync(TenantServiceContext context, int employeeId, Query query = null);
 
-
     /// <summary>Query items and count of objects</summary>
     /// <param name="context">The service context</param>
     /// <param name="employeeId">The employee id</param>
@@ -45,6 +44,15 @@ public interface IPayrunJobService : ICrudService<IPayrunJob, TenantServiceConte
     /// <param name="payrunJobId">The payrun job id</param>
     /// <returns>The payrun job status</returns>
     Task<string> GetJobStatusAsync(TenantServiceContext context, int payrunJobId);
+
+    /// <summary>
+    /// Preview a payrun job for a single employee (synchronous).
+    /// Returns calculation results as a PayrollResultSet without persisting to the database.
+    /// </summary>
+    /// <param name="context">The service context</param>
+    /// <param name="jobInvocation">The payrun job invocation with exactly one employee identifier</param>
+    /// <returns>The payroll result set containing wage type results, collector results, and payrun results</returns>
+    Task<T> PreviewJobAsync<T>(TenantServiceContext context, PayrunJobInvocation jobInvocation) where T : class, IPayrollResultSet;
 
     /// <summary>Start a payrun job, if the payroll has no previous draft payrun</summary>
     /// <param name="context">The service context</param>

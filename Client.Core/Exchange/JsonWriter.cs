@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Threading.Tasks;
 using PayrollEngine.Serialization;
@@ -13,14 +13,8 @@ public static class JsonWriter
     /// <param name="fileName">Name of the file</param>
     public static async Task ToFileAsync<T>(T obj, string fileName) where T : class
     {
-        if (obj == null)
-        {
-            throw new ArgumentNullException(nameof(obj));
-        }
-        if (string.IsNullOrWhiteSpace(fileName))
-        {
-            throw new ArgumentException(nameof(fileName));
-        }
+        ArgumentNullException.ThrowIfNull(obj);
+        ArgumentException.ThrowIfNullOrWhiteSpace(fileName);
 
         // serialize
         var json = DefaultJsonSerializer.Serialize(obj);

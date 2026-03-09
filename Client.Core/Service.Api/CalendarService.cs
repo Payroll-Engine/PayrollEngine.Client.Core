@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using PayrollEngine.Client.Model;
@@ -19,10 +19,7 @@ public class CalendarService : ServiceBase, ICalendarService
     /// <inheritdoc/>
     public virtual async Task<List<T>> QueryAsync<T>(TenantServiceContext context, Query query = null) where T : class, ICalendar
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.Items;
@@ -33,10 +30,7 @@ public class CalendarService : ServiceBase, ICalendarService
     /// <inheritdoc/>
     public virtual async Task<long> QueryCountAsync(TenantServiceContext context, Query query = null)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.Count;
@@ -47,10 +41,7 @@ public class CalendarService : ServiceBase, ICalendarService
     /// <inheritdoc/>
     public virtual async Task<QueryResult<T>> QueryResultAsync<T>(TenantServiceContext context, Query query = null) where T : class, ICalendar
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.ItemsWithCount;
@@ -61,10 +52,7 @@ public class CalendarService : ServiceBase, ICalendarService
     /// <inheritdoc/>
     public virtual async Task<T> GetAsync<T>(TenantServiceContext context, int calendarId) where T : class, ICalendar
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (calendarId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(calendarId));
@@ -76,14 +64,8 @@ public class CalendarService : ServiceBase, ICalendarService
     /// <inheritdoc/>
     public virtual async Task<T> GetAsync<T>(TenantServiceContext context, string name) where T : class, ICalendar
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
-        if (string.IsNullOrWhiteSpace(name))
-        {
-            throw new ArgumentException(nameof(name));
-        }
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentException.ThrowIfNullOrWhiteSpace(name);
 
         // query single item
         var query = QueryFactory.NewNameQuery(name);
@@ -94,14 +76,8 @@ public class CalendarService : ServiceBase, ICalendarService
     /// <inheritdoc/>
     public virtual async Task<T> CreateAsync<T>(TenantServiceContext context, T calendar) where T : class, ICalendar
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
-        if (calendar == null)
-        {
-            throw new ArgumentNullException(nameof(calendar));
-        }
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentNullException.ThrowIfNull(calendar);
 
         return await HttpClient.PostAsync(TenantApiEndpoints.CalendarsUrl(context.TenantId), calendar);
     }
@@ -109,14 +85,8 @@ public class CalendarService : ServiceBase, ICalendarService
     /// <inheritdoc/>
     public virtual async Task UpdateAsync<T>(TenantServiceContext context, T calendar) where T : class, ICalendar
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
-        if (calendar == null)
-        {
-            throw new ArgumentNullException(nameof(calendar));
-        }
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentNullException.ThrowIfNull(calendar);
 
         await HttpClient.PutAsync(TenantApiEndpoints.CalendarsUrl(context.TenantId), calendar);
     }
@@ -124,10 +94,7 @@ public class CalendarService : ServiceBase, ICalendarService
     /// <inheritdoc/>
     public virtual async Task DeleteAsync(TenantServiceContext context, int calendarId)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (calendarId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(calendarId));

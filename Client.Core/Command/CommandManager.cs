@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -34,10 +34,7 @@ public class CommandManager(ICommandConsole console, ILogger logger = null)
     /// <param name="assembly">Source assembly</param>
     public void RegisterAssembly(Assembly assembly)
     {
-        if (assembly == null)
-        {
-            throw new ArgumentNullException(nameof(assembly));
-        }
+        ArgumentNullException.ThrowIfNull(assembly);
 
         foreach (var type in assembly.GetTypes())
         {
@@ -80,10 +77,7 @@ public class CommandManager(ICommandConsole console, ILogger logger = null)
     /// <param name="name">Command name</param>
     public ICommand GetCommand(string name)
     {
-        if (string.IsNullOrWhiteSpace(name))
-        {
-            throw new ArgumentException(nameof(name));
-        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(name);
 
         foreach (var command in commands)
         {
@@ -177,18 +171,12 @@ public class CommandManager(ICommandConsole console, ILogger logger = null)
     private async Task<int> ExecuteAsync(ICommand command, CommandLineParser commandLineParser,
         PayrollHttpClient httpClient = null)
     {
-        if (command == null)
-        {
-            throw new ArgumentNullException(nameof(command));
-        }
+        ArgumentNullException.ThrowIfNull(command);
         if (!commands.Values.Contains(command))
         {
             throw new ArgumentException(nameof(command));
         }
-        if (commandLineParser == null)
-        {
-            throw new ArgumentNullException(nameof(commandLineParser));
-        }
+        ArgumentNullException.ThrowIfNull(commandLineParser);
 
         // store toggles
         var displayMode = Console.DisplayLevel;
@@ -267,10 +255,7 @@ public class CommandManager(ICommandConsole console, ILogger logger = null)
 
     private async Task<int> ExecuteFileAsync(CommandLineParser parser, PayrollHttpClient httpClient = null)
     {
-        if (parser == null)
-        {
-            throw new ArgumentNullException(nameof(parser));
-        }
+        ArgumentNullException.ThrowIfNull(parser);
 
         var items = ReadCommandFile(parser);
         if (items == null)

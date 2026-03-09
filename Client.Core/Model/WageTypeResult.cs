@@ -35,7 +35,7 @@ public class WageTypeResult : ModelBase, IWageTypeResult
 
     /// <inheritdoc/>
     [JsonPropertyOrder(106)]
-    public decimal Value { get; set; }
+    public decimal? Value { get; set; }
 
     /// <inheritdoc/>
     [JsonPropertyOrder(107)]
@@ -75,8 +75,18 @@ public class WageTypeResult : ModelBase, IWageTypeResult
         CompareTool.EqualProperties(this, compare);
 
     /// <inheritdoc/>
-    public virtual bool AlmostEqualValue(decimal? compare, int precision) =>
-        compare.HasValue && Value.AlmostEquals(compare.Value, precision);
+    public virtual bool AlmostEqualValue(decimal? compare, int precision)
+    {
+        if (Value == null && compare == null)
+        {
+            return true;
+        }
+        if (Value.HasValue && compare.HasValue)
+        {
+            return Value.Value.AlmostEquals(compare.Value, precision);
+        }
+        return false;
+    }
 
     /// <inheritdoc/>
     public override string GetUiString() =>

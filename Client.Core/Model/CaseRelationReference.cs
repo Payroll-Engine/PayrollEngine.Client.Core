@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace PayrollEngine.Client.Model;
 
@@ -34,14 +34,8 @@ public class CaseRelationReference : IEquatable<CaseRelationReference>
     /// <param name="targetCaseName">The relation target case name</param>
     public CaseRelationReference(string sourceCaseName, string targetCaseName)
     {
-        if (string.IsNullOrWhiteSpace(sourceCaseName))
-        {
-            throw new ArgumentException(nameof(sourceCaseName));
-        }
-        if (string.IsNullOrWhiteSpace(targetCaseName))
-        {
-            throw new ArgumentException(nameof(targetCaseName));
-        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(sourceCaseName);
+        ArgumentException.ThrowIfNullOrWhiteSpace(targetCaseName);
 
         SourceCaseName = sourceCaseName;
         TargetCaseName = targetCaseName;

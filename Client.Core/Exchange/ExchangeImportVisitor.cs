@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Globalization;
 using System.Threading.Tasks;
@@ -30,7 +30,8 @@ public abstract class ExchangeImportVisitor : AttachmentsLoader
         IScriptParser scriptParser, ExchangeImportOptions importOptions = null) :
         base(exchange, scriptParser)
     {
-        HttpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+        ArgumentNullException.ThrowIfNull(httpClient);
+        HttpClient = httpClient;
         ImportOptions = importOptions ?? new();
     }
 
@@ -183,7 +184,7 @@ public abstract class ExchangeImportVisitor : AttachmentsLoader
     /// <summary>Visit the webhook</summary>
     /// <param name="tenant">The tenant</param>
     /// <param name="webhook">The webhook</param>
-    protected override async Task VisitWebhookAsync(IExchangeTenant tenant, IWebhook webhook)
+    protected override async Task VisitWebhookAsync(IExchangeTenant tenant, IWebhookSet webhook)
     {
         // get webhook
         var target = TargetLoad ? await new WebhookService(HttpClient).GetAsync<Webhook>(
@@ -212,10 +213,7 @@ public abstract class ExchangeImportVisitor : AttachmentsLoader
     /// <param name="version">The regulation version</param>
     protected virtual async Task<Regulation> GetRegulationAsync(int tenantId, string name, int? version = null)
     {
-        if (string.IsNullOrWhiteSpace(name))
-        {
-            throw new ArgumentException(nameof(name));
-        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(name);
 
         // get existing objects
         var filter = version.HasValue ?
@@ -582,10 +580,7 @@ public abstract class ExchangeImportVisitor : AttachmentsLoader
     /// <param name="payrollName">The payroll name</param>
     protected virtual async Task<Payroll> GetPayrollAsync(int tenantId, string payrollName)
     {
-        if (string.IsNullOrWhiteSpace(payrollName))
-        {
-            throw new ArgumentException(nameof(payrollName));
-        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(payrollName);
 
         // get existing object
         var payroll = TargetLoad ? await new PayrollService(HttpClient).GetAsync<Payroll>(

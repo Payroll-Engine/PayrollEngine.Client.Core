@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace PayrollEngine.Client.Model;
@@ -25,10 +25,7 @@ public class LookupSettings : IEquatable<LookupSettings>
     /// <param name="source">The copy source</param>
     public LookupSettings(LookupSettings source)
     {
-        if (source == null)
-        {
-            throw new ArgumentNullException(nameof(source));
-        }
+        ArgumentNullException.ThrowIfNull(source);
 
         LookupName = source.LookupName;
         ValueFieldName = source.ValueFieldName;

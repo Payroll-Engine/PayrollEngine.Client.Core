@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace PayrollEngine.Client.QueryExpression;
 
@@ -12,10 +12,7 @@ public abstract class ExpressionBase
     /// <param name="expression">The query expression</param>
     protected ExpressionBase(string expression)
     {
-        if (string.IsNullOrWhiteSpace(expression))
-        {
-            throw new ArgumentException(nameof(expression));
-        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(expression);
         Expression = expression;
     }
     

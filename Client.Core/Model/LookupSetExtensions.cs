@@ -59,7 +59,7 @@ public static class LookupSetExtensions
     /// <param name="valueFieldName">Value field name</param>
     /// <remarks>The first lookup range value must be zero.</remarks>
     /// <returns>Summary of all lookup ranges</returns>
-    public static decimal ApplyProgressiveRangeValue(this ILookupSet lookup, decimal rangeValue, string valueFieldName = null)
+    private static decimal ApplyProgressiveRangeValue(this ILookupSet lookup, decimal rangeValue, string valueFieldName = null)
     {
         // ranges
         var ranges = GetLookupRanges(lookup, valueFieldName);
@@ -125,10 +125,11 @@ public static class LookupSetExtensions
         }
 
         // ranges
+        var sortedValues = lookup.Values.OrderBy(x => x.RangeValue).ToList();
         var ranges = new List<LookupRange>();
-        for (var i = 0; i < lookup.Values.Count; i++)
+        for (var i = 0; i < sortedValues.Count; i++)
         {
-            var lookupValue = lookup.Values[i];
+            var lookupValue = sortedValues[i];
 
             // ignore lookup values without range and lookup value
             if (lookupValue.RangeValue == null || string.IsNullOrWhiteSpace(lookupValue.Value))

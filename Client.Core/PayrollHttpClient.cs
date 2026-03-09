@@ -1,4 +1,4 @@
-﻿//#define HTTP_PERFORMANCE
+//#define HTTP_PERFORMANCE
 #if HTTP_PERFORMANCE
 #define LOG_STOPWATCH
 #endif
@@ -15,6 +15,8 @@ using PayrollEngine.Serialization;
 namespace PayrollEngine.Client;
 
 /// <summary>Http client for the Payroll Engine API</summary>
+/// <remarks>This class is not thread-safe. Do not share instances across threads
+/// or modify headers (API key, tenant authorization) concurrently.</remarks>
 public sealed class PayrollHttpClient : IDisposable
 {
     private HttpClient HttpClient { get; }
@@ -43,14 +45,8 @@ public sealed class PayrollHttpClient : IDisposable
     public PayrollHttpClient(HttpClientHandler httpClientHandler, string baseUrl,
         TimeSpan requestTimeout, int port = 0, Version version = null)
     {
-        if (httpClientHandler == null)
-        {
-            throw new ArgumentNullException(nameof(httpClientHandler));
-        }
-        if (string.IsNullOrWhiteSpace(baseUrl))
-        {
-            throw new ArgumentException(nameof(baseUrl));
-        }
+        ArgumentNullException.ThrowIfNull(httpClientHandler);
+        ArgumentException.ThrowIfNullOrWhiteSpace(baseUrl);
 
         // http client
         HttpClient = new(httpClientHandler, false)
@@ -58,6 +54,7 @@ public sealed class PayrollHttpClient : IDisposable
             BaseAddress = port > 0 ? new Uri($"{baseUrl}:{port}/") : new Uri($"{baseUrl}/"),
             Timeout = requestTimeout
         };
+        OwnsHttpClient = true;
 
         InitHttpClient(version);
     }
@@ -77,7 +74,9 @@ public sealed class PayrollHttpClient : IDisposable
     /// <param name="version">The request version</param>
     public PayrollHttpClient(HttpClient httpClient, Version version = null)
     {
-        this.HttpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+        ArgumentNullException.ThrowIfNull(httpClient);
+        this.HttpClient = httpClient;
+        OwnsHttpClient = false; // externally provided, caller is responsible for disposal
         InitHttpClient(version);
     }
 
@@ -108,10 +107,7 @@ public sealed class PayrollHttpClient : IDisposable
     /// <param name="apiKey">The api key</param>
     public void SetApiKey(string apiKey)
     {
-        if (string.IsNullOrWhiteSpace(apiKey))
-        {
-            throw new ArgumentException(nameof(apiKey));
-        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(apiKey);
 
         // remove existing api
         RemoveApiKey();
@@ -160,10 +156,7 @@ public sealed class PayrollHttpClient : IDisposable
     /// <param name="tenantIdentifier">The tenant identifier</param>
     public void SetTenantAuthorization(string tenantIdentifier)
     {
-        if (string.IsNullOrWhiteSpace(tenantIdentifier))
-        {
-            throw new ArgumentException(nameof(tenantIdentifier));
-        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(tenantIdentifier);
 
         // remove existing authorization
         RemoveTenantAuthorization();
@@ -198,10 +191,7 @@ public sealed class PayrollHttpClient : IDisposable
     /// <returns>True if internet connection is available</returns>
     public async Task<bool> IsConnectionAvailableAsync(string address)
     {
-        if (string.IsNullOrWhiteSpace(address))
-        {
-            throw new ArgumentException(nameof(address));
-        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(address);
 
         try
         {
@@ -209,10 +199,20 @@ public sealed class PayrollHttpClient : IDisposable
             var httpResponse = await HttpClient.GetAsync(address);
             return httpResponse.IsSuccessStatusCode;
         }
+        catch (HttpRequestException exception)
+        {
+            // connection refused or unavailable - expected when backend is not running
+            Log.Warning($"Backend connection {address} is not available: {exception.GetBaseException().Message}");
+        }
+        catch (TaskCanceledException)
+        {
+            // timeout - expected when backend is not reachable
+            Log.Warning($"Backend connection {address} timed out.");
+        }
         catch (Exception exception)
         {
+            // unexpected error
             Log.Error(exception, exception.GetBaseException().Message);
-            // ignored
         }
         return false;
     }
@@ -226,10 +226,7 @@ public sealed class PayrollHttpClient : IDisposable
     /// <returns>The new record id</returns>
     public static async Task<int> GetRecordIdAsync(HttpResponseMessage response)
     {
-        if (response == null)
-        {
-            throw new ArgumentNullException(nameof(response));
-        }
+        ArgumentNullException.ThrowIfNull(response);
 
         // location header
         if (response.Headers.Location != null && 
@@ -257,10 +254,7 @@ public sealed class PayrollHttpClient : IDisposable
     /// <returns>The http response message</returns>
     public async Task<HttpResponseMessage> GetAsync(string requestUri)
     {
-        if (string.IsNullOrWhiteSpace(requestUri))
-        {
-            throw new ArgumentException(nameof(requestUri));
-        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(requestUri);
 
         LogStopwatch.Start(GetLogName(nameof(GetAsync), requestUri));
         var response = await HttpClient.GetAsync(requestUri);
@@ -276,14 +270,8 @@ public sealed class PayrollHttpClient : IDisposable
     /// <returns>The http response message</returns>
     public async Task<HttpResponseMessage> GetAsync(string requestUri, StringContent content)
     {
-        if (string.IsNullOrWhiteSpace(requestUri))
-        {
-            throw new ArgumentException(nameof(requestUri));
-        }
-        if (content == null)
-        {
-            throw new ArgumentNullException(nameof(content));
-        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(requestUri);
+        ArgumentNullException.ThrowIfNull(content);
 
         var request = new HttpRequestMessage
         {
@@ -306,10 +294,7 @@ public sealed class PayrollHttpClient : IDisposable
     /// <returns>The backend resource</returns>
     public async Task<T> GetAsync<T>(string requestUri)
     {
-        if (string.IsNullOrWhiteSpace(requestUri))
-        {
-            throw new ArgumentException(nameof(requestUri));
-        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(requestUri);
 
         var response = await GetAsync(requestUri);
         var json = await response.Content.ReadAsStringAsync();
@@ -327,14 +312,8 @@ public sealed class PayrollHttpClient : IDisposable
     /// <returns>The backend resource</returns>
     public async Task<T> GetAsync<T>(string requestUri, object content)
     {
-        if (string.IsNullOrWhiteSpace(requestUri))
-        {
-            throw new ArgumentException(nameof(requestUri));
-        }
-        if (content == null)
-        {
-            throw new ArgumentNullException(nameof(content));
-        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(requestUri);
+        ArgumentNullException.ThrowIfNull(content);
 
         var response = await GetAsync(requestUri, DefaultJsonSerializer.SerializeJson(content));
         var json = await response.Content.ReadAsStringAsync();
@@ -342,7 +321,7 @@ public sealed class PayrollHttpClient : IDisposable
         {
             return default;
         }
-        return string.IsNullOrWhiteSpace(json) ? default : DefaultJsonSerializer.Deserialize<T>(json);
+        return DefaultJsonSerializer.Deserialize<T>(json);
     }
 
     /// <summary>Get single resource from a collection</summary>
@@ -362,10 +341,7 @@ public sealed class PayrollHttpClient : IDisposable
     /// <returns>A collection of backend resources</returns>
     public async Task<List<T>> GetCollectionAsync<T>(string requestUri) where T : class
     {
-        if (string.IsNullOrWhiteSpace(requestUri))
-        {
-            throw new ArgumentException(nameof(requestUri));
-        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(requestUri);
 
         LogStopwatch.Start(GetLogName(nameof(GetCollectionAsync), requestUri));
         using var response = await HttpClient.GetAsync(requestUri);
@@ -378,15 +354,7 @@ public sealed class PayrollHttpClient : IDisposable
             return [];
         }
 
-        try
-        {
-            return DefaultJsonSerializer.Deserialize<List<T>>(json);
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            throw;
-        }
+        return DefaultJsonSerializer.Deserialize<List<T>>(json);
     }
 
     /// <summary>Get collection of backend resource with request content</summary>
@@ -396,14 +364,8 @@ public sealed class PayrollHttpClient : IDisposable
     /// <returns>A collection of backend resources</returns>
     public async Task<List<T>> GetCollectionAsync<T>(string requestUri, object content) where T : class
     {
-        if (string.IsNullOrWhiteSpace(requestUri))
-        {
-            throw new ArgumentException(nameof(requestUri));
-        }
-        if (content == null)
-        {
-            throw new ArgumentNullException(nameof(content));
-        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(requestUri);
+        ArgumentNullException.ThrowIfNull(content);
 
         var response = await GetAsync(requestUri, DefaultJsonSerializer.SerializeJson(content));
         var json = await response.Content.ReadAsStringAsync();
@@ -419,10 +381,7 @@ public sealed class PayrollHttpClient : IDisposable
     /// <returns>The backend resource</returns>
     public async Task<T> PostAsync<T>(string requestUri)
     {
-        if (string.IsNullOrWhiteSpace(requestUri))
-        {
-            throw new ArgumentException(nameof(requestUri));
-        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(requestUri);
 
         LogStopwatch.Start(GetLogName(nameof(PostAsync), requestUri));
         using var response = await HttpClient.PostAsync(requestUri, null);
@@ -455,14 +414,8 @@ public sealed class PayrollHttpClient : IDisposable
     /// <returns>The backend resource</returns>
     public async Task<T> PostAsync<T>(string requestUri, T content) where T : class
     {
-        if (string.IsNullOrWhiteSpace(requestUri))
-        {
-            throw new ArgumentException(nameof(requestUri));
-        }
-        if (content == null)
-        {
-            throw new ArgumentNullException(nameof(content));
-        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(requestUri);
+        ArgumentNullException.ThrowIfNull(content);
 
         LogStopwatch.Start(GetLogName(nameof(PostAsync), requestUri));
         using var response = await HttpClient.PostAsync(requestUri, DefaultJsonSerializer.SerializeJson(content));
@@ -495,14 +448,8 @@ public sealed class PayrollHttpClient : IDisposable
     /// <returns>The backend resource</returns>
     public async Task<TOut> PostAsync<TIn, TOut>(string requestUri, TIn content)
     {
-        if (string.IsNullOrWhiteSpace(requestUri))
-        {
-            throw new ArgumentException(nameof(requestUri));
-        }
-        if (content == null)
-        {
-            throw new ArgumentNullException(nameof(content));
-        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(requestUri);
+        ArgumentNullException.ThrowIfNull(content);
 
         LogStopwatch.Start(GetLogName(nameof(PostAsync), requestUri));
         using var response = await HttpClient.PostAsync(requestUri, DefaultJsonSerializer.SerializeJson(content));
@@ -535,14 +482,8 @@ public sealed class PayrollHttpClient : IDisposable
     /// <param name="content">The resource content</param>
     public async Task PostAsync(string requestUri, object content)
     {
-        if (string.IsNullOrWhiteSpace(requestUri))
-        {
-            throw new ArgumentException(nameof(requestUri));
-        }
-        if (content == null)
-        {
-            throw new ArgumentNullException(nameof(content));
-        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(requestUri);
+        ArgumentNullException.ThrowIfNull(content);
 
         using var response = await PostAsync(requestUri, DefaultJsonSerializer.SerializeJson(content));
     }
@@ -553,14 +494,8 @@ public sealed class PayrollHttpClient : IDisposable
     /// <returns>The http response message</returns>
     public async Task<HttpResponseMessage> PostAsync(string requestUri, StringContent content)
     {
-        if (string.IsNullOrWhiteSpace(requestUri))
-        {
-            throw new ArgumentException(nameof(requestUri));
-        }
-        if (content == null)
-        {
-            throw new ArgumentNullException(nameof(content));
-        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(requestUri);
+        ArgumentNullException.ThrowIfNull(content);
 
         LogStopwatch.Start(GetLogName(nameof(PostAsync), requestUri));
         var response = await HttpClient.PostAsync(requestUri, content);
@@ -579,10 +514,7 @@ public sealed class PayrollHttpClient : IDisposable
     /// <param name="content">The resource content</param>
     public async Task PutAsync(string requestUri, string content = null)
     {
-        if (string.IsNullOrWhiteSpace(requestUri))
-        {
-            throw new ArgumentException(nameof(requestUri));
-        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(requestUri);
 
         if (string.IsNullOrWhiteSpace(content))
         {
@@ -596,14 +528,8 @@ public sealed class PayrollHttpClient : IDisposable
     /// <param name="content">The resource content</param>
     public async Task PutAsync(string requestUri, StringContent content)
     {
-        if (string.IsNullOrWhiteSpace(requestUri))
-        {
-            throw new ArgumentException(nameof(requestUri));
-        }
-        if (content == null)
-        {
-            throw new ArgumentNullException(nameof(content));
-        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(requestUri);
+        ArgumentNullException.ThrowIfNull(content);
 
         LogStopwatch.Start(GetLogName(nameof(PutAsync), requestUri));
         using var response = await HttpClient.PutAsync(requestUri, content);
@@ -617,14 +543,8 @@ public sealed class PayrollHttpClient : IDisposable
     /// <param name="content">The resource content</param>
     public async Task PutAsync<T>(string requestUri, T content) where T : IModel
     {
-        if (string.IsNullOrWhiteSpace(requestUri))
-        {
-            throw new ArgumentException(nameof(requestUri));
-        }
-        if (content == null)
-        {
-            throw new ArgumentNullException(nameof(content));
-        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(requestUri);
+        ArgumentNullException.ThrowIfNull(content);
 
         // extend url with the object id
         requestUri = $"{requestUri}/{content.Id}";
@@ -651,14 +571,8 @@ public sealed class PayrollHttpClient : IDisposable
         DateTime? createdDate = null)
         where T : IModel
     {
-        if (string.IsNullOrWhiteSpace(requestUri))
-        {
-            throw new ArgumentException(nameof(requestUri));
-        }
-        if (newObject == null)
-        {
-            throw new ArgumentNullException(nameof(newObject));
-        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(requestUri);
+        ArgumentNullException.ThrowIfNull(newObject);
 
         if (existingObject != null)
         {
@@ -702,10 +616,7 @@ public sealed class PayrollHttpClient : IDisposable
     /// <param name="id">The object id</param>
     public async Task DeleteAsync(string requestUri, int id)
     {
-        if (string.IsNullOrWhiteSpace(requestUri))
-        {
-            throw new ArgumentException(nameof(requestUri));
-        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(requestUri);
         if (id <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(id));
@@ -723,10 +634,7 @@ public sealed class PayrollHttpClient : IDisposable
     /// <param name="requestUri">The Uri the request is sent to</param>
     public async Task DeleteAsync(string requestUri)
     {
-        if (string.IsNullOrWhiteSpace(requestUri))
-        {
-            throw new ArgumentException(nameof(requestUri));
-        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(requestUri);
 
         requestUri = requestUri.EnsureEnd("/");
         LogStopwatch.Start(GetLogName(nameof(DeleteAsync), requestUri));
@@ -745,10 +653,7 @@ public sealed class PayrollHttpClient : IDisposable
     /// <returns>The attribute value</returns>
     public async Task<string> GetAttributeAsync(string requestUri)
     {
-        if (string.IsNullOrWhiteSpace(requestUri))
-        {
-            throw new ArgumentException(nameof(requestUri));
-        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(requestUri);
 
         LogStopwatch.Start(GetLogName(nameof(GetAttributeAsync), requestUri));
         using var response = await HttpClient.GetAsync(requestUri);
@@ -769,14 +674,8 @@ public sealed class PayrollHttpClient : IDisposable
     /// <param name="attributeValue">Value of the attribute</param>
     public async Task<string> PostAttributeAsync(string requestUri, string attributeValue)
     {
-        if (string.IsNullOrWhiteSpace(requestUri))
-        {
-            throw new ArgumentException(nameof(requestUri));
-        }
-        if (string.IsNullOrWhiteSpace(attributeValue))
-        {
-            throw new ArgumentException(nameof(attributeValue));
-        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(requestUri);
+        ArgumentException.ThrowIfNullOrWhiteSpace(attributeValue);
 
         LogStopwatch.Start(GetLogName(nameof(PostAttributeAsync), requestUri));
         using var response = await HttpClient.PostAsync(requestUri, DefaultJsonSerializer.SerializeJson(attributeValue));
@@ -791,10 +690,7 @@ public sealed class PayrollHttpClient : IDisposable
     /// <param name="requestUri">The Uri the request is sent to</param>
     public async Task DeleteAttributeAsync(string requestUri)
     {
-        if (string.IsNullOrWhiteSpace(requestUri))
-        {
-            throw new ArgumentException(nameof(requestUri));
-        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(requestUri);
 
         LogStopwatch.Start(GetLogName(nameof(DeleteAttributeAsync), requestUri));
         using var response = await HttpClient.DeleteAsync(requestUri);
@@ -869,13 +765,15 @@ public sealed class PayrollHttpClient : IDisposable
     /// <summary>The string representation</summary>
     public override string ToString() => Address;
 
+    /// <summary>The ownership flag indicates whether this instance owns the HttpClient</summary>
+    private bool OwnsHttpClient { get; }
+
     /// <summary>Dispose http client</summary>
     public void Dispose()
     {
-#if UNKNOWN_CERTIFICATE
-            httpClientHandler?.Dispose();
-#endif
-        // keep http client
-        //httpClient?.Dispose();
+        if (OwnsHttpClient)
+        {
+            HttpClient?.Dispose();
+        }
     }
 }

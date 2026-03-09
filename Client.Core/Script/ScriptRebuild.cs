@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Globalization;
 using PayrollEngine.Client.Model;
 using PayrollEngine.Client.Service;
@@ -21,7 +21,8 @@ public sealed class ScriptRebuild
     /// <param name="tenantId">The tenant id</param>
     public ScriptRebuild(PayrollHttpClient httpClient, int tenantId)
     {
-        HttpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+        ArgumentNullException.ThrowIfNull(httpClient);
+        HttpClient = httpClient;
         TenantId = tenantId;
     }
 
@@ -56,10 +57,7 @@ public sealed class ScriptRebuild
     /// <param name="objectKey">The object key</param>
     public async Task RebuildRegulationObjectAsync(string regulationName, RegulationScriptObject scriptObject, string objectKey = null)
     {
-        if (string.IsNullOrWhiteSpace(regulationName))
-        {
-            throw new ArgumentException(nameof(regulationName));
-        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(regulationName);
 
         // tenant
         var tenant = await new TenantService(HttpClient).GetAsync<Tenant>(new(), TenantId);
@@ -104,10 +102,7 @@ public sealed class ScriptRebuild
     /// <param name="payrunName">The payrun name</param>
     public async Task RebuildPayrunAsync(string payrunName)
     {
-        if (string.IsNullOrWhiteSpace(payrunName))
-        {
-            throw new ArgumentException(nameof(payrunName));
-        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(payrunName);
 
         try
         {

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Threading.Tasks;
@@ -20,10 +20,7 @@ public class WageTypeService : ServiceBase, IWageTypeService
     /// <inheritdoc />
     public virtual async Task<List<T>> QueryAsync<T>(RegulationServiceContext context, Query query = null) where T : class, IWageType
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.Items;
@@ -34,10 +31,7 @@ public class WageTypeService : ServiceBase, IWageTypeService
     /// <inheritdoc />
     public virtual async Task<long> QueryCountAsync(RegulationServiceContext context, Query query = null)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.Count;
@@ -48,10 +42,7 @@ public class WageTypeService : ServiceBase, IWageTypeService
     /// <inheritdoc />
     public virtual async Task<QueryResult<T>> QueryResultAsync<T>(RegulationServiceContext context, Query query = null) where T : class, IWageType
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.ItemsWithCount;
@@ -62,10 +53,7 @@ public class WageTypeService : ServiceBase, IWageTypeService
     /// <inheritdoc />
     public virtual async Task<T> GetAsync<T>(RegulationServiceContext context, int wageTypeId) where T : class, IWageType
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (wageTypeId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(wageTypeId));
@@ -79,10 +67,7 @@ public class WageTypeService : ServiceBase, IWageTypeService
     public virtual async Task<T> GetAsync<T>(RegulationServiceContext context, decimal wageTypeNumber,
         CultureInfo culture) where T : class, IWageType
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         // query single item
         var query = QueryFactory.NewEqualFilterQuery(nameof(wageTypeNumber), wageTypeNumber.ToString(culture));
@@ -93,14 +78,8 @@ public class WageTypeService : ServiceBase, IWageTypeService
     /// <inheritdoc />
     public virtual async Task<T> GetAsync<T>(RegulationServiceContext context, string name) where T : class, IWageType
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
-        if (string.IsNullOrWhiteSpace(name))
-        {
-            throw new ArgumentException(nameof(name));
-        }
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentException.ThrowIfNullOrWhiteSpace(name);
 
         // query single item
         var query = QueryFactory.NewNameQuery(name);
@@ -111,14 +90,8 @@ public class WageTypeService : ServiceBase, IWageTypeService
     /// <inheritdoc />
     public virtual async Task<T> CreateAsync<T>(RegulationServiceContext context, T wageType) where T : class, IWageType
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
-        if (wageType == null)
-        {
-            throw new ArgumentNullException(nameof(wageType));
-        }
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentNullException.ThrowIfNull(wageType);
 
         return await HttpClient.PostAsync(
             RegulationApiEndpoints.RegulationWageTypesUrl(context.TenantId, context.RegulationId), wageType);
@@ -127,14 +100,8 @@ public class WageTypeService : ServiceBase, IWageTypeService
     /// <inheritdoc />
     public virtual async Task UpdateAsync<T>(RegulationServiceContext context, T wageType) where T : class, IWageType
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
-        if (wageType == null)
-        {
-            throw new ArgumentNullException(nameof(wageType));
-        }
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentNullException.ThrowIfNull(wageType);
 
         await HttpClient.PutAsync(RegulationApiEndpoints.RegulationWageTypesUrl(context.TenantId, context.RegulationId),
             wageType);
@@ -143,10 +110,7 @@ public class WageTypeService : ServiceBase, IWageTypeService
     /// <inheritdoc/>
     public virtual async Task RebuildAsync(RegulationServiceContext context, int wageTypeId)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (wageTypeId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(wageTypeId));
@@ -158,10 +122,7 @@ public class WageTypeService : ServiceBase, IWageTypeService
     /// <inheritdoc />
     public virtual async Task DeleteAsync(RegulationServiceContext context, int wageTypeId)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (wageTypeId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(wageTypeId));

@@ -43,6 +43,10 @@ public static class PayrollApiEndpoints
     public static string PayrollCasesUrl(int tenantId, int payrollId) =>
         $"{PayrollUrl(tenantId, payrollId)}/cases";
 
+    /// <summary>The payroll cases bulk URL</summary>
+    public static string PayrollCasesBulkUrl(int tenantId, int payrollId) =>
+        $"{PayrollCasesUrl(tenantId, payrollId)}/bulk";
+
     /// <summary>The payroll available cases URL</summary>
     public static string PayrollCasesAvailableUrl(int tenantId, int payrollId) =>
         $"{PayrollCasesUrl(tenantId, payrollId)}/available";

@@ -7,6 +7,10 @@ public static class EmployeeCaseApiEndpoints
     public static string EmployeesUrl(int tenantId) =>
         $"{TenantApiEndpoints.TenantUrl(tenantId)}/employees";
 
+    /// <summary>The employees bulk URL</summary>
+    public static string EmployeesBulkUrl(int tenantId) =>
+        $"{EmployeesUrl(tenantId)}/bulk";
+
     /// <summary>The employee URL</summary>
     public static string EmployeeUrl(int tenantId, int employeeId) =>
         $"{EmployeesUrl(tenantId)}/{employeeId}";

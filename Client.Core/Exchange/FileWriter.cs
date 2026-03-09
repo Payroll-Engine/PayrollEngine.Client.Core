@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Threading.Tasks;
 using PayrollEngine.IO;
@@ -12,16 +12,10 @@ public static class FileWriter
     /// <param name="obj">The object to store</param>
     /// <param name="fileName">Name of the file</param>
     /// <remarks>Supported file types JSON/YAML</remarks>
-    public static async Task Write<T>(T obj, string fileName) where T : class
+    public static async Task WriteAsync<T>(T obj, string fileName) where T : class
     {
-        if (obj == null)
-        {
-            throw new ArgumentNullException(nameof(obj));
-        }
-        if (string.IsNullOrWhiteSpace(fileName))
-        {
-            throw new ArgumentException(nameof(fileName));
-        }
+        ArgumentNullException.ThrowIfNull(obj);
+        ArgumentException.ThrowIfNullOrWhiteSpace(fileName);
 
         var extension = Path.GetExtension(fileName);
 

@@ -352,9 +352,19 @@ public abstract class ConsoleProgram<TApp> : ConsoleToolBase, IDisposable
     protected virtual bool ShowErrorExitCode => true;
 
     /// <summary>Connection error handler</summary>
-    protected virtual async Task NotifyConnectionErrorAsync()
+    protected virtual Task NotifyConnectionErrorAsync()
     {
-        await NotifyErrorAsync($"Backend connection {HttpClient.Address} is not available or cannot be accessed.");
+        var message = $"Backend connection {HttpClient.Address} is not available or cannot be accessed.";
+        if (LogErrors)
+        {
+            Log.Warning(message);
+        }
+        WriteErrorLine(message);
+        if (WaitOnError)
+        {
+            PressAnyKey();
+        }
+        return Task.CompletedTask;
     }
 
     /// <summary>Notify global error</summary>

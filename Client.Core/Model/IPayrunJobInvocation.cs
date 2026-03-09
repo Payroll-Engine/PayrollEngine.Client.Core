@@ -12,14 +12,8 @@ public interface IPayrunJobInvocation : IEquatable<IPayrunJobInvocation>
     /// <summary>The job owner (immutable)</summary>
     public string Owner { get; set; }
 
-    /// <summary>The payrun id (immutable)</summary>
-    int PayrunId { get; set; }
-
     /// <summary>The payrun name (immutable)</summary>
     string PayrunName { get; set; }
-
-    /// <summary>The user id (immutable)</summary>
-    int UserId { get; set; }
 
     /// <summary>The user identifier (immutable)</summary>
     string UserIdentifier { get; set; }

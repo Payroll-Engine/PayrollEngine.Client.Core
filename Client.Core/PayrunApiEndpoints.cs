@@ -27,6 +27,10 @@ public static class PayrunApiEndpoints
     public static string PayrunJobsUrl(int tenantId) =>
         $"{PayrunsUrl(tenantId)}/jobs";
 
+    /// <summary>The payrun job preview URL</summary>
+    public static string PayrunJobPreviewUrl(int tenantId) =>
+        $"{PayrunJobsUrl(tenantId)}/preview";
+
     /// <summary>The payrun job employees URL</summary>
     public static string PayrunJobEmployeesUrl(int tenantId) =>
         $"{PayrunJobsUrl(tenantId)}/employees";

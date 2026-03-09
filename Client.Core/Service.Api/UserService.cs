@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
@@ -22,10 +22,7 @@ public class UserService : ServiceBase, IUserService
     /// <inheritdoc />
     public virtual async Task<List<T>> QueryAsync<T>(TenantServiceContext context, Query query = null) where T : class, IUser
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.Items;
@@ -36,10 +33,7 @@ public class UserService : ServiceBase, IUserService
     /// <inheritdoc />
     public virtual async Task<long> QueryCountAsync(TenantServiceContext context, Query query = null)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.Count;
@@ -50,10 +44,7 @@ public class UserService : ServiceBase, IUserService
     /// <inheritdoc />
     public virtual async Task<QueryResult<T>> QueryResultAsync<T>(TenantServiceContext context, Query query = null) where T : class, IUser
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.ItemsWithCount;
@@ -64,10 +55,7 @@ public class UserService : ServiceBase, IUserService
     /// <inheritdoc />
     public virtual async Task<T> GetAsync<T>(TenantServiceContext context, int userId) where T : class, IUser
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (userId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(userId));
@@ -79,14 +67,8 @@ public class UserService : ServiceBase, IUserService
     /// <inheritdoc />
     public virtual async Task<T> GetAsync<T>(TenantServiceContext context, string identifier) where T : class, IUser
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
-        if (string.IsNullOrWhiteSpace(identifier))
-        {
-            throw new ArgumentException(nameof(identifier));
-        }
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentException.ThrowIfNullOrWhiteSpace(identifier);
 
         // query single item
         var query = QueryFactory.NewIdentifierQuery(identifier);
@@ -97,14 +79,8 @@ public class UserService : ServiceBase, IUserService
     /// <inheritdoc />
     public virtual async Task<T> CreateAsync<T>(TenantServiceContext context, T user) where T : class, IUser
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
-        if (user == null)
-        {
-            throw new ArgumentNullException(nameof(user));
-        }
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentNullException.ThrowIfNull(user);
 
         return await HttpClient.PostAsync(TenantApiEndpoints.UsersUrl(context.TenantId), user);
     }
@@ -112,14 +88,8 @@ public class UserService : ServiceBase, IUserService
     /// <inheritdoc />
     public virtual async Task UpdateAsync<T>(TenantServiceContext context, T user) where T : class, IUser
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
-        if (user == null)
-        {
-            throw new ArgumentNullException(nameof(user));
-        }
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentNullException.ThrowIfNull(user);
 
         await HttpClient.PutAsync(TenantApiEndpoints.UsersUrl(context.TenantId), user);
     }
@@ -127,10 +97,7 @@ public class UserService : ServiceBase, IUserService
     /// <inheritdoc />
     public virtual async Task DeleteAsync(TenantServiceContext context, int userId)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (userId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(userId));
@@ -142,10 +109,7 @@ public class UserService : ServiceBase, IUserService
     /// <inheritdoc />
     public virtual async Task<bool> TestPasswordAsync(TenantServiceContext context, int userId, string password)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         // test user password: 200/Ok or 400/BadRequest
         try
@@ -169,14 +133,8 @@ public class UserService : ServiceBase, IUserService
     /// <inheritdoc />
     public virtual async Task UpdatePasswordAsync(TenantServiceContext context, int userId, PasswordChangeRequest changeRequest)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
-        if (changeRequest == null)
-        {
-            throw new ArgumentNullException(nameof(changeRequest));
-        }
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentNullException.ThrowIfNull(changeRequest);
         if (string.IsNullOrWhiteSpace(changeRequest.NewPassword))
         {
             throw new ArgumentException(nameof(changeRequest.NewPassword));
@@ -190,18 +148,12 @@ public class UserService : ServiceBase, IUserService
     /// <inheritdoc />
     public virtual async Task<string> GetAttributeAsync(TenantServiceContext context, int userId, string attributeName)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (userId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(userId));
         }
-        if (string.IsNullOrWhiteSpace(attributeName))
-        {
-            throw new ArgumentException(nameof(attributeName));
-        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(attributeName);
 
         return await HttpClient.GetAttributeAsync(TenantApiEndpoints.UserAttributeUrl(context.TenantId, userId,
             attributeName));
@@ -210,18 +162,12 @@ public class UserService : ServiceBase, IUserService
     /// <inheritdoc />
     public virtual async Task SetAttributeAsync(TenantServiceContext context, int userId, string attributeName, string attributeValue)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (userId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(userId));
         }
-        if (string.IsNullOrWhiteSpace(attributeName))
-        {
-            throw new ArgumentException(nameof(attributeName));
-        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(attributeName);
 
         await HttpClient.PostAttributeAsync(TenantApiEndpoints.UserAttributeUrl(context.TenantId, userId,
             attributeName), attributeValue);
@@ -230,18 +176,12 @@ public class UserService : ServiceBase, IUserService
     /// <inheritdoc />
     public virtual async Task DeleteAttributeAsync(TenantServiceContext context, int userId, string attributeName)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (userId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(userId));
         }
-        if (string.IsNullOrWhiteSpace(attributeName))
-        {
-            throw new ArgumentException(nameof(attributeName));
-        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(attributeName);
 
         await HttpClient.DeleteAttributeAsync(TenantApiEndpoints.UserAttributeUrl(context.TenantId, userId,
             attributeName));

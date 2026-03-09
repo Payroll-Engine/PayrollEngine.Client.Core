@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace PayrollEngine.Client.QueryExpression;
 
@@ -13,10 +13,7 @@ public class OrderBy
     /// <param name="direction">The order direction</param>
     public OrderBy(string expression, OrderDirection? direction = null)
     {
-        if (string.IsNullOrWhiteSpace(expression))
-        {
-            throw new ArgumentException(nameof(expression));
-        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(expression);
 
         if (direction == null)
         {

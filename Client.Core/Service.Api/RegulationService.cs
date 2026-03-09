@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using PayrollEngine.Client.Model;
@@ -19,10 +19,7 @@ public class RegulationService : ServiceBase, IRegulationService
     /// <inheritdoc/>
     public virtual async Task<List<T>> QueryAsync<T>(TenantServiceContext context, Query query = null) where T : class, IRegulation
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.Items;
@@ -33,10 +30,7 @@ public class RegulationService : ServiceBase, IRegulationService
     /// <inheritdoc/>
     public virtual async Task<long> QueryCountAsync(TenantServiceContext context, Query query = null)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.Count;
@@ -47,10 +41,7 @@ public class RegulationService : ServiceBase, IRegulationService
     /// <inheritdoc/>
     public virtual async Task<QueryResult<T>> QueryResultAsync<T>(TenantServiceContext context, Query query = null) where T : class, IRegulation
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
 
         query ??= new();
         query.Result = QueryResultType.ItemsWithCount;
@@ -61,10 +52,7 @@ public class RegulationService : ServiceBase, IRegulationService
     /// <inheritdoc/>
     public virtual async Task<T> GetAsync<T>(TenantServiceContext context, int regulationId) where T : class, IRegulation
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (regulationId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(regulationId));
@@ -76,14 +64,8 @@ public class RegulationService : ServiceBase, IRegulationService
     /// <inheritdoc/>
     public virtual async Task<T> GetAsync<T>(TenantServiceContext context, string name) where T : class, IRegulation
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
-        if (string.IsNullOrWhiteSpace(name))
-        {
-            throw new ArgumentException(nameof(name));
-        }
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentException.ThrowIfNullOrWhiteSpace(name);
 
         // query single item
         var query = QueryFactory.NewNameQuery(name);
@@ -94,14 +76,8 @@ public class RegulationService : ServiceBase, IRegulationService
     /// <inheritdoc/>
     public virtual async Task<string> GetCaseOfCaseFieldAsync(TenantServiceContext context, string caseFieldName)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
-        if (string.IsNullOrWhiteSpace(caseFieldName))
-        {
-            throw new ArgumentException(nameof(caseFieldName));
-        }
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentException.ThrowIfNullOrWhiteSpace(caseFieldName);
 
         return await HttpClient.GetAsync<string>(
             RegulationApiEndpoints.RegulationsCasesCaseFieldUrl(context.TenantId, caseFieldName));
@@ -110,14 +86,8 @@ public class RegulationService : ServiceBase, IRegulationService
     /// <inheritdoc/>
     public virtual async Task<T> CreateAsync<T>(TenantServiceContext context, T regulation) where T : class, IRegulation
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
-        if (regulation == null)
-        {
-            throw new ArgumentNullException(nameof(regulation));
-        }
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentNullException.ThrowIfNull(regulation);
 
         return await HttpClient.PostAsync(RegulationApiEndpoints.RegulationsUrl(context.TenantId), regulation);
     }
@@ -125,14 +95,8 @@ public class RegulationService : ServiceBase, IRegulationService
     /// <inheritdoc/>
     public virtual async Task UpdateAsync<T>(TenantServiceContext context, T regulation) where T : class, IRegulation
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
-        if (regulation == null)
-        {
-            throw new ArgumentNullException(nameof(regulation));
-        }
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentNullException.ThrowIfNull(regulation);
 
         await HttpClient.PutAsync(RegulationApiEndpoints.RegulationsUrl(context.TenantId), regulation);
     }
@@ -140,10 +104,7 @@ public class RegulationService : ServiceBase, IRegulationService
     /// <inheritdoc/>
     public virtual async Task DeleteAsync(TenantServiceContext context, int regulationId)
     {
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        ArgumentNullException.ThrowIfNull(context);
         if (regulationId <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(regulationId));

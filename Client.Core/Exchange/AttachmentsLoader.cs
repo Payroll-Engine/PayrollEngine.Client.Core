@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Linq;
 using Task = System.Threading.Tasks.Task;
@@ -25,7 +25,8 @@ public class AttachmentsLoader : Visitor
     public AttachmentsLoader(Model.Exchange exchange, IScriptParser scriptParser, bool resetFileName = true) :
         base(exchange)
     {
-        ScriptParser = scriptParser ?? throw new ArgumentNullException(nameof(scriptParser));
+        ArgumentNullException.ThrowIfNull(scriptParser);
+        ScriptParser = scriptParser;
         ResetFileName = resetFileName;
     }
 
