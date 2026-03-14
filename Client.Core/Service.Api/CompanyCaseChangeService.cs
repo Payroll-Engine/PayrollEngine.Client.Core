@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using PayrollEngine.Client.Model;
+using Task = System.Threading.Tasks.Task;
 
 namespace PayrollEngine.Client.Service.Api;
 
@@ -82,5 +83,17 @@ public class CompanyCaseChangeService : ServiceBase, ICompanyCaseChangeService
 
         var url = query.BuildQueryString(CompanyCaseApiEndpoints.CompanyCaseChangesUrl(context.TenantId));
         return await HttpClient.GetCollectionAsync<T>(url);
+    }
+
+    /// <inheritdoc/>
+    public virtual async Task DeleteAsync(TenantServiceContext context, int caseChangeId)
+    {
+        ArgumentNullException.ThrowIfNull(context);
+        if (caseChangeId <= 0)
+        {
+            throw new ArgumentOutOfRangeException(nameof(caseChangeId));
+        }
+
+        await HttpClient.DeleteAsync(CompanyCaseApiEndpoints.CompanyCaseChangesUrl(context.TenantId), caseChangeId);
     }
 }

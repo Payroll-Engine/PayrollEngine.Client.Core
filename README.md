@@ -84,6 +84,68 @@ RootServiceContext
 
 `Service` contains the interfaces (`ICaseService`, `IPayrunService`, …) and `Service.Api` contains the `PayrollHttpClient`-backed implementations.
 
+#### Implicit Dependency on Backend Controllers
+
+Every service interface and its implementation have an **implicit 1:1 relationship** with a backend controller in `PayrollEngine.Backend`. The service layer is not generated — it is maintained manually. Any change to a controller (new endpoint, changed parameter, removed method) requires a corresponding update in the client service.
+
+The mapping follows the REST URL structure:
+
+| Service Interface | Backend Controller | Route prefix |
+|:--|:--|:--|
+| `ITenantService` | `TenantController` | `/api/tenants` |
+| `ICalendarService` | `CalendarController` | `.../calendars` |
+| `IDivisionService` | `DivisionController` | `.../divisions` |
+| `IEmployeeService` | `EmployeeController` | `.../employees` |
+| `IUserService` | `UserController` | `.../users` |
+| `ITaskService` | `TaskController` | `.../tasks` |
+| `ILogService` | `LogController` | `.../logs` |
+| `IWebhookService` | `WebhookController` | `.../webhooks` |
+| `IWebhookMessageService` | `WebhookMessageController` | `.../webhooks/{id}/messages` |
+| `IRegulationService` | `RegulationController` | `.../regulations` |
+| `IRegulationShareService` | `RegulationShareController` | `/api/shares/regulations` |
+| `ICaseService` | `CaseController` | `.../regulations/{id}/cases` |
+| `ICaseFieldService` | `CaseFieldController` | `.../cases/{id}/fields` |
+| `ICaseRelationService` | `CaseRelationController` | `.../regulations/{id}/caserelations` |
+| `ICollectorService` | `CollectorController` | `.../regulations/{id}/collectors` |
+| `IWageTypeService` | `WageTypeController` | `.../regulations/{id}/wagetypes` |
+| `ILookupService` | `LookupController` | `.../regulations/{id}/lookups` |
+| `ILookupSetService` | `LookupController` (sets) | `.../lookups/sets` |
+| `ILookupValueService` | `LookupValueController` | `.../lookups/{id}/values` |
+| `IScriptService` | `ScriptController` | `.../regulations/{id}/scripts` |
+| `IReportService` | `ReportController` | `.../regulations/{id}/reports` |
+| `IReportSetService` | `ReportController` (sets) | `.../reports/sets` |
+| `IReportParameterService` | `ReportParameterController` | `.../reports/{id}/parameters` |
+| `IReportTemplateService` | `ReportTemplateController` | `.../reports/{id}/templates` |
+| `IReportLogService` | `ReportLogController` | `.../reportlogs` |
+| `IPayrollService` | `PayrollController` | `.../payrolls` |
+| `IPayrollLayerService` | `PayrollLayerController` | `.../payrolls/{id}/layers` |
+| `IPayrollCaseChangeValueService` | `PayrollController` | `.../payrolls/{id}/changes/values` |
+| `IPayrollResultService` | `PayrollResultController` | `.../payrollresults` |
+| `IPayrollResultValueService` | `PayrollResultController` | `.../payrollresults/values` |
+| `IPayrollConsolidatedResultService` | `PayrollConsolidatedResultController` | `.../payrollresults/consolidated` |
+| `IPayrunService` | `PayrunController` | `.../payruns` |
+| `IPayrunParameterService` | `PayrunParameterController` | `.../payruns/{id}/parameters` |
+| `IPayrunJobService` | `PayrunJobController` | `.../payruns/jobs` |
+| `IGlobalCaseValueService` | `GlobalCaseValueController` | `.../globalcases` |
+| `IGlobalCaseChangeService` | `GlobalCaseChangeController` | `.../globalcases/changes` |
+| `IGlobalCaseDocumentService` | `GlobalCaseDocumentController` | `.../globalcases/{id}/documents` |
+| `INationalCaseValueService` | `NationalCaseValueController` | `.../nationalcases` |
+| `INationalCaseChangeService` | `NationalCaseChangeController` | `.../nationalcases/changes` |
+| `INationalCaseDocumentService` | `NationalCaseDocumentController` | `.../nationalcases/{id}/documents` |
+| `ICompanyCaseValueService` | `CompanyCaseValueController` | `.../companycases` |
+| `ICompanyCaseChangeService` | `CompanyCaseChangeController` | `.../companycases/changes` |
+| `ICompanyCaseDocumentService` | `CompanyCaseDocumentController` | `.../companycases/{id}/documents` |
+| `IEmployeeCaseValueService` | `EmployeeCaseValueController` | `.../employees/{id}/cases` |
+| `IEmployeeCaseChangeService` | `EmployeeCaseChangeController` | `.../employees/{id}/cases/changes` |
+| `IEmployeeCaseDocumentService` | `EmployeeCaseDocumentController` | `.../employees/{id}/cases/{id}/documents` |
+
+The following controllers have **no client service** by design:
+
+| Backend Controller | Reason |
+|:--|:--|
+| `AdminController` | Infrastructure/ops only — no payroll domain relevance |
+| `*AuditController` (11×) | Read-only audit history — can be added when needed |
+
 ### `PayrollHttpClient`
 
 HTTP wrapper for the Payroll Engine REST API.

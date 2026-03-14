@@ -90,4 +90,43 @@ public class TaskService : ServiceBase, ITaskService
 
         await HttpClient.DeleteAsync(TenantApiEndpoints.TasksUrl(context.TenantId), taskId);
     }
+
+    /// <inheritdoc/>
+    public virtual async Task<string> GetAttributeAsync(TenantServiceContext context, int taskId, string attributeName)
+    {
+        ArgumentNullException.ThrowIfNull(context);
+        if (taskId <= 0)
+        {
+            throw new ArgumentOutOfRangeException(nameof(taskId));
+        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(attributeName);
+
+        return await HttpClient.GetAttributeAsync(TenantApiEndpoints.TaskAttributeUrl(context.TenantId, taskId, attributeName));
+    }
+
+    /// <inheritdoc/>
+    public virtual async Task SetAttributeAsync(TenantServiceContext context, int taskId, string attributeName, string attributeValue)
+    {
+        ArgumentNullException.ThrowIfNull(context);
+        if (taskId <= 0)
+        {
+            throw new ArgumentOutOfRangeException(nameof(taskId));
+        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(attributeName);
+
+        await HttpClient.PostAttributeAsync(TenantApiEndpoints.TaskAttributeUrl(context.TenantId, taskId, attributeName), attributeValue);
+    }
+
+    /// <inheritdoc/>
+    public virtual async Task DeleteAttributeAsync(TenantServiceContext context, int taskId, string attributeName)
+    {
+        ArgumentNullException.ThrowIfNull(context);
+        if (taskId <= 0)
+        {
+            throw new ArgumentOutOfRangeException(nameof(taskId));
+        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(attributeName);
+
+        await HttpClient.DeleteAttributeAsync(TenantApiEndpoints.TaskAttributeUrl(context.TenantId, taskId, attributeName));
+    }
 }

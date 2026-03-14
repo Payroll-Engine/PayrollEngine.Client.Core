@@ -112,4 +112,43 @@ public class RegulationService : ServiceBase, IRegulationService
 
         await HttpClient.DeleteAsync(RegulationApiEndpoints.RegulationsUrl(context.TenantId), regulationId);
     }
+
+    /// <inheritdoc/>
+    public virtual async Task<string> GetAttributeAsync(TenantServiceContext context, int regulationId, string attributeName)
+    {
+        ArgumentNullException.ThrowIfNull(context);
+        if (regulationId <= 0)
+        {
+            throw new ArgumentOutOfRangeException(nameof(regulationId));
+        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(attributeName);
+
+        return await HttpClient.GetAttributeAsync(RegulationApiEndpoints.RegulationAttributeUrl(context.TenantId, regulationId, attributeName));
+    }
+
+    /// <inheritdoc/>
+    public virtual async Task SetAttributeAsync(TenantServiceContext context, int regulationId, string attributeName, string attributeValue)
+    {
+        ArgumentNullException.ThrowIfNull(context);
+        if (regulationId <= 0)
+        {
+            throw new ArgumentOutOfRangeException(nameof(regulationId));
+        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(attributeName);
+
+        await HttpClient.PostAttributeAsync(RegulationApiEndpoints.RegulationAttributeUrl(context.TenantId, regulationId, attributeName), attributeValue);
+    }
+
+    /// <inheritdoc/>
+    public virtual async Task DeleteAttributeAsync(TenantServiceContext context, int regulationId, string attributeName)
+    {
+        ArgumentNullException.ThrowIfNull(context);
+        if (regulationId <= 0)
+        {
+            throw new ArgumentOutOfRangeException(nameof(regulationId));
+        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(attributeName);
+
+        await HttpClient.DeleteAttributeAsync(RegulationApiEndpoints.RegulationAttributeUrl(context.TenantId, regulationId, attributeName));
+    }
 }

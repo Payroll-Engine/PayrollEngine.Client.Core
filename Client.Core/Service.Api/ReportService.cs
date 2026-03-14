@@ -140,4 +140,43 @@ public class ReportService : ServiceBase, IReportService
 
         await HttpClient.PutAsync(RegulationApiEndpoints.RegulationReportRebuildUrl(context.TenantId, context.RegulationId, reportId));
     }
+
+    /// <inheritdoc/>
+    public virtual async Task<string> GetAttributeAsync(RegulationServiceContext context, int reportId, string attributeName)
+    {
+        ArgumentNullException.ThrowIfNull(context);
+        if (reportId <= 0)
+        {
+            throw new ArgumentOutOfRangeException(nameof(reportId));
+        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(attributeName);
+
+        return await HttpClient.GetAttributeAsync(RegulationApiEndpoints.RegulationReportAttributeUrl(context.TenantId, context.RegulationId, reportId, attributeName));
+    }
+
+    /// <inheritdoc/>
+    public virtual async Task SetAttributeAsync(RegulationServiceContext context, int reportId, string attributeName, string attributeValue)
+    {
+        ArgumentNullException.ThrowIfNull(context);
+        if (reportId <= 0)
+        {
+            throw new ArgumentOutOfRangeException(nameof(reportId));
+        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(attributeName);
+
+        await HttpClient.PostAttributeAsync(RegulationApiEndpoints.RegulationReportAttributeUrl(context.TenantId, context.RegulationId, reportId, attributeName), attributeValue);
+    }
+
+    /// <inheritdoc/>
+    public virtual async Task DeleteAttributeAsync(RegulationServiceContext context, int reportId, string attributeName)
+    {
+        ArgumentNullException.ThrowIfNull(context);
+        if (reportId <= 0)
+        {
+            throw new ArgumentOutOfRangeException(nameof(reportId));
+        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(attributeName);
+
+        await HttpClient.DeleteAttributeAsync(RegulationApiEndpoints.RegulationReportAttributeUrl(context.TenantId, context.RegulationId, reportId, attributeName));
+    }
 }

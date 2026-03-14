@@ -11,6 +11,14 @@ public static class RegulationApiEndpoints
     public static string RegulationUrl(int tenantId, int regulationId) =>
         $"{RegulationsUrl(tenantId)}/{regulationId}";
 
+    /// <summary>The regulation attributes URL</summary>
+    public static string RegulationAttributesUrl(int tenantId, int regulationId) =>
+        $"{RegulationUrl(tenantId, regulationId)}/{ApiEndpoints.AttributesPath()}";
+
+    /// <summary>The regulation attribute URL</summary>
+    public static string RegulationAttributeUrl(int tenantId, int regulationId, string attributeName) =>
+        $"{RegulationAttributesUrl(tenantId, regulationId)}/{attributeName}";
+
     /// <summary>The regulations cases URL</summary>
     public static string RegulationsCasesUrl(int tenantId) =>
         $"{RegulationsUrl(tenantId)}/cases";

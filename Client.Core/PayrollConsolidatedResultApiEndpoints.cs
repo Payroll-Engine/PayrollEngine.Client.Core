@@ -17,5 +17,5 @@ public static class PayrollConsolidatedResultApiEndpoints
 
     /// <summary>The payroll consolidated payrun results URL</summary>
     public static string PayrollConsolidatedPayrunResultsUrl(int tenantId) =>
-        $"{PayrollConsolidatedResultsUrl(tenantId)}/casevalues";
+        $"{PayrollConsolidatedResultsUrl(tenantId)}/payruns";
 }

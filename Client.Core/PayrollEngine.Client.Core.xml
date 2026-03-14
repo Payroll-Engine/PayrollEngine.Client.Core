@@ -9702,6 +9702,12 @@
         <member name="M:PayrollEngine.Client.RegulationApiEndpoints.RegulationUrl(System.Int32,System.Int32)">
             <summary>The regulation URL</summary>
         </member>
+        <member name="M:PayrollEngine.Client.RegulationApiEndpoints.RegulationAttributesUrl(System.Int32,System.Int32)">
+            <summary>The regulation attributes URL</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.RegulationApiEndpoints.RegulationAttributeUrl(System.Int32,System.Int32,System.String)">
+            <summary>The regulation attribute URL</summary>
+        </member>
         <member name="M:PayrollEngine.Client.RegulationApiEndpoints.RegulationsCasesUrl(System.Int32)">
             <summary>The regulations cases URL</summary>
         </member>
@@ -10410,6 +10416,9 @@
         <member name="M:PayrollEngine.Client.Service.Api.CompanyCaseChangeService.GetAsync``1(PayrollEngine.Client.Service.TenantServiceContext,PayrollEngine.Client.Model.CaseChangeQuery)">
             <inheritdoc/>
         </member>
+        <member name="M:PayrollEngine.Client.Service.Api.CompanyCaseChangeService.DeleteAsync(PayrollEngine.Client.Service.TenantServiceContext,System.Int32)">
+            <inheritdoc/>
+        </member>
         <member name="T:PayrollEngine.Client.Service.Api.CompanyCaseDocumentService">
             <summary>Payroll company case document service</summary>
         </member>
@@ -10482,6 +10491,15 @@
         <member name="M:PayrollEngine.Client.Service.Api.DivisionService.DeleteAsync(PayrollEngine.Client.Service.TenantServiceContext,System.Int32)">
             <inheritdoc/>
         </member>
+        <member name="M:PayrollEngine.Client.Service.Api.DivisionService.GetAttributeAsync(PayrollEngine.Client.Service.TenantServiceContext,System.Int32,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PayrollEngine.Client.Service.Api.DivisionService.SetAttributeAsync(PayrollEngine.Client.Service.TenantServiceContext,System.Int32,System.String,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PayrollEngine.Client.Service.Api.DivisionService.DeleteAttributeAsync(PayrollEngine.Client.Service.TenantServiceContext,System.Int32,System.String)">
+            <inheritdoc/>
+        </member>
         <member name="T:PayrollEngine.Client.Service.Api.EmployeeCaseChangeService">
             <summary>Payroll employee case change service</summary>
         </member>
@@ -10511,6 +10529,9 @@
             <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Service.Api.EmployeeCaseChangeService.GetAsync``1(PayrollEngine.Client.Service.EmployeeServiceContext,PayrollEngine.Client.Model.CaseChangeQuery)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PayrollEngine.Client.Service.Api.EmployeeCaseChangeService.DeleteAsync(PayrollEngine.Client.Service.EmployeeServiceContext,System.Int32)">
             <inheritdoc/>
         </member>
         <member name="T:PayrollEngine.Client.Service.Api.EmployeeCaseDocumentService">
@@ -10626,6 +10647,9 @@
             <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Service.Api.GlobalCaseChangeService.GetAsync``1(PayrollEngine.Client.Service.TenantServiceContext,PayrollEngine.Client.Model.CaseChangeQuery)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PayrollEngine.Client.Service.Api.GlobalCaseChangeService.DeleteAsync(PayrollEngine.Client.Service.TenantServiceContext,System.Int32)">
             <inheritdoc/>
         </member>
         <member name="T:PayrollEngine.Client.Service.Api.GlobalCaseDocumentService">
@@ -10821,6 +10845,9 @@
         <member name="M:PayrollEngine.Client.Service.Api.NationalCaseChangeService.GetAsync``1(PayrollEngine.Client.Service.TenantServiceContext,PayrollEngine.Client.Model.CaseChangeQuery)">
             <inheritdoc/>
         </member>
+        <member name="M:PayrollEngine.Client.Service.Api.NationalCaseChangeService.DeleteAsync(PayrollEngine.Client.Service.TenantServiceContext,System.Int32)">
+            <inheritdoc/>
+        </member>
         <member name="T:PayrollEngine.Client.Service.Api.NationalCaseDocumentService">
             <summary>Payroll national case document service</summary>
         </member>
@@ -10888,16 +10915,16 @@
             <summary>Initializes a new instance of the <see cref="T:PayrollEngine.Client.Service.Api.PayrollConsolidatedResultService"/> class</summary>
             <param name="httpClient">The Payroll http client</param>
         </member>
-        <member name="M:PayrollEngine.Client.Service.Api.PayrollConsolidatedResultService.QueryPayrollResultAsync``1(PayrollEngine.Client.Service.TenantServiceContext,System.Int32,System.Int32,System.DateTime,System.Nullable{System.Int32},System.String,PayrollEngine.PayrunJobStatus,System.Collections.Generic.IEnumerable{System.String})">
+        <member name="M:PayrollEngine.Client.Service.Api.PayrollConsolidatedResultService.QueryPayrollResultAsync``1(PayrollEngine.Client.Service.TenantServiceContext,System.Int32,System.DateTime,System.DateTime,System.Nullable{System.Int32},System.String,System.Nullable{PayrollEngine.PayrunJobStatus},System.Collections.Generic.IEnumerable{System.String})">
             <inheritdoc/>
         </member>
-        <member name="M:PayrollEngine.Client.Service.Api.PayrollConsolidatedResultService.GetCollectorResultsAsync``1(PayrollEngine.Client.Service.TenantServiceContext,System.Int32,System.Int32,System.Collections.Generic.IEnumerable{System.DateTime},System.Nullable{System.Int32},System.Collections.Generic.IEnumerable{System.String},System.String,PayrollEngine.PayrunJobStatus,System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.DateTime})">
+        <member name="M:PayrollEngine.Client.Service.Api.PayrollConsolidatedResultService.GetCollectorResultsAsync``1(PayrollEngine.Client.Service.TenantServiceContext,System.Int32,System.Collections.Generic.IEnumerable{System.DateTime},System.Nullable{System.Int32},System.Collections.Generic.IEnumerable{System.String},System.String,System.Nullable{PayrollEngine.PayrunJobStatus},System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.DateTime})">
             <inheritdoc/>
         </member>
-        <member name="M:PayrollEngine.Client.Service.Api.PayrollConsolidatedResultService.QueryWageTypeResultsAsync``1(PayrollEngine.Client.Service.TenantServiceContext,System.Int32,System.Int32,System.Collections.Generic.IEnumerable{System.DateTime},System.Nullable{System.Int32},System.Collections.Generic.IEnumerable{System.Decimal},System.String,PayrollEngine.PayrunJobStatus,System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.DateTime})">
+        <member name="M:PayrollEngine.Client.Service.Api.PayrollConsolidatedResultService.QueryWageTypeResultsAsync``1(PayrollEngine.Client.Service.TenantServiceContext,System.Int32,System.Collections.Generic.IEnumerable{System.DateTime},System.Nullable{System.Int32},System.Collections.Generic.IEnumerable{System.Decimal},System.String,System.Nullable{PayrollEngine.PayrunJobStatus},System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.DateTime})">
             <inheritdoc/>
         </member>
-        <member name="M:PayrollEngine.Client.Service.Api.PayrollConsolidatedResultService.QueryPayrunResultsAsync``1(PayrollEngine.Client.Service.TenantServiceContext,System.Int32,System.Int32,System.Collections.Generic.IEnumerable{System.DateTime},System.Nullable{System.Int32},System.Collections.Generic.IEnumerable{System.String},System.String,PayrollEngine.PayrunJobStatus,System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.DateTime})">
+        <member name="M:PayrollEngine.Client.Service.Api.PayrollConsolidatedResultService.QueryPayrunResultsAsync``1(PayrollEngine.Client.Service.TenantServiceContext,System.Int32,System.Collections.Generic.IEnumerable{System.DateTime},System.Nullable{System.Int32},System.Collections.Generic.IEnumerable{System.String},System.String,System.Nullable{PayrollEngine.PayrunJobStatus},System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.DateTime})">
             <inheritdoc/>
         </member>
         <member name="T:PayrollEngine.Client.Service.Api.PayrollLayerService">
@@ -11066,8 +11093,16 @@
         <member name="M:PayrollEngine.Client.Service.Api.PayrollService.GetCaseValuesAsync(PayrollEngine.Client.Service.PayrollServiceContext,System.DateTime,System.DateTime,System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String)">
             <inheritdoc/>
         </member>
-        <member name="M:PayrollEngine.Client.Service.Api.PayrollService.GetCaseTimeValuesAsync(PayrollEngine.Client.Service.PayrollServiceContext,PayrollEngine.CaseType,System.Nullable{System.Int32},System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+        <member name="M:PayrollEngine.Client.Service.Api.PayrollService.GetCaseTimeValuesAsync(PayrollEngine.Client.Service.PayrollServiceContext,PayrollEngine.CaseType,System.Nullable{System.Int32},System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String)">
             <inheritdoc/>
+            <remarks>
+            When <paramref name="caseType"/> is <see cref="F:PayrollEngine.CaseType.Employee"/> and <paramref name="employeeId"/> is null,
+            the backend returns case values for all active employees of the tenant, each enriched with their EmployeeId.
+            Use <paramref name="evaluationDate"/> to control the temporal perspective:
+            - Set equal to <paramref name="valueDate"/> for "as of that date" (historical view)
+            - Set to today for "current knowledge applied to past date"
+            - Set equal to <paramref name="valueDate"/> with a forecast name for forecast view
+            </remarks>
         </member>
         <member name="M:PayrollEngine.Client.Service.Api.PayrollService.GetAvailableCaseFieldValuesAsync(PayrollEngine.Client.Service.PayrollServiceContext,System.Int32,System.Collections.Generic.IEnumerable{System.String},System.DateTime,System.DateTime,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String)">
             <inheritdoc/>
@@ -11292,6 +11327,15 @@
         <member name="M:PayrollEngine.Client.Service.Api.RegulationService.DeleteAsync(PayrollEngine.Client.Service.TenantServiceContext,System.Int32)">
             <inheritdoc/>
         </member>
+        <member name="M:PayrollEngine.Client.Service.Api.RegulationService.GetAttributeAsync(PayrollEngine.Client.Service.TenantServiceContext,System.Int32,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PayrollEngine.Client.Service.Api.RegulationService.SetAttributeAsync(PayrollEngine.Client.Service.TenantServiceContext,System.Int32,System.String,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PayrollEngine.Client.Service.Api.RegulationService.DeleteAttributeAsync(PayrollEngine.Client.Service.TenantServiceContext,System.Int32,System.String)">
+            <inheritdoc/>
+        </member>
         <member name="T:PayrollEngine.Client.Service.Api.RegulationShareService">
             <summary>Regulation share service</summary>
         </member>
@@ -11423,6 +11467,15 @@
             <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Service.Api.ReportService.RebuildAsync(PayrollEngine.Client.Service.RegulationServiceContext,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PayrollEngine.Client.Service.Api.ReportService.GetAttributeAsync(PayrollEngine.Client.Service.RegulationServiceContext,System.Int32,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PayrollEngine.Client.Service.Api.ReportService.SetAttributeAsync(PayrollEngine.Client.Service.RegulationServiceContext,System.Int32,System.String,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PayrollEngine.Client.Service.Api.ReportService.DeleteAttributeAsync(PayrollEngine.Client.Service.RegulationServiceContext,System.Int32,System.String)">
             <inheritdoc/>
         </member>
         <member name="T:PayrollEngine.Client.Service.Api.ReportSetService">
@@ -11565,6 +11618,15 @@
             <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Service.Api.TaskService.DeleteAsync(PayrollEngine.Client.Service.TenantServiceContext,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PayrollEngine.Client.Service.Api.TaskService.GetAttributeAsync(PayrollEngine.Client.Service.TenantServiceContext,System.Int32,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PayrollEngine.Client.Service.Api.TaskService.SetAttributeAsync(PayrollEngine.Client.Service.TenantServiceContext,System.Int32,System.String,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PayrollEngine.Client.Service.Api.TaskService.DeleteAttributeAsync(PayrollEngine.Client.Service.TenantServiceContext,System.Int32,System.String)">
             <inheritdoc/>
         </member>
         <member name="T:PayrollEngine.Client.Service.Api.TenantService">
@@ -11985,6 +12047,11 @@
             <param name="query">The case change query</param>
             <returns>The new case change</returns>
         </member>
+        <member name="M:PayrollEngine.Client.Service.ICompanyCaseChangeService.DeleteAsync(PayrollEngine.Client.Service.TenantServiceContext,System.Int32)">
+            <summary>Delete a company case change</summary>
+            <param name="context">The service context</param>
+            <param name="caseChangeId">The case change id</param>
+        </member>
         <member name="T:PayrollEngine.Client.Service.ICompanyCaseDocumentService">
             <summary>Payroll company case document service</summary>
         </member>
@@ -12055,6 +12122,11 @@
             <param name="query">The case change query</param>
             <returns>The new case change</returns>
         </member>
+        <member name="M:PayrollEngine.Client.Service.IEmployeeCaseChangeService.DeleteAsync(PayrollEngine.Client.Service.EmployeeServiceContext,System.Int32)">
+            <summary>Delete an employee case change</summary>
+            <param name="context">The service context</param>
+            <param name="caseChangeId">The case change id</param>
+        </member>
         <member name="T:PayrollEngine.Client.Service.IEmployeeCaseDocumentService">
             <summary>Payroll employee case document service</summary>
         </member>
@@ -12110,6 +12182,11 @@
             <param name="context">The service context</param>
             <param name="query">The case change query</param>
             <returns>The new case change</returns>
+        </member>
+        <member name="M:PayrollEngine.Client.Service.IGlobalCaseChangeService.DeleteAsync(PayrollEngine.Client.Service.TenantServiceContext,System.Int32)">
+            <summary>Delete a global case change</summary>
+            <param name="context">The service context</param>
+            <param name="caseChangeId">The case change id</param>
         </member>
         <member name="T:PayrollEngine.Client.Service.IGlobalCaseDocumentService">
             <summary>Payroll global case document service</summary>
@@ -12190,6 +12267,11 @@
             <param name="query">The case change query</param>
             <returns>The new case change</returns>
         </member>
+        <member name="M:PayrollEngine.Client.Service.INationalCaseChangeService.DeleteAsync(PayrollEngine.Client.Service.TenantServiceContext,System.Int32)">
+            <summary>Delete a national case change</summary>
+            <param name="context">The service context</param>
+            <param name="caseChangeId">The case change id</param>
+        </member>
         <member name="T:PayrollEngine.Client.Service.INationalCaseDocumentService">
             <summary>Payroll national case document service</summary>
         </member>
@@ -12210,23 +12292,22 @@
         <member name="T:PayrollEngine.Client.Service.IPayrollConsolidatedResultService">
             <summary>Payroll consolidated result service</summary>
         </member>
-        <member name="M:PayrollEngine.Client.Service.IPayrollConsolidatedResultService.QueryPayrollResultAsync``1(PayrollEngine.Client.Service.TenantServiceContext,System.Int32,System.Int32,System.DateTime,System.Nullable{System.Int32},System.String,PayrollEngine.PayrunJobStatus,System.Collections.Generic.IEnumerable{System.String})">
-            <summary>Query consolidated collector results</summary>
+        <member name="M:PayrollEngine.Client.Service.IPayrollConsolidatedResultService.QueryPayrollResultAsync``1(PayrollEngine.Client.Service.TenantServiceContext,System.Int32,System.DateTime,System.DateTime,System.Nullable{System.Int32},System.String,System.Nullable{PayrollEngine.PayrunJobStatus},System.Collections.Generic.IEnumerable{System.String})">
+            <summary>Query consolidated payroll result</summary>
             <param name="context">The service context</param>
             <param name="employeeId">The employee id</param>
-            <param name="payrunId">The payrun id</param>
             <param name="periodStart">Period start date</param>
+            <param name="periodEnd">Period end date</param>
             <param name="divisionId">The division id</param>
             <param name="forecast">The forecast name</param>
             <param name="jobStatus">The payrun job status</param>
             <param name="tags">The result tags</param>
-            <returns>The period collector results</returns>
+            <returns>The consolidated payroll result</returns>
         </member>
-        <member name="M:PayrollEngine.Client.Service.IPayrollConsolidatedResultService.GetCollectorResultsAsync``1(PayrollEngine.Client.Service.TenantServiceContext,System.Int32,System.Int32,System.Collections.Generic.IEnumerable{System.DateTime},System.Nullable{System.Int32},System.Collections.Generic.IEnumerable{System.String},System.String,PayrollEngine.PayrunJobStatus,System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.DateTime})">
+        <member name="M:PayrollEngine.Client.Service.IPayrollConsolidatedResultService.GetCollectorResultsAsync``1(PayrollEngine.Client.Service.TenantServiceContext,System.Int32,System.Collections.Generic.IEnumerable{System.DateTime},System.Nullable{System.Int32},System.Collections.Generic.IEnumerable{System.String},System.String,System.Nullable{PayrollEngine.PayrunJobStatus},System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.DateTime})">
             <summary>Get consolidated collector results</summary>
             <param name="context">The service context</param>
             <param name="employeeId">The employee id</param>
-            <param name="payrunId">The payrun id</param>
             <param name="periodStarts">Period start dates</param>
             <param name="divisionId">The division id</param>
             <param name="collectorNames">The collector names</param>
@@ -12236,11 +12317,10 @@
             <param name="evaluationDate">The evaluation date (default: UTC now)</param>
             <returns>The period collector results</returns>
         </member>
-        <member name="M:PayrollEngine.Client.Service.IPayrollConsolidatedResultService.QueryWageTypeResultsAsync``1(PayrollEngine.Client.Service.TenantServiceContext,System.Int32,System.Int32,System.Collections.Generic.IEnumerable{System.DateTime},System.Nullable{System.Int32},System.Collections.Generic.IEnumerable{System.Decimal},System.String,PayrollEngine.PayrunJobStatus,System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.DateTime})">
+        <member name="M:PayrollEngine.Client.Service.IPayrollConsolidatedResultService.QueryWageTypeResultsAsync``1(PayrollEngine.Client.Service.TenantServiceContext,System.Int32,System.Collections.Generic.IEnumerable{System.DateTime},System.Nullable{System.Int32},System.Collections.Generic.IEnumerable{System.Decimal},System.String,System.Nullable{PayrollEngine.PayrunJobStatus},System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.DateTime})">
             <summary>Query consolidated wage type results</summary>
             <param name="context">The service context</param>
             <param name="employeeId">The employee id</param>
-            <param name="payrunId">The payrun id</param>
             <param name="periodStarts">Period start dates</param>
             <param name="divisionId">The division id</param>
             <param name="wageTypeNumbers">The wage type numbers</param>
@@ -12250,14 +12330,13 @@
             <param name="evaluationDate">The evaluation date (default: UTC now)</param>
             <returns>The period wage type results</returns>
         </member>
-        <member name="M:PayrollEngine.Client.Service.IPayrollConsolidatedResultService.QueryPayrunResultsAsync``1(PayrollEngine.Client.Service.TenantServiceContext,System.Int32,System.Int32,System.Collections.Generic.IEnumerable{System.DateTime},System.Nullable{System.Int32},System.Collections.Generic.IEnumerable{System.String},System.String,PayrollEngine.PayrunJobStatus,System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.DateTime})">
+        <member name="M:PayrollEngine.Client.Service.IPayrollConsolidatedResultService.QueryPayrunResultsAsync``1(PayrollEngine.Client.Service.TenantServiceContext,System.Int32,System.Collections.Generic.IEnumerable{System.DateTime},System.Nullable{System.Int32},System.Collections.Generic.IEnumerable{System.String},System.String,System.Nullable{PayrollEngine.PayrunJobStatus},System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.DateTime})">
             <summary>Query consolidated payrun results</summary>
             <param name="context">The service context</param>
             <param name="employeeId">The employee id</param>
-            <param name="payrunId">The payrun id</param>
             <param name="periodStarts">Period start dates</param>
             <param name="divisionId">The division id</param>
-            <param name="names">The result names</param>
+            <param name="resultNames">The result names</param>
             <param name="forecast">The forecast name</param>
             <param name="tags">The result tags</param>
             <param name="jobStatus">The payrun job status</param>
@@ -12428,15 +12507,16 @@
             <param name="caseSlot">The case slot</param>
             <returns>The case value periods</returns>
         </member>
-        <member name="M:PayrollEngine.Client.Service.IPayrollService.GetCaseTimeValuesAsync(PayrollEngine.Client.Service.PayrollServiceContext,PayrollEngine.CaseType,System.Nullable{System.Int32},System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+        <member name="M:PayrollEngine.Client.Service.IPayrollService.GetCaseTimeValuesAsync(PayrollEngine.Client.Service.PayrollServiceContext,PayrollEngine.CaseType,System.Nullable{System.Int32},System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String)">
             <summary>Get payroll case values from a specific time moment</summary>
             <param name="context">The service context</param>
             <param name="caseType">The case type</param>
-            <param name="employeeId">The employee id</param>
+            <param name="employeeId">The employee id; null returns all employees (Employee case type only)</param>
             <param name="caseFieldNames">The case field names</param>
             <param name="valueDate">The moment of the value (default: UTC now)</param>
             <param name="regulationDate">The regulation date (default: value date)</param>
             <param name="evaluationDate">The evaluation date (default: value date)</param>
+            <param name="forecast">The forecast name; null = real values only</param>
             <returns>The payroll case value of the case field</returns>
         </member>
         <member name="M:PayrollEngine.Client.Service.IPayrollService.GetAvailableCaseFieldValuesAsync(PayrollEngine.Client.Service.PayrollServiceContext,System.Int32,System.Collections.Generic.IEnumerable{System.String},System.DateTime,System.DateTime,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String)">
@@ -13138,11 +13218,23 @@
         <member name="M:PayrollEngine.Client.TenantApiEndpoints.DivisionUrl(System.Int32,System.Int32)">
             <summary>The division URL</summary>
         </member>
+        <member name="M:PayrollEngine.Client.TenantApiEndpoints.DivisionAttributesUrl(System.Int32,System.Int32)">
+            <summary>The division attributes URL</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.TenantApiEndpoints.DivisionAttributeUrl(System.Int32,System.Int32,System.String)">
+            <summary>The division attribute URL</summary>
+        </member>
         <member name="M:PayrollEngine.Client.TenantApiEndpoints.TasksUrl(System.Int32)">
             <summary>The tasks URL</summary>
         </member>
         <member name="M:PayrollEngine.Client.TenantApiEndpoints.TaskUrl(System.Int32,System.Int32)">
             <summary>The task URL</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.TenantApiEndpoints.TaskAttributesUrl(System.Int32,System.Int32)">
+            <summary>The task attributes URL</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.TenantApiEndpoints.TaskAttributeUrl(System.Int32,System.Int32,System.String)">
+            <summary>The task attribute URL</summary>
         </member>
         <member name="M:PayrollEngine.Client.TenantApiEndpoints.LogsUrl(System.Int32)">
             <summary>The logs URL</summary>

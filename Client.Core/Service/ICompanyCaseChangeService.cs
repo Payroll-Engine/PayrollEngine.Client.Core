@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using PayrollEngine.Client.Model;
+using Task = System.Threading.Tasks.Task;
 
 namespace PayrollEngine.Client.Service;
 
@@ -30,4 +31,9 @@ public interface ICompanyCaseChangeService : IReadService<ICaseChange, TenantSer
     /// <param name="query">The case change query</param>
     /// <returns>The new case change</returns>
     Task<List<T>> GetAsync<T>(TenantServiceContext context, CaseChangeQuery query = null) where T : class, ICaseChange;
+
+    /// <summary>Delete a company case change</summary>
+    /// <param name="context">The service context</param>
+    /// <param name="caseChangeId">The case change id</param>
+    Task DeleteAsync(TenantServiceContext context, int caseChangeId);
 }

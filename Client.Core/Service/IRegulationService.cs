@@ -4,7 +4,7 @@ using PayrollEngine.Client.Model;
 namespace PayrollEngine.Client.Service;
 
 /// <summary>Payroll regulation service</summary>
-public interface IRegulationService : ICrudService<IRegulation, TenantServiceContext, Query>
+public interface IRegulationService : ICrudService<IRegulation, TenantServiceContext, Query>, IAttributeService<TenantServiceContext>
 {
     /// <summary>Get regulation by name</summary>
     /// <param name="context">The service context</param>

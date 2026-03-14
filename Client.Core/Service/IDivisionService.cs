@@ -4,7 +4,7 @@ using PayrollEngine.Client.Model;
 namespace PayrollEngine.Client.Service;
 
 /// <summary>Payroll division service</summary>
-public interface IDivisionService : ICrudService<IDivision, TenantServiceContext, Query>
+public interface IDivisionService : ICrudService<IDivision, TenantServiceContext, Query>, IAttributeService<TenantServiceContext>
 {
     /// <summary>Get division by name</summary>
     /// <param name="context">The service context</param>

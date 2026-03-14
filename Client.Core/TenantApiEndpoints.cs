@@ -86,6 +86,14 @@ public static class TenantApiEndpoints
     public static string DivisionUrl(int tenantId, int divisionId) =>
         $"{DivisionsUrl(tenantId)}/{divisionId}";
 
+    /// <summary>The division attributes URL</summary>
+    public static string DivisionAttributesUrl(int tenantId, int divisionId) =>
+        $"{DivisionUrl(tenantId, divisionId)}/{ApiEndpoints.AttributesPath()}";
+
+    /// <summary>The division attribute URL</summary>
+    public static string DivisionAttributeUrl(int tenantId, int divisionId, string attributeName) =>
+        $"{DivisionAttributesUrl(tenantId, divisionId)}/{attributeName}";
+
     /// <summary>The tasks URL</summary>
     public static string TasksUrl(int tenantId) =>
         $"{TenantUrl(tenantId)}/tasks";
@@ -93,6 +101,14 @@ public static class TenantApiEndpoints
     /// <summary>The task URL</summary>
     public static string TaskUrl(int tenantId, int taskId) =>
         $"{TasksUrl(tenantId)}/{taskId}";
+
+    /// <summary>The task attributes URL</summary>
+    public static string TaskAttributesUrl(int tenantId, int taskId) =>
+        $"{TaskUrl(tenantId, taskId)}/{ApiEndpoints.AttributesPath()}";
+
+    /// <summary>The task attribute URL</summary>
+    public static string TaskAttributeUrl(int tenantId, int taskId, string attributeName) =>
+        $"{TaskAttributesUrl(tenantId, taskId)}/{attributeName}";
 
     /// <summary>The logs URL</summary>
     public static string LogsUrl(int tenantId) =>

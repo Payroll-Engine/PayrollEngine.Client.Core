@@ -200,9 +200,18 @@ public class PayrollService : ServiceBase, IPayrollService
     }
 
     /// <inheritdoc/>
+    /// <remarks>
+    /// When <paramref name="caseType"/> is <see cref="CaseType.Employee"/> and <paramref name="employeeId"/> is null,
+    /// the backend returns case values for all active employees of the tenant, each enriched with their EmployeeId.
+    /// Use <paramref name="evaluationDate"/> to control the temporal perspective:
+    /// - Set equal to <paramref name="valueDate"/> for "as of that date" (historical view)
+    /// - Set to today for "current knowledge applied to past date"
+    /// - Set equal to <paramref name="valueDate"/> with a forecast name for forecast view
+    /// </remarks>
     public virtual async Task<List<CaseValue>> GetCaseTimeValuesAsync(PayrollServiceContext context,
         CaseType caseType, int? employeeId = null, IEnumerable<string> caseFieldNames = null,
-        DateTime? valueDate = null, DateTime? regulationDate = null, DateTime? evaluationDate = null)
+        DateTime? valueDate = null, DateTime? regulationDate = null, DateTime? evaluationDate = null,
+        string forecast = null)
     {
         ArgumentNullException.ThrowIfNull(context);
 
@@ -212,7 +221,8 @@ public class PayrollService : ServiceBase, IPayrollService
             .AddCollectionQueryString(nameof(caseFieldNames), caseFieldNames)
             .AddQueryString(nameof(valueDate), valueDate)
             .AddQueryString(nameof(regulationDate), regulationDate)
-            .AddQueryString(nameof(evaluationDate), evaluationDate);
+            .AddQueryString(nameof(evaluationDate), evaluationDate)
+            .AddQueryString(nameof(forecast), forecast);
         return await HttpClient.GetCollectionAsync<CaseValue>(url);
     }
 

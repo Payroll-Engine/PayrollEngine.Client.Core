@@ -6,7 +6,7 @@ namespace PayrollEngine.Client.Service;
 
 /// <summary>Regulation report service</summary>
 // ReSharper disable UnusedMemberInSuper.Global
-public interface IReportService : ICrudService<IReport, RegulationServiceContext, Query>
+public interface IReportService : ICrudService<IReport, RegulationServiceContext, Query>, IAttributeService<RegulationServiceContext>
 {
     /// <summary>Get report by name</summary>
     /// <param name="context">The service context</param>
