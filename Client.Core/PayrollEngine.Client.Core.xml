@@ -6038,6 +6038,9 @@
         <member name="P:PayrollEngine.Client.Model.IReport.UserType">
             <summary>The user type (default: employee)</summary>
         </member>
+        <member name="P:PayrollEngine.Client.Model.IReport.ReportIsolation">
+            <summary>The report isolation level</summary>
+        </member>
         <member name="P:PayrollEngine.Client.Model.IReport.Queries">
             <summary>The report queries, key is the query name and value the api operation name</summary>
         </member>
@@ -7736,6 +7739,9 @@
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.Report.UserType">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.Report.ReportIsolation">
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.Report.BuildExpression">
