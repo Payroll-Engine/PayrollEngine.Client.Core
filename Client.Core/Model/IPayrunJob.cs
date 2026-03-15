@@ -61,9 +61,6 @@ public interface IPayrunJob : IModel, IAttributeObject, IEquatable<IPayrunJob>
     /// <summary>The payrun job result</summary>
     PayrunJobResult JobResult { get; set; }
 
-    /// <summary>The culture including the calendar</summary>
-    string Culture { get; set; }
-
     /// <summary>The cycle name (immutable)</summary>
     string CycleName { get; set; }
 

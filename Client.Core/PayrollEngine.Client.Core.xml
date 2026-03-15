@@ -4122,6 +4122,24 @@
         <member name="P:PayrollEngine.Client.Model.CollectorResult.CollectorId">
             <inheritdoc/>
         </member>
+        <member name="P:PayrollEngine.Client.Model.CollectorResult.TenantId">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.CollectorResult.EmployeeId">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.CollectorResult.DivisionId">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.CollectorResult.PayrunJobId">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.CollectorResult.Forecast">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.CollectorResult.ParentJobId">
+            <inheritdoc/>
+        </member>
         <member name="M:PayrollEngine.Client.Model.CollectorResult.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
@@ -5038,6 +5056,24 @@
         <member name="P:PayrollEngine.Client.Model.ICollectorResult.PayrollResultId">
             <summary>The payroll result id (immutable)</summary>
         </member>
+        <member name="P:PayrollEngine.Client.Model.ICollectorResult.TenantId">
+            <summary>The tenant id (denormalized, immutable)</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.ICollectorResult.EmployeeId">
+            <summary>The employee id (denormalized, immutable)</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.ICollectorResult.DivisionId">
+            <summary>The division id (denormalized, immutable)</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.ICollectorResult.PayrunJobId">
+            <summary>The payrun job id (denormalized, immutable)</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.ICollectorResult.Forecast">
+            <summary>The forecast name (denormalized, immutable)</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.ICollectorResult.ParentJobId">
+            <summary>The parent payrun job id (denormalized, immutable)</summary>
+        </member>
         <member name="P:PayrollEngine.Client.Model.ICollectorResult.CollectorId">
             <summary>The collector id (immutable)</summary>
         </member>
@@ -5738,9 +5774,6 @@
         <member name="P:PayrollEngine.Client.Model.IPayrunJob.JobResult">
             <summary>The payrun job result</summary>
         </member>
-        <member name="P:PayrollEngine.Client.Model.IPayrunJob.Culture">
-            <summary>The culture including the calendar</summary>
-        </member>
         <member name="P:PayrollEngine.Client.Model.IPayrunJob.CycleName">
             <summary>The cycle name (immutable)</summary>
         </member>
@@ -5896,6 +5929,24 @@
         </member>
         <member name="P:PayrollEngine.Client.Model.IPayrunResult.PayrollResultId">
             <summary>The payroll result id (immutable)</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.IPayrunResult.TenantId">
+            <summary>The tenant id (denormalized, immutable)</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.IPayrunResult.EmployeeId">
+            <summary>The employee id (denormalized, immutable)</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.IPayrunResult.DivisionId">
+            <summary>The division id (denormalized, immutable)</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.IPayrunResult.PayrunJobId">
+            <summary>The payrun job id (denormalized, immutable)</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.IPayrunResult.Forecast">
+            <summary>The forecast name (denormalized, immutable)</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.IPayrunResult.ParentJobId">
+            <summary>The parent payrun job id (denormalized, immutable)</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.IPayrunResult.Source">
             <summary>The result source (immutable)</summary>
@@ -6352,6 +6403,24 @@
         </member>
         <member name="P:PayrollEngine.Client.Model.IWageTypeResult.PayrollResultId">
             <summary>The payroll result id (immutable)</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.IWageTypeResult.TenantId">
+            <summary>The tenant id (denormalized, immutable)</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.IWageTypeResult.EmployeeId">
+            <summary>The employee id (denormalized, immutable)</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.IWageTypeResult.DivisionId">
+            <summary>The division id (denormalized, immutable)</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.IWageTypeResult.PayrunJobId">
+            <summary>The payrun job id (denormalized, immutable)</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.IWageTypeResult.Forecast">
+            <summary>The forecast name (denormalized, immutable)</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.IWageTypeResult.ParentJobId">
+            <summary>The parent payrun job id (denormalized, immutable)</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.IWageTypeResult.WageTypeId">
             <summary>The wage type id (immutable)</summary>
@@ -7294,9 +7363,6 @@
         <member name="P:PayrollEngine.Client.Model.PayrunJob.JobResult">
             <inheritdoc/>
         </member>
-        <member name="P:PayrollEngine.Client.Model.PayrunJob.Culture">
-            <inheritdoc/>
-        </member>
         <member name="P:PayrollEngine.Client.Model.PayrunJob.CycleName">
             <inheritdoc/>
         </member>
@@ -7558,6 +7624,24 @@
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.PayrunResult.Attributes">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.PayrunResult.TenantId">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.PayrunResult.EmployeeId">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.PayrunResult.DivisionId">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.PayrunResult.PayrunJobId">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.PayrunResult.Forecast">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.PayrunResult.ParentJobId">
             <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.PayrunResult.#ctor">
@@ -8412,6 +8496,24 @@
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.WageTypeResult.Attributes">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.WageTypeResult.TenantId">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.WageTypeResult.EmployeeId">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.WageTypeResult.DivisionId">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.WageTypeResult.PayrunJobId">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.WageTypeResult.Forecast">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.WageTypeResult.ParentJobId">
             <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.WageTypeResult.#ctor">

@@ -87,10 +87,6 @@ public class PayrunJob : ModelBase, IPayrunJob
     public PayrunJobResult JobResult { get; set; }
 
     /// <inheritdoc/>
-    [JsonPropertyOrder(118)]
-    public string Culture { get; set; }
-
-    /// <inheritdoc/>
     [Required]
     [JsonPropertyOrder(119)]
     public string CycleName { get; set; }

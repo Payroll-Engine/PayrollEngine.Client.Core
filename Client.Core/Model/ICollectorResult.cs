@@ -11,6 +11,24 @@ public interface ICollectorResult : IModel, IAttributeObject,
     /// <summary>The payroll result id (immutable)</summary>
     int PayrollResultId { get; set; }
 
+    /// <summary>The tenant id (denormalized, immutable)</summary>
+    int TenantId { get; set; }
+
+    /// <summary>The employee id (denormalized, immutable)</summary>
+    int EmployeeId { get; set; }
+
+    /// <summary>The division id (denormalized, immutable)</summary>
+    int DivisionId { get; set; }
+
+    /// <summary>The payrun job id (denormalized, immutable)</summary>
+    int PayrunJobId { get; set; }
+
+    /// <summary>The forecast name (denormalized, immutable)</summary>
+    string Forecast { get; set; }
+
+    /// <summary>The parent payrun job id (denormalized, immutable)</summary>
+    int? ParentJobId { get; set; }
+
     /// <summary>The collector id (immutable)</summary>
     int CollectorId { get; set; }
 

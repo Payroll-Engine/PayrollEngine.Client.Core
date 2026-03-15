@@ -62,6 +62,30 @@ public class PayrunResult : ModelBase, IPayrunResult, INameObject
     [JsonPropertyOrder(112)]
     public Dictionary<string, object> Attributes { get; set; }
 
+    /// <inheritdoc/>
+    [JsonPropertyOrder(113)]
+    public int TenantId { get; set; }
+
+    /// <inheritdoc/>
+    [JsonPropertyOrder(114)]
+    public int EmployeeId { get; set; }
+
+    /// <inheritdoc/>
+    [JsonPropertyOrder(115)]
+    public int DivisionId { get; set; }
+
+    /// <inheritdoc/>
+    [JsonPropertyOrder(116)]
+    public int PayrunJobId { get; set; }
+
+    /// <inheritdoc/>
+    [JsonPropertyOrder(117)]
+    public string Forecast { get; set; }
+
+    /// <inheritdoc/>
+    [JsonPropertyOrder(118)]
+    public int? ParentJobId { get; set; }
+
     /// <summary>Initializes a new instance</summary>
     public PayrunResult()
     {
