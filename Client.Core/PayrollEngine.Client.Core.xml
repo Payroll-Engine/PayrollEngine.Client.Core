@@ -19,6 +19,9 @@
         <member name="M:PayrollEngine.Client.ApiEndpoints.AdminQueryMethods">
             <summary>The admin query methods URL</summary>
         </member>
+        <member name="M:PayrollEngine.Client.ApiEndpoints.AdminInformationUrl">
+            <summary>The backend information URL</summary>
+        </member>
         <member name="M:PayrollEngine.Client.ApiEndpoints.SharesRegulationsUrl">
             <summary>The shares regulations URL</summary>
         </member>
@@ -2797,6 +2800,132 @@
         <member name="M:PayrollEngine.Client.Model.ActionParameterInfo.ToString">
             <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
             <returns>A <see cref="T:System.String" /> that represents this instance</returns>
+        </member>
+        <member name="T:PayrollEngine.Client.Model.BackendAuditTrailInformation">
+            <summary>Audit trail feature flags</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.BackendAuditTrailInformation.Script">
+            <summary>Script audit trail enabled</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.BackendAuditTrailInformation.Lookup">
+            <summary>Lookup and lookup value audit trail enabled</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.BackendAuditTrailInformation.Input">
+            <summary>Case, case field and case relation audit trail enabled</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.BackendAuditTrailInformation.Payrun">
+            <summary>Collector and wage type audit trail enabled</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.BackendAuditTrailInformation.Report">
+            <summary>Report, report template and report parameter audit trail enabled</summary>
+        </member>
+        <member name="T:PayrollEngine.Client.Model.BackendAuthInformation">
+            <summary>Backend authentication information (no secrets exposed)</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.BackendAuthInformation.Mode">
+            <summary>Authentication mode: None, ApiKey or OAuth</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.BackendAuthInformation.OAuthAuthority">
+            <summary>OAuth token authority URL — only set when Mode is OAuth</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.BackendAuthInformation.OAuthAudience">
+            <summary>OAuth expected audience — only set when Mode is OAuth</summary>
+        </member>
+        <member name="T:PayrollEngine.Client.Model.BackendCorsInformation">
+            <summary>CORS runtime information</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.BackendCorsInformation.IsActive">
+            <summary>Whether CORS is active (at least one allowed origin configured)</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.BackendCorsInformation.AllowedOrigins">
+            <summary>Allowed origins — empty when CORS is inactive</summary>
+        </member>
+        <member name="T:PayrollEngine.Client.Model.BackendDatabaseInformation">
+            <summary>Database runtime information</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.BackendDatabaseInformation.Type">
+            <summary>Database type (e.g. "SqlServer")</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.BackendDatabaseInformation.Name">
+            <summary>Database catalog name</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.BackendDatabaseInformation.Version">
+            <summary>Database server version (e.g. "16.0.4175.1")</summary>
+        </member>
+        <member name="T:PayrollEngine.Client.Model.BackendInformation">
+            <summary>Backend server information for client diagnostics and compatibility checks</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.BackendInformation.Version">
+            <summary>Backend assembly version (e.g. "0.10.0-beta.1")</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.BackendInformation.BuildDate">
+            <summary>Backend assembly build date (UTC)</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.BackendInformation.ApiVersion">
+            <summary>REST API version (e.g. "1.0")</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.BackendInformation.ApiName">
+            <summary>REST API name</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.BackendInformation.Authentication">
+            <summary>Authentication configuration (no secrets)</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.BackendInformation.Database">
+            <summary>Database runtime information</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.BackendInformation.Runtime">
+            <summary>Runtime configuration</summary>
+        </member>
+        <member name="T:PayrollEngine.Client.Model.BackendRateLimitingInformation">
+            <summary>Rate limiting runtime information</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.BackendRateLimitingInformation.IsActive">
+            <summary>Whether any rate limiting policy is active</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.BackendRateLimitingInformation.GlobalPermitLimit">
+            <summary>Global policy: max requests per window (0 = inactive)</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.BackendRateLimitingInformation.GlobalWindowSeconds">
+            <summary>Global policy: window size in seconds</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.BackendRateLimitingInformation.PayrunJobStartPermitLimit">
+            <summary>Payrun job start policy: max requests per window (0 = inactive)</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.BackendRateLimitingInformation.PayrunJobStartWindowSeconds">
+            <summary>Payrun job start policy: window size in seconds</summary>
+        </member>
+        <member name="T:PayrollEngine.Client.Model.BackendRuntimeInformation">
+            <summary>Backend runtime configuration information</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.BackendRuntimeInformation.MaxParallelEmployees">
+            <summary>Resolved maximum parallel employee threads (0 = sequential)</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.BackendRuntimeInformation.MaxRetroPayrunPeriods">
+            <summary>Maximum retro payrun periods (0 = unlimited)</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.BackendRuntimeInformation.DbCommandTimeoutSeconds">
+            <summary>Database command timeout in seconds</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.BackendRuntimeInformation.DbTransactionTimeoutSeconds">
+            <summary>Database transaction timeout in seconds</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.BackendRuntimeInformation.AssemblyCacheTimeoutSeconds">
+            <summary>Script assembly cache timeout in seconds</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.BackendRuntimeInformation.WebhookTimeoutSeconds">
+            <summary>Webhook call timeout in seconds</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.BackendRuntimeInformation.ScriptSafetyAnalysis">
+            <summary>Static safety analysis of user scripts enabled</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.BackendRuntimeInformation.AuditTrail">
+            <summary>Audit trail feature flags</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.BackendRuntimeInformation.Cors">
+            <summary>CORS configuration</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.BackendRuntimeInformation.RateLimiting">
+            <summary>Rate limiting configuration</summary>
         </member>
         <member name="T:PayrollEngine.Client.Model.Calendar">
             <summary>The payroll calendar client object</summary>
@@ -10320,6 +10449,16 @@
             <summary>Rebuild the payrun script</summary>
             <param name="payrunName">The payrun name</param>
         </member>
+        <member name="T:PayrollEngine.Client.Service.Api.AdminService">
+            <summary>Payroll backend administration service</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Service.Api.AdminService.#ctor(PayrollEngine.Client.PayrollHttpClient)">
+            <summary>Initializes a new instance of the <see cref="T:PayrollEngine.Client.Service.Api.AdminService"/> class</summary>
+            <param name="httpClient">The Payroll http client</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Service.Api.AdminService.GetBackendInformationAsync">
+            <inheritdoc />
+        </member>
         <member name="T:PayrollEngine.Client.Service.Api.CalendarService">
             <summary>Payroll calendar service</summary>
         </member>
@@ -12007,6 +12146,13 @@
         </member>
         <member name="P:PayrollEngine.Client.Service.EmployeeServiceContext.EmployeeId">
             <summary>The employee id</summary>
+        </member>
+        <member name="T:PayrollEngine.Client.Service.IAdminService">
+            <summary>Payroll backend administration service</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Service.IAdminService.GetBackendInformationAsync">
+            <summary>Get backend server information</summary>
+            <returns>The backend information</returns>
         </member>
         <member name="T:PayrollEngine.Client.Service.IAttributeService`1">
             <summary>Service with attribute support</summary>

@@ -25,6 +25,10 @@ public static class ApiEndpoints
     public static string AdminQueryMethods() =>
         $"{AdminUrl()}/querymethods";
 
+    /// <summary>The backend information URL</summary>
+    public static string AdminInformationUrl() =>
+        $"{AdminUrl()}/information";
+
     #endregion
 
     #region Shares
