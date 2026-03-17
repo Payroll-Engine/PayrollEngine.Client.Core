@@ -733,6 +733,14 @@ public sealed class ExchangeImport : ExchangeImportVisitor
         }
         invocation.UserIdentifier = user.Identifier;
 
+        // The import path is always sequential and needs JobEnd to be set for the polling loop below.
+        // Propagate JobStatus into CompletedJobStatus so the background worker finalizes the job
+        // (setting JobEnd) with the requested status instead of leaving it in Draft indefinitely.
+        if (!invocation.CompletedJobStatus.HasValue)
+        {
+            invocation.CompletedJobStatus = invocation.JobStatus;
+        }
+
         // create new payrun job (POST only, async: returns 202 Accepted)
         using var response = await HttpClient.PostAsync(PayrunApiEndpoints.PayrunJobsUrl(tenant.Id),
             DefaultJsonSerializer.SerializeJson(invocation));

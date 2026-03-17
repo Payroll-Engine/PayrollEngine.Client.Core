@@ -2852,6 +2852,9 @@
         <member name="P:PayrollEngine.Client.Model.BackendDatabaseInformation.Version">
             <summary>Database server version (e.g. "16.0.4175.1")</summary>
         </member>
+        <member name="P:PayrollEngine.Client.Model.BackendDatabaseInformation.Edition">
+            <summary>Database server edition (e.g. "Developer Edition (64-bit)")</summary>
+        </member>
         <member name="T:PayrollEngine.Client.Model.BackendInformation">
             <summary>Backend server information for client diagnostics and compatibility checks</summary>
         </member>
@@ -6005,6 +6008,11 @@
         <member name="P:PayrollEngine.Client.Model.IPayrunJobInvocation.JobStatus">
             <summary>The target payrun job status</summary>
         </member>
+        <member name="P:PayrollEngine.Client.Model.IPayrunJobInvocation.CompletedJobStatus">
+            <summary>The completed payrun job status, used by test runner to bypass the manual workflow.
+            If set, the background processor finalizes the job with this status instead of leaving it in Draft.
+            Null (default) means the job stays in Draft after calculation, following the normal workflow.</summary>
+        </member>
         <member name="P:PayrollEngine.Client.Model.IPayrunJobInvocation.JobResult">
             <summary>The payrun job result</summary>
         </member>
@@ -7634,6 +7642,9 @@
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.PayrunJobInvocation.JobStatus">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.PayrunJobInvocation.CompletedJobStatus">
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.PayrunJobInvocation.JobResult">

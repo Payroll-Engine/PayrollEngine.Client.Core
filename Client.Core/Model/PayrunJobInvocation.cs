@@ -45,6 +45,9 @@ public class PayrunJobInvocation : IPayrunJobInvocation
     public PayrunJobStatus JobStatus { get; set; }
 
     /// <inheritdoc/>
+    public PayrunJobStatus? CompletedJobStatus { get; set; }
+
+    /// <inheritdoc/>
     public PayrunJobResult JobResult { get; set; }
 
     /// <inheritdoc/>
