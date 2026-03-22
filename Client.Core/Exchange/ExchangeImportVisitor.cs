@@ -262,9 +262,10 @@ public abstract class ExchangeImportVisitor : AttachmentsLoader
             ValidateLookup(lookup);
         }
 
-        // get lookup
+        // get lookup — search with namespace-qualified name (stored with prefix by the backend)
+        var lookupSearchName = lookup.Name.EnsureNamespace(regulation.Namespace);
         var target = TargetLoad ? await new LookupService(HttpClient).GetAsync<Lookup>(
-            new(tenant.Id, regulation.Id), lookup.Name) : null;
+            new(tenant.Id, regulation.Id), lookupSearchName) : null;
 
         // setup lookup
         await SetupLookupAsync(tenant, regulation, lookup, target);

@@ -217,7 +217,8 @@ public sealed class ExchangeImport : ExchangeImportVisitor
             // lookup update mode: remove existing lookup
             if (lookup.UpdateMode == UpdateMode.Update)
             {
-                var existingLookup = existingLookups.FirstOrDefault(x => string.Equals(x.Name, lookup.Name));
+                var lookupSearchName = lookup.Name.EnsureNamespace(regulation.Namespace);
+                var existingLookup = existingLookups.FirstOrDefault(x => string.Equals(x.Name, lookupSearchName));
                 if (existingLookup != null)
                 {
                     await resLookups.DeleteAsync(context, existingLookup.Id);
