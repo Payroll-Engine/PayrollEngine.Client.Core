@@ -224,13 +224,29 @@ public abstract class ExchangeImportVisitor : AttachmentsLoader
         var regulations = await new RegulationService(HttpClient).QueryAsync<Regulation>(
             new(tenantId), filter);
 
-        // match by validFrom when provided — supports multiple versions of the same regulation name
-        // no match = new version, return null so the importer creates a new record
+        // match by validFrom when provided
         if (validFrom.HasValue)
         {
-            return regulations.FirstOrDefault(r =>
+            // 1. exact date match
+            var exactMatch = regulations.FirstOrDefault(r =>
                 r.ValidFrom.HasValue &&
                 r.ValidFrom.Value.Date == validFrom.Value.Date);
+            if (exactMatch != null)
+            {
+                return exactMatch;
+            }
+
+            // 2. regulation exists without validFrom (e.g. created by a lookup import before
+            //    the regulation definition file is processed) — return it so the importer
+            //    can set validFrom via UpsertObjectAsync rather than creating a duplicate
+            var noDateMatch = regulations.FirstOrDefault(r => !r.ValidFrom.HasValue);
+            if (noDateMatch != null)
+            {
+                return noDateMatch;
+            }
+
+            // 3. no match — new version, let the importer create a new regulation record
+            return null;
         }
 
         return regulations.FirstOrDefault();
@@ -243,6 +259,13 @@ public abstract class ExchangeImportVisitor : AttachmentsLoader
     {
         // get regulation
         var target = TargetLoad ? await GetRegulationAsync(tenant.Id, regulation.Name, regulation.Version, regulation.ValidFrom) : null;
+
+        // propagate stored namespace — split files (updateMode: NoUpdate) omit namespace in JSON;
+        // subsequent object existence checks require the correct namespace prefix
+        if (target != null && string.IsNullOrWhiteSpace(regulation.Namespace))
+        {
+            regulation.Namespace = target.Namespace;
+        }
 
         // setup regulation
         await SetupRegulationAsync(tenant, regulation, target);
@@ -356,19 +379,10 @@ public abstract class ExchangeImportVisitor : AttachmentsLoader
     /// <param name="caseSet">The case</param>
     protected override async Task VisitCaseAsync(IExchangeTenant tenant, IRegulationSet regulation, ICaseSet caseSet)
     {
-        // get case — try namespace-qualified name first, fall back to short name
-        CaseSet target = null;
-        if (TargetLoad)
-        {
-            var caseSearchName = caseSet.Name.EnsureNamespace(regulation.Namespace);
-            target = await new CaseService(HttpClient).GetAsync<CaseSet>(
-                new(tenant.Id, regulation.Id), caseSearchName);
-            if (target == null && !string.Equals(caseSearchName, caseSet.Name, StringComparison.OrdinalIgnoreCase))
-            {
-                target = await new CaseService(HttpClient).GetAsync<CaseSet>(
-                    new(tenant.Id, regulation.Id), caseSet.Name);
-            }
-}
+        // get case — search with namespace-qualified name (stored with prefix by the backend)
+        var caseSearchName = caseSet.Name.EnsureNamespace(regulation.Namespace);
+        var target = TargetLoad ? await new CaseService(HttpClient).GetAsync<CaseSet>(
+            new(tenant.Id, regulation.Id), caseSearchName) : null;
 
         // setup case
         await SetupCaseAsync(tenant, regulation, caseSet, target);
@@ -384,9 +398,10 @@ public abstract class ExchangeImportVisitor : AttachmentsLoader
     protected override async Task VisitCaseFieldAsync(IExchangeTenant tenant, IRegulationSet regulation,
         ICaseSet caseSet, ICaseField caseField)
     {
-        // get case field
+        // get case field — search with namespace-qualified name (stored with prefix by the backend)
+        var caseFieldSearchName = caseField.Name.EnsureNamespace(regulation.Namespace);
         var target = TargetLoad ? await new CaseFieldService(HttpClient).GetAsync<CaseField>(
-            new(tenant.Id, regulation.Id, caseSet.Id), caseField.Name) : null;
+            new(tenant.Id, regulation.Id, caseSet.Id), caseFieldSearchName) : null;
 
         // setup case field
         await SetupCaseFieldAsync(tenant, regulation, caseSet, caseField, target);
@@ -436,19 +451,10 @@ public abstract class ExchangeImportVisitor : AttachmentsLoader
     /// <param name="collector">The collector</param>
     protected override async Task VisitCollectorAsync(IExchangeTenant tenant, IRegulationSet regulation, ICollector collector)
     {
-        // get collector — try namespace-qualified name first, fall back to short name
-        Collector target = null;
-        if (TargetLoad)
-        {
-            var collectorSearchName = collector.Name.EnsureNamespace(regulation.Namespace);
-            target = await new CollectorService(HttpClient).GetAsync<Collector>(
-                new(tenant.Id, regulation.Id), collectorSearchName);
-            if (target == null && !string.Equals(collectorSearchName, collector.Name, StringComparison.OrdinalIgnoreCase))
-            {
-                target = await new CollectorService(HttpClient).GetAsync<Collector>(
-                    new(tenant.Id, regulation.Id), collector.Name);
-            }
-}
+        // get collector — search with namespace-qualified name (stored with prefix by the backend)
+        var collectorSearchName = collector.Name.EnsureNamespace(regulation.Namespace);
+        var target = TargetLoad ? await new CollectorService(HttpClient).GetAsync<Collector>(
+            new(tenant.Id, regulation.Id), collectorSearchName) : null;
 
         // setup collector
         await SetupCollectorAsync(tenant, regulation, collector, target);
@@ -494,19 +500,10 @@ public abstract class ExchangeImportVisitor : AttachmentsLoader
     protected override async Task VisitScriptAsync(IExchangeTenant tenant, IRegulationSet regulation,
         IScript script)
     {
-        // get script — try namespace-qualified name first (backend may store with prefix), fall back to short name
-        Client.Model.Script target = null;
-        if (TargetLoad)
-        {
-            var scriptSearchName = script.Name.EnsureNamespace(regulation.Namespace);
-            target = await new ScriptService(HttpClient).GetAsync<Client.Model.Script>(
-                new(tenant.Id, regulation.Id), scriptSearchName);
-            if (target == null && !string.Equals(scriptSearchName, script.Name, StringComparison.OrdinalIgnoreCase))
-            {
-                target = await new ScriptService(HttpClient).GetAsync<Client.Model.Script>(
-                    new(tenant.Id, regulation.Id), script.Name);
-            }
-        }
+        // get script — search with namespace-qualified name (stored with prefix by the backend)
+        var scriptSearchName = script.Name.EnsureNamespace(regulation.Namespace);
+        var target = TargetLoad ? await new ScriptService(HttpClient).GetAsync<Client.Model.Script>(
+            new(tenant.Id, regulation.Id), scriptSearchName) : null;
 
         // setup script
         await SetupScriptAsync(tenant, regulation, script, target);
@@ -524,9 +521,10 @@ public abstract class ExchangeImportVisitor : AttachmentsLoader
     /// <param name="report">The report</param>
     protected override async Task VisitReportAsync(IExchangeTenant tenant, IRegulationSet regulation, IReportSet report)
     {
-        // get report
+        // get report — search with namespace-qualified name (stored with prefix by the backend)
+        var reportSearchName = report.Name.EnsureNamespace(regulation.Namespace);
         var target = TargetLoad ? await new ReportSetService(HttpClient).GetAsync<ReportSet>(
-            new(tenant.Id, regulation.Id), report.Name) : null;
+            new(tenant.Id, regulation.Id), reportSearchName) : null;
 
         // setup report
         await SetupReportAsync(tenant, regulation, report, target);
@@ -542,9 +540,10 @@ public abstract class ExchangeImportVisitor : AttachmentsLoader
     protected override async Task VisitReportParameterAsync(IExchangeTenant tenant, IRegulationSet regulation,
         IReportSet report, IReportParameter parameter)
     {
-        // get report parameter
+        // get report parameter — search with namespace-qualified name (stored with prefix by the backend)
+        var reportParameterSearchName = parameter.Name.EnsureNamespace(regulation.Namespace);
         var target = TargetLoad ? await new ReportParameterService(HttpClient).GetAsync<ReportParameter>(
-            new(tenant.Id, regulation.Id, report.Id), parameter.Name) : null;
+            new(tenant.Id, regulation.Id, report.Id), reportParameterSearchName) : null;
 
         // setup report parameter
         await SetupReportParameterAsync(tenant, regulation, report, parameter, target);
