@@ -1442,11 +1442,12 @@
             <param name="webhook">The webhook</param>
             <param name="targetWebhook">The target webhook</param>
         </member>
-        <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.GetRegulationAsync(System.Int32,System.String,System.Nullable{System.Int32})">
+        <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.GetRegulationAsync(System.Int32,System.String,System.Nullable{System.Int32},System.Nullable{System.DateTime})">
             <summary>Get division</summary>
             <param name="tenantId">The tenant id</param>
             <param name="name">The regulation name</param>
             <param name="version">The regulation version</param>
+            <param name="validFrom">Valid from date</param>
         </member>
         <member name="M:PayrollEngine.Client.Exchange.ExchangeImportVisitor.VisitRegulationAsync(PayrollEngine.Client.Model.IExchangeTenant,PayrollEngine.Client.Model.IRegulationSet)">
             <summary>Visit the regulation</summary>

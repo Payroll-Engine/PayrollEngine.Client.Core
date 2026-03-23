@@ -211,17 +211,29 @@ public abstract class ExchangeImportVisitor : AttachmentsLoader
     /// <param name="tenantId">The tenant id</param>
     /// <param name="name">The regulation name</param>
     /// <param name="version">The regulation version</param>
-    protected virtual async Task<Regulation> GetRegulationAsync(int tenantId, string name, int? version = null)
+    /// <param name="validFrom">Valid from date</param>
+    protected virtual async Task<Regulation> GetRegulationAsync(int tenantId, string name,
+        int? version = null, DateTime? validFrom = null)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(name);
 
-        // get existing objects
+        // get all regulations with this name, then match by validFrom if provided
         var filter = version.HasValue ?
             QueryFactory.NewEqualsFilterQuery(nameof(name), name, nameof(version), version) :
             QueryFactory.NewEqualFilterQuery(nameof(name), name);
-        var regulation = (await new RegulationService(HttpClient).QueryAsync<Regulation>(
-            new(tenantId), filter)).FirstOrDefault();
-        return regulation;
+        var regulations = await new RegulationService(HttpClient).QueryAsync<Regulation>(
+            new(tenantId), filter);
+
+        // match by validFrom when provided — supports multiple versions of the same regulation name
+        // no match = new version, return null so the importer creates a new record
+        if (validFrom.HasValue)
+        {
+            return regulations.FirstOrDefault(r =>
+                r.ValidFrom.HasValue &&
+                r.ValidFrom.Value.Date == validFrom.Value.Date);
+        }
+
+        return regulations.FirstOrDefault();
     }
 
     /// <summary>Visit the regulation</summary>
@@ -230,7 +242,7 @@ public abstract class ExchangeImportVisitor : AttachmentsLoader
     protected override async Task VisitRegulationAsync(IExchangeTenant tenant, IRegulationSet regulation)
     {
         // get regulation
-        var target = TargetLoad ? await GetRegulationAsync(tenant.Id, regulation.Name, regulation.Version) : null;
+        var target = TargetLoad ? await GetRegulationAsync(tenant.Id, regulation.Name, regulation.Version, regulation.ValidFrom) : null;
 
         // setup regulation
         await SetupRegulationAsync(tenant, regulation, target);
@@ -344,9 +356,19 @@ public abstract class ExchangeImportVisitor : AttachmentsLoader
     /// <param name="caseSet">The case</param>
     protected override async Task VisitCaseAsync(IExchangeTenant tenant, IRegulationSet regulation, ICaseSet caseSet)
     {
-        // get case
-        var target = TargetLoad ? await new CaseService(HttpClient).GetAsync<CaseSet>(
-            new(tenant.Id, regulation.Id), caseSet.Name) : null;
+        // get case — try namespace-qualified name first, fall back to short name
+        CaseSet target = null;
+        if (TargetLoad)
+        {
+            var caseSearchName = caseSet.Name.EnsureNamespace(regulation.Namespace);
+            target = await new CaseService(HttpClient).GetAsync<CaseSet>(
+                new(tenant.Id, regulation.Id), caseSearchName);
+            if (target == null && !string.Equals(caseSearchName, caseSet.Name, StringComparison.OrdinalIgnoreCase))
+            {
+                target = await new CaseService(HttpClient).GetAsync<CaseSet>(
+                    new(tenant.Id, regulation.Id), caseSet.Name);
+            }
+}
 
         // setup case
         await SetupCaseAsync(tenant, regulation, caseSet, target);
@@ -414,9 +436,19 @@ public abstract class ExchangeImportVisitor : AttachmentsLoader
     /// <param name="collector">The collector</param>
     protected override async Task VisitCollectorAsync(IExchangeTenant tenant, IRegulationSet regulation, ICollector collector)
     {
-        // get collector
-        var target = TargetLoad ? await new CollectorService(HttpClient).GetAsync<Collector>(
-            new(tenant.Id, regulation.Id), collector.Name) : null;
+        // get collector — try namespace-qualified name first, fall back to short name
+        Collector target = null;
+        if (TargetLoad)
+        {
+            var collectorSearchName = collector.Name.EnsureNamespace(regulation.Namespace);
+            target = await new CollectorService(HttpClient).GetAsync<Collector>(
+                new(tenant.Id, regulation.Id), collectorSearchName);
+            if (target == null && !string.Equals(collectorSearchName, collector.Name, StringComparison.OrdinalIgnoreCase))
+            {
+                target = await new CollectorService(HttpClient).GetAsync<Collector>(
+                    new(tenant.Id, regulation.Id), collector.Name);
+            }
+}
 
         // setup collector
         await SetupCollectorAsync(tenant, regulation, collector, target);
@@ -462,9 +494,19 @@ public abstract class ExchangeImportVisitor : AttachmentsLoader
     protected override async Task VisitScriptAsync(IExchangeTenant tenant, IRegulationSet regulation,
         IScript script)
     {
-        // get script
-        var target = TargetLoad ? await new ScriptService(HttpClient).GetAsync<Client.Model.Script>(
-            new(tenant.Id, regulation.Id), script.Name) : null;
+        // get script — try namespace-qualified name first (backend may store with prefix), fall back to short name
+        Client.Model.Script target = null;
+        if (TargetLoad)
+        {
+            var scriptSearchName = script.Name.EnsureNamespace(regulation.Namespace);
+            target = await new ScriptService(HttpClient).GetAsync<Client.Model.Script>(
+                new(tenant.Id, regulation.Id), scriptSearchName);
+            if (target == null && !string.Equals(scriptSearchName, script.Name, StringComparison.OrdinalIgnoreCase))
+            {
+                target = await new ScriptService(HttpClient).GetAsync<Client.Model.Script>(
+                    new(tenant.Id, regulation.Id), script.Name);
+            }
+        }
 
         // setup script
         await SetupScriptAsync(tenant, regulation, script, target);
