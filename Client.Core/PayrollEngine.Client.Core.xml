@@ -6203,6 +6203,11 @@
         <member name="P:PayrollEngine.Client.Model.IRegulationShare.ConsumerDivisionName">
             <summary>The consumer division name (client only)</summary>
         </member>
+        <member name="P:PayrollEngine.Client.Model.IRegulationShare.IsolationLevel">
+            <summary>The isolation level granted to the consumer tenant.
+            Consolidation: cross-tenant result access for report scripts — regulation not added as payroll layer.
+            Write: regulation available as full payroll layer (default).</summary>
+        </member>
         <member name="T:PayrollEngine.Client.Model.IReport">
             <summary>The report client object</summary>
         </member>
@@ -7893,7 +7898,7 @@
             <inheritdoc/>
         </member>
         <member name="T:PayrollEngine.Client.Model.RegulationShare">
-            <summary>The tenant client object</summary>
+            <summary>The regulation share client object</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.RegulationShare.ProviderTenantId">
             <inheritdoc/>
@@ -7919,6 +7924,9 @@
         <member name="P:PayrollEngine.Client.Model.RegulationShare.ConsumerDivisionName">
             <inheritdoc/>
         </member>
+        <member name="P:PayrollEngine.Client.Model.RegulationShare.IsolationLevel">
+            <inheritdoc/>
+        </member>
         <member name="P:PayrollEngine.Client.Model.RegulationShare.Attributes">
             <inheritdoc/>
         </member>
@@ -7939,8 +7947,7 @@
             <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.RegulationShare.ToString">
-            <summary>Returns a <see cref="T:System.String" /> that represents this instance</summary>
-            <returns>A <see cref="T:System.String" /> that represents this instance</returns>
+            <inheritdoc/>
         </member>
         <member name="T:PayrollEngine.Client.Model.Report">
             <summary>The payroll report client object</summary>
