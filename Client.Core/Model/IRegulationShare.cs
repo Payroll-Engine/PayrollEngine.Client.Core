@@ -1,4 +1,4 @@
-﻿namespace PayrollEngine.Client.Model;
+namespace PayrollEngine.Client.Model;
 
 /// <summary>The regulation share client object</summary>
 public interface IRegulationShare : IModel, IAttributeObject, IKeyEquatable<IRegulationShare>
@@ -26,4 +26,9 @@ public interface IRegulationShare : IModel, IAttributeObject, IKeyEquatable<IReg
 
     /// <summary>The consumer division name (client only)</summary>
     string ConsumerDivisionName { get; set; }
+
+    /// <summary>The isolation level granted to the consumer tenant.
+    /// Consolidation: cross-tenant result access for report scripts — regulation not added as payroll layer.
+    /// Write: regulation available as full payroll layer (default).</summary>
+    TenantIsolationLevel IsolationLevel { get; set; }
 }

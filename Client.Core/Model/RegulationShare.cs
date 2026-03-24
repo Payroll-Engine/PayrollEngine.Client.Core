@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace PayrollEngine.Client.Model;
 
-/// <summary>The tenant client object</summary>
+/// <summary>The regulation share client object</summary>
 public class RegulationShare : ModelBase, IRegulationShare
 {
     /// <inheritdoc/>
@@ -40,6 +40,10 @@ public class RegulationShare : ModelBase, IRegulationShare
 
     /// <inheritdoc/>
     [JsonPropertyOrder(108)]
+    public TenantIsolationLevel IsolationLevel { get; set; } = TenantIsolationLevel.Write;
+
+    /// <inheritdoc/>
+    [JsonPropertyOrder(109)]
     public Dictionary<string, object> Attributes { get; set; }
 
     /// <summary>Initializes a new instance</summary>
@@ -70,8 +74,7 @@ public class RegulationShare : ModelBase, IRegulationShare
     public override string GetUiString() =>
         $"{ProviderTenantIdentifier} {ProviderRegulationName} > {ConsumerTenantIdentifier}:{ConsumerDivisionName}";
 
-    /// <summary>Returns a <see cref="string" /> that represents this instance</summary>
-    /// <returns>A <see cref="string" /> that represents this instance</returns>
+    /// <inheritdoc/>
     public override string ToString() =>
         $"{GetUiString()} {base.ToString()}";
 }
