@@ -147,7 +147,7 @@ public class CommandManager(ICommandConsole console, ILogger logger = null)
             // unknown command
             if (command == null)
             {
-                throw new PayrollException($"Unknown command or command file {argCommand}");
+                throw new CommandException($"Unknown command or command file {argCommand}");
             }
         }
         if (command == null)
@@ -451,6 +451,11 @@ public class CommandManager(ICommandConsole console, ILogger logger = null)
 
         // restore directory
         EnsureCurrentDirectory(startDirectory);
+
+        if (error)
+        {
+            Console.WaitMode = WaitMode.Wait;
+        }
 
         return !error && fileItems.Any() ? fileItems : null;
     }

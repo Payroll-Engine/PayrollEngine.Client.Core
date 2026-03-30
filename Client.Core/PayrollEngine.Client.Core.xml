@@ -229,6 +229,16 @@
             Command info level.
             </summary>
         </member>
+        <member name="T:PayrollEngine.Client.Command.CommandException">
+            <summary>The payroll API error</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Command.CommandException.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:CommandException"></see> class.</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Command.CommandException.#ctor(System.String)">
+            <summary>Initializes a new instance of the <see cref="T:CommandException"></see> class with a specified error message.</summary>
+            <param name="message">The message that describes the error.</param>
+        </member>
         <member name="T:PayrollEngine.Client.Command.CommandLineParser">
             <summary>Represents the environment command line arguments</summary>
         </member>
@@ -2930,6 +2940,9 @@
         </member>
         <member name="P:PayrollEngine.Client.Model.BackendRuntimeInformation.RateLimiting">
             <summary>Rate limiting configuration</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.BackendRuntimeInformation.TenantIsolationLevel">
+            <summary>Server-wide cross-tenant access policy</summary>
         </member>
         <member name="T:PayrollEngine.Client.Model.Calendar">
             <summary>The payroll calendar client object</summary>
