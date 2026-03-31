@@ -5857,8 +5857,13 @@
         <member name="P:PayrollEngine.Client.Model.IPayrun.EndExpressionFile">
             <summary>The payrun end expression file</summary>
         </member>
-        <member name="P:PayrollEngine.Client.Model.IPayrun.RetroTimeType">
-            <summary>The payrun retro time type</summary>
+        <member name="P:PayrollEngine.Client.Model.IPayrun.RetroBackCycles">
+            <summary>
+            The number of previous cycles allowed for retro calculation.
+            0  = current cycle only (no back cycles).
+            n  = retro may reach back n complete cycles before the current one.
+            -1 = unlimited (no cycle boundary) — default.
+            </summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.IPayrun.PayrunParameters">
             <summary>The payrun parameters</summary>
@@ -7434,7 +7439,7 @@
         <member name="P:PayrollEngine.Client.Model.Payrun.EndExpressionFile">
             <inheritdoc/>
         </member>
-        <member name="P:PayrollEngine.Client.Model.Payrun.RetroTimeType">
+        <member name="P:PayrollEngine.Client.Model.Payrun.RetroBackCycles">
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.Payrun.PayrollId">

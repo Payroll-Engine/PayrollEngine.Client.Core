@@ -75,7 +75,7 @@ public class Payrun : ModelBase, IPayrun, INameObject
 
     /// <inheritdoc/>
     [JsonPropertyOrder(116)]
-    public RetroTimeType RetroTimeType { get; set; }
+    public int RetroBackCycles { get; set; } = -1;
 
     /// <inheritdoc/>
     [JsonPropertyOrder(117)]

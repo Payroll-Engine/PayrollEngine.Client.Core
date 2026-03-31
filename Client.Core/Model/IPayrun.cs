@@ -59,8 +59,13 @@ public interface IPayrun : IModel, IKeyEquatable<IPayrun>
     /// <summary>The payrun end expression file</summary>
     string EndExpressionFile { get; set; }
 
-    /// <summary>The payrun retro time type</summary>
-    RetroTimeType RetroTimeType { get; set; }
+    /// <summary>
+    /// The number of previous cycles allowed for retro calculation.
+    /// 0  = current cycle only (no back cycles).
+    /// n  = retro may reach back n complete cycles before the current one.
+    /// -1 = unlimited (no cycle boundary) — default.
+    /// </summary>
+    int RetroBackCycles { get; set; }
 
     /// <summary>The payrun parameters</summary>
     List<PayrunParameter> PayrunParameters { get; set; }
