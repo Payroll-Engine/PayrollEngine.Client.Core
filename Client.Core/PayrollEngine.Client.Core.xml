@@ -7705,6 +7705,22 @@
         <member name="M:PayrollEngine.Client.Model.PayrunJobInvocation.Equals(PayrollEngine.Client.Model.IPayrunJobInvocation)">
             <inheritdoc/>
         </member>
+        <member name="T:PayrollEngine.Client.Model.PayrunJobSet">
+            <summary>
+            A payrun job with its payroll result sets — used for archive restore and migration.
+            Only jobs with <see cref="F:PayrollEngine.PayrunJobStatus.Complete"/> or <see cref="F:PayrollEngine.PayrunJobStatus.Forecast"/>
+            are accepted on import.
+            </summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.PayrunJobSet.ResultSets">
+            <summary>The payroll result sets belonging to this job</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.PayrunJobSet.#ctor">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Model.PayrunJobSet.#ctor(PayrollEngine.Client.Model.PayrunJobSet)">
+            <summary>Initializes a new instance from a copy</summary>
+        </member>
         <member name="T:PayrollEngine.Client.Model.PayrunParameter">
             <summary>The payroll payrun parameter client object</summary>
         </member>
@@ -9377,6 +9393,9 @@
         </member>
         <member name="M:PayrollEngine.Client.PayrunApiEndpoints.PayrunJobStatusUrl(System.Int32,System.Int32)">
             <summary>The payrun job status URL</summary>
+        </member>
+        <member name="M:PayrollEngine.Client.PayrunApiEndpoints.PayrunJobSetsImportUrl(System.Int32)">
+            <summary>The payrun job sets import URL</summary>
         </member>
         <member name="T:PayrollEngine.Client.QueryExpression.Active">
             <summary>Active status expression</summary>
@@ -11491,6 +11510,9 @@
         <member name="M:PayrollEngine.Client.Service.Api.PayrunJobService.StartJobAsync``1(PayrollEngine.Client.Service.TenantServiceContext,PayrollEngine.Client.Model.PayrunJobInvocation)">
             <inheritdoc/>
         </member>
+        <member name="M:PayrollEngine.Client.Service.Api.PayrunJobService.ImportJobSetsAsync``1(PayrollEngine.Client.Service.TenantServiceContext,System.Collections.Generic.IEnumerable{``0})">
+            <inheritdoc/>
+        </member>
         <member name="M:PayrollEngine.Client.Service.Api.PayrunJobService.ChangeJobStatusAsync(PayrollEngine.Client.Service.TenantServiceContext,System.Int32,PayrollEngine.PayrunJobStatus,System.Int32,System.String,System.Boolean)">
             <inheritdoc/>
         </member>
@@ -13027,6 +13049,16 @@
             <param name="context">The service context</param>
             <param name="jobInvocation">The payrun job invocation</param>
             <returns>The newly created payrun job</returns>
+        </member>
+        <member name="M:PayrollEngine.Client.Service.IPayrunJobService.ImportJobSetsAsync``1(PayrollEngine.Client.Service.TenantServiceContext,System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Import payrun job sets from an external source (archive restore, migration).
+            Only Complete and Forecast jobs are accepted.
+            Returns the number of imported job sets.
+            </summary>
+            <param name="context">The service context</param>
+            <param name="jobSets">The payrun job sets to import</param>
+            <returns>The number of imported job sets</returns>
         </member>
         <member name="M:PayrollEngine.Client.Service.IPayrunJobService.ChangeJobStatusAsync(PayrollEngine.Client.Service.TenantServiceContext,System.Int32,PayrollEngine.PayrunJobStatus,System.Int32,System.String,System.Boolean)">
             <summary>Get the status of a payrun job</summary>

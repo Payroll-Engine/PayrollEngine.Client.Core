@@ -60,6 +60,17 @@ public interface IPayrunJobService : ICrudService<IPayrunJob, TenantServiceConte
     /// <returns>The newly created payrun job</returns>
     Task<T> StartJobAsync<T>(TenantServiceContext context, PayrunJobInvocation jobInvocation) where T : class, IPayrunJob;
 
+    /// <summary>
+    /// Import payrun job sets from an external source (archive restore, migration).
+    /// Only Complete and Forecast jobs are accepted.
+    /// Returns the number of imported job sets.
+    /// </summary>
+    /// <param name="context">The service context</param>
+    /// <param name="jobSets">The payrun job sets to import</param>
+    /// <returns>The number of imported job sets</returns>
+    Task<int> ImportJobSetsAsync<T>(TenantServiceContext context, IEnumerable<T> jobSets)
+        where T : class, IPayrunJob;
+
     /// <summary>Get the status of a payrun job</summary>
     /// <param name="context">The service context</param>
     /// <param name="payrunJobId">The payrun job id</param>

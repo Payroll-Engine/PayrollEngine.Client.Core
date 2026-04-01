@@ -155,6 +155,17 @@ public class PayrunJobService : ServiceBase, IPayrunJobService
     }
 
     /// <inheritdoc/>
+    public virtual async Task<int> ImportJobSetsAsync<T>(TenantServiceContext context, IEnumerable<T> jobSets)
+        where T : class, IPayrunJob
+    {
+        ArgumentNullException.ThrowIfNull(context);
+        ArgumentNullException.ThrowIfNull(jobSets);
+
+        var url = PayrunApiEndpoints.PayrunJobSetsImportUrl(context.TenantId);
+        return await HttpClient.PostAsync<IEnumerable<T>, int>(url, jobSets);
+    }
+
+    /// <inheritdoc/>
     public virtual async Task ChangeJobStatusAsync(TenantServiceContext context, int payrunJobId,
         PayrunJobStatus jobStatus, int userId, string reason, bool patchMode)
     {

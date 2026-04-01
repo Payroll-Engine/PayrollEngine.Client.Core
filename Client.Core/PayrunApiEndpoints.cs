@@ -54,4 +54,8 @@ public static class PayrunApiEndpoints
     /// <summary>The payrun job status URL</summary>
     public static string PayrunJobStatusUrl(int tenantId, int payrunJobId) =>
         $"{PayrunJobUrl(tenantId, payrunJobId)}/status";
+
+    /// <summary>The payrun job sets import URL</summary>
+    public static string PayrunJobSetsImportUrl(int tenantId) =>
+        $"{PayrunJobsUrl(tenantId)}/import";
 }
