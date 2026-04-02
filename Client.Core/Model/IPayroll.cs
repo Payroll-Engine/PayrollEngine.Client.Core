@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace PayrollEngine.Client.Model;
 
@@ -23,29 +23,8 @@ public interface IPayroll : IModel, IAttributeObject, IKeyEquatable<IPayroll>
     /// <summary>The division name (client only)</summary>
     string DivisionName { get; set; }
 
-    /// <summary>The case cluster set (undefined: all)</summary>
-    string ClusterSetCase { get; set; }
-        
-    /// <summary>The case field cluster set (undefined: all)</summary>
-    string ClusterSetCaseField { get; set; }
-
-    /// <summary>The collector cluster set (undefined: all)</summary>
-    string ClusterSetCollector { get; set; }
-
-    /// <summary>The collector cluster set for retro payrun jobs (undefined: all)</summary>
-    string ClusterSetCollectorRetro { get; set; }
-
-    /// <summary>The wage type cluster set (undefined: all)</summary>
-    string ClusterSetWageType { get; set; }
-
-    /// <summary>The wage type cluster set for retro payrun jobs (undefined: all)</summary>
-    string ClusterSetWageTypeRetro { get; set; }
-
-    /// <summary>The case value cluster set (undefined: none, *: all)</summary>
-    string ClusterSetCaseValue { get; set; }
-
-    /// <summary>The wage type period result cluster set (undefined: none)</summary>
-    string ClusterSetWageTypePeriod { get; set; }
+    /// <summary>Typed cluster set name references for this payroll</summary>
+    PayrollClusterSets ClusterSet { get; set; }
 
     /// <summary>Cluster sets</summary>
     List<ClusterSet> ClusterSets { get; set; }

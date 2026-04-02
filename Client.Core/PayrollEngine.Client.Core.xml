@@ -5580,29 +5580,8 @@
         <member name="P:PayrollEngine.Client.Model.IPayroll.DivisionName">
             <summary>The division name (client only)</summary>
         </member>
-        <member name="P:PayrollEngine.Client.Model.IPayroll.ClusterSetCase">
-            <summary>The case cluster set (undefined: all)</summary>
-        </member>
-        <member name="P:PayrollEngine.Client.Model.IPayroll.ClusterSetCaseField">
-            <summary>The case field cluster set (undefined: all)</summary>
-        </member>
-        <member name="P:PayrollEngine.Client.Model.IPayroll.ClusterSetCollector">
-            <summary>The collector cluster set (undefined: all)</summary>
-        </member>
-        <member name="P:PayrollEngine.Client.Model.IPayroll.ClusterSetCollectorRetro">
-            <summary>The collector cluster set for retro payrun jobs (undefined: all)</summary>
-        </member>
-        <member name="P:PayrollEngine.Client.Model.IPayroll.ClusterSetWageType">
-            <summary>The wage type cluster set (undefined: all)</summary>
-        </member>
-        <member name="P:PayrollEngine.Client.Model.IPayroll.ClusterSetWageTypeRetro">
-            <summary>The wage type cluster set for retro payrun jobs (undefined: all)</summary>
-        </member>
-        <member name="P:PayrollEngine.Client.Model.IPayroll.ClusterSetCaseValue">
-            <summary>The case value cluster set (undefined: none, *: all)</summary>
-        </member>
-        <member name="P:PayrollEngine.Client.Model.IPayroll.ClusterSetWageTypePeriod">
-            <summary>The wage type period result cluster set (undefined: none)</summary>
+        <member name="P:PayrollEngine.Client.Model.IPayroll.ClusterSet">
+            <summary>Typed cluster set name references for this payroll</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.IPayroll.ClusterSets">
             <summary>Cluster sets</summary>
@@ -7033,28 +7012,7 @@
         <member name="P:PayrollEngine.Client.Model.Payroll.DivisionName">
             <inheritdoc/>
         </member>
-        <member name="P:PayrollEngine.Client.Model.Payroll.ClusterSetCase">
-            <inheritdoc/>
-        </member>
-        <member name="P:PayrollEngine.Client.Model.Payroll.ClusterSetCaseField">
-            <inheritdoc/>
-        </member>
-        <member name="P:PayrollEngine.Client.Model.Payroll.ClusterSetCollector">
-            <inheritdoc/>
-        </member>
-        <member name="P:PayrollEngine.Client.Model.Payroll.ClusterSetCollectorRetro">
-            <inheritdoc/>
-        </member>
-        <member name="P:PayrollEngine.Client.Model.Payroll.ClusterSetWageType">
-            <inheritdoc/>
-        </member>
-        <member name="P:PayrollEngine.Client.Model.Payroll.ClusterSetWageTypeRetro">
-            <inheritdoc/>
-        </member>
-        <member name="P:PayrollEngine.Client.Model.Payroll.ClusterSetCaseValue">
-            <inheritdoc/>
-        </member>
-        <member name="P:PayrollEngine.Client.Model.Payroll.ClusterSetWageTypePeriod">
+        <member name="P:PayrollEngine.Client.Model.Payroll.ClusterSet">
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.Payroll.ClusterSets">
@@ -7113,6 +7071,42 @@
             <summary>
             The evaluation date
             </summary>
+        </member>
+        <member name="T:PayrollEngine.Client.Model.PayrollClusterSets">
+            <summary>Typed cluster set name references for a payroll.
+            Each property holds the name of a <see cref="T:PayrollEngine.Client.Model.ClusterSet"/> entry defined in
+            <see cref="P:PayrollEngine.Client.Model.IPayroll.ClusterSets"/>. An empty or null value means no cluster
+            filtering is applied for that context.</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.PayrollClusterSets.ClusterSetCase">
+            <summary>The case cluster set name (undefined: all).</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.PayrollClusterSets.ClusterSetCaseField">
+            <summary>The case field cluster set name (undefined: all).</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.PayrollClusterSets.ClusterSetCollector">
+            <summary>The collector cluster set name (undefined: all).</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.PayrollClusterSets.ClusterSetCollectorRetro">
+            <summary>The collector cluster set name for retro payrun jobs (undefined: all).</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.PayrollClusterSets.ClusterSetWageType">
+            <summary>The wage type cluster set name (undefined: all).</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.PayrollClusterSets.ClusterSetWageTypeRetro">
+            <summary>The wage type cluster set name for retro payrun jobs (undefined: all).</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.PayrollClusterSets.ClusterSetCaseValue">
+            <summary>The case value cluster set name (undefined: none, *: all).</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.PayrollClusterSets.ClusterSetWageTypePeriod">
+            <summary>The wage type period result cluster set name (undefined: none).</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.PayrollClusterSets.ClusterSetWageTypeYtd">
+            <summary>The wage type YTD cache cluster set name (undefined: no YTD preloading).</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.PayrollClusterSets.ClusterSetWageTypeCons">
+            <summary>The wage type consolidated cache cluster set name (undefined: no Cons preloading).</summary>
         </member>
         <member name="T:PayrollEngine.Client.Model.PayrollLayer">
             <summary>The payroll layer client object</summary>
