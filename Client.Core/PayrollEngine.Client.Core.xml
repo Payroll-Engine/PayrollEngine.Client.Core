@@ -7102,8 +7102,9 @@
         <member name="P:PayrollEngine.Client.Model.PayrollClusterSets.ClusterSetWageTypePeriod">
             <summary>The wage type period result cluster set name (undefined: none).</summary>
         </member>
-        <member name="P:PayrollEngine.Client.Model.PayrollClusterSets.ClusterSetWageTypeYtd">
-            <summary>The wage type YTD cache cluster set name (undefined: no YTD preloading).</summary>
+        <member name="P:PayrollEngine.Client.Model.PayrollClusterSets.ClusterSetWageTypeCycle">
+            <summary>The wage type cycle cache cluster set name (undefined: no cycle cache pre-loading).
+            Works for any calendar cycle type (annual, quarterly, monthly, etc.).</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.PayrollClusterSets.ClusterSetWageTypeCons">
             <summary>The wage type consolidated cache cluster set name (undefined: no Cons preloading).</summary>
