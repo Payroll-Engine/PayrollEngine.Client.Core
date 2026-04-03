@@ -32,8 +32,9 @@ public class PayrollClusterSets
     /// <summary>The wage type period result cluster set name (undefined: none).</summary>
     public string ClusterSetWageTypePeriod { get; set; }
 
-    /// <summary>The wage type YTD cache cluster set name (undefined: no YTD preloading).</summary>
-    public string ClusterSetWageTypeYtd { get; set; }
+    /// <summary>The wage type cycle cache cluster set name (undefined: no cycle cache pre-loading).
+    /// Works for any calendar cycle type (annual, quarterly, monthly, etc.).</summary>
+    public string ClusterSetWageTypeCycle { get; set; }
 
     /// <summary>The wage type consolidated cache cluster set name (undefined: no Cons preloading).</summary>
     public string ClusterSetWageTypeCons { get; set; }
