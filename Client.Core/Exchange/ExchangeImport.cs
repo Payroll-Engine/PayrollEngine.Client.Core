@@ -776,6 +776,12 @@ public sealed class ExchangeImport : ExchangeImportVisitor
         }
         if (payrunJob.JobStatus == PayrunJobStatus.Abort || payrunJob.JobStatus == PayrunJobStatus.Cancel)
         {
+            // expected abort: CompletedJobStatus == Abort means the test intentionally expects this job
+            // to fail (e.g. to verify that an invalid script input is correctly rejected).
+            if (invocation.CompletedJobStatus == PayrunJobStatus.Abort)
+            {
+                return;
+            }
             throw new PayrollException($"Payrun job {invocation.Name} ended with status {payrunJob.JobStatus}: {payrunJob.Message}.");
         }
     }
