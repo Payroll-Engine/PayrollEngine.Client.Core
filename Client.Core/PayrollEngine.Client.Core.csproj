@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<AssemblyName>PayrollEngine.Client.Core</AssemblyName>
@@ -89,7 +89,7 @@
 	  </None>
 	</ItemGroup>
 	<ItemGroup>
-	  <PackageReference Include="PayrollEngine.Core" Version="0.10.0-beta.dev" />
+	  <PackageReference Include="PayrollEngine.Core" Version="$(Version)" />
 	  <PackageReference Include="YamlDotNet" Version="16.3.0" />
 	  <PackageReference Include="YamlDotNet.System.Text.Json" Version="1.7.1" />
 	</ItemGroup>
