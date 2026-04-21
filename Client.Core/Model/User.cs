@@ -19,28 +19,32 @@ public class User : ModelBase, IUser, IIdentifierObject
     public string Password { get; set; }
 
     /// <inheritdoc/>
-    [Required]
-    [StringLength(128)]
     [JsonPropertyOrder(102)]
-    public string FirstName { get; set; }
+    public bool PasswordAvailable { get; set; }
 
     /// <inheritdoc/>
     [Required]
     [StringLength(128)]
     [JsonPropertyOrder(103)]
+    public string FirstName { get; set; }
+
+    /// <inheritdoc/>
+    [Required]
+    [StringLength(128)]
+    [JsonPropertyOrder(104)]
     public string LastName { get; set; }
 
     /// <inheritdoc/>
     [StringLength(128)]
-    [JsonPropertyOrder(104)]
+    [JsonPropertyOrder(105)]
     public string Culture { get; set; }
 
     /// <inheritdoc/>
-    [JsonPropertyOrder(105)]
+    [JsonPropertyOrder(106)]
     public UserType UserType { get; set; }
 
     /// <inheritdoc/>
-    [JsonPropertyOrder(106)]
+    [JsonPropertyOrder(107)]
     public Dictionary<string, object> Attributes { get; set; }
 
     /// <summary>Initializes a new instance</summary>

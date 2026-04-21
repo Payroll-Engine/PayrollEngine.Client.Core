@@ -9,6 +9,9 @@ public interface IUser : IModel, IAttributeObject, IKeyEquatable<IUser>
     /// <summary>The user password</summary>
     string Password { get; set; }
 
+    /// <summary>Indicates whether a password is set for this user</summary>
+    bool PasswordAvailable { get; set; }
+
     /// <summary>The first name of the user</summary>
     string FirstName { get; set; }
 

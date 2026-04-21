@@ -6436,6 +6436,9 @@
         <member name="P:PayrollEngine.Client.Model.IUser.Password">
             <summary>The user password</summary>
         </member>
+        <member name="P:PayrollEngine.Client.Model.IUser.PasswordAvailable">
+            <summary>Indicates whether a password is set for this user</summary>
+        </member>
         <member name="P:PayrollEngine.Client.Model.IUser.FirstName">
             <summary>The first name of the user</summary>
         </member>
@@ -8460,6 +8463,9 @@
             <summary>The user identifier</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.User.Password">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.User.PasswordAvailable">
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.User.FirstName">
