@@ -2632,6 +2632,12 @@
             <param name="enumType">Enum type</param>
             <param name="name">Enum name</param>
         </member>
+        <member name="M:PayrollEngine.Client.Exchange.PropertyFilteringInspector.HasParseMethod(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:PayrollEngine.Client.Exchange.PropertyFilteringInspector.Parse(System.String,System.Type)">
+            <inheritdoc />
+        </member>
         <member name="T:PayrollEngine.Client.Exchange.YamlReader">
             <summary>Read model from a YAML file</summary>
         </member>

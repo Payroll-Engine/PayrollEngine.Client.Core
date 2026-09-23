@@ -56,4 +56,12 @@ public class PropertyFilteringInspector : TypeInspectorSkeleton
     /// <param name="name">Enum name</param>
     public override string GetEnumName(Type enumType, string name) =>
         inner.GetEnumName(enumType, name);
+
+    /// <inheritdoc />
+    public override bool HasParseMethod(Type type) =>
+        inner.HasParseMethod(type);
+
+    /// <inheritdoc />
+    public override object Parse(string value, Type expectedType) =>
+        inner.Parse(value, expectedType);
 }

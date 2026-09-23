@@ -188,7 +188,7 @@ public class TenantService : ServiceBase, ITenantService
         }
         ArgumentException.ThrowIfNullOrWhiteSpace(attributeName);
 
-        await HttpClient.PostAttributeAsync(TenantApiEndpoints.TenantAttributesUrl(tenantId), attributeValue);
+        await HttpClient.PostAttributeAsync(TenantApiEndpoints.TenantAttributeUrl(tenantId, attributeName), attributeValue);
     }
 
     /// <inheritdoc />
@@ -201,7 +201,7 @@ public class TenantService : ServiceBase, ITenantService
         }
         ArgumentException.ThrowIfNullOrWhiteSpace(attributeName);
 
-        await HttpClient.DeleteAttributeAsync(TenantApiEndpoints.TenantAttributesUrl(tenantId));
+        await HttpClient.DeleteAttributeAsync(TenantApiEndpoints.TenantAttributeUrl(tenantId, attributeName));
     }
 
     #endregion

@@ -116,7 +116,7 @@ public class RegulationShareService : ServiceBase, IRegulationShareService
         }
         ArgumentException.ThrowIfNullOrWhiteSpace(attributeName);
 
-        await HttpClient.PostAttributeAsync(ApiEndpoints.SharesRegulationAttributesUrl(shareId), attributeValue);
+        await HttpClient.PostAttributeAsync(ApiEndpoints.SharesRegulationAttributeUrl(shareId, attributeName), attributeValue);
     }
 
     /// <inheritdoc />
@@ -129,7 +129,7 @@ public class RegulationShareService : ServiceBase, IRegulationShareService
         }
         ArgumentException.ThrowIfNullOrWhiteSpace(attributeName);
 
-        await HttpClient.DeleteAttributeAsync(ApiEndpoints.SharesRegulationAttributesUrl(shareId));
+        await HttpClient.DeleteAttributeAsync(ApiEndpoints.SharesRegulationAttributeUrl(shareId, attributeName));
     }
 
     #endregion

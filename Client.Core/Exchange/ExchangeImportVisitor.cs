@@ -249,7 +249,10 @@ public abstract class ExchangeImportVisitor : AttachmentsLoader
             return null;
         }
 
-        return regulations.FirstOrDefault();
+        // Multiple regulations with the same name but different validFrom dates (e.g. 2025 + 2026
+        // data satellites). Return the latest so that RegulationShare creation always references
+        // the most recent version, which matches what GetDerivedRegulations will select at runtime.
+        return regulations.OrderByDescending(r => r.ValidFrom).FirstOrDefault();
     }
 
     /// <summary>Visit the regulation</summary>
