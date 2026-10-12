@@ -27,6 +27,9 @@ public interface IPayrunResult : IModel, IAttributeObject, IEquatable<IPayrunRes
     /// <summary>The parent payrun job id (denormalized, immutable)</summary>
     int? ParentJobId { get; set; }
 
+    /// <summary>The payrun job pay date (denormalized, immutable)</summary>
+    DateTime PayDate { get; set; }
+
     /// <summary>The result source (immutable)</summary>
     string Source { get; set; }
 

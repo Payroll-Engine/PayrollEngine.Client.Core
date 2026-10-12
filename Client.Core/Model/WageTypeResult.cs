@@ -81,6 +81,10 @@ public class WageTypeResult : ModelBase, IWageTypeResult
     [JsonPropertyOrder(117)]
     public int? ParentJobId { get; set; }
 
+    /// <inheritdoc/>
+    [JsonPropertyOrder(118)]
+    public DateTime PayDate { get; set; }
+
     /// <summary>Initializes a new instance</summary>
     public WageTypeResult()
     {

@@ -2980,6 +2980,12 @@
         <member name="P:PayrollEngine.Client.Model.Calendar.FirstDayOfWeek">
             <inheritdoc/>
         </member>
+        <member name="P:PayrollEngine.Client.Model.Calendar.PeriodAnchorDate">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.Calendar.PayDateOffset">
+            <inheritdoc/>
+        </member>
         <member name="P:PayrollEngine.Client.Model.Calendar.WeekMode">
             <inheritdoc/>
         </member>
@@ -4292,6 +4298,9 @@
         <member name="P:PayrollEngine.Client.Model.CollectorResult.ParentJobId">
             <inheritdoc/>
         </member>
+        <member name="P:PayrollEngine.Client.Model.CollectorResult.PayDate">
+            <inheritdoc/>
+        </member>
         <member name="M:PayrollEngine.Client.Model.CollectorResult.#ctor">
             <summary>Initializes a new instance</summary>
         </member>
@@ -4602,6 +4611,13 @@
         </member>
         <member name="P:PayrollEngine.Client.Model.ICalendar.FirstDayOfWeek">
             <summary>Override the calendar first day of week</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.ICalendar.PeriodAnchorDate">
+            <summary>Anchor date of the week and bi-week periods: the periods start on the anchor date
+            and repeat every 7 or 14 days, independent of the year (default: week of year)</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.ICalendar.PayDateOffset">
+            <summary>Pay date offset in days from the period end date (default: 0)</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.ICalendar.WeekMode">
             <summary>The week mode (default: week)</summary>
@@ -5225,6 +5241,9 @@
         </member>
         <member name="P:PayrollEngine.Client.Model.ICollectorResult.ParentJobId">
             <summary>The parent payrun job id (denormalized, immutable)</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.ICollectorResult.PayDate">
+            <summary>The payrun job pay date (denormalized, immutable)</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.ICollectorResult.CollectorId">
             <summary>The collector id (immutable)</summary>
@@ -5931,6 +5950,9 @@
         <member name="P:PayrollEngine.Client.Model.IPayrunJob.EvaluationDate">
             <summary>The evaluation date (immutable)</summary>
         </member>
+        <member name="P:PayrollEngine.Client.Model.IPayrunJob.PayDate">
+            <summary>The pay date: invocation pay date or calendar pay date of the period (immutable)</summary>
+        </member>
         <member name="P:PayrollEngine.Client.Model.IPayrunJob.Processed">
             <summary>The job process date (immutable)</summary>
         </member>
@@ -6026,6 +6048,9 @@
         <member name="P:PayrollEngine.Client.Model.IPayrunJobInvocation.EvaluationDate">
             <summary>The evaluation date (immutable)</summary>
         </member>
+        <member name="P:PayrollEngine.Client.Model.IPayrunJobInvocation.PayDate">
+            <summary>The pay date, overrides the calendar pay date of the period (immutable)</summary>
+        </member>
         <member name="P:PayrollEngine.Client.Model.IPayrunJobInvocation.Reason">
             <summary>The execution reason (immutable)</summary>
         </member>
@@ -6088,6 +6113,9 @@
         </member>
         <member name="P:PayrollEngine.Client.Model.IPayrunResult.ParentJobId">
             <summary>The parent payrun job id (denormalized, immutable)</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.IPayrunResult.PayDate">
+            <summary>The payrun job pay date (denormalized, immutable)</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.IPayrunResult.Source">
             <summary>The result source (immutable)</summary>
@@ -6570,6 +6598,9 @@
         </member>
         <member name="P:PayrollEngine.Client.Model.IWageTypeResult.ParentJobId">
             <summary>The parent payrun job id (denormalized, immutable)</summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.IWageTypeResult.PayDate">
+            <summary>The payrun job pay date (denormalized, immutable)</summary>
         </member>
         <member name="P:PayrollEngine.Client.Model.IWageTypeResult.WageTypeId">
             <summary>The wage type id (immutable)</summary>
@@ -7549,6 +7580,9 @@
         <member name="P:PayrollEngine.Client.Model.PayrunJob.EvaluationDate">
             <inheritdoc/>
         </member>
+        <member name="P:PayrollEngine.Client.Model.PayrunJob.PayDate">
+            <inheritdoc/>
+        </member>
         <member name="P:PayrollEngine.Client.Model.PayrunJob.Released">
             <summary>The job release date (immutable)</summary>
         </member>
@@ -7682,6 +7716,9 @@
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.PayrunJobInvocation.EvaluationDate">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.PayrunJobInvocation.PayDate">
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.PayrunJobInvocation.Reason">
@@ -7826,6 +7863,9 @@
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.PayrunResult.ParentJobId">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.PayrunResult.PayDate">
             <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.PayrunResult.#ctor">
@@ -8703,6 +8743,9 @@
             <inheritdoc/>
         </member>
         <member name="P:PayrollEngine.Client.Model.WageTypeResult.ParentJobId">
+            <inheritdoc/>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.WageTypeResult.PayDate">
             <inheritdoc/>
         </member>
         <member name="M:PayrollEngine.Client.Model.WageTypeResult.#ctor">

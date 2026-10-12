@@ -29,6 +29,9 @@ public interface IWageTypeResult : IModel, IAttributeObject,
     /// <summary>The parent payrun job id (denormalized, immutable)</summary>
     int? ParentJobId { get; set; }
 
+    /// <summary>The payrun job pay date (denormalized, immutable)</summary>
+    DateTime PayDate { get; set; }
+
     /// <summary>The wage type id (immutable)</summary>
     int WageTypeId { get; set; }
 

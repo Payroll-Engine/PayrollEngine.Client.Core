@@ -82,6 +82,9 @@ public interface IPayrunJob : IModel, IAttributeObject, IEquatable<IPayrunJob>
     /// <summary>The evaluation date (immutable)</summary>
     DateTime? EvaluationDate { get; set; }
 
+    /// <summary>The pay date: invocation pay date or calendar pay date of the period (immutable)</summary>
+    DateTime? PayDate { get; set; }
+
     /// <summary>The job process date (immutable)</summary>
     public DateTime? Processed { get; set; }
 

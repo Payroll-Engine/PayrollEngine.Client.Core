@@ -58,6 +58,9 @@ public class PayrunJobInvocation : IPayrunJobInvocation
     public DateTime? EvaluationDate { get; set; }
 
     /// <inheritdoc/>
+    public DateTime? PayDate { get; set; }
+
+    /// <inheritdoc/>
     [Required]
     public string Reason { get; set; }
 

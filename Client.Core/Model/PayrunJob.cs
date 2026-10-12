@@ -120,65 +120,69 @@ public class PayrunJob : ModelBase, IPayrunJob
     [JsonPropertyOrder(125)]
     public DateTime? EvaluationDate { get; set; }
 
-    /// <summary>The job release date (immutable)</summary>
+    /// <inheritdoc/>
     [JsonPropertyOrder(126)]
+    public DateTime? PayDate { get; set; }
+
+    /// <summary>The job release date (immutable)</summary>
+    [JsonPropertyOrder(127)]
     public DateTime? Released { get; set; }
 
     /// <inheritdoc/>
-    [JsonPropertyOrder(127)]
+    [JsonPropertyOrder(128)]
     public DateTime? Processed { get; set; }
 
     /// <inheritdoc/>
-    [JsonPropertyOrder(128)]
+    [JsonPropertyOrder(129)]
     public DateTime? Finished { get; set; }
 
     /// <inheritdoc/>
     [Required]
-    [JsonPropertyOrder(129)]
+    [JsonPropertyOrder(130)]
     public string CreatedReason { get; set; }
 
     /// <inheritdoc/>
-    [JsonPropertyOrder(130)]
+    [JsonPropertyOrder(131)]
     public string ReleasedReason { get; set; }
 
     /// <inheritdoc/>
-    [JsonPropertyOrder(131)]
+    [JsonPropertyOrder(132)]
     public string ProcessedReason { get; set; }
 
     /// <inheritdoc/>
-    [JsonPropertyOrder(132)]
+    [JsonPropertyOrder(133)]
     public string FinishedReason { get; set; }
 
     /// <inheritdoc/>
-    [JsonPropertyOrder(133)]
+    [JsonPropertyOrder(134)]
     public int TotalEmployeeCount { get; set; }
 
     /// <inheritdoc/>
-    [JsonPropertyOrder(134)]
+    [JsonPropertyOrder(135)]
     public int ProcessedEmployeeCount { get; set; }
 
     /// <inheritdoc/>
-    [JsonPropertyOrder(135)]
+    [JsonPropertyOrder(136)]
     public DateTime JobStart { get; set; }
 
     /// <inheritdoc/>
-    [JsonPropertyOrder(136)]
+    [JsonPropertyOrder(137)]
     public DateTime? JobEnd { get; set; }
 
     /// <inheritdoc/>
-    [JsonPropertyOrder(137)]
+    [JsonPropertyOrder(138)]
     public string Message { get; set; }
 
     /// <inheritdoc/>
-    [JsonPropertyOrder(138)]
+    [JsonPropertyOrder(139)]
     public string ErrorMessage { get; set; }
 
     /// <inheritdoc/>
-    [JsonPropertyOrder(139)]
+    [JsonPropertyOrder(140)]
     public List<PayrunJobEmployee> Employees { get; set; }
 
     /// <inheritdoc/>
-    [JsonPropertyOrder(140)]
+    [JsonPropertyOrder(141)]
     public Dictionary<string, object> Attributes { get; set; }
 
     /// <summary>Initializes a new instance</summary>

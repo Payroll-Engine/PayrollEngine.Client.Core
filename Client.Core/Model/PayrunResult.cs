@@ -86,6 +86,10 @@ public class PayrunResult : ModelBase, IPayrunResult, INameObject
     [JsonPropertyOrder(118)]
     public int? ParentJobId { get; set; }
 
+    /// <inheritdoc/>
+    [JsonPropertyOrder(119)]
+    public DateTime PayDate { get; set; }
+
     /// <summary>Initializes a new instance</summary>
     public PayrunResult()
     {

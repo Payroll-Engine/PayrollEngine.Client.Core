@@ -53,6 +53,9 @@ public interface IPayrunJobInvocation : IEquatable<IPayrunJobInvocation>
     /// <summary>The evaluation date (immutable)</summary>
     DateTime? EvaluationDate { get; set; }
 
+    /// <summary>The pay date, overrides the calendar pay date of the period (immutable)</summary>
+    DateTime? PayDate { get; set; }
+
     /// <summary>The execution reason (immutable)</summary>
     string Reason { get; set; }
     

@@ -52,43 +52,51 @@ public class Calendar : ModelBase, ICalendar, INameObject
 
     /// <inheritdoc/>
     [JsonPropertyOrder(109)]
-    public CalendarWeekMode WeekMode { get; set; } = CalendarWeekMode.Week;
+    public System.DateTime? PeriodAnchorDate { get; set; }
 
     /// <inheritdoc/>
     [JsonPropertyOrder(110)]
-    [DefaultValue(true)]
-    public bool WorkMonday { get; set; } = true;
+    public int? PayDateOffset { get; set; }
 
     /// <inheritdoc/>
     [JsonPropertyOrder(111)]
-    [DefaultValue(true)]
-    public bool WorkTuesday { get; set; } = true;
+    public CalendarWeekMode WeekMode { get; set; } = CalendarWeekMode.Week;
 
     /// <inheritdoc/>
     [JsonPropertyOrder(112)]
     [DefaultValue(true)]
-    public bool WorkWednesday { get; set; } = true;
+    public bool WorkMonday { get; set; } = true;
 
     /// <inheritdoc/>
     [JsonPropertyOrder(113)]
     [DefaultValue(true)]
-    public bool WorkThursday { get; set; } = true;
+    public bool WorkTuesday { get; set; } = true;
 
     /// <inheritdoc/>
     [JsonPropertyOrder(114)]
     [DefaultValue(true)]
-    public bool WorkFriday { get; set; } = true;
+    public bool WorkWednesday { get; set; } = true;
 
     /// <inheritdoc/>
     [JsonPropertyOrder(115)]
-    public bool WorkSaturday { get; set; }
+    [DefaultValue(true)]
+    public bool WorkThursday { get; set; } = true;
 
     /// <inheritdoc/>
     [JsonPropertyOrder(116)]
-    public bool WorkSunday { get; set; }
+    [DefaultValue(true)]
+    public bool WorkFriday { get; set; } = true;
 
     /// <inheritdoc/>
     [JsonPropertyOrder(117)]
+    public bool WorkSaturday { get; set; }
+
+    /// <inheritdoc/>
+    [JsonPropertyOrder(118)]
+    public bool WorkSunday { get; set; }
+
+    /// <inheritdoc/>
+    [JsonPropertyOrder(119)]
     public Dictionary<string, object> Attributes { get; set; }
 
     /// <summary>Initializes a new instance</summary>

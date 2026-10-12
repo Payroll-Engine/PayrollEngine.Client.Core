@@ -29,6 +29,9 @@ public interface ICollectorResult : IModel, IAttributeObject,
     /// <summary>The parent payrun job id (denormalized, immutable)</summary>
     int? ParentJobId { get; set; }
 
+    /// <summary>The payrun job pay date (denormalized, immutable)</summary>
+    DateTime PayDate { get; set; }
+
     /// <summary>The collector id (immutable)</summary>
     int CollectorId { get; set; }
 
