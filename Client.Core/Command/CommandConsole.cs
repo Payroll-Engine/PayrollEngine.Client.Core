@@ -56,7 +56,8 @@ public class CommandConsole : ICommandConsole
         if (ErrorMode == ErrorMode.Errors)
         {
             // ensure error is displayed in separate line
-            if (Console.CursorLeft > 0)
+            // the cursor position is not available on redirected output
+            if (!Console.IsOutputRedirected && Console.CursorLeft > 0)
             {
                 ConsoleToolBase.WriteLine();
             }
