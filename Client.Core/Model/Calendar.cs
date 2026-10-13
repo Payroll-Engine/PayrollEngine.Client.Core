@@ -1,4 +1,4 @@
-﻿using System.ComponentModel;
+using System.ComponentModel;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
@@ -60,43 +60,47 @@ public class Calendar : ModelBase, ICalendar, INameObject
 
     /// <inheritdoc/>
     [JsonPropertyOrder(111)]
-    public CalendarWeekMode WeekMode { get; set; } = CalendarWeekMode.Week;
+    public CalendarCycleAssignment? CycleAssignment { get; set; }
 
     /// <inheritdoc/>
     [JsonPropertyOrder(112)]
-    [DefaultValue(true)]
-    public bool WorkMonday { get; set; } = true;
+    public CalendarWeekMode WeekMode { get; set; } = CalendarWeekMode.Week;
 
     /// <inheritdoc/>
     [JsonPropertyOrder(113)]
     [DefaultValue(true)]
-    public bool WorkTuesday { get; set; } = true;
+    public bool WorkMonday { get; set; } = true;
 
     /// <inheritdoc/>
     [JsonPropertyOrder(114)]
     [DefaultValue(true)]
-    public bool WorkWednesday { get; set; } = true;
+    public bool WorkTuesday { get; set; } = true;
 
     /// <inheritdoc/>
     [JsonPropertyOrder(115)]
     [DefaultValue(true)]
-    public bool WorkThursday { get; set; } = true;
+    public bool WorkWednesday { get; set; } = true;
 
     /// <inheritdoc/>
     [JsonPropertyOrder(116)]
     [DefaultValue(true)]
-    public bool WorkFriday { get; set; } = true;
+    public bool WorkThursday { get; set; } = true;
 
     /// <inheritdoc/>
     [JsonPropertyOrder(117)]
-    public bool WorkSaturday { get; set; }
+    [DefaultValue(true)]
+    public bool WorkFriday { get; set; } = true;
 
     /// <inheritdoc/>
     [JsonPropertyOrder(118)]
-    public bool WorkSunday { get; set; }
+    public bool WorkSaturday { get; set; }
 
     /// <inheritdoc/>
     [JsonPropertyOrder(119)]
+    public bool WorkSunday { get; set; }
+
+    /// <inheritdoc/>
+    [JsonPropertyOrder(120)]
     public Dictionary<string, object> Attributes { get; set; }
 
     /// <summary>Initializes a new instance</summary>
