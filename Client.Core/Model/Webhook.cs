@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
@@ -23,6 +23,20 @@ public class Webhook : ModelBase, IWebhook, INameObject
     [Required]
     [JsonPropertyOrder(102)]
     public WebhookAction Action { get; set; }
+
+    /// <summary>
+    /// The secret used to sign the webhook messages (write-only, never returned by the backend).
+    /// On update: null keeps the current secret, an empty value removes it, any other value replaces it.
+    /// </summary>
+    [StringLength(256)]
+    [JsonPropertyOrder(104)]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public string Secret { get; set; }
+
+    /// <summary>Indicates whether the webhook messages are signed (read-only)</summary>
+    [JsonPropertyOrder(105)]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+    public bool Signed { get; set; }
 
     /// <inheritdoc/>
     [JsonPropertyOrder(103)]

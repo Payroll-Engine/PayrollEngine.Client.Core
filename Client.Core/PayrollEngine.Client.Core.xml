@@ -8809,6 +8809,15 @@
         <member name="P:PayrollEngine.Client.Model.Webhook.Action">
             <inheritdoc/>
         </member>
+        <member name="P:PayrollEngine.Client.Model.Webhook.Secret">
+            <summary>
+            The secret used to sign the webhook messages (write-only, never returned by the backend).
+            On update: null keeps the current secret, an empty value removes it, any other value replaces it.
+            </summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Model.Webhook.Signed">
+            <summary>Indicates whether the webhook messages are signed (read-only)</summary>
+        </member>
         <member name="P:PayrollEngine.Client.Model.Webhook.Attributes">
             <inheritdoc/>
         </member>
