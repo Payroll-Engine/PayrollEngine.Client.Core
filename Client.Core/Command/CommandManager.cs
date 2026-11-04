@@ -14,9 +14,28 @@ namespace PayrollEngine.Client.Command;
 /// </summary>
 public class CommandManager(ICommandConsole console, ILogger logger = null)
 {
-    private readonly Dictionary<string, ICommand> commands = new();
+    private readonly Dictionary<string, ICommand> commands = new(StringComparer.OrdinalIgnoreCase);
+    private readonly Dictionary<string, CommandOrigin> origins = new(StringComparer.OrdinalIgnoreCase);
     private ICommandConsole Console { get; } = console ?? throw new ArgumentNullException(nameof(console));
     private ILogger Logger { get; } = logger;
+
+    /// <summary>
+    /// Version of the command extension API (major.minor).
+    /// Raise the minor version on compatible and the major version on breaking contract changes.
+    /// </summary>
+    public static Version ExtensionApiVersion { get; } = new(1, 2);
+
+    /// <summary>
+    /// Test if an extension requiring the specified API version is supported:
+    /// same major version and a required minor version up to the current minor version.
+    /// </summary>
+    /// <param name="requiredVersion">Required extension API version.</param>
+    public static bool IsExtensionApiSupported(Version requiredVersion)
+    {
+        ArgumentNullException.ThrowIfNull(requiredVersion);
+        return requiredVersion.Major == ExtensionApiVersion.Major &&
+               requiredVersion.Minor <= ExtensionApiVersion.Minor;
+    }
 
     /// <summary>
     /// Name fo the help command (default: Help)
@@ -29,34 +48,101 @@ public class CommandManager(ICommandConsole console, ILogger logger = null)
     private static string CommandFileExtension => FileExtensions.PayrollEngineCommand;
 
     /// <summary>
-    /// Register assembly commands
+    /// Register the commands of a core assembly
     /// </summary>
     /// <param name="assembly">Source assembly</param>
     public void RegisterAssembly(Assembly assembly)
     {
         ArgumentNullException.ThrowIfNull(assembly);
+        RegisterAssemblies([assembly], CommandOrigin.Core);
+    }
 
-        foreach (var type in assembly.GetTypes())
+    /// <summary>
+    /// Register the commands of multiple assemblies with a common origin.
+    /// The registration is atomic: on any error, no command is registered.
+    /// </summary>
+    /// <param name="assemblies">Source assemblies</param>
+    /// <param name="origin">Command origin</param>
+    /// <returns>Names of the registered commands</returns>
+    /// <exception cref="CommandException">Invalid command or duplicate command name</exception>
+    public List<string> RegisterAssemblies(IEnumerable<Assembly> assemblies, CommandOrigin origin)
+    {
+        ArgumentNullException.ThrowIfNull(assemblies);
+        ArgumentNullException.ThrowIfNull(origin);
+
+        var newCommands = new Dictionary<string, ICommand>(StringComparer.OrdinalIgnoreCase);
+        foreach (var assembly in assemblies)
         {
-            if (type.IsAbstract)
+            ArgumentNullException.ThrowIfNull(assembly);
+            foreach (var type in GetAssemblyTypes(assembly))
             {
-                continue;
-            }
+                if (type.IsAbstract)
+                {
+                    continue;
+                }
 
-            // command marker
-            var attribute = type.GetCustomAttribute(typeof(CommandAttribute)) as CommandAttribute;
-            if (attribute == null)
-            {
-                continue;
-            }
+                // command marker
+                if (type.GetCustomAttribute(typeof(CommandAttribute)) is not CommandAttribute attribute)
+                {
+                    continue;
+                }
 
-            // command instance
-            var cmd = Activator.CreateInstance(type) as ICommand;
-            if (cmd == null)
-            {
-                throw new PayrollException($"Invalid command {type.FullName}.");
+                // duplicate command
+                if (commands.ContainsKey(attribute.Name))
+                {
+                    throw new CommandException(
+                        $"Duplicate command {attribute.Name}: {origin} conflicts with {origins[attribute.Name]}.");
+                }
+                if (newCommands.ContainsKey(attribute.Name))
+                {
+                    throw new CommandException(
+                        $"Duplicate command {attribute.Name} in {origin}.");
+                }
+
+                newCommands.Add(attribute.Name, CreateCommand(type));
             }
-            commands.Add(attribute.Name, cmd);
+        }
+
+        foreach (var newCommand in newCommands)
+        {
+            commands.Add(newCommand.Key, newCommand.Value);
+            origins.Add(newCommand.Key, origin);
+        }
+        return newCommands.Keys.ToList();
+    }
+
+    private static Type[] GetAssemblyTypes(Assembly assembly)
+    {
+        try
+        {
+            return assembly.GetTypes();
+        }
+        catch (ReflectionTypeLoadException exception)
+        {
+            var reasons = exception.LoaderExceptions
+                .Where(x => x != null)
+                .Select(x => x.Message)
+                .Distinct();
+            throw new CommandException(
+                $"Failed to load types of assembly {assembly.GetName().Name}: {string.Join(" ", reasons)}", exception);
+        }
+    }
+
+    private static ICommand CreateCommand(Type type)
+    {
+        ArgumentNullException.ThrowIfNull(type);
+        if (!typeof(ICommand).IsAssignableFrom(type))
+        {
+            throw new CommandException($"Invalid command {type.FullName}: missing {typeof(ICommand).FullName}.");
+        }
+        try
+        {
+            return (ICommand)Activator.CreateInstance(type);
+        }
+        catch (Exception exception)
+        {
+            throw new CommandException(
+                $"Invalid command {type.FullName}: {exception.GetBaseException().Message}", exception);
         }
     }
 
@@ -64,6 +150,29 @@ public class CommandManager(ICommandConsole console, ILogger logger = null)
     /// Test for any command
     /// </summary>
     public bool HasCommands => commands.Any();
+
+    /// <summary>
+    /// Get the origin of a command
+    /// </summary>
+    /// <param name="name">Command name</param>
+    /// <returns>The command origin, null for unknown commands</returns>
+    public CommandOrigin GetCommandOrigin(string name)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(name);
+        return origins.GetValueOrDefault(name);
+    }
+
+    /// <summary>
+    /// Get the origin of a registered command
+    /// </summary>
+    /// <param name="command">Registered command</param>
+    /// <returns>The command origin, null for unknown commands</returns>
+    public CommandOrigin GetCommandOrigin(ICommand command)
+    {
+        ArgumentNullException.ThrowIfNull(command);
+        var name = commands.FirstOrDefault(x => ReferenceEquals(x.Value, command)).Key;
+        return name == null ? null : origins[name];
+    }
 
     /// <summary>
     /// List of available commands
@@ -78,15 +187,7 @@ public class CommandManager(ICommandConsole console, ILogger logger = null)
     public ICommand GetCommand(string name)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(name);
-
-        foreach (var command in commands)
-        {
-            if (string.Equals(command.Key, name, StringComparison.InvariantCultureIgnoreCase))
-            {
-                return command.Value;
-            }
-        }
-        return null;
+        return commands.GetValueOrDefault(name);
     }
 
     /// <summary>

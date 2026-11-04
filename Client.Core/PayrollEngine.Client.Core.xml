@@ -239,6 +239,11 @@
             <summary>Initializes a new instance of the <see cref="T:CommandException"></see> class with a specified error message.</summary>
             <param name="message">The message that describes the error.</param>
         </member>
+        <member name="M:PayrollEngine.Client.Command.CommandException.#ctor(System.String,System.Exception)">
+            <summary>Initializes a new instance of the <see cref="T:CommandException"></see> class with a specified error message and inner exception.</summary>
+            <param name="message">The message that describes the error.</param>
+            <param name="innerException">The exception that caused the error.</param>
+        </member>
         <member name="T:PayrollEngine.Client.Command.CommandLineParser">
             <summary>Represents the environment command line arguments</summary>
         </member>
@@ -370,6 +375,19 @@
             Command manager
             </summary>
         </member>
+        <member name="P:PayrollEngine.Client.Command.CommandManager.ExtensionApiVersion">
+            <summary>
+            Version of the command extension API (major.minor).
+            Raise the minor version on compatible and the major version on breaking contract changes.
+            </summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Command.CommandManager.IsExtensionApiSupported(System.Version)">
+            <summary>
+            Test if an extension requiring the specified API version is supported:
+            same major version and a required minor version up to the current minor version.
+            </summary>
+            <param name="requiredVersion">Required extension API version.</param>
+        </member>
         <member name="P:PayrollEngine.Client.Command.CommandManager.HelpCommandName">
             <summary>
             Name fo the help command (default: Help)
@@ -382,14 +400,38 @@
         </member>
         <member name="M:PayrollEngine.Client.Command.CommandManager.RegisterAssembly(System.Reflection.Assembly)">
             <summary>
-            Register assembly commands
+            Register the commands of a core assembly
             </summary>
             <param name="assembly">Source assembly</param>
+        </member>
+        <member name="M:PayrollEngine.Client.Command.CommandManager.RegisterAssemblies(System.Collections.Generic.IEnumerable{System.Reflection.Assembly},PayrollEngine.Client.Command.CommandOrigin)">
+            <summary>
+            Register the commands of multiple assemblies with a common origin.
+            The registration is atomic: on any error, no command is registered.
+            </summary>
+            <param name="assemblies">Source assemblies</param>
+            <param name="origin">Command origin</param>
+            <returns>Names of the registered commands</returns>
+            <exception cref="T:PayrollEngine.Client.Command.CommandException">Invalid command or duplicate command name</exception>
         </member>
         <member name="P:PayrollEngine.Client.Command.CommandManager.HasCommands">
             <summary>
             Test for any command
             </summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Command.CommandManager.GetCommandOrigin(System.String)">
+            <summary>
+            Get the origin of a command
+            </summary>
+            <param name="name">Command name</param>
+            <returns>The command origin, null for unknown commands</returns>
+        </member>
+        <member name="M:PayrollEngine.Client.Command.CommandManager.GetCommandOrigin(PayrollEngine.Client.Command.ICommand)">
+            <summary>
+            Get the origin of a registered command
+            </summary>
+            <param name="command">Registered command</param>
+            <returns>The command origin, null for unknown commands</returns>
         </member>
         <member name="M:PayrollEngine.Client.Command.CommandManager.GetCommands">
             <summary>
@@ -424,6 +466,47 @@
             Execute specific command using a custom command line parser
             </summary>
             <returns>Exit code</returns>
+        </member>
+        <member name="T:PayrollEngine.Client.Command.CommandOrigin">
+            <summary>
+            Origin of a registered command: the core application or an extension.
+            </summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Command.CommandOrigin.Core">
+            <summary>
+            Core application origin.
+            </summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Command.CommandOrigin.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Extension origin.
+            </summary>
+            <param name="name">Extension name.</param>
+            <param name="version">Extension version.</param>
+            <param name="path">Extension path.</param>
+        </member>
+        <member name="P:PayrollEngine.Client.Command.CommandOrigin.Name">
+            <summary>
+            Extension name, null for the core application.
+            </summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Command.CommandOrigin.Version">
+            <summary>
+            Extension version.
+            </summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Command.CommandOrigin.Path">
+            <summary>
+            Extension path.
+            </summary>
+        </member>
+        <member name="P:PayrollEngine.Client.Command.CommandOrigin.IsExtension">
+            <summary>
+            Test for extension origin.
+            </summary>
+        </member>
+        <member name="M:PayrollEngine.Client.Command.CommandOrigin.ToString">
+            <inheritdoc />
         </member>
         <member name="T:PayrollEngine.Client.Command.DisplayLevel">
             <summary>
