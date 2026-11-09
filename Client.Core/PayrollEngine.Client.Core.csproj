@@ -91,7 +91,7 @@
 	<ItemGroup>
 	  <PackageReference Include="PayrollEngine.Core" Version="$(Version)" />
 	  <PackageReference Include="YamlDotNet" Version="18.1.0" />
-	  <PackageReference Include="YamlDotNet.System.Text.Json" Version="1.11.1" />
+	  <PackageReference Include="YamlDotNet.System.Text.Json" Version="2.0.1" />
 	</ItemGroup>
 
 	<!--  build json schema -->

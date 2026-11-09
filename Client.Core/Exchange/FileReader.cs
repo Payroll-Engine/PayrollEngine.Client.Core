@@ -93,7 +93,7 @@ public static class FileReader
             else if (string.Equals(info.Extension, FileExtensions.Yaml, StringComparison.InvariantCultureIgnoreCase) ||
                      string.Equals(info.Extension, FileExtensions.Yml, StringComparison.InvariantCultureIgnoreCase))
             {
-                newObj = YamlReader.FromYaml<T>(fileName);
+                newObj = YamlReader.FromYaml<T>(content);
             }
             else
             {
